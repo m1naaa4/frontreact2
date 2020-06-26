@@ -38,7 +38,7 @@ export default function SearchingProject  (query, pageNumber) {
                 return [...prevProjects, ...resp.data.result.data]
                 // return [...prevProjects, ...resp.data.docs.map(b => b.title)]
             })
-            setHasMore(resp.data.result.current_page)
+            setHasMore(resp.data.result.current)
             // setHaseMore(resp.data.docs.length > 0)
             setLoading(false)
                 console.log(resp.result)
