@@ -64,7 +64,7 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
                                      ) : (
                                          () => {
                                              console.log("projectoooooo",projects)
-                                             if  (projects.success !== false && projects!=undefined && projects!="loading" && projects.length>0) {
+                                             if  (projects.success !== false && projects!==undefined && projects!=="loading" && projects.length>0) {
 
                                                  return (
                                                      projects.map((project, index) => {

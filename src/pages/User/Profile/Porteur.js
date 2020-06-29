@@ -4,7 +4,6 @@ import {useForm} from "react-hooks-helper";
 import PorteurView0 from "../../../views/User/Profile/PorteurView0";
 
 export default function Porteur(props ) {
-console.log("porteur" , props)
     const defaultData = {
         search: "",
         zone: "",

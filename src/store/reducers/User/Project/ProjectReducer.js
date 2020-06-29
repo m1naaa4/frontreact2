@@ -1,25 +1,21 @@
 const initState = {
-    projects: ""
+    projects: []
 }
 
 
-const projectReducer = (state = initState, action) => {
+const projectReducer = (state = initState ||undefined, action) => {
 
     switch (action.type) {
 
         case 'LOADING':
             return {
                 ...state,
-                projects:[],
+                projects: state.projects,
             }
         case 'LOAD_PROJECT_SUCCESS':
-            console.log("new state", action.res.result.data)
-            console.log("old state", state)
             return {
                 ...state,
-                // projects:state.projects.push(...action.res.result.data),
                 projects: [...state.projects, ...action.res.result.data],
-                // projects: action.res,
                 hasMore:  action.res.result.hasMore,
                 current:  action.res.result.current
             }
@@ -28,7 +24,7 @@ const projectReducer = (state = initState, action) => {
 
             return {
                 ...state,
-                projects: action.res.result.data,
+                projects: action.res,
             }
 
         case 'CODE_ERROR':
@@ -37,6 +33,7 @@ const projectReducer = (state = initState, action) => {
                 projects: 'there seems to be a problem please refresh your browser',
             }
         default:
+            console.log("default here ", state)
             return state
 
     }
