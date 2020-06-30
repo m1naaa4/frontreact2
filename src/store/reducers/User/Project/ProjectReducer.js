@@ -11,13 +11,15 @@ const projectReducer = (state = initState ||undefined, action) => {
             return {
                 ...state,
                 projects: state.projects,
+                loading:true
             }
         case 'LOAD_PROJECT_SUCCESS':
             return {
                 ...state,
                 projects: [...state.projects, ...action.res.result.data],
                 hasMore:  action.res.result.hasMore,
-                current:  action.res.result.current
+                current:  action.res.result.current,
+                loading:false
             }
 
         case 'LOAD_PROJECT_ERROR':

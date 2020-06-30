@@ -19,9 +19,10 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
 
     const hasMore = useSelector(state => state.projects.hasMore);
     const current = useSelector(state => state.projects.current);
-    const loading = projects
+    const loading = useSelector(state => state.projects.loading);
 
     console.log("soulaimane", useSelector(state => state.projects))
+    console.log("loading", useSelector(state => state.projects.loading))
 
     const lastProjectElementRef = useCallback(node =>{
         if (projects.loading) return
@@ -32,7 +33,7 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
             }
         })
         if (node) observer.current.observe(node)
-    }, [loading,hasMore])
+    }, [projects.loading,hasMore])
 
     const goToAddproject = () =>
     {
@@ -57,7 +58,7 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
                          <div className="offers-list">
                              <div className="row" >
                                  {
-                                     projects.success === false ? (
+                                     loading === true ? (
                                          <ProjectSkeleton/>
                                      ) : projects.success === false ? (
                                          <div data-testid="error-message">ERROR</div>
