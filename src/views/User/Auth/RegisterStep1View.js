@@ -5,7 +5,6 @@ import TypeDrop from "../Fields/Signup/TypeDrop";
 import ItemForm from "./ItemForm";
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
 import Footer from "../../../layout/footer/footer";
-import {NavLink} from "react-router-dom";
 import {Text} from "../../../containers/Language";
 import SocialAuth from "./Social/SocialAuth";
 

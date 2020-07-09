@@ -1,10 +1,5 @@
 import React from 'react'
-import {Text} from "../containers/Language";
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Avatar from '@material-ui/core/Avatar';
 
 
 
@@ -32,19 +27,12 @@ const ProjectSkeleton  = () =>{
                             <div className="player" >
                                 <Skeleton width={350} height={234}  />
                             </div>
-
-                            {/*<video className="player"  controls*/}
-                            {/*       data-poster="assets/images/offer-thumb-1.jpg">*/}
-                            {/*    <source src="/assets/media/earth.mp4" type="video/mp4"/>*/}
-                            {/*    <source src="/assets/media/earth.ogv" type="video/ogv"/>*/}
-                            {/*</video>*/}
                         </div>
                         <div className="offer-meta">
                             <ul className="meta-items">
                                 <li className="meta-item">
                                     <div className="meta-icon">
                                         <Skeleton circle={true} height={40} width={40} />
-                                        {/*<img src="/assets/images/icons/marker.svg" alt=""/>*/}
                                     </div>
                                     <div className="meta-details">
                                         <span className="meta-title"><Skeleton height={20} width={80} /></span>
@@ -54,7 +42,6 @@ const ProjectSkeleton  = () =>{
                                 <li className="meta-item">
                                     <div className="meta-icon">
                                         <Skeleton circle={true} height={40} width={40} />
-                                        {/*<img src="/assets/images/icons/cost.svg" alt=""/>*/}
                                     </div>
                                     <div className="meta-details">
                                         <span className="meta-title"><Skeleton height={20} width={80} /></span>

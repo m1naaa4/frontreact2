@@ -19,7 +19,19 @@ class HttpService {
         return await axios({
             method: 'POST',
             url: this.url + "/" + added_url,
-            params: item
+            data: item
+        }).then(response => response.data)
+    }
+
+    postUploadData = async (item, added_url, tokenId = "") =>
+    {
+        return await axios({
+            method: 'POST',
+            url: this.url + "/" + added_url,
+            data: item,
+            onUploadProgress : progressEvent =>{
+                console.log('upload progress: ' + Math.round(progressEvent.loaded / progressEvent.total *100)+'%')
+            }
         }).then(response => response.data)
     }
 

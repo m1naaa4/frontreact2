@@ -35,7 +35,6 @@ const projectReducer = (state = initState ||undefined, action) => {
                 projects: 'there seems to be a problem please refresh your browser',
             }
         default:
-            console.log("default here ", state)
             return state
 
     }

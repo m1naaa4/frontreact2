@@ -1,15 +1,12 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
-import HeaderProfile from "../layout/Header/HeaderProfile";
 import DetailProjectPage from "../pages/User/Profile/DetailProjectPage";
 
 
 
-export default function DetailRoutes(props) {
-    console.log(props)
+export default function DetailProjectRoutes(props) {
     return (
         <div>
-            <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
                 <Switch>
                     <Route exact path={`${props.match.path}/addproject`}  component = {DetailProjectPage} />

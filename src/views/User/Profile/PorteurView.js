@@ -1,5 +1,4 @@
 import React, {useRef, useCallback} from 'react'
-import Footer from "../../../layout/footer/footer";
 import {Text} from "../../../containers/Language";
 import FilterProject from "../Fields/Filter/FilterProject";
 import ProjectView from "../Project/ProjectView";
@@ -21,9 +20,6 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
     const current = useSelector(state => state.projects.current);
     const loading = useSelector(state => state.projects.loading);
 
-    console.log("soulaimane", useSelector(state => state.projects))
-    console.log("loading", useSelector(state => state.projects.loading))
-
     const lastProjectElementRef = useCallback(node =>{
         if (projects.loading) return
         if (observer.current) observer.current.disconnect()
@@ -33,12 +29,12 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
             }
         })
         if (node) observer.current.observe(node)
-    }, [projects.loading,hasMore])
+    }, [loading,hasMore])
 
-    const goToAddproject = () =>
+    const goToDetailProject = () =>
     {
         // console.log("props", props)
-        props.history.push('/projects/addproject');
+        props.history.push('/projects/detail');
     };
 
     return (
@@ -64,23 +60,21 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
                                          <div data-testid="error-message">ERROR</div>
                                      ) : (
                                          () => {
-                                             console.log("projectoooooo",projects)
+                                             // console.log("projectoooooo",projects)
                                              if  (projects.success !== false && projects!==undefined && projects!=="loading" && projects.length>0) {
 
                                                  return (
                                                      projects.map((project, index) => {
                                                          if (projects.length === index +1){
                                                              return (
-                                                                 // <ProjectSkeleton/>
-                                                                 <div onClick={goToAddproject} className="col-md-4"  key={index +1} ref={lastProjectElementRef}>
+                                                                 <div  className="col-md-4"  key={index +1} ref={lastProjectElementRef}>
                                                                      <ProjectView   project={project} />
                                                                  </div>
                                                              )
 
                                                          }else{
                                                              return(
-                                                                 // <ProjectSkeleton/>
-                                                                 <div onClick={goToAddproject} className="col-md-4" key={index +1}>
+                                                                 <div  className="col-md-4" key={index +1}>
                                                                      <ProjectView   project={project} />
                                                                  </div>
 
@@ -108,7 +102,6 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
                          {/*<input type="button" value="click" onClick={handleFilterProjects}/>*/}
                      </div>
                  </div>
-                 <Footer />
              </>
 
     )

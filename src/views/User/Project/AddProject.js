@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react'
+import React,  from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {useForm} from "react-hooks-helper";
 import SectorDropFilter from "../Fields/Filter/Porteur/SectorDropFilter";
 import EtatDropFilter from "../Fields/Filter/Porteur/EtatDropFilter";
 import FinanceDropFilter from "../Fields/Filter/Porteur/FinanceDropFilter";

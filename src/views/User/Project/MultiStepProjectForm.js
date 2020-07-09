@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm, useStep } from "react-hooks-helper";
-import RegisterStep1View from "/../RegisterStep1View";
-import RegisterStep2View from "/../RegisterStep2View";
-import Submit from "./Submit";
+import Step1View from "./Step/Step1View";
+import Step2View from "./Step/Step2View";
+import Step3View from "./Step/Step3View";
+import FinalView from "./Step/FinalView";
+
 
 
 const steps = [
@@ -13,16 +15,23 @@ const steps = [
 ];
 
 const defaultData = {
-    name: "AbdeLKARIM",
-    email: "ichiabdelkrim@gmail.com",
-    address: "casablanca",
-    company: "Dadupa",
-    type: "PP",
-    phone: "0602098403",
-    password: ""
+    name: "project test",
+    logo: "",
+    sector: "2",
+    project_id: "",
+    zone: "Goulmima",
+    financement: "1000000$a1000000000000$",
+    description: "",
+    etat: "50",
+    action: "createProject",
+    look_mentor: 0,
+    look_angel: 1,
+    step: "1",
+    url: "",
 };
 
-const MultiStepForm = ({ props }) => {
+const MultiStepProjectForm = ({ props }) => {
+
     const [formData, setForm] = useForm(defaultData);
     const { step, navigation } = useStep({ initialStep: 0, steps });
     const { id } = step;
@@ -31,16 +40,16 @@ const MultiStepForm = ({ props }) => {
 
     switch (id) {
         case "step1":
-            return <RegisterStep1View {...data} />;
+            return <Step1View {...data} />;
         case "step2":
-            return <RegisterStep2View {...data} />;
+            return <Step2View {...data} />;
         case "step3":
-            return <RegisterStep2View {...data} />;
+            return <Step3View {...data} />;
         case "final":
-            return <Submit {...data} />;
+            return <FinalView {...data} />;
         default:
             return null;
     }
 };
 
-export default MultiStepForm;
+export default MultiStepProjectForm;

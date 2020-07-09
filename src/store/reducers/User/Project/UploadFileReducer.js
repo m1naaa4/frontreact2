@@ -1,42 +1,41 @@
 const initState = {
-    project : ""
+    url : ""
     }
 
 
-    const addprojectReducer = (state= initState | undefined, action) =>{
+    const uploadFileReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
                 case 'LOADING':
                     return {
                         ...state,
-                        project:'loading'
+                        url:'loading'
                     }
 
-          case 'ADD_PROJECT_SUCCESS':
+          case 'File_UPLOADED_SUCCESS':
+              console.log('rrrr',action.res)
               return {
-                  ...state,
-                  project:action.res,
-                  projectid:action.res.project.id,
+                  url:action.res,
               }
 
-              case 'ADD_PROJECT_ERROR':
+              case 'File_UPLOADED_ERROR':
 
                     return {
                         ...state,
-                        project:action.res,
+                        url:action.res,
                     }
 
                     case 'CODE_ERROR':
                             return {
                                 ...state,
-                                project:'there seems to be a problem please refresh your browser',
+                                url:'there seems to be a problem please refresh your browser',
                             }
                 default:
                     if (action.res === undefined) {
 
                         return {
                             ...state,
-                            project:state
+                            url:state
                         }
                     }
                     return state
@@ -44,4 +43,4 @@ const initState = {
         }
     }
     
-    export default addprojectReducer;
+    export default uploadFileReducer;

@@ -12,11 +12,12 @@ export const ProjectServices = (query) =>
         return error;
     });
 }
-export const AddProjectProject = (query) =>
+export const UploadFileService = (formdata) =>
 {
+
     const http = new HttpService();
-    let searchProject = "project/handleaction";
-    return http.postData(query,searchProject).then(data=>{
+    let searchProject = "video/handleaction";
+    return http.postUploadData(formdata, searchProject).then(data=>{
         return data;
     }).catch((error)=> {
         return error;
