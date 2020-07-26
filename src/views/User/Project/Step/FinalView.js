@@ -5,14 +5,18 @@ import {useSelector} from "react-redux";
 
 
 
-export default function FinalView({filterInput, setFilterInput, navigation, props}) {
+export default function FinalView({formData, setFormData, navigation, props}) {
 
+    const { etat, zone, financement, logo, tag, descriptions, look_angel, look_mentor, name,  sector, step, url } = formData;
     const {previous, next} = navigation;
     const project = useSelector(state => state.addproject);
     const fileurl = useSelector(state => state.fileuploaded);
+    console.log("here", fileurl.url)
     console.log("here", fileurl.url.url)
+    console.log("project", project)
+    let tags = project.project.tags
 
-
+    console.log("tags", tag)
 
     return (
 
@@ -73,49 +77,33 @@ export default function FinalView({filterInput, setFilterInput, navigation, prop
                                             <div className="review-meta">
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Project Status</label>
-                                                    <span>Public</span>
+                                                    <span>{`${name}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Secteurs d'activité</label>
-                                                    <span>Agri</span>
+                                                    <span>{`${sector}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Zones du projet</label>
-                                                    <span>Maroc</span>
+                                                    <span>{`${zone}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Financement</label>
-                                                    <span>$100.000</span>
+                                                    <span>{`${financement}`}</span>
                                                 </div>
                                             </div>
                                             <div className="review-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                    labore et dolore magna aliqua. In hac habitasse platea dictumst vestibulum rhoncus est. Nibh
-                                                    tortor id aliquet lectus proin nibh nisl condimentum id. Interdum velit laoreet id donec
-                                                    ultrices tincidunt arcu non sodales. Eget felis eget nunc lobortis mattis aliquam faucibus purus
-                                                    in. Cras adipiscing enim eu turpis egestas pretium. Ornare suspendisse sed nisi lacus. Nibh
-                                                    venenatis cras sed felis. Elementum tempus egestas sed sed risus pretium quam vulputate. Cursus
-                                                    eget nunc scelerisque viverra mauris in aliquam sem fringilla. Id diam vel quam elementum.
-                                                    Mattis rhoncus urna neque viverra. Ut aliquam purus sit amet. Vulputate odio ut enim blandit
-                                                    volutpat maecenas. Tempus quam pellentesque nec nam aliquam sem et tortor consequat. Interdum
-                                                    posuere lorem ipsum dolor sit amet consectetur. Nisl suscipit adipiscing bibendum est ultricies
-                                                    integer quis. Facilisis mauris sit amet massa vitae tortor condimentum lacinia quis.</p>
+                                                <p>{`${descriptions}`}</p>
 
-                                                <p>Sed augue lacus viverra vitae congue eu consequat. Viverra vitae congue eu consequat ac felis
-                                                    donec et odio. Faucibus purus in massa tempor nec. Egestas fringilla phasellus faucibus
-                                                    scelerisque eleifend donec pretium. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras
-                                                    fermentum odio. Dolor magna eget est lorem ipsum dolor sit amet. Sed arcu non odio euismod
-                                                    lacinia. Facilisis volutpat est velit egestas dui id ornare arcu odio. In fermentum posuere urna
-                                                    nec tincidunt praesent semper. Morbi tristique senectus et netus et.</p>
                                             </div>
                                             <div className="review-tags">
                                                 <h3>Tags</h3>
                                                 <ul>
-                                                    <li>Tag</li>
-                                                    <li>Tag</li>
-                                                    <li>Tag</li>
-                                                    <li>Tag</li>
-                                                    <li>Tag</li>
+                                                    {tag.map((name, index) => (
+                                                        <li key={index}>
+                                                            {name}
+                                                        </li>
+                                                    ))}
                                                 </ul>
                                             </div>
                                         </div>

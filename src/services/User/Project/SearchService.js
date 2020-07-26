@@ -5,7 +5,9 @@ export const ProjectServices = (query) =>
 {
     const http = new HttpService();
     let searchProject = "project/handleaction";
-    return http.postData(query,searchProject).then(data=>{
+    console.log("query" , query)
+    console.log("query" , query.logo)
+    return http.postUploadData(query,searchProject).then(data=>{
         console.log(data)
         return data;
     }).catch((error)=> {

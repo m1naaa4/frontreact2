@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import EtatDropFilter from "../../Fields/Filter/Porteur/EtatDropFilter";
 import SectorDropFilter from "../../Fields/Filter/Porteur/SectorDropFilter";
@@ -6,19 +6,24 @@ import ZoneDropFilter from "../../Fields/Filter/Porteur/ZoneDropFilter";
 import FinanceDropFilter from "../../Fields/Filter/Porteur/FinanceDropFilter";
 import {AddProjectsAction} from "../../../../store/actions/User/Project/AddProjectAction";
 
-
 export default function Step1View({formData, setForm,navigation, props}) {
 
 
     const dispatch = useDispatch();
     const { etat, zone, financement, logo, look_angel, look_mentor, name,  sector, step, url } = formData;
+    const fileInput = useRef(null);
+    const project= useSelector(state => state.addproject);
+    const [file, setFile] = useState('');
 
-    const project = useSelector(state => state.addproject);
-    const project_id = project;
-
+    const selectFile = e => {
+        setFile(e.target.files[0]);
+    };
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
+        console.log(formData.logo.append('file',file));
+
+        formData.project_id = project.project!="loading"?project.projectid:'';
         dispatch(AddProjectsAction(formData, props));
     }
 
@@ -85,7 +90,8 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
-                                                    <input type="file"  onChange={setForm} className="custom-file-input" id="customFile"/>
+                                                    <input type="file" ref={fileInput} onChange={selectFile}
+                                                    className="custom-file-input" id="customFile"/>
                                                     <label className="custom-file-label" htmlFor="customFile">Ajouter
                                                         le logo</label>
                                                 </div>
@@ -104,11 +110,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                                        placeholder="Ajouter un lien" className="wizard-required"
                                                        required/>
                                             </div>
-                                            <div className="col-md-6 input-row">
-                                                <input  type="text" value={project_id.projectid} name="project_id" onChangeCapture={setForm}
-                                                       placeholder="Ajouter un lien" className="wizard-required"
-                                                       required/>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <button type="button" onClick={(event) => { handleSubmitValue(event); next();}} name="next" className="next action-button">Continue <i

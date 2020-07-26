@@ -37,8 +37,13 @@ export default function Step2View({formData, setForm, navigation, props}) {
         formData.append('file', file.raw);
         formData.append('action', "create");
         dispatch(UploadFileAction(formData, props));
-        setStart('')
-    };
+        setStart('');
+        setgo(true);
+    }
+
+    const project = useSelector(state => state.addproject);
+
+    console.log("project2", project)
 
     // setgo(fileurl.url)
 
@@ -102,7 +107,9 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                     </div>
                                     <button  onClick={previous} name="previous" className="previous action-button">
                                         <i className="uil uil-arrow-left  "></i> Previous</button>
-                                    <button  onClick={next}
+                                    <button
+                                        disabled={fileurl.url.url === undefined ? true:false}
+                                        onClick={next}
 
                                              name="next" className="next action-button">Continue
                                         <i className="uil uil-arrow-right"></i></button>

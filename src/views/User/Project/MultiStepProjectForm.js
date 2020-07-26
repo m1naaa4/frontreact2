@@ -16,18 +16,19 @@ const steps = [
 
 const defaultData = {
     name: "project test",
-    logo: "",
+    logo: new FormData(),
     sector: "2",
     project_id: "",
     zone: "Goulmima",
     financement: "1000000$a1000000000000$",
-    description: "",
+    descriptions: "",
     etat: "50",
     action: "createProject",
     look_mentor: 0,
     look_angel: 1,
     step: "1",
     url: "",
+    tag: "",
 };
 
 const MultiStepProjectForm = ({ props }) => {

@@ -3,11 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import InputTags from "../../../../utils/tags/TagsInput";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {AddProjectsAction} from "../../../../store/actions/User/Project/AddProjectAction";
+import {AddTagDescriptionProjectsAction} from "../../../../store/actions/User/Project/AddTagDescriptionProjectAction";
 
 
 export default function Step3View({formData, setForm, navigation, props}) {
     const {previous, next} = navigation;
+
+    const { tag, descriptions } = formData;
 
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
@@ -22,15 +24,22 @@ export default function Step3View({formData, setForm, navigation, props}) {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('description', description);
-        formData.append('tags', tags);
-        formData.append('project_id', project.projectid);
-        formData.append('action', "createProject");
-        formData.append('step', "2");
-        dispatch(AddProjectsAction(formData, props));
-    };
 
+        formData.tag            = tags;
+        formData.descriptions   = description;
+        // const formData = new FormData();
+        // formData.append('description', description);
+        // formData.append('tags', tags);
+        formData.project_id = project.projectid;
+        formData.action     = "createProject";
+        formData.step       = "2";
+        dispatch(AddTagDescriptionProjectsAction(formData, props));
+
+        next()
+    };
+    const projectt = useSelector(state => state.addproject);
+
+    console.log("project3", projectt)
 
     return (
 
@@ -86,7 +95,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                     </button>
-                                    <button onClick={(event) => {  next()}} type="button" name="next" className="next action-button">Continue <i
+                                    <button onClick={(event) => {handleSubmit(event);  next()}} type="button" name="next" className="next action-button">Continue <i
                                         className="uil uil-arrow-right"></i></button>
                                 </fieldset>
 
