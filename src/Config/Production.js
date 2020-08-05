@@ -1,6 +1,9 @@
 const prod = {
     urls: {
-        'api' : 'http://api.dadupa.test/api'
+        'api' : 'https://gatwaytest.dadupa.com/api'
+    },
+    facebook:{
+        appId      : '2711133325873185'
     }
 };
 
