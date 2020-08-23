@@ -6,10 +6,10 @@ import ItemForm from "./ItemForm";
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
 import Footer from "../../../layout/footer/footer";
 import {Text} from "../../../containers/Language";
-import SocialAuth from "./Social/SocialAuth";
+import SocialLogin from "./Social/SocialLogin";
 
 
-const RegisterStep1View = ({setForm, formData, navigation ,}) =>{
+const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
     const { type, email  } = formData;
 
     const {  next } = navigation;
@@ -82,7 +82,8 @@ const RegisterStep1View = ({setForm, formData, navigation ,}) =>{
                                     </fieldset>
 
                                 </div>
-                                <SocialAuth/>
+
+                                <SocialLogin props={props} />
 
                                 <div id="authErr"></div>
 

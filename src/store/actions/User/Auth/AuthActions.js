@@ -1,10 +1,6 @@
 import {LoginUser,SignUpService,LogoutUser} from '../../../../services/User/AuthService'
 
 
-
-
-
-
 export const signUpAction = (credentials,props) =>
 {
 

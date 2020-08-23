@@ -7,7 +7,7 @@ import UilFacebook from '@iconscout/react-unicons/icons/uil-facebook-f'
 import UilLinkedin from '@iconscout/react-unicons/icons/uil-linkedin-alt'
 
 
-const SocialAuth = ({setForm, formData, navigation}) => {
+const SocialAuth = ({props}) => {
 
     return (
 

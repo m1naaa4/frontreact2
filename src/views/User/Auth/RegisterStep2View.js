@@ -87,8 +87,6 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
                                     </div>
                                 </fieldset>
 
-                                <SocialAuth/>
-
                                 <div id="authErr"></div>
 
                                 <div id="authResponse">

@@ -137,7 +137,7 @@ export default function LoginView(props) {
                                     </div>
                                 </form>
 
-                                <SocialLogin/>
+                                <SocialLogin props={props.props} />
 
                                 <NavLink className="login-link" to="/register"><span>Don't have an account ? </span><Text tid="register" /></NavLink>
 

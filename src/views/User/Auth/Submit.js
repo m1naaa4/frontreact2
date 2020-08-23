@@ -121,7 +121,6 @@ const Submit = ({setForm, formData, navigation, props}) => {
                                         </div>
                                     </fieldset>
                                 </div>
-                                <SocialAuth/>
                             </div>
                         </div>
                     </div>

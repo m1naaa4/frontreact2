@@ -1,8 +1,7 @@
 import axios from "axios";
-
+import config from '../Config'
 class HttpService {
-    url = "http://api.projectauth.test/api";
-
+    url = config.urls.api;
 
     postDataa = async (item, added_url, tokenId = "") =>
     {
