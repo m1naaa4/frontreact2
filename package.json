@@ -1,7 +1,7 @@
 {
   "name": "finalddpfront",
   "version": "0.1.0",
-  "homepage": "https://auth.dadupa.com/",
+  "homepage": "https://gatwaytest.dadupa.com/",
   "private": true,
   "dependencies": {
     "@iconscout/react-unicons": "^1.1.3",

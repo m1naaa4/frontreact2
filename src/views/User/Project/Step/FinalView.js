@@ -9,14 +9,12 @@ export default function FinalView({formData, setFormData, navigation, props}) {
 
     const { etat, zone, financement, logo, tag, descriptions, look_angel, look_mentor, name,  sector, step, url } = formData;
     const {previous, next} = navigation;
-    const project = useSelector(state => state.addproject);
     const fileurl = useSelector(state => state.fileuploaded);
-    console.log("here", fileurl.url)
-    console.log("here", fileurl.url.url)
-    console.log("project", project)
-    let tags = project.project.tags
 
-    console.log("tags", tag)
+    const goToShowproject = () => {
+        console.log('propsssssssssssssssssssssssssssssssssssssssssssssssssssssss',props)
+        props.history.push('/project/show');
+    };
 
     return (
 
@@ -111,7 +109,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                     </button>
-                                    <button type="submit" name="submit" className="submit action-button">Review <i
+                                    <button type="button" onClick={goToShowproject}  className="submit action-button">Review <i
                                         className="uil uil-arrow-right"></i></button>
                                     {/*<select className="post-status" name="">
                                         <option disabled selected>Statut de l’offre</option>
