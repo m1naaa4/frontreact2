@@ -32,7 +32,7 @@ const defaultData = {
 };
 
 const MultiStepProjectForm = ({ props }) => {
-
+console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwww',props)
     const [formData, setForm] = useForm(defaultData);
     const { step, navigation } = useStep({ initialStep: 0, steps });
     const { id } = step;

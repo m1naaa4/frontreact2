@@ -8,7 +8,7 @@ import HeaderProfile from "../layout/Header/HeaderProfile";
 export default function PorteurPrivateRoutes(props) {
     return (
         <div>
-            <HeaderProfile props={props}/>
+
             <div className="Dadupa-Page">
                 <Switch>
                     <Route exact path={`${props.match.path}/lists`}  component={Porteur} />

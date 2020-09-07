@@ -6,6 +6,7 @@ import UserRegister from "./pages/User/Auth/Register";
 import {Gaurd} from './Gaurd'
 import PorteurPrivateRoutes from "./routes/PorteurPrivateRoutes";
 import AddProjectRoutes from "./routes/AddProjectRoutes";
+import ShowProjectRoutes from "./routes/ShowProjectRoutes";
 
 const Routes = (props) => {
 
@@ -20,6 +21,7 @@ const Routes = (props) => {
                     <Route path="/register" component={UserRegister} />
                     <Gaurd  path="/projects" token='user-token' routeRedirect='/login' component={PorteurPrivateRoutes} />
                     <Gaurd  path="/projects" token='user-token' routeRedirect='/login' component={AddProjectRoutes} />
+                    <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ShowProjectRoutes} />
                 </LanguageProvider>
             </Switch>
         </div>
