@@ -1,6 +1,7 @@
 const dev = {
     urls: {
-        'api' : 'http://api.dadupa.test/api'
+        'front' : 'https://dadupa-front.test',
+        'api' : 'https://gatwaytest.dadupa.com/api'
     },
     facebook:{
         appId      : '2711133325873185'
