@@ -1,9 +1,8 @@
 import React from 'react'
 
 import UilGoogle from '@iconscout/react-unicons/icons/uil-google'
-import UilLinkedin from '@iconscout/react-unicons/icons/uil-linkedin-alt'
 import FacebookButton from "./Buttons/FacebookButton";
-
+import LinkedInButton from "./Buttons/LinkedInButton";
 const SocialLogin = ({props}) => {
     return (
 
@@ -21,6 +20,7 @@ const SocialLogin = ({props}) => {
                         <FacebookButton props={props} />
                     </div>
                     <div className="social-option linkedin">
+                        <LinkedInButton props={props} />
                         {/*<div className="social-option linkedin">
                             <a href="#!" data-toggle="tooltip" data-placement="bottom" title="Sign up with Linkedin"><UilLinkedin/>
                             </a>
