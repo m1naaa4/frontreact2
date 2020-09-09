@@ -12,8 +12,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
     const fileurl = useSelector(state => state.fileuploaded);
 
     const goToShowproject = () => {
-        console.log('propsssssssssssssssssssssssssssssssssssssssssssssssssssssss',props)
-        props.history.push('/project/show');
+        props.history.push('/project/show', { id: 1 });
     };
 
     return (

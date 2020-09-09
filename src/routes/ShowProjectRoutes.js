@@ -11,7 +11,7 @@ export default function ShowProjectRoutes(props) {
         <div>
             <div className="Dadupa-Page">
                 <Switch>
-                    <Route exact path={`${props.match.path}/show`}  component = {FinalView} />
+                    <Route exact path={`${props.match.path}/show`}  component = {ViewProject} />
                     <Route  exact path={props.match.path} render={ props=>(
                         <Redirect to={{pathname: `${props.match.path}/show` }} />
                     )} />

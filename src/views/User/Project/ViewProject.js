@@ -1,8 +1,40 @@
-import React  from 'react'
+import React, {useEffect} from 'react'
+import {getProjectAction} from "../../../store/actions/User/Project/GetProjectActions";
+import {useDispatch, useSelector} from "react-redux";
+import {Player} from "video-react";
+import AddComment from "../Comment/AddComment";
 
-export default function ViewProject() {
+export default function ViewProject(props) {
 
+    let id = 0;
+    if (props.location.state){
+        id = props.location.state.id
+    }else{
+        id = 0
+    }
+    const data = {
+        uuidproject : id,
+        action      : "getProject",
+    }
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getProjectAction(data,props));
+    }, [dispatch])
 
+    const project = useSelector(state => state.project.projects);
+
+    let tags;
+    if (project.tags) {
+         tags = <ul className="Tags-List">
+            {project.tags.map((name, index) => (
+                <li className="Tag-Item" key={index}>
+                    {name}
+                </li>
+            ))}
+        </ul>;
+    }else{
+         tags = [];
+    }
 
     return (
         <div className="Single-Wrapper">
@@ -20,17 +52,18 @@ export default function ViewProject() {
                                     <div className="single-offer-logo">
                                         <img src="assets/images/porject-logo.png" title="Nom du projet" alt=""/>
                                     </div>
-                                    <h3 className="single-offer-name">Nom du projet</h3>
+                                    <h3 className="single-offer-name">{project.name}</h3>
                                 </div>
                             </div>
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-                                    <video className="player" playsinline controls
-                                           data-poster="assets/images/offers/offer-thumb-5.jpg">
-                                        <source src="assets/media/earth.mp4" type="video/mp4"/>
-                                        <source src="assets/media/earth.ogv" type="video/ogv"/>
-                                    </video>
+
+                                    <Player width="300" height="300"
+                                            playsInline
+                                            poster="/assets/poster.png"
+                                            src="https://www.w3schools.com/tags/movie.ogg"
+                                    />
                                 </div>
 
                                 <div className="Signle-Offer-Content">
@@ -64,271 +97,15 @@ export default function ViewProject() {
                                         </button>
                                     </div>
                                     <div className="Signle-Offer-Text">
-                                        <p>Massa vitae tortor condimentum lacinia quis vel eros donec ac odio tempor
-                                            orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae congue
-                                            eu consequat ac felis donec et odio pellentesque diam volutpat commodo sed
-                                            egestas egestas fringilla phasellus faucibus scelerisque eleifend donec
-                                            pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae
-                                            elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer
-                                            vitae justo eget magna fermentum iaculis eu non diam phasellus vestibulum
-                                            lorem sed risus ultricies tristique nulla aliquet enim tortor at auctor urna
-                                            nunc id cursus metus aliquam eleifend mi in nulla posuere sollicitudin
-                                            aliquam ultrices sagittis orci a scelerisque purus semper eget duis at
-                                            tellus at urna condimentum mattis pellentesque id nibh tortor id aliquet
-                                            lectus proin nibh nisl condimentum id venenatis a condimentum vitae sapien
-                                            pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                                            ac turpis egestas sed tempus urna et pharetra pharetra massa massa ultricies
-                                            mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet
-                                            consectetur adipiscing elit pellentesque habitant morbi tristique senectus
-                                            et netus et malesuada fames ac turpis egestas integer eget aliquet nibh
-                                            praesent tristique magna sit amet purus gravida quis blandit turpis cursus
-                                            in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat
-                                            consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam
-                                            maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras
-                                            adipiscing enim eu turpis egestas pretium aenean pharetra magna ac placerat
-                                            vestibulum lectus mauris ultrices eros in cursus turpis massa tincidunt dui
-                                            ut ornare lectus sit amet est placerat in egestas erat imperdiet sed euismod
-                                            nisi porta lorem mollis aliquam ut porttitor leo a diam sollicitudin tempor
-                                            id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet
-                                            risus nullam eget felis eget nunc lobortis mattis</p>
+                                        <p>
+                                            {project.description}
+                                        </p>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div id="Comments-Wrap" className="Comments-Wrap">
-                                <div className="Comments-Header">
-                                    <div className="Comments-Title">
-                                        <h3>Comments</h3>
-                                    </div>
-                                    <div className="Comments-Filter">
-                                        <div className="comment-select">
-                                            <select className="comments-filter-select" name="">
-                                                <option value="" selected>Newest</option>
-                                                <option value="">Newest</option>
-                                                <option value="">Newest</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Comments-Box">
-                                    <div className="Comment-Writing">
-                                        <div className="Comment-Col-2">
-                                            <div className="Comment-User-Thumb">
-                                                <img src="assets/images/abbass-iya.jpg"/>
-                                            </div>
-                                        </div>
-                                        <div className="Comment-Col-10">
-                                            <div className="Comment-Area">
-                                                <div className="Comment-Input">
-                                                    <input type="text" name="" value=""
-                                                           placeholder="Write your comment"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="User-Comments">
-
-                                        {/*!--#### COMMENT 1 ### --*/}
-                                        <div className="User-Comment">
-                                            <div className="Comment-Col-2">
-                                                <div className="Comment-User-Thumb">
-                                                    <img src="assets/images/abdelkarim-profile.jpg" alt=""/>
-                                                </div>
-                                                <ul className="comment-reactions-list">
-                                                    <li className="comment-reaction"><img
-                                                        src="assets/images/icons/dadupa-like.svg" alt=""/></li>
-                                                    <label className="count-reactions">120</label>
-                                                </ul>
-                                            </div>
-                                            <div className="Comment-Col-10">
-                                                <div className="Comment-User">
-                                                    <div className="Comment-Content">
-                                                        <div className="Comment-User-Name">
-                                                            <a className="Comment-User-Profile" href="#">Abdelkrim
-                                                                Ichi</a>
-                                                            <span className="Comment-Date">07/04/2020</span>
-                                                        </div>
-                                                        <div className="Comment-Text">
-                                                            <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="comment-actions">
-                                                    <ul className="comment-actions-list">
-                                                        <li className="comment-action">
-                                                            <button className="like-action">Like</button>
-                                                        </li>
-                                                        <li className="comment-action replay-action">Reply</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="Comment-Reply Writing-Box">
-                                                <div className="Comment-Writing">
-                                                    <div className="Comment-Col-2">
-                                                        <div className="Comment-User-Thumb">
-                                                            <img src="assets/images/abbass-iya.jpg"/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="Comment-Col-10">
-                                                        <div className="Comment-Area">
-                                                            <div className="Comment-Input">
-                                                                <input type="text" name="" value=""
-                                                                       placeholder="Write your comment"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/*<!-- #### COMMENT 2 ### -->*/}
-                                        <div className="User-Comment">
-
-                                            {/*<!-- ### COMMENTE THUMB ### -->*/}
-                                            <div className="Comment-Col-2">
-                                                <div className="Comment-User-Thumb">
-                                                    <img src="assets/images/elbezzaz-profile.jpg" alt=""/>
-                                                </div>
-                                                <ul className="comment-reactions-list">
-                                                    <li className="comment-reaction"><img
-                                                        src="assets/images/icons/dadupa-like.svg" alt=""/></li>
-                                                    <label className="count-reactions">28</label>
-                                                </ul>
-                                            </div>
-
-
-                                            <div className="Comment-Col-10">
-                                                {/*<!-- ### COMMENTE CONTENT ### -->*/}
-                                                <div className="Comment-User">
-                                                    <div className="Comment-Content">
-                                                        <div className="Comment-User-Name">
-                                                            <a className="Comment-User-Profile" href="#">Youness EL
-                                                                BEZZAZI</a>
-                                                            <span className="Comment-Date">07/04/2020</span>
-                                                        </div>
-                                                        <div className="Comment-Text">
-                                                            <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {/*<!-- ### COMMENTE ACTIONS ### -->*/}
-                                                <div className="comment-actions multi-options">
-                                                    <div className="comment-replies-count">
-                                                        <button className="comment-replies-button" type="button"
-                                                                name="button"><i className="uil uil-comment-notes"></i>
-                                                            <span>16</span><span> Replies</span></button>
-                                                    </div>
-                                                    <ul className="comment-actions-list">
-                                                        <li className="comment-action">
-                                                            <button className="like-action">Like</button>
-                                                        </li>
-                                                        <li className="comment-action replay-action">Reply</li>
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-
-                                            {/*!--### COMMENTER REPLIES ### --*/}
-                                            <div className="Comment-Replies">
-                                                <div className="Comment-Reply">
-                                                    <div className="User-Comment">
-                                                        <div className="Comment-Col-2">
-                                                            <div className="Comment-User-Thumb">
-                                                                <img src="assets/images/abbass-iya.jpg"/>
-                                                            </div>
-                                                            <ul className="comment-reactions-list">
-                                                                <li className="comment-reaction"><img
-                                                                    src="assets/images/icons/dadupa-like.svg" alt=""/>
-                                                                </li>
-                                                                <label className="count-reactions">12</label>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="Comment-Col-10">
-                                                            <div className="Comment-User">
-                                                                <div className="Comment-Content">
-                                                                    <div className="Comment-User-Name">
-                                                                        <a className="Comment-User-Profile" href="#">Abbass
-                                                                            IYA</a>
-                                                                        <span className="Comment-Date">07/04/2020</span>
-                                                                    </div>
-                                                                    <div className="Comment-Text">
-                                                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="comment-actions">
-                                                                <ul className="comment-actions-list">
-                                                                    <li className="comment-action">
-                                                                        <button className="like-action">Like</button>
-                                                                    </li>
-                                                                    <li className="comment-action replay-action">Reply</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="Writing-Reply">
-                                                <div className="Comment-Writing">
-                                                    <div className="Comment-Col-2">
-                                                        <div className="Comment-User-Thumb">
-                                                            <img src="assets/images/abbass-iya.jpg"/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="Comment-Col-10">
-                                                        <div className="Comment-Area">
-                                                            <div className="Comment-Input">
-                                                                <input type="text" name="" value=""
-                                                                       placeholder="Write a reply..."/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/*<!-- #### COMMENT 3 ### -->*/}
-                                        <div className="User-Comment">
-                                            <div className="Comment-Col-2">
-                                                <div className="Comment-User-Thumb">
-                                                    <img src="assets/images/othmane-profile.jpg" alt=""/>
-                                                </div>
-                                                <ul className="comment-reactions-list">
-                                                    <li className="comment-reaction"><img
-                                                        src="assets/images/icons/dadupa-like.svg" alt=""/></li>
-                                                    <label className="count-reactions">2</label>
-                                                </ul>
-                                            </div>
-                                            <div className="Comment-Col-10">
-                                                <div className="Comment-User">
-                                                    <div className="Comment-Content">
-                                                        <div className="Comment-User-Name">
-                                                            <a className="Comment-User-Profile" href="#">Othmane
-                                                                Amrhar</a>
-                                                            <span className="Comment-Date">07/04/2020</span>
-                                                        </div>
-                                                        <div className="Comment-Text">
-                                                            <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="comment-actions">
-                                                    <ul className="comment-actions-list">
-                                                        <ul className="comment-replies-count">
-                                                            {/*<!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->*/}
-                                                        </ul>
-                                                        <li className="comment-action">
-                                                            <button className="like-action">Like</button>
-                                                        </li>
-                                                        <li className="comment-action">Reply</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <AddComment  project={project}/>
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">
@@ -347,7 +124,7 @@ export default function ViewProject() {
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">
                                         <label>Publié le</label>
-                                        <span>7 Avril 2020</span>
+                                        <span>{project.created}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Etat du projet</label>
@@ -359,62 +136,17 @@ export default function ViewProject() {
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Zones ciblées</label>
-                                        <span>Maroc, France</span>
+                                        <span>{project.project_area}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Financement recherché</label>
-                                        <span>$100.000</span>
+                                        <span>{project.funding_search}</span>
                                     </li>
                                 </ul>
                             </div>
                             <div className="Single-Offer-Tags">
                                 <h3>Tags</h3>
-                                <ul className="Tags-List">
-                                    <li className="Tag-Item">Tag</li>
-                                    <li className="Tag-Item">Tag</li>
-                                    <li className="Tag-Item">Tag</li>
-                                    <li className="Tag-Item">Tag</li>
-                                    <li className="Tag-Item">Tag</li>
-                                    <li className="Tag-Item">Tag</li>
-                                    <li className="Tag-Item">Tag</li>
-                                </ul>
-                            </div>
-                            <div className="Co-Porteurs">
-                                <h3>Co-porteurs du projet</h3>
-                                <ul className="Co-Porteurs-List">
-                                    <li className="Co-Porteur">
-                                        <a href="#">
-                                            <div className="Co-Porteur-Profile">
-                                                <img src="assets/images/abbass-iya.jpg"/>
-                                            </div>
-                                            <div className="Co-Porteur-Name">Abbass IYA</div>
-                                        </a>
-                                    </li>
-                                    <li className="Co-Porteur">
-                                        <a href="#">
-                                            <div className="Co-Porteur-Profile">
-                                                <img src="assets/images/abbass-iya.jpg"/>
-                                            </div>
-                                            <div className="Co-Porteur-Name">Abbass IYA</div>
-                                        </a>
-                                    </li>
-                                    <li className="Co-Porteur">
-                                        <a href="#">
-                                            <div className="Co-Porteur-Profile">
-                                                <img src="assets/images/abbass-iya.jpg"/>
-                                            </div>
-                                            <div className="Co-Porteur-Name">Abbass IYA</div>
-                                        </a>
-                                    </li>
-                                    <li className="Co-Porteur">
-                                        <a href="#">
-                                            <div className="Co-Porteur-Profile">
-                                                <img src="assets/images/abbass-iya.jpg"/>
-                                            </div>
-                                            <div className="Co-Porteur-Name">Abbass IYA</div>
-                                        </a>
-                                    </li>
-                                </ul>
+                                    {tags}
                             </div>
                         </div>
                     </div>

@@ -1,22 +1,22 @@
 import HttpService from '../../HttpService';
 
 
-export const LoadProject = (data, props, current) =>{
+export const AddComment = (data, props, current) =>{
 
     const http = new HttpService();
-    let getProjectUrl = "project/handleaction"+"?page="+current;
+    let addcommentUr = "comment/handleaction";
     const tokenId = "user-token";
-    return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
+    return http.postData(data,addcommentUr,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
         console.log(error)
         return error;
     });
 }
-export const GetProject = (data, props, current) =>{
+export const GetComment = (data, props, current) =>{
 
     const http = new HttpService();
-    let getProjectUrl = "project/handleaction";
+    let getProjectUrl = "comment/handleaction";
     const tokenId = "user-token";
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data

@@ -108,7 +108,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                     <button  onClick={previous} name="previous" className="previous action-button">
                                         <i className="uil uil-arrow-left  "></i> Previous</button>
                                     <button
-                                        disabled={fileurl.url.url === undefined ? true:false}
+                                        // disabled={fileurl.url.url === undefined ? true:false}
                                         onClick={next}
 
                                              name="next" className="next action-button">Continue

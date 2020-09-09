@@ -3,7 +3,6 @@ import MultiStepProjectForm from "../../../views/User/Project/MultiStepProjectFo
 
 export default function DetailProjectPage(props) {
 
-
     return (
         <div>
             <MultiStepProjectForm {...props}/>

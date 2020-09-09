@@ -37,6 +37,10 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
         props.history.push('/projects/detail');
     };
 
+    const goToShowproject = (id) => {
+        props.history.push('/project/show', { id: id });
+    };
+
     return (
              <>
                  <div className="Page-Wrapper">
@@ -67,14 +71,14 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
                                                      projects.map((project, index) => {
                                                          if (projects.length === index +1){
                                                              return (
-                                                                 <div  className="col-md-4"  key={index +1} ref={lastProjectElementRef}>
+                                                                 <div  className="col-md-4" onClick={() => goToShowproject(project.id) }   key={index +1} ref={lastProjectElementRef}>
                                                                      <ProjectView   project={project} />
                                                                  </div>
                                                              )
 
                                                          }else{
                                                              return(
-                                                                 <div  className="col-md-4" key={index +1}>
+                                                                 <div  className="col-md-4" onClick={() => goToShowproject(project.id) } key={index +1}>
                                                                      <ProjectView   project={project} />
                                                                  </div>
 

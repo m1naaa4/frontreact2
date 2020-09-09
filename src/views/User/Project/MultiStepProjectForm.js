@@ -31,8 +31,7 @@ const defaultData = {
     tag: "",
 };
 
-const MultiStepProjectForm = ({ props }) => {
-console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwww',props)
+const MultiStepProjectForm = ( props ) => {
     const [formData, setForm] = useForm(defaultData);
     const { step, navigation } = useStep({ initialStep: 0, steps });
     const { id } = step;

@@ -1,6 +1,6 @@
 const dev = {
     urls: {
-        'api' : 'http://api.dadupa.test/api'
+        'api' : 'http://projectauth.test/api'
     },
     facebook:{
         appId      : '2711133325873185'
