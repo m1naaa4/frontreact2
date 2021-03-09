@@ -31,6 +31,22 @@ export default function Step2View({formData, setForm, navigation, props}) {
 
     const fileurl = useSelector(state => state.fileuploaded);
 
+    const onChange = e => {
+        getBase64(e.target.files[0]);
+    };
+
+    const onLoad = fileString => {
+        formData.logo = fileString;
+    };
+    
+    const getBase64 = file => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            onLoad(reader.result);
+        };
+    };
+
     const handleUpload = async e => {
         e.preventDefault();
         const formData = new FormData();

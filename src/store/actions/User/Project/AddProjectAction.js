@@ -1,13 +1,13 @@
 import {ProjectServices} from "../../../../services/User/Project/SearchService";
 
 
-export const AddProjectsAction = (data) =>{
+export const AddProjectsAction = (data, props, url) =>{
 
     return (dispatch)=>{
 
         dispatch({type:'LOADING'});
 
-        ProjectServices(data).then((res) =>
+        ProjectServices(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_PROJECT_SUCCESS',res});

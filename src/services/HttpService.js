@@ -17,7 +17,7 @@ class HttpService {
     {
         return await axios({
             method: 'POST',
-            url: this.url + "/" + added_url,
+            url: "/" + added_url,
             data: item
         }).then(response => response.data)
     }
@@ -26,7 +26,7 @@ class HttpService {
     {
         return await axios({
             method: 'POST',
-            url: this.url + "/" + added_url,
+            url: "/" + added_url,
             data: item,
             onUploadProgress : progressEvent =>{
                 console.log('upload progress: ' + Math.round(progressEvent.loaded / progressEvent.total *100)+'%')
@@ -39,8 +39,7 @@ class HttpService {
         const token = await localStorage.getItem(tokenId);
         const requestOptions = this.getRequestOptions(token);
 
-        return fetch(this.url + "/" + added_url, requestOptions).then(
-            response => response.json());
+        return axios("/" + added_url, requestOptions).then( response => response.data);
     }
 
     getRequestOptions = (token) =>

@@ -4,7 +4,7 @@ import HttpService from '../../HttpService';
 export const LoadProject = (data, props, current) =>{
 
     const http = new HttpService();
-    let getProjectUrl = "project/handleaction"+"?page="+current;
+    let getProjectUrl = "project/getallProjects"+"?page="+current;
     const tokenId = "user-token";
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
@@ -16,7 +16,7 @@ export const LoadProject = (data, props, current) =>{
 export const GetProject = (data, props, current) =>{
 
     const http = new HttpService();
-    let getProjectUrl = "project/handleaction";
+    let getProjectUrl = "project/getProject";
     const tokenId = "user-token";
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data

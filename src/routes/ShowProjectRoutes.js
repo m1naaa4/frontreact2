@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
-import AddProjectPage from "../pages/User/Profile/AddProjectPage";
+import AddProjectPage from "../pages/User/Project/AddProjectPage";
 import ViewProject from "../views/User/Project/ViewProject";
 import FinalView from "../views/User/Project/Step/FinalView";
 

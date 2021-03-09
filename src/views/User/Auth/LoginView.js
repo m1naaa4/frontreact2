@@ -14,6 +14,9 @@ import SocialLogin from "./Social/SocialLogin";
 
 export default function LoginView(props) {
 
+    if (localStorage.getItem('user-token')) {
+        props.props.history.push('/project/lists');
+    }
     const [fields, handleFieldChange] = useFormFields({
         email: "",
         password: ""

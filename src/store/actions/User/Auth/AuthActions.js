@@ -49,7 +49,7 @@ export const UserLoginAction = (credentials,props) =>
             localStorage.setItem('user-token','Bearer '+res.token);
             dispatch({type:'LOGIN_SUCCESS'});
             setTimeout(() => {
-                props.history.push("/projects/lists");
+                props.history.push("/project/lists");
                 dispatch({type:'RESTART_AUTH_RESPONSE'}); 
             }, 10);
             

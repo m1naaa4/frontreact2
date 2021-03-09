@@ -11,20 +11,28 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
     const dispatch = useDispatch();
     const { etat, zone, financement, logo, look_angel, look_mentor, name,  sector, step, url } = formData;
-    const fileInput = useRef(null);
     const project= useSelector(state => state.addproject);
-    const [file, setFile] = useState('');
 
-    const selectFile = e => {
-        setFile(e.target.files[0]);
+    const onChange = e => {
+        getBase64(e.target.files[0]);
+    };
+
+    const onLoad = fileString => {
+        formData.logo = fileString;
+    };
+    
+    const getBase64 = file => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            onLoad(reader.result);
+        };
     };
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        console.log(formData.logo.append('file',file));
-
-        formData.project_id = project.project!="loading"?project.projectid:'';
-        dispatch(AddProjectsAction(formData, props));
+        formData.project_id = project.project != "loading" ? project.projectid: '';
+        dispatch(AddProjectsAction(formData, props, '/create'));
     }
 
     const {  next } = navigation;
@@ -90,7 +98,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
-                                                    <input type="file" ref={fileInput} onChange={selectFile}
+                                                    <input type="file" onChange={onChange}
                                                     className="custom-file-input" id="customFile"/>
                                                     <label className="custom-file-label" htmlFor="customFile">Ajouter
                                                         le logo</label>

@@ -1,10 +1,12 @@
 import HttpService from '../../HttpService';
 
 
-export const ProjectServices = (query) =>
+export const ProjectServices = (query, props, url) =>
 {
+    console.log('query')
+    console.log(query)
     const http = new HttpService();
-    let searchProject = "project/handleaction";
+    let searchProject = "project"+url;
     console.log("query" , query)
     console.log("query" , query.logo)
     return http.postUploadData(query,searchProject).then(data=>{
@@ -18,7 +20,7 @@ export const UploadFileService = (formdata) =>
 {
 
     const http = new HttpService();
-    let searchProject = "video/handleaction";
+    let searchProject = "video/upload";
     return http.postUploadData(formdata, searchProject).then(data=>{
         return data;
     }).catch((error)=> {

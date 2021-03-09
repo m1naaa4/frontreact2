@@ -31,7 +31,7 @@ function HeaderProfile(props) {
     }, [authResponse])
 
     const goToAddproject = () => {
-        props.props.history.push('/projects/addproject');
+        props.props.history.push('/project/create');
     };
 
     return (

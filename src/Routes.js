@@ -4,7 +4,7 @@ import {LanguageProvider} from "./containers/Language";
 import UserLogin from "./pages/User/Auth/Login";
 import UserRegister from "./pages/User/Auth/Register";
 import {Gaurd} from './Gaurd'
-import PorteurPrivateRoutes from "./routes/PorteurPrivateRoutes";
+import ProjectListPrivateRoutes from "./routes/ProjectListPrivateRoutes";
 import AddProjectRoutes from "./routes/AddProjectRoutes";
 import ShowProjectRoutes from "./routes/ShowProjectRoutes";
 
@@ -19,9 +19,7 @@ const Routes = (props) => {
                     )} />
                     <Route path="/login" component={UserLogin} />
                     <Route path="/register" component={UserRegister} />
-                    <Gaurd  path="/projects" token='user-token' routeRedirect='/login' component={PorteurPrivateRoutes} />
-                    <Gaurd  path="/projects" token='user-token' routeRedirect='/login' component={AddProjectRoutes} />
-                    <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ShowProjectRoutes} />
+                    <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
                 </LanguageProvider>
             </Switch>
         </div>

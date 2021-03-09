@@ -16,7 +16,7 @@ const projectReducer = (state = initState ||undefined, action) => {
         case 'LOAD_PROJECT_SUCCESS':
             return {
                 ...state,
-                projects: [...state.projects, ...action.res.result.data],
+                projects: [...state.projects, ...action.res.result],
                 hasMore:  action.res.result.hasMore,
                 current:  action.res.result.current,
                 loading:false
