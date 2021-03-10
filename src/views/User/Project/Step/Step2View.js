@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {UploadFileAction} from "../../../../store/actions/User/Project/UploadFileAction";
 import ProgressBar from "../../../../skeleton/ProgressBar";
@@ -12,31 +12,40 @@ import { Player } from 'video-react';
 export default function Step2View({formData, setForm, navigation, props}) {
 
     const dispatch = useDispatch();
-    const [file, setFile] = useState('');
+
+
+    const [selectedFile, setSelectedFiles] = useState(undefined);
+    const [file, setFile] = useState(undefined);
+    const [currentFile, setCurrentFile] = useState(undefined);
+    const [progress, setProgress] = useState(0);
+
+    // useEffect(() => {
+    //     dispatch(UploadFileAction(formData, props));
+    // }, []);
+
+    const selectFile = (e) => {
+     setSelectedFiles(e.target.files);
+    };
+
+
     const [go, setgo] = useState('');
-    const [start, setStart] = useState('');
 
     const {previous, next} = navigation;
 
-    const [uploadPercentage, setUploadPercentage] = useState(0);
-
-    const selectFile = e => {
-        setFile({
-            preview: URL.createObjectURL(e.target.files[0]),
-            raw: e.target.files[0]
-        });
-        setStart(e.target.files[0]);
-    };
-    const fileInput = useRef(null)
-
-    const fileurl = useSelector(state => state.fileuploaded);
 
     const onChange = e => {
+        console.log(e.target.files[0])
         getBase64(e.target.files[0]);
+
+        let currentFile = e.target.files[0];
+        setCurrentFile(currentFile);
+        
     };
 
     const onLoad = fileString => {
-        formData.logo = fileString;
+        formData.video = fileString;
+        formData.action = 'upload';
+        formData.project_id = project.id;
     };
     
     const getBase64 = file => {
@@ -49,15 +58,15 @@ export default function Step2View({formData, setForm, navigation, props}) {
 
     const handleUpload = async e => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('file', file.raw);
-        formData.append('action', "create");
+        
+        setProgress(0);
+
         dispatch(UploadFileAction(formData, props));
-        setStart('');
         setgo(true);
+        setSelectedFiles(undefined);
     }
 
-    const project = useSelector(state => state.addproject);
+    const project = useSelector(state => state);
 
     console.log("project2", project)
 
@@ -108,17 +117,29 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                             <Player width="300" height="300"
                                                 playsInline
                                                 poster="/assets/poster.png"
-                                                src={file.preview}
+                                                //src={file.preview}
                                             />
+                                            {currentFile && (
+                                                <div className="progress">
+                                                <div
+                                                    className="progress-bar progress-bar-info progress-bar-striped"
+                                                    role="progressbar"
+                                                    aria-valuenow={progress}
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100"
+                                                    style={{ width: progress + "%" }}
+                                                >
+                                                    {progress}%
+                                                </div>
+                                                </div>
+                                            )}
+                                            {/* <ProgressBar percentage={progress} /> */}
+
+                                            {/* <input type="file" onChange={onChange} /> */}
                                             <label className="btn btn-default">
-                                                <input style={{display:"none"}} ref={fileInput}
-                                                       type="file" onChange={selectFile}/>
+                                                <input type="file" onChange={onChange} />
                                             </label>
-
-                                            <ProgressBar percentage={uploadPercentage} />
-
-                                            <div onClick={() => fileInput.current.click()} className="for-ProgressBar">upload</div>
-                                            <button disabled={!start} onChange={handleUpload}   name="next" className="next action-button">Start upload</button>
+                                            <button  onChange={onChange}   name="next" className="next action-button">Start upload</button>
                                         </div>
                                     </div>
                                     <button  onClick={previous} name="previous" className="previous action-button">
