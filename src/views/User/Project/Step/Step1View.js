@@ -19,6 +19,8 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
     const onLoad = fileString => {
         formData.logo = fileString;
+        formData.action = 'create';
+        formData.type = 'image';
     };
     
     const getBase64 = file => {

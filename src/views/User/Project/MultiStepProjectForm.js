@@ -30,6 +30,7 @@ const defaultData = {
     step: "1",
     url: "",
     tag: "",
+    type: "",
 };
 
 const MultiStepProjectForm = ( props ) => {
