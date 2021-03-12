@@ -32,7 +32,7 @@ const InputTags = props => {
             </ul>
             <input
                 type="text"
-                onKeyDown={event => event.keyCode === 32 || event.keyCode === 32 ? addTags(event) : null}
+                onKeyDown={event => event.keyCode === 13 ? addTags(event) : null}
                 placeholder="Press spacebar to add tags"
             />
         </div>

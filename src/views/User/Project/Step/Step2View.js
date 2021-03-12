@@ -22,6 +22,8 @@ export default function Step2View({formData, setForm, navigation, props}) {
         if (project.fileuploaded.id) {
             console.log(project.fileuploaded.url !== 'loading')
             setFile(project.fileuploaded.url);
+           formData.url = project.fileuploaded.url;
+           formData.media = project.fileuploaded.type;
         }
         
     });

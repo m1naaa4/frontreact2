@@ -13,7 +13,7 @@ export default function ViewProject(props) {
         id = 0
     }
     const data = {
-        uuidproject : id,
+        project_id : id,
         action      : "getProject",
     }
     const dispatch = useDispatch();

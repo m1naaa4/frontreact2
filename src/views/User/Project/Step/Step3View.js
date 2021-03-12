@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import InputTags from "../../../../utils/tags/TagsInput";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import {AddTagDescriptionProjectsAction} from "../../../../store/actions/User/Project/AddTagDescriptionProjectAction";
+import { AddProjectsAction } from '../../../../store/actions/User/Project/AddProjectAction';
 
 
 export default function Step3View({formData, setForm, navigation, props}) {
@@ -31,15 +31,14 @@ export default function Step3View({formData, setForm, navigation, props}) {
         // formData.append('description', description);
         // formData.append('tags', tags);
         formData.project_id = project.projectid;
-        formData.action     = "createProject";
-        formData.step       = "2";
-        dispatch(AddTagDescriptionProjectsAction(formData, props));
+        formData.action     = 'create';
+        dispatch(AddProjectsAction (formData, props, '/create'));
 
         next()
     };
     const projectt = useSelector(state => state.addproject);
 
-    console.log("project3", projectt)
+    //console.log("project3", projectt)
 
     return (
 

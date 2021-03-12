@@ -7,12 +7,12 @@ import {useSelector} from "react-redux";
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
-    const { etat, zone, financement, logo, tag, descriptions, look_angel, look_mentor, name,  sector, step, url } = formData;
+    const { etat, zone, financement, logo, tag, descriptions, look_angel, look_mentor, name,  sector, step, url, media, project_id } = formData;
     const {previous, next} = navigation;
     const fileurl = useSelector(state => state.fileuploaded);
 
     const goToShowproject = () => {
-        props.history.push('/project/show', { id: 1 });
+        props.history.push('/project/show', { id: project_id });
     };
 
     return (
@@ -58,23 +58,34 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <div className="form-inputs review-box">
                                         <div className="review-fieldset">
                                             <div className="review-header">
-                                                <h2 className="review-offer-title">Offer title</h2>
+                                                <h2 className="review-offer-title">{`${name}`}</h2>
                                                 <div className="review-offer-logo">
                                                     <img src="assets/images/porject-logo.png" alt=""/>
                                                 </div>
                                             </div>
                                             <div className="review-media">
 
-                                                <Player width="300" height="300"
+                                                {/* <Player width="300" height="300"
                                                         playsInline
                                                         poster="/assets/poster.png"
-                                                        src={fileurl.url.url}
-                                                />
+                                                        src={`${url}`}
+                                                /> */}
+
+                                                {
+                                                    `${media}` === 'video' ? (
+                                                        <Player width="100%" height="100%"
+                                                            playsInline
+                                                            poster="/assets/poster.png"
+                                                            src={url}
+                                                        />) : (<img width="100%" height="300" src={url} alt="Project"/>)
+                                                }
+
+
                                             </div>
                                             <div className="review-meta">
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Project Status</label>
-                                                    <span>{`${name}`}</span>
+                                                    <span>{`${etat}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Secteurs d'activité</label>
@@ -96,11 +107,13 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                             <div className="review-tags">
                                                 <h3>Tags</h3>
                                                 <ul>
-                                                    {tag.map((name, index) => (
-                                                        <li key={index}>
-                                                            {name}
-                                                        </li>
-                                                    ))}
+                                                    {
+                                                       tag ?  tag.map((name, index) => (
+                                                            <li key={index}>
+                                                                {name}
+                                                                </li>
+                                                            )):''
+                                                    }                                                   
                                                 </ul>
                                             </div>
                                         </div>

@@ -21,16 +21,17 @@ const defaultData = {
     sector: "2",
     project_id: "",
     zone: "Goulmima",
-    financement: "1000000$a1000000000000$",
-    descriptions: "",
+    financement: "1000$a10000$",
+    description: "",
     etat: "50",
     action: "create",
     look_mentor: 0,
     look_angel: 1,
     step: "1",
     url: "",
-    tag: "",
+    tags: "",
     type: "",
+    media: "",
 };
 
 const MultiStepProjectForm = ( props ) => {
