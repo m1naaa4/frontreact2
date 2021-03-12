@@ -7,22 +7,32 @@ const initState = {
         switch(action.type){
 
                 case 'LOADING':
-                    return {
-                        ...state,
-                        url:'loading'
+                    console.log('rrrr',state)
+                    if (state !== 'loading') {
+                        return {
+                            ...state,
+                            url: state.url
+                        }
+                    } else {
+                        return {
+                            ...state,
+                            url:'loading'
+                        }
                     }
 
           case 'File_UPLOADED_SUCCESS':
-              console.log('rrrr',action.res)
+              
               return {
-                  url:action.res,
+                  url:action.response.data.url,
+                  id:action.response.data.id,
+                  type:action.response.data.type,
               }
 
               case 'File_UPLOADED_ERROR':
 
                     return {
                         ...state,
-                        url:action.res,
+                        url:action.action.response.data.url,
                     }
 
                     case 'CODE_ERROR':

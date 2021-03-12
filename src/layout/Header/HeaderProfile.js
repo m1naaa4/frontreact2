@@ -21,12 +21,10 @@ function HeaderProfile(props) {
 
     useEffect(() => {
         if (authResponse !== "" && authResponse.success === true) {
-            alert(authResponse.message);
             localStorage.removeItem('user-token');
             console.log(props)
             props.props.history.push('/login');
         } else if (authResponse.success === false) {
-            alert(authResponse.message);
         }
     }, [authResponse])
 

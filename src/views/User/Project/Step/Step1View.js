@@ -33,7 +33,8 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        formData.project_id = project.project != "loading" ? project.projectid: '';
+        formData.project_id = project.project !== "loading" ? project.projectid: '';
+        formData.action = 'create';
         dispatch(AddProjectsAction(formData, props, '/create'));
     }
 

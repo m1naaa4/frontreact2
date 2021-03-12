@@ -18,9 +18,13 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [message, setMessage] = useState("");
     const hiddenFileInput = React.useRef(null);
 
-    // useEffect(() => {
-    //     dispatch(UploadFileAction(formData, props));
-    // }, []);
+    useEffect(() => {
+        if (project.fileuploaded.id) {
+            console.log(project.fileuploaded.url !== 'loading')
+            setFile(project.fileuploaded.url);
+        }
+        
+    });
 
     const selectFile = (e) => {
      setSelectedFiles(e.target.files);
@@ -48,7 +52,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
         formData.video = fileString;
         formData.action = 'upload';
         formData.type = 'video';
-        formData.project_id = project.addproject.projectid;
+        formData.project_id = project.addproject.projectid;        
     };
     
     const getBase64 = file => {
@@ -64,6 +68,9 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const handleUpload = async e => {
 
         setProgress(0);
+
+        // dispatch(UploadFileAction(formData, props));
+
         UploadService.upload(formData, (event) => {
         setProgress(Math.round((100 * event.loaded) / event.total));
 
@@ -73,6 +80,8 @@ export default function Step2View({formData, setForm, navigation, props}) {
             setMessage(response.data.message);
             setFile(response.data.url);
             setMedia(response.data.type);
+
+            dispatch({type:'File_UPLOADED_SUCCESS', response})
         })
         .then((files) => {
             setFile(files.data);
@@ -95,6 +104,8 @@ export default function Step2View({formData, setForm, navigation, props}) {
     // console.log("project2", project.addproject.projectid)
 
     // setgo(fileurl.url)
+
+        
 
     return (
 

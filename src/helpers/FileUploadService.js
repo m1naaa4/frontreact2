@@ -1,9 +1,9 @@
-import http from "./http-common";
+import axios from "axios";
 
 
 const upload = (data, onUploadProgress) => {
-
-  return http.post("/video/upload", data, {
+  console.log("here progress",onUploadProgress)
+  return axios.post("/video/upload", data, {
     onUploadProgress,
   });
 };
