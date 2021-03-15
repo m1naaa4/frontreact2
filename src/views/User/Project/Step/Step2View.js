@@ -26,29 +26,18 @@ export default function Step2View({formData, setForm, navigation, props}) {
            formData.media = project.fileuploaded.type;
         }
         
-    });
+    });  
 
-    const selectFile = (e) => {
-     setSelectedFiles(e.target.files);
-    };
-
-    const handleClick = event => {
+    const handleClick = e => {
         hiddenFileInput.current.click();
       };
 
-
-    const [go, setgo] = useState('');
-
     const {previous, next} = navigation;
 
-
-    const onChange = e => {
-        getBase64(e.target.files[0]);
-
-        let currentFile = e.target.files[0];
-        setCurrentFile(currentFile);
-        
-    };
+    const selectFile = (e) => {   
+        setSelectedFiles(1)     
+        getBase64(e.target.files[0]); 
+      };
 
     const onLoad = fileString => {
         formData.video = fileString;
@@ -62,27 +51,23 @@ export default function Step2View({formData, setForm, navigation, props}) {
         reader.readAsDataURL(file);
         reader.onload = () => {
             onLoad(reader.result);
-
-            handleUpload()
+            setSelectedFiles(1)     
+            handleUpload(file)
         };
     };
 
     const handleUpload = async e => {
-
         setProgress(0);
-
-        // dispatch(UploadFileAction(formData, props));
-
-        UploadService.upload(formData, (event) => {
-        setProgress(Math.round((100 * event.loaded) / event.total));
-
-        console.log(progress)
+        setCurrentFile(e);
+        UploadService.upload(formData, (e) => {
+            console.log("progress", Math.round((100 * e.loaded) / e.total))
+        setProgress(Math.round((100 * e.loaded) / e.total));
+        
         })
         .then((response) => {
-            setMessage(response.data.message);
             setFile(response.data.url);
             setMedia(response.data.type);
-
+            setSelectedFiles(undefined);
             dispatch({type:'File_UPLOADED_SUCCESS', response})
         })
         .then((files) => {
@@ -92,22 +77,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
             setProgress(0);
             setMessage("Could not upload the file!");
             setCurrentFile(undefined);
-        });
-
-        setSelectedFiles(undefined);
-        
-        //dispatch(UploadFileAction(formData, props));
-        setgo(true);
+        });        
     }
 
     const project = useSelector(state => state);
-
-    console.log("project2", project)
-    // console.log("project2", project.addproject.projectid)
-
-    // setgo(fileurl.url)
-
-        
 
     return (
 
@@ -119,6 +92,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
 
                             <div className="page-header">
                                 <h3>Détails de l'offre</h3>
+                                <div id="authErr">{message}</div>
                                 <p>Enter details about the project <br/>to preceed further</p>
                                 <img src="/assets/images/offer-thumbnail.svg"/>
                             </div>
@@ -150,53 +124,53 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                         <p>Enter details about the project <br/>to preceed further</p>
                                     </div>
                                     {file && ( 
-                                         <div className="form-inputs">
+                                        <div className="form-inputs">
                                             <div  className="col-md-12 input-row">
-
                                                 {
-                                                    media === 'video' ? (
-                                                        <Player width="100%" height="100%"
-                                                            playsInline
-                                                            poster="/assets/poster.png"
-                                                            src={file}
-                                                        />) : (<img width="100%" height="300" src={file} alt="Project"/>)
-                                                }
+                                                media === 'video' ? (
+                                                    <Player width="100%" height="100%"
+                                                        playsInline
+                                                        poster="/assets/poster.png"
+                                                        src={file}
+                                                    />) : (<img width="100%" height="300" src={file} alt="Project"/>)
+                                                } 
 
-                                                    {currentFile && (
+                                                {currentFile && (
                                                     <ProgressBar percentage={progress} />
-                                                    )}
-
-                                                    {/* <input type="file" onChange={onChange} /> */}
-                                                    
-                                                
-                                                    {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}
-                                                </div>
-                                            </div>
-                                    )}
-
+                                                    )}                                                                                               
+                                            </div>                                            
+                                        </div>
+                                    )}                                    
+                                      
                                     {!file && ( 
                                          <div className="form-inputs">
                                             <div  className="col-md-12 input-row" style={{ height: "350px" , width: "100%" , display: "grid", placeItems: "center"}} onClick={handleClick}>
                                                     {/* <input type="file" onChange={onChange} /> */}
                                                     <div  className="btn btn-default" style={{ margin: "auto", display: "block"}}>
                                                         <input ref={hiddenFileInput}
-                                                            style={{display: 'none'}} type="file" onChange={onChange} /> Choose file
+                                                            style={{display: 'none'}} type="file" onChange={selectFile} /> Choose file
                                                     </div>
-                                                
                                                     {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}
                                                 </div>
+                                                {currentFile && (
+                                                    <ProgressBar percentage={progress} />
+                                                    )}
                                             </div>
+                                            
                                     )}
                                    
                                     <button  onClick={previous} name="previous" className="previous action-button">
                                         <i className="uil uil-arrow-left  "></i> Previous</button>
 
-                                    <label className="btn btn-default">
-                                        <input type="file" onChange={onChange} />
-                                    </label>
+                                        {file && ( 
+                                            <label className="btn btn-default">Choose another file
+                                                <input  ref={hiddenFileInput} style={{display: 'none'}} type="file" onChange={selectFile}/>
+                                            </label>
+                                        )}
+                                    
                                     <button
                                         // disabled={fileurl.url.url === undefined ? true:false}
-                                        onClick={next}
+                                        onClick={next} disabled={!file}
 
                                              name="next" className="next action-button">Continue
                                         <i className="uil uil-arrow-right"></i></button>

@@ -32,7 +32,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
         // formData.append('tags', tags);
         formData.project_id = project.projectid;
         formData.action     = 'create';
-        dispatch(AddProjectsAction (formData, props, '/create'));
+        dispatch(AddProjectsAction (formData, props, '/create', navigation));
 
         next()
     };

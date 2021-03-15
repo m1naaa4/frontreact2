@@ -7,6 +7,9 @@ const ProgressBar = ({ percentage }) => {
             <div
                 className='for-ProgressBar progress-bar-striped bg-success'
                 role='progressbar'
+                aria-valuenow={percentage}
+                aria-valuemin="0"
+                aria-valuemax="100"
                 style={{ width: `${percentage}%` }}
             >
                 {percentage}%

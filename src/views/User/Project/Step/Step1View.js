@@ -5,13 +5,14 @@ import SectorDropFilter from "../../Fields/Filter/Porteur/SectorDropFilter";
 import ZoneDropFilter from "../../Fields/Filter/Porteur/ZoneDropFilter";
 import FinanceDropFilter from "../../Fields/Filter/Porteur/FinanceDropFilter";
 import {AddProjectsAction} from "../../../../store/actions/User/Project/AddProjectAction";
+import { displayErrorMessages } from '../../../../helpers/displayErr';
 
 export default function Step1View({formData, setForm,navigation, props}) {
 
 
     const dispatch = useDispatch();
     const { project_status, project_area, funding_search, look_angel, name,  sector_id, url } = formData;
-    const project= useSelector(state => state.addproject);
+    const project = useSelector(state => state.addproject.addproject);
 
     const onChange = e => {
         getBase64(e.target.files[0]);
@@ -21,9 +22,9 @@ export default function Step1View({formData, setForm,navigation, props}) {
     if (props.location.state){
         formData.project_id = props.location.state.id
     }
-    useEffect(() => {
-        dispatch(AddProjectsAction(formData, props, '/create'));
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(AddProjectsAction(formData, props, '/create'));
+    // }, [dispatch])
 
     const onLoad = fileString => {
         formData.logo = fileString;
@@ -41,12 +42,30 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        formData.project_id = project.project !== "loading" ? project.projectid: '';
+        clearAuthErrDiv();
+        formData.project_id = project !== "loading" ? project.projectid: '';
         formData.action = 'create';
-        dispatch(AddProjectsAction(formData, props, '/create'));
+        dispatch(AddProjectsAction(formData, props, '/create', navigation));
     }
 
+    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project.projectid)
+    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project.success)
+    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project.projectid)
+    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project)
+
     const {  next } = navigation;
+
+    const successMessage = (successMessage) => {
+        return <div dangerouslySetInnerHTML=
+          {{ __html: '<div class="alert alert-success add-padding">' + ' ' + successMessage + '</div>' }}
+        />
+    
+      }
+
+      const clearAuthErrDiv = () => {
+        let authErr = document.querySelector("#authErr");
+        authErr.innerHTML = "";
+      }
 
     return (
 
@@ -59,8 +78,34 @@ export default function Step1View({formData, setForm,navigation, props}) {
                             <div className="page-header">
                                 <h3>Détails de l'offre</h3>
                                 <p>Enter details about the project <br/>to preceed further</p>
+
+                                <div id="authErr"></div>
+                                <div id="authResponse">
+
+                                {
+                                 project !== 0 && project.success == true ?
+                                 project.message
+                                    :
+                                project.success == false ?
+                                displayErrorMessages(project.errors, document.getElementById('authErr'))
+                                : project
+
+                                }
+
+                            </div>
+
                                 <img src="/assets/images/offer-thumbnail.svg"/>
                             </div>
+
+                            <div id="authErr"></div>
+
+                            <div id="authResponse">
+                                
+                            </div>
+
+                               
+
+                                
                         </div>
                         <div className="col-md-12 col-lg-8">
                             <form id="form-wizard" className="form-wizard" action="" method="post">
@@ -132,7 +177,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
                                         </div>
                                     </div>
-                                    <button type="button" onClick={(event) => { handleSubmitValue(event); next();}} name="next" className="next action-button">Continue <i
+                                    <button type="button" onClick={(event) => { handleSubmitValue(event);}} name="next" className="next action-button">Continue <i
                                         className="uil uil-arrow-right"></i></button>
                                 </fieldset>
 

@@ -80,9 +80,9 @@ export default function LoginView(props) {
                          * else if authResponse.success == false show error messages
                          */
                         :
-                        authResponse.success === false ?
-                            displayErrorMessages(authResponse.error, document.getElementById('authErr'))
-                            : authResponse
+                    authResponse.success === false ?
+                        displayErrorMessages(authResponse.error, document.getElementById('authErr'))
+                        : authResponse
 
                 }
 

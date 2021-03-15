@@ -9,34 +9,34 @@ const initState = {
                 case 'LOADING':
                     return {
                         ...state,
-                        project:'loading'
+                        addproject:'loading'
                     }
 
           case 'ADD_PROJECT_SUCCESS':
               return {
                   ...state,
-                  project:action.res,
+                  addproject:action.res,
                   projectid:action.res.project.id,
+                  success:action.res.success,
               }
 
               case 'ADD_PROJECT_ERROR':
-
                     return {
                         ...state,
-                        project:action.res,
+                        addproject:action.res,
                     }
 
                     case 'CODE_ERROR':
                             return {
                                 ...state,
-                                project:'there seems to be a problem please refresh your browser',
+                                addproject:'there seems to be a problem please refresh your browser',
                             }
                 default:
                     if (action.res === undefined) {
 
                         return {
                             ...state,
-                            project:state
+                            addproject:state
                         }
                     }
                     return state

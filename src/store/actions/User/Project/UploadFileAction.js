@@ -1,4 +1,4 @@
-import { UploadFileService} from "../../../../services/User/Project/SearchService";
+import { UploadFileService} from "../../../../services/User/Project/ProjectServices";
 
 
 export const UploadFileAction = (data) =>{
