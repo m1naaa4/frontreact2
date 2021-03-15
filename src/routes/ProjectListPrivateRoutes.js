@@ -4,6 +4,7 @@ import ListProject from "../pages/User/Project/ListProject";
 import HeaderProfile from "../layout/Header/HeaderProfile";
 import ViewProject from '../views/User/Project/ViewProject';
 import AddProjectPage from "../pages/User/Project/AddProjectPage"
+import UpdateProjectPage from '../pages/User/Project/UpdateProjectPage';
 
 
 export default function ProjectListPrivateRoutes(props) {
@@ -39,6 +40,15 @@ export default function ProjectListPrivateRoutes(props) {
                                 <Route exact path={`${props.match.path}/show`}  component = {ViewProject} />
                                 <Route  exact path={props.match.path} render = { props => (
                                     <Redirect to={{pathname: `${props.match.path}/show` }} />
+                                )} />
+                            </Switch>
+                        );
+                    case '/project/update': 
+                        return (
+                            <Switch>
+                                <Route exact path={`${props.match.path}/update`}  component = {UpdateProjectPage} />
+                                <Route  exact path={props.match.path} render = { props => (
+                                    <Redirect to={{pathname: `${props.match.path}/update` }} />
                                 )} />
                             </Switch>
                         );

@@ -1,33 +1,36 @@
-import React, { useEffect} from 'react'
+import React, {useRef, useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import EtatDropFilter from "../../Fields/Filter/Porteur/EtatDropFilter";
 import SectorDropFilter from "../../Fields/Filter/Porteur/SectorDropFilter";
 import ZoneDropFilter from "../../Fields/Filter/Porteur/ZoneDropFilter";
 import FinanceDropFilter from "../../Fields/Filter/Porteur/FinanceDropFilter";
 import {AddProjectsAction} from "../../../../store/actions/User/Project/AddProjectAction";
+import { getProjectAction } from '../../../../store/actions/User/Project/GetProjectActions';
 
-export default function Step1View({formData, setForm,navigation, props}) {
+export default function UpdateStep1View({formData, setForm,navigation, props}) {
 
 
     const dispatch = useDispatch();
-    const { project_status, project_area, funding_search, look_angel, name,  sector_id, url } = formData;
+    
     const project= useSelector(state => state.addproject);
+    const getproject= useSelector(state => state.project);
+    const nameForm = useRef(null)
 
     const onChange = e => {
         getBase64(e.target.files[0]);
     };
 
-
-    if (props.location.state){
-        formData.project_id = props.location.state.id
+    const data = {
+        project_id  : props.location.state.id,
+        action      : "getProject",
     }
     useEffect(() => {
-        dispatch(AddProjectsAction(formData, props, '/create'));
+        console.log("here update", getproject)
+        dispatch(getProjectAction(data, props));
     }, [dispatch])
 
     const onLoad = fileString => {
         formData.logo = fileString;
-        formData.action = 'create';
         formData.type = 'image';
     };
     
@@ -41,7 +44,14 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
+        const form = nameForm.current
+
         formData.project_id = project.project !== "loading" ? project.projectid: '';
+        formData.name = `${form['name'].value}`;
+        formData.project_area = `${form['project_area'].value}`;
+        formData.project_status = `${form['project_status'].value}`;
+        formData.funding_search = `${form['funding_search'].value}`;
+        formData.sector_id = `${form['sector_id'].value}`;
         formData.action = 'create';
         dispatch(AddProjectsAction(formData, props, '/create'));
     }
@@ -63,7 +73,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-8">
-                            <form id="form-wizard" className="form-wizard" action="" method="post">
+                            <form ref={nameForm} id="form-wizard" className="form-wizard" action="" method="post">
                                 <ul id="wizardbar">
                                     <li className="active">
                                         <div className="Step-Number"><span>1</span><i className="uil uil-check"></i></div>
@@ -91,21 +101,21 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                     <div className="form-inputs">
                                         <div className="form-row">
                                             <div className="col-md-12 input-row">
-                                                <input type="text" name="name" onChange={setForm} value={name}
+                                                <input type="text" name="name" onChange={setForm} defaultValue={getproject.project.name}
                                                        placeholder="Nom du projet" className="wizard-required" required/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <EtatDropFilter value={project_status} onChange={setForm}/>
+                                                <EtatDropFilter name="project_status" value={getproject.project.project_status} onChange={setForm}/>
                                             </div>
 
                                             <div className="col-md-6 input-row input-select">
-                                                <SectorDropFilter value={sector_id} onChange={setForm} />
+                                                <SectorDropFilter name="sector_id" value={getproject.project.sector_id} onChange={setForm} />
                                             </div>
                                             <div className="col-md-12 input-row">
-                                                <ZoneDropFilter value={project_area}  onChange={setForm}/>
+                                                <ZoneDropFilter name="project_area" value={getproject.project.project_area}  onChange={setForm}/>
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                <FinanceDropFilter value={funding_search}  onChange={setForm}/>
+                                                <FinanceDropFilter name="funding_search" value={getproject.project.funding_search}  onChange={setForm}/>
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
@@ -118,14 +128,14 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
                                             <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
-                                                    <input type="checkbox" value={look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
-                                                           name="angel"/>
+                                                    <input type="checkbox" onChange={setForm}   className="custom-control-input" id="switch1"
+                                                           name="look_angel"/>
                                                     <label className="custom-control-label" htmlFor="switch1">Je
                                                         cherche des mentors</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 input-row">
-                                                <input type="text" value={url} name="url" onChange={setForm}
+                                                <input type="text" value={getproject.project.url} name="url" onChange={setForm}
                                                        placeholder="Ajouter un lien" className="wizard-required"
                                                        required/>
                                             </div>

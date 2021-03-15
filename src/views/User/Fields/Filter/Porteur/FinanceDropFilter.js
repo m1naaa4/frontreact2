@@ -14,7 +14,7 @@ const finances = [
 const FinanceDropFilter = ({ label, ...others }) => (
     <>
         <div className="input-row input-select">
-            <select className="user-type" name="financement"  {...others}>
+            <select className="user-type" name="funding_search"  {...others}>
                 {finances.map(([value, name]) => (
                     <option key={name} value={value}>{name}</option>
                 ))}

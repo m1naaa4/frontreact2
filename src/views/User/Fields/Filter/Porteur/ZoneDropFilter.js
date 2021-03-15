@@ -12,7 +12,7 @@ const zones = [
 
 const ZoneDropFilter = ({ label, ...others }) => (
     <>
-            <select className="user-type" name="zone"  {...others}>
+            <select className="user-type" name="project_area"  {...others}>
                 {zones.map(([value, name]) => (
                     <option key={name} value={value}>{name}</option>
                 ))}

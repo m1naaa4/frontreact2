@@ -1,15 +1,13 @@
 import React  from 'react'
 import { Player } from 'video-react';
-import {useSelector} from "react-redux";
 
 
 
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
-    const { etat, zone, financement, logo, tag, descriptions, look_angel, look_mentor, name,  sector, step, url, media, project_id } = formData;
-    const {previous, next} = navigation;
-    const fileurl = useSelector(state => state.fileuploaded);
+    const { project_status, project_area, funding_search, tag, descriptions, name,  sector_id, url, media, project_id } = formData;
+    const {previous} = navigation;
 
     const goToShowproject = () => {
         props.history.push('/project/show', { id: project_id });
@@ -85,19 +83,19 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                             <div className="review-meta">
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Project Status</label>
-                                                    <span>{`${etat}`}</span>
+                                                    <span>{`${project_status}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Secteurs d'activité</label>
-                                                    <span>{`${sector}`}</span>
+                                                    <span>{`${sector_id}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Zones du projet</label>
-                                                    <span>{`${zone}`}</span>
+                                                    <span>{`${project_area}`}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Financement</label>
-                                                    <span>{`${financement}`}</span>
+                                                    <span>{`${funding_search}`}</span>
                                                 </div>
                                             </div>
                                             <div className="review-content">

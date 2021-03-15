@@ -10,7 +10,7 @@ export const getProjectAction = (data, props, current) =>{
         GetProject(data,props, current).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
-                dispatch({type:'GET_PROJECT_SUCCESS',res});
+                dispatch({type:'GET_PROJECT_SUCCESS', res});
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
                 dispatch({type:'GET_PROJECT_ERROR',res})

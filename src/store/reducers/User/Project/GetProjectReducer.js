@@ -1,5 +1,5 @@
 const initState = {
-    projects: ''
+    project: ''
 }
 
 
@@ -10,26 +10,25 @@ const getProjectReducer = (state = initState ||undefined, action) => {
         case 'LOADING':
             return {
                 ...state,
-                projects: state.projects,
-                loading:true
+                project: state.project,
             }
         case 'GET_PROJECT_SUCCESS':
             return {
                 ...state,
-                projects: action.res.result,
+                project: action.res.project,
             }
 
         case 'GET_PROJECT_ERROR':
 
             return {
                 ...state,
-                projects: action.res,
+                success: false,
             }
 
         case 'CODE_ERROR':
             return {
                 ...state,
-                projects: 'there seems to be a problem please refresh your browser',
+                project: 'there seems to be a problem please refresh your browser',
             }
         default:
             return state

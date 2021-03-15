@@ -10,7 +10,7 @@ export const loadProjectAction = (data, props, current) =>{
         LoadProject(data,props, current).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
-                dispatch({type:'LOAD_PROJECT_SUCCESS',res});
+                dispatch({type:'LOAD_PROJECT_SUCCESS', res});
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
                 dispatch({type:'LOAD_PROJECT_ERROR',res})

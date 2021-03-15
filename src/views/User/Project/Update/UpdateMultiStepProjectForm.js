@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm, useStep } from "react-hooks-helper";
-import Step1View from "./Step/Step1View";
-import Step2View from "./Step/Step2View";
-import Step3View from "./Step/Step3View";
-import FinalView from "./Step/FinalView";
+import UpdateStep1View from "./UpdateStep1View";
+import Step2View from "../Step/Step2View";
+import Step3View from "../Step/Step3View";
+import FinalView from "../Step/FinalView";
 
 
 
@@ -34,7 +34,7 @@ const defaultData = {
     media: "",
 };
 
-const MultiStepProjectForm = ( props ) => {
+const UpdateMultiStepProjectForm = ( props ) => {
     const [formData, setForm] = useForm(defaultData);
     const { step, navigation } = useStep({ initialStep: 0, steps });
     const { id } = step;
@@ -43,7 +43,7 @@ const MultiStepProjectForm = ( props ) => {
 
     switch (id) {
         case "step1":
-            return <Step1View {...data} />;
+            return <UpdateStep1View {...data} />;
         case "step2":
             return <Step2View {...data} />;
         case "step3":
@@ -55,4 +55,4 @@ const MultiStepProjectForm = ( props ) => {
     }
 };
 
-export default MultiStepProjectForm;
+export default UpdateMultiStepProjectForm;

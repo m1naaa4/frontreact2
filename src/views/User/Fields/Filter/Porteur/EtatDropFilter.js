@@ -13,7 +13,7 @@ const etats = [
 const EtatDropFilter = ({ label, ...others }) => (
     <>
         <div className="input-row input-select">
-            <select className="user-type" name="etat"  {...others}>
+            <select className="user-type" name="project_status"  {...others}>
                 {etats.map(([value, name]) => (
                     <option key={name} value={value}>{name}</option>
                 ))}

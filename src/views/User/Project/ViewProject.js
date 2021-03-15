@@ -3,6 +3,7 @@ import {getProjectAction} from "../../../store/actions/User/Project/GetProjectAc
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from "video-react";
 import AddComment from "../Comment/AddComment";
+import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
 
 export default function ViewProject(props) {
 
@@ -21,12 +22,15 @@ export default function ViewProject(props) {
         dispatch(getProjectAction(data,props));
     }, [dispatch])
 
-    const project = useSelector(state => state.project.projects);
+    const project = useSelector(state => state.project);
+    console.log("salammmmmmmmmmmmmmmmmmmmmmm", project)
+    const projectadd = useSelector(state => state.addproject);
+    console.log("hhhhhhhhhhhhhhhhhhhhamdo li ALLAH", projectadd)
 
     let tags;
-    if (project.tags) {
+    if (project.project) {
          tags = <ul className="Tags-List">
-            {project.tags.map((name, index) => (
+            {project.project.tags.map((name, index) => (
                 <li className="Tag-Item" key={index}>
                     {name}
                 </li>
@@ -35,14 +39,22 @@ export default function ViewProject(props) {
     }else{
          tags = [];
     }
-
+    const goToEditproject = () => {
+        props.history.push('/project/update', { id: project.project.id });
+    };
     return (
         <div className="Single-Wrapper">
             <div className="container">
 
                 {/* <!-- SINGLE -->*/}
-                <div className="Single-Content">
-                    <div className="row">
+                    {
+                            project.loading === true ? (
+                                <ProjectSkeleton/>
+                            ) : project.project.success === false ? (
+                                <div data-testid="error-message">ERROR</div>
+                            ) : (
+                        <div className="Single-Content">
+                            <div className="row">
                         <div className="col-md-8">
 
                             {/*!--PAGE HEADER --*/}
@@ -52,7 +64,7 @@ export default function ViewProject(props) {
                                     <div className="single-offer-logo">
                                         <img src="assets/images/porject-logo.png" title="Nom du projet" alt=""/>
                                     </div>
-                                    <h3 className="single-offer-name">{project.name}</h3>
+                                    <h3 className="single-offer-name">{project.project.name}</h3>
                                 </div>
                             </div>
 
@@ -98,20 +110,20 @@ export default function ViewProject(props) {
                                     </div>
                                     <div className="Signle-Offer-Text">
                                         <p>
-                                            {project.description}
+                                            {project.project.description}
                                         </p>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <AddComment  project={project}/>
+                            {/* <AddComment  project={project}/> */}
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">
                                 <div className="Update-Post">
-                                    <button type="button" name="button" data-toggle="tooltip" data-placement="bottom"
-                                            title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
+                                    <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
+                                            title="Edit Post"  className="edit-button"><i className="uil uil-pen"></i>
                                     </button>
                                 </div>
                                 <div className="Send-Message">
@@ -124,23 +136,23 @@ export default function ViewProject(props) {
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">
                                         <label>Publié le</label>
-                                        <span>{project.created}</span>
+                                        <span>{project.project.date}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Etat du projet</label>
-                                        <span>Idée</span>
+                                        <span>{project.project.project_status}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Secteurs d’activité</label>
-                                        <span>Agriculture</span>
+                                        <span>{project.project.sector_id}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Zones ciblées</label>
-                                        <span>{project.project_area}</span>
+                                        <span>{project.project.project_area}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Financement recherché</label>
-                                        <span>{project.funding_search}</span>
+                                        <span>{project.project.funding_search}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -150,7 +162,12 @@ export default function ViewProject(props) {
                             </div>
                         </div>
                     </div>
-                </div>
+                        </div>
+                                     )
+                                }
+
+
+                
 
             </div>
         </div>
