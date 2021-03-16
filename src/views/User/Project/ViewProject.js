@@ -10,8 +10,6 @@ export default function ViewProject(props) {
     let id = 0;
     if (props.location.state){
         id = props.location.state.id
-    }else{
-        id = 0
     }
     const data = {
         project_id : id,

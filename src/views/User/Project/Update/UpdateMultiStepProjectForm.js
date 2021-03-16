@@ -16,8 +16,10 @@ const steps = [
 
 const defaultData = {
     name: "",
+    logolink: '',
     logo: new FormData(),
     video: new FormData(),
+    medialink: '',
     sector_id: "",
     project_id: "",
     project_area: "",
@@ -29,8 +31,9 @@ const defaultData = {
     look_angel: 1,
     step: "1",
     url: "",
-    tags: "",
+    tags: [],
     type: "",
+    mediatype: '',
     media: "",
 };
 

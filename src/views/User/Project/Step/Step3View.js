@@ -9,12 +9,11 @@ import { AddProjectsAction } from '../../../../store/actions/User/Project/AddPro
 export default function Step3View({formData, setForm, navigation, props}) {
     const {previous, next} = navigation;
 
-    const { tags, descriptions } = formData;
+    const { tags, description } = formData;
 
     const dispatch = useDispatch();
-    const [description, setDescription] = useState('');
-    const [tag, setTags] = useState([]);
-    console.log("taaaaaaaaaaaaaaaaaagggggggggggggggggggggggggggggggggggggggggosssssssssssssss",tags)
+    const [descriptions, setDescription] = useState(description);
+    const [tag, setTags] = useState(tags);
 
 
     const selectedTags = tags => {
@@ -27,7 +26,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
         e.preventDefault();
 
         formData.tags           = tag;
-        formData.descriptions   = description;
+        formData.descriptions   = descriptions;
         // const formData = new FormData();
         // formData.append('description', description);
         // formData.append('tags', tags);
@@ -85,7 +84,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
                                     <div className="form-inputs">
                                         <div className="col-md-12 input-row">
                                             {/*<div id="editor">This is some sample content.</div>*/}
-                                            <ReactQuill id="editor" style={{ height: "250px"}} theme="snow" name="description" defaultValue={descriptions} onChange={setDescription}/>
+                                            <ReactQuill id="editor" style={{ height: "250px"}} theme="snow" name="description" defaultValue={description} onChange={setDescription}/>
                                         </div>
                                         <div className="col-md-12 input-tags">
                                             {/*<input type="text" data-role="tagsinput" value="" placeholder="Ajouter Tag"/>*/}

@@ -33,7 +33,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
 
     const onLoad = fileString => {
         formData.logo = fileString;
-        formData.type = 'image';
+        formData.type = 'logo';
     };
     
     const getBase64 = file => {
@@ -50,10 +50,15 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
 
         formData.project_id = getproject.project !== "loading" ? getproject.projectid: '';
         formData.name = `${form['name'].value}`;
-        formData.project_area = `${form['project_area'].value}`;
+        formData.project_area   = `${form['project_area'].value}`;
         formData.project_status = `${form['project_status'].value}`;
         formData.funding_search = `${form['funding_search'].value}`;
         formData.sector_id = `${form['sector_id'].value}`;
+        formData.medialink = getproject.project.media_link;
+        formData.logolink  = getproject.project.logo_link;
+        formData.mediatype = getproject.project.mediatype;
+        formData.description = getproject.project.description;
+        formData.tags = getproject.project.tags;
         formData.action = 'create';
         dispatch(AddProjectsAction(formData, props, '/create', navigation));
     }
@@ -125,10 +130,9 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                </div>
                                                <div className="col-md-12 input-row">
                                                    <div className="custom-file">
-                                                       <input type="file" onChange={onChange}
+                                                       <input type="file"  onChange={onChange}
                                                        className="custom-file-input" id="customFile"/>
-                                                       <label className="custom-file-label" htmlFor="customFile">Ajouter
-                                                           le logo</label>
+                                                       <label className="custom-file-label" htmlFor="customFile"></label>
                                                    </div>
                                                </div>
    
