@@ -48,12 +48,6 @@ export default function Step1View({formData, setForm,navigation, props}) {
         dispatch(AddProjectsAction(formData, props, '/create', navigation));
     }
 
-    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project.projectid)
-    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project.success)
-    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project.projectid)
-    console.log("projecttoooooooooooooooooooooooooooooooooooooooo", project)
-
-    const {  next } = navigation;
 
     const successMessage = (successMessage) => {
         return <div dangerouslySetInnerHTML=
@@ -83,17 +77,16 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                 <div id="authResponse">
 
                                 {
-                                 project !== 0 && project.success == true ?
+                                 project !== 0 && project.success === true ?
                                  project.message
                                     :
-                                project.success == false ?
+                                project.success === false ?
                                 displayErrorMessages(project.errors, document.getElementById('authErr'))
                                 : project
 
                                 }
 
                             </div>
-
                                 <img src="/assets/images/offer-thumbnail.svg"/>
                             </div>
 
@@ -102,10 +95,6 @@ export default function Step1View({formData, setForm,navigation, props}) {
                             <div id="authResponse">
                                 
                             </div>
-
-                               
-
-                                
                         </div>
                         <div className="col-md-12 col-lg-8">
                             <form id="form-wizard" className="form-wizard" action="" method="post">

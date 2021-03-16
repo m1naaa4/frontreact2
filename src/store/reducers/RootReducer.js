@@ -13,7 +13,7 @@ const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
   userProfile: UserProfileReducer,
   projects: ProjectReducer,  //from here   project = useSelector(state => state.project.project)   projectView
-  project: GetProjectReducer,  //from here   project = useSelector(state => state.project.project)   projectView
+  getproject: GetProjectReducer,  //from here   project = useSelector(state => state.project.project)   projectView
   addproject: AddProjectReducer,
   fileuploaded: uploadFileReducer,
   addtagdescriptionproject: addtagDescriptionprojectReducer,

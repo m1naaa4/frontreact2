@@ -3,7 +3,7 @@ const initState = {
     }
 
 
-    const uploadFileReducer = (state= initState | undefined, action) =>{
+    const GetFileReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
                 case 'LOADING':
@@ -19,7 +19,7 @@ const initState = {
                         }
                     }
 
-          case 'File_UPLOADED_SUCCESS':
+          case 'GET_File_UPLOADED_SUCCESS':
               
               return {
                   url:action.response.data.url,
@@ -27,7 +27,7 @@ const initState = {
                   type:action.response.data.type,
               }
 
-              case 'File_UPLOADED_ERROR':
+              case 'GET_File_UPLOADED_ERROR':
 
                     return {
                         ...state,
@@ -52,4 +52,4 @@ const initState = {
         }
     }
     
-    export default uploadFileReducer;
+    export default GetFileReducer;

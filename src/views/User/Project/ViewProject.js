@@ -22,7 +22,7 @@ export default function ViewProject(props) {
         dispatch(getProjectAction(data,props));
     }, [dispatch])
 
-    const project = useSelector(state => state.project);
+    const project = useSelector(state => state.getproject.getproject);
     console.log("salammmmmmmmmmmmmmmmmmmmmmm", project)
     const projectadd = useSelector(state => state.addproject);
     console.log("hhhhhhhhhhhhhhhhhhhhamdo li ALLAH", projectadd)
@@ -48,12 +48,12 @@ export default function ViewProject(props) {
 
                 {/* <!-- SINGLE -->*/}
                     {
-                            project.loading === true ? (
+                            project.success === 'loading' ? (
                                 <ProjectSkeleton/>
-                            ) : project.project.success === false ? (
-                                <div data-testid="error-message">ERROR</div>
-                            ) : (
-                        <div className="Single-Content">
+                            ) : project.success === true ? (
+
+
+                                <div className="Single-Content">
                             <div className="row">
                         <div className="col-md-8">
 
@@ -163,6 +163,10 @@ export default function ViewProject(props) {
                         </div>
                     </div>
                         </div>
+
+                                
+                            ) : (
+                                <div data-testid="error-message">ERROR</div>
                                      )
                                 }
 

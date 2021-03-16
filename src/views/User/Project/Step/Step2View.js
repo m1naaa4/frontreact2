@@ -1,9 +1,9 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {UploadFileAction} from "../../../../store/actions/User/Project/UploadFileAction";
 import ProgressBar from "../../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
 import UploadService from '../../../../helpers/FileUploadService';
+import { GetFileAction } from '../../../../store/actions/User/Media/GetFileAction';
 
 
 export default function Step2View({formData, setForm, navigation, props}) {
@@ -16,16 +16,17 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [currentFile, setCurrentFile] = useState(undefined);
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
+    const [project_id, setProject_id] = useState(undefined);
+    const [type, setType] = useState(undefined);
     const hiddenFileInput = React.useRef(null);
 
     useEffect(() => {
-        if (project.fileuploaded.id) {
+        if (project.fileuploaded) {
             console.log(project.fileuploaded.url !== 'loading')
             setFile(project.fileuploaded.url);
            formData.url = project.fileuploaded.url;
            formData.media = project.fileuploaded.type;
-        }
-        
+        }        
     });  
 
     const handleClick = e => {
@@ -80,8 +81,24 @@ export default function Step2View({formData, setForm, navigation, props}) {
         });        
     }
 
-    const project = useSelector(state => state);
+    const project = useSelector(state => state.fileuploaded);
+    const projectadd = useSelector(state => state.addproject.addproject);
 
+    if(projectadd !== 'loading'){
+            
+            setProject_id(projectadd.projectid);
+            setType( projectadd.project.type);
+
+            let data = {
+                project_id : projectadd.projectid,
+                type_id :  projectadd.type,
+            }
+            
+              dispatch(GetFileAction(data, props));
+        }
+    
+    console.log(project.fileuploaded)
+    
     return (
 
         <div className="Page-Wrapper">
