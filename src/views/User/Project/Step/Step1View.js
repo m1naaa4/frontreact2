@@ -11,7 +11,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
 
     const dispatch = useDispatch();
-    const { project_status, project_area, funding_search, look_angel, name,  sector_id, url } = formData;
+    const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink } = formData;
     const project = useSelector(state => state.addproject.addproject);
 
     const onChange = e => {
@@ -27,9 +27,9 @@ export default function Step1View({formData, setForm,navigation, props}) {
     // }, [dispatch])
 
     const onLoad = fileString => {
-        formData.logo = fileString;
+        formData.logo   = fileString;
         formData.action = 'create';
-        formData.type = 'image';
+        formData.type   = 'image';
     };
     
     const getBase64 = file => {
@@ -48,18 +48,10 @@ export default function Step1View({formData, setForm,navigation, props}) {
         dispatch(AddProjectsAction(formData, props, '/create', navigation));
     }
 
-
-    const successMessage = (successMessage) => {
-        return <div dangerouslySetInnerHTML=
-          {{ __html: '<div class="alert alert-success add-padding">' + ' ' + successMessage + '</div>' }}
-        />
-    
-      }
-
-      const clearAuthErrDiv = () => {
-        let authErr = document.querySelector("#authErr");
-        authErr.innerHTML = "";
-      }
+    const clearAuthErrDiv = () => {
+    let authErr = document.querySelector("#authErr");
+    authErr.innerHTML = "";
+    }
 
     return (
 
@@ -143,10 +135,9 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
-                                                    <input type="file" onChange={onChange}
+                                                    <input type="file" value={logolink} name="logolink" onChange={onChange}
                                                     className="custom-file-input" id="customFile"/>
-                                                    <label className="custom-file-label" htmlFor="customFile">Ajouter
-                                                        le logo</label>
+                                                    <label className="custom-file-label" htmlFor="customFile"></label>
                                                 </div>
                                             </div>
 

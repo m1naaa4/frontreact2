@@ -9,11 +9,12 @@ import { AddProjectsAction } from '../../../../store/actions/User/Project/AddPro
 export default function Step3View({formData, setForm, navigation, props}) {
     const {previous, next} = navigation;
 
-    const { tag, descriptions } = formData;
+    const { tags, descriptions } = formData;
 
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
-    const [tags, setTags] = useState('');
+    const [tag, setTags] = useState([]);
+    console.log("taaaaaaaaaaaaaaaaaagggggggggggggggggggggggggggggggggggggggggosssssssssssssss",tags)
 
 
     const selectedTags = tags => {
@@ -25,7 +26,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        formData.tag            = tags;
+        formData.tags           = tag;
         formData.descriptions   = description;
         // const formData = new FormData();
         // formData.append('description', description);
@@ -84,11 +85,11 @@ export default function Step3View({formData, setForm, navigation, props}) {
                                     <div className="form-inputs">
                                         <div className="col-md-12 input-row">
                                             {/*<div id="editor">This is some sample content.</div>*/}
-                                            <ReactQuill id="editor" theme="snow" name="description" value={description} onChange={setDescription}/>
+                                            <ReactQuill id="editor" style={{ height: "250px"}} theme="snow" name="description" defaultValue={descriptions} onChange={setDescription}/>
                                         </div>
                                         <div className="col-md-12 input-tags">
                                             {/*<input type="text" data-role="tagsinput" value="" placeholder="Ajouter Tag"/>*/}
-                                            <InputTags selectedTags={selectedTags}  tags={[]}/>
+                                            <InputTags  selectedTags={selectedTags}  tags={tags}/>
                                         </div>
                                     </div>
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i

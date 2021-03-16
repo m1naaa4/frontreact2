@@ -15,23 +15,25 @@ const steps = [
 ];
 
 const defaultData = {
-    name: "",
+    name: '',
+    logolink: '',
     logo: new FormData(),
     video: new FormData(),
-    sector_id: "",
-    project_id: "",
-    project_area: "",
-    funding_search: "",
-    description: "",
-    project_status: "",
-    action: "create",
+    medialink: '',
+    sector_id: '',
+    project_id: '',
+    project_area: '',
+    funding_search: '',
+    description: '',
+    project_status: '',
+    action: 'create',
     look_mentor: 0,
     look_angel: 1,
     step: "1",
-    url: "",
-    tags: "",
-    type: "",
-    media: "",
+    url: '',
+    tags: [],
+    mediatype: '',
+    media: '',
 };
 
 const MultiStepProjectForm = ( props ) => {

@@ -4,47 +4,28 @@ import ProgressBar from "../../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
 import UploadService from '../../../../helpers/FileUploadService';
 import { GetFileAction } from '../../../../store/actions/User/Media/GetFileAction';
-import { getProjectAction } from '../../../../store/actions/User/Project/GetProjectActions';
 
 
-export default function Step2View({formData, setForm, navigation, props}) {
+export default function UpdateStep2View({formData, setForm, navigation, props}) {
 
     const dispatch = useDispatch();
-    const { medialink, mediatype } = formData;
+
     const [selectedFiles, setSelectedFiles] = useState(undefined);
-    const [file, setFile] = useState(medialink);
-    const [media, setMedia] = useState(mediatype);
+    const [file, setFile] = useState(undefined);
+    const [media, setMedia] = useState(undefined);
     const [currentFile, setCurrentFile] = useState(undefined);
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
-    const [project_id, setProject_id] = useState();
+    const [project_id, setProject_id] = useState(undefined);
     const [type, setType] = useState(undefined);
     const hiddenFileInput = React.useRef(null);
 
-    console.log('media linnnnnnnnnnnnnnnnnnnkkkkkkkkkkkkkkkkkk', medialink)
-    console.log('media is videoooooooooooooooooooooooo', mediatype)
-    console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', media)
     useEffect(() => {
-        if (projectadd.addproject.addproject) {
-
-            if(getproject.getproject !== 'loading'){
-                const data = {
-                    project_id  : projectadd.addproject.addproject.projectid,
-                    action      : "getProject",
-                }
-    
-                setProject_id(projectadd.addproject.addproject.projectid);
-    
-                dispatch( getProjectAction (data, props));
-                
-                setFile(getproject.getproject.project.media_link);
-                setMedia(getproject.getproject.project.is_video);
-                formData.medialink = getproject.getproject.project.media_link;
-                formData.logolink = getproject.getproject.project.logolink;
-                formData.mediatype = getproject.getproject.project.is_video;
-                setProject_id(getproject.getproject.projectid);
-            } 
-           
+        if (infomedia.fileuploaded) {
+            console.log(infomedia.fileuploaded.url !== 'loading')
+            setFile(infomedia.fileuploaded.url);
+           formData.url = infomedia.fileuploaded.url;
+           formData.media = infomedia.fileuploaded.type;
         }        
     });  
 
@@ -63,8 +44,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
         formData.video = fileString;
         formData.action = 'upload';
         formData.type = 'video';
-        formData.project_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id ;  
-        console.log("idddddddddddddddddddddddddddddddddddddddddddd", projectadd.addproject, project_id)      
+        formData.project_id = projectadd.projectid;        
     };
     
     const getBase64 = file => {
@@ -86,8 +66,6 @@ export default function Step2View({formData, setForm, navigation, props}) {
         })
         .then((response) => {
             setFile(response.data.url);
-            formData.medialink = response.data.url;
-            formData.mediatype = response.data.type;
             setMedia(response.data.type);
             setSelectedFiles(undefined);
             dispatch({type:'File_UPLOADED_SUCCESS', response})
@@ -102,12 +80,23 @@ export default function Step2View({formData, setForm, navigation, props}) {
         });        
     }
 
-    const mediaproject = useSelector(state => state.fileuploaded);
+    const infomedia = useSelector(state => state.fileuploaded);
     const projectadd = useSelector(state => state.addproject);
-    const getproject = useSelector(state => state.getproject);
 
-    // console.log("projectadssssssssssssssssssssssssssssssssssssssssssssssssd", projectadd)
-    // console.log("projectadssssssssssssssssssssssssssssssssssssssssssssssssd", getproject)
+    if(projectadd !== 'loading'){
+            
+            setProject_id(projectadd.projectid);
+            setType( projectadd.project.type);
+
+            let data = {
+                project_id : projectadd.projectid,
+                type_id :  projectadd.type,
+            }
+            
+              dispatch(GetFileAction(data, props));
+        }
+    
+    console.log("project.idddddddddddddddddd", projectadd)
     
     return (
 

@@ -62,7 +62,7 @@ export default function ViewProject(props) {
                                 <div className="signle-offer-type">Project Business</div>
                                 <div className="single-offer-header">
                                     <div className="single-offer-logo">
-                                        <img src="assets/images/porject-logo.png" title="Nom du projet" alt=""/>
+                                        <img src={project.project.logo_link} title="Nom du projet" alt=""/>
                                     </div>
                                     <h3 className="single-offer-name">{project.project.name}</h3>
                                 </div>
@@ -71,11 +71,14 @@ export default function ViewProject(props) {
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
 
-                                    <Player width="300" height="300"
+                                    {
+                                        project.project.is_video ? (
+                                        <Player width="100%" height="100%"
                                             playsInline
                                             poster="/assets/poster.png"
-                                            src="https://www.w3schools.com/tags/movie.ogg"
-                                    />
+                                            src={project.project.media_link}
+                                        />) : (<img width="100%" height="300" src={project.project.media_link} alt="Project"/>)
+                                    }                             
                                 </div>
 
                                 <div className="Signle-Offer-Content">

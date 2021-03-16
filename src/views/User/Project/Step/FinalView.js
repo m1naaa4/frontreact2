@@ -6,7 +6,7 @@ import { Player } from 'video-react';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
-    const { project_status, project_area, funding_search, tag, descriptions, name,  sector_id, url, media, project_id } = formData;
+    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, url, media, project_id, medialink, logolink, mediatype } = formData;
     const {previous} = navigation;
 
     const goToShowproject = () => {
@@ -58,7 +58,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                             <div className="review-header">
                                                 <h2 className="review-offer-title">{`${name}`}</h2>
                                                 <div className="review-offer-logo">
-                                                    <img src="assets/images/porject-logo.png" alt=""/>
+                                                    <img src={`${logolink}`} alt=""/>
                                                 </div>
                                             </div>
                                             <div className="review-media">
@@ -70,12 +70,12 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                                 /> */}
 
                                                 {
-                                                    `${media}` === 'video' ? (
+                                                    `${mediatype}` === 'video' ? (
                                                         <Player width="100%" height="100%"
                                                             playsInline
                                                             poster="/assets/poster.png"
-                                                            src={url}
-                                                        />) : (<img width="100%" height="300" src={url} alt="Project"/>)
+                                                            src={medialink}
+                                                        />) : (<img width="100%" height="300" src={medialink} alt="Project"/>)
                                                 }
 
 
@@ -106,7 +106,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                                 <h3>Tags</h3>
                                                 <ul>
                                                     {
-                                                       tag ?  tag.map((name, index) => (
+                                                       tags ?  tags.map((name, index) => (
                                                             <li key={index}>
                                                                 {name}
                                                                 </li>

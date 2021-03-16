@@ -1,53 +1,47 @@
 const initState = {
-    url : ""
+    file : ""
     }
 
 
     const uploadFileReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
-                case 'LOADING':
-                    if (state !== 'loading') {
-                        return {
-                            ...state,
-                            url: state.url
-                        }
-                    } else {
-                        return {
-                            ...state,
-                            url:'loading'
-                        }
-                    }
+        case 'LOADING':            
+            return {
+                ...state,
+                file :'loading'
+            }               
 
-          case 'File_UPLOADED_SUCCESS':
+        case 'File_UPLOADED_SUCCESS':
               
-              return {
-                  url:action.response.data.url,
-                  id:action.response.data.id,
-                  type:action.response.data.type,
-              }
+            return {
+                ...state,
+                file     :action.response.data,
+                type     :action.response.data.type,
+                fileurl     :action.response.data.url,
+            }
 
-              case 'File_UPLOADED_ERROR':
+        case 'File_UPLOADED_ERROR':
 
-                    return {
-                        ...state,
-                        url:action.action.response.data.url,
-                    }
+            return {
+                ...state,
+                file     :action.action.response.data.url,
+            }
 
-                    case 'CODE_ERROR':
-                            return {
-                                ...state,
-                                url:'there seems to be a problem please refresh your browser',
-                            }
-                default:
-                    if (action.res === undefined) {
+        case 'CODE_ERROR':
+            return {
+                ...state,
+                file     :'there seems to be a problem please refresh your browser',
+            }
+        default:
+            if (action.res === undefined) {
 
-                        return {
-                            ...state,
-                            url:state
-                        }
-                    }
-                    return state
+                return {
+                    ...state,
+                    file :state
+                }
+            }
+            return state
 
         }
     }
