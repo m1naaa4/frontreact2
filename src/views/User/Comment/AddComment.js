@@ -26,6 +26,10 @@ export default function AddComment(project) {
         dispatch(AddCommentAction(data));
     }
 
+    const white = () =>{
+
+    }
+
     // useEffect(() => {
     //     dispatch(GetCommentAction(data));
     // }, [dispatch])
@@ -39,7 +43,7 @@ export default function AddComment(project) {
             <div className="Comments-Filter">
                 <div className="comment-select">
                     <select className="comments-filter-select" name="">
-                        <option value="1" selected>Newest</option>
+                        <option value="1" defaultValue="1">Newest</option>
                         <option value="2">Newest</option>
                         <option value="3">Newest</option>
                     </select>
@@ -170,7 +174,7 @@ export default function AddComment(project) {
                             <div className="Comment-Col-10">
                                 <div className="Comment-Area">
                                     <div className="Comment-Input">
-                                        <input type="text" name="" value=""
+                                        <input type="text" name="reply" value="." onChange={white}
                                                placeholder="Write a reply..."/>
                                     </div>
                                 </div>

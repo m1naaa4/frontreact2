@@ -7,17 +7,18 @@ const initState = {
         switch (action.type) {
 
             case 'LOADING':
+                
                 return {
                     ...state,
-                    comments: state.comments,
-                    loading:true
+                    comments: "loading"
                 }
             case 'GET_COMMENT_SUCCESS':
+                console.log("herrrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeee", action.res.comment.data)
                 return {
                     ...state,
-                    comments :  [...state.comments, ...action.res.result.data],
-                    hasMore  :  action.res.result.hasMore,
-                    current  :  action.res.result.current,
+                    comments :  [state, ...action.res.comment.data],
+                    hasMore  :  action.res.comment.meta,
+                    current  :  action.res.comment.meta.current_page,
                     loading  :  false
                 }
 

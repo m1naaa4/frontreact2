@@ -21,9 +21,7 @@ export default function ViewProject(props) {
     }, [dispatch])
 
     const project = useSelector(state => state.getproject.getproject);
-    console.log("salammmmmmmmmmmmmmmmmmmmmmm", project)
     const projectadd = useSelector(state => state.addproject);
-    console.log("hhhhhhhhhhhhhhhhhhhhamdo li ALLAH", projectadd)
 
     let tags;
     if (project.project) {
@@ -46,7 +44,7 @@ export default function ViewProject(props) {
 
                 {/* <!-- SINGLE -->*/}
                     {
-                            project.success === 'loading' ? (
+                            project.success === 'loading'  || project === 'loading'? (
                                 <ProjectSkeleton/>
                             ) : project.success === true ? (
 
@@ -118,7 +116,7 @@ export default function ViewProject(props) {
                                 </div>
                             </div>
 
-                            {/* <AddComment  project={project}/> */}
+                            <AddComment  project={project}/>
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">
@@ -167,7 +165,8 @@ export default function ViewProject(props) {
 
                                 
                             ) : (
-                                <div data-testid="error-message">ERROR</div>
+                                console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
+                                // <div data-testid="error-message">ERROR</div>
                                      )
                                 }
 

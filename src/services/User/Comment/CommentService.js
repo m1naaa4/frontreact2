@@ -4,7 +4,7 @@ import HttpService from '../../HttpService';
 export const AddComment = (data, props, current) =>{
 
     const http = new HttpService();
-    let addcommentUr = "comment/handleaction";
+    let addcommentUr = "comment/add";
     const tokenId = "user-token";
     return http.postData(data,addcommentUr,tokenId,'').then(data=>{
         return data
@@ -16,7 +16,7 @@ export const AddComment = (data, props, current) =>{
 export const GetComment = (data, props, current) =>{
 
     const http = new HttpService();
-    let getProjectUrl = "comment/handleaction";
+    let getProjectUrl = "comment/get";
     const tokenId = "user-token";
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data

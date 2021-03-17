@@ -5,17 +5,10 @@ import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAc
 
 export default function ShowComment(project) {
 
-    let id = 0;
-    if (project){
-        id = project.project.project.id
-    }else{
-        id = 0
-    }
-    console.log("projectkkkkk", project.project.project.id)
-
     const data = {
-        action           : "get",
-        commentable_id   : 1449330443,
+        action           : 'get',
+        provider         : 'project',
+        provider_id      : project.project.project.projectid,
     }
 
     const dispatch = useDispatch();
@@ -49,7 +42,11 @@ export default function ShowComment(project) {
                         </div>
                         <div className="Comment-Text">
                                 <span>
-                                    {/*{comments.comment.body}*/}
+                                    {
+                                        comments ?
+                                        comments.body:''                                         
+                                    }
+                                    
                                 </span>
                         </div>
                     </div>
