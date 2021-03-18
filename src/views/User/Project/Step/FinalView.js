@@ -1,4 +1,5 @@
 import React  from 'react'
+import { NavLink } from 'react-router-dom';
 import { Player } from 'video-react';
 
 
@@ -119,8 +120,9 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                     </button>
-                                    <button type="button" onClick={goToShowproject}  className="submit action-button">Review <i
-                                        className="uil uil-arrow-right"></i></button>
+                                    
+                                    <NavLink className="submit action-button" to={`show/${project_id}`}>Review <i
+                                    className="uil uil-arrow-right"></i></NavLink>
                                     {/*<select className="post-status" name="">
                                         <option disabled selected>Statut de l’offre</option>
                                         <option value="publish">Publier</option>

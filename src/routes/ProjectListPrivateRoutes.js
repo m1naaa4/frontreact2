@@ -14,59 +14,28 @@ export default function ProjectListPrivateRoutes(props) {
         <div>
             <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
-            {(() => {
-                switch(props.history.location.pathname){
-                    case '/project/lists': 
-                        return (
-                            <Switch>
-                                <Route exact path={`${props.match.path}/lists`}  component = {ListProject} />
-                                <Route  exact path={props.match.path} render = { props => (
-                                    <Redirect to={{pathname: `${props.match.path}/lists` }} />
-                                )} />
-                            </Switch>
-                        );
-                    case '/project/create': 
-                        return (
-                            <Switch>
-                                <Route exact path={`${props.match.path}/create`}  component = {AddProjectPage} />
-                                <Route  exact path={props.match.path} render = { props => (
-                                    <Redirect to={{pathname: `${props.match.path}/create` }} />
-                                )} />
-                            </Switch>
-                        );
-                    case '/project/show': console.log('dfdfd')
-                        return (
-                            <Switch>
-                                <Route exact path={`${props.match.path}/show`}  component = {ViewProject} />
-                                <Route  exact path={props.match.path} render = { props => (
-                                    <Redirect to={{pathname: `${props.match.path}/show` }} />
-                                )} />
-                            </Switch>
-                        );
-                    case '/project/update': 
-                        return (
-                            <Switch>
-                                <Route exact path={`${props.match.path}/update`}  component = {UpdateProjectPage} />
-                                <Route  exact path={props.match.path} render = { props => (
-                                    <Redirect to={{pathname: `${props.match.path}/update` }} />
-                                )} />
-                            </Switch>
-                        );
-                    default: 
-                        return  (
-                            <Switch>
-                                <Route exact path={`${props.match.path}/lists`}  component = {ListProject} />
-                                <Route  exact path={props.match.path} render = { props => (
-                                    <Redirect to={{pathname: `${props.match.path}/lists` }} />
-                                )} />
-                            </Switch>
-                        );
-                }
-            })()
-            }
-                
-            </div>
+                <Switch>
+                    <Route exact path={`${props.match.path}/lists`}  component = {ListProject} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/lists` }} />
+                    )} />
 
+                    <Route exact path={`${props.match.path}/create`}  component = {AddProjectPage} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/create` }} />
+                    )} />
+
+                    <Route exact  path={`${props.match.path}/show/:id`}  component = {ViewProject} />
+                    <Route exact  path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/show/:id` }} />
+                    )} />
+
+                    <Route exact path={`${props.match.path}/update/:id`}  component = {UpdateProjectPage} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/update/:id` }} />
+                    )} />
+                </Switch>
+            </div>
         </div>
     )
 }

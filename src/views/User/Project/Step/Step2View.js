@@ -21,29 +21,38 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [type, setType] = useState(undefined);
     const hiddenFileInput = React.useRef(null);
 
-    console.log('media linnnnnnnnnnnnnnnnnnnkkkkkkkkkkkkkkkkkk', medialink)
+    const mediaproject = useSelector(state => state.fileuploaded);
+    const projectadd = useSelector(state => state.addproject);
+    const getproject = useSelector(state => state.getproject);
+
+    
     console.log('media is videoooooooooooooooooooooooo', mediatype)
     console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', media)
     useEffect(() => {
-        if (projectadd.addproject.addproject) {
+        if (projectadd.addproject) {
+            console.log('media ffffffffffffffffffffffffffffffffffffffffffffffffffff', getproject.addproject)
+            if (getproject !== undefined && getproject.getproject  !== '') {
+                if(getproject.getproject !== 'loading'){
+                    const data = {
+                        project_id  : projectadd.addproject.projectid,
+                        action      : "getProject",
+                    }
+        
+                    setProject_id(projectadd.addproject.projectid);
+        
+                    dispatch( getProjectAction (data, props));
+                    console.log('dqsdqsdsdddddddddddddddddddddddddddddddddddddd',getproject.getproject)
+                    
+                    setFile(getproject.getproject.project.media_link);
+                    setMedia(getproject.getproject.project.is_video);
+                    formData.medialink = getproject.getproject.project.media_link;
+                    formData.logolink = getproject.getproject.project.logolink;
+                    formData.mediatype = getproject.getproject.project.is_video;
+                    setProject_id(getproject.getproject.projectid);
+                } 
+            }
 
-            if(getproject.getproject !== 'loading'){
-                const data = {
-                    project_id  : projectadd.addproject.addproject.projectid,
-                    action      : "getProject",
-                }
-    
-                setProject_id(projectadd.addproject.addproject.projectid);
-    
-                dispatch( getProjectAction (data, props));
-                
-                setFile(getproject.getproject.project.media_link);
-                setMedia(getproject.getproject.project.is_video);
-                formData.medialink = getproject.getproject.project.media_link;
-                formData.logolink = getproject.getproject.project.logolink;
-                formData.mediatype = getproject.getproject.project.is_video;
-                setProject_id(getproject.getproject.projectid);
-            } 
+            
            
         }        
     });  
@@ -102,9 +111,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
         });        
     }
 
-    const mediaproject = useSelector(state => state.fileuploaded);
-    const projectadd = useSelector(state => state.addproject);
-    const getproject = useSelector(state => state.getproject);
+    
 
     // console.log("projectadssssssssssssssssssssssssssssssssssssssssssssssssd", projectadd)
     // console.log("projectadssssssssssssssssssssssssssssssssssssssssssssssssd", getproject)

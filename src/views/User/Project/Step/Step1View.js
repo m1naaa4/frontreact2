@@ -53,6 +53,14 @@ export default function Step1View({formData, setForm,navigation, props}) {
     authErr.innerHTML = "";
     }
 
+    const checkparameters = () => {
+        if (project == 0 && project.addproject ==0) {
+          return "loading...";
+        }else if(project.success === false){
+            displayErrorMessages(project.errors, document.getElementById('authErr'))
+        }        
+      }
+
     return (
 
         <div className="Page-Wrapper">
@@ -68,15 +76,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                 <div id="authErr"></div>
                                 <div id="authResponse">
 
-                                {
-                                 project !== 0 && project.success === true ?
-                                 project.message
-                                    :
-                                project.success === false ?
-                                displayErrorMessages(project.errors, document.getElementById('authErr'))
-                                : project
-
-                                }
+                                {checkparameters()}
 
                             </div>
                                 <img src="/assets/images/offer-thumbnail.svg"/>

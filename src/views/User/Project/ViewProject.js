@@ -4,12 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Player} from "video-react";
 import AddComment from "../Comment/AddComment";
 import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
+import { NavLink } from 'react-router-dom';
 
 export default function ViewProject(props) {
 
-    
     const data = {
-        project_id : props.location.state.id,
+        project_id : props.match.params.id,
         action      : "getProject",
     }
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function ViewProject(props) {
          tags = [];
     }
     const goToEditproject = () => {
-        props.history.push('/project/update', { id: project.project.id });
+        props.history.push('update/'+ data.project_id);
     };
     return (
         <div className="Single-Wrapper">
@@ -121,6 +121,8 @@ export default function ViewProject(props) {
                                     <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
                                             title="Edit Post"  className="edit-button"><i className="uil uil-pen"></i>
                                     </button>
+                                    {/* <NavLink 
+                                        title="Edit Post"  className="edit-button" to={`update/${data.project_id}`}><i className="uil uil-pen"></i></NavLink> */}
                                 </div>
                                 <div className="Send-Message">
                                     <button className="Button-Send" type="button" name="button" data-toggle="tooltip"

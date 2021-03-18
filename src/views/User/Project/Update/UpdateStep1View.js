@@ -23,7 +23,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
     };
 
     const data = {
-        project_id  : props.location.state.id,
+        project_id  :  props.match.params.id,
         action      : "getProject",
     }
     useEffect(() => {
