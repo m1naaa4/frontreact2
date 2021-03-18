@@ -7,17 +7,14 @@ import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
 
 export default function ViewProject(props) {
 
-    let id = 0;
-    if (props.location.state){
-        id = props.location.state.id
-    }
+    
     const data = {
-        project_id : id,
+        project_id : props.location.state.id,
         action      : "getProject",
     }
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getProjectAction(data,props));
+        dispatch(getProjectAction(data, props));
     }, [dispatch])
 
     const project = useSelector(state => state.getproject.getproject);
@@ -44,7 +41,7 @@ export default function ViewProject(props) {
 
                 {/* <!-- SINGLE -->*/}
                     {
-                            project.success === 'loading'  || project === 'loading'? (
+                            project.success === 'loading' || project === 'loading' ? (
                                 <ProjectSkeleton/>
                             ) : project.success === true ? (
 
@@ -165,8 +162,8 @@ export default function ViewProject(props) {
 
                                 
                             ) : (
-                                console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
-                                // <div data-testid="error-message">ERROR</div>
+                                // console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
+                                <div data-testid="error-message">ERROR</div>
                                      )
                                 }
 

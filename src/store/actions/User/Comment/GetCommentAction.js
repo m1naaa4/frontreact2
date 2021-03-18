@@ -5,7 +5,7 @@ export const GetCommentAction = (data) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_GET_COMMENT'});
 
         GetComment(data).then((res) =>
             {

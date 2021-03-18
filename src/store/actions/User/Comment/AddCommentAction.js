@@ -5,7 +5,7 @@ export const AddCommentAction = (data) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_ADD_COMMENT'});
 
         AddComment(data).then((res) =>
             {

@@ -7,7 +7,7 @@ const getProjectReducer = (state = initState ||undefined, action) => {
 
     switch (action.type) {
 
-        case 'LOADING':
+        case 'LOADING_GET_PROJECT':
             return {
                 ...state,
                 getproject: 'loading',

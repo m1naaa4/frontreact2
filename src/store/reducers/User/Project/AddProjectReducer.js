@@ -1,12 +1,12 @@
 const initState = {
-    project : ""
+    addproject : ""
     }
 
 
     const addprojectReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
-                case 'LOADING':
+                case 'LOADING_ADD_PROJECT':
                     return {
                         ...state,
                         addproject:'loading'

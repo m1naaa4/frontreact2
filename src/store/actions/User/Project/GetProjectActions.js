@@ -5,7 +5,7 @@ export const getProjectAction = (data, props, current) =>{
 
     return (dispatch) =>
     {
-        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_GET_PROJECT'});
 
         GetProject(data,props, current).then((res)=>{
 

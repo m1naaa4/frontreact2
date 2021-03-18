@@ -61,8 +61,7 @@ export default function PorteurView({filterInput, setFilterInput, props}) {
                                      loading === true ? (
                                          <ProjectSkeleton/>
                                      ) : projects.success === false ? (
-                                         console.log("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",projects.success)
-                                        //  <div data-testid="error-message">ERROR</div>
+                                         <div data-testid="error-message">ERROR</div>
                                      ) : (
                                          () => {
                                              // console.log("projectoooooo",projects)

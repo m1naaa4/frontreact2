@@ -6,7 +6,7 @@ const initState = {
     const AddCommentReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
-                case 'LOADING':
+                case 'LOADING_ADD_COMMENT':
                     return {
                         ...state,
                         comment:'loading'

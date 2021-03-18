@@ -6,17 +6,17 @@ const initState = {
     const GetCommentReducer = (state= initState | undefined, action) =>{
         switch (action.type) {
 
-            case 'LOADING':
+            case 'LOADING_GET_COMMENT':
                 
                 return {
                     ...state,
-                    comments: "loading"
+                    comments: [],
+                    loading : true,
                 }
             case 'GET_COMMENT_SUCCESS':
-                console.log("herrrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeee", action.res.comment.data)
                 return {
                     ...state,
-                    comments :  [state, ...action.res.comment.data],
+                    comments :  [...state.comments, ...action.res.comment.data],
                     hasMore  :  action.res.comment.meta,
                     current  :  action.res.comment.meta.current_page,
                     loading  :  false

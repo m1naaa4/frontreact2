@@ -5,7 +5,7 @@ export const AddProjectsAction = (data, props, url, navigation) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_ADD_PROJECT'});
 
         ProjectServices(data, props, url, navigation).then((res) =>
             {
