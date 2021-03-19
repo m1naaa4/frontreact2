@@ -105,10 +105,7 @@ export default function ViewProject(props) {
                                                 Partager
                                         </button>
                                     </div>
-                                    <div className="Signle-Offer-Text">
-                                        <p>
-                                            {project.project.description}
-                                        </p>
+                                    <div className="Signle-Offer-Text" dangerouslySetInnerHTML={{ __html: project.project.description }}>
                                     </div>
 
                                 </div>

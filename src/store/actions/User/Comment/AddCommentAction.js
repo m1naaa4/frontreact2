@@ -1,13 +1,13 @@
 import {AddComment} from "../../../../services/User/Comment/CommentService";
 
 
-export const AddCommentAction = (data) =>{
+export const AddCommentAction = (data, props, url) =>{
 
     return (dispatch)=>{
 
         dispatch({type:'LOADING_ADD_COMMENT'});
 
-        AddComment(data).then((res) =>
+        AddComment(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_COMMENT_SUCCESS',res});

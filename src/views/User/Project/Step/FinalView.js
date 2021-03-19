@@ -99,9 +99,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                                     <span>{`${funding_search}`}</span>
                                                 </div>
                                             </div>
-                                            <div className="review-content">
-                                                <p>{`${descriptions}`}</p>
-
+                                            <div className="review-content" dangerouslySetInnerHTML={{ __html: descriptions }}>
                                             </div>
                                             <div className="review-tags">
                                                 <h3>Tags</h3>

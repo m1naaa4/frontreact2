@@ -31,37 +31,22 @@ export default function ReplyComment(comment) {
 
 
 
-    return (
-            // <form className="Comment-Reply Writing-Box" onSubmit={ handleSubmitValue}>
-           
-
-            //   console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll",comment)              
-                comment.comment.replies.data.map((comment, index) => {
-                    return (
-                        <>  
-                            <form className="Comment-Reply Writing-Box" >
-                                <div className="Comment-Writing">
-                                    <div className="Comment-Col-2">
-                                        <div className="Comment-User-Thumb">
-                                            <img src={userProfile.avatar} alt={userProfile.name}/>
-                                        </div>
-                                    </div>
-                                    <div className="Comment-Col-10">
-                                        <div className="Comment-Area">
-                                            <div className="Comment-Input">
-                                                <input type="text" name="body"
-                                                    onChange={e => setBody(e.target.value)}
-                                                    placeholder="Write your comment"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </>
-                        )
-                    }
-                )
-                                        
-          
+    return (           
+            <div className="Comment-Writing">
+                <div className="Comment-Col-2">
+                    <div className="Comment-User-Thumb">
+                        <img src={userProfile.avatar} alt={userProfile.name}/>
+                    </div>
+                </div>
+                <div className="Comment-Col-10">
+                    <div className="Comment-Area">
+                        <div className="Comment-Input">
+                            <input type="text" name="body"
+                                onChange={e => setBody(e.target.value)}
+                                placeholder="Write your comment"/>
+                        </div>
+                    </div>
+                </div>
+            </div>                                                                              
     )
 }

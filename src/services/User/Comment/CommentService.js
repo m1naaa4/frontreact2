@@ -4,7 +4,7 @@ import HttpService from '../../HttpService';
 export const AddComment = (data, props, current) =>{
 
     const http = new HttpService();
-    let addcommentUr = "comment/add";
+    let addcommentUr = "comment/"+current;
     const tokenId = "user-token";
     return http.postData(data,addcommentUr,tokenId,'').then(data=>{
         return data

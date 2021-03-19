@@ -6,7 +6,7 @@ import ShowComment from "./ShowComment";
 import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
 
 
-export default function AddComment() {
+export default function AddComment(props) {
 
     const [body, setBody] = useState();
 
@@ -14,7 +14,7 @@ export default function AddComment() {
     const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile.user);
     const comments = useSelector(state => state.getComments);
-    console.log("profileeeeeeeeeeeeeeeeeee", comments)
+    //console.log("profileeeeeeeeeeeeeeeeeee", comments)
 
     const data = {
         provider_id   : project.getproject.projectid,
@@ -23,17 +23,19 @@ export default function AddComment() {
         body        : body,
     }
 
-    const dispatch = useDispatch();
-
-    const handleSubmitValue = (e) => {
-        e.preventDefault();
-        dispatch(AddCommentAction(data));
-    }
-
     const dataget = {
         action           : 'get',
         provider         : 'project',
         provider_id      : project.getproject.projectid,
+    }
+
+    const dispatch = useDispatch();
+
+    const handleSubmitValue = (e) => {
+        e.preventDefault();
+        dispatch(AddCommentAction(data, props, 'add'));
+        dispatch( GetCommentAction(dataget));
+       
     }
 
     useEffect(() => {

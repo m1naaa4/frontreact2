@@ -1,29 +1,34 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import {Text} from "../../../containers/Language";
+import { Player } from 'video-react';
 
 
 const ProjectView = ({ project }) => {
 
-
+//console.log("goloooooooooooooooooooo", project.logo_link)
 
     return (
 
              <div className="offer-box">
                         <div className="offer-header">
                             <div className="offer-title">
-                                <h3><a href="#!" >{project.name}</a></h3>
+                                <h3><NavLink to={`/project/show/${project.id}`}>{project.name}</NavLink></h3>
                                 <span>{project.sector}</span>
                             </div>
                             <div className="offer-logo">
-                                <img src="/assets/images/porject-logo.png" title="Nom du projet" alt=""/>
+                                <img src={project.logo_link} style={{ width: "30px"}}  title="Nom du projet" alt=""/>
                             </div>
                         </div>
                         <div className="offer-media">
-                            <video className="player"  controls
-                                   data-poster="assets/images/offer-thumb-1.jpg">
-                                <source src="/assets/media/earth.mp4" type="video/mp4"/>
-                                <source src="/assets/media/earth.ogv" type="video/ogv"/>
-                            </video>
+                            {
+                                project.is_video ? (
+                                    <Player width="100%" height="100%"
+                                        playsInline
+                                        poster="/assets/poster.png"
+                                        src={project.media_link}
+                                    />) : (<img width="100%" height="300" src={project.media_link} alt="Project"/>)
+                            } 
                         </div>
                         <div className="offer-meta">
                             <ul className="meta-items">
