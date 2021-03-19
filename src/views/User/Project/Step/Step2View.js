@@ -26,11 +26,11 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const getproject = useSelector(state => state.getproject);
 
     
-    console.log('media is videoooooooooooooooooooooooo', mediatype)
-    console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', media)
+    // console.log('media is videoooooooooooooooooooooooo', mediatype)
+    console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', getproject)
     useEffect(() => {
         if (projectadd.addproject) {
-            console.log('media ffffffffffffffffffffffffffffffffffffffffffffffffffff', getproject.addproject)
+            console.log('media ffffffffffffffffffffffffffffffffffffffffffffffffffff', projectadd)
             if (getproject !== undefined && getproject.getproject  !== '') {
                 if(getproject.getproject !== 'loading'){
                     const data = {
@@ -41,7 +41,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
                     setProject_id(projectadd.addproject.projectid);
         
                     dispatch( getProjectAction (data, props));
-                    console.log('dqsdqsdsdddddddddddddddddddddddddddddddddddddd',getproject.getproject)
+                    // console.log('dqsdqsdsdddddddddddddddddddddddddddddddddddddd',getproject.getproject)
                     
                     setFile(getproject.getproject.project.media_link);
                     setMedia(getproject.getproject.project.is_video);
@@ -55,7 +55,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
             
            
         }        
-    });  
+    }, [dispatch]);  
 
     const handleClick = e => {
         hiddenFileInput.current.click();
@@ -73,7 +73,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
         formData.action = 'upload';
         formData.type = 'video';
         formData.project_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id ;  
-        console.log("idddddddddddddddddddddddddddddddddddddddddddd", projectadd.addproject, project_id)      
+        // console.log("idddddddddddddddddddddddddddddddddddddddddddd", projectadd.addproject, project_id)      
     };
     
     const getBase64 = file => {

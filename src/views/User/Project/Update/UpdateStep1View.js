@@ -14,7 +14,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
     const dispatch = useDispatch();    
     const getproject = useSelector(state => state.getproject.getproject);
 
-    console.log("here update", getproject)
+    console.log("here updateeeeeeeeeee", getproject)
     
     const nameForm = useRef(null)
 

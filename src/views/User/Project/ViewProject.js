@@ -33,7 +33,8 @@ export default function ViewProject(props) {
          tags = [];
     }
     const goToEditproject = () => {
-        props.history.push('update/'+ data.project_id);
+        
+        props.history.push('/project/update/'+ data.project_id);
     };
     return (
         <div className="Single-Wrapper">

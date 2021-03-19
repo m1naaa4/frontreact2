@@ -11,7 +11,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
     const {previous} = navigation;
 
     const goToShowproject = () => {
-        props.history.push('/project/show', { id: project_id });
+        props.history.push('/project/show/'+ project_id );
     };
 
     return (
@@ -120,9 +120,12 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                     </button>
+
+                                    <button type="button" onClick={goToShowproject}  className="submit action-button">Review <i
+                                        className="uil uil-arrow-right"></i></button>
                                     
-                                    <NavLink className="submit action-button" to={`show/${project_id}`}>Review <i
-                                    className="uil uil-arrow-right"></i></NavLink>
+                                    {/* <NavLink className="submit action-button" to={`show/${project_id}`}>Review <i
+                                    className="uil uil-arrow-right"></i></NavLink> */}
                                     {/*<select className="post-status" name="">
                                         <option disabled selected>Statut de l’offre</option>
                                         <option value="publish">Publier</option>

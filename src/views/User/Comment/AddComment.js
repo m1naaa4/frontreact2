@@ -13,7 +13,8 @@ export default function AddComment() {
     const comment = useSelector(state => state.addComment);
     const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile.user);
-    console.log("profileeeeeeeeeeeeeeeeeee", userProfile)
+    const comments = useSelector(state => state.getComments);
+    console.log("profileeeeeeeeeeeeeeeeeee", comments)
 
     const data = {
         provider_id   : project.getproject.projectid,
@@ -29,9 +30,15 @@ export default function AddComment() {
         dispatch(AddCommentAction(data));
     }
 
-    const white = () =>{
-
+    const dataget = {
+        action           : 'get',
+        provider         : 'project',
+        provider_id      : project.getproject.projectid,
     }
+
+    useEffect(() => {
+        dispatch(GetCommentAction(dataget));
+    }, [dispatch])
 
     // useEffect(() => {
     //     dispatch(GetCommentAction(data));
@@ -75,7 +82,11 @@ export default function AddComment() {
 
                 {/*!--#### COMMENT 1 ### --*/}
                 <div className="User-Comment">
-                <ShowComment />
+                {comments && comments.comments.map((comment, index) => 
+                    <ShowComment comment={comment} key={comment.id}/>
+                     )
+                }
+                
                 </div>
 
                </div>
