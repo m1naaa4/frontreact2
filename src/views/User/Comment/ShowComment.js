@@ -29,7 +29,7 @@ export default function ShowComment(comment, props) {
 
     const showReplies = e =>  {
         SetReplies(!replies)
-        //SetReplyBox(!replyBox)
+        SetReplyBox(!replyBox)
         
     }
 
@@ -49,7 +49,7 @@ export default function ShowComment(comment, props) {
         e.preventDefault();
         dispatch(AddCommentAction(data, props, 'reply'));
 
-        dispatch( GetCommentAction(dataget));
+       
     }
 
     return (

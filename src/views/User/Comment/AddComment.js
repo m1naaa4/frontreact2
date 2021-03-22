@@ -4,6 +4,7 @@ import {AddCommentAction} from "../../../store/actions/User/Comment/AddCommentAc
 import ReplyComment from "./ReplyComment";
 import ShowComment from "./ShowComment";
 import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
+import Pusher from 'pusher-js';
 
 
 export default function AddComment(props) {
@@ -34,9 +35,34 @@ export default function AddComment(props) {
     const handleSubmitValue = (e) => {
         e.preventDefault();
         dispatch(AddCommentAction(data, props, 'add'));
-        dispatch( GetCommentAction(dataget));
+        // dispatch( GetCommentAction(dataget));
        
     }
+
+    
+    const pusher = new Pusher('0eb0de6602610580c1bf', {
+        cluster:'eu',
+    });
+
+    
+
+    var channel = pusher.subscribe('project_comment_' + project.getproject.projectid);
+    channel.bind('NewComment', function(res) {
+
+        let chan = 'project_comment_' + project.getproject.projectid
+        console.log('ressssssssssssssssssssssssss', res.project_comment_3786684919)
+        console.log('gggggggggggggggggggg', res.chan)
+        
+        
+            let   feed = res.chan
+            console.log('kkkkkkkkkkkkkkkkkkkk', feed)
+            console.log('ffffffffffffffffffff', chan)
+            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
+        
+    });
+
+
+    
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
