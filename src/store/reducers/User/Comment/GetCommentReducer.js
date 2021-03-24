@@ -23,10 +23,13 @@ const initState = {
                 }
 
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
-                console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnjjjjjjjjjjjjjjjjjj",action.feed)
+                
+                console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnjjjjjjjjjjjjjjjjjj", action)
+                const j = action.res.id;
+                console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnjjjjjjjjjjjjjjjjjj", action.res.j)
                             return {
                                 ...state,
-                                comments :  [...state.comments, action.feed.data],
+                                comments :  [...state.comments, action.res],
                                 // hasMore  :  action.res.comment.meta,
                                 // current  :  action.res.comment.meta,
                                 loading  :  false
