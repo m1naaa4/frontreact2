@@ -25,12 +25,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const projectadd = useSelector(state => state.addproject);
     const getproject = useSelector(state => state.getproject);
 
-    
-    // console.log('media is videoooooooooooooooooooooooo', mediatype)
-    console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', getproject)
+    let formDatas = new FormData();
+
     useEffect(() => {
         if (projectadd.addproject) {
-            console.log('media ffffffffffffffffffffffffffffffffffffffffffffffffffff', projectadd)
             if (getproject !== undefined && getproject.getproject  !== '') {
                 if(getproject.getproject !== 'loading'){
                     const data = {
@@ -40,21 +38,16 @@ export default function Step2View({formData, setForm, navigation, props}) {
         
                     setProject_id(projectadd.addproject.projectid);
         
-                    dispatch( getProjectAction (data, props));
-                    // console.log('dqsdqsdsdddddddddddddddddddddddddddddddddddddd',getproject.getproject)
-                    
-                    setFile(getproject.getproject.project.media_link);
-                    setMedia(getproject.getproject.project.is_video);
-                    formData.medialink = getproject.getproject.project.media_link;
-                    formData.logolink = getproject.getproject.project.logolink;
-                    formData.mediatype = getproject.getproject.project.is_video;
-                    setProject_id(getproject.getproject.projectid);
+                    dispatch( getProjectAction (data, props));                        
+                        setFile(getproject.getproject.project.media_link);
+                        setMedia(getproject.getproject.project.is_video);
+                        formData.medialink = getproject.getproject.project.media_link;
+                        formData.logolink = getproject.getproject.project.logolink;
+                        formData.mediatype = getproject.getproject.project.is_video;
+                        setProject_id(getproject.getproject.projectid);
+                    } 
                 } 
-            }
-
-            
-           
-        }        
+            }               
     }, [dispatch]);  
 
     const handleClick = e => {
@@ -69,11 +62,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
       };
 
     const onLoad = fileString => {
-        formData.video = fileString;
-        formData.action = 'upload';
-        formData.type = 'video';
-        formData.project_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id ;  
-        // console.log("idddddddddddddddddddddddddddddddddddddddddddd", projectadd.addproject, project_id)      
+        formDatas.append('video', fileString);
+        formDatas.append('action', 'upload');
+        formDatas.append('type', 'video');
+        formDatas.append('project_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id); 
     };
     
     const getBase64 = file => {
@@ -88,7 +80,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const handleUpload = async e => {
         setProgress(0);
         setCurrentFile(e);
-        UploadService.upload(formData, (e) => {
+        UploadService.upload(formDatas, (e) => {
             console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
         
@@ -110,11 +102,6 @@ export default function Step2View({formData, setForm, navigation, props}) {
             setCurrentFile(undefined);
         });        
     }
-
-    
-
-    // console.log("projectadssssssssssssssssssssssssssssssssssssssssssssssssd", projectadd)
-    // console.log("projectadssssssssssssssssssssssssssssssssssssssssssssssssd", getproject)
     
     return (
 
@@ -161,7 +148,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                         <div className="form-inputs">
                                             <div  className="col-md-12 input-row">
                                                 {
-                                                media === 'video' ? (
+                                                media ? (
                                                     <Player width="100%" height="100%"
                                                         playsInline
                                                         poster="/assets/poster.png"

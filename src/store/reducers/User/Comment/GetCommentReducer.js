@@ -30,6 +30,15 @@ const initState = {
                     // current  :  action.res.comment.meta,
                     loading  :  false
                 }
+            
+            case 'ADD_TO_COLLECTION_COMMENT_REPLY_SUCCESS':                            
+                return {
+                    ...state,
+                    comments :  [action.feed.data, ...state.comments],
+                    // hasMore  :  action.res.comment.meta,
+                    // current  :  action.res.comment.meta,
+                    loading  :  false
+                }
 
             case 'GET_COMMENT_ERROR':
 

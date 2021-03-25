@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm, useStep } from "react-hooks-helper";
 import UpdateStep1View from "./UpdateStep1View";
-import Step2View from "../Step/Step2View";
 import Step3View from "../Step/Step3View";
 import FinalView from "../Step/FinalView";
+import UpdateStep2View from "./UpdateStep2View";
 
 
 
@@ -48,7 +48,7 @@ const UpdateMultiStepProjectForm = ( props ) => {
         case "step1":
             return <UpdateStep1View {...data} />;
         case "step2":
-            return <Step2View {...data} />;
+            return <UpdateStep2View {...data} />;
         case "step3":
             return <Step3View {...data} />;
         case "final":

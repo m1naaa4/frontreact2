@@ -1,6 +1,7 @@
 import React from 'react'
 import PorteurView  from '../../../views/User/Projects/PorteurView'
 import {useForm} from "react-hooks-helper";
+import ListProjectView from '../../../views/User/Projects/ListProjectView';
 
 export default function ListProject(props ) {
     const defaultData = {
@@ -17,7 +18,8 @@ export default function ListProject(props ) {
 
     return (
         <div>
-            <PorteurView {...data}/>
+            <ListProjectView {...data}/>
+            {/* <PorteurView {...data}/> */}
             {/*<PorteurView0/>*/}
         </div>
     )

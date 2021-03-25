@@ -4,30 +4,47 @@ import ProgressBar from "../../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
 import UploadService from '../../../../helpers/FileUploadService';
 import { GetFileAction } from '../../../../store/actions/User/Media/GetFileAction';
+import { getProjectAction } from '../../../../store/actions/User/Project/GetProjectActions';
 
 
 export default function UpdateStep2View({formData, setForm, navigation, props}) {
 
     const dispatch = useDispatch();
-
+    const { medialink, mediatype } = formData;
     const [selectedFiles, setSelectedFiles] = useState(undefined);
-    const [file, setFile] = useState(undefined);
-    const [media, setMedia] = useState(undefined);
+    const [file, setFile] = useState(medialink);
+    const [media, setMedia] = useState(mediatype);
     const [currentFile, setCurrentFile] = useState(undefined);
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
-    const [project_id, setProject_id] = useState(undefined);
+    const [project_id, setProject_id] = useState();
     const [type, setType] = useState(undefined);
     const hiddenFileInput = React.useRef(null);
 
+    const mediaproject = useSelector(state => state.fileuploaded);
+    const projectadd = useSelector(state => state.addproject);
+    const getproject = useSelector(state => state.getproject);
+    let formDatas = new FormData();
+    
     useEffect(() => {
-        if (infomedia.fileuploaded) {
-            console.log(infomedia.fileuploaded.url !== 'loading')
-            setFile(infomedia.fileuploaded.url);
-           formData.url = infomedia.fileuploaded.url;
-           formData.media = infomedia.fileuploaded.type;
-        }        
-    });  
+            const data = {
+                project_id  : props.match.params.id,
+                action      : "getProject",
+            }
+            setProject_id(projectadd.addproject.projectid);
+        
+            dispatch( getProjectAction (data, props));
+
+            console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', getproject)
+            
+            setFile(getproject.getproject.project.media_link);
+            setMedia(getproject.getproject.project.is_video);
+            formData.medialink = getproject.getproject.project.media_link;
+            formData.logolink = getproject.getproject.project.logolink;
+            formData.mediatype = getproject.getproject.project.is_video;
+            setProject_id(getproject.getproject.projectid);
+             
+    }, [dispatch]);  
 
     const handleClick = e => {
         hiddenFileInput.current.click();
@@ -41,10 +58,10 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
       };
 
     const onLoad = fileString => {
-        formData.video = fileString;
-        formData.action = 'upload';
-        formData.type = 'video';
-        formData.project_id = projectadd.projectid;        
+        formDatas.append('video', fileString);
+        formDatas.append('action', 'upload');
+        formDatas.append('type', 'video');
+        formDatas.append('project_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id);      
     };
     
     const getBase64 = file => {
@@ -59,13 +76,15 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     const handleUpload = async e => {
         setProgress(0);
         setCurrentFile(e);
-        UploadService.upload(formData, (e) => {
+        UploadService.upload(formDatas, (e) => {
             console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
         
         })
         .then((response) => {
             setFile(response.data.url);
+            formData.medialink = response.data.url;
+            formData.mediatype = response.data.type;
             setMedia(response.data.type);
             setSelectedFiles(undefined);
             dispatch({type:'File_UPLOADED_SUCCESS', response})
@@ -79,24 +98,6 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
             setCurrentFile(undefined);
         });        
     }
-
-    const infomedia = useSelector(state => state.fileuploaded);
-    const projectadd = useSelector(state => state.addproject);
-
-    if(projectadd !== 'loading'){
-            
-            setProject_id(projectadd.projectid);
-            setType( projectadd.project.type);
-
-            let data = {
-                project_id : projectadd.projectid,
-                type_id :  projectadd.type,
-            }
-            
-              dispatch(GetFileAction(data, props));
-        }
-    
-    console.log("project.idddddddddddddddddd", projectadd)
     
     return (
 
@@ -143,7 +144,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                         <div className="form-inputs">
                                             <div  className="col-md-12 input-row">
                                                 {
-                                                media === 'video' ? (
+                                                media ? (
                                                     <Player width="100%" height="100%"
                                                         playsInline
                                                         poster="/assets/poster.png"

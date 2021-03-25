@@ -19,9 +19,9 @@ function FilterProject({ filterInput, setFilterInput, props }) {
         dispatch(loadProjectAction(filterInput));
     }
     //fecth data on mounted
-    useEffect(() => {
-        dispatch(loadProjectAction(filterInput,props));
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(loadProjectAction(filterInput,props));
+    // }, [dispatch])
 
     return (
             <div className="Filter-Row">

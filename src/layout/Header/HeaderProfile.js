@@ -32,6 +32,10 @@ function HeaderProfile(props) {
         props.props.history.push('/project/create');
     };
 
+    const goToListproject = () => {
+        props.props.history.push('/project/lists');
+    };
+
     return (
         <div>
             {
@@ -51,7 +55,7 @@ function HeaderProfile(props) {
                                 <div className="col-md-5 d-none d-lg-block">
                                     <div className="center-nav">
                                         <ul className="Dadupa-Nav">
-                                            <li className="Nav-Item Active-Nav"><a href="#!" className="Nav-Link"><i
+                                            <li className="Nav-Item Active-Nav"><a onClick={goToListproject} href="" className="Nav-Link"><i
                                                 className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></a>
                                             </li>
                                             <li className="Nav-Item"><a href="#!" className="Nav-Link"><i

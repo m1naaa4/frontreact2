@@ -5,6 +5,7 @@ import { AddCommentAction } from '../../../store/actions/User/Comment/AddComment
 import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
 import ReplyComment from './ReplyComment';
 import PusherService from '../../../services/Pusher';
+import { wait } from '@testing-library/dom';
 
 
 export default function ShowComment(comment, props) {
@@ -51,35 +52,13 @@ export default function ShowComment(comment, props) {
         e.preventDefault();
         refcomment.current.value = '';
         dispatch(AddCommentAction(data, props, 'reply'));
+
+        setTimeout(() => {
+            //SetReplies(replies)
+            SetReplyBox(!replyBox)
+            dispatch( GetCommentAction(dataget));
+          }, 2000)
     }
-
-    const pusher = new PusherService();
-        
-        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);
-        
-        channel.bind('NewComment', function(res) {    
-            let j = res.id;
-            let feed = res[j]
-        
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
-            
-        });
-
-    useEffect(() => {
-        //dispatch(GetCommentAction(dataget));
-        // const pusher = new PusherService();
-        
-        // var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);
-        
-        // channel.bind('NewComment', function(res) {    
-        //     let j = res.id;
-        //     let feed = res[j]
-        
-        //     dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
-            
-        // });
-    
-    }, [dispatch])
 
     return (
         
