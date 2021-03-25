@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AddCommentAction} from "../../../store/actions/User/Comment/AddCommentAction";
 import ReplyComment from "./ReplyComment";
 import ShowComment from "./ShowComment";
 import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
-import Pusher from 'pusher-js';
+import PusherService from '../../../services/Pusher';
 
 
 export default function AddComment(props) {
 
     const [body, setBody] = useState();
-    const [chnn, setChnn] = useState();
+    const refcomment = useRef(null)
 
     const comment = useSelector(state => state.addComment);
     const project = useSelector(state => state.getproject);
@@ -35,36 +35,28 @@ export default function AddComment(props) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
+        refcomment.current.value = ''
         dispatch(AddCommentAction(data, props, 'add'));
+        
         // dispatch( GetCommentAction(dataget));
        
     }
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
+        const pusher = new PusherService();
         
-
-        const pusher = new Pusher('0eb0de6602610580c1bf', {
-            cluster:'eu',
-        });
-    
-        var channel = pusher.subscribe('project_comment_' + project.getproject.projectid);
+        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);
         
         channel.bind('NewComment', function(res) {    
-           
+            let j = res.id;
+            let feed = res[j]
         
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
+            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
             
         });
     
     }, [dispatch])
-
-    
-    
-
-    
-
-   
 
     // useEffect(() => {
     //     dispatch(GetCommentAction(data));
@@ -98,7 +90,7 @@ export default function AddComment(props) {
                     <div className="Comment-Area">
                         <div className="Comment-Input">
                             <input type="text" name="body"
-                                   onChange={e => setBody(e.target.value)}  placeholder="Write your comment"/>
+                                   onChange={e => setBody(e.target.value)} ref={refcomment}  placeholder="Write your comment"/>
                         </div>
                     </div>
                 </div>

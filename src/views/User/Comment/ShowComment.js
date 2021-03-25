@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
 import { AddCommentAction } from '../../../store/actions/User/Comment/AddCommentAction';
 import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
 import ReplyComment from './ReplyComment';
+import PusherService from '../../../services/Pusher';
 
 
 export default function ShowComment(comment, props) {
@@ -15,6 +16,7 @@ export default function ShowComment(comment, props) {
     const [replies, SetReplies] = useState(false);
     const [replyBox, SetReplyBox] = useState(false);
     const [body, setBody] = useState();
+    const refcomment = useRef(null)
 
     const userProfile = useSelector(state => state.userProfile.userProfile.user);
 
@@ -47,10 +49,37 @@ export default function ShowComment(comment, props) {
         
     const submitReply = (e) => {
         e.preventDefault();
+        refcomment.current.value = '';
         dispatch(AddCommentAction(data, props, 'reply'));
-
-       
     }
+
+    const pusher = new PusherService();
+        
+        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);
+        
+        channel.bind('NewComment', function(res) {    
+            let j = res.id;
+            let feed = res[j]
+        
+            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
+            
+        });
+
+    useEffect(() => {
+        //dispatch(GetCommentAction(dataget));
+        // const pusher = new PusherService();
+        
+        // var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);
+        
+        // channel.bind('NewComment', function(res) {    
+        //     let j = res.id;
+        //     let feed = res[j]
+        
+        //     dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
+            
+        // });
+    
+    }, [dispatch])
 
     return (
         
@@ -149,7 +178,7 @@ export default function ShowComment(comment, props) {
                                 <div className="Comment-Area">
                                     <div className="Comment-Input">
                                         <input type="text" name="body"
-                                            onChange={e => setBody(e.target.value)}
+                                            onChange={e => setBody(e.target.value)} ref={refcomment}
                                             placeholder="Write your comment"/>
                                     </div>
                                 </div>

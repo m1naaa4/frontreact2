@@ -3,7 +3,7 @@ const initState = {
     }
 
 
-    const GetCommentReducer = (state= initState | undefined, action) =>{
+    const GetCommentReducer = (state= initState | undefined, action, h) =>{
         switch (action.type) {
 
             case 'LOADING_GET_COMMENT':
@@ -22,18 +22,14 @@ const initState = {
                     loading  :  false
                 }
 
-            case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
-                
-                console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnjjjjjjjjjjjjjjjjjj", action)
-                const j = action.res.id;
-                console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnjjjjjjjjjjjjjjjjjj", action.res.j)
-                            return {
-                                ...state,
-                                comments :  [...state.comments, action.res],
-                                // hasMore  :  action.res.comment.meta,
-                                // current  :  action.res.comment.meta,
-                                loading  :  false
-                            }
+            case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':                            
+                return {
+                    ...state,
+                    comments :  [action.feed.data, ...state.comments],
+                    // hasMore  :  action.res.comment.meta,
+                    // current  :  action.res.comment.meta,
+                    loading  :  false
+                }
 
             case 'GET_COMMENT_ERROR':
 

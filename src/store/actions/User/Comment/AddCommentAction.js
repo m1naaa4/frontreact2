@@ -1,6 +1,4 @@
 import {AddComment} from "../../../../services/User/Comment/CommentService";
-import withPusher from 'react-pusher-hoc';
-import Pusher from 'pusher-js';
 
 export const AddCommentAction = (data, props, url) =>{
 
@@ -12,7 +10,6 @@ export const AddCommentAction = (data, props, url) =>{
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_COMMENT_SUCCESS', res});
-                   // dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'ADD_COMMENT_ERROR',res})

@@ -14,6 +14,15 @@ const dev = {
     },
     facebook:{
         appId      : '2711133325873185'
+    },
+    pusher:{
+        api_key : '0eb0de6602610580c1bf',
+        cluster : 'eu',
+
+        // api_key : `${process.env.APP_KEY}`,
+        // cluster : `${process.env.APP_CLUSTER}`,
+
+        
     }
 };
 
