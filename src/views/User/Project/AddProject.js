@@ -1,9 +1,9 @@
 import React,  from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import SectorDropFilter from "../Fields/Filter/Porteur/SectorDropFilter";
-import EtatDropFilter from "../Fields/Filter/Porteur/EtatDropFilter";
-import FinanceDropFilter from "../Fields/Filter/Porteur/FinanceDropFilter";
-import ZoneDropFilter from "../Fields/Filter/Porteur/ZoneDropFilter";
+import SectorDropFilter from "../Fields/Filter/Project/SectorDropFilter";
+import EtatDropFilter from "../Fields/Filter/Project/EtatDropFilter";
+import FinanceDropFilter from "../Fields/Filter/Project/FinanceDropFilter";
+import ZoneDropFilter from "../Fields/Filter/Project/ZoneDropFilter";
 import {AddProjectsAction} from "../../../store/actions/User/Project/AddProjectAction";
 
 export default function AddProject({filterInput, setFilterInput, props}) {

@@ -3,7 +3,7 @@ import {Text,Input} from "../../../../../containers/Language";
 
 const etats = [
     ["", "Etat du projet"],
-    ["10", "10"],
+    ["10", "10%"],
     ["25", "25%"],
     ["50", "50%"],
     ["75", "75%"],

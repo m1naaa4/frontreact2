@@ -6,10 +6,10 @@ import ListProjectView from '../../../views/User/Projects/ListProjectView';
 export default function ListProject(props ) {
     const defaultData = {
         search: "",
-        zone: "",
-        sector: "",
-        financement: "",
-        etat: "",
+        project_area: "",
+        sector_id: "",
+        funding_search: "",
+        project_status: "",
         action: "getallProjects",
     };
     const [filterInput, setFilterInput] = useForm(defaultData);

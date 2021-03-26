@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import ZoneDropFilter from "./Porteur/ZoneDropFilter";
-import EtatDropFilter from "./Porteur/EtatDropFilter";
-import SectorDropFilter from "./Porteur/SectorDropFilter";
-import FinanceDropFilter from "./Porteur/FinanceDropFilter";
+import React, {useEffect} from 'react'
+import ZoneDropFilter from "./Project/ZoneDropFilter";
+import EtatDropFilter from "./Project/EtatDropFilter";
+import SectorDropFilter from "./Project/SectorDropFilter";
+import FinanceDropFilter from "./Project/FinanceDropFilter";
 import {useDispatch} from "react-redux";
 import {loadProjectAction} from "../../../../store/actions/User/Project/ProjectActions";
 
@@ -16,9 +16,11 @@ function FilterProject({ filterInput, setFilterInput, props }) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
+        filterInput.filters = true;
+
         dispatch(loadProjectAction(filterInput));
     }
-    //fecth data on mounted
+    // fecth data on mounted
     // useEffect(() => {
     //     dispatch(loadProjectAction(filterInput,props));
     // }, [dispatch])

@@ -22,6 +22,17 @@ const projectReducer = (state = initState ||undefined, action) => {
                 loading:false
             }
 
+        case 'LOAD_PROJECT_FILTERS_SUCCESS':
+            return {
+                ...state,
+                projects: action.res.projects,
+                hasMore:  action.res.hasMore,
+                current:  action.res.current,
+                loading:false
+            }
+        
+        
+
         case 'LOAD_PROJECT_ERROR':
 
             return {

@@ -1,9 +1,9 @@
 import React, { useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import EtatDropFilter from "../../Fields/Filter/Porteur/EtatDropFilter";
-import SectorDropFilter from "../../Fields/Filter/Porteur/SectorDropFilter";
-import ZoneDropFilter from "../../Fields/Filter/Porteur/ZoneDropFilter";
-import FinanceDropFilter from "../../Fields/Filter/Porteur/FinanceDropFilter";
+import EtatDropFilter from "../../Fields/Filter/Project/EtatDropFilter";
+import SectorDropFilter from "../../Fields/Filter/Project/SectorDropFilter";
+import ZoneDropFilter from "../../Fields/Filter/Project/ZoneDropFilter";
+import FinanceDropFilter from "../../Fields/Filter/Project/FinanceDropFilter";
 import {AddProjectsAction} from "../../../../store/actions/User/Project/AddProjectAction";
 import { displayErrorMessages } from '../../../../helpers/displayErr';
 

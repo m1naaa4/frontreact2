@@ -32,7 +32,9 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
        
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver( entries =>{
-            if (entries[0].isIntersecting && hasMore  ){                
+            console.log('entriessssss',entries)
+            if (entries[0].isIntersecting && hasMore  ){  
+                filterInput.filters = false;              
                 dispatch(loadProjectAction( filterInput, props, current+1));
                 setIsLoading(true)
             }
@@ -41,19 +43,18 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
     }, [loading, hasMore])
 
     useEffect(() => {
-        console.log('isloadingg', isLoading)
         if(!isLoading){
             dispatch(loadProjectAction( filterInput, props, 1));
         }
     }, [dispatch]);  
 
     const goToShowproject = (id) => {
-        props.history.push('/project/update/'+ id)
+        props.history.push('/project/show/'+ id)
     };
 
     return (
              <>
-                 <div className="Page-Wrapper" ref={lastProjectElementRef}>
+                 <div className="Page-Wrapper" >
                      <div className="container">
                          <div className="page-header">
                              <h3><Text tid="listproject" /></h3>
