@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {loadUserAction} from "../../store/actions/User/ProfileActions";
+import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {Dropdown} from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
 
 function HeaderProfile(props) {
 
@@ -35,6 +36,13 @@ function HeaderProfile(props) {
     const goToListproject = () => {
         props.props.history.push('/project/lists');
     };
+
+    
+    const gotToProfile = () => {
+        props.history.push('/profile/'+ userProfile.user.id)
+    };
+
+
 
     return (
         <div>
@@ -423,7 +431,7 @@ function HeaderProfile(props) {
                                                     <Dropdown.Menu className="Mini-Profile-Items">
                                                         <label
                                                             className="Mini-Profile-Name">{userProfile.user.name}</label>
-                                                        <a className="Mini-Profile-Link" href="#!">Voir mon profil</a>
+                                                        <NavLink className="Mini-Profile-Link" to={"/profile/"+ userProfile.user.id}>Voir mon profile</NavLink>
                                                         <Dropdown.Item className="Mini-Profile-Item"
                                                                        href="#/action-1"><i
                                                             className="uil uil-layer-group"></i>Action</Dropdown.Item>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
-import ListProject from "../pages/User/Project/ListProject";
+import ListProject from "../pages/User/Project/ListProjectPage";
 import HeaderProfile from "../layout/Header/HeaderProfile";
 import ViewProject from '../views/User/Project/ViewProject';
 import AddProjectPage from "../pages/User/Project/AddProjectPage"

@@ -168,7 +168,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                             <div  className="col-md-12 input-row" style={{ height: "350px" , width: "100%" , display: "grid", placeItems: "center"}} onClick={handleClick}>
                                                     {/* <input type="file" onChange={onChange} /> */}
                                                     <div  className="btn btn-default" style={{ margin: "auto", display: "block"}}>
-                                                        <input ref={hiddenFileInput}
+                                                        <input ref={hiddenFileInput} accept=".png, .jpg, .jpeg"
                                                             style={{display: 'none'}} type="file" onChange={selectFile} /> Choose file
                                                     </div>
                                                     {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}

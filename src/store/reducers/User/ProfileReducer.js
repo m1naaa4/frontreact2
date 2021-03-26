@@ -18,11 +18,27 @@ const UserProfileReducer = (state = initState, action) => {
                 userProfile: action.res,
             }
 
+        
+        case 'LOAD_PROFILE_USER_SUCCESS':
+            return {
+                ...state,
+                infoprofile: action.res.profile.data,
+            }
+
+        
+
+        case 'LOAD_PROFILE_USER_ERROR':
+            return {
+                ...state,
+                userProfile: action.res,
+            }
+        
         case 'LOAD_PROFILE_ERROR':
             return {
                 ...state,
                 userProfile: action.res,
             }
+        
 
         case 'CODE_ERROR':
             return {
