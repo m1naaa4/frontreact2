@@ -28,7 +28,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     
     useEffect(() => {
             const data = {
-                project_id  : props.match.params.id,
+                provider_id  : props.match.params.id,
                 action      : "getProject",
             }
             setProject_id(projectadd.addproject.projectid);
@@ -60,6 +60,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     const onLoad = fileString => {
         formDatas.append('file', fileString);
         formDatas.append('action', 'upload');
+        formDatas.append('url', 'project/upload');
         formDatas.append('type', 'video');
         formDatas.append('provider_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id);      
     };

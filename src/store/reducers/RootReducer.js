@@ -9,6 +9,7 @@ import uploadFileReducer from "./User/Project/UploadFileReducer";
 import addtagDescriptionprojectReducer from "./User/Project/AddTagDescrptionProjectReducer";
 import AddCommentReducer from "./User/Comment/AddCommentReducer";
 import GetCommentReducer from "./User/Comment/GetCommentReducer";
+import AvatarReducer from './Post/AvatarReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -19,6 +20,7 @@ const RootReducer = combineReducers({
   addproject: AddProjectReducer,
   fileuploaded: uploadFileReducer,
   addtagdescriptionproject: addtagDescriptionprojectReducer,
+  updateavatar: AvatarReducer,
 
   addComment:AddCommentReducer,
   getComments:GetCommentReducer

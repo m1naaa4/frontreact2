@@ -29,4 +29,17 @@ export const LoadProfile = (id) =>{
          });
 }
 
+export const AddPost = (data, props, current) =>{
+
+    const http = new HttpService();
+    let addpost = 'post/addPost';
+    const tokenId = "user-token";
+    return http.postData(data, addpost, tokenId, '').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}
+
 

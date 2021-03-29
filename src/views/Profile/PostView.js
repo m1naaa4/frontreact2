@@ -6,10 +6,7 @@ import AddPostView from './Post/AddPostView';
 
 
 
-export default function PostView({formData, setForm, props}) {
-
-
-
+export default function PostView(props) {
 
     return (
         
@@ -36,7 +33,7 @@ export default function PostView({formData, setForm, props}) {
                 </form>
               </div>
 
-              <AddPostView/>
+              <AddPostView  {...props}/>
 
               <div className="Posts-List">
                 

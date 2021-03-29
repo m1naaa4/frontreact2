@@ -25,8 +25,11 @@ export default function HeaderProfileView({formData, setForm, props}) {
      useEffect(() => {        
         if (newAvatar && infoprofile.infoprofile.avatar !== newAvatar) {
             setFileAvatar(newAvatar)
+            dispatch({type:'UPDATE_AVATAR_SUCCESS', newAvatar});
         }else{
             setFileAvatar(infoprofile.infoprofile.avatar)
+            let newAvatar = infoprofile.infoprofile.avatar;
+            dispatch({type:'UPDATE_AVATAR_SUCCESS', newAvatar});
         }
         
         if (newCover && infoprofile.infoprofile.cover !== newCover) {
@@ -50,6 +53,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
         formData.file =  fileString;
         formData.action = 'upload';
         formData.type =  type;
+        formData.url =  'profile/upload';
     };
     
     const getBase64 = (file, type) => {
@@ -71,8 +75,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
         })
         .then((response) => {
             formData.type === 'avatar' ? setNewAvatar(response.data.url) : setNewCover(response.data.url)
-            setSelectedFiles(undefined);
-            dispatch({type:'UPDATE_AVATAR_SUCCESS', response});
+            setSelectedFiles(undefined);            
         })
         .then((files) => {
             //setFileAvatar(files.data);

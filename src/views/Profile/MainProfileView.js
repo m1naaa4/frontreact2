@@ -8,8 +8,7 @@ import SideLeftProfileView from './SideLeftProfileView';
 
 
 
-export default function MainProfileView(props) {
-
+export default function MainProfileView(props) { 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch( ProfileAction(props.match.params.id));    
@@ -23,7 +22,7 @@ export default function MainProfileView(props) {
                 <div className="container">
                     <div className="row">
                         <SideLeftProfileView />
-                        <PostView/>
+                        <PostView  {...props}/>
                     </div>
                 </div>
             </div>

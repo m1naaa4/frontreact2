@@ -31,7 +31,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
             if (getproject !== undefined && getproject.getproject  !== '') {
                 if(getproject.getproject !== 'loading'){
                     const data = {
-                        project_id  : projectadd.addproject.projectid,
+                        provider_id  : projectadd.addproject.projectid,
                         action      : "getProject",
                     }
         
@@ -63,6 +63,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const onLoad = fileString => {
         formDatas.append('file', fileString);
         formDatas.append('action', 'upload');
+        formDatas.append('url', 'project/upload');
         formDatas.append('type', 'video');
         formDatas.append('provider_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id); 
     };

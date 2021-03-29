@@ -3,7 +3,7 @@ const initState = {
 }
 
 
-const ProfileReducer = (state = initState, action, response) => {
+const ProfileReducer = (state = initState, action) => {
     switch (action.type) {
 
         case 'LOADING_LOAD_PROFILE':
@@ -13,21 +13,10 @@ const ProfileReducer = (state = initState, action, response) => {
             }
 
         case 'LOAD_PROFILE_SUCCESS':
-            console.log(" action.res.profile.infoprofile",  action.res.profile.avatar)
-            console.log(" action.res.profile.infoprofile",  action.res.profile.cover)
             return {
                 ...state,
                 infoprofile: action.res.profile,
             }
-
-        case 'UPDATE_AVATAR_SUCCESS':
-            console.log('newAvataaaaaaaaaaaaaaaaaaaar', response.data.url)
-        
-            return {
-                url:response.data.url,
-            }
-
-        
 
         case 'LOAD_PROFILE_ERROR':
             return {
