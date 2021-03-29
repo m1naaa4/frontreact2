@@ -21,7 +21,7 @@ export const LoadProfile = (id) =>{
     const tokenId = "user-token";
 
     return  http.getData(profileUpUrl, tokenId).then( data => {
-        console.log(data)
+        // console.log(data)
         return data;
     }).catch((error)=> {
         // console.log(error)

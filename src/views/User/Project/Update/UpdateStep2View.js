@@ -58,10 +58,10 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
       };
 
     const onLoad = fileString => {
-        formDatas.append('video', fileString);
+        formDatas.append('file', fileString);
         formDatas.append('action', 'upload');
         formDatas.append('type', 'video');
-        formDatas.append('project_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id);      
+        formDatas.append('provider_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id);      
     };
     
     const getBase64 = file => {

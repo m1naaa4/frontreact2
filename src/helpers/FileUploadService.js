@@ -3,7 +3,7 @@ import axios from "axios";
 
 const upload = (data, onUploadProgress) => {
   console.log("here progress",onUploadProgress)
-  return axios.post("/video/upload", data, {
+  return axios.post("/profile/upload", data, {
     onUploadProgress,
   });
 };

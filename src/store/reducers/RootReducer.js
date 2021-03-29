@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 import UserAuthReducer from '../reducers/User/Auth/AuthReducer'
-import UserProfileReducer  from '../reducers/User/ProfileReducer'
+import UserReducer  from '../reducers/User/UserReducer'
+import ProfileReducer  from '../reducers/User/ProfileReducer'
 import ProjectReducer  from '../reducers/User/Project/ProjectReducer'
 import GetProjectReducer  from '../reducers/User/Project/GetProjectReducer'
 import AddProjectReducer  from '../reducers/User/Project/AddProjectReducer'
@@ -11,7 +12,8 @@ import GetCommentReducer from "./User/Comment/GetCommentReducer";
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
-  userProfile: UserProfileReducer,
+  userProfile: UserReducer,
+  infoProfile: ProfileReducer,
   projects: ProjectReducer,  //from here   project = useSelector(state => state.project.project)   projectView
   getproject: GetProjectReducer,  //from here   project = useSelector(state => state.project.project)   projectView
   addproject: AddProjectReducer,

@@ -4,16 +4,16 @@ import {LoadUser, LoadProfile} from '../../../services/User/Profile/ProfileServi
 export const loadUserAction = () =>{
     return (dispatch)=>{
 
-        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_LOAD_USER'});
 
         LoadUser().then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  
-                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                dispatch({type:'LOAD_USER_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'LOAD_PROFILE_ERROR',res})
+                dispatch({type:'LOAD_USER_ERROR',res})
             }
         },
         error=>{
@@ -27,16 +27,16 @@ export const loadUserAction = () =>{
 export const ProfileAction = (id) =>{
     return (dispatch)=>{
 
-        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_LOAD_PROFILE'});
 
         LoadProfile(id).then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  
-                dispatch({type:'LOAD_PROFILE_USER_SUCCESS',res});
+                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'LOAD_PROFILE_USER_ERROR',res})
+                dispatch({type:'LOAD_PROFILE_ERROR',res})
             }
         },
         error=>{

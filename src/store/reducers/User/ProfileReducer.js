@@ -1,49 +1,45 @@
 const initState = {
-    userProfile: ""
+    infoprofile: ''
 }
 
 
-const UserProfileReducer = (state = initState, action) => {
+const ProfileReducer = (state = initState, action, response) => {
     switch (action.type) {
 
-        case 'LOADING':
+        case 'LOADING_LOAD_PROFILE':
             return {
                 ...state,
-                userProfile: 'loading'
+                infoprofile: 'loading'
             }
 
         case 'LOAD_PROFILE_SUCCESS':
+            console.log(" action.res.profile.infoprofile",  action.res.profile.avatar)
+            console.log(" action.res.profile.infoprofile",  action.res.profile.cover)
             return {
                 ...state,
-                userProfile: action.res,
+                infoprofile: action.res.profile,
+            }
+
+        case 'UPDATE_AVATAR_SUCCESS':
+            console.log('newAvataaaaaaaaaaaaaaaaaaaar', response.data.url)
+        
+            return {
+                url:response.data.url,
             }
 
         
-        case 'LOAD_PROFILE_USER_SUCCESS':
-            return {
-                ...state,
-                infoprofile: action.res.profile.data,
-            }
 
-        
-
-        case 'LOAD_PROFILE_USER_ERROR':
-            return {
-                ...state,
-                userProfile: action.res,
-            }
-        
         case 'LOAD_PROFILE_ERROR':
             return {
                 ...state,
-                userProfile: action.res,
+                infoprofile: action.res,
             }
         
 
         case 'CODE_ERROR':
             return {
                 ...state,
-                userProfile: 'there seems to be a problem please refresh your browser',
+                infoprofile: 'there seems to be a problem please refresh your browser',
             }
 
         default:
@@ -52,4 +48,4 @@ const UserProfileReducer = (state = initState, action) => {
     }
 }
 
-export default UserProfileReducer;
+export default ProfileReducer;

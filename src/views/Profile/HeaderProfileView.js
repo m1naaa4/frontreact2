@@ -7,15 +7,9 @@ import { ProfileAction } from '../../store/actions/Profile/UserActions';
 
 export default function HeaderProfileView({formData, setForm, props}) {
 
-    const infoprofile = useSelector(state => state.userProfile);
-    //const infoprofile = useSelector(state => state.userProfile.infoprofile);
-
-    //console.log('userProfile', infoprofilee)
-    console.log(infoprofile.infoprofile)
-
-    
-
+    const infoprofile = useSelector(state => state.infoProfile);
     const dispatch = useDispatch();
+
     const hiddenFileInput = useRef(null);
     const hiddenCoverInput = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
@@ -24,37 +18,45 @@ export default function HeaderProfileView({formData, setForm, props}) {
     const [message, setMessage] = useState("");
     const [fileAvatar, setFileAvatar] = useState();
     const [fileCover, setFileCover]   = useState();
-
-    useEffect(() => {  
-        dispatch( ProfileAction(props.match.params.id)); 
-        console.log("infoprofile", infoprofile.infoprofile);     
-    }, [dispatch]);  
-      
-    const handleClick = e => {
-        hiddenFileInput.current.click();
-      };
+    const [ newAvatar, setNewAvatar ] = useState()
+    const [ newCover, setNewCover ] = useState()
+    
+    
+     useEffect(() => {        
+        if (newAvatar && infoprofile.infoprofile.avatar !== newAvatar) {
+            setFileAvatar(newAvatar)
+        }else{
+            setFileAvatar(infoprofile.infoprofile.avatar)
+        }
+        
+        if (newCover && infoprofile.infoprofile.cover !== newCover) {
+            setFileCover(newCover)
+        }else{
+            setFileCover(infoprofile.infoprofile.cover)
+        }
+    })
 
     const selectFile = (e) => {   
         setSelectedFiles(e.target.files[0])     
-        getBase64(e.target.files[0]); 
-      };
+        getBase64(e.target.files[0], 'avatar'); 
+    };
     
     const selectFileCover = (e) => {   
         setSelectedFiles(e.target.files[0])     
-        getBase64(e.target.files[0]); 
+        getBase64(e.target.files[0], 'cover'); 
       };  
 
-    const onLoad = fileString => {
-        formData.append('video', fileString);
-        formData.append('action', 'upload');
-        formData.append('type', 'video');
+    const onLoad = (fileString, type) => {
+        formData.file =  fileString;
+        formData.action = 'upload';
+        formData.type =  type;
     };
     
-    const getBase64 = file => {
+    const getBase64 = (file, type) => {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-            onLoad(reader.result);
+            onLoad(reader.result, type);
             handleUpload(file)
         };
     };
@@ -68,14 +70,12 @@ export default function HeaderProfileView({formData, setForm, props}) {
         
         })
         .then((response) => {
-            setFileAvatar(response.data.url);
-            formData.medialink = response.data.url;
-            formData.mediatype = response.data.type;
+            formData.type === 'avatar' ? setNewAvatar(response.data.url) : setNewCover(response.data.url)
             setSelectedFiles(undefined);
-            dispatch({type:'File_UPLOADED_SUCCESS', response})
+            dispatch({type:'UPDATE_AVATAR_SUCCESS', response});
         })
         .then((files) => {
-            setFileAvatar(files.data);
+            //setFileAvatar(files.data);
         })
         .catch(() => {
             setProgress(0);
@@ -86,11 +86,10 @@ export default function HeaderProfileView({formData, setForm, props}) {
 
 
     return (
-    
-        <div className="Profile-Header">
-            {
-            infoprofile.infoprofile !== "" || infoprofile === undefined ?
-            <div className="Profile-Cover" id="photoCover" style={{backgroundImage: `url(${ infoprofile.cover })`}}>
+        <>       
+        {
+            infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
+            <div className="Profile-Cover" id="photoCover" style={{backgroundImage: `url(${ fileCover })`}}>
                 <div className="container">
                     <div className="Profile-Wrap">
                         <div className="Profile-Infos">
@@ -98,8 +97,8 @@ export default function HeaderProfileView({formData, setForm, props}) {
                         <label htmlFor="imageUpload" style={{cursor: "pointer"}}>
                             <i className="uil uil-camera" />
                         </label>
-                        <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${ infoprofile.avatar })`}} />
-                        <div className="Profile-Name">{infoprofile.username}</div>
+                        <div className="Profile-Picture" id="imageProfile"  style={{backgroundImage: `url(${fileAvatar})`}} />
+                        <div className="Profile-Name">{infoprofile.infoprofile.username}</div>
                         </div>
                         <div className="Profile-Navigation">
                         <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
@@ -107,8 +106,8 @@ export default function HeaderProfileView({formData, setForm, props}) {
                         <ul className="Profie-Menu">
                             {/* <li><NavLink href="offers.html" to={`/profile/${this.props.id}/offers`}><i className="uil uil-layer-group" /> Offres</NavLink></li>
                             <li><NavLink href="profile.html" to={`/profile/${this.props.id}/posts`}><i className="uil uil-apps" /> Publications</NavLink></li> */}
-                            {/* <li><a href="reseaux.html"><i className="uil uil-share-alt" /> Réseaux</a></li>
-                            <li><a href="#!"><i className="uil uil-comment-alt-lines" /> Discuter</a></li> */}
+                            <li><a href="reseaux.html"><i className="uil uil-share-alt" /> Réseaux</a></li>
+                            <li><a href="#!"><i className="uil uil-comment-alt-lines" /> Discuter</a></li>
                         </ul>
                         </div>
                     </div>
@@ -118,7 +117,9 @@ export default function HeaderProfileView({formData, setForm, props}) {
             infoprofile.success === false ?
             infoprofile.message: <span/>
             }
-        </div>
+        </>
+    
+           
         
     )
 }

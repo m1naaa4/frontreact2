@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import ProgressBar from "../../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
 import UploadService from '../../../../helpers/FileUploadService';
-import { GetFileAction } from '../../../../store/actions/User/Media/GetFileAction';
 import { getProjectAction } from '../../../../store/actions/User/Project/GetProjectActions';
 
 
@@ -62,10 +61,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
       };
 
     const onLoad = fileString => {
-        formDatas.append('video', fileString);
+        formDatas.append('file', fileString);
         formDatas.append('action', 'upload');
         formDatas.append('type', 'video');
-        formDatas.append('project_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id); 
+        formDatas.append('provider_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id); 
     };
     
     const getBase64 = file => {
