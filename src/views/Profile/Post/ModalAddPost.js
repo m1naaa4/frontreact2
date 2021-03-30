@@ -3,12 +3,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { AddPostAction } from "../../../store/actions/Post/AddPostAction";
 import FileUploadService from "../../../helpers/FileUploadService";
+import PusherService from '../../../services/Pusher';
+import Player from "video-react/lib/components/Player";
 
 export default function(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [avatar, setAvatar] = useState();
-    const [post, setPost] = useState();
+    const [body, setBody] = useState();
     const [medialink, setMedialink] = useState();
     const [type, setType] = useState('normal');
     const refbody = useRef(null);
@@ -36,7 +38,7 @@ export default function(props) {
 
     const data = {
         profile_id : props.match.params.id,
-        body       : post,
+        body       : body,
         action     : 'addPost',
         type       : type,
         medialink : medialink,
@@ -44,10 +46,22 @@ export default function(props) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        refbody.current.value = ''
+        refbody.current.value = '';
+        handleClose()
         dispatch(AddPostAction(data, props));
-        handleClose();       
+              
     }
+    
+    useEffect(() => {
+        const pusher = new PusherService();        
+        var channel = pusher.config.subscribe('post_' + props.match.params.id);        
+        channel.bind('NewPost', function(res) {                
+            let j = res.id;
+            let feed = res[j]
+            dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', feed});            
+        });
+    
+    }, [dispatch])
     
     const selectFile = (e) => {   
         setSelectedFiles(e.target.files[0]); 
@@ -100,6 +114,7 @@ export default function(props) {
         })
         .then((response) => {
             setMedialink(response.data.url)
+            setType(response.data.type)
             setSelectedFiles(undefined);            
         })
         .then((files) => {
@@ -115,7 +130,7 @@ export default function(props) {
   return (    
             <div className="modal-body">
 
-                <form className="AddNewPost-Form" onSubmit={ handleSubmitValue}>
+                <div className="AddNewPost-Form">
 
                     <div className="CreatePost-Row">
                         <div className="CreatePost-ColLeft">
@@ -137,7 +152,16 @@ export default function(props) {
                             </div>
                             <div className="CreatePost-ColRight">
                                 <div className="CreatePost-Body">
-                                    <textarea name="post" onChange={e => setPost(e.target.value)} ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                                    <textarea name="post" onChange={e => setBody(e.target.value)} ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                                    {
+                                        medialink? (type == "video" ? (
+                                            <Player width="100%" height="100%"
+                                                playsInline
+                                                poster="/assets/poster.png"
+                                                src={medialink}
+                                            />
+                                            ) : (<img width="100%" height="300" src={medialink} alt="media"/>)): '' 
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -146,10 +170,10 @@ export default function(props) {
                                 <button type="button" className="CreatePost-AddTag"><i className="uil uil-plus"></i> Ajouter un tag</button>
                             </div>
                             <div className="CreatePost-FooterRight">
-                                <button name="button" className="CreatePost-PublishBTN">Publish</button>
+                                <button name="button" className="CreatePost-PublishBTN" onClick={handleSubmitValue} >Publish</button>
                             </div>
                         </div>
-                </form>
+                </div>
             </div>         
   );
 }

@@ -27,9 +27,8 @@ export default function ListPostsView(props) {
        
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver( entries =>{
-            console.log('entriessssss',entries)
             if (entries[0].isIntersecting && hasMore  ){  
-                //dispatch(GetPostsAction( data, props, current+1));
+                dispatch(GetPostsAction( data, props, current+1));
                 setIsLoading(true)
             }
         })
@@ -45,7 +44,6 @@ export default function ListPostsView(props) {
     return (
 
         <div className="Posts-List">
-            <div className="PostWrap">
             {
                 loading === true ? (
                     'loading'
@@ -60,7 +58,7 @@ export default function ListPostsView(props) {
                                     posts.map((post, index) => {
                                         if (posts.length === index +1){
                                             return (
-                                                <div  key={index +1} ref={lastProjectElementRef}>
+                                                <div className="PostWrap"  key={index +1} ref={lastProjectElementRef}>
                                                     <PostHeader post={post}/>
                                                     <PostBody post={post}/>
                                                     <PostFooter post={post}/>
@@ -69,7 +67,7 @@ export default function ListPostsView(props) {
 
                                         }else{
                                             return(
-                                                <div  key={index +1}>
+                                                <div className="PostWrap"  key={index +1}>
                                                     <PostHeader  post={post}/>
                                                     <PostBody post={post}/>
                                                     <PostFooter post={post}/>
@@ -94,7 +92,6 @@ export default function ListPostsView(props) {
                             )
                             ()
                         }
-            </div>
         </div>
 
     )

@@ -32,6 +32,12 @@ const initState = {
                     loading:false
                 }
 
+            case 'ADD_TO_COLLECTION_POST_SUCCESS':
+                return {
+                    posts :  [action.feed, ...state.posts],
+                    loading  :  false
+                }
+
             case 'GET_POSTS_ERROR':
                 return {
                     ...state,
