@@ -9,34 +9,34 @@ const initState = {
                 case 'LOADING_ADD_POST':
                     return {
                         ...state,
-                        comment:'loading'
+                        post:'loading'
                     }
 
           case 'ADD_POST_SUCCESS':
               return {
                   ...state,
-                  comment:action.res,
-                  commentid:action.res.comment.id,
+                  post:action.res,
+                  postid:action.res.post.id,
               }
 
               case 'ADD_POST_ERROR':
 
                     return {
                         ...state,
-                        comment:action.res,
+                        post:action.res,
                     }
 
                     case 'CODE_ERROR':
                             return {
                                 ...state,
-                                comment:'there seems to be a problem please refresh your browser',
+                                post:'there seems to be a problem please refresh your browser',
                             }
                 default:
                     if (action.res === undefined) {
 
                         return {
                             ...state,
-                            comment:state
+                            post:state
                         }
                     }
                     return state

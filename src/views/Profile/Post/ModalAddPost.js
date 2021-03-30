@@ -9,6 +9,7 @@ export default function(props) {
     const handleClose = () => setShow(false);
     const [avatar, setAvatar] = useState();
     const [post, setPost] = useState();
+    const [medialink, setMedialink] = useState();
     const [type, setType] = useState('normal');
     const refbody = useRef(null);
     const hiddenImage = useRef(null);
@@ -38,6 +39,7 @@ export default function(props) {
         body       : post,
         action     : 'addPost',
         type       : type,
+        medialink : medialink,
     }
 
     const handleSubmitValue = (e) => {
@@ -48,24 +50,26 @@ export default function(props) {
     }
     
     const selectFile = (e) => {   
-        setSelectedFiles(e.target.files[0]);     
-        getBase64(e.target.files[0], 'file'); 
+        setSelectedFiles(e.target.files[0]); 
+        setType('file')    
+        getBase64(e.target.files[0]); 
     };
 
     const selectImage = (e) => {   
-        setSelectedFiles(e.target.files[0]);     
-        getBase64(e.target.files[0], 'image'); 
+        setSelectedFiles(e.target.files[0]); 
+        setType('image')    
+        getBase64(e.target.files[0]); 
     };
 
     const selectVideo = (e) => {   
-        setSelectedFiles(e.target.files[0]);     
-        getBase64(e.target.files[0], 'video'); 
+        setSelectedFiles(e.target.files[0]);
+        setType('video')     
+        getBase64(e.target.files[0]); 
     };
 
-    const onLoad = (fileString, type) => {
+    const onLoad = (fileString) => {
         formData.file =  fileString;
-        formData.action = 'upload';
-        formData.provider_id = props.match.params.id;
+        formData.profile_id = props.match.params.id;
         formData.type =  type;
         formData.url =  'video/upload';
     };
@@ -82,12 +86,20 @@ export default function(props) {
     const handleUpload = async e => {
         setProgress(0);
         setCurrentFile(e);
-        FileUploadService.upload(formData, (e) => {
+        const data = {
+            file  : formData.file,
+            provider_id : formData.profile_id,
+            action      : 'uploadPost',
+            type        : formData.type,
+            url         : formData.url,
+        }
+        FileUploadService.upload(data, (e) => {
             console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
         
         })
         .then((response) => {
+            setMedialink(response.data.url)
             setSelectedFiles(undefined);            
         })
         .then((files) => {
@@ -107,7 +119,7 @@ export default function(props) {
 
                     <div className="CreatePost-Row">
                         <div className="CreatePost-ColLeft">
-                            <div className="CreatePost-UserThumb"><img src={avatar}/></div>
+                            <div className="CreatePost-UserThumb"><img src={avatar} alt="avatar"/></div>
                                 <div className="CreatePost-OptionsRow">
                                     <div className="CreatePost-Options">
                                         <button type="button" className="CreatePost-Option CreatePost-OptionDate" data-toggle="tooltip" data-placement="right" title="Add date"><i className="uil uil-calendar-alt"></i></button>
@@ -115,7 +127,7 @@ export default function(props) {
                                             <input type="file" ref={hiddenImage} onChange={selectImage}  accept="image/jpeg, image/x-png" /><i className="uil uil-image"></i>
                                         </button>
                                         <button type="button" className="CreatePost-Option CreatePost-OptionVideo" data-toggle="tooltip" data-placement="right" title="Add Video">
-                                            <input type="file" ref={hiddenVideo} onChange={selectVideo} accept="video/x-mpeg2, video/x-msvideo, video/quicktime" /><i className="uil uil-video"></i>
+                                            <input type="file" ref={hiddenVideo} onChange={selectVideo} accept="video/x-mpeg2, video/x-msvideo, video/quicktime, video/mp4" /><i className="uil uil-video"></i>
                                         </button>
                                         <button type="button" className="CreatePost-Option CreatePost-OptionFile" data-toggle="tooltip" data-placement="right" title="Add File">
                                             <input type="file" ref={hiddenFile} onChange={selectFile} accept="" /><i className="uil uil-file-alt"></i>

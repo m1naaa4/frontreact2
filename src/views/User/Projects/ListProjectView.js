@@ -11,13 +11,7 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
 
     const data = { filterInput, setFilterInput, props };
 
-    const [listprojects, setListprojects] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    //const [hasMore, setHasMore] = useState(null);
-    const [nextPageUrl, setNextPageUrl] = useState(null);
-    const [error, setError] = useState(null);
-
-
 
     const dispatch = useDispatch();
     const observer = useRef()

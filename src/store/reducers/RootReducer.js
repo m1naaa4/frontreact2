@@ -7,9 +7,13 @@ import GetProjectReducer  from '../reducers/User/Project/GetProjectReducer'
 import AddProjectReducer  from '../reducers/User/Project/AddProjectReducer'
 import uploadFileReducer from "./User/Project/UploadFileReducer";
 import addtagDescriptionprojectReducer from "./User/Project/AddTagDescrptionProjectReducer";
+
 import AddCommentReducer from "./User/Comment/AddCommentReducer";
 import GetCommentReducer from "./User/Comment/GetCommentReducer";
+
 import AvatarReducer from './Post/AvatarReducer'
+import AddPostReducer from './Post/AddPostReducer'
+import GetPostsReducer from './Post/GetPostsReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -20,7 +24,10 @@ const RootReducer = combineReducers({
   addproject: AddProjectReducer,
   fileuploaded: uploadFileReducer,
   addtagdescriptionproject: addtagDescriptionprojectReducer,
+
   updateavatar: AvatarReducer,
+  posts: GetPostsReducer,
+  post: AddPostReducer,
 
   addComment:AddCommentReducer,
   getComments:GetCommentReducer

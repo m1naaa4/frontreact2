@@ -42,4 +42,19 @@ export const AddPost = (data, props, current) =>{
     });
 }
 
+export const GetPosts = (data, props, current) =>{
+
+    const http = new HttpService();
+    let getposts = 'post/getPosts?page='+current;
+    const tokenId = "user-token";
+    return http.postData(data, getposts, tokenId, '').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}
+
+
+
 
