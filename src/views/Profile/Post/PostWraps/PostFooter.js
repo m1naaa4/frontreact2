@@ -230,7 +230,7 @@ export default function PostFooter({ post }) {
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
                   <label className="count-reactions">2</label>
                 </ul>
-                ''
+                
               </div>
               <div className="Comment-Col-10">
                 <div className="Comment-User">
