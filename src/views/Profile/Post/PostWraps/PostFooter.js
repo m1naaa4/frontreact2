@@ -30,9 +30,6 @@ export default function PostFooter({ post }) {
 
   const commentss = useSelector(state => state.getComments);
 
-  const dispatch = useDispatch();
-  //dispatch(GetCommentAction(dataget));
-
     const showReplyBox = e => {
       SetCommentBox(!commentBox)
   }
@@ -85,12 +82,8 @@ export default function PostFooter({ post }) {
           {comments &&
               <AddComment post={post} />               
           }
-          {commentBox &&
-             
-              commentss && commentss.comments.map((comment, index) => 
-                <ShowComment post={post} />  
-                )
-                                      
+          {commentBox &&            
+              <ShowComment  post={post} />                                       
           }
           
           

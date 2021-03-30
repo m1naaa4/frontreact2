@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abbass IYA - Dadupa</title>
+
+    <link rel="icon" type="image/png" href="dadupa-favicon.png">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.7/css/unicons.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/lightgallery.css">
+    <link rel="stylesheet" href="assets/css/lg-fb-comment-box.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bundle.js"></script>
+
+  </head>
+  <body class="Dadupa-Page">
+
+    <div id="load" class="load">
+      <div class="spinner"></div>
+    </div>
+
+    <div id="wrapper">
+
+    <div class="Dadupa-Overlay"><button class="Dadupa-Close"><i class="uil uil-multiply"></i></button></div>
+
+    <header class="Dadupa-Header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2 col-md-2">
+            <div class="left-nav">
+              <a href="profile.html">
+                <img src="assets/images/dadupa-brand-text.svg" alt="Dadupa Connect" class="Logo-Desktop">
+                <img src="assets/images/dadupa-responsive.svg" alt="Dadupa Connect" class="Logo-Responsive">
+              </a>
+            </div>
+          </div>
+          <div class="col-md-5 d-none d-lg-block">
+            <div class="center-nav">
+              <ul class="Dadupa-Nav">
+                <li class="Nav-Item"><a href="projects-list.html"class="Nav-Link"><i class="uil uil-lightbulb-alt"></i> Porteur de projet</a></li>
+                <li class="Nav-Item"><a href="bailleur-de-fonds.html"class="Nav-Link"><i class="uil uil-moneybag"></i> Bailleur de fonds</a></li>
+                <li class="Nav-Item"><a href="accompagnateur.html"class="Nav-Link"><i class="uil uil-users-alt"></i> Accompagnateur</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-10 col-md-10 col-lg-5">
+            <div class="right-nav">
+              <div class="New-Post">
+                <button class="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i class="uil uil-plus"></i></button>
+                <div class="Dadupa-Popup-DropDown">
+                  <ul class="Mini-Profile-Items">
+                    <li class="Mini-Profile-Item"><a href="new-offer.html"><i class="uil uil-rocket"></i>  Projet</a></li>
+                    <li class="Mini-Profile-Item"><a href="new-bailleur-offer.html"><i class="uil uil-briefcase-alt"></i> Financement</a></li>
+                    <li class="Mini-Profile-Item"><a href="new-accompagnateur-offer.html"><i class="uil uil-comment-alt-notes"></i> Mentoring</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="Dadupa-Notifications">
+                <div class="Dadupa-Notifications-Items">
+                  <div class="Dadupa-Notifications-Item Dadupa-Search">
+                    <form class="search" action="#" method="post">
+                      <input type="search" name="search" placeholder="Search Dadupa" value="">
+                      <button type="submit" name="submit"><i class="uil uil-search"></i></button>
+                    </form>
+                  </div>
+                  <div class="Dadupa-Notifications-Item Dadupa-Alert-Popup"><button class="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications"><span class="new-notif"></span><i class="uil uil-bell"></i></button>
+                    <div class="Dadupa-Notifs-Box">
+                      <h3>Notifications</h3>
+                      <div class="Notifs-List">
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div class="Notif-Item">
+                          <div class="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Notif-Options btn-group">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-item">Mark as read</div>
+                                <div class="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div class="Notif-Content">
+                            <div class="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div class="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Dadupa-Notifications-Item Dadupa-Message-Popup">
+                    <a href="messenger.html" class="Dadupa-Message Dadupa-MessengerBTN" data-toggle="tooltip" data-placement="bottom" title="Messages"><span class="new-message"></span><i class="uil uil-envelope"></i></a>
+                    <button class="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span class="new-message"></span><i class="uil uil-envelope"></i></button>
+                    <div class="Dadupa-Msgs-Box">
+                      <h3>Messages</h3>
+                      <span class="User-Connected"></span>
+                      <div class="Msgs-List">
+                        <div  id="sidebar-user-box" class="101 Msgs-Item New-Msg">
+                            <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                            <div class="Msgs-Content">
+                              <div class="Msgs-User">Youness EL BEZZAZI</div>
+                              <div class="Msgs-Text">Message text goes here...</div>
+                              <div class="Friend-Active">
+                              </div>
+                            </div>
+                        </div>
+                        <div id="sidebar-user-box" class="102 Msgs-Item">
+                            <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                            <div class="Msgs-Content">
+                              <div class="Msgs-User">Youness EL BEZZAZI</div>
+                              <div class="Msgs-Text">Message text goes here...</div>
+                              <div class="Friend-Active">
+                              </div>
+                            </div>
+
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Active">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Active">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Not-Active">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Not-Active">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Active">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Active">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="Msgs-Item">
+                          <div class="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div class="Msgs-Content">
+                            <div class="Msgs-User">Youness EL BEZZAZI</div>
+                            <div class="Msgs-Text">Message text goes here...</div>
+                            <div class="Friend-Active">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="All-Messages-Row">
+                        <a href="messenger.html" class="all-messages-button">See All Messages</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="Dadupa-User">
+                <ul class="Dadupa-User-Infos">
+                  <li class="profile-image">
+                    <img src="assets/images/abbass-iya.jpg" />
+                  </li>
+                  <!-- <li class="profile-name">
+                    <span class="">Abbass IYA</span>
+                  </li> -->
+                  <li class="profile-arrow"><i class="uil uil-angle-down"></i></li>
+                </ul>
+                <div class="Dadupa-Mini-Profile">
+                  <label class="Mini-Profile-Name">Abbass IYA</label>
+                  <a class="Mini-Profile-Link" href="profile.html">Voir mon profil</a>
+                  <ul class="Mini-Profile-Items">
+                    <li class="Mini-Profile-Item"><a href="offers.html"><i class="uil uil-layer-group"></i> Mes offres</a></li>
+                    <li class="Mini-Profile-Item"><a href="favoris.html"><i class="uil uil-favorite"></i> Mes favoris</a></li>
+                    <li class="Mini-Profile-Item"><a href="settings.html"><i class="uil uil-setting"></i> Paramètres</a></li>
+                    <li class="Mini-Profile-Item"><a href="login.html"><i class="uil uil-exit"></i> Déconnexion</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="Sidebar-Nav">
+      <div class="">
+        <div class="User-Profile">
+          <div class="User-Image">
+            <img src="assets/images/abbass-iya.jpg" />
+          </div>
+          <div class="User-Details">
+            <label class="User-Name">Abbass IYA</label>
+            <a class="User-Profile-Link" href="profile.html">Voir mon profil</a>
+          </div>
+        </div>
+
+        <div class="Add-New-Post">
+          <a href="new-accompagnateur-offer.html" data-toggle="tooltip" data-placement="bottom" title="Add new"><i class="uil uil-plus"></i> Add new offer</a>
+        </div>
+
+        <ul class="Sidebar-Nav-Items">
+          <li class="Nav-Item"><a href="projects-list.html"class="Nav-Link"><i class="uil uil-lightbulb-alt"></i> Porteur de projet</a></li>
+          <li class="Nav-Item"><a href="bailleur-de-fonds.html"class="Nav-Link"><i class="uil uil-moneybag"></i> Bailleur de fonds</a></li>
+          <li class="Nav-Item"><a href="accompagnateur.html"class="Nav-Link"><i class="uil uil-users-alt"></i> Accompagnateur</a></li>
+        </ul>
+        <ul class="Mini-Profile-Items">
+          <li class="Mini-Profile-Item"><a href="offers.html"><i class="uil uil-layer-group"></i> Mes offres</a></li>
+          <li class="Mini-Profile-Item"><a href="favoris.html"><i class="uil uil-favorite"></i> Mes favoris</a></li>
+          <li class="Mini-Profile-Item"><a href="settings.html"><i class="uil uil-setting"></i> Paramètres</a></li>
+          <li class="Mini-Profile-Item"><a href="login.html"><i class="uil uil-exit"></i> Déconnexion</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="Page-Profile">
+      <div class="Profile-Header">
+        <div class="Profile-Cover" id="photoCover" style="background-image:url('assets/images/Untitled-1.jpg');">
+          <div class="container">
+            <div class="Profile-Wrap">
+              <div class="Profile-Infos">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"><i class="uil uil-camera"></i></label>
+                <div class="Profile-Picture" id="imageProfile" style="background-image: url('assets/images/abbass-iya-profile.jpg');"></div>
+                <div class="Profile-Name"><span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span> Abbass IYA</div>
+              </div>
+              <div class="Profile-Navigation">
+                <input type='file' id="coverUpload" accept=".png, .jpg, .jpeg" />
+                <label for="coverUpload" class="coverUpload"><i class="uil uil-camera"></i><span> Edit cover photo</span></label>
+                <ul class="Profie-Menu">
+                  <li><a href="bio.html"><i class="uil uil-user-square"></i> Bio</a></li>
+                  <li><a href="offers.html"><i class="uil uil-layer-group"></i> Offres</a></li>
+                  <li class="Profie-Menu-Active"><a href="profile.html"><i class="uil uil-apps"></i> Historique</a></li>
+                  <li><a href="reseaux.html"><i class="uil uil-users-alt"></i> Réseaux <span class="NewRequests-Numbers">+2</span></a></li>
+                  <li><a class="Discuss-Tab" href="http://weinolab.com/dadupa/messenger.html"><i class="uil uil-comment-alt-lines"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Profile-Wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="Left-Side">
+              <div class="Widget-BOX Profile-Info">
+                <h3 class="Widget-Title text-center">Les 7 derniers jours</h3>
+                <div class="Widget-Stats">
+                  <div class="Stats-Field Stats-Field-Col-2">
+                    <div class="Stats-Value"><span>+ </span><span class="counter">45</span></div>
+                    <div class="Stats-Text">Interactions<br/> offres</div>
+                  </div>
+                  <div class="Stats-Field Stats-Field-Col-2">
+                    <div class="Stats-Value"><span>+ </span><span class="counter">30</span></div>
+                    <div class="Stats-Text">Visites<br/> de profil</div>
+                  </div>
+                </div>
+              </div>
+              <div class="Widget-BOX">
+
+                <div class="Profile-Info Profile-Infos-Items">
+                  <button type="button" class="UpdateInfos-BTN" data-toggle="modal" data-target="#exampleModalCenter"><i class="uil uil-pen"></i></button>
+                  <ul>
+                    <li><i class="uil uil-user"></i> 26 ans</li>
+                    <li><i class="uil uil-crosshair"></i> Web designer</li>
+                    <li><i class="uil uil-phone"></i> +212 617 713 251</li>
+                    <li><i class="uil uil-envelope"></i> abbas@dadupa.com</li>
+                    <li><i class="uil uil-facebook-f"></i> @facebook</li>
+                    <li><i class="uil uil-twitter-alt"></i> @twitter</li>
+                  </ul>
+                </div>
+                <div class="Profile-Info Profile-Bio">
+                  <h3>Bio</h3>
+                  <span>dadupa veut guider chaque entrepreneur vers le succès en l’intégrant dans un environnement idéal et constitué de porteurs de projets, d’investisseurs, de mentors, de partenaires du monde entier, et offrant tous les outils d'assistance à l’entre</span>
+                </div>
+                <div class="Profile-Info">
+                  <h3>Secteur d’activité</h3>
+                  <span>Business Consultant</span>
+                </div>
+                <div class="Profile-Info">
+                  <h3>Lieu de résidence</h3>
+                  <span>Centre d’affaire Contempo, 71 Angle Boulevard Mohamed V et Rue Azilal, Etg 3, Casablanca, 20110, Maroc</span>
+                </div>
+                <div class="Profile-Adresse">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.443077639317!2d-7.6081671853399175!3d33.593806480733214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd6c03865309%3A0x1281f2138bd13aab!2sRegus%20-%20Casablanca%2C%20Downtown!5e0!3m2!1sen!2sma!4v1593043725007!5m2!1sen!2sma" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="Center-Side">
+
+              <div class="Filter-Row">
+                <form class="Filter-Form NoMargin-Top Margin-Bottom_30" action="#" method="post">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="display-flex">
+                        <div class="input-row">
+                          <button type="button" class="OrderAlph">Ordre Alphabétique</button>
+                        </div>
+                        <div class="input-row date-row">
+                          <div id="reportrange">
+                              <i class="uil uil-calendar-alt"></i>&nbsp;
+                              <span></span> <i class="fa fa-caret-down"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="WritePost">
+                <div class="WritePost-Area">
+                  <div class="WritePost-UserThumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                  <!-- <button type="button" class="UpdateInfos-BTN" ><i class="uil uil-pen"></i></button> -->
+                  <textarea class="WritePost-TextArea js-elasticArea" data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder="Write something"></textarea>
+                </div>
+                <div class="WritePost-Options">
+                  <button type="button" name="button"><i class="uil uil-camera"></i> Photo/Video</button>
+                  <button type="button" name="button"><i class="uil uil-tag-alt"></i> Tag Friends</button>
+                </div>
+              </div>
+
+              <div class="Posts-List">
+                <div class="PostWrap">
+                  <div class="PostHeader">
+                    <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                    <div class="PostUser-Details">
+                      <div class="PostUser-Name">Abbass IYA</div>
+                      <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                    </div>
+                    <div class="PostOptions">
+                      <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                      <ul class="PostOptions-List">
+                        <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                        <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                        <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="PostBody">
+
+                    <div class="PostBody-Text">
+                      <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                    </div>
+                    <div id="multi-comment-box" class="PostBody-Media PostBody-SingleImage">
+                      <a href="assets/images/dadupa-post-image.jpg" data-sub-html='<div class="fb-comments" data-href="http://sachinchoolur.github.io/lightGallery/demos/comment-box.html#lg=1&slide=0" data-width="400" data-numposts="5">
+
+                        <div class="PostHeader">
+                          <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                          <div class="PostUser-Details">
+                            <div class="PostUser-Name">Abbass IYA</div>
+                            <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                          </div>
+                          <div class="PostOptions">
+                            <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                            <ul class="PostOptions-List">
+                              <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                              <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                              <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="PostBody-Text">
+                          <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                          <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra daccélérer ladoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                        </div>
+
+                        <div id="Comments-Wrap" class="Comments-Wrap">
+                          <div class="Comments-Box">
+                            <div class="User-Comments">
+
+                              <!-- #### COMMENT 1 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">120</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="Comment-Reply Writing-Box">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write your comment">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 2 ### -->
+                              <div class="User-Comment">
+
+                                <!-- ### COMMENTE THUMB ### -->
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">28</label>
+                                  </ul>
+                                </div>
+
+
+                                <div class="Comment-Col-10">
+                                  <!-- ### COMMENTE CONTENT ### -->
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- ### COMMENTE ACTIONS ### -->
+                                  <div class="comment-actions multi-options">
+                                    <div class="comment-replies-count">
+                                      <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i> <span>16</span><span> Replies</span></button>
+                                    </div>
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+
+                                </div>
+
+                                <!-- ### COMMENTER REPLIES ### -->
+                                <div class="Comment-Replies">
+                                  <div class="Comment-Reply">
+                                    <div class="User-Comment">
+                                      <div class="Comment-Col-2">
+                                        <div class="Comment-User-Thumb">
+                                          <img src="assets/images/abbass-iya.jpg" />
+                                        </div>
+                                        <ul class="comment-reactions-list">
+                                          <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                          <label class="count-reactions">12</label>
+                                        </ul>
+                                      </div>
+                                      <div class="Comment-Col-10">
+                                        <div class="Comment-User">
+                                          <div class="Comment-Content">
+                                            <div class="Comment-User-Name">
+                                              <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                              <span class="Comment-Date">07/04/2020</span>
+                                            </div>
+                                            <div class="Comment-Text">
+                                              <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="comment-actions">
+                                          <ul class="comment-actions-list">
+                                            <li class="comment-action"><button class="like-action">Like</button></li>
+                                            <li class="comment-action replay-action">Reply</li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="Writing-Reply">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write a reply...">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 3 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/othmane-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">2</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <ul class="comment-replies-count">
+                                        <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                      </ul>
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>'>
+                          <img src="assets/images/dadupa-post-image.jpg" alt="">
+                      </a>
+                    </div>
+                  </div>
+                  <div class="PostFooter">
+                    <div class="reactions-wrap">
+                      <div class="reactions-box">
+                        <div class="row">
+                          <div class="col-6 col-md-4 col-lg-6">
+                            <div class="reaction likes"><i class="dadupa-icon icon-clap"></i><span>145</span></div>
+                            <div class="reaction views"><i class="uil uil-eye"></i> <span>1500</span></div>
+                          </div>
+                          <div class="col-6 col-md-8 col-lg-6 text-right">
+                            <div class="reaction comments"><span>1.9K Comments</span></div>
+                            <div class="reaction shares"><span>380 Shares</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reactions-buttons">
+                      <button class="reaction-button reaction-like" type="button" name="button">
+                        <img src="assets/images/icons/dadupa-clap-green.svg" alt="">
+                        Aimer
+                       </button>
+                       <button class="reaction-button reaction-comment" type="button" name="button">
+                         <img src="assets/images/icons/dadupa-comment.svg" alt="">
+                         Commenter
+                       </button>
+                      <button class="reaction-button" type="button" name="button" data-toggle="modal" data-target="#SharingModal">
+                        <img src="assets/images/icons/dadupa-share.svg" alt="">
+                        Partager
+                       </button>
+                    </div>
+                    <div id="Comments-Wrap" class="Comments-Wrap">
+                      <div class="Comments-Box">
+                        <div class="Comment-Writing">
+                          <div class="Comment-Col-2">
+                            <div class="Comment-User-Thumb">
+                              <img src="assets/images/abbass-iya.jpg" />
+                            </div>
+                          </div>
+                          <div class="Comment-Col-10">
+                            <div class="Comment-Area">
+                              <div class="Comment-Input">
+                                <input type="text" name="" value="" placeholder="Write your comment">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="User-Comments">
+
+                          <!-- #### COMMENT 1 ### -->
+                          <div class="User-Comment">
+                            <div class="Comment-Col-2">
+                              <div class="Comment-User-Thumb">
+                                <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                              </div>
+                              <ul class="comment-reactions-list">
+                                <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                <label class="count-reactions">120</label>
+                              </ul>
+                            </div>
+                            <div class="Comment-Col-10">
+                              <div class="Comment-User">
+                                <div class="Comment-Content">
+                                  <div class="Comment-User-Name">
+                                    <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                    <span class="Comment-Date">07/04/2020</span>
+                                  </div>
+                                  <div class="Comment-Text">
+                                    <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="comment-actions">
+                                <ul class="comment-actions-list">
+                                  <li class="comment-action"><button class="like-action">Like</button></li>
+                                  <li class="comment-action replay-action">Reply</li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="Comment-Reply Writing-Box">
+                              <div class="Comment-Writing">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abbass-iya.jpg" />
+                                  </div>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-Area">
+                                    <div class="Comment-Input">
+                                      <input type="text" name="" value="" placeholder="Write your comment">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- #### COMMENT 2 ### -->
+                          <div class="User-Comment">
+
+                            <!-- ### COMMENTE THUMB ### -->
+                            <div class="Comment-Col-2">
+                              <div class="Comment-User-Thumb">
+                                <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                              </div>
+                              <ul class="comment-reactions-list">
+                                <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                <label class="count-reactions">28</label>
+                              </ul>
+                            </div>
+
+
+                            <div class="Comment-Col-10">
+                              <!-- ### COMMENTE CONTENT ### -->
+                              <div class="Comment-User">
+                                <div class="Comment-Content">
+                                  <div class="Comment-User-Name">
+                                    <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                    <span class="Comment-Date">07/04/2020</span>
+                                  </div>
+                                  <div class="Comment-Text">
+                                    <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- ### COMMENTE ACTIONS ### -->
+                              <div class="comment-actions multi-options">
+                                <div class="comment-replies-count">
+                                  <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i>
+                                     <span>16</span><span> Replies</span>
+                                  </button>
+                                </div>
+                                <ul class="comment-actions-list">
+                                  <li class="comment-action"><button class="like-action">Like</button></li>
+                                  <li class="comment-action replay-action">Reply</li>
+                                </ul>
+                              </div>
+
+                            </div>
+
+                            <!-- ### COMMENTER REPLIES ### -->
+                            <div class="Comment-Replies">
+
+                              <div class="Comment-Reply">
+                                <div class="User-Comment">
+                                  <div class="Comment-Col-2">
+                                    <div class="Comment-User-Thumb">
+                                      <img src="assets/images/abbass-iya.jpg" />
+                                    </div>
+                                    <ul class="comment-reactions-list">
+                                      <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                      <label class="count-reactions">12</label>
+                                    </ul>
+                                  </div>
+                                  <div class="Comment-Col-10">
+                                    <div class="Comment-User">
+                                      <div class="Comment-Content">
+                                        <div class="Comment-User-Name">
+                                          <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                          <span class="Comment-Date">07/04/2020</span>
+                                        </div>
+                                        <div class="Comment-Text">
+                                          <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="comment-actions">
+                                      <ul class="comment-actions-list">
+                                        <li class="comment-action"><button class="like-action">Like</button></li>
+                                        <li class="comment-action replay-action">Reply</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                            </div>
+                            <div class="Writing-Reply">
+                              <div class="Comment-Writing">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abbass-iya.jpg" />
+                                  </div>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-Area">
+                                    <div class="Comment-Input">
+                                      <input type="text" name="" value="" placeholder="Write a reply...">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- #### COMMENT 3 ### -->
+                          <div class="User-Comment">
+                            <div class="Comment-Col-2">
+                              <div class="Comment-User-Thumb">
+                                <img src="assets/images/othmane-profile.jpg" alt="">
+                              </div>
+                              <ul class="comment-reactions-list">
+                                <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                <label class="count-reactions">2</label>
+                              </ul> ''
+                            </div>
+                            <div class="Comment-Col-10">
+                              <div class="Comment-User">
+                                <div class="Comment-Content">
+                                  <div class="Comment-User-Name">
+                                    <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                    <span class="Comment-Date">07/04/2020</span>
+                                  </div>
+                                  <div class="Comment-Text">
+                                    <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="comment-actions">
+                                <ul class="comment-actions-list">
+                                  <ul class="comment-replies-count">
+                                    <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                  </ul>
+                                  <li class="comment-action"><button class="like-action">Like</button></li>
+                                  <li class="comment-action">Reply</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="PostWrap">
+                  <div class="PostHeader">
+                    <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                    <div class="PostUser-Details">
+                      <div class="PostUser-Name">Abbass IYA</div>
+                      <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                    </div>
+                    <div class="PostOptions">
+                      <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                      <ul class="PostOptions-List">
+                        <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                        <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                        <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="PostBody">
+                    <div class="PostBody-Text">
+                      <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                    </div>
+                    <div id="comment-box" class="PostBody-Media PostBody-MultiImages">
+                      <a class="PostBody-MultiImage" href="assets/images/dadupa-post-image.jpg" data-sub-html='<div class="fb-comments" data-href="http://weinolab.com/dadupa/profile.html#lg=1&slide=0" data-width="400" data-numposts="5">
+
+                        <div class="PostHeader">
+                          <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                          <div class="PostUser-Details">
+                            <div class="PostUser-Name">Abbass IYA</div>
+                            <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                          </div>
+                          <div class="PostOptions">
+                            <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                            <ul class="PostOptions-List">
+                              <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                              <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                              <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="PostBody-Text">
+                          <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                          <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra daccélérer ladoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                        </div>
+
+                        <div id="Comments-Wrap" class="Comments-Wrap">
+                          <div class="Comments-Box">
+                            <div class="User-Comments">
+
+                              <!-- #### COMMENT 1 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">120</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="Comment-Reply Writing-Box">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write your comment">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 2 ### -->
+                              <div class="User-Comment">
+
+                                <!-- ### COMMENTE THUMB ### -->
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">28</label>
+                                  </ul>
+                                </div>
+
+
+                                <div class="Comment-Col-10">
+                                  <!-- ### COMMENTE CONTENT ### -->
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- ### COMMENTE ACTIONS ### -->
+                                  <div class="comment-actions multi-options">
+                                    <div class="comment-replies-count">
+                                      <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i> <span>16</span><span> Replies</span></button>
+                                    </div>
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+
+                                </div>
+
+                                <!-- ### COMMENTER REPLIES ### -->
+                                <div class="Comment-Replies">
+                                  <div class="Comment-Reply">
+                                    <div class="User-Comment">
+                                      <div class="Comment-Col-2">
+                                        <div class="Comment-User-Thumb">
+                                          <img src="assets/images/abbass-iya.jpg" />
+                                        </div>
+                                        <ul class="comment-reactions-list">
+                                          <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                          <label class="count-reactions">12</label>
+                                        </ul>
+                                      </div>
+                                      <div class="Comment-Col-10">
+                                        <div class="Comment-User">
+                                          <div class="Comment-Content">
+                                            <div class="Comment-User-Name">
+                                              <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                              <span class="Comment-Date">07/04/2020</span>
+                                            </div>
+                                            <div class="Comment-Text">
+                                              <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="comment-actions">
+                                          <ul class="comment-actions-list">
+                                            <li class="comment-action"><button class="like-action">Like</button></li>
+                                            <li class="comment-action replay-action">Reply</li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="Writing-Reply">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write a reply...">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 3 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/othmane-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">2</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <ul class="comment-replies-count">
+                                        <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                      </ul>
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>'>
+                          <img src="assets/images/dadupa-post-image.jpg" alt="">
+                      </a>
+                      <a class="PostBody-MultiImage" href="assets/images/dadupa-post-image.jpg" data-sub-html='<div class="fb-comments" data-href="http://weinolab.com/dadupa/profile.html#lg=1&slide=1" data-width="400" data-numposts="5">
+
+                        <div class="PostHeader">
+                          <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                          <div class="PostUser-Details">
+                            <div class="PostUser-Name">Abbass IYA</div>
+                            <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                          </div>
+                          <div class="PostOptions">
+                            <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                            <ul class="PostOptions-List">
+                              <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                              <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                              <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="PostBody-Text">
+                          <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                          <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra daccélérer ladoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                        </div>
+
+                        <div id="Comments-Wrap" class="Comments-Wrap">
+                          <div class="Comments-Box">
+                            <div class="User-Comments">
+
+                              <!-- #### COMMENT 1 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">120</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="Comment-Reply Writing-Box">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write your comment">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 2 ### -->
+                              <div class="User-Comment">
+
+                                <!-- ### COMMENTE THUMB ### -->
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">28</label>
+                                  </ul>
+                                </div>
+
+
+                                <div class="Comment-Col-10">
+                                  <!-- ### COMMENTE CONTENT ### -->
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- ### COMMENTE ACTIONS ### -->
+                                  <div class="comment-actions multi-options">
+                                    <div class="comment-replies-count">
+                                      <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i> <span>16</span><span> Replies</span></button>
+                                    </div>
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+
+                                </div>
+
+                                <!-- ### COMMENTER REPLIES ### -->
+                                <div class="Comment-Replies">
+                                  <div class="Comment-Reply">
+                                    <div class="User-Comment">
+                                      <div class="Comment-Col-2">
+                                        <div class="Comment-User-Thumb">
+                                          <img src="assets/images/abbass-iya.jpg" />
+                                        </div>
+                                        <ul class="comment-reactions-list">
+                                          <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                          <label class="count-reactions">12</label>
+                                        </ul>
+                                      </div>
+                                      <div class="Comment-Col-10">
+                                        <div class="Comment-User">
+                                          <div class="Comment-Content">
+                                            <div class="Comment-User-Name">
+                                              <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                              <span class="Comment-Date">07/04/2020</span>
+                                            </div>
+                                            <div class="Comment-Text">
+                                              <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="comment-actions">
+                                          <ul class="comment-actions-list">
+                                            <li class="comment-action"><button class="like-action">Like</button></li>
+                                            <li class="comment-action replay-action">Reply</li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="Writing-Reply">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write a reply...">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 3 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/othmane-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">2</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <ul class="comment-replies-count">
+                                        <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                      </ul>
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>'>
+                          <img src="assets/images/dadupa-post-image.jpg" alt="">
+                      </a>
+                      <a class="PostBody-MultiImage" href="assets/images/dadupa-post-image.jpg" data-sub-html='<div class="fb-comments" data-href="http://weinolab.com/dadupa/profile.html#lg=1&slide=2" data-width="400" data-numposts="5">
+
+                        <div class="PostHeader">
+                          <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                          <div class="PostUser-Details">
+                            <div class="PostUser-Name">Abbass IYA</div>
+                            <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                          </div>
+                          <div class="PostOptions">
+                            <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                            <ul class="PostOptions-List">
+                              <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                              <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                              <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="PostBody-Text">
+                          <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                          <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra daccélérer ladoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                        </div>
+
+                        <div id="Comments-Wrap" class="Comments-Wrap">
+                          <div class="Comments-Box">
+                            <div class="User-Comments">
+
+                              <!-- #### COMMENT 1 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">120</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="Comment-Reply Writing-Box">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write your comment">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 2 ### -->
+                              <div class="User-Comment">
+
+                                <!-- ### COMMENTE THUMB ### -->
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">28</label>
+                                  </ul>
+                                </div>
+
+
+                                <div class="Comment-Col-10">
+                                  <!-- ### COMMENTE CONTENT ### -->
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- ### COMMENTE ACTIONS ### -->
+                                  <div class="comment-actions multi-options">
+                                    <div class="comment-replies-count">
+                                      <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i> <span>16</span><span> Replies</span></button>
+                                    </div>
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+
+                                </div>
+
+                                <!-- ### COMMENTER REPLIES ### -->
+                                <div class="Comment-Replies">
+                                  <div class="Comment-Reply">
+                                    <div class="User-Comment">
+                                      <div class="Comment-Col-2">
+                                        <div class="Comment-User-Thumb">
+                                          <img src="assets/images/abbass-iya.jpg" />
+                                        </div>
+                                        <ul class="comment-reactions-list">
+                                          <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                          <label class="count-reactions">12</label>
+                                        </ul>
+                                      </div>
+                                      <div class="Comment-Col-10">
+                                        <div class="Comment-User">
+                                          <div class="Comment-Content">
+                                            <div class="Comment-User-Name">
+                                              <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                              <span class="Comment-Date">07/04/2020</span>
+                                            </div>
+                                            <div class="Comment-Text">
+                                              <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="comment-actions">
+                                          <ul class="comment-actions-list">
+                                            <li class="comment-action"><button class="like-action">Like</button></li>
+                                            <li class="comment-action replay-action">Reply</li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="Writing-Reply">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write a reply...">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 3 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/othmane-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">2</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <ul class="comment-replies-count">
+                                        <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                      </ul>
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>'>
+                          <img src="assets/images/dadupa-post-image.jpg" alt="">
+                      </a>
+                      <a class="PostBody-MultiImage" href="assets/images/dadupa-post-image.jpg" data-sub-html='<div class="fb-comments" data-href="http://weinolab.com/dadupa/profile.html#lg=1&slide=3" data-width="400" data-numposts="5">
+
+                        <div class="PostHeader">
+                          <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                          <div class="PostUser-Details">
+                            <div class="PostUser-Name">Abbass IYA</div>
+                            <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                          </div>
+                          <div class="PostOptions">
+                            <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                            <ul class="PostOptions-List">
+                              <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                              <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                              <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="PostBody-Text">
+                          <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                          <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra daccélérer ladoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                        </div>
+
+                        <div id="Comments-Wrap" class="Comments-Wrap">
+                          <div class="Comments-Box">
+                            <div class="User-Comments">
+
+                              <!-- #### COMMENT 1 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">120</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="Comment-Reply Writing-Box">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write your comment">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 2 ### -->
+                              <div class="User-Comment">
+
+                                <!-- ### COMMENTE THUMB ### -->
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">28</label>
+                                  </ul>
+                                </div>
+
+
+                                <div class="Comment-Col-10">
+                                  <!-- ### COMMENTE CONTENT ### -->
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- ### COMMENTE ACTIONS ### -->
+                                  <div class="comment-actions multi-options">
+                                    <div class="comment-replies-count">
+                                      <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i> <span>16</span><span> Replies</span></button>
+                                    </div>
+                                    <ul class="comment-actions-list">
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action replay-action">Reply</li>
+                                    </ul>
+                                  </div>
+
+                                </div>
+
+                                <!-- ### COMMENTER REPLIES ### -->
+                                <div class="Comment-Replies">
+                                  <div class="Comment-Reply">
+                                    <div class="User-Comment">
+                                      <div class="Comment-Col-2">
+                                        <div class="Comment-User-Thumb">
+                                          <img src="assets/images/abbass-iya.jpg" />
+                                        </div>
+                                        <ul class="comment-reactions-list">
+                                          <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                          <label class="count-reactions">12</label>
+                                        </ul>
+                                      </div>
+                                      <div class="Comment-Col-10">
+                                        <div class="Comment-User">
+                                          <div class="Comment-Content">
+                                            <div class="Comment-User-Name">
+                                              <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                              <span class="Comment-Date">07/04/2020</span>
+                                            </div>
+                                            <div class="Comment-Text">
+                                              <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="comment-actions">
+                                          <ul class="comment-actions-list">
+                                            <li class="comment-action"><button class="like-action">Like</button></li>
+                                            <li class="comment-action replay-action">Reply</li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="Writing-Reply">
+                                  <div class="Comment-Writing">
+                                    <div class="Comment-Col-2">
+                                      <div class="Comment-User-Thumb">
+                                        <img src="assets/images/abbass-iya.jpg" />
+                                      </div>
+                                    </div>
+                                    <div class="Comment-Col-10">
+                                      <div class="Comment-Area">
+                                        <div class="Comment-Input">
+                                          <input type="text" name="" value="" placeholder="Write a reply...">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- #### COMMENT 3 ### -->
+                              <div class="User-Comment">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/othmane-profile.jpg" alt="">
+                                  </div>
+                                  <ul class="comment-reactions-list">
+                                    <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                    <label class="count-reactions">2</label>
+                                  </ul>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-User">
+                                    <div class="Comment-Content">
+                                      <div class="Comment-User-Name">
+                                        <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                        <span class="Comment-Date">07/04/2020</span>
+                                      </div>
+                                      <div class="Comment-Text">
+                                        <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment-actions">
+                                    <ul class="comment-actions-list">
+                                      <ul class="comment-replies-count">
+                                        <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                      </ul>
+                                      <li class="comment-action"><button class="like-action">Like</button></li>
+                                      <li class="comment-action">Reply</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>'>
+                          <img src="assets/images/dadupa-post-image.jpg" alt="">
+                      </a>
+                    </div>
+                  </div>
+                  <div class="PostFooter">
+                    <div class="reactions-wrap">
+                      <div class="reactions-box">
+                        <div class="row">
+                          <div class="col-6 col-md-4 col-lg-6">
+                            <div class="reaction likes"><i class="dadupa-icon icon-clap"></i><span>145</span></div>
+                            <div class="reaction views"><i class="uil uil-eye"></i> <span>1500</span></div>
+                          </div>
+                          <div class="col-6 col-md-8 col-lg-6 text-right">
+                            <div class="reaction comments"><span>1.9K Comments</span></div>
+                            <div class="reaction shares"><span>380 Shares</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reactions-buttons">
+                      <button class="reaction-button reaction-like" type="button" name="button">
+                        <img src="assets/images/icons/dadupa-clap-green.svg" alt="">
+                        Aimer
+                       </button>
+                      <button class="reaction-button reaction-comment" type="button" name="button">
+                        <img src="assets/images/icons/dadupa-comment.svg" alt="">
+                        Commenter
+                      </button>
+                      <button class="reaction-button" type="button" name="button" data-toggle="modal" data-target="#SharingModal">
+                        <img src="assets/images/icons/dadupa-share.svg" alt="">
+                        Partager
+                       </button>
+                    </div>
+                    <div id="Comments-Wrap" class="Comments-Wrap">
+                      <div class="Comments-Box">
+                        <div class="Comment-Writing">
+                          <div class="Comment-Col-2">
+                            <div class="Comment-User-Thumb">
+                              <img src="assets/images/abbass-iya.jpg" />
+                            </div>
+                          </div>
+                          <div class="Comment-Col-10">
+                            <div class="Comment-Area">
+                              <div class="Comment-Input">
+                                <input type="text" name="" value="" placeholder="Write your comment">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="User-Comments">
+
+                          <!-- #### COMMENT 1 ### -->
+                          <div class="User-Comment">
+                            <div class="Comment-Col-2">
+                              <div class="Comment-User-Thumb">
+                                <img src="assets/images/abdelkarim-profile.jpg" alt="">
+                              </div>
+                              <ul class="comment-reactions-list">
+                                <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                <label class="count-reactions">120</label>
+                              </ul>
+                            </div>
+                            <div class="Comment-Col-10">
+                              <div class="Comment-User">
+                                <div class="Comment-Content">
+                                  <div class="Comment-User-Name">
+                                    <a class="Comment-User-Profile"href="#">Abdelkrim Ichi</a>
+                                    <span class="Comment-Date">07/04/2020</span>
+                                  </div>
+                                  <div class="Comment-Text">
+                                    <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="comment-actions">
+                                <ul class="comment-actions-list">
+                                  <li class="comment-action"><button class="like-action">Like</button></li>
+                                  <li class="comment-action replay-action">Reply</li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="Comment-Reply Writing-Box">
+                              <div class="Comment-Writing">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abbass-iya.jpg" />
+                                  </div>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-Area">
+                                    <div class="Comment-Input">
+                                      <input type="text" name="" value="" placeholder="Write your comment">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- #### COMMENT 2 ### -->
+                          <div class="User-Comment">
+
+                            <!-- ### COMMENTE THUMB ### -->
+                            <div class="Comment-Col-2">
+                              <div class="Comment-User-Thumb">
+                                <img src="assets/images/elbezzaz-profile.jpg" alt="">
+                              </div>
+                              <ul class="comment-reactions-list">
+                                <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                <label class="count-reactions">28</label>
+                              </ul>
+                            </div>
+
+
+                            <div class="Comment-Col-10">
+                              <!-- ### COMMENTE CONTENT ### -->
+                              <div class="Comment-User">
+                                <div class="Comment-Content">
+                                  <div class="Comment-User-Name">
+                                    <a class="Comment-User-Profile"href="#">Youness EL BEZZAZI</a>
+                                    <span class="Comment-Date">07/04/2020</span>
+                                  </div>
+                                  <div class="Comment-Text">
+                                    <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- ### COMMENTE ACTIONS ### -->
+                              <div class="comment-actions multi-options">
+                                <div class="comment-replies-count">
+                                  <button class="comment-replies-button" type="button" name="button"><i class="uil uil-comment-notes"></i> <span>16</span><span> Replies</span></button>
+                                </div>
+                                <ul class="comment-actions-list">
+                                  <li class="comment-action"><button class="like-action">Like</button></li>
+                                  <li class="comment-action replay-action">Reply</li>
+                                </ul>
+                              </div>
+
+                            </div>
+
+                            <!-- ### COMMENTER REPLIES ### -->
+                            <div class="Comment-Replies">
+                              <div class="Comment-Reply">
+                                <div class="User-Comment">
+                                  <div class="Comment-Col-2">
+                                    <div class="Comment-User-Thumb">
+                                      <img src="assets/images/abbass-iya.jpg" />
+                                    </div>
+                                    <ul class="comment-reactions-list">
+                                      <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                      <label class="count-reactions">12</label>
+                                    </ul>
+                                  </div>
+                                  <div class="Comment-Col-10">
+                                    <div class="Comment-User">
+                                      <div class="Comment-Content">
+                                        <div class="Comment-User-Name">
+                                          <a class="Comment-User-Profile"href="#">Abbass IYA</a>
+                                          <span class="Comment-Date">07/04/2020</span>
+                                        </div>
+                                        <div class="Comment-Text">
+                                          <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="comment-actions">
+                                      <ul class="comment-actions-list">
+                                        <li class="comment-action"><button class="like-action">Like</button></li>
+                                        <li class="comment-action replay-action">Reply</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="Writing-Reply">
+                              <div class="Comment-Writing">
+                                <div class="Comment-Col-2">
+                                  <div class="Comment-User-Thumb">
+                                    <img src="assets/images/abbass-iya.jpg" />
+                                  </div>
+                                </div>
+                                <div class="Comment-Col-10">
+                                  <div class="Comment-Area">
+                                    <div class="Comment-Input">
+                                      <input type="text" name="" value="" placeholder="Write a reply...">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- #### COMMENT 3 ### -->
+                          <div class="User-Comment">
+                            <div class="Comment-Col-2">
+                              <div class="Comment-User-Thumb">
+                                <img src="assets/images/othmane-profile.jpg" alt="">
+                              </div>
+                              <ul class="comment-reactions-list">
+                                <li class="comment-reaction"><i class="dadupa-icon icon-clap"></i></li>
+                                <label class="count-reactions">2</label>
+                              </ul>
+                            </div>
+                            <div class="Comment-Col-10">
+                              <div class="Comment-User">
+                                <div class="Comment-Content">
+                                  <div class="Comment-User-Name">
+                                    <a class="Comment-User-Profile"href="#">Othmane Amrhar</a>
+                                    <span class="Comment-Date">07/04/2020</span>
+                                  </div>
+                                  <div class="Comment-Text">
+                                    <span>Massa vitae tortor condimentum lacinia quis vel eros doc odio</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="comment-actions">
+                                <ul class="comment-actions-list">
+                                  <ul class="comment-replies-count">
+                                    <!-- <i class="uil uil-comment-notes"></i> <span>16</span><label> Replies</label> -->
+                                  </ul>
+                                  <li class="comment-action"><button class="like-action">Like</button></li>
+                                  <li class="comment-action">Reply</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="PostWrap">
+                  <div class="PostHeader">
+                    <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                    <div class="PostUser-Details">
+                      <div class="PostUser-Name">Abbass IYA</div>
+                      <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                    </div>
+                    <div class="PostOptions">
+                      <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                      <ul class="PostOptions-List">
+                        <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                        <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                        <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="PostBody">
+                    <div class="PostBody-Text">
+                      <p>Postulez au Cisco Global Problem Solver Challenge, et tentez de gagner jusqu’au Grand prix de 250 000 USD pour accélérer le développement de votre startup.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                      <p>Afin d’encourager les entrepreneurs en démarrage du monde entier, Cisco met en jeu un prix de 1 000 000 USD qui permettra d'accélérer l'adoption de technologies, de produits et de services révolutionnaires qui favorisent le développement économique et/ou résolvent des problèmes sociaux ou environnementaux.</p>
+                    </div>
+                    <div class="PostBody-Media PostBody-Video">
+                      <video class="player" playsinline controls data-poster="assets/images/offer-thumb-1.jpg">
+                        <source src="assets/media/earth.mp4" type="video/mp4" />
+                        <source src="assets/media/earth.ogv" type="video/ogv" />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="PostFooter">
+                    <div class="reactions-wrap">
+                      <div class="reactions-box">
+                        <div class="row">
+                          <div class="col-6 col-md-4 col-lg-6">
+                            <div class="reaction likes"><i class="dadupa-icon icon-clap"></i><span>145</span></div>
+                            <div class="reaction views"><i class="uil uil-eye"></i> <span>1500</span></div>
+                          </div>
+                          <div class="col-6 col-md-8 col-lg-6 text-right">
+                            <div class="reaction comments"><span>1.9K Comments</span></div>
+                            <div class="reaction shares"><span>380 Shares</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reactions-buttons">
+                      <button class="reaction-button reaction-like" type="button" name="button">
+                        <img src="assets/images/icons/dadupa-clap-green.svg" alt="">
+                        Aimer
+                       </button>
+                      <a class="reaction-button reaction-comment" href="#!">
+                        <img src="assets/images/icons/dadupa-comment.svg" alt="">
+                        Commenter
+                      </a>
+                      <button class="reaction-button" type="button" name="button" data-toggle="modal" data-target="#SharingModal">
+                        <img src="assets/images/icons/dadupa-share.svg" alt="">
+                        Partager
+                       </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="PostWrap">
+                  <div class="PostHeader">
+                    <div class="PostUser-Thumb"><img src="assets/images/abbass-iya-profile.jpg" /></div>
+                    <div class="PostUser-Details">
+                      <div class="PostUser-Name">Abbass IYA</div>
+                      <div class="PostUser-Time">March 13 at 9:41 PM</div>
+                    </div>
+                    <div class="PostOptions">
+                      <button type="button" class="PostOptions-BTN"><i class="uil uil-ellipsis-h"></i></button>
+                      <ul class="PostOptions-List">
+                        <li class="PostFavorite"><button><i class="uil uil-favorite"></i> Favori</button></li>
+                        <li class="PostKey"><button><i class="uil uil-key-skeleton"></i> Historique clé</button></li>
+                        <li class="PostDelete"><button><i class="uil uil-trash-alt"></i> Supprimer</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="PostBody">
+                    <div class="PostBody-Attachment">
+                      <div class="Doc-Wrap">
+                        <a href="#!">
+                          <div class="Doc-Icon"><span class="Doc-Type">PDF</span><i class="uil uil-file-alt"></i></div>
+                          <div class="Doc-Name"><i class="uil uil-paperclip"></i> Document Name</div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="PostFooter">
+                    <div class="reactions-wrap">
+                      <div class="reactions-box">
+                        <div class="row">
+                          <div class="col-6 col-md-4 col-lg-6">
+                            <div class="reaction likes"><i class="dadupa-icon icon-clap"></i><span>145</span></div>
+                            <div class="reaction views"><i class="uil uil-eye"></i> <span>1500</span></div>
+                          </div>
+                          <div class="col-6 col-md-8 col-lg-6 text-right">
+                            <div class="reaction comments"><span>1.9K Comments</span></div>
+                            <div class="reaction shares"><span>380 Shares</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reactions-buttons">
+                      <button class="reaction-button reaction-like" type="button" name="button">
+                        <img src="assets/images/icons/dadupa-clap-green.svg" alt="">
+                        Aimer
+                       </button>
+                      <a class="reaction-button reaction-comment" href="#!">
+                        <img src="assets/images/icons/dadupa-comment.svg" alt="">
+                        Commenter
+                      </a>
+                      <button class="reaction-button" type="button" name="button" data-toggle="modal" data-target="#SharingModal">
+                        <img src="assets/images/icons/dadupa-share.svg" alt="">
+                        Partager
+                       </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="Right-Side">
+              <div class="Contact-Widget">
+                <h3 class="Widget-Title">Invitations</h3>
+                <div class="Suggestion-List">
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-1.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact Invitation-Options">
+                      <button type="button" name="button" class="Invitation-Option_Confirm"><i class="uil uil-check"></i></button>
+                      <button type="button" name="button" class="Invitation-Option_Delete"><i class="uil uil-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-2.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact Invitation-Options">
+                      <button type="button" name="button" class="Invitation-Option_Confirm"><i class="uil uil-check"></i></button>
+                      <button type="button" name="button" class="Invitation-Option_Delete"><i class="uil uil-times"></i></button>
+                    </div>
+                  </div>
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-3.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact Invitation-Options">
+                      <button type="button" name="button" class="Invitation-Option_Confirm"><i class="uil uil-check"></i></button>
+                      <button type="button" name="button" class="Invitation-Option_Delete"><i class="uil uil-times"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="Contact-Widget">
+                <h3 class="Widget-Title">Suggestion de contacts</h3>
+                <div class="Suggestion-List">
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-1.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact">
+                      <button type="button" name="button"><i class="uil uil-user-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-2.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact">
+                      <button type="button" name="button"><i class="uil uil-user-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-3.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact">
+                      <button type="button" name="button"><i class="uil uil-user-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-4.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact">
+                      <button type="button" name="button"><i class="uil uil-user-plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="Contact">
+                    <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                    <div class="Contact-Thumb"><img src="assets/images/profiles/profile-5.jpg" ></div>
+                    <div class="Contact-Infos">
+                      <h4>Nom complet</h4>
+                      <!-- <span class="Profile-Type">Porteurs de projets</span> -->
+                    </div>
+                    <div class="Add-Contact">
+                      <button type="button" name="button"><i class="uil uil-user-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <a class="Contact-SeeMore" href="#">Voir plus</a>
+              </div>
+              <div class="Widget-Conseils">
+                <h3 class="Widget-Title">Conseils de DADUPA</h3>
+                <div class="Featured-Post-Thumb"><img src="assets/images/conseils/Conseils-de-DADUPA.jpg" ></div>
+                <div class="Featured-Post-Content">
+                  <div class="Featured-Post-Title"><a href="#!">Le marketing digital au service defdfdfdfdddfdf</a></div>
+                  <div class="Featured-Post-Meta">
+                    <ul>
+                      <li><span>275 </span>Views</li>
+                      <li><span>41 </span>weeks ago</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="Widget-Sponsored">
+                <h3 class="Widget-Title">Sponsored</h3>
+                <div class="Sponsored-Post-Thumb">
+
+                </div>
+                <div class="Sponsored-Post-Content">
+                  <div class="Sponsored-Post-Title"><a href="#!">Le marketing digital au service defdfdfdfdddfdf</a></div>
+                  <div class="Sponsored-Post-Meta"><a href="#!">dadupa.com</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Infos Modal -->
+    <div class="DadupaModal modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="DadupaModal-Header">
+            <h4>Update Infos</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="uil uil-times"></i></button>
+          </div>
+          <div class="modal-body">
+            <form class="" action="index.html" method="post">
+              <div class="form-inputs">
+                <div class="form-row">
+                  <div class="col-md-6 input-row input-select input-select-multi">
+                    <select multiple class="project-status" name="project-status" required >
+                      <option selected disabled>Type entrepreneur</option>
+                      <option value="Porteur de projet">Porteur de projet</option>
+                      <option value="Bailleurs de fonds">Bailleurs de fonds</option>
+                      <option value="Mentor">Mentor</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 input-row input-select input-select-multi">
+                    <select multiple class="" name="project-status" required >
+                      <option selected disabled>Secteurs d’activité</option>
+                      <option value="">Secteurs 1</option>
+                      <option value="">Secteurs 2</option>
+                      <option value="">Secteurs 3</option>
+                      <option value="">Secteurs 4</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 input-row">
+                    <input type="email" name="" value="" placeholder="Email" class="wizard-required" required>
+                  </div>
+                  <div class="col-md-6 input-row">
+                    <input type="tel" name="" value="" placeholder="Téléphone" class="wizard-required" required>
+                  </div>
+                  <div class="col-md-6 input-row">
+                    <input type="email" name="" value="" placeholder="Facebook" class="wizard-required" required>
+                  </div>
+                  <div class="col-md-6 input-row">
+                    <input type="tel" name="" value="" placeholder="Twitter" class="wizard-required" required>
+                  </div>
+                  <div class="col-md-12 input-row">
+                    <textarea name="name" placeholder="Bio"></textarea>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="DadupaModal-BTNSubmit">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Post Modal -->
+    <div class="CreatePost-Modal modal fade" id="CreatePost-Modal" tabindex="-1" role="dialog" aria-labelledby="CreatePost-ModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="DadupaModal-Header">
+            <h4>Publier un historique</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="uil uil-times"></i></button>
+          </div>
+          <div class="modal-body">
+
+            <form class="AddNewPost-Form" action="index.html" method="post">
+
+              <div class="CreatePost-Row">
+                <div class="CreatePost-ColLeft">
+                  <div class="CreatePost-UserThumb"><img src="assets/images/abbass-iya-profile.jpg"></div>
+                  <div class="CreatePost-OptionsRow">
+                    <div class="CreatePost-Options">
+                      <button type="button" class="CreatePost-Option CreatePost-OptionDate" data-toggle="tooltip" data-placement="right" title="Add date"><i class="uil uil-calendar-alt"></i></button>
+                      <button type="button" class="CreatePost-Option CreatePost-OptionImage" data-toggle="tooltip" data-placement="right" title="Add Image"><input type="file" accept="image/jpeg, image/x-png" /><i class="uil uil-image"></i></button>
+                      <button type="button" class="CreatePost-Option CreatePost-OptionVideo" data-toggle="tooltip" data-placement="right" title="Add Video"><input type="file" accept="video/x-mpeg2, video/x-msvideo, video/quicktime" /><i class="uil uil-video"></i></button>
+                      <button type="button" class="CreatePost-Option CreatePost-OptionFile" data-toggle="tooltip" data-placement="right" title="Add File"><input type="file" accept="" /><i class="uil uil-file-alt"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="CreatePost-ColRight">
+                  <div class="CreatePost-Body">
+                    <textarea name="name" placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="CreatePost-Footer">
+                <div class="CreatePost-FooterLeft">
+                  <button type="button" class="CreatePost-AddTag"><i class="uil uil-plus"></i> Ajouter un tag</button>
+                </div>
+                <div class="CreatePost-FooterRight">
+                  <button type="submit" name="button" class="CreatePost-PublishBTN">Publish</button>
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="SharingModal" tabindex="-1" role="dialog" aria-labelledby="SharingModalTitle" aria-hidden="true">
+      <div class="ModalShare modal-dialog modal-dialog-centered" role="document">
+        <div class="ModalShare-Content modal-content">
+          <div class="ModalShare-Header">
+            <h5 class="ModalShare-Title" id="exampleModalLongTitle">Share</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="uil uil-times"></i></button>
+          </div>
+          <div class="ModalShare-Body">
+            <ul class="Share-Items">
+              <li class="Share-Item"><a class="Share-Link Share-Facebook" data-toggle="tooltip" data-placement="bottom" title="Share on Facebook"><i class="uil uil-facebook-f"></i></a></li>
+              <li class="Share-Item"><a class="Share-Link Share-Twitter" data-toggle="tooltip" data-placement="bottom" title="Share on Twitter"><i class="uil uil-twitter"></i></a></li>
+              <li class="Share-Item"><a class="Share-Link Share-Linkedin" data-toggle="tooltip" data-placement="bottom" title="Share on Linkedin"><i class="uil uil-linkedin-alt"></i></a></li>
+              <li class="Share-Item"><a class="Share-Link Share-Instagram" data-toggle="tooltip" data-placement="bottom" title="Share on Instagram"><i class="uil uil-instagram"></i></a></li>
+              <li class="Share-Item"><a class="Share-Link Share-Profile" data-toggle="tooltip" data-placement="bottom" title="Share on My profile"><i class="uil uil-user"></i></a></li>
+            </ul>
+
+            <div class="ModalShare-CopyLink">
+              <h5>Or copy link</h5>
+              <form data-copy=true>
+                <input type="text" value="http://weinolab.com/dadupa/single-offer.html" data-click-select-all />
+                <button type="submit" name="button"><i class="uil uil-copy"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="DadupaChat"></div>
+
+    </div>
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="assets/js/readmore.js"></script>
+    <script type="text/javascript" src="assets/js/lightgallery.min.js"></script>
+    <script type="text/javascript" src="assets/js/lg-fullscreen.min.js"></script>
+    <script type="text/javascript" src="assets/js/lg-thumbnail.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="assets/js/popups-chat.js"></script>
+    <script type="text/javascript" src="assets/js/emojiPicker.js"></script>
+    <script type="text/javascript" src="assets/js/scripts.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function ($) {
+        const players = Array.from(document.querySelectorAll('.player'));
+        players.map(player => new Plyr(player, {
+          hideControls: false,
+          controls: ['play-large', 'play', 'progress', 'current-time', 'volume', 'fullscreen']
+        }));
+
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+      });
+    </script>
+
+    <script type="text/javascript">
+
+      function elasticArea() {
+        $('.js-elasticArea').each(function(index, element) {
+         var elasticElement = element,
+            $elasticElement = $(element),
+            initialHeight = initialHeight || $elasticElement.height(),
+            delta = parseInt( $elasticElement.css('paddingBottom') ) + parseInt( $elasticElement.css('paddingTop') ) || 0,
+            resize = function() {
+              $elasticElement.height(initialHeight);
+              $elasticElement.height( elasticElement.scrollHeight - delta );
+          };
+          $elasticElement.on('input change keyup', resize);
+          resize();
+        });
+      };
+      elasticArea();
+
+      function ProfileUpdate(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  $('#imageProfile').css('background-image', 'url('+e.target.result +')');
+                  $('#imageProfile').hide();
+                  $('#imageProfile').fadeIn(650);
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+      $("#imageUpload").change(function() {
+          ProfileUpdate(this);
+      });
+
+      function CoverUpdate(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                  $('#photoCover').css('background-image', 'url('+e.target.result +')');
+                  $('#photoCover').hide();
+                  $('#photoCover').fadeIn(650);
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+      $("#coverUpload").change(function() {
+          CoverUpdate(this);
+      });
+
+      var width = $(window).width();
+
+      if((width >= 992)){
+        var fixRight = $('.Right-Side').offset().top + $('.Right-Side').outerHeight() - window.innerHeight;       // get initial position of the element
+        $(window).scroll(function() {                  // assign scroll event listener
+            var currentScrolll = $(window).scrollTop(); // get current position
+            if (currentScrolll >= fixRight) {           // apply position: fixed if you
+                $('.Right-Side').css({                      // scroll to that element or below it
+                    position: 'fixed',
+                    bottom: '15px',
+                    width: '255',
+                });
+            } else {                                   // apply position: static
+                $('.Right-Side').css({                      // if you scroll above it
+                    position: 'static'
+                });
+            }
+        });
+
+        var fixLeft = $('.Left-Side').offset().top + $('.Left-Side').outerHeight() - window.innerHeight;       // get initial position of the element
+        $(window).scroll(function() {                  // assign scroll event listener
+            var currentScroll = $(window).scrollTop(); // get current position
+            if (currentScroll >= fixLeft) {           // apply position: fixed if you
+                $('.Left-Side').css({                      // scroll to that element or below it
+                    position: 'fixed',
+                    bottom: '15px',
+                    width: '255',
+                });
+            } else {                                   // apply position: static
+                $('.Left-Side').css({                      // if you scroll above it
+                    position: 'static'
+                });
+            }
+        });
+
+        $(function() {
+
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                   'Today': [moment(), moment()],
+                   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                   'This Month': [moment().startOf('month'), moment().endOf('month')],
+                   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+        });
+
+      }
+    </script>
+
+  </body>
+</html>

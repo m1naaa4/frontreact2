@@ -118,7 +118,7 @@ export default function ShowComment(comment, props) {
                                 <div className="User-Comment">
                                     <div className="Comment-Col-2">
                                         <div className="Comment-User-Thumb">
-                                        <img src={com.avatar} />
+                                        <img src={com.avatar} alt="avatar" />
                                         </div>
                                     </div>
                                     <div className="Comment-Col-10">
