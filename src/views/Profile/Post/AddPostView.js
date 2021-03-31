@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { Modal } from 'react-bootstrap';
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import ModalAddPost from './ModalAddPost';
 
 
@@ -9,7 +9,6 @@ import ModalAddPost from './ModalAddPost';
 export default function AddPostView(props) {
 
     const [avatar, setAvatar] = useState();
-    const [isModalOpen, toggleModal] = useState(false);
     const infoprofile = useSelector(state => state.infoProfile);
     const newavatar = useSelector(state => state.updateavatar);
     const [show, setShow] = useState(false);

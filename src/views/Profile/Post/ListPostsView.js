@@ -1,21 +1,25 @@
 import React, {useRef, useCallback, useState, useEffect} from 'react'
 
 import {useDispatch, useSelector} from "react-redux";
+import { useLocation, useParams } from 'react-router';
 import { GetPostsAction } from '../../../store/actions/Post/GetPostsAction';
 import PostBody from './PostWraps/PostBody';
 import PostFooter from './PostWraps/PostFooter';
 import PostHeader from './PostWraps/PostHeader';
 
 
-export default function ListPostsView(props) {
+export default function ListPostsView() {
 
     const [isLoading, setIsLoading] = useState(false);
+
+    const params = useParams();
 
     const dispatch = useDispatch();
     const observer = useRef()
 
     const data = {
         action: 'getPosts',
+        profile_id: params.id,
     };
 
     const posts =  useSelector(state => state.posts.posts);
@@ -28,7 +32,7 @@ export default function ListPostsView(props) {
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver( entries =>{
             if (entries[0].isIntersecting && hasMore  ){  
-                dispatch(GetPostsAction( data, props, current+1));
+                dispatch(GetPostsAction( data, '', current+1));
                 setIsLoading(true)
             }
         })
@@ -37,7 +41,8 @@ export default function ListPostsView(props) {
 
     useEffect(() => {
         if(!isLoading){
-            dispatch(GetPostsAction(data, props, 1));
+
+            dispatch(GetPostsAction(data, '', 1));
         }
     }, [dispatch]);  
 

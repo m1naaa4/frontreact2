@@ -4,10 +4,10 @@ import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {Dropdown} from "react-bootstrap";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory  } from 'react-router-dom';
 
 function HeaderProfile(props) {
-
+    let history = useHistory();
     const dispatch = useDispatch();
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const authResponse = useSelector(state => state.userAuth.authResponse);
@@ -24,22 +24,27 @@ function HeaderProfile(props) {
         if (authResponse !== "" && authResponse.success === true) {
             localStorage.removeItem('user-token');
             console.log(props)
-            props.props.history.push('/login');
+            // props.props.history.push('/login');
+            history.push("/login")
         } else if (authResponse.success === false) {
         }
     }, [authResponse])
 
     const goToAddproject = () => {
-        props.props.history.push('/project/create');
+        console.log(props)
+        history.push("/project/create");
+        // props.props.history.push('/project/create');
     };
 
     const goToListproject = () => {
-        props.props.history.push('/project/lists');
+        history.push("/project/lists");
+        // props.props.history.push('/project/lists');
     };
 
     
     const gotToProfile = () => {
-        props.history.push('/profile/'+ userProfile.user.id)
+        history.push('/profile/'+ userProfile.user.profile_id);
+        // props.history.push('/profile/'+ userProfile.user.profile_id)
     };
 
 
@@ -431,7 +436,7 @@ function HeaderProfile(props) {
                                                     <Dropdown.Menu className="Mini-Profile-Items">
                                                         <label
                                                             className="Mini-Profile-Name">{userProfile.user.name}</label>
-                                                        <NavLink className="Mini-Profile-Link" to={"/profile/"+ userProfile.user.id}>Voir mon profile</NavLink>
+                                                        <div className="Mini-Profile-Link" onClick={gotToProfile}>Voir mon profile</div>
                                                         <Dropdown.Item className="Mini-Profile-Item"
                                                                        href="#/action-1"><i
                                                             className="uil uil-layer-group"></i>Action</Dropdown.Item>

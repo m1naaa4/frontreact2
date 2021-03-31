@@ -9,10 +9,11 @@ import SideLeftProfileView from './SideLeftProfileView';
 
 
 export default function MainProfileView(props) { 
+    console.log('dfdfssdfdsfsdf', props)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch( ProfileAction(props.match.params.id));    
-    }, [dispatch]);
+    });
 
 
     return (

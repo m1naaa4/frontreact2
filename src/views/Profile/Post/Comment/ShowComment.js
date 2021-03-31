@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
 import {GetCommentAction} from "../../../../store/actions/User/Comment/GetCommentAction";
 import ReplyComment from './ReplyComment';
 
@@ -34,7 +35,7 @@ export default function ShowComment({post}) {
     }
 
   useEffect(() => {
-    // if (condition) {
+    // if (post.commentCount > 0) {
       dispatch(GetCommentAction(dataget));
     // }   
   }, [])
@@ -44,7 +45,8 @@ export default function ShowComment({post}) {
         <> 
          <div className="User-Comments"  >
          {comments && comments.comments.map((comment, index) => 
-         
+         <>
+         {post.id == comment.commentable_id &&
             <div className="User-Comment" key={index} >
               <div className="Comment-Col-2">
                 <div className="Comment-User-Thumb">
@@ -59,7 +61,7 @@ export default function ShowComment({post}) {
                 <div className="Comment-User">
                   <div className="Comment-Content">
                     <div className="Comment-User-Name">
-                      <a className="Comment-User-Profile" href="#">{comment.user_name}</a>
+                      <Link className="Comment-User-Profile" to={"/profile/"+ comment.profile_id}  >{comment.user_name}fdgfdgfdgfd</Link>
                       <span className="Comment-Date">{comment.created_at}</span>
                     </div>
                     <div className="Comment-Text">
@@ -125,6 +127,8 @@ export default function ShowComment({post}) {
                <ReplyComment comment={comment} post={post} />
               
             </div>
+         }
+         </>
           )
                           
         }             

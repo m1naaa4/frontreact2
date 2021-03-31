@@ -9,17 +9,17 @@ import ShowComment from '../Comment/ShowComment';
 
 export default function PostFooter({ post }) {
 
-    const [avatar, setAvatar] = useState();
-    const [name, setName] = useState();
-    const [date, setDate] = useState();
-    const infoprofile = useSelector(state => state.infoProfile);  
+    const refcomment = useRef()
 
     const [comments, SetComments] = useState(false);
     const [commentBox, SetCommentBox] = useState(false);
 
     const showComments = e =>  {
-      SetComments(!comments)
-      SetCommentBox(!commentBox)      
+      console.log(e)
+      console.log(refcomment)
+      SetComments(e)
+      console.log(comments)
+      // SetCommentBox(!commentBox)      
   }
 
   const dataget = {
@@ -28,19 +28,10 @@ export default function PostFooter({ post }) {
     provider_id      : post.id,
   }
 
-  const commentss = useSelector(state => state.getComments);
-
-    const showReplyBox = e => {
+  const showCommentBox = e => {
       SetCommentBox(!commentBox)
+      SetComments(!comments)
   }
-    
-    useEffect(() => {          
-        if (infoprofile.infoprofile.avatar) {             
-            setAvatar(infoprofile.infoprofile.avatar)            
-            setName(infoprofile.infoprofile.name)            
-            setDate(infoprofile.infoprofile.created_at)            
-        }     
-    })
 
     return (
         
@@ -55,7 +46,7 @@ export default function PostFooter({ post }) {
               <div className="reaction views"><i className="uil uil-eye"></i> <span>1500</span></div>
             </div>
             <div className="col-6 col-md-8 col-lg-6 text-right">
-              <div className="reaction comments" onClick={showComments}><span>{post.commentCount} Comments</span></div>
+              <div className="reaction comments" ref={refcomment} onClick={e => showComments(post.id)} ><span>{post.commentCount} Comments</span></div>
               <div className="reaction shares"><span>380 Shares</span></div>
             </div>
           </div>
@@ -66,7 +57,7 @@ export default function PostFooter({ post }) {
           <img src="/assets/images/icons/dadupa-clap-green.svg" alt="like"/>
           Aimer
         </button>
-        <button className="reaction-button reaction-comment" onClick={showComments} type="button" name="button">
+        <button className="reaction-button reaction-comment" onClick={showCommentBox} type="button" name="button">
           <img src="/assets/images/icons/dadupa-comment.svg" alt="comment"/>
           Commenter
         </button>
@@ -78,12 +69,11 @@ export default function PostFooter({ post }) {
       <div id="Comments-Wrap" className="Comments-Wrap">
         <div className="Comments-Box">
           
-
-          {comments &&
-              <AddComment post={post} />               
-          }
           {commentBox &&            
-              <ShowComment  post={post} />                                       
+              <AddComment post={post} />                                       
+          }
+          {comments && post.commentCount > 0 &&
+              <ShowComment  post={post} />                 
           }
           
           

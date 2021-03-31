@@ -1,10 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import FileUploadService from '../../helpers/FileUploadService';
-import { ProfileAction } from '../../store/actions/Profile/UserActions';
+import React from 'react'
 import AddPostView from './Post/AddPostView';
 import ListPostsView from './Post/ListPostsView';
-import Post from './Post/Post';
 
 
 
@@ -39,7 +35,7 @@ export default function PostView(props) {
 
               <div className="Posts-List">
                 
-             <ListPostsView/>
+             <ListPostsView {...props} />
 
               </div>
             </div>
