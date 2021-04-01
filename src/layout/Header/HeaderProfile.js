@@ -1,16 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {Dropdown} from "react-bootstrap";
 import { NavLink, useHistory  } from 'react-router-dom';
+import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import Notifications from './Notifications';
 
 function HeaderProfile(props) {
     let history = useHistory();
     const dispatch = useDispatch();
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const authResponse = useSelector(state => state.userAuth.authResponse);
+    const [showNotifications, setShowNotifications] = useState(false);
+    
+    
     useEffect(() => {
         dispatch(loadUserAction());
     }, [dispatch])
@@ -19,6 +24,9 @@ function HeaderProfile(props) {
         dispatch(UserLogOutAction());
     }
 
+    useEffect(() => {
+        dispatch( LoadNotificationAction());    
+    },[dispatch]);
 
     useEffect(() => {
         if (authResponse !== "" && authResponse.success === true) {
@@ -45,6 +53,10 @@ function HeaderProfile(props) {
     const gotToProfile = () => {
         history.push('/profile/'+ userProfile.user.profile_id);
         // props.history.push('/profile/'+ userProfile.user.profile_id)
+    };
+
+    const openNotifications = () => {
+        setShowNotifications(!showNotifications );
     };
 
 
@@ -96,205 +108,13 @@ function HeaderProfile(props) {
                                                             <i className="uil uil-search"></i>
                                                         </button>
                                                     </form>
-                                                </div>
+                                                </div>                                            
 
                                                 <div className="Dadupa-Notifications-Item Dadupa-Alert-Popup">
-                                                    <a href="#!"
-                                                       className="Dadupa-Alert"
-                                                       data-toggle="tooltip"
-                                                       data-placement="bottom"
-                                                       title="Notifications"><span
-                                                        className="new-notif"></span>
-                                                        <i className="uil uil-bell"></i></a>
-                                                    <div className="Dadupa-Notifs-Box">
-                                                        <h3>Notifications</h3>
-                                                        <div className="Notifs-List">
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image">
-                                                                    <img src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="Notif-Item">
-                                                                <div className="Notif-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
-                                                                <div className="Notif-Options btn-group">
-                                                                    <button
-                                                                        className="btn btn-secondary btn-sm dropdown-toggle"
-                                                                        type="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false"><i
-                                                                        className="uil uil-ellipsis-h"></i></button>
-                                                                    <div className="dropdown-menu dropdown-menu-right">
-                                                                        <div className="dropdown-item">Mark as read
-                                                                        </div>
-                                                                        <div className="dropdown-item">Hide</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="Notif-Content">
-                                                                    <div className="Notif-Text">Abbass IYA has ivited
-                                                                        you to the
-                                                                        project
-                                                                    </div>
-                                                                    <div className="Notif-Time">About a minute ago</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <a href={null} onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
+                                                        <span className="new-notif"></span><i className="uil uil-bell"></i>
+                                                    </a>
+                                                    {showNotifications && <Notifications/>}
                                                 </div>
 
                                                 <div className="Dadupa-Notifications-Item Dadupa-Message-Popup"><a
@@ -430,7 +250,7 @@ function HeaderProfile(props) {
                                             <ul className="Dadupa-User-Infos">
                                                 <Dropdown>
                                                     <Dropdown.Toggle variant="default" id="dropdown-basic">
-                                                        <img src="/assets/images/abbass-iya.jpg"/>
+                                                        <img style={{width: "40px", height:"40px"}}  src={userProfile.user.profile.avatar_link} alt="avatar"/>
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu className="Mini-Profile-Items">

@@ -6,9 +6,6 @@ import ReplyComment from './ReplyComment';
 
 
 export default function ShowComment({post}) {
-
-  console.log('possssssssssssstttttttttttt', post.id)
-
     
     const dispatch = useDispatch();
     const comments = useSelector(state => state.getComments);
@@ -49,9 +46,9 @@ export default function ShowComment({post}) {
          {post.id === comment.commentable_id &&
             <div className="User-Comment" key={index} >
               <div className="Comment-Col-2">
-                <div className="Comment-User-Thumb">
+                <Link className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id}>
                   <img src={comment.avatar} alt=""/>
-                </div>
+                </Link>
                 <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
                   <label className="count-reactions">120</label>

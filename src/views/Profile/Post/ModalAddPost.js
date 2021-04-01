@@ -17,9 +17,6 @@ export default function(props) {
     const hiddenImage = useRef(null);
     const hiddenVideo = useRef(null);
     const hiddenFile = useRef(null);
-    const [image, setImage] = useState();
-    const [video, setVideo]   = useState();
-    const [file, setFile]   = useState();
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [currentFile, setCurrentFile] = useState(undefined);
     const [progress, setProgress] = useState(0);

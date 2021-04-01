@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
+import { useParams } from 'react-router';
 import FileUploadService from '../../helpers/FileUploadService';
 import { ProfileAction } from '../../store/actions/Profile/UserActions';
 
@@ -8,6 +9,7 @@ import { ProfileAction } from '../../store/actions/Profile/UserActions';
 export default function HeaderProfileView({formData, setForm, props}) {
 
     const infoprofile = useSelector(state => state.infoProfile);
+    const infouser = useSelector(state => state.userProfile);
     const dispatch = useDispatch();
 
     const hiddenFileInput = useRef(null);
@@ -20,6 +22,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
     const [fileCover, setFileCover]   = useState();
     const [ newAvatar, setNewAvatar ] = useState()
     const [ newCover, setNewCover ] = useState()
+    const params = useParams();
     
     
      useEffect(() => {        
@@ -87,7 +90,6 @@ export default function HeaderProfileView({formData, setForm, props}) {
         });        
     }
 
-
     return (
         <>       
         {
@@ -96,16 +98,21 @@ export default function HeaderProfileView({formData, setForm, props}) {
                 <div className="container">
                     <div className="Profile-Wrap">
                         <div className="Profile-Infos">
-                        <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
-                        <label htmlFor="imageUpload" style={{cursor: "pointer"}}>
-                            <i className="uil uil-camera" />
-                        </label>
+                        {infouser.userProfile.user.profile_id === params.id && <> <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
+                            <label htmlFor="imageUpload" style={{cursor: "pointer"}}>
+                                <i className="uil uil-camera" />
+                            </label></>
+                        }
+                        
                         <div className="Profile-Picture" id="imageProfile"  style={{backgroundImage: `url(${fileAvatar})`}} />
                         <div className="Profile-Name">{infoprofile.infoprofile.username}</div>
                         </div>
                         <div className="Profile-Navigation">
-                        <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
-                        <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
+                        {infouser.userProfile.user.profile_id === params.id && <>
+                            <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
+                            <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
+                            </>
+                        }
                         <ul className="Profie-Menu">
                             {/* <li><NavLink href="offers.html" to={`/profile/${this.props.id}/offers`}><i className="uil uil-layer-group" /> Offres</NavLink></li>
                             <li><NavLink href="profile.html" to={`/profile/${this.props.id}/posts`}><i className="uil uil-apps" /> Publications</NavLink></li> */}
