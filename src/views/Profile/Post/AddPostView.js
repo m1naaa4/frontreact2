@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { Modal } from 'react-bootstrap';
 import { useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
 import ModalAddPost from './ModalAddPost';
 
 
@@ -19,7 +20,7 @@ export default function AddPostView(props) {
     
     useEffect(() => {  
         
-        if (infoprofile.infoprofile.avatar != undefined &&  newavatar.avatar != undefined) {  
+        if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
             if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
                 setAvatar(newavatar.avatar)
             }else{
@@ -35,7 +36,7 @@ export default function AddPostView(props) {
             infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
                 <div className="WritePost">
                     <div className="WritePost-Area">
-                        <div className="WritePost-UserThumb"><img src={avatar} alt="avatar" /></div>
+                        <Link className="WritePost-UserThumb" to={"/profile/"+ infoprofile.infoprofile.id} ><img src={avatar} alt="avatar" /></Link>
                         {/* <!-- <button type="button" className="UpdateInfos-BTN" ><i className="uil uil-pen"></i></button> --> */}
                         <textarea className="WritePost-TextArea js-elasticArea" onClick={handleShow} 
                             data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder="Write something">

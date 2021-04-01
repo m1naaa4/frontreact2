@@ -1,35 +1,21 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 
 
 export default function PostHeader({ post }) {
 
-    const [avatar, setAvatar] = useState();
-    const [name, setName] = useState();
-    const [date, setDate] = useState();
-    const infoprofile = useSelector(state => state.infoProfile);
-    
-    
-    useEffect(() => {          
-        if (infoprofile.infoprofile.avatar) {             
-            setAvatar(infoprofile.infoprofile.avatar)            
-            setName(infoprofile.infoprofile.name)            
-            setDate(infoprofile.infoprofile.created_at)            
-        }     
-    })
-
 
     return (
 
         
         <div className="PostHeader">
-          <div className="PostUser-Thumb"><img src={post.avatar} alt="avatar" /></div>
-          <div className="PostUser-Details">
+          <Link className="PostUser-Thumb" to={"/profile/"+ post.profile_id} ><img src={post.avatar} alt="avatar" /></Link>
+          <Link className="PostUser-Details" to={"/profile/"+ post.profile_id}>
             <div className="PostUser-Name">{post.creator_name}</div>
             <div className="PostUser-Time">{post.created_at.date}</div>
-          </div>
+          </Link>
           <div className="PostOptions">
             <button type="button" className="PostOptions-BTN"><i className="uil uil-ellipsis-h"></i></button>
             <ul className="PostOptions-List">

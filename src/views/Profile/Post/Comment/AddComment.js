@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
 import PusherService from '../../../../services/Pusher';
 import {AddCommentAction} from "../../../../store/actions/User/Comment/AddCommentAction";
 import {GetCommentAction} from "../../../../store/actions/User/Comment/GetCommentAction";
@@ -16,11 +17,13 @@ export default function AddComment({post}) {
     const comments = useSelector(state => state.getComments);
 
     const [avatar, setAvatar] = useState();
+    const [user_profile_id, setUserProfileId] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
 
     useEffect(() => {          
         if (infoprofile.infoprofile.avatar) {             
             setAvatar(infoprofile.infoprofile.avatar)            
+            setUserProfileId(infoprofile.infoprofile.profile_id)            
         }     
     })    
     
@@ -48,7 +51,7 @@ export default function AddComment({post}) {
     useEffect(() => {
         //dispatch(GetCommentAction(dataget));
         const pusher = new PusherService();    
-        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
+        var channel = pusher.config.subscribe('project_comment_' + user_profile_id);        
         channel.bind('NewComment', function(res) {    
             let j = res.id;
             let feed = res[j]
@@ -66,9 +69,9 @@ export default function AddComment({post}) {
             <>
             <form className="Comment-Writing" onSubmit={ handleSubmitValue}>
                 <div className="Comment-Col-2">
-                    <div className="Comment-User-Thumb">
+                    <Link className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id} >
                         <img src={avatar} alt="avatar" />
-                    </div>
+                    </Link>
                 </div>
                 <div className="Comment-Col-10">
                     <div className="Comment-Area">

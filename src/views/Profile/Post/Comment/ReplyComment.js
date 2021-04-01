@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
 import PusherService from '../../../../services/Pusher';
 import {AddCommentAction} from "../../../../store/actions/User/Comment/AddCommentAction";
 
@@ -12,11 +13,13 @@ export default function ReplyComment({comment, post}) {
     const project = useSelector(state => state.getproject);
 
     const [avatar, setAvatar] = useState();
+    const [profile_id, setProfileId] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
 
     useEffect(() => {          
         if (infoprofile.infoprofile.avatar) {             
             setAvatar(infoprofile.infoprofile.avatar)            
+            setProfileId(infoprofile.infoprofile.id)            
         }     
     })    
     
@@ -54,9 +57,9 @@ export default function ReplyComment({comment, post}) {
             <div className="Comment-Reply Writing-Box">
             <div className="Comment-Writing">
                 <div className="Comment-Col-2">
-                <div className="Comment-User-Thumb">
+                <Link to={"/profile/"+ profile_id} className="Comment-User-Thumb">
                     <img src={avatar} alt="avatar"/>
-                </div>
+                </Link>
                 </div>
                 <div className="Comment-Col-10">
                     <div className="Comment-Area">

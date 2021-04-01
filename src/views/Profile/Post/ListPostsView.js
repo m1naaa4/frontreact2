@@ -1,7 +1,7 @@
 import React, {useRef, useCallback, useState, useEffect} from 'react'
 
 import {useDispatch, useSelector} from "react-redux";
-import { useLocation, useParams } from 'react-router';
+import {  useParams } from 'react-router';
 import { GetPostsAction } from '../../../store/actions/Post/GetPostsAction';
 import PostBody from './PostWraps/PostBody';
 import PostFooter from './PostWraps/PostFooter';
@@ -41,10 +41,10 @@ export default function ListPostsView() {
 
     useEffect(() => {
         if(!isLoading){
-
             dispatch(GetPostsAction(data, '', 1));
+            dispatch({ type: 'CLEAR_POSTS_LIST' });
         }
-    }, [dispatch]);  
+    }, [params.id]);  
 
     return (
 

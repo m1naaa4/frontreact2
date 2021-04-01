@@ -1,26 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react'
 import Player from 'video-react/lib/components/Player';
 
 
 
 
-export default function PostBody({ post }) {
-
-    const [avatar, setAvatar] = useState();
-    const [name, setName] = useState();
-    const [date, setDate] = useState();
-    const infoprofile = useSelector(state => state.infoProfile);
-    
-    
-    useEffect(() => {          
-        if (infoprofile.infoprofile.avatar) {             
-            setAvatar(infoprofile.infoprofile.avatar)            
-            setName(infoprofile.infoprofile.name)            
-            setDate(infoprofile.infoprofile.created_at)            
-        }     
-    })
-
+export default function PostBody({ post }) {    
 
     return (
         

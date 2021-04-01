@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { GetCommentAction } from '../../../../store/actions/User/Comment/GetCommentAction';
 import AddComment from '../Comment/AddComment';
@@ -9,7 +9,7 @@ import ShowComment from '../Comment/ShowComment';
 
 export default function PostFooter({ post }) {
 
-    const refcomment = useRef()
+    //const refcomment = useRef()
 
     const [comments, SetComments] = useState(false);
     const [commentBox, SetCommentBox] = useState(false);
@@ -33,9 +33,14 @@ export default function PostFooter({ post }) {
       SetComments(!comments)
   }
 
-    return (
+  const observer = useRef()
+  const refcomment = useCallback( node =>{
+    SetCommentBox(!commentBox)
+    SetComments(!comments)
+}, [observer])
+
+  return (
         
-      
       <div className="PostFooter">
 
       <div className="reactions-wrap">
@@ -70,10 +75,10 @@ export default function PostFooter({ post }) {
         <div className="Comments-Box">
           
           {commentBox &&            
-              <AddComment post={post} />                                       
+              <AddComment post = {post} />                                       
           }
           {comments && post.commentCount > 0 &&
-              <ShowComment  post={post} />                 
+              <ShowComment  post = {post} />                 
           }
           
           
