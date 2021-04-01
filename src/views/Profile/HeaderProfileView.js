@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
 import FileUploadService from '../../helpers/FileUploadService';
-import { ProfileAction } from '../../store/actions/Profile/UserActions';
 
 
 
@@ -22,6 +21,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
     const [fileCover, setFileCover]   = useState();
     const [ newAvatar, setNewAvatar ] = useState()
     const [ newCover, setNewCover ] = useState()
+    const [ user_id, setUserId ] = useState()
     const params = useParams();
     
     
@@ -90,6 +90,14 @@ export default function HeaderProfileView({formData, setForm, props}) {
         });        
     }
 
+    useEffect(() => {
+        if(infouser.userProfile && infouser.userProfile !== 'loading'){
+            setUserId(infouser.userProfile.user.profile_id);
+        };    
+    });
+
+    console.log("progressssssssssssssssssssssssssssssssssssss", infouser)
+
     return (
         <>       
         {
@@ -98,7 +106,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
                 <div className="container">
                     <div className="Profile-Wrap">
                         <div className="Profile-Infos">
-                        {infouser.userProfile.user.profile_id === params.id && <> <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
+                        {user_id === params.id && <> <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
                             <label htmlFor="imageUpload" style={{cursor: "pointer"}}>
                                 <i className="uil uil-camera" />
                             </label></>
@@ -108,7 +116,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
                         <div className="Profile-Name">{infoprofile.infoprofile.username}</div>
                         </div>
                         <div className="Profile-Navigation">
-                        {infouser.userProfile.user.profile_id === params.id && <>
+                        {user_id === params.id && <>
                             <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
                             <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
                             </>

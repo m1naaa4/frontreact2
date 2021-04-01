@@ -2,7 +2,6 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
 import PusherService from '../../../../services/Pusher';
-import { LoadNotificationAction } from '../../../../store/actions/Notification/LoadNotificationAction';
 import {AddCommentAction} from "../../../../store/actions/User/Comment/AddCommentAction";
 
 
@@ -16,13 +15,16 @@ export default function AddComment({post}) {
     const [avatar, setAvatar] = useState();
     const [user_profile_id, setUserProfileId] = useState();
     const [user_id, setUserId] = useState();
+    const [user_visiter_avatar, setUserVisiterAvatar] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
+    const user = useSelector(state => state.userProfile.userProfile);
 
     useEffect(() => {          
         if (infoprofile.infoprofile.avatar) {             
             setAvatar(infoprofile.infoprofile.avatar);           
             setUserProfileId(infoprofile.infoprofile.id);           
             setUserId(infoprofile.infoprofile.user_id);  
+            setUserVisiterAvatar(user.user.profile.avatar_link);
         }     
     })    
     
@@ -67,7 +69,7 @@ export default function AddComment({post}) {
             <form className="Comment-Writing" onSubmit={ handleSubmitValue}>
                 <div className="Comment-Col-2">
                     <Link className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id} >
-                        <img src={avatar} alt="avatar" />
+                        <img src={user_visiter_avatar} alt="avatar" />
                     </Link>
                 </div>
                 <div className="Comment-Col-10">

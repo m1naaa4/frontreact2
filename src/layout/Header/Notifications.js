@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 
@@ -9,7 +8,6 @@ export default function Notifications() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [mask, setShowMark] = useState(false);
     const [notification_id, setNotification_id] = useState(false);
-    let history = useHistory();
     const dispatch = useDispatch();
     
     const show = (e) => {
@@ -26,11 +24,6 @@ export default function Notifications() {
     };
     const HideNotif = () => {
         ;
-    };
-
-    const gotToProfile = () => {
-        history.push('/profile/'+ userProfile.user.profile_id);
-        // props.history.push('/profile/'+ userProfile.user.profile_id)
     };
 
     return (

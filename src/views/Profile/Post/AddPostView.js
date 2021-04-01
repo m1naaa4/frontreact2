@@ -12,6 +12,10 @@ export default function AddPostView(props) {
     const [avatar, setAvatar] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
     const newavatar = useSelector(state => state.updateavatar);
+    const user = useSelector(state => state.userProfile.userProfile);
+
+    const [user_visiter_avatar, setUserVisiterAvatar] = useState();
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -22,9 +26,13 @@ export default function AddPostView(props) {
         
         if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
             if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
-                setAvatar(newavatar.avatar)
+                setAvatar(newavatar.avatar);                
+                setUserVisiterAvatar(user.user.profile.avatar_link);
             }else{
-                setAvatar(infoprofile.infoprofile.avatar)
+                setAvatar(infoprofile.infoprofile.avatar);
+                if(user.user.profile){
+                    setUserVisiterAvatar(user.user.profile.avatar_link);
+                }
             }
         }     
     })
@@ -36,7 +44,9 @@ export default function AddPostView(props) {
             infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
                 <div className="WritePost">
                     <div className="WritePost-Area">
-                        <Link className="WritePost-UserThumb" to={"/profile/"+ infoprofile.infoprofile.id} ><img src={avatar} alt="avatar" /></Link>
+                        <Link className="WritePost-UserThumb" to={"/profile/"+ infoprofile.infoprofile.id} >
+                            <img src={user_visiter_avatar} alt="avatar" />
+                        </Link>
                         {/* <!-- <button type="button" className="UpdateInfos-BTN" ><i className="uil uil-pen"></i></button> --> */}
                         <textarea className="WritePost-TextArea js-elasticArea" onClick={handleShow} 
                             data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder="Write something">
