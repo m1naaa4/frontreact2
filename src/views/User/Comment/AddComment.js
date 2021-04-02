@@ -14,7 +14,7 @@ export default function AddComment(props) {
 
     const comment = useSelector(state => state.addComment);
     const project = useSelector(state => state.getproject);
-    const userProfile = useSelector(state => state.userProfile.userProfile.user);
+    const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
     //console.log("profileeeeeeeeeeeeeeeeeee", comments)
 

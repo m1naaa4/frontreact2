@@ -14,7 +14,8 @@ const initState = {
                 }
 
             case 'GET_NOTIFICATIONS_SUCCESS':
-                console.log(action.res)
+                console.log('GET_NOTIFICATIONS_SUCCESS', action.res.notifications)
+                
               return {
                   ...state,
                   notifications: [...state.notifications, ...action.res.notifications],
@@ -26,7 +27,8 @@ const initState = {
             case 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS':
                 return {
                     notifications :  [action.feed, ...state.notifications],
-                    loading  :  false
+                    user_id       :  action.feed.user_id,
+                    loading       :  false
                 }
 
             case 'GET_NOTIFICATIONS_ERROR':

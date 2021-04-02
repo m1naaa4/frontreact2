@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 
 export default function Notifications() {
@@ -8,7 +8,19 @@ export default function Notifications() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [mask, setShowMark] = useState(false);
     const [notification_id, setNotification_id] = useState(false);
+    const [notifed_user_id, setNotifed_user_id] = useState();
     const dispatch = useDispatch();
+    const params = useParams();
+
+    console.log("usernotificationsssssssssssssssssssssssssssss", usernotifications.user_id)
+    
+
+    useEffect(() => {
+        if(userProfile){
+            setNotifed_user_id(userProfile.id)
+            console.log("ooooooooiiiiiiiiiddddddddddddddddddsssssssssssssssssssss", userProfile.id)
+        }
+    },[dispatch]);
     
     const show = (e) => {
         setShowMark(e);
@@ -30,8 +42,8 @@ export default function Notifications() {
     <>
         <div className="Dadupa-Notifs-Box Notifs-Box-Active">
           <h3>Notifications</h3>
-          { usernotifications.notifications.map((notification, index) =>
-           (!notification.seen ? (<div className="Notifs-List" style={{backgroundColor:"#edf2fa", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
+          {usernotifications.user_id !== notifed_user_id &&  usernotifications.notifications.map((notification, index) =>
+           (!notification.seen ? (<div className="Notifs-List" style={{backgroundColor:"#f2fff8", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
                 <div className="Notif-Item">
                     <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>
                   

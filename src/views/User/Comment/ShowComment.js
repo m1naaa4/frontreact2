@@ -19,7 +19,7 @@ export default function ShowComment(comment, props) {
     const [body, setBody] = useState();
     const refcomment = useRef(null)
 
-    const userProfile = useSelector(state => state.userProfile.userProfile.user);
+    const userProfile = useSelector(state => state.userProfile.userProfile);
 
    
     //console.log("getcomments", comment.comment.replies.data)

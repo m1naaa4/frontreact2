@@ -15,7 +15,7 @@ const UserReducer = (state = initState, action) => {
         case 'LOAD_USER_SUCCESS':
             return {
                 ...state,
-                userProfile: action.res,
+                userProfile: action.res.user,
             }
 
         case 'LOAD_USER_ERROR':

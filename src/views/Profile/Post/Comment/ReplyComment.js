@@ -22,7 +22,7 @@ export default function ReplyComment({comment, post}) {
         if (infoprofile.infoprofile.avatar) {             
             setAvatar(infoprofile.infoprofile.avatar)            
             setProfileId(infoprofile.infoprofile.id)  
-            setUserVisiterAvatar(user.user.profile.avatar_link);          
+            setUserVisiterAvatar(user.profile.avatar_link);          
         }     
     })    
     

@@ -92,11 +92,9 @@ export default function HeaderProfileView({formData, setForm, props}) {
 
     useEffect(() => {
         if(infouser.userProfile && infouser.userProfile !== 'loading'){
-            setUserId(infouser.userProfile.user.profile_id);
+            setUserId(infouser.userProfile.profile_id);
         };    
     });
-
-    console.log("progressssssssssssssssssssssssssssssssssssss", infouser)
 
     return (
         <>       

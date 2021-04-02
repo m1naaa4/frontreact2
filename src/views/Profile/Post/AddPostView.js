@@ -30,8 +30,8 @@ export default function AddPostView(props) {
                 setUserVisiterAvatar(user.user.profile.avatar_link);
             }else{
                 setAvatar(infoprofile.infoprofile.avatar);
-                if(user.user.profile){
-                    setUserVisiterAvatar(user.user.profile.avatar_link);
+                if(user.profile){
+                    setUserVisiterAvatar(user.profile.avatar_link);
                 }
             }
         }     

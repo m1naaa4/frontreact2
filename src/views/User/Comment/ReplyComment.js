@@ -11,7 +11,7 @@ export default function ReplyComment(comment) {
     const [body, setBody] = useState();
 
     const project = useSelector(state => state.getproject);
-    const userProfile = useSelector(state => state.userProfile.userProfile.user);
+    const userProfile = useSelector(state => state.userProfile.userProfile);
 
     console.log("commenhhhhhhhhhhhhhhhhhhhhhhhhhhhhht", comment)
     //

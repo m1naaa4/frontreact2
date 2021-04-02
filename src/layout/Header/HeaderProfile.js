@@ -14,6 +14,7 @@ function HeaderProfile(props) {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const authResponse = useSelector(state => state.userAuth.authResponse);
     const [showNotifications, setShowNotifications] = useState(false);
+    console.log('sddsdsdsdsdsdsdsds', userProfile)
     
     
     useEffect(() => {
@@ -51,7 +52,7 @@ function HeaderProfile(props) {
 
     
     const gotToProfile = () => {
-        history.push('/profile/'+ userProfile.user.profile_id);
+        history.push('/profile/'+ userProfile.profile_id);
         // props.history.push('/profile/'+ userProfile.user.profile_id)
     };
 
@@ -64,9 +65,9 @@ function HeaderProfile(props) {
     return (
         <div>
             {
-                userProfile !== "" && userProfile.success === true ?
+                userProfile !== '' && userProfile != 'loading'  ?
 
-                    <header className="Dadupa-Header">
+                    <header className="Dadupa-Header Dadupa-Header-Fixed">
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-2 col-md-2">
@@ -250,12 +251,12 @@ function HeaderProfile(props) {
                                             <ul className="Dadupa-User-Infos">
                                                 <Dropdown>
                                                     <Dropdown.Toggle variant="default" id="dropdown-basic">
-                                                        <img style={{width: "40px", height:"40px"}}  src={userProfile.user.profile.avatar_link} alt="avatar"/>
+                                                        <img style={{width: "40px", height:"40px"}}  src={userProfile.profile.avatar_link} alt="avatar"/>
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu className="Mini-Profile-Items">
                                                         <label
-                                                            className="Mini-Profile-Name">{userProfile.user.name}</label>
+                                                            className="Mini-Profile-Name">{userProfile.name}</label>
                                                         <div className="Mini-Profile-Link" onClick={gotToProfile}>Voir mon profile</div>
                                                         <Dropdown.Item className="Mini-Profile-Item"
                                                                        href="#/action-1"><i

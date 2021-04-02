@@ -1,14 +1,15 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { Link } from 'react-router-dom';
-import PusherService from '../../../../services/Pusher';
+import { Link, useParams } from 'react-router-dom';
 import {AddCommentAction} from "../../../../store/actions/User/Comment/AddCommentAction";
+import {PusherAction} from "../../../../store/actions/Generale/PusherAction";
 
 
 export default function AddComment({post}) {
 
     const [body, setBody] = useState();
-    const refcomment = useRef(null)
+    const refcomment = useRef(null);
+    const params = useParams();
 
     const comment = useSelector(state => state.addComment);
 
@@ -24,7 +25,7 @@ export default function AddComment({post}) {
             setAvatar(infoprofile.infoprofile.avatar);           
             setUserProfileId(infoprofile.infoprofile.id);           
             setUserId(infoprofile.infoprofile.user_id);  
-            setUserVisiterAvatar(user.user.profile.avatar_link);
+            setUserVisiterAvatar(user.profile.avatar_link);
         }     
     })    
     
@@ -47,22 +48,32 @@ export default function AddComment({post}) {
     const handleSubmitValue = (e) => {
         e.preventDefault();
         refcomment.current.value = ''
-        dispatch(AddCommentAction(data, '', 'add'));       
+        dispatch(AddCommentAction(data, '', 'add')); 
+        
+        const notifData = {
+            channel : 'notification_' + user_id,
+            event   : 'notifpost',
+            type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
+        };
+        dispatch(PusherAction(notifData));
     }
 
     useEffect(() => {
         //dispatch(GetCommentAction(dataget));
-        const pusher = new PusherService();    
-        var channel = pusher.config.subscribe('post_comment_' + post.id);        
-        channel.bind('NewComment', function(res) {   
-            console.log(res) 
-            let j = res.id;
-            let feed = res[j]
-        
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', feed});        
-        });
+        const commentData = {
+            channel : 'post_comment_' + post.id,
+            event   : 'NewComment',
+            type    : 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS',
+        };
+        dispatch(PusherAction(commentData));
     
     }, [dispatch]) 
+
+    // useEffect(() => { 
+       
+        
+    // }, [dispatch])
+
 
     return (
             <>
