@@ -1,4 +1,4 @@
-import { AddPost } from "../../../services/User/Profile/ProfileService";
+import { AddPost, DeletePost } from "../../../services/User/Profile/ProfileService";
 
 export const AddPostAction = (data, props) =>{
 
@@ -22,3 +22,27 @@ export const AddPostAction = (data, props) =>{
     }
 
 }
+
+export const DeletePostAction = (data, props) =>{
+
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_ADD_POST'});
+
+        DeletePost(data, props).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    
+
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'DELETE_POST_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+
+}
+

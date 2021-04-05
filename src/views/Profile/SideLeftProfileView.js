@@ -1,17 +1,21 @@
 import React, {useEffect, useRef, useState} from 'react'
+import { Modal } from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
-import FileUploadService from '../../helpers/FileUploadService';
-import { ProfileAction } from '../../store/actions/Profile/UserActions';
+import ModalUpdateProfile from './Update_profile/ModalUpdateProfile';
 
 
 
 export default function SideLeftProfileView() {
 
     const infoprofile = useSelector(state => state.infoProfile);
+    const [show, setShow] = useState(false);
 
-    useEffect(() => {        
-      if (infoprofile.infoprofile.networks) {
-      }
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+  useEffect(() => {        
+    if (infoprofile.infoprofile.networks) {
+    }
   })
    
   let networks;
@@ -45,7 +49,7 @@ export default function SideLeftProfileView() {
               <div className="Widget-BOX">
 
                 <div className="Profile-Info Profile-Infos-Items">
-                  <button type="button" className="UpdateInfos-BTN" data-toggle="modal" data-target="#exampleModalCenter"><i className="uil uil-pen"></i></button>
+                  <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#exampleModalCenter"><i className="uil uil-pen"></i></button>
                   <ul>
                     <li><i className="uil uil-user"></i> {infoprofile.infoprofile.age}</li>
                     <li><i className="uil uil-crosshair"></i> {infoprofile.infoprofile.job}</li>
@@ -54,6 +58,19 @@ export default function SideLeftProfileView() {
                     {networks}
                   </ul>
                 </div>
+
+                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                      <div className="DadupaModal-Header">
+                        <h4>Update Infos</h4>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"><i className="uil uil-times"></i></button>
+                      </div>
+                      <ModalUpdateProfile/>
+                    </div>
+                  </div>
+                </Modal>
+
                 <div className="Profile-Info Profile-Bio">
                   <h3>Bio</h3>
                   <span>{infoprofile.infoprofile.about}</span>

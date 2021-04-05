@@ -42,6 +42,19 @@ export const AddPost = (data, props, current) =>{
     });
 }
 
+export const DeletePost = (data, props, current) =>{
+
+    const http = new HttpService();
+    let addpost = 'post/deletePost';
+    const tokenId = "user-token";
+    return http.postData(data, addpost, tokenId, '').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}
+
 export const GetPosts = (data, props, current) =>{
 
     const http = new HttpService();

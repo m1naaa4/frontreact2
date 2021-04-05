@@ -47,22 +47,9 @@ export default function AddComment({post}) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        refcomment.current.value = ''
+        refcomment.current.value = '';
         dispatch(AddCommentAction(data, '', 'add')); 
         
-        const notifData = {
-            channel : 'notification_' + user_id,
-            event   : 'notifpost',
-            type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
-        };
-        dispatch(PusherAction(notifData));
-
-        const notifDataa = {
-            channel : 'notification_' + user_id,
-            event   : 'notifpost',
-            type    : 'GET_ADDED_NOTIFICATION_SUCCESS',
-        };
-        dispatch(PusherAction(notifDataa));
     }
 
     useEffect(() => {
@@ -76,10 +63,23 @@ export default function AddComment({post}) {
     
     }, [dispatch]) 
 
-    // useEffect(() => { 
-       
+    useEffect(() => { 
+        console.log(user_id)
+        const notifData = {
+            channel : 'notification_' + user_id,
+            event   : 'notifpost',
+            type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
+        };
+        dispatch(PusherAction(notifData));
+
+        const notifDataa = {
+            channel : 'notification_' + user_id,
+            event   : 'notifpost',
+            type    : 'GET_ADDED_NOTIFICATION_SUCCESS',
+        };
+        dispatch(PusherAction(notifDataa));
         
-    // }, [dispatch])
+    }, [dispatch])
 
 
     return (

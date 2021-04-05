@@ -1,11 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { DeletePostAction } from '../../../../store/actions/Post/AddPostAction';
 
 
 
 
 export default function PostHeader({ post }) {
 
+  const dispatch = useDispatch();
+  const infoprofile = useSelector(state => state.infoProfile);
+    const [options_List, SetOptions_List] = useState(false);
+    const [user_id, setUserId] = useState();
+    const [post_id, setPostId] = useState(post.id);
+
+    const showOptions = () =>{
+      SetOptions_List(!options_List)
+    }
+    useEffect(() => {          
+      if (infoprofile.infoprofile.avatar) {             
+          setUserId(infoprofile.infoprofile.user_id);  
+      }     
+  })
+
+  const data = {
+      post_id     : post.id,
+      provider    : "post",
+      user_id     : user_id,
+  }
+
+  const supprimePost =(id) =>{
+    console.log(id)
+    dispatch(DeletePostAction(data, '', 'delete'));
+    dispatch({type:'DELETE_POST_SUCCESS', id});
+    SetOptions_List(!options_List)
+  }
 
     return (
 
@@ -16,20 +45,29 @@ export default function PostHeader({ post }) {
             <div className="PostUser-Name">{post.creator_name}</div>
             <div className="PostUser-Time">{post.created_at.date}</div>
           </Link>
+         
+            
           <div className="PostOptions">
-            <button type="button" className="PostOptions-BTN"><i className="uil uil-ellipsis-h"></i></button>
-            <ul className="PostOptions-List">
-              <li className="PostFavorite">
-                <button><i className="uil uil-favorite"></i> Favorite</button>
-              </li>
-              <li className="PostKey">
-                <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
-              </li>
-              <li className="PostDelete">
-                <button><i className="uil uil-trash-alt"></i> Supprimer</button>
-              </li>
-            </ul>
+            <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+           {      
+                options_List && (
+                <ul className="PostOptions-List PostOptions-ListShow"  >
+                  <li className="PostFavorite">
+                    <button><i className="uil uil-favorite"></i> Favorite</button>
+                  </li>
+                  <li className="PostKey">
+                    <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
+                  </li>
+                  <li className="PostDelete">
+                    <button onClick={e => supprimePost(post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                  </li>
+                </ul>
+               )
+          }
+
           </div>
+           
+          
         </div>
         
 
