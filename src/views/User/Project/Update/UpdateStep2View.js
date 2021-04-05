@@ -34,8 +34,6 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
             setProject_id(projectadd.addproject.projectid);
         
             dispatch( getProjectAction (data, props));
-
-            console.log('media is meeeeeeeeeeeeedddddddddddddddiiiiiia', getproject)
             
             setFile(getproject.getproject.project.media_link);
             setMedia(getproject.getproject.project.is_video);
@@ -58,11 +56,12 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
       };
 
     const onLoad = fileString => {
-        formDatas.append('file', fileString);
-        formDatas.append('action', 'upload');
-        formDatas.append('url', 'project/upload');
-        formDatas.append('type', 'video');
-        formDatas.append('provider_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id);      
+        formData.file     = fileString;
+        formData.action   = 'upload';
+        formData.url      = 'video/upload';
+        formData.type     = 'video';
+        formData.provider = 'project';
+        formData.provider_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id;       
     };
     
     const getBase64 = file => {
@@ -77,7 +76,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     const handleUpload = async e => {
         setProgress(0);
         setCurrentFile(e);
-        UploadService.upload(formDatas, (e) => {
+        UploadService.upload(formData, (e) => {
             console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
         

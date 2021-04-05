@@ -33,7 +33,7 @@ export default function AddComment({post}) {
         provider_id : post.id,
         action      : "add",
         provider    : "post",
-        profile_id  : user_profile_id,
+        user_to     : user_id,
         body        : body,
     }
 
@@ -56,6 +56,13 @@ export default function AddComment({post}) {
             type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
         };
         dispatch(PusherAction(notifData));
+
+        const notifDataa = {
+            channel : 'notification_' + user_id,
+            event   : 'notifpost',
+            type    : 'GET_ADDED_NOTIFICATION_SUCCESS',
+        };
+        dispatch(PusherAction(notifDataa));
     }
 
     useEffect(() => {

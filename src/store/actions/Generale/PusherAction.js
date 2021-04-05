@@ -11,7 +11,7 @@ export const PusherAction = (data) =>{
             let j = res.id;
             let feed = res[j]
         
-            dispatch({type:data.type, feed});        
+            dispatch({type:data.type, feed, res});        
         });
     }
 

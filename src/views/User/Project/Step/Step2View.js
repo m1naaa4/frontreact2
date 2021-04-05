@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ProgressBar from "../../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
@@ -18,13 +18,12 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [message, setMessage] = useState("");
     const [project_id, setProject_id] = useState();
     const [type, setType] = useState(undefined);
-    const hiddenFileInput = React.useRef(null);
+    const hiddenFileInput = useRef(null);
 
     const mediaproject = useSelector(state => state.fileuploaded);
     const projectadd = useSelector(state => state.addproject);
     const getproject = useSelector(state => state.getproject);
 
-    let formDatas = new FormData();
 
     useEffect(() => {
         if (projectadd.addproject) {
@@ -61,11 +60,12 @@ export default function Step2View({formData, setForm, navigation, props}) {
       };
 
     const onLoad = fileString => {
-        formDatas.append('file', fileString);
-        formDatas.append('action', 'upload');
-        formDatas.append('url', 'project/upload');
-        formDatas.append('type', 'video');
-        formDatas.append('provider_id', projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id); 
+        formData.file     = fileString;
+        formData.action   = 'upload';
+        formData.url      = 'video/upload';
+        formData.type     = 'video';
+        formData.provider = 'project';
+        formData.provider_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id; 
     };
     
     const getBase64 = file => {
@@ -80,7 +80,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const handleUpload = async e => {
         setProgress(0);
         setCurrentFile(e);
-        UploadService.upload(formDatas, (e) => {
+        UploadService.upload(formData, (e) => {
             console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
         

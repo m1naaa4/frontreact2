@@ -5,19 +5,27 @@ import { SeenNotificationAction } from '../../store/actions/Notification/LoadNot
 
 export default function Notifications() {
     const usernotifications = useSelector(state => state.getnotifications);
+    const usernotification = useSelector(state => state.addednotification);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [mask, setShowMark] = useState(false);
     const [notification_id, setNotification_id] = useState(false);
     const [notifed_user_id, setNotifed_user_id] = useState();
+    const [from_user_id, setFrom_user_id] = useState();
     const dispatch = useDispatch();
     const params = useParams();
 
-    console.log("usernotificationsssssssssssssssssssssssssssss", usernotifications.user_id)
+    console.log("usernotificationssssrrrrrrrrrreeeeeesqqqqqssssssssssssssssss", usernotification.user_id)
+    console.log("usernotificationssssssssssssssssssssssssssssskkkkkkkkkkkkkkk", userProfile.id)
     
 
     useEffect(() => {
         if(userProfile){
-            setNotifed_user_id(userProfile.id)
+            
+            if(usernotification){
+                setNotifed_user_id(userProfile.id)
+                setFrom_user_id(usernotification.user_id)
+            }
+            
             console.log("ooooooooiiiiiiiiiddddddddddddddddddsssssssssssssssssssss", userProfile.id)
         }
     },[dispatch]);
@@ -42,7 +50,7 @@ export default function Notifications() {
     <>
         <div className="Dadupa-Notifs-Box Notifs-Box-Active">
           <h3>Notifications</h3>
-          {usernotifications.user_id !== notifed_user_id &&  usernotifications.notifications.map((notification, index) =>
+          {from_user_id !== notifed_user_id &&  usernotifications.notifications.map((notification, index) =>
            (!notification.seen ? (<div className="Notifs-List" style={{backgroundColor:"#f2fff8", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
                 <div className="Notif-Item">
                     <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>

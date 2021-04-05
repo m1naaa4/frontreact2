@@ -16,6 +16,7 @@ import AddPostReducer from './Post/AddPostReducer'
 import GetPostsReducer from './Post/GetPostsReducer'
 
 import GetNotificationsReducer from './Notification/GetNotificationsReducer'
+import GetAddedNotificationReducer from './Notification/GetAddedNotificationReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -34,7 +35,8 @@ const RootReducer = combineReducers({
   addComment:AddCommentReducer,
   getComments:GetCommentReducer,
 
-  getnotifications:GetNotificationsReducer
+  getnotifications:GetNotificationsReducer,
+  addednotification:GetAddedNotificationReducer
 })
 
 export default RootReducer

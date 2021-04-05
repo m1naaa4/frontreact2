@@ -31,7 +31,6 @@ const initState = {
                     loading  :  false
                 }
             case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':                
-                console.log('hhhhhhhhhhhhhhhhhhhhhhh', state)
                 return {
                     ...state,
                     comments :  [action.feed.data, ...state.comments],
