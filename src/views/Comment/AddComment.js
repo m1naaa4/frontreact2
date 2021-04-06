@@ -15,7 +15,6 @@ export default function AddComment(props) {
     const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
-    //console.log("profileeeeeeeeeeeeeeeeeee", comments)
 
     const data = {
         provider_id   : project.getproject.projectid,
@@ -35,31 +34,20 @@ export default function AddComment(props) {
     const handleSubmitValue = (e) => {
         e.preventDefault();
         refcomment.current.value = ''
-        dispatch(AddCommentAction(data, props, 'add'));
-        
-        // dispatch( GetCommentAction(dataget));
-       
+        dispatch(AddCommentAction(data, props, 'add'));       
     }
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
-        const pusher = new PusherService();
-        
-        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);
-        
+        const pusher = new PusherService();        
+        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
         channel.bind('NewComment', function(res) {    
             let j = res.id;
-            let feed = res[j]
-        
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});
-            
+            let feed = res[j]       
+            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});            
         });
     
     }, [dispatch])
-
-    // useEffect(() => {
-    //     dispatch(GetCommentAction(data));
-    // }, [dispatch])
 
     return (
             <div id="Comments-Wrap" className="Comments-Wrap">

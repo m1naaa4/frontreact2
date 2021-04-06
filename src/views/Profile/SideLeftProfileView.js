@@ -8,21 +8,24 @@ import ModalUpdateProfile from './Update_profile/ModalUpdateProfile';
 export default function SideLeftProfileView() {
 
     const infoprofile = useSelector(state => state.infoProfile);
+    const user = useSelector(state => state.userProfile.userProfile);
     const [show, setShow] = useState(false);
+    const [user_profile_id, setProfileId] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
   useEffect(() => {        
-    if (infoprofile.infoprofile.networks) {
+    if (user) {
+      setProfileId(user.profile_id);console.log('user_profile_id', user_profile_id)
     }
   })
+  
    
   let networks;
   if (infoprofile.infoprofile.networks) {
           
     networks = <>{infoprofile.infoprofile.networks.map((name, index) => (
-      // console.log(name.name)
               <li key={index}><i className={name.class}></i><a href={name.link}>@{name.name}</a> </li>
           ))}
     </>
@@ -47,7 +50,7 @@ export default function SideLeftProfileView() {
                 </div>
               </div>
               <div className="Widget-BOX">
-
+              {user_profile_id === infoprofile.infoprofile.id &&
                 <div className="Profile-Info Profile-Infos-Items">
                   <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#exampleModalCenter"><i className="uil uil-pen"></i></button>
                   <ul>
@@ -58,17 +61,13 @@ export default function SideLeftProfileView() {
                     {networks}
                   </ul>
                 </div>
-
+              }
                 <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
                       <div className="DadupaModal-Header">
                         <h4>Update Infos</h4>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close"><i className="uil uil-times"></i></button>
                       </div>
                       <ModalUpdateProfile/>
-                    </div>
-                  </div>
                 </Modal>
 
                 <div className="Profile-Info Profile-Bio">

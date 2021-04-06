@@ -10,7 +10,6 @@ export const LoadUser = () =>{
         console.log(data)
         return data;
     }).catch((error)=> {
-        // console.log(error)
         return error;
          });
 }
@@ -20,14 +19,25 @@ export const LoadProfile = (id) =>{
     let profileUpUrl = "profile/getProfile/"+ id;
     const tokenId = "user-token";
 
-    return  http.getData(profileUpUrl, tokenId).then( data => {
-        // console.log(data)
+    return  http.getData(profileUpUrl, tokenId,).then( data => {
         return data;
     }).catch((error)=> {
-        // console.log(error)
         return error;
          });
 }
+
+export const UpdateProfile = (data) =>{
+    const http = new HttpService();
+    let profileUpUrl = "profile/update";
+
+    return  http.postData(data, profileUpUrl,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
+
 
 export const AddPost = (data, props, current) =>{
 

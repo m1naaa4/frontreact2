@@ -1,4 +1,4 @@
-import {LoadUser, LoadProfile} from '../../../services/User/Profile/ProfileService'
+import {LoadUser, LoadProfile, UpdateProfile} from '../../../services/User/Profile/ProfileService'
 
 
 export const loadUserAction = () =>{
@@ -37,6 +37,29 @@ export const ProfileAction = (id) =>{
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
                 dispatch({type:'LOAD_PROFILE_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const EditProfileAction = (id) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_UPDATE_PROFILE'});
+
+        UpdateProfile(id).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'UPDATE_PROFILE_ERROR',res})
             }
         },
         error=>{

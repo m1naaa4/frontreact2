@@ -9,36 +9,36 @@ import { DeletePostAction } from '../../../../store/actions/Post/PostAction';
 export default function PostHeader({ post }) {
 
   const dispatch = useDispatch();
-  const infoprofile = useSelector(state => state.infoProfile);
-    const [options_List, SetOptions_List] = useState(false);
-    const [user_id, setUserId] = useState();
-    const [post_id, setPostId] = useState(post.id);
+  const infoprofile = useSelector(state => state.infoProfile.infoprofile);
+  const user = useSelector(state => state.userProfile.userProfile);
+  const [options_List, SetOptions_List] = useState(false);
+  const [user_profile_id, setUserProfileId] = useState();
+  const [user_id, setUserId] = useState();
 
-    const showOptions = () =>{
-      SetOptions_List(!options_List)
-    }
-    useEffect(() => {          
-      if (infoprofile.infoprofile.avatar) {             
-          setUserId(infoprofile.infoprofile.user_id);  
-      }     
+  const showOptions = () =>{
+    SetOptions_List(!options_List)
+  }
+  useEffect(() => {          
+    if (infoprofile.avatar) {             
+      setUserProfileId(infoprofile.user_id);  
+      setUserId(user.id);  
+    }     
   })
 
   const data = {
       post_id     : post.id,
       provider    : "post",
-      user_id     : user_id,
+      user_id     : user_profile_id,
   }
 
   const supprimePost =(id) =>{
-    console.log(id)
     dispatch(DeletePostAction(data, '', 'delete'));
     dispatch({type:'DELETE_POST_SUCCESS', id});
     SetOptions_List(!options_List)
   }
 
-    return (
-
-        
+  return (
+  
         <div className="PostHeader">
           <Link className="PostUser-Thumb" to={"/profile/"+ post.profile_id} ><img src={post.avatar} alt="avatar" /></Link>
           <Link className="PostUser-Details" to={"/profile/"+ post.profile_id}>
@@ -58,9 +58,12 @@ export default function PostHeader({ post }) {
                   <li className="PostKey">
                     <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
                   </li>
-                  <li className="PostDelete">
-                    <button onClick={e => supprimePost(post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
-                  </li>
+                  {user_id === post.user_id &&
+                    <li className="PostDelete">
+                      <button onClick={e => supprimePost(post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                    </li>
+                  }
+                  
                 </ul>
                )
           }

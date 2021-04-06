@@ -63,11 +63,22 @@ export default function ListPostsView() {
                                     posts.map((post, index) => {
                                         if (posts.length === index +1){
                                             return (
+                                                <>
                                                 <div className="PostWrap"  key={index +1} ref={lastProjectElementRef}>
                                                     <PostHeader post={post}/>
                                                     <PostBody post={post}/>
                                                     <PostFooter post={post}/>
+                                                    
                                                 </div>
+                                                <div className="PostWrap"  key={index +1}>
+                                                    <PostHeader post={post}/>
+                                                    <div className="PostBody">
+                                                        <div className="PostBody-Text">
+                                                            Born
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </>
                                             )
 
                                         }else{
@@ -87,7 +98,14 @@ export default function ListPostsView() {
                                         <div className="col-md-12">
                                             <div className="offer-box">
                                                 <div className="offer-box">
-                                                    no result found
+                                                <div className="PostWrap">
+                                                    {/* <PostHeader post={}/> */}
+                                                    <div className="PostBody">
+                                                        <div className="PostBody-Text">
+                                                            Born
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
