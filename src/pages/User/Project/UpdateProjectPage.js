@@ -1,5 +1,5 @@
 import React from 'react'
-import UpdateMultiStepProjectForm from "../../../views/User/Project/Update/UpdateMultiStepProjectForm";
+import UpdateMultiStepProjectForm from "../../../views/Project/Update/UpdateMultiStepProjectForm";
 
 export default function UpdateProjectPage(props) {
 

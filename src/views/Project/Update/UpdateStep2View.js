@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import ProgressBar from "../../../../skeleton/ProgressBar";
+import ProgressBar from "../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
-import UploadService from '../../../../helpers/FileUploadService';
-import { getProjectAction } from '../../../../store/actions/User/Project/GetProjectActions';
+import UploadService from '../../../helpers/FileUploadService';
+import { GetProjectAction } from '../../../store/actions/User/Project/ProjectAction';
 
 
-export default function Step2View({formData, setForm, navigation, props}) {
+export default function UpdateStep2View({formData, setForm, navigation, props}) {
 
     const dispatch = useDispatch();
     const { medialink, mediatype } = formData;
@@ -17,35 +17,28 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
     const [project_id, setProject_id] = useState();
-    const [type, setType] = useState(undefined);
-    const hiddenFileInput = useRef(null);
+    const hiddenFileInput = React.useRef(null);
 
     const mediaproject = useSelector(state => state.fileuploaded);
     const projectadd = useSelector(state => state.addproject);
     const getproject = useSelector(state => state.getproject);
-
-
+    
     useEffect(() => {
-        if (projectadd.addproject) {
-            if (getproject !== undefined && getproject.getproject  !== '') {
-                if(getproject.getproject !== 'loading'){
-                    const data = {
-                        provider_id  : projectadd.addproject.projectid,
-                        action      : "getProject",
-                    }
+            const data = {
+                provider_id  : props.match.params.id,
+                action      : "getProject",
+            }
+            setProject_id(projectadd.addproject.projectid);
         
-                    setProject_id(projectadd.addproject.projectid);
-        
-                    dispatch( getProjectAction (data, props));                        
-                        setFile(getproject.getproject.project.media_link);
-                        setMedia(getproject.getproject.project.is_video);
-                        formData.medialink = getproject.getproject.project.media_link;
-                        formData.logolink = getproject.getproject.project.logolink;
-                        formData.mediatype = getproject.getproject.project.is_video;
-                        setProject_id(getproject.getproject.projectid);
-                    } 
-                } 
-            }               
+            dispatch( GetProjectAction (data, props));
+            
+            setFile(getproject.getproject.project.media_link);
+            setMedia(getproject.getproject.project.is_video);
+            formData.medialink = getproject.getproject.project.media_link;
+            formData.logolink = getproject.getproject.project.logolink;
+            formData.mediatype = getproject.getproject.project.is_video;
+            setProject_id(getproject.getproject.projectid);
+             
     }, [dispatch]);  
 
     const handleClick = e => {
@@ -65,7 +58,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
         formData.url      = 'video/upload';
         formData.type     = 'video';
         formData.provider = 'project';
-        formData.provider_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id; 
+        formData.provider_id = projectadd.addproject.projectid ? projectadd.addproject.projectid : project_id;       
     };
     
     const getBase64 = file => {
@@ -168,7 +161,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                             <div  className="col-md-12 input-row" style={{ height: "350px" , width: "100%" , display: "grid", placeItems: "center"}} onClick={handleClick}>
                                                     {/* <input type="file" onChange={onChange} /> */}
                                                     <div  className="btn btn-default" style={{ margin: "auto", display: "block"}}>
-                                                        <input ref={hiddenFileInput} accept=".png, .jpg, .jpeg"
+                                                        <input ref={hiddenFileInput}
                                                             style={{display: 'none'}} type="file" onChange={selectFile} /> Choose file
                                                     </div>
                                                     {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}

@@ -1,5 +1,5 @@
 import React from 'react'
-import MultiStepProjectForm from "../../../views/User/Project/MultiStepProjectForm";
+import MultiStepProjectForm from "../../../views/Project/MultiStepProjectForm";
 
 export default function AddProjectPage(props) {
 

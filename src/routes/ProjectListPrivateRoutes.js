@@ -1,9 +1,9 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
-import ListProject from "../pages/User/Project/ListProjectPage";
 import HeaderProfile from "../layout/Header/HeaderProfile";
-import ViewProject from '../views/User/Project/ViewProject';
-import AddProjectPage from "../pages/User/Project/AddProjectPage"
+import AddProjectPage from '../pages/User/Project/AddProjectPage';
+import ShowProjectView from '../views/Project/ShowProjectView';
+import ListProjectPage from '../pages/User/Project/ListProjectPage';
 import UpdateProjectPage from '../pages/User/Project/UpdateProjectPage';
 
 
@@ -15,7 +15,7 @@ export default function ProjectListPrivateRoutes(props) {
             <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
                 <Switch>
-                    <Route exact path={`${props.match.path}/lists`}  component = {ListProject} />
+                    <Route exact path={`${props.match.path}/lists`}  component = {ListProjectPage} />
                     <Route exact path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/lists` }} />
                     )} />
@@ -25,7 +25,7 @@ export default function ProjectListPrivateRoutes(props) {
                         <Redirect to={{pathname: `${props.match.path}/create` }} />
                     )} />
 
-                    <Route exact  path={`${props.match.path}/show/:id`}  component = {ViewProject} />
+                    <Route exact  path={`${props.match.path}/show/:id`}  component = {ShowProjectView} />
                     <Route exact  path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/show/:id` }} />
                     )} />

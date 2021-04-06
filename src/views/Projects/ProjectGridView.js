@@ -1,14 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import {Text} from "../../../containers/Language";
+import {Text} from "../../containers/Language";
 import { Player } from 'video-react';
 import VideoPlayer from 'simple-react-video-thumbnail'
 
 
 
-const ProjectView = ({ project }) => {
-
-//console.log("goloooooooooooooooooooo", project.logo_link)
+const ProjectGridView = ({ project }) => {
 
     return (
 
@@ -74,4 +72,4 @@ const ProjectView = ({ project }) => {
     )
 }
 
-export default ProjectView;
+export default ProjectGridView;

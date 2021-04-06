@@ -1,12 +1,12 @@
 import React, {useRef, useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import EtatDropFilter from "../../Fields/Filter/Project/EtatDropFilter";
-import SectorDropFilter from "../../Fields/Filter/Project/SectorDropFilter";
-import ZoneDropFilter from "../../Fields/Filter/Project/ZoneDropFilter";
-import FinanceDropFilter from "../../Fields/Filter/Project/FinanceDropFilter";
-import {AddProjectsAction} from "../../../../store/actions/User/Project/AddProjectAction";
-import { getProjectAction } from '../../../../store/actions/User/Project/GetProjectActions';
-import ProjectSkeleton from '../../../../skeleton/ProjectSkeleton';
+import EtatDropFilter from "../../User/Fields/Filter/Project/EtatDropFilter";
+import SectorDropFilter from "../../User/Fields/Filter/Project/SectorDropFilter";
+import ZoneDropFilter from "../../User/Fields/Filter/Project/ZoneDropFilter";
+import FinanceDropFilter from "../../User/Fields/Filter/Project/FinanceDropFilter";
+import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
+import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
+import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
 
 export default function UpdateStep1View({formData, setForm, navigation, props}) {
 

@@ -20,7 +20,6 @@ const initState = {
                     }
 
           case 'GET_File_UPLOADED_SUCCESS':
-            console.log('newAvataaaaaaaaaaaaaaaaaaaar', response.data.url)
               return {
                   url:action.response.data.url,
                   id:action.response.data.id,

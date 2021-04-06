@@ -1,6 +1,6 @@
 import React from 'react'
 import {useForm} from "react-hooks-helper";
-import ListProjectView from '../../../views/User/Projects/ListProjectView';
+import ListProjectView from '../../../views/Projects/ListProjectView';
 
 export default function ListProject(props ) {
     const defaultData = {

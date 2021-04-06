@@ -1,24 +1,25 @@
 import React, {useEffect} from 'react'
-import {getProjectAction} from "../../../store/actions/User/Project/GetProjectActions";
+import {GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
 import {useDispatch, useSelector} from "react-redux";
-import {Player} from "video-react";
-import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
-import { NavLink } from 'react-router-dom';
-import AddComment from '../../Comment/AddComment';
+import {Player} from 'video-react';
+import ProjectSkeleton from '../../skeleton/ProjectSkeleton';
+import AddComment from '../Comment/AddComment';
+import { useLocation, useParams } from 'react-router';
 
-export default function ViewProject(props) {
+export default function ShowProjectView(props) {
 
+    const params = useParams();
+    const location = useLocation();
     const data = {
-        project_id : props.match.params.id,
-        action      : "getProject",
+        project_id : params.id,
+        action     : "getProject",
     }
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getProjectAction(data, props));
+        dispatch(GetProjectAction(data, props));
     }, [dispatch])
 
     const project = useSelector(state => state.getproject.getproject);
-    const projectadd = useSelector(state => state.addproject);
 
     let tags;
     if (project.project) {
@@ -34,7 +35,7 @@ export default function ViewProject(props) {
     }
     const goToEditproject = () => {
         
-        props.history.push('/project/update/'+ data.project_id);
+        location.history.push('/project/update/'+ data.project_id);
     };
     return (
         <div className="Single-Wrapper">

@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import InputTags from "../../../../utils/tags/TagsInput";
+import InputTags from "../../../utils/tags/TagsInput";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { AddProjectsAction } from '../../../../store/actions/User/Project/AddProjectAction';
+import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';
 
 
 export default function Step3View({formData, setForm, navigation, props}) {
