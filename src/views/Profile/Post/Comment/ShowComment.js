@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
-import {GetCommentAction} from "../../../../store/actions/User/Comment/GetCommentAction";
+import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import ReplyComment from './ReplyComment';
 
 

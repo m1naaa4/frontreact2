@@ -1,11 +1,7 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, { useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
-import { AddCommentAction } from '../../../store/actions/User/Comment/AddCommentAction';
-import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
-import ReplyComment from './ReplyComment';
-import PusherService from '../../../services/Pusher';
-import { wait } from '@testing-library/dom';
+import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
+import {GetCommentAction} from "../../store/actions/Comment/CommentAction";
 
 
 export default function ShowComment(comment, props) {

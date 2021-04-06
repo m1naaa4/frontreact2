@@ -2,9 +2,9 @@ import React, {useEffect} from 'react'
 import {getProjectAction} from "../../../store/actions/User/Project/GetProjectActions";
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from "video-react";
-import AddComment from "../Comment/AddComment";
 import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
 import { NavLink } from 'react-router-dom';
+import AddComment from '../../Comment/AddComment';
 
 export default function ViewProject(props) {
 

@@ -1,6 +1,4 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import { GetCommentAction } from '../../../../store/actions/User/Comment/GetCommentAction';
 import AddComment from '../Comment/AddComment';
 import ShowComment from '../Comment/ShowComment';
 

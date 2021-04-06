@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
 import PusherService from '../../../../services/Pusher';
-import {AddCommentAction} from "../../../../store/actions/User/Comment/AddCommentAction";
+import { AddCommentAction } from '../../../../store/actions/Comment/CommentAction';
 
 
 export default function ReplyComment({comment, post}) {

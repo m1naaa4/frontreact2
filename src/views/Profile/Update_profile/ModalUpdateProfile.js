@@ -1,33 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
 import SectorDropFilter from '../../User/Fields/Filter/Project/SectorDropFilter'
 import TypeDrop from '../../User/Fields/Signup/TypeDrop'
 
 
 
-export default function ModalUpdateProfile() {
+const  ModalUpdateProfile = () => {
 
     const infoprofile = useSelector(state => state.infoProfile);
-    const newavatar = useSelector(state => state.updateavatar);
     const user = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
-    const [sector_id, setSectorId] = useState();
-    const [type, setType]= useState();
-    const [email, setEmail]= useState();
-    const [phone, setPhone] = useState();
-    const [networks, setNetworks]= useState();
-    const [bio, setBio]= useState();
-
-  
-
-  useEffect(() => {        
-    if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {
-      setSectorId(infoprofile.infoprofile.sector);  setType(infoprofile.infoprofile.type);  
-      setEmail(infoprofile.infoprofile.email);  setPhone(infoprofile.infoprofile.phone);  
-      setNetworks(infoprofile.infoprofile.networks);  setBio(infoprofile.infoprofile.about); 
-    }     
-  })
+    const [formData, setForm] = useForm({sector_id:infoprofile.infoprofile.sector, 
+      type:infoprofile.infoprofile.email, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
+       networks:infoprofile.infoprofile.networks, bio:infoprofile.infoprofile.about});
 
   const EditProfile =(id) =>{
     console.log(id)
@@ -41,25 +27,25 @@ export default function ModalUpdateProfile() {
             <div className="form-inputs">
               <div className="form-row">
                 <div className="col-md-6 input-row input-select input-select-multi">
-                  <TypeDrop className="project-status"   defaultValue={type} onChange={setType}/>
+                  <TypeDrop className="project-status"   defaultValue={formData.type} onChange={setForm}/>
                 </div>
                 <div className="col-md-6 input-row input-select input-select-multi">
-                  <SectorDropFilter defaultValue={sector_id} onChange={setSectorId} />
+                  <SectorDropFilter defaultValue={formData.sector_id} onChange={setForm} />
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="email" name="email" defaultValue={email} onChange={setEmail} placeholder="Email" className="wizard-required" required/>
+                  <input type="email" name="email" defaultValue={formData.email} onChange={setForm} placeholder="Email" className="wizard-required" required/>
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="tel" name="phone" defaultValue={phone} onChange={setPhone} placeholder="Téléphone" className="wizard-required" required/>
+                  <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Téléphone" className="wizard-required" required/>
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="email" name="network" defaultValue={networks} onChange={setNetworks} placeholder="Facebook" className="wizard-required" required/>
+                  <input type="email" name="network" defaultValue={formData.networks} onChange={setForm} placeholder="Facebook" className="wizard-required" required/>
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="tel" name="network" defaultValue={networks} onChange={setNetworks} placeholder="Twitter" className="wizard-required" required/>
+                  <input type="tel" name="network" defaultValue={formData.networks} onChange={setForm} placeholder="Twitter" className="wizard-required" required/>
                 </div>
                 <div className="col-md-12 input-row">
-                  <textarea name="about" placeholder="Bio" defaultValue={bio} onChange={setBio}></textarea>
+                  <textarea name="about" placeholder="Bio" defaultValue={formData.bio} onChange={setForm}></textarea>
                 </div>
               </div>
             </div>
@@ -69,3 +55,4 @@ export default function ModalUpdateProfile() {
       
     )
 }
+export default ModalUpdateProfile;

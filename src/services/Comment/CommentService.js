@@ -1,4 +1,4 @@
-import HttpService from '../../HttpService';
+import HttpService from '../HttpService';
 
 
 export const AddComment = (data, props, current) =>{

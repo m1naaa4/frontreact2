@@ -59,7 +59,7 @@ export default function SideLeftProfileView() {
                   </ul>
                 </div>
 
-                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                       <div className="DadupaModal-Header">

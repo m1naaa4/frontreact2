@@ -2,7 +2,7 @@ import React, {useRef, useCallback, useState, useEffect} from 'react'
 
 import {useDispatch, useSelector} from "react-redux";
 import {  useParams } from 'react-router';
-import { GetPostsAction } from '../../../store/actions/Post/GetPostsAction';
+import { GetPostsAction } from '../../../store/actions/Post/PostAction';
 import PostBody from './PostWraps/PostBody';
 import PostFooter from './PostWraps/PostFooter';
 import PostHeader from './PostWraps/PostHeader';

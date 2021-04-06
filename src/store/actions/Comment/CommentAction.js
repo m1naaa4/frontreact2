@@ -1,18 +1,18 @@
-import { AddPost, DeletePost } from "../../../services/User/Profile/ProfileService";
+import {AddComment, GetComment} from "../../../services/Comment/CommentService";
 
-export const AddPostAction = (data, props) =>{
+export const AddCommentAction = (data, props, url) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING_ADD_POST'});
+        dispatch({type:'LOADING_ADD_COMMENT'});
 
-        AddPost(data, props).then((res) =>
+        AddComment(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'ADD_POST_SUCCESS', res});
+                    dispatch({type:'ADD_COMMENT_SUCCESS', res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'ADD_POST_ERROR',res})
+                    dispatch({type:'ADD_COMMENT_ERROR',res})
                 }
             },
             error => {
@@ -22,20 +22,19 @@ export const AddPostAction = (data, props) =>{
     }
 
 }
-
-export const DeletePostAction = (data, props) =>{
+export const GetCommentAction = (data) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING_ADD_POST'});
+        dispatch({type:'LOADING_GET_COMMENT'});
 
-        DeletePost(data, props).then((res) =>
+        GetComment(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    
+                    dispatch({type:'GET_COMMENT_SUCCESS',res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'DELETE_POST_ERROR',res})
+                    dispatch({type:'GET_COMMENT_ERROR',res})
                 }
             },
             error => {
@@ -45,4 +44,3 @@ export const DeletePostAction = (data, props) =>{
     }
 
 }
-

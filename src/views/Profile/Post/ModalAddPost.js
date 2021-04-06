@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { Modal } from 'react-bootstrap';
-import { AddPostAction } from "../../../store/actions/Post/AddPostAction";
+import { AddPostAction } from "../../../store/actions/Post/PostAction";
 import FileUploadService from "../../../helpers/FileUploadService";
 import PusherService from '../../../services/Pusher';
 import Player from "video-react/lib/components/Player";
+import { useParams } from "react-router";
+import { useForm } from "react-hooks-helper";
 
-export default function(props) {
+export default function(newavatar) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const [avatar, setAvatar] = useState();
@@ -22,7 +23,10 @@ export default function(props) {
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
 
-    let formData = new FormData();
+    //let formData = new FormData();
+    const [formData, setForm] = useForm({file:'', provider_id:'', type:'', url:'', provider:'profile', action:'uploadPost'});
+
+    const params = useParams();
 
     const infoprofile = useSelector(state => state.infoProfile);
 
@@ -34,24 +38,25 @@ export default function(props) {
     const dispatch = useDispatch();
 
     const data = {
-        profile_id : props.match.params.id,
+        profile_id : params.id,
         body       : body,
         action     : 'addPost',
         type       : type,
         medialink : medialink,
     }
+    console.log(type)
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
         refbody.current.value = '';
         handleClose()
-        dispatch(AddPostAction(data, props));
+        dispatch(AddPostAction(data));
               
     }
     
     useEffect(() => {
         const pusher = new PusherService();        
-        var channel = pusher.config.subscribe('post_' + props.match.params.id);        
+        var channel = pusher.config.subscribe('post_' + params.id);        
         channel.bind('NewPost', function(res) {                
             let j = res.id;
             let feed = res[j]
@@ -80,7 +85,7 @@ export default function(props) {
 
     const onLoad = (fileString) => {
         formData.file =  fileString;
-        formData.profile_id = props.match.params.id;
+        formData.provider_id = params.id;
         formData.type =  type;
         formData.url =  'video/upload';
     };
@@ -96,20 +101,14 @@ export default function(props) {
 
     const handleUpload = async e => {
         setProgress(0);
-        setCurrentFile(e);
-        const data = {
-            file  : formData.file,
-            provider_id : formData.profile_id,
-            action      : 'uploadPost',
-            type        : formData.type,
-            url         : formData.url,
-        }
-        FileUploadService.upload(data, (e) => {
+        setCurrentFile(e);        
+        FileUploadService.upload(formData, (e) => {
             console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
         
         })
         .then((response) => {
+            console.log(response.data)
             setMedialink(response.data.url)
             setType(response.data.type)
             setSelectedFiles(undefined);            
@@ -131,7 +130,7 @@ export default function(props) {
 
                     <div className="CreatePost-Row">
                         <div className="CreatePost-ColLeft">
-                            <div className="CreatePost-UserThumb"><img src={avatar} alt="avatar"/></div>
+                            <div className="CreatePost-UserThumb"><img src={newavatar.newavatar} alt="avatar"/></div>
                                 <div className="CreatePost-OptionsRow">
                                     <div className="CreatePost-Options">
                                         <button type="button" className="CreatePost-Option CreatePost-OptionDate" data-toggle="tooltip" data-placement="right" title="Add date"><i className="uil uil-calendar-alt"></i></button>

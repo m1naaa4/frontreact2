@@ -1,10 +1,9 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {AddCommentAction} from "../../../store/actions/User/Comment/AddCommentAction";
-import ReplyComment from "./ReplyComment";
 import ShowComment from "./ShowComment";
-import {GetCommentAction} from "../../../store/actions/User/Comment/GetCommentAction";
-import PusherService from '../../../services/Pusher';
+import PusherService from '../../services/Pusher';
+import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
+import { GetCommentAction } from '../../store/actions/Comment/CommentAction';
 
 
 export default function AddComment(props) {

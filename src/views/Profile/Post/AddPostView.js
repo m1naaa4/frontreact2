@@ -24,17 +24,17 @@ export default function AddPostView(props) {
     
     useEffect(() => {  
         
-        if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
-            if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
-                setAvatar(newavatar.avatar);                
-                setUserVisiterAvatar(user.user.profile.avatar_link);
-            }else{
-                setAvatar(infoprofile.infoprofile.avatar);
-                if(user.profile){
-                    setUserVisiterAvatar(user.profile.avatar_link);
-                }
+    if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
+        if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
+            setAvatar(newavatar.avatar);                
+            setUserVisiterAvatar(newavatar.avatar);
+        }else{
+            setAvatar(infoprofile.infoprofile.avatar);
+            if(user.profile){
+                setUserVisiterAvatar(user.profile.avatar_link);
             }
-        }     
+        }
+    }     
     })
 
 
@@ -64,7 +64,7 @@ export default function AddPostView(props) {
                                         <h4>Publier un historique</h4>
                                         <button type="button" className="close" data-dismiss="modal" onClick={handleClose} aria-label="Close"><i className="uil uil-times"></i></button>
                                     </div>
-                                    <ModalAddPost  {...props}/>
+                                    <ModalAddPost  newavatar={user_visiter_avatar}/>
                                 </div>
                         </div>
                     </Modal>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link, useParams } from 'react-router-dom';
-import {AddCommentAction} from "../../../../store/actions/User/Comment/AddCommentAction";
+import { AddCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import {PusherAction} from "../../../../store/actions/Generale/PusherAction";
 
 
