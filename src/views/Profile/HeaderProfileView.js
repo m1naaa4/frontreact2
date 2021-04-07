@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import FileUploadService from '../../helpers/FileUploadService';
 
 
@@ -120,10 +121,8 @@ export default function HeaderProfileView({formData, setForm, props}) {
                             </>
                         }
                         <ul className="Profie-Menu">
-                            {/* <li><NavLink href="offers.html" to={`/profile/${this.props.id}/offers`}><i className="uil uil-layer-group" /> Offres</NavLink></li>
-                            <li><NavLink href="profile.html" to={`/profile/${this.props.id}/posts`}><i className="uil uil-apps" /> Publications</NavLink></li> */}
-                            <li><a href="reseaux.html"><i className="uil uil-share-alt" /> Réseaux</a></li>
-                            <li><a href="#!"><i className="uil uil-comment-alt-lines" /> Discuter</a></li>
+                            <li><Link to={`/messages/${params.id}`}><i className="uil uil-share-alt" /> Réseaux</Link></li>
+                            <li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li>
                         </ul>
                         </div>
                     </div>

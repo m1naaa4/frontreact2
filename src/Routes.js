@@ -7,6 +7,7 @@ import {Gaurd} from './Gaurd'
 import ProjectListPrivateRoutes from "./routes/ProjectListPrivateRoutes";
 import ProfilePrivateRoute from "./routes/ProfilePrivateRoutes";
 import HeaderProfile from './layout/Header/HeaderProfile';
+import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
 
 const Routes = (props) => {
 
@@ -22,6 +23,7 @@ const Routes = (props) => {
                     <Route path="/register" component={UserRegister} />
                     <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
                     <Gaurd  path="/profile" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
+                    <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
                 </LanguageProvider>
             </Switch>
         </div>

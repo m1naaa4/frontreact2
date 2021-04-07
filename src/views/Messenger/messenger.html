@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Abbass IYA - Dadupa</title>
+
+  <link rel="icon" type="image/png" href="dadupa-favicon.png">
+
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.7/css/unicons.css">
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/css/lightgallery.css">
+  <link rel="stylesheet" href="assets/css/lg-fb-comment-box.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/bundle.js"></script>
+
+</head>
+
+<body className="Dadupa-Page">
+
+  <div id="load" className="load">
+    <div className="spinner"></div>
+  </div>
+
+  <div id="wrapper">
+
+    <div className="Dadupa-Overlay"><button className="Dadupa-Close"><i className="uil uil-multiply"></i></button></div>
+
+    <header className="Dadupa-Header">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-2 col-md-2">
+            <div className="left-nav">
+              <a href="profile.html">
+                <img src="assets/images/dadupa-brand-text.svg" alt="Dadupa Connect" className="Logo-Desktop">
+                <img src="assets/images/dadupa-responsive.svg" alt="Dadupa Connect" className="Logo-Responsive">
+              </a>
+            </div>
+          </div>
+          <div className="col-md-5 d-none d-lg-block">
+            <div className="center-nav">
+              <ul className="Dadupa-Nav">
+                <li className="Nav-Item"><a href="projects-list.html"className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> Porteur de projet</a></li>
+                <li className="Nav-Item"><a href="bailleur-de-fonds.html"className="Nav-Link"><i className="uil uil-moneybag"></i> Bailleur de fonds</a></li>
+                <li className="Nav-Item"><a href="accompagnateur.html"className="Nav-Link"><i className="uil uil-users-alt"></i> Accompagnateur</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="col-10 col-md-10 col-lg-5">
+            <div className="right-nav">
+              <div className="New-Post">
+                <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
+                <div className="Dadupa-Popup-DropDown">
+                  <ul className="Mini-Profile-Items">
+                    <li className="Mini-Profile-Item"><a href="new-offer.html"><i className="uil uil-rocket"></i>  Projet</a></li>
+                    <li className="Mini-Profile-Item"><a href="new-bailleur-offer.html"><i className="uil uil-briefcase-alt"></i> Financement</a></li>
+                    <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer.html"><i className="uil uil-comment-alt-notes"></i> Mentoring</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div className="Dadupa-Notifications">
+                <div className="Dadupa-Notifications-Items">
+                  <div className="Dadupa-Notifications-Item Dadupa-Search">
+                    <form className="search" action="#" method="post">
+                      <input type="search" name="search" placeholder="Search Dadupa" value="">
+                      <button type="submit" name="submit"><i className="uil uil-search"></i></button>
+                    </form>
+                  </div>
+                  <div className="Dadupa-Notifications-Item Dadupa-Alert-Popup"><button className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications"><span className="new-notif"></span><i className="uil uil-bell"></i></button>
+                    <div className="Dadupa-Notifs-Box">
+                      <h3>Notifications</h3>
+                      <div className="Notifs-List">
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                        <div className="Notif-Item">
+                          <div className="Notif-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                          <div className="Notif-Options btn-group">
+                              <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="uil uil-ellipsis-h"></i></button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-item">Mark as read</div>
+                                <div className="dropdown-item">Hide</div>
+                              </div>
+                          </div>
+                          <div className="Notif-Content">
+                            <div className="Notif-Text">Abbass IYA has ivited you to the project</div>
+                            <div className="Notif-Time">About a minute ago</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className="Dadupa-User">
+                <ul className="Dadupa-User-Infos">
+                  <li className="profile-image">
+                    <img src="assets/images/abbass-iya.jpg" />
+                  </li>
+                  <li className="profile-arrow"><i className="uil uil-angle-down"></i></li>
+                </ul>
+                <div className="Dadupa-Mini-Profile">
+                  <label className="Mini-Profile-Name">Abbass IYA</label>
+                  <a className="Mini-Profile-Link" href="profile.html">Voir mon profil</a>
+                  <ul className="Mini-Profile-Items">
+                    <li className="Mini-Profile-Item"><a href="offers.html"><i className="uil uil-layer-group"></i> Mes offres</a></li>
+                    <li className="Mini-Profile-Item"><a href="favoris.html"><i className="uil uil-favorite"></i> Mes favoris</a></li>
+                    <li className="Mini-Profile-Item"><a href="settings.html"><i className="uil uil-setting"></i> Paramètres</a></li>
+                    <li className="Mini-Profile-Item"><a href="login.html"><i className="uil uil-exit"></i> Déconnexion</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div className="Sidebar-Nav">
+      <div className="">
+        <div className="User-Profile">
+          <div className="User-Image">
+            <img src="assets/images/abbass-iya.jpg" />
+          </div>
+          <div className="User-Details">
+            <label className="User-Name">Abbass IYA</label>
+            <a className="User-Profile-Link" href="profile.html">Voir mon profil</a>
+          </div>
+        </div>
+
+        <div className="Add-New-Post">
+          <a href="new-accompagnateur-offer.html" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i> Add new offer</a>
+        </div>
+
+        <ul className="Sidebar-Nav-Items">
+          <li className="Nav-Item"><a href="projects-list.html"className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> Porteur de projet</a></li>
+          <li className="Nav-Item"><a href="bailleur-de-fonds.html"className="Nav-Link"><i className="uil uil-moneybag"></i> Bailleur de fonds</a></li>
+          <li className="Nav-Item"><a href="accompagnateur.html"className="Nav-Link"><i className="uil uil-users-alt"></i> Accompagnateur</a></li>
+        </ul>
+        <ul className="Mini-Profile-Items">
+          <li className="Mini-Profile-Item"><a href="offers.html"><i className="uil uil-layer-group"></i> Mes offres</a></li>
+          <li className="Mini-Profile-Item"><a href="favoris.html"><i className="uil uil-favorite"></i> Mes favoris</a></li>
+          <li className="Mini-Profile-Item"><a href="settings.html"><i className="uil uil-setting"></i> Paramètres</a></li>
+          <li className="Mini-Profile-Item"><a href="login.html"><i className="uil uil-exit"></i> Déconnexion</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="Page-Profile">
+
+      <div className="Messenger-Wrapper">
+
+        <div className="container-fluid">
+
+          <div className="row MessengerDesktop">
+            <div className="col-md-4 col-lg-3">
+              <div className="row">
+
+                <div className="Messenger-List">
+                  <div className="Messenger-ListHeader">
+                    <button className="Messenger-ListHeaderButton" type="button" data-target="#Search-Modal" data-toggle="modal" data-placement="bottom" title="New Message"><i className="uil uil-focus-add"></i></button>
+                    <div className="Messenger-Search">
+                      <form className="search" action="#" method="post">
+                        <input type="search" name="search" placeholder="Search in Messenger" value="">
+                        <button type="submit" name="submit"><i className="uil uil-search"></i></button>
+                      </form>
+                    </div>
+                    <div className="Preferences-Options">
+                      <button type="button" data-toggle="tooltip" data-placement="bottom" title="Messenger Preferences" className="Messenger-PreferencesBTN"><i className="uil uil-ellipsis-v"></i></button>
+                      <ul className="Preferences-List">
+                        <li className="Preferences-Option"><button>Action 1</button></li>
+                        <li className="Preferences-Option"><button>Action 2</button></li>
+                        <li className="Preferences-Option"><button>Action 3</button></li>
+                      </ul>
+                    </div>
+                    <!-- <button className="Messenger-ListHeaderButton" type="button"  data-toggle="tooltip" data-placement="bottom" title="Messenger Preferences"></button> -->
+                  </div>
+
+                  <div className="Msgs-List nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    
+                    <a className="Msgs-Item New-Msg nav-link active" id="v-abdelkarim-ichia-tab" data-toggle="pill" href="#v-abdelkarim-ichia" role="tab" aria-controls="v-abdelkarim-ichia" aria-selected="true">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Abdelkarim ICHIA</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Active"></div>
+                        <span className="Msgs-N">10</span>
+                      </div>
+                    </a>
+                    
+                    <a className="nav-link Msgs-Item" id="v-youness-elbezzazi-tab" data-toggle="pill" href="#v-youness-elbezzazi" role="tab" aria-controls="v-youness-elbezzazi" aria-selected="false">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Youness EL BEZZAZI</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Active">
+                        </div>
+                      </div>
+                    </a>
+                    <a className="Msgs-Item" id="v-othmane-marhar-tab" data-toggle="pill" href="#v-othmane-marhar" role="tab" aria-controls="v-othmane-marhar" aria-selected="false">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Othmane Amrhar</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Active">
+                        </div>
+                      </div>
+                    </a>
+                    <a className="Msgs-Item" id="v-mounir-yamoul-tab" data-toggle="pill" href="#v-mounir-yamoul" role="tab" aria-controls="v-mounir-yamoul" aria-selected="false">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Mounir Yamoul</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Not-Active">
+                        </div>
+                      </div>
+                    </a>
+                    <a className="Msgs-Item New-Msg nav-link" id="v-abdelkarim-ichia-tab" data-toggle="pill" href="#v-abdelkarim-ichia" role="tab" aria-controls="v-abdelkarim-ichia" aria-selected="true">
+                      <div className="Msgs-Image"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Abdelkarim ICHIA</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Active">
+                        </div>
+                      </div>
+                    </a>
+                    <a className="nav-link Msgs-Item" id="v-youness-elbezzazi-tab" data-toggle="pill" href="#v-youness-elbezzazi" role="tab" aria-controls="v-youness-elbezzazi" aria-selected="false">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Youness EL BEZZAZI</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Active">
+                        </div>
+                      </div>
+                    </a>
+                    <a className="Msgs-Item" id="v-othmane-marhar-tab" data-toggle="pill" href="#v-othmane-marhar" role="tab" aria-controls="v-othmane-marhar" aria-selected="false">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Othmane Amrhar</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Active">
+                        </div>
+                      </div>
+                    </a>
+                    <a className="Msgs-Item" id="v-mounir-yamoul-tab" data-toggle="pill" href="#v-mounir-yamoul" role="tab" aria-controls="v-mounir-yamoul" aria-selected="false">
+                      <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+                      <div className="Msgs-Content">
+                        <div className="Msgs-User">Mounir Yamoul</div>
+                        <div className="Msgs-Text">Message text goes here...</div>
+                        <div className="Friend-Not-Active">
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div className="col-md-8 col-lg-9">
+              <div className="row">
+                <div className="tab-content Messenger-row" id="v-pills-tabContent">
+                  <div className="tab-pane fade show active" id="v-abdelkarim-ichia" role="tabpanel" aria-labelledby="v-abdelkarim-ichia-tab">
+                    <div className="Messenger-wrapper">
+                      <div className="Messenger-box" rel="'+ userID+'">
+                        <div className="Messenger-head">
+                            <div className="Messenger-head-left">
+                              <div className="Friend-Active"></div>
+                              <div className="Messenger-head-user-thumb"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                              <div className="Messenger-head-user-info">
+                                <label>Abdelkarim ICHIA</label>
+                                <span>Online</span>
+                              </div>
+                            </div>
+                            <div className="Messenger-head-right">
+                              <div className="Conversation-Options">
+                                <button type="button" className="Conversation-BTN"><i className="uil uil-ellipsis-h"></i></button>
+                                <ul className="ConversationOptions-List">
+                                  <li className="Conversation-Option"><button>Action 1</button></li>
+                                  <li className="Conversation-Option"><button>Action 2</button></li>
+                                  <li className="Conversation-Option"><button>Action 3</button></li>
+                                </ul>
+                              </div>
+                            </div>
+                        </div>
+                        <div className="Messenger-body msg_wrap">
+                          <div className="Messenger-messages '+ userID+'">
+                          <div className="message incoming-message">
+                              <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                            <div className="incoming-bubbles">
+                              <div className="bubble bubble-light message-seen"><div className="message-text">Hello</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                              <div className="bubble bubble-light message-seen"><div className="message-text">Hello Abbass</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                              <div className="bubble bubble-light message-seen"><div className="message-text">How are you ?</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                            </div>
+                          </div>
+                          <div className="message outcoming-message">
+                            <div className="outcoming-bubbles">
+                              <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Hello Boss</div></div>
+                              <div className="bubble bubble-dark message-seen"><span className="message-status">1:52AM <i className="uil uil-eye"></i></span><div className="message-text">Wach hani ?</div></div>
+                            </div>
+                            <div className="avatar-wrapper avatar-small"></div>
+                          </div>
+                          <div className="messages-date"><label className="messages-date-label">Saturday</label></div>
+                          <div className="message incoming-message">
+                              <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                            <div className="incoming-bubbles">
+                              <div className="bubble bubble-light message-seen"><div className="message-text">Mehdi is the best</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                            </div>
+                          </div>
+                          <div className="message outcoming-message">
+                            <div className="outcoming-bubbles">
+                              <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">No dadupa is the best</div></div>
+                              <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Dadupa is the best</div></div>
+                              <div className="bubble bubble-dark"><span className="message-status">1:52AM <i className="uil uil-eye-slash"></i></span><div className="message-text">Dadupa is the best</div></div>
+                            </div>
+                            <div className="avatar-wrapper avatar-small"></div>
+                          </div>
+                          </div>
+                          <div id="EmojiPicker" className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true">
+                          <div className="Messenger-footer-attachments">
+                          <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+                          <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+                          <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+                          </div>
+                          <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+                        </div>
+                      </div>
+                      <div className="Messenger-user-profile">
+                        <div className="Messenger-profile-header">
+                          <div className="Messenger-Profile-Infos">
+                            <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
+                            <div className="Profile-Picture" id="imageProfile" style="background-image: url('assets/images/profiles/Abdelkarim-ICHIA.jpg');"></div>
+                            <div className="Profile-Name">Abdelkarim ICHIA</div>
+                          </div>
+                        </div>
+                        <div className="Messenger-Profile-Widgets">
+                          <div className="Messenger-Profile-Widget">
+                            <h3 className="Messenger-Widget-Title">Lieu de résidence</h3>
+                            <p>Casablanca</p>
+                          </div>
+                          <div className="Messenger-Profile-Widget">
+                            <h3 className="Messenger-Widget-Title">Bio</h3>
+                            <p>Full Stack Developer</p>
+                          </div>
+                          <div className="Messenger-Profile-Widget">
+                            <h3 className="Messenger-Widget-Title">Offres</h3>
+                            <div className="Messenger-Offers">
+                              <div className="Messenger-Offer">
+                                <div className="Messenger-Offer-Media">
+                                </div>
+                                <div className="Messenger-Offer-Content">
+                                  <div className="offer-title">
+                                    <div className="offer-logo">
+                                      <img src="assets/images/majorel.png" title="Nom du projet" alt="">
+                                    </div>
+                                    <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
+                                    <span>Secteur d’activité</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="Messenger-Offer">
+                                <div className="Messenger-Offer-Media">
+                                </div>
+                                <div className="Messenger-Offer-Content">
+                                  <div className="offer-title">
+                                    <div className="offer-logo">
+                                      <img src="assets/images/majorel.png" title="Nom du projet" alt="">
+                                    </div>
+                                    <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
+                                    <span>Secteur d’activité</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane fade" id="v-youness-elbezzazi" role="tabpanel" aria-labelledby="v-youness-elbezzazi-tab">
+                    <div className="Messenger-box" rel="'+ userID+'">
+                      <div className="Messenger-head">
+                          <div className="Messenger-head-left">
+                            <div className="Messenger-head-user-thumb"></div>
+                            <div className="Messenger-head-user-info">
+                              <label>Youness EL BEZZAZI</label>
+                              <span>Active 1m ago</span>
+                            </div>
+                          </div>
+                          <!-- <div className="Messenger-head-right"><a href="#!">-</a><a href="#!">&#10005;</a></div> -->
+                      </div>
+                      <div className="Messenger-body msg_wrap">
+                        <div className="Messenger-messages '+ userID+'">
+                        <div className="message incoming-message">
+                            <div className="avatar-wrapper avatar-small"></div>
+                          <div className="incoming-bubbles">
+                            <div className="bubble bubble-light" data-toggle="tooltip" data-placement="right" title="Thursday 1:49AM">Hey anhat!</div>
+                          </div>
+                        </div>
+                        <div className="message outcoming-message">
+                          <div className="outcoming-bubbles">
+                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:51AM">what is going on?</div>
+                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:52AM">Hani Mhani ?</div>
+                          </div>
+                          <div className="avatar-wrapper avatar-small"></div>
+                        </div>
+                        </div>
+                        <div className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true">
+                        <div className="Messenger-footer-attachments">
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+                        </div>
+                        <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane fade" id="v-othmane-marhar" role="tabpanel" aria-labelledby="v-othmane-marhar-tab">
+                    <div className="Messenger-box" rel="'+ userID+'">
+                      <div className="Messenger-head">
+                          <div className="Messenger-head-left">
+                            <div className="Messenger-head-user-thumb"></div>
+                            <div className="Messenger-head-user-info">
+                              <label>Othmane Amrhar</label>
+                              <span>Active 1m ago</span>
+                            </div>
+                          </div>
+                          <!-- <div className="Messenger-head-right"><a href="#!">-</a><a href="#!">&#10005;</a></div> -->
+                      </div>
+                      <div className="Messenger-body msg_wrap">
+                        <div className="Messenger-messages '+ userID+'">
+                        <div className="message incoming-message">
+                            <div className="avatar-wrapper avatar-small"></div>
+                          <div className="incoming-bubbles">
+                            <div className="bubble bubble-light" data-toggle="tooltip" data-placement="right" title="Thursday 1:49AM">Hey anhat!</div>
+                          </div>
+                        </div>
+                        <div className="message outcoming-message">
+                          <div className="outcoming-bubbles">
+                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:51AM">what is going on?</div>
+                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:52AM">Hani Mhani ?</div>
+                          </div>
+                          <div className="avatar-wrapper avatar-small"></div>
+                        </div>
+                        </div>
+                        <div className="Messenger-footer"><input type="text" placeholder="Type messages here..." data-emoji-picker="true">
+                        <div className="Messenger-footer-attachments">
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+                        </div>
+                        <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="tab-pane fade" id="v-mounir-yamoul" role="tabpanel" aria-labelledby="v-mounir-yamoul-tab">
+                    <div className="Messenger-box" rel="'+ userID+'">
+                      <div className="Messenger-head">
+                          <div className="Messenger-head-left">
+                            <div className="Messenger-head-user-thumb"></div>
+                            <div className="Messenger-head-user-info">
+                              <label>Mounir Yamoul</label>
+                              <span>Active 1m ago</span>
+                            </div>
+                          </div>
+                          <!-- <div className="Messenger-head-right"><a href="#!">-</a><a href="#!">&#10005;</a></div> -->
+                      </div>
+                      <div className="Messenger-body msg_wrap">
+                        <div className="Messenger-messages '+ userID+'">
+                        <div className="message incoming-message">
+                            <div className="avatar-wrapper avatar-small"></div>
+                          <div className="incoming-bubbles">
+                            <div className="bubble bubble-light" data-toggle="tooltip" data-placement="right" title="Thursday 1:49AM">Hey anhat!</div>
+                          </div>
+                        </div>
+                        <div className="message outcoming-message">
+                          <div className="outcoming-bubbles">
+                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:51AM">what is going on?</div>
+                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:52AM">Hani Mhani ?</div>
+                          </div>
+                          <div className="avatar-wrapper avatar-small"></div>
+                        </div>
+                        </div>
+                        <div className="Messenger-footer"><input type="text" placeholder="Type messages here..." data-emoji-picker="true">
+                        <div className="Messenger-footer-attachments">
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+                        </div>
+                        <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div className="MessengerMobile">
+    <div className="Messenger-List">
+      <div className="Messenger-ListHeader">
+        <button className="Messenger-ListHeaderButton" type="button" data-target="#Search-Modal" data-toggle="modal" data-placement="bottom" title="New Message"><i className="uil uil-focus-add"></i></button>
+        <div className="Messenger-Search">
+          <form className="search" action="#" method="post">
+            <input type="search" name="search" placeholder="Search in Messenger" value="">
+            <button type="submit" name="submit"><i className="uil uil-search"></i></button>
+          </form>
+        </div>
+        <div className="Preferences-Options">
+          <button type="button" data-toggle="tooltip" data-placement="bottom" title="Messenger Preferences" className="Messenger-PreferencesBTN"><i className="uil uil-ellipsis-v"></i></button>
+          <ul className="Preferences-List">
+            <li className="Preferences-Option"><button>Action 1</button></li>
+            <li className="Preferences-Option"><button>Action 2</button></li>
+            <li className="Preferences-Option"><button>Action 3</button></li>
+          </ul>
+        </div>
+        <!-- <button className="Messenger-ListHeaderButton" type="button"  data-toggle="tooltip" data-placement="bottom" title="Messenger Preferences"></button> -->
+      </div>
+
+      <div className="Msgs-List nav nav-pills" id="vmobile-pills-tab" role="tablist" aria-orientation="vertical">
+        <a className="Msgs-Item New-Msg nav-link active" id="vmobile-abdelkarim-ichia-tab" data-toggle="pill" href="#vmobile-abdelkarim-ichia" role="tab" aria-controls="vmobile-abdelkarim-ichia" aria-selected="true">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Abdelkarim ICHIA</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Active"></div>
+            <span className="Msgs-N">10</span>
+          </div>
+        </a>
+        <a className="nav-link Msgs-Item" id="vmobile-youness-elbezzazi-tab" data-toggle="pill" href="#vmobile-youness-elbezzazi" role="tab" aria-controls="v-youness-elbezzazi" aria-selected="false">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Youness EL BEZZAZI</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Active">
+            </div>
+          </div>
+        </a>
+        <a className="Msgs-Item" id="vmobile-othmane-marhar-tab" data-toggle="pill" href="#vmobile-othmane-marhar" role="tab" aria-controls="vmobile-othmane-marhar" aria-selected="false">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Othmane Amrhar</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Active">
+            </div>
+          </div>
+        </a>
+        <a className="Msgs-Item" id="vmobile-mounir-yamoul-tab" data-toggle="pill" href="#vmobile-mounir-yamoul" role="tab" aria-controls="vmobile-mounir-yamoul" aria-selected="false">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Mounir Yamoul</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Not-Active">
+            </div>
+          </div>
+        </a>
+        <a className="Msgs-Item New-Msg navmobile-link" id="vmobile-abdelkarim-ichia-tab" data-toggle="pill" href="#vmobile-abdelkarim-ichia" role="tab" aria-controls="vmobile-abdelkarim-ichia" aria-selected="true">
+          <div className="Msgs-Image"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Abdelkarim ICHIA</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Active">
+            </div>
+          </div>
+        </a>
+        <a className="navmobile-link Msgs-Item" id="vmobile-youness-elbezzazi-tab" data-toggle="pill" href="#vmobile-youness-elbezzazi" role="tab" aria-controls="vmobile-youness-elbezzazi" aria-selected="false">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Youness EL BEZZAZI</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Active">
+            </div>
+          </div>
+        </a>
+        <a className="Msgs-Item" id="vmobile-othmane-marhar-tab" data-toggle="pill" href="#vmobile-othmane-marhar" role="tab" aria-controls="vmobile-othmane-marhar" aria-selected="false">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Othmane Amrhar</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Active">
+            </div>
+          </div>
+        </a>
+        <a className="Msgs-Item" id="vmobile-mounir-yamoul-tab" data-toggle="pill" href="#vmobile-mounir-yamoul" role="tab" aria-controls="vmobile-mounir-yamoul" aria-selected="false">
+          <div className="Msgs-Image"><img src="assets/images/abbass-iya.jpg" /></div>
+          <div className="Msgs-Content">
+            <div className="Msgs-User">Mounir Yamoul</div>
+            <div className="Msgs-Text">Message text goes here...</div>
+            <div className="Friend-Not-Active">
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div className="tab-content Messenger-row" id="vmobile-pills-tabContent">
+      <div className="tab-pane fade" id="vmobile-abdelkarim-ichia" role="tabpanel" aria-labelledby="vmobile-abdelkarim-ichia-tab">
+        <div className="Messenger-wrapper">
+          <div className="Messenger-box" rel="'+ userID+'">
+            <div className="Messenger-head">
+                <div className="Messenger-head-left">
+                  <div className="Friend-Active"></div>
+                  <div className="Messenger-head-user-thumb"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                  <div className="Messenger-head-user-info">
+                    <label>Abdelkarim ICHIA</label>
+                    <span>Online</span>
+                  </div>
+                </div>
+                <div className="Messenger-head-right">
+                  <button type="button" className="ConversationClose"><i className="uil uil-arrow-left"></i></button>
+                  <div className="Conversation-Options">
+                    <button type="button" className="Conversation-BTN"><i className="uil uil-ellipsis-h"></i></button>
+                    <ul className="ConversationOptions-List">
+                      <li className="Conversation-Option"><button>Action 1</button></li>
+                      <li className="Conversation-Option"><button>Action 2</button></li>
+                      <li className="Conversation-Option"><button>Action 3</button></li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+            <div className="Messenger-body msg_wrap">
+              <div className="Messenger-messages '+ userID+'">
+              <div className="message incoming-message">
+                  <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                <div className="incoming-bubbles">
+                  <div className="bubble bubble-light message-seen"><div className="message-text">Hello</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                  <div className="bubble bubble-light message-seen"><div className="message-text">Hello Abbass</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                  <div className="bubble bubble-light message-seen"><div className="message-text">How are you ?</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                </div>
+              </div>
+              <div className="message outcoming-message">
+                <div className="outcoming-bubbles">
+                  <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Hello Boss</div></div>
+                  <div className="bubble bubble-dark message-seen"><span className="message-status">1:52AM <i className="uil uil-eye"></i></span><div className="message-text">Wach hani ?</div></div>
+                </div>
+                <div className="avatar-wrapper avatar-small"></div>
+              </div>
+              <div className="messages-date"><label className="messages-date-label">Saturday</label></div>
+              <div className="message incoming-message">
+                  <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                <div className="incoming-bubbles">
+                  <div className="bubble bubble-light message-seen"><div className="message-text">Mehdi is the best</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                </div>
+              </div>
+              <div className="message outcoming-message">
+                <div className="outcoming-bubbles">
+                  <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">No dadupa is the best</div></div>
+                  <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Dadupa is the best</div></div>
+                  <div className="bubble bubble-dark"><span className="message-status">1:52AM <i className="uil uil-eye-slash"></i></span><div className="message-text">Dadupa is the best</div></div>
+                </div>
+                <div className="avatar-wrapper avatar-small"></div>
+              </div>
+              </div>
+              <div id="EmojiPicker" className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true">
+              <div className="Messenger-footer-attachments">
+              <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+              <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+              <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+              </div>
+              <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+            </div>
+          </div>
+          <div className="Messenger-user-profile">
+            <div className="Messenger-profile-header">
+              <div className="Messenger-Profile-Infos">
+                <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
+                <div className="Profile-Picture" id="imageProfile" style="background-image: url('assets/images/profiles/Abdelkarim-ICHIA.jpg');"></div>
+                <div className="Profile-Name">Abdelkarim ICHIA</div>
+              </div>
+            </div>
+            <div className="Messenger-Profile-Widgets">
+              <div className="Messenger-Profile-Widget">
+                <h3 className="Messenger-Widget-Title">Lieu de résidence</h3>
+                <p>Casablanca</p>
+              </div>
+              <div className="Messenger-Profile-Widget">
+                <h3 className="Messenger-Widget-Title">Bio</h3>
+                <p>Full Stack Developer</p>
+              </div>
+              <div className="Messenger-Profile-Widget">
+                <h3 className="Messenger-Widget-Title">Offres</h3>
+                <div className="Messenger-Offers">
+                  <div className="Messenger-Offer">
+                    <div className="Messenger-Offer-Media">
+                    </div>
+                    <div className="Messenger-Offer-Content">
+                      <div className="offer-title">
+                        <div className="offer-logo">
+                          <img src="assets/images/majorel.png" title="Nom du projet" alt="">
+                        </div>
+                        <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
+                        <span>Secteur d’activité</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="Messenger-Offer">
+                    <div className="Messenger-Offer-Media">
+                    </div>
+                    <div className="Messenger-Offer-Content">
+                      <div className="offer-title">
+                        <div className="offer-logo">
+                          <img src="assets/images/majorel.png" title="Nom du projet" alt="">
+                        </div>
+                        <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
+                        <span>Secteur d’activité</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div className="tab-pane fade" id="vmobile-youness-elbezzazi" role="tabpanel" aria-labelledby="vmobile-youness-elbezzazi-tab">
+        <div className="Messenger-box" rel="'+ userID+'">
+          <div className="Messenger-head">
+              <div className="Messenger-head-left">
+                <div className="Friend-Active"></div>
+                <div className="Messenger-head-user-thumb"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                <div className="Messenger-head-user-info">
+                  <label>Youness EL BEZZAZI</label>
+                  <span>Online</span>
+                </div>
+              </div>
+              <div className="Messenger-head-right">
+                <button type="button" className="ConversationClose"><i className="uil uil-arrow-left"></i></button>
+                <div className="Conversation-Options">
+                  <button type="button" className="Conversation-BTN"><i className="uil uil-ellipsis-h"></i></button>
+                  <ul className="ConversationOptions-List">
+                    <li className="Conversation-Option"><button>Action 1</button></li>
+                    <li className="Conversation-Option"><button>Action 2</button></li>
+                    <li className="Conversation-Option"><button>Action 3</button></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <div className="Messenger-body msg_wrap">
+            <div className="Messenger-messages '+ userID+'">
+            <div className="message incoming-message">
+                <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+              <div className="incoming-bubbles">
+                <div className="bubble bubble-light message-seen"><div className="message-text">Hello</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                <div className="bubble bubble-light message-seen"><div className="message-text">Hello Abbass</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                <div className="bubble bubble-light message-seen"><div className="message-text">How are you ?</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+              </div>
+            </div>
+            <div className="message outcoming-message">
+              <div className="outcoming-bubbles">
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Hello Boss</div></div>
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:52AM <i className="uil uil-eye"></i></span><div className="message-text">Wach hani ?</div></div>
+              </div>
+              <div className="avatar-wrapper avatar-small"></div>
+            </div>
+            <div className="messages-date"><label className="messages-date-label">Saturday</label></div>
+            <div className="message incoming-message">
+                <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+              <div className="incoming-bubbles">
+                <div className="bubble bubble-light message-seen"><div className="message-text">Mehdi is the best</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+              </div>
+            </div>
+            <div className="message outcoming-message">
+              <div className="outcoming-bubbles">
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">No dadupa is the best</div></div>
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Dadupa is the best</div></div>
+                <div className="bubble bubble-dark"><span className="message-status">1:52AM <i className="uil uil-eye-slash"></i></span><div className="message-text">Dadupa is the best</div></div>
+              </div>
+              <div className="avatar-wrapper avatar-small"></div>
+            </div>
+            </div>
+            <div id="EmojiPicker" className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true">
+            <div className="Messenger-footer-attachments">
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+            </div>
+            <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+          </div>
+        </div>
+      </div>
+      <div className="tab-pane fade" id="vmobile-othmane-marhar" role="tabpanel" aria-labelledby="vmobile-othmane-marhar-tab">
+        <div className="Messenger-box" rel="'+ userID+'">
+          <div className="Messenger-head">
+              <div className="Messenger-head-left">
+                <div className="Friend-Active"></div>
+                <div className="Messenger-head-user-thumb"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                <div className="Messenger-head-user-info">
+                  <label>Abdelkarim ICHIA</label>
+                  <span>Online</span>
+                </div>
+              </div>
+              <div className="Messenger-head-right">
+                <button type="button" className="ConversationClose"><i className="uil uil-arrow-left"></i></button>
+                <div className="Conversation-Options">
+                  <button type="button" className="Conversation-BTN"><i className="uil uil-ellipsis-h"></i></button>
+                  <ul className="ConversationOptions-List">
+                    <li className="Conversation-Option"><button>Action 1</button></li>
+                    <li className="Conversation-Option"><button>Action 2</button></li>
+                    <li className="Conversation-Option"><button>Action 3</button></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <div className="Messenger-body msg_wrap">
+            <div className="Messenger-messages '+ userID+'">
+            <div className="message incoming-message">
+                <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+              <div className="incoming-bubbles">
+                <div className="bubble bubble-light message-seen"><div className="message-text">Hello</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                <div className="bubble bubble-light message-seen"><div className="message-text">Hello Abbass</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                <div className="bubble bubble-light message-seen"><div className="message-text">How are you ?</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+              </div>
+            </div>
+            <div className="message outcoming-message">
+              <div className="outcoming-bubbles">
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Hello Boss</div></div>
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:52AM <i className="uil uil-eye"></i></span><div className="message-text">Wach hani ?</div></div>
+              </div>
+              <div className="avatar-wrapper avatar-small"></div>
+            </div>
+            <div className="messages-date"><label className="messages-date-label">Saturday</label></div>
+            <div className="message incoming-message">
+                <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+              <div className="incoming-bubbles">
+                <div className="bubble bubble-light message-seen"><div className="message-text">Mehdi is the best</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+              </div>
+            </div>
+            <div className="message outcoming-message">
+              <div className="outcoming-bubbles">
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">No dadupa is the best</div></div>
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Dadupa is the best</div></div>
+                <div className="bubble bubble-dark"><span className="message-status">1:52AM <i className="uil uil-eye-slash"></i></span><div className="message-text">Dadupa is the best</div></div>
+              </div>
+              <div className="avatar-wrapper avatar-small"></div>
+            </div>
+            </div>
+            <div id="EmojiPicker" className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true">
+            <div className="Messenger-footer-attachments">
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+            </div>
+            <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+          </div>
+        </div>
+      </div>
+      <div className="tab-pane fade" id="vmobile-mounir-yamoul" role="tabpanel" aria-labelledby="vmobile-mounir-yamoul-tab">
+        <div className="Messenger-box" rel="'+ userID+'">
+          <div className="Messenger-head">
+              <div className="Messenger-head-left">
+                <div className="Friend-Active"></div>
+                <div className="Messenger-head-user-thumb"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+                <div className="Messenger-head-user-info">
+                  <label>Mounir YAMOUL</label>
+                  <span>Online</span>
+                </div>
+              </div>
+              <div className="Messenger-head-right">
+                <button type="button" className="ConversationClose"><i className="uil uil-arrow-left"></i></button>
+                <div className="Conversation-Options">
+                  <button type="button" className="Conversation-BTN"><i className="uil uil-ellipsis-h"></i></button>
+                  <ul className="ConversationOptions-List">
+                    <li className="Conversation-Option"><button>Action 1</button></li>
+                    <li className="Conversation-Option"><button>Action 2</button></li>
+                    <li className="Conversation-Option"><button>Action 3</button></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <div className="Messenger-body msg_wrap">
+            <div className="Messenger-messages '+ userID+'">
+            <div className="message incoming-message">
+                <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+              <div className="incoming-bubbles">
+                <div className="bubble bubble-light message-seen"><div className="message-text">Hello</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                <div className="bubble bubble-light message-seen"><div className="message-text">Hello Abbass</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+                <div className="bubble bubble-light message-seen"><div className="message-text">How are you ?</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+              </div>
+            </div>
+            <div className="message outcoming-message">
+              <div className="outcoming-bubbles">
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Hello Boss</div></div>
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:52AM <i className="uil uil-eye"></i></span><div className="message-text">Wach hani ?</div></div>
+              </div>
+              <div className="avatar-wrapper avatar-small"></div>
+            </div>
+            <div className="messages-date"><label className="messages-date-label">Saturday</label></div>
+            <div className="message incoming-message">
+                <div className="avatar-wrapper avatar-small"><img src="assets/images/profiles/Abdelkarim-ICHIA.jpg"></div>
+              <div className="incoming-bubbles">
+                <div className="bubble bubble-light message-seen"><div className="message-text">Mehdi is the best</div><span className="message-status"><i className="uil uil-eye"></i> 1:49AM</span></div>
+              </div>
+            </div>
+            <div className="message outcoming-message">
+              <div className="outcoming-bubbles">
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">No dadupa is the best</div></div>
+                <div className="bubble bubble-dark message-seen"><span className="message-status">1:51AM <i className="uil uil-eye"></i></span><div className="message-text">Dadupa is the best</div></div>
+                <div className="bubble bubble-dark"><span className="message-status">1:52AM <i className="uil uil-eye-slash"></i></span><div className="message-text">Dadupa is the best</div></div>
+              </div>
+              <div className="avatar-wrapper avatar-small"></div>
+            </div>
+            </div>
+            <div id="EmojiPicker" className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true">
+            <div className="Messenger-footer-attachments">
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"><span><i className="uil uil-image"></i></span></div>
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"><span><i className="uil uil-video"></i></span></div>
+            <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"><span><i className="uil uil-file-alt"></i></span></div>
+            </div>
+            <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Post Modal -->
+  <div className="Search-Modal modal fade" id="Search-Modal" tabindex="-1" role="dialog" aria-labelledby="CreatePost-ModalTitle" aria-hidden="true">
+    <div className="modal-dialog modal-dialog-centered" role="document">
+      <div className="modal-content">
+        <div className="DadupaModal-Header">
+          <h4>New Message</h4>
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close"><i className="uil uil-times"></i></button>
+        </div>
+        <div className="modal-body">
+
+          <div className="Dadupa-Search">
+            <form className="search" action="#" method="post">
+              <input type="search" name="search" placeholder="Search for a contact" value="">
+              <button type="submit" name="submit"><i className="uil uil-search"></i></button>
+            </form>
+          </div>
+          <div className="Networks">
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <button type="button" className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-1.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-2.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-3.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-4.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-5.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-5.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <button type="button" className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-1.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-2.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-3.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-4.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-5.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div className="FriendBox-Item">
+              <div className="FriendBox">
+                <a href="#!">
+                  <div className="FriendThumb"><img src="assets/images/profiles/profile-5.jpg" ></div>
+                  <div className="FriendInfos">
+                    <h3>Claire Rose</h3>
+                    <span>CEO et DevFund</span>
+                    <span>Funder - Agriculture</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+  <script type="text/javascript" src="assets/js/popper.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.easing.min.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/readmore.js"></script> -->
+  <script type="text/javascript" src="assets/js/lightgallery.min.js"></script>
+  <script type="text/javascript" src="assets/js/lg-fullscreen.min.js"></script>
+  <script type="text/javascript" src="assets/js/lg-thumbnail.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>
+  <script type="text/javascript" src="assets/js/emojiPicker.js"></script>
+  <script type="text/javascript" src="assets/js/scripts.js"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+      const players = Array.from(document.querySelectorAll('.player'));
+      players.map(player => new Plyr(player, {
+        hideControls: false,
+        controls: ['play-large', 'play', 'progress', 'current-time', 'volume', 'fullscreen']
+      }));
+
+      $('.counter').counterUp({
+        delay: 10,
+        time: 1000
+      });
+    });
+  </script>
+
+</body>
+
+</html>

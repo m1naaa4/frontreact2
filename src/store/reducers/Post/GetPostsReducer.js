@@ -45,8 +45,6 @@ const initState = {
                 }
 
             case 'DELETE_POST_SUCCESS':
-                console.log('deleteeeeeeeeerrrrrrrrrrrreeeeeeeee', action.id)
-                console.log('deleteeeeeeeeeeeeeeeeeee', [...state.posts].filter(item => item.id !== action.id))
                 return {
                     ...state,
                     posts : [...state.posts].filter(item => item.id !== action.id),

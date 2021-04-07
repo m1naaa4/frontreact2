@@ -34,12 +34,9 @@ class HttpService {
         }).then(response => response.data)
     }
 
-    getData = async (added_url, tokenId = "") =>
+    getData = async (added_url) =>
     {
-        const token = await localStorage.getItem(tokenId);
-        const requestOptions = this.getRequestOptions(token);
-
-        return axios("/" + added_url, requestOptions).then( response => response.data);
+        return axios("/" + added_url).then( response => response.data);
     }
 
     getRequestOptions = (token) =>

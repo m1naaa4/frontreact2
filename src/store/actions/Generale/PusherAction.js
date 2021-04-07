@@ -7,7 +7,6 @@ export const PusherAction = (data) =>{
         const pusher = new PusherService();    
         var channel = pusher.config.subscribe(data.channel);        
         channel.bind(data.event, function(res) {   
-            console.log('ressssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',res) 
             let j = res.id;
             let feed = res[j]
         

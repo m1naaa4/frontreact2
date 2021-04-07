@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
 import { EditProfileAction } from '../../../store/actions/Profile/UserActions';

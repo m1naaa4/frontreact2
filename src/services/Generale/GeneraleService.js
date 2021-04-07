@@ -1,5 +1,4 @@
 import HttpService from "../HttpService";
-import PusherService from "../Pusher";
 
 
 export const LoadNotification = () =>{
@@ -12,6 +11,16 @@ export const LoadNotification = () =>{
         return data;
     }).catch((error)=> {
         // console.log(error)
+        return error;
+         });
+}
+
+export const Get = (url) =>{
+    const http = new HttpService();
+
+    return  http.getData(url).then( data => {
+        return data;
+    }).catch((error)=> {
         return error;
          });
 }
