@@ -18,7 +18,9 @@ import GetAddedNotificationReducer from './Notification/GetAddedNotificationRedu
 
 import AddCommentReducer from './Comment/AddCommentReducer'
 import GetCommentReducer from './Comment/GetCommentReducer'
-import MessengerReducer from './Messenger/MessengertReducer'
+
+import ConversationsReducer from './Messenger/ConversationsReducer'
+import ConversationReducer from './Messenger/ConversationReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -39,7 +41,8 @@ const RootReducer = combineReducers({
   getnotifications:GetNotificationsReducer,
   addednotification:GetAddedNotificationReducer,
 
-  conversations:MessengerReducer
+  conversations:ConversationsReducer,
+  conversation:ConversationReducer
 })
 
 export default RootReducer

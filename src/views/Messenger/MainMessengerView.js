@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux';
 import { useParams } from 'react-router';
 import SearchBar from './SearchBar';
@@ -11,9 +11,12 @@ import MessengerContent from './MessengerContent';
 export default function MainMessengerView(props) { 
     const dispatch = useDispatch();
     const params = useParams();
-    useEffect(() => {
-        // dispatch( ProfileAction(params.id));    
-    });
+    const [show, setShow] = useState(true);
+
+    const showContent = () =>{
+        setShow(!show)
+    }
+    //const showContent = () => setShow(true);
 
 
     return (
@@ -25,16 +28,19 @@ export default function MainMessengerView(props) {
                             <div className="row">
                                 <div className="Messenger-List">
                                     <SearchBar/>
-                                    <SideListBar/>
-                                    
-
-                        {/* <SideLeftProfileView />
-                        <PostView  {...props}/>
-                        <SideRightProfileView/> */}
+                                    <div onClick={showContent}>
+                                        <SideListBar/>
+                                    </div >
+                                            {/* <SideLeftProfileView />
+                                            <PostView  {...props}/>
+                                            <SideRightProfileView/> */}
                                 </div>
                             </div>
                         </div>
-                        <MessengerContent/>
+                        {show &&
+                            <MessengerContent/>
+                        }
+                        
                     </div>
                 </div>
             </div>

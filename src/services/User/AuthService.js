@@ -4,7 +4,7 @@ import HttpService from '../HttpService';
 export const SignUpService = (credentials) =>
 {
     const http = new HttpService();
-    let signUpUrl = "registerStep1";
+    let signUpUrl = "register";
     return http.postData(credentials,signUpUrl).then(data=>{
         // console.log(JSON.stringify(data));
         return data;

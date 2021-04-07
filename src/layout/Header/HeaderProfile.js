@@ -14,7 +14,6 @@ function HeaderProfile(props) {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const authResponse = useSelector(state => state.userAuth.authResponse);
     const [showNotifications, setShowNotifications] = useState(false);
-    console.log('sddsdsdsdsdsdsdsds', userProfile)
     
     
     useEffect(() => {

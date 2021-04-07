@@ -1,38 +1,39 @@
 const initState = {
-    conversations : []
+    messages : []
     }
 
 
-    const MessengerReducer = (state= initState | undefined, action) =>{
+    const ConversationReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
-            case 'LOADING_GET_MESSEGES':
+            case 'LOADING_GET_CONVERSATION':
                 return {
                     ...state,
-                    conversations:state.conversations,
+                    messages:state.messages,
                     loading:true
                     }
 
-            case 'GET_MESSEGES_SUCCESS':
+            case 'GET_CONVERSATION_SUCCESS':
+                console.log('hereeeeeeeeeeeeeeeeeeee', action.res)
                 return {
                     ...state,
-                    conversations: action.res.conversations,
+                    messages: action.res.messages,
                     hasMore:  action.res.hasMore,
                     current:  action.res.current,
                     loading:false
                 }
 
-            case 'GET_MESSEGES_ERROR':
+            case 'GET_CONVERSATION_ERROR':
 
                 return {
                     ...state,
-                    conversations:action.res,
+                    messages:action.res,
                 }
 
             case 'CODE_ERROR':
                 return {
                     ...state,
-                    conversations:'there seems to be a problem please refresh your browser',
+                    messages:'there seems to be a problem please refresh your browser',
                 }
             default:
                 return state
@@ -40,4 +41,4 @@ const initState = {
         }
     }
     
-    export default MessengerReducer;
+    export default ConversationReducer;

@@ -7,7 +7,7 @@ export const LoadUser = () =>{
     const tokenId = "user-token";
 
     return  http.getData(profileUpUrl, tokenId).then( data => {
-        console.log(data)
+        //console.log(data)
         return data;
     }).catch((error)=> {
         return error;

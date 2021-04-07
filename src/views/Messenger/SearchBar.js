@@ -13,7 +13,7 @@ export default function SearchBar({filterInput, setFilterInput, props}) {
             <button className="Messenger-ListHeaderButton" type="button" data-target="#Search-Modal" data-toggle="modal" data-placement="bottom" title="New Message"><i className="uil uil-focus-add"></i></button>
             <div className="Messenger-Search">
                 <form className="search" action="#" method="post">
-                    <input type="search" name="search" placeholder="Search in Messenger" value=""/>
+                    <input type="search" name="search" placeholder="Search in Messenger" />
                     <button type="submit" name="submit"><i className="uil uil-search"></i></button>
                 </form>
             </div>

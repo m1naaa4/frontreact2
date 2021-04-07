@@ -1,14 +1,15 @@
 import React  from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 
-export default function MessengerContent({filterInput, setFilterInput, props}) {
+export default function MessengerContent() {
 
-
+  const conversation = useSelector(state => state.messages);
+  console.log('conversationnnnnnn', conversation);
     
 
 
-    return (
+  return (
         <div className="col-md-8 col-lg-9">
               <div className="row">
                 <div className="tab-content Messenger-row" id="v-pills-tabContent">

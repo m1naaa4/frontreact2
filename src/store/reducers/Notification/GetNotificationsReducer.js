@@ -14,7 +14,7 @@ const initState = {
                 }
 
             case 'GET_NOTIFICATIONS_SUCCESS':
-                console.log('GET_NOTIFICATIONS_SUCCESS', action.res.notifications)
+                //console.log('GET_NOTIFICATIONS_SUCCESS', action.res.notifications)
                 
               return {
                   ...state,
