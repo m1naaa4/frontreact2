@@ -2,19 +2,16 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
 import SearchBar from './SearchBar';
-import SideListBar from './SideListBar';
-import MessengerContent from './MessengerContent';
+import SideLeftBar from './SideLeftBar';
 import Body from './MessengerWraps/Body';
 import Header from './MessengerWraps/Header';
+import SideRightBar from './SideRightBar';
 
 
 
 
 export default function MainMessengerView(props) { 
-    const dispatch = useDispatch();
-    const params = useParams();
-    
-
+   
     const conversation = useSelector(state => state.messages);
     const showContent = () =>{
         console.log('salam')
@@ -37,7 +34,7 @@ export default function MainMessengerView(props) {
                                 <div className="Messenger-List">
                                     <SearchBar/>
                                     <div onClick={showContent}>
-                                        <SideListBar/>
+                                        <SideLeftBar/>
                                     </div >
                                             {/* <SideLeftProfileView />
                                             <PostView  {...props}/>
@@ -56,59 +53,9 @@ export default function MainMessengerView(props) {
                                             <Body conversation={conversation} />                       
                                             </div>): (<div className="Messenger-box" rel="'+ userID+'"></div>)
                                         }
-                                        
-                                        <div className="Messenger-user-profile">
-                                            <div className="Messenger-profile-header">
-                                            <div className="Messenger-Profile-Infos">
-                                                <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                                <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${null})`}} ></div>
-                                                <div className="Profile-Name">Abdelkarim ICHIA</div>
-                                            </div>
-                                            </div>
-                                            <div className="Messenger-Profile-Widgets">
-                                            <div className="Messenger-Profile-Widget">
-                                                <h3 className="Messenger-Widget-Title">Lieu de résidence</h3>
-                                                <p>Casablanca</p>
-                                            </div>
-                                            <div className="Messenger-Profile-Widget">
-                                                <h3 className="Messenger-Widget-Title">Bio</h3>
-                                                <p>Full Stack Developer</p>
-                                            </div>
-                                            <div className="Messenger-Profile-Widget">
-                                                <h3 className="Messenger-Widget-Title">Offres</h3>
-                                                <div className="Messenger-Offers">
-                                                <div className="Messenger-Offer">
-                                                    <div className="Messenger-Offer-Media">
-                                                    </div>
-                                                    <div className="Messenger-Offer-Content">
-                                                    <div className="offer-title">
-                                                        <div className="offer-logo">
-                                                        <img src="assets/images/majorel.png" title="Nom du projet" alt=""/>
-                                                        </div>
-                                                        <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
-                                                        <span>Secteur d’activité</span>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                <div className="Messenger-Offer">
-                                                    <div className="Messenger-Offer-Media">
-                                                    </div>
-                                                    <div className="Messenger-Offer-Content">
-                                                    <div className="offer-title">
-                                                        <div className="offer-logo">
-                                                        <img src="assets/images/majorel.png" title="Nom du projet" alt=""/>
-                                                        </div>
-                                                        <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
-                                                        <span>Secteur d’activité</span>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
 
-                                        </div>
-                    
+                                        <SideRightBar conversation={conversation} />
+                                        
                                     </div>
                                 </div>
                                                     

@@ -4,7 +4,7 @@ import { GetMessagesListAction } from '../../store/actions/Messenger/MessageActi
 import { GetConversationAction } from '../../store/actions/Messenger/MessageAction';
 
 
-export default function SideListBar({filterInput, setFilterInput, props}) {
+export default function SideLeftBar({filterInput, setFilterInput, props}) {
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);

@@ -47,3 +47,26 @@ export const GetConversationAction = (data, props, current) =>{
 
 }
 
+export const SendMessageAction = (data, props, current) =>{
+
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_SEND_MESSAGE'});
+
+        Post(data, props, current).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'SEND_MESSAGE_SUCCESS', res});
+
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'SEND_MESSAGE_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+
+}
+
