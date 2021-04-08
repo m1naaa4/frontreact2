@@ -8,23 +8,27 @@ export default function SideListBar({filterInput, setFilterInput, props}) {
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
-    const [listusers, setListusers] = useState();
+    
     const observer = useRef();
     const users = useSelector(state => state.conversations);
+    const [listusers, setListusers] = useState();
     
 
     useEffect(() => {          
-        if (users.conversations !== undefined && users.conversations !== 'loading') {              
+        if (users.conversations !== undefined && users.conversations !== 'loading') {  
             setListusers(users.conversations);
-        }       
-    })
-    // console.log('listtttttttttttttttttttttttttsssssss', listusers)
+            let data = {
+                receiver_id : users.conversations[0].id
+            }
+            dispatch(GetConversationAction(data, 'messages/show', 1));         
+        }
+    },[users])
+    
     useEffect(() => {
         if(!isLoading){
             dispatch(GetMessagesListAction('conversations/getConversations', '', 1));
         }
     }, []);
-
 
     const showConversation =(id) =>{
         let data = {
@@ -32,7 +36,6 @@ export default function SideListBar({filterInput, setFilterInput, props}) {
         }
         dispatch(GetConversationAction(data, 'messages/show', 1));
       }
-
 
     return (
         <div className="Msgs-List nav nav-pillss" style={{backgroundColor:'#f2fff8'}} id="v-pills-tab" role="tablist" aria-orientation="vertical">

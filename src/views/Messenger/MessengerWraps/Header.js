@@ -4,14 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 
 export default function Header({conversation}) {
 
-    console.log('fffffffffffffffffffffffffff', conversation.messages.success)
-
-    
-
-
 return (
     <>
-        {conversation.messages.success &&
+        {conversation.messages && conversation.messages.success &&
     (<div className="Messenger-head">
         <div className="Messenger-head-left">
           <div className="Friend-Active"></div>

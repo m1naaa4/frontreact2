@@ -77,8 +77,10 @@ export default function MessengerContent() {
                         </div>
 
                       </div>
+                    
                     </div>
                   </div>
+                      
                   <div className="tab-pane fade" id="v-youness-elbezzazi" role="tabpanel" aria-labelledby="v-youness-elbezzazi-tab">
                     <div className="Messenger-box" rel="'+ userID+'">
                       <div className="Messenger-head">
@@ -190,6 +192,7 @@ export default function MessengerContent() {
                       </div>
                     </div>
                   </div>
+                
                 </div>
               </div>
             </div>

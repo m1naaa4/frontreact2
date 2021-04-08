@@ -4,12 +4,13 @@ import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {Dropdown} from "react-bootstrap";
-import { NavLink, useHistory  } from 'react-router-dom';
+import { Link, NavLink, useHistory, useParams  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 
-function HeaderProfile(props) {
-    let history = useHistory();
+function HeaderProfile() {
+    const history = useHistory();
+    const params = useParams();
     const dispatch = useDispatch();
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const authResponse = useSelector(state => state.userAuth.authResponse);
@@ -31,28 +32,22 @@ function HeaderProfile(props) {
     useEffect(() => {
         if (authResponse !== "" && authResponse.success === true) {
             localStorage.removeItem('user-token');
-            console.log(props)
-            // props.props.history.push('/login');
             history.push("/login")
         } else if (authResponse.success === false) {
         }
     }, [authResponse])
 
     const goToAddproject = () => {
-        console.log(props)
         history.push("/project/create");
-        // props.props.history.push('/project/create');
     };
 
     const goToListproject = () => {
         history.push("/project/lists");
-        // props.props.history.push('/project/lists');
     };
 
     
     const gotToProfile = () => {
         history.push('/profile/'+ userProfile.profile_id);
-        // props.history.push('/profile/'+ userProfile.user.profile_id)
     };
 
     const openNotifications = () => {
@@ -117,13 +112,14 @@ function HeaderProfile(props) {
                                                     {showNotifications && <Notifications/>}
                                                 </div>
 
-                                                <div className="Dadupa-Notifications-Item Dadupa-Message-Popup"><a
+                                                <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
+                                                    <Link to={`/messages/${params.id}`}
                                                     href="#!"
                                                     className="Dadupa-Message"
                                                     data-toggle="tooltip"
                                                     data-placement="bottom"
                                                     title="Messages"><span
-                                                    className="new-message"></span><i className="uil uil-envelope"></i></a>
+                                                    className="new-message"></span><i className="uil uil-envelope"></i></Link>
                                                     <div className="Dadupa-Msgs-Box">
                                                         <h3>Messages</h3>
                                                         <div className="Msgs-List">
