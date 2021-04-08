@@ -16,7 +16,7 @@ export default function LinkedInButton(props) {
             if(res.hasOwnProperty('success') && res.success===true &&  res.hasOwnProperty('token')){
                 localStorage.setItem('user-token','Bearer '+res.token);
                 setTimeout(() => {
-                    props.props.history.push("/projects/lists");
+                    props.props.history.push("/project/lists");
                 }, 10);
             }
         }).catch((error)=> {

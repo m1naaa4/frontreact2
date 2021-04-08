@@ -17,7 +17,7 @@ export const signUpAction = (credentials,props) =>
 
                 dispatch({type:'LOGIN_SUCCESS'});
                 setTimeout(() => {
-                    props.history.push("/projects/lists");
+                    props.history.push("/project/lists");
                     dispatch({type:'RESTART_AUTH_RESPONSE'});
                 }, 10);
 

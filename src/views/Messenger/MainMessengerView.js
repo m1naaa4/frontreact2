@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
 import SearchBar from './SearchBar';
 import SideListBar from './SideListBar';
@@ -13,8 +13,9 @@ export default function MainMessengerView(props) {
     const params = useParams();
     const [show, setShow] = useState(true);
 
+    const conversation = useSelector(state => state.messages);
     const showContent = () =>{
-        setShow(!show)
+        setShow(conversation)
     }
     //const showContent = () => setShow(true);
 

@@ -17,9 +17,7 @@ const initState = {
                 console.log('hereeeeeeeeeeeeeeeeeeee', action.res)
                 return {
                     ...state,
-                    messages: action.res.messages,
-                    hasMore:  action.res.hasMore,
-                    current:  action.res.current,
+                    messages: action.res,
                     loading:false
                 }
 

@@ -42,7 +42,7 @@ const RootReducer = combineReducers({
   addednotification:GetAddedNotificationReducer,
 
   conversations:ConversationsReducer,
-  conversation:ConversationReducer
+  messages:ConversationReducer
 })
 
 export default RootReducer
