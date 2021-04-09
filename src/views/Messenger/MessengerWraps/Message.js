@@ -8,19 +8,20 @@ export default function Message({message, sender}) {
   
   const me = useSelector(state => state.userProfile.userProfile.id);
   let eye = message.read_at ? 'uil uil-eye' : 'uil uil-eye-slash';
-  let classe = message.read_at ? 'bubble bubble-dark message-seen' : 'bubble bubble-light';
+  let classe = message.read_at ? 'message-seen' : '';
+  console.log('ttttttttttttttttt', message.sender_id , me )
   
   return (
     <>
         {message && 
           (
             <>
-            {!message.sender_id === me ?
+            {message.sender_id !== me ?
               (
                 <div className="message incoming-message">
                   <div className="avatar-wrapper avatar-small"><img src={sender.avatar} alt="avatar"/></div>
                   <div className="incoming-bubbles">
-                    <div className={classe}><div className="message-text">{message.content}</div><span className="message-status"><i className={eye}></i>
+                    <div className={`${classe} bubble bubble-light`}><div className="message-text">{message.content}</div><span className="message-status"><i className={eye}></i>
                       {message.created_at} </span></div>
                   </div>
                 </div>
@@ -28,7 +29,7 @@ export default function Message({message, sender}) {
               (
                 <div className="message outcoming-message">
                   <div className="outcoming-bubbles">
-                    <div className={classe}><span className="message-status">{message.created_at} 
+                    <div className={`${classe} bubble bubble-dark`}><span className="message-status">{message.created_at} 
                     <i className={eye}></i>
                     </span><div className="message-text">{message.content}</div></div>
                   </div>
