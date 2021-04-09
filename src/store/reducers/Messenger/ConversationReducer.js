@@ -14,13 +14,23 @@ const initState = {
                     }
 
             case 'GET_CONVERSATION_SUCCESS':
-                console.log('hereeeeeeeeeeeeeeeeeeee', action.res)
+                console.log('GET_CONVERSATION_SUCCESS', action.res)
                 return {
                     ...state,
                     messages: action.res,
                     loading:false
                 }
-
+            
+            case 'SEND_MESSAGE_SUCCESS':
+                console.log('SEND_MESSAGE_SUCCESS', action.res)
+                console.log('OLD_SEND_MESSAGE_SUCCESS', [action.res.message, ...state.messages.messages])
+                return {
+                    ...state,
+                    messages: [action.res.message, ...state.messages.messages],
+                    loading:false
+                }
+    
+                
             case 'GET_CONVERSATION_ERROR':
 
                 return {

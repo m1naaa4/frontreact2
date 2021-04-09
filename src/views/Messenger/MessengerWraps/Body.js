@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useRef, useState }  from 'react'
 import BoxMessage from './BoxMessage';
 import Message from './Message';
 
@@ -8,6 +8,13 @@ export default function Body({conversation}) {
 
   const [messages, setMessages] = useState();
   const [sender, setSender] = useState();
+
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
   useEffect(() => {          
     if (conversation.messages !== undefined) {  
@@ -26,7 +33,7 @@ return (
                 <Message message={message} sender={sender}/>
               </div>
             ))}
-
+          <div ref={messagesEndRef} />
         </div>
         <BoxMessage sender={sender}/>
     </div>

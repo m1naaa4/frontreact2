@@ -9,7 +9,6 @@ export default function Message({message, sender}) {
   const me = useSelector(state => state.userProfile.userProfile.id);
   let eye = message.read_at ? 'uil uil-eye' : 'uil uil-eye-slash';
   let classe = message.read_at ? 'message-seen' : '';
-  console.log('ttttttttttttttttt', message.sender_id , me )
   
   return (
     <>

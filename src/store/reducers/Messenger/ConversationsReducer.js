@@ -16,10 +16,10 @@ const initState = {
             case 'GET_MESSEGES_SUCCESS':
                 return {
                     ...state,
-                    conversations: action.res.conversations,
-                    hasMore:  action.res.hasMore,
-                    current:  action.res.current,
-                    loading:false
+                    conversations:  action.res.conversations,
+                    hasMore      :  action.res.hasMore,
+                    current      :  action.res.current,
+                    loading      :  false
                 }
 
             case 'GET_MESSEGES_ERROR':
