@@ -130,10 +130,10 @@ export default function LoginView(props) {
                                             <label className="container-checkbox">
                                                 <input type="checkbox"/>
                                                     <span className="checkmark"></span>
-                                                    <span>Remember me</span>
+                                                    <span><Text tid="remember_me" /></span>
                                             </label>
                                         </div>
-                                        <div className="forgot-password"><a href="#!">Forgot password?</a></div>
+                                        <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
                                     </div>
                                     <div className="form-submit">
                                         <button type="submit" name="submit"><Text tid="login" /></button>
@@ -141,8 +141,11 @@ export default function LoginView(props) {
                                 </form>
 
                                 <SocialLogin props={props.props} />
-
-                                <NavLink className="login-link" to="/register"><span>Don't have an account ? </span><Text tid="register" /></NavLink>
+                                <div className="login-link">
+                                    <span><Text tid="q_register" /></span>
+                                    <NavLink to="/register"><Text tid="register" /></NavLink>
+                                </div>
+                                
 
                             </div>
                         </div>

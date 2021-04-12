@@ -28,6 +28,20 @@ const en = {
     step: 'Step',
     logout: 'Logout',
     setting: 'Setting',
+    forget_password:'Forgot password?',
+    remember_me: 'Remember me',
+    q_register: "Don't have an account ?",
+    signUpWith : 'or Sign Up with',
+    'footer.copyright': '2021 All Rights Reserved. Dadupa Connect',
+    'footer.menu.about': 'About',
+    'footer.menu.user_agreement': "Conditions Générales d'Utilisation ",
+    'footer.menu.privacy': "Privacy Policy",
+    'footer.menu.cookie': "Cookie Policy ",
+    'footer.menu.copyright': "Copyright Policy",
+    'footer.menu.brand': "Brand Policy",
+    'footer.menu.guest': "Guest Controls ",
+    'footer.menu.community': "Community Guidelines ",
+
 };
 
 export default en;
