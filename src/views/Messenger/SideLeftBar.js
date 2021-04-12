@@ -27,7 +27,7 @@ export default function SideLeftBar({filterInput, setFilterInput, props}) {
     
     useEffect(() => {
         if(!isLoading){
-            dispatch(GetMessagesListAction('conversations/getConversations', '', 1));
+            dispatch(GetMessagesListAction('messages/getConversations', '', 1));
         }
     }, []);
 
