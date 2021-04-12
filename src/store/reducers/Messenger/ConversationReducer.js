@@ -9,7 +9,7 @@ const initState = {
             case 'LOADING_GET_CONVERSATION':
                 return {
                     ...state,
-                    messages:state.messages,
+                    messages:[],
                     loading:true
                     }
 
@@ -17,17 +17,18 @@ const initState = {
                 console.log('GET_CONVERSATION_SUCCESS', action.res)
                 return {
                     ...state,
-                    messages: action.res,
+                    messages: [...state.messages, ...action.res.messages],
+                    user: action.res.user,
                     loading:false
                 }
             
             case 'SEND_MESSAGE_SUCCESS':
                 console.log('SEND_MESSAGE_SUCCESS', action.res)
-                console.log('OLD_SEND_MESSAGE_SUCCESS', [action.res.message, ...state.messages.messages])
+                console.log('OLD_SEND_MESSAGE_SUCCESS', [...state.messages, action.res.message])
                 return {
                     ...state,
-                    messages: [action.res.message, ...state.messages.messages],
-                    loading:false
+                    messages: [...state.messages, action.res.message],
+                    // loading:false
                 }
     
                 

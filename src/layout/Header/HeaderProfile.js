@@ -113,7 +113,7 @@ function HeaderProfile() {
                                                 </div>
 
                                                 <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
-                                                    <Link to={`/messages/${params.id}`}
+                                                    <Link to={`/messages/${userProfile.id}`}
                                                     href="#!"
                                                     className="Dadupa-Message"
                                                     data-toggle="tooltip"
@@ -125,7 +125,7 @@ function HeaderProfile() {
                                                         <div className="Msgs-List">
                                                             <div className="Msgs-Item New-Msg">
                                                                 <div className="Msgs-Image"><img
-                                                                    src="assets/images/abbass-iya.jpg"/></div>
+                                                                    src="/assets/images/abbass-iya.jpg"/></div>
                                                                 <div className="Msgs-Content">
                                                                     <div className="Msgs-User">Youness EL BEZZAZI</div>
                                                                     <div className="Msgs-Text">Message text goes

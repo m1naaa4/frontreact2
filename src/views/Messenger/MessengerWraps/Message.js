@@ -1,11 +1,9 @@
 import React  from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import Moment from 'react-moment';
 
 
-export default function Message({message, sender}) {
-
-  
+export default function Message({message}) {
   const me = useSelector(state => state.userProfile.userProfile.id);
   let eye = message.read_at ? 'uil uil-eye' : 'uil uil-eye-slash';
   let classe = message.read_at ? 'message-seen' : '';
@@ -18,7 +16,7 @@ export default function Message({message, sender}) {
             {message.sender_id !== me ?
               (
                 <div className="message incoming-message">
-                  <div className="avatar-wrapper avatar-small"><img src={sender.avatar} alt="avatar"/></div>
+                  <div className="avatar-wrapper avatar-small"><img src={message.sender.profile.avatar_link} alt="avatar"/></div>
                   <div className="incoming-bubbles">
                     <div className={`${classe} bubble bubble-light`}><div className="message-text">{message.content}</div><span className="message-status"><i className={eye}></i>
                       {message.created_at} </span></div>

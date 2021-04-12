@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router';
+import {useSelector} from 'react-redux';
 import SearchBar from './SearchBar';
 import SideLeftBar from './SideLeftBar';
 import Body from './MessengerWraps/Body';
@@ -13,6 +12,7 @@ import SideRightBar from './SideRightBar';
 export default function MainMessengerView(props) { 
    
     const conversation = useSelector(state => state.messages);
+    console.log('conversationnnnnnnnnnnnn', conversation);
     const showContent = () =>{
         console.log('salam')
         //setShow(conversation)

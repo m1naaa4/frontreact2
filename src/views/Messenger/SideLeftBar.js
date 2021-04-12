@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState }  from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
 import { GetMessagesListAction } from '../../store/actions/Messenger/MessageAction';
 import { GetConversationAction } from '../../store/actions/Messenger/MessageAction';
 
@@ -41,7 +42,7 @@ export default function SideLeftBar({filterInput, setFilterInput, props}) {
         <div className="Msgs-List nav nav-pillss" style={{backgroundColor:'#f2fff8'}} id="v-pills-tab" role="tablist" aria-orientation="vertical">
         {listusers &&
             listusers.map((user, index) => (
-                <a key={index} className="Msgs-Item New-Msg nav-link" onClick={e=> showConversation(user.id)}  id="v-abdelkarim-ichia-tab" data-toggle="pill" href={null} role="tab" aria-controls="v-abdelkarim-ichia" aria-selected="true">
+                <Link to={`/messages/${user.id}`} key={index} className="Msgs-Item New-Msg nav-link" onClick={e=> showConversation(user.id)}  id="v-abdelkarim-ichia-tab" data-toggle="pill" href={null} role="tab" aria-controls="v-abdelkarim-ichia" aria-selected="true">
                     <div className="Msgs-Image"><img src={user.avatar} alt="avatar"/></div>
                     <div className="Msgs-Content">
                         <div className="Msgs-User">{user.name}</div>
@@ -49,7 +50,7 @@ export default function SideLeftBar({filterInput, setFilterInput, props}) {
                     <div className="Friend-Active"></div>
                     <span className="Msgs-N">{user.unread}</span>
                     </div>
-                </a>)
+                </Link>)
             )
         }
 

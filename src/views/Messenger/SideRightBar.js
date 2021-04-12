@@ -1,5 +1,4 @@
 import React  from 'react'
-import {useSelector} from "react-redux";
 
 
 
@@ -10,24 +9,24 @@ export default function SideRightBar({conversation}) {
 
   return (
     <>
-      {conversation.messages && conversation.messages.success &&
+      {conversation.user  &&
   (
     <div className="Messenger-user-profile">
       <div className="Messenger-profile-header">
         <div className="Messenger-Profile-Infos">
           <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-          <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${conversation.messages.user.avatar})`}} ></div>
-          <div className="Profile-Name">{conversation.messages.user.name}</div>
+          <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${conversation.user.profile.avatar_link})`}} ></div>
+          <div className="Profile-Name">{conversation.user.profile.username}</div>
         </div>
       </div>
       <div className="Messenger-Profile-Widgets">
       <div className="Messenger-Profile-Widget">
         <h3 className="Messenger-Widget-Title">Lieu de résidence</h3>
-        <p>{conversation.messages.user.address}</p>
+        <p>{conversation.user.profile.address}</p>
       </div>
       <div className="Messenger-Profile-Widget">
-        <h3 className="Messenger-Widget-Title">{conversation.messages.user.bio}</h3>
-        <p>{conversation.messages.user.job}</p>
+        <h3 className="Messenger-Widget-Title">{conversation.user.bio}</h3>
+        <p>{conversation.user.profile.job}</p>
       </div>
       <div className="Messenger-Profile-Widget">
         <h3 className="Messenger-Widget-Title">Offres</h3>

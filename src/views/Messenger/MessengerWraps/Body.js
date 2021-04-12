@@ -7,7 +7,8 @@ export default function Body({conversation}) {
 
 
   const [messages, setMessages] = useState();
-  const [sender, setSender] = useState();
+  console.log('OLD_SEND_MESSAGE_SUCCESSconversation', conversation.messages)
+  console.log('OLD_SEND_MESSAGE_SUCCESSconversatiousern', conversation.user)
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
@@ -18,8 +19,7 @@ export default function Body({conversation}) {
 
   useEffect(() => {          
     if (conversation.messages !== undefined) {  
-      setMessages(conversation.messages.messages);
-      setSender(conversation.messages.user);
+      setMessages(conversation.messages);
     }
 },[conversation])
 
@@ -30,12 +30,12 @@ return (
           {messages &&
             messages.map((message, index) => (
               <div key={index}>
-                <Message message={message} sender={sender}/>
+                <Message message={message}/>
               </div>
             ))}
           <div ref={messagesEndRef} />
         </div>
-        <BoxMessage sender={sender}/>
+        <BoxMessage/>
     </div>
       
     )

@@ -1,18 +1,17 @@
 import React  from 'react'
-import {useDispatch, useSelector} from "react-redux";
 
 
 export default function Header({conversation}) {
 
 return (
     <>
-        {conversation.messages && conversation.messages.success &&
+        {conversation.user &&
     (<div className="Messenger-head">
         <div className="Messenger-head-left">
           <div className="Friend-Active"></div>
-          <div className="Messenger-head-user-thumb"><img src={conversation.messages.user.avatar} alt="avatar"/></div>
+          <div className="Messenger-head-user-thumb"><img src={conversation.user.profile.avatar_link} alt="avatar"/></div>
           <div className="Messenger-head-user-info">
-            <label>{conversation.messages.user.name}</label>
+            <label>{conversation.user.name}</label>
             <span>Online</span>
           </div>
         </div>
