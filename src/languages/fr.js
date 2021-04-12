@@ -28,6 +28,19 @@ const fr = {
     step: 'Etape',
     logout: 'Logout',
     setting: 'Paramètres',
+    forget_password: 'Mot de passe oublié ?',
+    remember_me: 'Se souvenir de moi',
+    q_register: "Pas de compte ? ",
+    signUpWith : 'ou me connecter avec :',
+    'footer.copyright': '2021 Tous droits réservés. dadupa Connect',
+    'footer.menu.about': 'À propos',
+    'footer.menu.user_agreement': "Conditions Générales d'Utilisation",
+    'footer.menu.privacy': "Politique d'Utilisation des Données ",
+    'footer.menu.cookie': "Aide & FAQ",
+    'footer.menu.copyright': "Presse & Médias",
+    'footer.menu.brand': "Stages & Carrières",
+    'footer.menu.guest': "Services dadupa",
+    'footer.menu.community': "Nos Réseaux Sociaux",
 };
 
 export default fr;

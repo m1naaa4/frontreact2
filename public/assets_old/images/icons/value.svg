@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="18.665" viewBox="0 0 20 18.665">
+  <g id="value" transform="translate(0 -16.017)">
+    <g id="Groupe_2469" data-name="Groupe 2469" transform="translate(5.335 18.683)">
+      <g id="Groupe_2468" data-name="Groupe 2468" transform="translate(0 0)">
+        <path id="Tracé_856" data-name="Tracé 856" d="M130.034,84.017a.667.667,0,0,1,0-1.333h1.333a.667.667,0,0,0,0-1.333H130.7v-.667a.667.667,0,0,0-1.333,0v.789a1.995,1.995,0,0,0,.667,3.877.667.667,0,0,1,0,1.333H128.7a.667.667,0,0,0,0,1.333h.667v.667a.667.667,0,1,0,1.333,0v-.789a1.995,1.995,0,0,0-.667-3.877Z" transform="translate(-128.034 -80.017)" fill="#00ce61"/>
+      </g>
+    </g>
+    <g id="Groupe_2471" data-name="Groupe 2471" transform="translate(0.002 16.017)">
+      <g id="Groupe_2470" data-name="Groupe 2470">
+        <path id="Tracé_857" data-name="Tracé 857" d="M7.367,16.017A7.33,7.33,0,0,0,4.126,29.923a.679.679,0,0,0,.293.068.667.667,0,0,0,.295-1.265,6,6,0,1,1,8.653-5.376,6.03,6.03,0,0,1-2.642,4.982.667.667,0,0,0,.752,1.1A7.339,7.339,0,0,0,7.367,16.017Z" transform="translate(-0.034 -16.017)" fill="#00ce61"/>
+      </g>
+    </g>
+    <g id="Groupe_2473" data-name="Groupe 2473" transform="translate(0 26.683)">
+      <g id="Groupe_2472" data-name="Groupe 2472" transform="translate(0)">
+        <path id="Tracé_858" data-name="Tracé 858" d="M19.334,272.017h-4a.667.667,0,1,0,0,1.333h2.321l-4.424,3.869L8.3,274.753a.665.665,0,0,0-.617.012l-7.333,4a.667.667,0,0,0,.32,1.252.657.657,0,0,0,.319-.083L8.015,276.1l5.021,2.51a.671.671,0,0,0,.737-.095l4.894-4.282v2.448a.667.667,0,1,0,1.333,0v-4A.667.667,0,0,0,19.334,272.017Z" transform="translate(0 -272.017)" fill="#00ce61"/>
+      </g>
+    </g>
+  </g>
+</svg>
