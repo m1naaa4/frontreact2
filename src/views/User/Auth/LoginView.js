@@ -9,7 +9,8 @@ import Footer from "../../../layout/footer/footer";
 import {Text} from "../../../containers/Language";
 import {displayErrorMessages} from '../../../helpers/displayErr';
 import SocialLogin from "./Social/SocialLogin";
-
+import $ from "jquery";
+import 'jquery-validation'
 
 
 export default function LoginView(props) {
@@ -39,11 +40,12 @@ export default function LoginView(props) {
 
     const UserLogin = (e) => {
         e.preventDefault();
-
         clearAuthErrDiv();
 
-        dispatch(UserLoginAction(fields, props.props))
-
+        if($("#form-login").valid()){
+            dispatch(UserLoginAction(fields, props.props))
+        }
+       
     }
 
     const clearAuthErrDiv = () => {
@@ -102,7 +104,7 @@ export default function LoginView(props) {
                         <div className="col-md-12 col-lg-4">
                             <div className="form-wrapper">
 
-                                <form onSubmit={UserLogin} id="form-login" className="form-login">
+                                <form id="form-login" className="form-login">
                                     <h3 className="form-title"><Text tid="welcomeDescription" />!</h3>
                                     <div className="form-inputs">
                                         <div className="input-row">
@@ -112,6 +114,7 @@ export default function LoginView(props) {
                                               margin="normal"
                                               variant="outlined"
                                               id="email"
+                                              className="wizard-required" 
                                               required/>
                                         </div>
                                         <div className="input-row">
@@ -136,7 +139,7 @@ export default function LoginView(props) {
                                         <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
                                     </div>
                                     <div className="form-submit">
-                                        <button type="submit" name="submit"><Text tid="login" /></button>
+                                        <button type="button" onClick={UserLogin} name="submit"><Text tid="login" /></button>
                                     </div>
                                 </form>
 
