@@ -19,8 +19,11 @@ const en = {
     previous: 'Previous',
     edit: 'Edit',
     name: 'Name',
+    firstName: 'First Name',
+    lastName: 'Last Name',
     phone: 'Phone',
     email: 'Email',
+    city: 'City',
     company: 'Company',
     password: 'Password',
     type: 'Type',
@@ -41,6 +44,13 @@ const en = {
     'footer.menu.brand': "Brand Policy",
     'footer.menu.guest': "Guest Controls ",
     'footer.menu.community': "Community Guidelines ",
+    'signin': 'Sign In',
+    'signup.message1': 'Bienvenue chez Dadupa,',
+    'signup.message2': 'le réseau social des entrepreneurs',
+    'signup.message3': 'By signing up, I agree to Dadupa Connect',
+    'signup.message4': 'Privacy Policy and Terms of Services.',
+    'signup.form.email': 'Type your email addresse',
+    'signup.form.alreadyMember': 'Already a member',
 
 };
 

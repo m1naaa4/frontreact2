@@ -19,8 +19,11 @@ const fr = {
     previous: 'Précédente',
     edit: 'Modifier',
     name: 'Nom',
+    firstName: 'Nom',
+    lastName: 'Prenom',
     phone: 'Téléphone',
     email: 'Email',
+    city: 'Ville',
     company: 'Compagnie',
     password: 'Mot de passe',
     type: 'Type',
@@ -41,6 +44,14 @@ const fr = {
     'footer.menu.brand': "Stages & Carrières",
     'footer.menu.guest': "Services dadupa",
     'footer.menu.community': "Nos Réseaux Sociaux",
+    'signin': "M'identifier !",
+    'signup.message1': 'Bienvenue chez Dadupa,',
+    'signup.message2': 'le réseau social des entrepreneurs',
+    'signup.message3': 'By signing up, I agree to Dadupa Connect',
+    'signup.message4': 'Privacy Policy and Terms of Services.',
+    'signup.form.email': 'Type your email addresse',
+    'signup.form.alreadyMember': 'Déjà inscrit ?',
+
 };
 
 export default fr;

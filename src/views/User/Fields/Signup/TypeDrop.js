@@ -1,10 +1,12 @@
 import React from "react";
+import {Text} from "../../../../containers/Language";
 
 const types = [
     ["", "Vous êtes ?"],
     ["PP", "Porteur de projet"],
-    ["BF", "Bailleur de fonds"],
-    ["ACMPT", "Accompagnateur"]
+    ["BF", "Investisseur"],
+    ["ACMPT", "Mentor"],
+    ["visitor", "Visiteur"],
 ];
 
 const TypeDrop = ({ label, ...others }) => (
