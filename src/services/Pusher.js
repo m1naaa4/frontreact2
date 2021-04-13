@@ -8,8 +8,15 @@ class PusherService {
     
 
     config =  new Pusher(app_key , {
-            cluster : app_cluster,
-        });    
+        cluster : app_cluster,
+        authEndpoint: '/channels/authorize',
+        encrypted: true,
+        auth: {
+            headers: { 
+                'Authorization': localStorage.getItem('user-token')
+            }         
+        }
+    });    
 }
 
 
