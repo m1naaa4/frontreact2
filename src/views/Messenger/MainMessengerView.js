@@ -12,7 +12,7 @@ import SideRightBar from './SideRightBar';
 export default function MainMessengerView(props) { 
    
     const conversation = useSelector(state => state.messages);
-    console.log('conversationnnnnnnnnnnnn', conversation);
+    // console.log('conversationnnnnnnnnnnnn', conversation);
     const showContent = () =>{
         console.log('salam')
         //setShow(conversation)

@@ -14,7 +14,6 @@ const initState = {
                     }
 
             case 'GET_CONVERSATION_SUCCESS':
-                console.log('GET_CONVERSATION_SUCCESS', action.res)
                 return {
                     ...state,
                     messages: [...state.messages, ...action.res.messages],
@@ -23,8 +22,6 @@ const initState = {
                 }
             
             case 'SEND_MESSAGE_SUCCESS':
-                console.log('SEND_MESSAGE_SUCCESS', action.res)
-                console.log('OLD_SEND_MESSAGE_SUCCESS', [...state.messages, action.res.message])
                 return {
                     ...state,
                     messages: [...state.messages, action.res.message],

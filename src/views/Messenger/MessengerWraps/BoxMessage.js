@@ -39,14 +39,14 @@ export default function BoxMessage() {
       event   : 'message',
       type    : 'SEND_MESSAGE_SUCCESS',
     };
-    dispatch(PusherAction(msgData));
+    dispatch(PusherAction(msgData, params.id));
 
     const notifData = {
       channel : 'notification_' + params.id,
       event   : 'notifpost',
       type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
     };
-    dispatch(PusherAction(notifData)); 
+    // dispatch(PusherAction(notifData)); 
   }
 
   const handleImageClick = e => {

@@ -7,8 +7,8 @@ export default function Body({conversation}) {
 
 
   const [messages, setMessages] = useState();
-  console.log('OLD_SEND_MESSAGE_SUCCESSconversation', conversation.messages)
-  console.log('OLD_SEND_MESSAGE_SUCCESSconversatiousern', conversation.user)
+  // console.log('OLD_SEND_MESSAGE_SUCCESSconversation', conversation.messages)
+  // console.log('OLD_SEND_MESSAGE_SUCCESSconversatiousern', conversation.user)
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
