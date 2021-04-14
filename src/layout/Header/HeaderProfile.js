@@ -18,16 +18,17 @@ function HeaderProfile() {
     
     
     useEffect(() => {
-        dispatch(loadUserAction());
+        if(localStorage.removeItem('user-token')){
+                    dispatch(loadUserAction());
+
+        // dispatch( LoadNotificationAction());    
+        }
+
     }, [dispatch])
 
     const logOut = () => {
         dispatch(UserLogOutAction());
     }
-
-    useEffect(() => {
-        dispatch( LoadNotificationAction());    
-    },[dispatch]);
 
     useEffect(() => {
         if (authResponse !== "" && authResponse.success === true) {
