@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Overpass");
 * {
     box-sizing: border-box;
-    font-family: "Overpass", sans-serif;
+    /* font-family: "Overpass", sans-serif; */
 }
 
 .tags-input {
