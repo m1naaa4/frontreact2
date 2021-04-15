@@ -21,11 +21,20 @@ export const PusherAction = (data, id) =>{
         // channel.bind('deleted', this.updateNotifications)
         // channel.bind('App\\Events\\PushNotification', this.updateNotifications)
         
-        var channel = pusher.config.subscribe('Message.User.'+id);
-        channel.bind('pusher:subscription_succeeded', function() {
-            var triggered = channel.trigger('client-NewMessage', { your: data });
-            console.log(data)
-          });
+        // var channel = pusher.config.subscribe('private-Message.User.'+id);
+        // channel.bind('NewMessage', function(res) {
+        //     console.log(res)
+        //   });
+
+        
+    //     pusher.echo.private('Message.User.'+id)
+    //     .listen('NewMessage',(e)=>{
+    //       console.log('pmessage sent', e);
+
+    //   })
+        // channel.bind('NewMessage', function(res) {  
+        //     console.log(res)
+        //   });
 
         
         pusher.echo.private('Message.User.'+id)

@@ -18,11 +18,12 @@ function HeaderProfile() {
     
     
     useEffect(() => {
-        if(localStorage.removeItem('user-token')){
+
+        // if(localStorage.removeItem('user-token')){
                     dispatch(loadUserAction());
 
         // dispatch( LoadNotificationAction());    
-        }
+        // }
 
     }, [dispatch])
 

@@ -5,19 +5,25 @@ import Echo from 'laravel-echo'
 let   app_key       = config.pusher.api_key;
 let   app_cluster   = config.pusher.cluster;
 
+Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+
 class PusherService {
     
 
     config =  new Pusher(app_key , {
         broadcaster: 'pusher',
         cluster : app_cluster,
-        authEndpoint: 'http://api.dockergateway.test/src/public/broadcasting/auth',
+        authEndpoint: 'http://api.dockergateway.test/src/public/api/broadcasting/auth',
         encrypted: true,
 
         auth:{
             headers:{
               'Accept':'application/json',
-              'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+              'Authorization': localStorage.getItem('user-token')
             }
         }
     });
