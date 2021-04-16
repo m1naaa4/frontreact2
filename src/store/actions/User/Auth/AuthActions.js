@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {LoginUser,SignUpService,LogoutUser} from '../../../../services/User/AuthService'
 
 
@@ -8,6 +9,7 @@ export const signUpAction = (credentials,props) =>
         
         dispatch({type:'RESTART_AUTH_RESPONSE'});
         dispatch({type:'LOADING'});
+         dispatch({type:'LOADING_LOAD_USER'});
 
         SignUpService(credentials).then((res)=>{
 
@@ -15,9 +17,12 @@ export const signUpAction = (credentials,props) =>
 
                 localStorage.setItem('user-token','Bearer '+res.token);
 
-                dispatch({type:'LOGIN_SUCCESS'});
+                axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
+
+                dispatch({type:'LOGIN_SUCCESS', res});
+                dispatch({type:'LOAD_USER_SUCCESS',res});
                 setTimeout(() => {
-                    props.history.push("/project/lists");
+                    // props.history.push("/project/lists");
                     dispatch({type:'RESTART_AUTH_RESPONSE'});
                 }, 10);
 
@@ -36,27 +41,27 @@ export const signUpAction = (credentials,props) =>
 
 export const UserLoginAction = (credentials,props) =>
 {
-    
-
  return (dispatch)=>{
-
-
     dispatch({type:'RESTART_AUTH_RESPONSE'});
     dispatch({type:'LOADING'});
+    dispatch({type:'LOADING_LOAD_USER'});
      LoginUser(credentials).then((res)=>{
         if(res.success===true && res.hasOwnProperty('token')){
-            console.log('ready to login user with '+res.token)
             localStorage.setItem('user-token','Bearer '+res.token);
-            dispatch({type:'LOGIN_SUCCESS'});
+
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
+
+            dispatch({type:'LOGIN_SUCCESS', res});
+            
+            dispatch({type:'LOAD_USER_SUCCESS',res});
             setTimeout(() => {
                 props.history.push("/project/lists");
                 dispatch({type:'RESTART_AUTH_RESPONSE'}); 
-            }, 10);
+            }, 100);
             
         }else if(res.success===false){
             dispatch({type:'LOGIN_ERROR',res})
         }
-           
     },
     error=>{
         dispatch({type:'CODE_ERROR',error});
@@ -67,7 +72,7 @@ export const UserLoginAction = (credentials,props) =>
 }
 
 
-export const UserLogOutAction = () =>
+export const UserLogOutAction = (history) =>
 {
     
 
@@ -78,6 +83,9 @@ export const UserLogOutAction = () =>
      LogoutUser().then((res)=>{
         if(res.success===true){
             dispatch({type:'LOGOUT_SUCCESS',res});
+
+             localStorage.removeItem('user-token');
+            history.push("/login")
 
         }else if(res.success===false){
             dispatch({type:'LOGOUT_ERROR',res})

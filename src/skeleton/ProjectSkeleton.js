@@ -19,7 +19,7 @@ const ProjectSkeleton  = () =>{
                                 <span><Skeleton height={25} width={100} /></span>
                             </div>
                             <div className="offer-logo">
-                                <Skeleton circle={true} height={60} width={45} />
+                                <Skeleton variant="circle" height={60} width={45} />
                                 {/*<img src="/assets/images/porject-logo.png" title="Nom du projet" alt=""/>*/}
                             </div>
                         </div>
@@ -32,7 +32,7 @@ const ProjectSkeleton  = () =>{
                             <ul className="meta-items">
                                 <li className="meta-item">
                                     <div className="meta-icon">
-                                        <Skeleton circle={true} height={40} width={40} />
+                                        <Skeleton variant="circle" height={40} width={40} />
                                     </div>
                                     <div className="meta-details">
                                         <span className="meta-title"><Skeleton height={20} width={80} /></span>
@@ -41,7 +41,7 @@ const ProjectSkeleton  = () =>{
                                 </li>
                                 <li className="meta-item">
                                     <div className="meta-icon">
-                                        <Skeleton circle={true} height={40} width={40} />
+                                        <Skeleton variant="circle" height={40} width={40} />
                                     </div>
                                     <div className="meta-details">
                                         <span className="meta-title"><Skeleton height={20} width={80} /></span>

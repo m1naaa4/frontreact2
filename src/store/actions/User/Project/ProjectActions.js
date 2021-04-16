@@ -6,7 +6,6 @@ export const loadProjectAction = (data, props, current) =>{
     return (dispatch) =>
     {
         dispatch({type:'LOADING_ALL_PROJECTS'});
-
         LoadProject(data,props, current).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){

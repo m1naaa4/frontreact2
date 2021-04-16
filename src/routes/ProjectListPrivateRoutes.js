@@ -8,8 +8,6 @@ import UpdateProjectPage from '../pages/User/Project/UpdateProjectPage';
 
 
 export default function ProjectListPrivateRoutes(props) {
-    console.log('props')
-    console.log( props.history.location.pathname)
     return (
         <div>
             <HeaderProfile props={props}/>

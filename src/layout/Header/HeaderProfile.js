@@ -4,7 +4,7 @@ import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {Dropdown} from "react-bootstrap";
-import { Link, NavLink, useHistory, useParams  } from 'react-router-dom';
+import { Link, useHistory, useParams  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 
@@ -13,31 +13,21 @@ function HeaderProfile() {
     const params = useParams();
     const dispatch = useDispatch();
     const userProfile = useSelector(state => state.userProfile.userProfile);
-    const authResponse = useSelector(state => state.userAuth.authResponse);
     const [showNotifications, setShowNotifications] = useState(false);
     
     
     useEffect(() => {
-
-        // if(localStorage.removeItem('user-token')){
-                    dispatch(loadUserAction());
+        if(userProfile == ""){
+            dispatch(loadUserAction());
 
         // dispatch( LoadNotificationAction());    
-        // }
+        }
 
     }, [dispatch])
 
     const logOut = () => {
-        dispatch(UserLogOutAction());
+        dispatch(UserLogOutAction(history));
     }
-
-    useEffect(() => {
-        if (authResponse !== "" && authResponse.success === true) {
-            localStorage.removeItem('user-token');
-            history.push("/login")
-        } else if (authResponse.success === false) {
-        }
-    }, [authResponse])
 
     const goToAddproject = () => {
         history.push("/project/create");

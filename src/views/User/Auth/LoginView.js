@@ -38,9 +38,10 @@ export default function LoginView(props) {
         },
         [])
 
-    const UserLogin = (e) => {
-        e.preventDefault();
+    const handleLogin = () => {
         clearAuthErrDiv();
+
+        console.log(fields, props)
 
         if($("#form-login").valid()){
             dispatch(UserLoginAction(fields, props.props))
@@ -139,7 +140,7 @@ export default function LoginView(props) {
                                         <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
                                     </div>
                                     <div className="form-submit">
-                                        <button type="button" onClick={UserLogin} name="submit"><Text tid="login" /></button>
+                                        <button type="button" onClick={handleLogin} name="submit"><Text tid="login" /></button>
                                     </div>
                                 </form>
 

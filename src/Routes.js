@@ -6,7 +6,6 @@ import UserRegister from "./pages/User/Auth/Register";
 import {Gaurd} from './Gaurd'
 import ProjectListPrivateRoutes from "./routes/ProjectListPrivateRoutes";
 import ProfilePrivateRoute from "./routes/ProfilePrivateRoutes";
-import HeaderProfile from './layout/Header/HeaderProfile';
 import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
 
 const Routes = (props) => {
@@ -15,7 +14,6 @@ const Routes = (props) => {
         <div>
             <Switch>
                 <LanguageProvider>
-                <HeaderProfile props={props}/>
                     <Route  exact path="/" render={ props=>(
                         <Redirect to={{pathname: '/login'}} />
                     )} />
