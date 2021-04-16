@@ -51,6 +51,7 @@ const fr = {
     'signup.message4': 'Privacy Policy and Terms of Services.',
     'signup.form.email': 'Type your email addresse',
     'signup.form.alreadyMember': 'Déjà inscrit ?',
+    'error.credentials' : "Ces informations d'identification ne correspondent pas à nos enregistrements. "
 
 };
 

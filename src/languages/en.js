@@ -51,6 +51,7 @@ const en = {
     'signup.message4': 'Privacy Policy and Terms of Services.',
     'signup.form.email': 'Type your email addresse',
     'signup.form.alreadyMember': 'Already a member',
+    'error.credentials' : "These credentials do not match our records."
 
 };
 
