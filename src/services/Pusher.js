@@ -33,7 +33,10 @@ class PusherService {
         key: app_key,
         cluster: app_cluster,
         encrypted: true,
-        authEndpoint: 'http://api.dockergateway.test/src/public/api/broadcasting/auth',
+        wsHost: 'http://dockergateway.test/src/public',
+        wsPort: 6001,
+        disableStats: true,
+        authEndpoint: 'http://dockergateway.test/src/public/api/broadcasting/auth',
         auth:{
             headers:{
               'Accept':'application/json',
