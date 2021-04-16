@@ -38,13 +38,10 @@ export const PusherAction = (data, id) =>{
 
         
         pusher.echo.private('Message.User.'+id)
-        .listen('NewMessage',(e)=>{
-          console.log('pmessage sent', e);
-
-      })
+    
 
 
-        console.log("THIS CHANNEL: ", 'Message_User.'+id)
+        // console.log("THIS CHANNEL: ", 'Message_User.'+id)
 
     }
 

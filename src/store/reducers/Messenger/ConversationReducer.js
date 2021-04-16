@@ -22,6 +22,7 @@ const initState = {
                 }
             
             case 'SEND_MESSAGE_SUCCESS':
+                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', JSON.stringify(action.res.message))
                 return {
                     ...state,
                     messages: [...state.messages, action.res.message],

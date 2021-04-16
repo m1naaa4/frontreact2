@@ -7,14 +7,15 @@ import {Dropdown} from "react-bootstrap";
 import { Link, useHistory, useParams  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
+import PusherService from '../../services/Pusher';
 
 function HeaderProfile() {
     const history = useHistory();
-    const params = useParams();
     const dispatch = useDispatch();
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     
+    const pusher = new PusherService();  
     
     useEffect(() => {
         if(userProfile == ""){
@@ -24,6 +25,15 @@ function HeaderProfile() {
         }
 
     }, [dispatch])
+
+    useEffect(() => {
+        if(userProfile !== '' && userProfile != 'loading'){
+             pusher.echo.private('Message.User.'+ `${userProfile.id}`)
+            .listen('NewMessage',(res)=>{
+                dispatch({type:'SEND_MESSAGE_SUCCESS', res : res});
+            })
+        }
+    })
 
     const logOut = () => {
         dispatch(UserLogOutAction(history));
