@@ -7,23 +7,30 @@ import {Gaurd} from './Gaurd'
 import ProjectListPrivateRoutes from "./routes/ProjectListPrivateRoutes";
 import ProfilePrivateRoute from "./routes/ProfilePrivateRoutes";
 import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
+import NotFound from './pages/404';
+import Opps from './pages/500';
 
 const Routes = (props) => {
 
     return (
         <div>
-            <Switch>
-                <LanguageProvider>
-                    <Route  exact path="/" render={ props=>(
-                        <Redirect to={{pathname: '/login'}} />
-                    )} />
-                    <Route path="/login" component={UserLogin} />
-                    <Route path="/register" component={UserRegister} />
-                    <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
-                    <Gaurd  path="/profile" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
-                    <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
-                </LanguageProvider>
-            </Switch>
+            <LanguageProvider>
+                <Switch>
+                        <Route  exact path="/" render={ props=>(
+                            <Redirect to={{pathname: '/login'}} />
+                        )} />
+                        <Route exact path="/login" component={UserLogin} />
+                        <Route path="/register" component={UserRegister} />
+                        <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
+                        <Gaurd  path="/profile" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
+                        <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
+                
+                        <Route exact path="/oops" component={Opps} />
+
+                        <Route component={NotFound} />
+                </Switch>
+            </LanguageProvider>
+
         </div>
     )
 }
