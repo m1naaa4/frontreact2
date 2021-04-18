@@ -27,7 +27,9 @@ const Routes = (props) => {
                 
                         <Route exact path="/oops" component={Opps} />
 
-                        <Route component={NotFound} />
+                        <Route path="*" render={ props=>(
+                            <NotFound header="show" />
+                        )} />
                 </Switch>
             </LanguageProvider>
 
