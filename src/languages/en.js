@@ -51,7 +51,18 @@ const en = {
     'signup.message4': 'Privacy Policy and Terms of Services.',
     'signup.form.email': 'Type your email addresse',
     'signup.form.alreadyMember': 'Already a member',
-    'error.credentials' : "These credentials do not match our records."
+    'error.credentials' : "These credentials do not match our records.",
+    'see_profile' : "Voir mon profil",
+    'my_offre' : "Mes offres",
+    'my_favorite' : "Mes favoris",
+    'header.menu.project' : 'Projet',
+    'header.menu.finance' : 'Financement',
+    'header.menu.mentoring' : 'Mentoring',
+    'notifications' : 'Notifications',
+    'messages' : 'Messages',
+
+
+   // 'error.credentials' : "These credentials do not match our records.",
 
 };
 

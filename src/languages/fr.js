@@ -2,6 +2,7 @@ const fr = {
     exploreHeader: 'Explorer',
     welcomeDescription: 'Bonjour',
     buttonClicked: 'Click ici',
+    logout: 'Déconnexion',
     aboutMe: 'Dadupa',
     project: 'Projet',
     listproject: 'Tous les Projets',
@@ -29,7 +30,6 @@ const fr = {
     type: 'Type',
     address: 'Adresse',
     step: 'Etape',
-    logout: 'Logout',
     setting: 'Paramètres',
     forget_password: 'Mot de passe oublié ?',
     remember_me: 'Se souvenir de moi',
@@ -51,7 +51,15 @@ const fr = {
     'signup.message4': 'Privacy Policy and Terms of Services.',
     'signup.form.email': 'Type your email addresse',
     'signup.form.alreadyMember': 'Déjà inscrit ?',
-    'error.credentials' : "Ces informations d'identification ne correspondent pas à nos enregistrements. "
+    'error.credentials' : "Ces informations d'identification ne correspondent pas à nos enregistrements. ",
+    'see_profile' : "Voir mon profil",
+    'my_offre' : "Mes offres",
+    'my_favorite' : "Mes favoris",
+    'header.menu.project' : 'Projet',
+    'header.menu.finance' : 'Financement',
+    'header.menu.mentoring' : 'Mentoring',
+    'notifications' : 'Notifications',
+    'messages' : 'Messages',
 
 };
 
