@@ -8,7 +8,7 @@ import $ from "jquery";
 export default function Messages() {
     // const usernotifications = useSelector(state => state.getnotifications);
     // const usernotification = useSelector(state => state.addednotification);
-    // const userProfile = useSelector(state => state.userProfile.userProfile);
+    const userProfile = useSelector(state => state.userProfile.userProfile);
     // const [mask, setShowMark] = useState(false);
     // const [notification_id, setNotification_id] = useState(false);
     // const [notifed_user_id, setNotifed_user_id] = useState();
@@ -137,7 +137,7 @@ export default function Messages() {
             </div>
             </div>
             <div className="All-Messages-Row">
-            <a href="messenger.html" className="all-messages-button">See All Messages</a>
+                <Link to={`/messages/${userProfile.id}`} className="all-messages-button">See All Messages</Link>
             </div>
         </div>
                                             
