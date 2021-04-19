@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import {Text} from "../../containers/Language";
+import $ from "jquery";
 
 export default function Notifications() {
     const usernotifications = useSelector(state => state.getnotifications);
@@ -13,10 +15,12 @@ export default function Notifications() {
     const [from_user_id, setFrom_user_id] = useState();
     const dispatch = useDispatch();
     const params = useParams();
-
-    console.log("frommmmmmmm account", usernotification.user_id)
-    console.log("my account", userProfile.id)
     
+    useEffect(() => {
+        $('.Dadupa-Msgs-Box').removeClass('Msgs-Box-Active');
+        $('.Dadupa-Mini-Profile').removeClass('Mini-Profile-Active');
+    });
+
 
     useEffect(() => {
         if(userProfile){           
@@ -46,7 +50,7 @@ export default function Notifications() {
     return (
     <>
         <div className="Dadupa-Notifs-Box Notifs-Box-Active">
-          <h3>Notifications</h3>
+            <h3><Text tid="notifications"/></h3>
           {usernotifications.user_id !== notifed_user_id &&  usernotifications.notifications.map((notification, index) =>
            (!notification.seen ? (<div className="Notifs-List" style={{backgroundColor:"#f2fff8", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
                 <div className="Notif-Item">

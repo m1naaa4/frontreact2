@@ -41,34 +41,32 @@ export const signUpAction = (credentials,props) =>
 
 export const UserLoginAction = (credentials,props) =>
 {
- return (dispatch)=>{
-    dispatch({type:'RESTART_AUTH_RESPONSE'});
-    dispatch({type:'LOADING'});
-    dispatch({type:'LOADING_LOAD_USER'});
-     LoginUser(credentials).then((res)=>{
-        if(res.success===true && res.hasOwnProperty('token')){
-            localStorage.setItem('user-token','Bearer '+res.token);
+    return (dispatch)=>{
+        dispatch({type:'RESTART_AUTH_RESPONSE'});
+        dispatch({type:'LOADING'});
+        dispatch({type:'LOADING_LOAD_USER'});
+        LoginUser(credentials).then((res)=>{
+            if(res.success===true && res.hasOwnProperty('token')){
+                localStorage.setItem('user-token','Bearer '+res.token);
 
-            axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
+                axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
 
-            dispatch({type:'LOGIN_SUCCESS', res});
-            
-            dispatch({type:'LOAD_USER_SUCCESS',res});
-            setTimeout(() => {
-                props.history.push("/project/lists");
-                dispatch({type:'RESTART_AUTH_RESPONSE'}); 
-            }, 100);
-            
-        }else if(res.success===false){
-            dispatch({type:'LOGIN_ERROR',res})
-        }
-    },
-    error=>{
-        dispatch({type:'CODE_ERROR',error});
+                dispatch({type:'LOGIN_SUCCESS', res});
+                
+                dispatch({type:'LOAD_USER_SUCCESS',res});
+                setTimeout(() => {
+                    props.history.push("/project/lists");
+                    dispatch({type:'RESTART_AUTH_RESPONSE'}); 
+                }, 100);
+                
+            }else if(res.success===false){
+                dispatch({type:'LOGIN_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        })
     }
-    
-     )
- }   
 }
 
 

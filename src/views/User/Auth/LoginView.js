@@ -7,7 +7,6 @@ import {useFormFields} from '../../../helpers/hooksFormInput'
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
 import Footer from "../../../layout/footer/footer";
 import {Text} from "../../../containers/Language";
-import {displayErrorMessages} from '../../../helpers/displayErr';
 import SocialLogin from "./Social/SocialLogin";
 import $ from "jquery";
 import 'jquery-validation'
@@ -36,62 +35,16 @@ export default function LoginView(props) {
     useEffect(() => {
             dispatch(clearUserAuthState())
         },
-        [])
+    [])
 
     const handleLogin = () => {
-        clearAuthErrDiv();
-
-        console.log(fields, props)
-
         if($("#form-login").valid()){
             dispatch(UserLoginAction(fields, props.props))
-        }
-       
+        }  
     }
-
-    const clearAuthErrDiv = () => {
-        let authErr = document.querySelector("#authErr");
-        authErr.innerHTML = "";
-    }
-
-    const successMessage = (successMessage) => {
-        return <div dangerouslySetInnerHTML=
-                 {{__html: '<div class="alert alert-success add-padding">' + ' ' + successMessage + '</div>'}}
-        />
-    }
-
-    const [clickText, setClickText] = useState();
-
-    const handleClick = () => {
-        setClickText(<Text tid="buttonClicked" />);
-    }
-
 
     return (
         <div>
-            <div id="authErr"></div>
-
-            <div id="authResponse" >
-
-                {
-                    /**
-                     * if authResponse.success is true show success message
-                     */
-                    authResponse !== "" && authResponse.success === true ?
-                        successMessage(authResponse.message)
-                        /**
-                         * else if authResponse.success == false show error messages
-                         */
-                        :
-                    authResponse.success === false ?
-                        displayErrorMessages(authResponse.error, document.getElementById('authErr'))
-                        : authResponse
-
-                }
-
-
-            </div>
-
             <HeaderLogo/>
 
             <div className="Dadupa-Login">
@@ -104,6 +57,11 @@ export default function LoginView(props) {
                         </div>
                         <div className="col-md-12 col-lg-4">
                             <div className="form-wrapper">
+                                
+                               
+                                { authResponse.success === false &&
+                                     <div id="authErr" className="alert alert-danger"><Text tid={authResponse.error} /></div>
+                                }
 
                                 <form id="form-login" className="form-login">
                                     <h3 className="form-title"><Text tid="welcomeDescription" />!</h3>

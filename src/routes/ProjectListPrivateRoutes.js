@@ -5,6 +5,8 @@ import AddProjectPage from '../pages/User/Project/AddProjectPage';
 import ShowProjectView from '../views/Project/ShowProjectView';
 import ListProjectPage from '../pages/User/Project/ListProjectPage';
 import UpdateProjectPage from '../pages/User/Project/UpdateProjectPage';
+import Footer from "../layout/footer/footer";
+import NotFound from '../pages/404';
 
 
 export default function ProjectListPrivateRoutes(props) {
@@ -32,8 +34,12 @@ export default function ProjectListPrivateRoutes(props) {
                     <Route exact path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/update/:id` }} />
                     )} />
+
+                    <Route component={NotFound} header="false" />
                 </Switch>
             </div>
+            <Footer/>
+
         </div>
     )
 }
