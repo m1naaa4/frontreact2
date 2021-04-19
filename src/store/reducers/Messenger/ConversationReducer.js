@@ -22,16 +22,34 @@ const initState = {
                 }
             
             case 'SEND_MESSAGE_SUCCESS':
-                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', JSON.stringify(action.res.message))
-                let receiver_id = action.res.message.receiver_id;
-                let feed = {[receiver_id]:state.messages};
-                console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed)
-                console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed[receiver_id])
-                return {
-                    ...state,
-                    messages: [...state.messages, action.res.message],
-                    // loading:false
-                }
+                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', action.res.message)
+                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzdddddddddddddddddzzzzzz', state.messages)
+
+                state.messages.forEach(function (conversation) {
+
+                    if(conversation['sender_id'] == action.res.message.sender_id){
+                        console.log('conversationnnaaaaaannnns', conversation['sender_id'] == action.res.message.sender_id, conversation['sender_id'], action.res.message.sender_id)
+                    //     console.log('conversationnnnaaaaaaaaaaaaaaaaaaaannnnnnnnnnns', conversation['id'])
+                    // console.log('conversationnnnaaaaqqqqqqqzzzzzzzzzzzzzzznnnnnnns', action.res.message.id)
+                        return {
+                            ...state,
+                            messages: [...state.messages, action.res.message],
+                            // loading:false
+                        }
+                    }
+                    
+                    
+                });
+
+                // let receiver_id = action.res.message.receiver_id;
+                // let feed = {[receiver_id]:state.messages};
+                // console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed)
+                // console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed[receiver_id])
+                // return {
+                //     ...state,
+                //     messages: [...state.messages, action.res.message],
+                //     // loading:false
+                // }
     
                 
             case 'GET_CONVERSATION_ERROR':

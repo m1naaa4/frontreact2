@@ -1,5 +1,5 @@
 const initState = {
-    conversations : []
+    conversations : {}
     }
 
 
@@ -14,6 +14,21 @@ const initState = {
                     }
 
             case 'GET_MESSEGES_SUCCESS':
+                // action.res['conversations'].forEach(function (c) {
+                //     const conversations =  action.res.conversations;
+                //     let conversation = conversations[c.id] || {};
+                    
+                //     conversation = {...conversation, ...c};
+                //     console.log('conversationnnnaaaaaaaaaaaaaaaaaaaannnnnnnnnnns', ...conversation)
+                //     // console.log('conversationnnnnnnnnnnnnnns', {[c.id]: conversation})
+                //     console.log('conversationnnnnnnnnnnnnnns', c)
+                //     if ({[c.id]: conversation}) {
+                //          console.log('conversationnnnnnzzzzzzzznnnnnnnnns', ...conversation)
+                //     // conversations = {...conversations, ...{[c.id]: conversation}}
+                //     }
+                   
+                //     // console.log('conversationnnnnnnnnnnnnnns', conversations)
+                // });
                 return {
                     ...state,
                     conversations:  action.res.conversations,
