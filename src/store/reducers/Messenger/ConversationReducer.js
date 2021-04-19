@@ -23,6 +23,10 @@ const initState = {
             
             case 'SEND_MESSAGE_SUCCESS':
                 console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', JSON.stringify(action.res.message))
+                let receiver_id = action.res.message.receiver_id;
+                let feed = {[receiver_id]:state.messages};
+                console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed)
+                console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed[receiver_id])
                 return {
                     ...state,
                     messages: [...state.messages, action.res.message],

@@ -10,6 +10,15 @@ export const GetMessagesListAction = (data, props, current) =>{
         Get(data, props, current).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
+                    // console.log('conversationnnnnnnnnnnnnnns', res)
+                    res['conversations'].forEach(function (c) {
+                        const conversations =  {};
+                        const conversation = conversations[c.id];
+                        console.log('conversationnnnnnnnnnnnnnns', {...c})
+                        conversation = {...conversation, ...c}
+                        conversations = {...conversations, ...{[c.id]: conversation}}
+                        // console.log('conversationnnnnnnnnnnnnnns', conversations)
+                    })
                     dispatch({type:'GET_MESSEGES_SUCCESS', res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {

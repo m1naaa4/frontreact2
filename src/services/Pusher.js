@@ -6,14 +6,15 @@ let   app_key       = config.pusher.api_key;
 let   app_cluster   = config.pusher.cluster;
 
 // Pusher.log = function(message) {
-//     if (window.console && window.console.log) {
-//       window.console.log(message);
-//     }
+//       console.log( JSON.stringify(message));
+
 //   };
+
+ 
 console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.REACT_APP_API_URL}`)
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.WEB_SOCKET_CLUSTER}`)
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.REACT_APP_API_URL_NOT}`)
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.REACT_APP_API_URL_NOT}`)
+console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_KEY}`)
+console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_CLUSTER}`)
+console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env}`)
 class PusherService {
     
 
@@ -40,7 +41,7 @@ class PusherService {
         wsHost: `${process.env.REACT_APP_API_URL_NOT}`,
         wsPort: 6001,
         disableStats: true,
-        authEndpoint: 'http://api.dockergateway.test/src/public/api/broadcasting/auth',
+        authEndpoint: `${process.env.REACT_APP_API_URL}` + 'broadcasting/auth',
         auth:{
             headers:{
               'Accept':'application/json',

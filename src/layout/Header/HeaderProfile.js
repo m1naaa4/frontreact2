@@ -28,10 +28,14 @@ function HeaderProfile() {
 
     useEffect(() => {
         if(userProfile !== '' && userProfile != 'loading'){
-             pusher.echo.private('Message.User.'+ `${userProfile.id}`)
-            .listen('NewMessage',(res)=>{
-                dispatch({type:'SEND_MESSAGE_SUCCESS', res : res});
-            })
+            pusher.echo.private("Message.User." + userProfile.id).listen(".NewMessage", data => {
+                console.log("private-Message.User." + userProfile.id);
+                console.log(data);
+                dispatch({type:'SEND_MESSAGE_SUCCESS', res : data});
+            }).listenForWhisper('typing', (e) => {
+
+                             
+          });    
         }
     })
 

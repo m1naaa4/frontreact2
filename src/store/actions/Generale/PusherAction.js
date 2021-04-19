@@ -37,7 +37,7 @@ export const PusherAction = (data, id) =>{
         //   });
 
         
-        pusher.echo.private('Message.User.'+id)
+        // pusher.echo.private('Message.User.'+id)
     
 
 
