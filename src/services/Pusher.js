@@ -11,10 +11,10 @@ let   app_cluster   = config.pusher.cluster;
 //   };
 
  
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.REACT_APP_API_URL}`)
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_KEY}`)
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_CLUSTER}`)
-console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env}`)
+// console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.REACT_APP_API_URL}`)
+// console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_KEY}`)
+// console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_CLUSTER}`)
+// console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env}`)
 class PusherService {
     
 

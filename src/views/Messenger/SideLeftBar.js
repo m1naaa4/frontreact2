@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState }  from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { GetMessagesListAction } from '../../store/actions/Messenger/MessageAction';
 import { GetConversationAction } from '../../store/actions/Messenger/MessageAction';
+import _map from 'lodash/map'
 
 
-export default function SideLeftBar({filterInput, setFilterInput, props}) {
+export default function SideLeftBar() {
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
@@ -13,13 +14,15 @@ export default function SideLeftBar({filterInput, setFilterInput, props}) {
     const observer = useRef();
     const users = useSelector(state => state.conversations);
     const [listusers, setListusers] = useState();
+
+    const params = useParams();
     
 
     useEffect(() => {          
-        if (users.conversations !== undefined && users.conversations !== 'loading') {  
+        if (users !== 0 && users.conversations !== undefined && users.loading !== true) {  
             setListusers(users.conversations);
             let data = {
-                receiver_id : users.conversations[0].id
+                receiver_id : params.id
             }
             dispatch(GetConversationAction(data, 'messages/show', 1));         
         }
@@ -35,14 +38,20 @@ export default function SideLeftBar({filterInput, setFilterInput, props}) {
         let data = {
             receiver_id : id
         }
-        dispatch(GetConversationAction(data, 'messages/show', 1));
+        // dispatch(GetConversationAction(data, 'messages/show', 1));
       }
+    //   if(listusers){
+    //     console.log('listusersss', listusers)
+    //     listusers.map(function(element){
+    //         console.log(element);
+    //     });
+    //   }
 
     return (
         <div className="Msgs-List nav nav-pillss" style={{backgroundColor:'#f2fff8'}} id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        {listusers &&
-            listusers.map((user, index) => (
-                <Link to={`/messages/${user.id}`} key={index} className="Msgs-Item New-Msg nav-link" onClick={e=> showConversation(user.id)}  id="v-abdelkarim-ichia-tab" data-toggle="pill" href={null} role="tab" aria-controls="v-abdelkarim-ichia" aria-selected="true">
+        {listusers && 
+            _map(listusers, (user, index) => (
+                <Link to={`/messages/${index}`} key={index} className="Msgs-Item New-Msg nav-link" onClick={e=> showConversation(index)}  id="v-abdelkarim-ichia-tab" data-toggle="pill" href={null} role="tab" aria-controls="v-abdelkarim-ichia" aria-selected="true">
                     <div className="Msgs-Image"><img src={user.avatar} alt="avatar"/></div>
                     <div className="Msgs-Content">
                         <div className="Msgs-User">{user.name}</div>
@@ -50,7 +59,8 @@ export default function SideLeftBar({filterInput, setFilterInput, props}) {
                     <div className="Friend-Active"></div>
                     <span className="Msgs-N">{user.unread}</span>
                     </div>
-                </Link>)
+                </Link>
+                )
             )
         }
 
