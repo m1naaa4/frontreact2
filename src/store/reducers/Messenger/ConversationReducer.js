@@ -13,7 +13,7 @@ const initState = {
                     loading:true
                     }
 
-            case 'GET_CONVERSATION_SUCCESS':
+            case 'GET_CONVERSATION_SUCcCESS':
                 let conversations = {};
                 action.res['messages'].forEach(function (conversation) {
                     conversations[conversation.receiver_id] = conversation;

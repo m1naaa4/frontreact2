@@ -36,7 +36,7 @@ class HttpService {
 
     getData = async (added_url) =>
     {
-        return axios("/" + added_url).then( response => response.data);
+        return await axios("/" + added_url).then( response => response.data);
     }
 
     getRequestOptions = (token) =>

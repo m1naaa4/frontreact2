@@ -14,6 +14,11 @@ import 'jquery-validation'
 
 export default function LoginView(props) {
 
+    const [place, sePlace] = useState();
+
+
+
+
     if (localStorage.getItem('user-token')) {
         props.props.history.push('/project/lists');
     }
@@ -34,6 +39,9 @@ export default function LoginView(props) {
 
     useEffect(() => {
             dispatch(clearUserAuthState())
+            sePlace(<Text tid="welcomeDescription"/>)
+
+            console.log(place)
         },
     [])
 
@@ -78,7 +86,7 @@ export default function LoginView(props) {
                                         </div>
                                         <div className="input-row">
                                             <ItemForm  id="password" name="password"
-                                               placeholder="Type your Password"
+                                               placeholder={place}
                                                className="input-password"
                                                type={passwordShown ? "text" : "password"}
                                                onChange={handleFieldChange}

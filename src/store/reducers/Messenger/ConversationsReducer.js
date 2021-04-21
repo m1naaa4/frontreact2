@@ -27,6 +27,20 @@ const initState = {
                     loading      :  false
                 }
 
+            case 'GET_CONVERSATION_SUCCESS':
+                let conversation = state.conversations || {};
+                conversation.messages = state.messages
+                // action.res['messages'].forEach(function (conversation) {
+                //     state.conversations[conversation.receiver_id] = conversation;
+                // })
+                console.log('conversationsss', state.conversations, conversation)
+                return {
+                    ...state,
+                    messages: action.res.messages,
+                    user: action.res.user,
+                    loading:false
+                }
+
             case 'GET_MESSEGES_ERROR':
 
                 return {
