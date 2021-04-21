@@ -1,4 +1,4 @@
-import { Get, Post } from "../../../services/Generale/GeneraleService";
+import { Get, Post, PostMessage } from "../../../services/Generale/GeneraleService";
 
 
 export const GetMessagesListAction = (data, props, current) =>{
@@ -29,15 +29,15 @@ export const GetConversationAction = (data, props, current) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING_GET_CONVERSATION'});
+        dispatch({type:'LOADING_GET_MESSEGES'});
 
-        Post(data, props, current).then((res) =>
+        PostMessage(data, props, current).then((res) =>
             {
-                if(res.hasOwnProperty('success') && res.success === true){
+                if(res.data.hasOwnProperty('success') && res.data.success === true){
                     dispatch({type:'GET_CONVERSATION_SUCCESS', res});
 
-                }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'GET_CONVERSATION_ERROR',res})
+                }else if(res.data.hasOwnProperty('success') && res.data.success === false) {
+                    dispatch({type:'GET_MESSEGES_ERROR',res})
                 }
             },
             error => {

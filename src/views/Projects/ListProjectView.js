@@ -26,7 +26,6 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
        
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver( entries =>{
-            console.log('entriessssss',entries)
             if (entries[0].isIntersecting && hasMore  ){  
                 filterInput.filters = false;              
                 dispatch(loadProjectAction( filterInput, props, current+1));

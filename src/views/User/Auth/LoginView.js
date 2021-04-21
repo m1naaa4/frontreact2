@@ -86,7 +86,7 @@ export default function LoginView(props) {
                                         </div>
                                         <div className="input-row">
                                             <ItemForm  id="password" name="password"
-                                               placeholder={place}
+                                               placeholder={<Text tid="welcomeDescription"/>}
                                                className="input-password"
                                                type={passwordShown ? "text" : "password"}
                                                onChange={handleFieldChange}

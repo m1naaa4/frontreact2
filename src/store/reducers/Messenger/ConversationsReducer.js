@@ -6,7 +6,7 @@ const initState = {
     const ConversationsReducer = (state= initState | undefined, action) =>{
         switch(action.type){
 
-            case 'LOADING_GET_MESSEGES':
+            case 'LOADING_GET_MEeSSEGES':
                 return {
                     ...state,
                     conversations:state.conversations,
@@ -15,29 +15,33 @@ const initState = {
 
             case 'GET_MESSEGES_SUCCESS':
                 let conversations = {};
-                action.res['conversations'].forEach(function (conversation) {
-                    conversations[conversation.id] = conversation;
+                action.res['conversations'].forEach(function (c) {
+                    let conversation = state.conversations ? state.conversations[action.res.id] : state.conversations|| {};
+                    conversation = {...conversation, ...c}
+                    conversations = {...conversations, ...{[c.id]: conversation}};
                 })
-
+                console.log('conversations00', conversations)
                 return {
                     ...state,
                     conversations:  conversations,
-                    hasMore      :  action.res.hasMore,
-                    current      :  action.res.current,
+                    // hasMore      :  action.res.hasMore,
+                    // current      :  action.res.current,
                     loading      :  false
                 }
 
             case 'GET_CONVERSATION_SUCCESS':
-                let conversation = state.conversations || {};
-                conversation.messages = state.messages
+                console.log('conversations1', state.conversations)
+                let conversation = state.conversations ? state.conversations[action.res.id] : state.conversations|| {};
+                conversation.messages = action.res.data.messages
                 // action.res['messages'].forEach(function (conversation) {
                 //     state.conversations[conversation.receiver_id] = conversation;
                 // })
-                console.log('conversationsss', state.conversations, conversation)
+                // console.log('conversations', state.conversations)
+                // console.log('conversations1', conversation.messages)
+                console.log('conversations2', {...state.conversations, ...{[action.res.id]: conversation.messages}})
                 return {
                     ...state,
-                    messages: action.res.messages,
-                    user: action.res.user,
+                    conversations: {...state.conversations, ...{[action.res.id]: conversation.messages}},
                     loading:false
                 }
 

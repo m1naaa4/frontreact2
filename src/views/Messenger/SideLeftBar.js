@@ -20,11 +20,7 @@ export default function SideLeftBar() {
 
     useEffect(() => {          
         if (users !== 0 && users.conversations !== undefined && users.loading !== true) {  
-            setListusers(users.conversations);
-            let data = {
-                receiver_id : params.id
-            }
-            dispatch(GetConversationAction(data, 'messages/show', 1));         
+            setListusers(users.conversations);                     
         }
     },[users])
     
@@ -32,13 +28,17 @@ export default function SideLeftBar() {
         if(!isLoading){
             dispatch(GetMessagesListAction('messages/getConversations', '', 1));
         }
+        let data = {
+            receiver_id : params.id
+        }
+        dispatch(GetConversationAction(data, 'messages/show', 1));
     }, []);
 
     const showConversation =(id) =>{
         let data = {
             receiver_id : id
         }
-        // dispatch(GetConversationAction(data, 'messages/show', 1));
+        dispatch(GetConversationAction(data, 'messages/show', 1));
       }
     //   if(listusers){
     //     console.log('listusersss', listusers)
@@ -46,7 +46,7 @@ export default function SideLeftBar() {
     //         console.log(element);
     //     });
     //   }
-
+    console.log('listusers', listusers)
     return (
         <div className="Msgs-List nav nav-pillss" style={{backgroundColor:'#f2fff8'}} id="v-pills-tab" role="tablist" aria-orientation="vertical">
         {listusers && 

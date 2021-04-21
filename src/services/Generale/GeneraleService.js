@@ -35,6 +35,16 @@ export const Post = (data, url) =>{
          });
 }
 
+export const PostMessage = (data, url) =>{
+    const http = new HttpService();
+
+    return  http.postData(data,url).then( res => {
+        return {data:res, id:data['receiver_id']};
+    }).catch((error)=> {
+        return error;
+         });
+}
+
 
 export const SeenNotification = (data) =>{
     const http = new HttpService();

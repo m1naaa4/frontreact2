@@ -18,7 +18,7 @@ const initState = {
                 action.res['messages'].forEach(function (conversation) {
                     conversations[conversation.receiver_id] = conversation;
                 })
-                console.log('conversationsss', conversations)
+                console.log('messages', conversations)
                 return {
                     ...state,
                     messages: action.res.messages,
