@@ -1,23 +1,18 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
+import countries from '../../../../../countries'
 
-const zones = [
-    ["", "Zones ciblées"],
-    ["Maroc", "Maroc"],
-    ["cameron", "cameron"],
-    ["Turk", "Turk"],
-    ["Goulmima", "Goulmima"],
-    ["casablanca", "casablanca"],
-    ["Rabat", "Rabat"],
-];
 
-const ZoneDropFilter = ({ label, ...others }) => (
-    <>
-            <select className="user-type" name="project_area"  {...others}>
-                {zones.map(([value, name]) => (
-                    <option key={name} value={value}>{name}</option>
-                ))}
-            </select>
-    </>
-);
+function ZoneDropFilter ({ label, ...others }) {
+    const { t, i18n } = useTranslation();
+
+    return (
+        <select className="user-type" name="project_area" defaultValue={'MA'} {...others}>
+            {countries.map((item) => (
+                <option key={item.value} value={item.value} >{item.label}</option>
+            ))}
+        </select>
+    )
+}
 
 export default ZoneDropFilter;

@@ -5,10 +5,12 @@ import SectorDropFilter from "./Project/SectorDropFilter";
 import FinanceDropFilter from "./Project/FinanceDropFilter";
 import {useDispatch} from "react-redux";
 import {loadProjectAction} from "../../../../store/actions/User/Project/ProjectActions";
+import { useTranslation } from 'react-i18next';
 
 
 
 function FilterProject({ filterInput, setFilterInput, props }) {
+    const { t, i18n } = useTranslation();
 
     const { zone, etat, sector, financement } = filterInput;
 
@@ -45,7 +47,7 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                                 </div>
                                 <div className="input-row">
                                     <input type="text" name="search" data-testid="filter-input-search"
-                                           onChange={setFilterInput} placeholder="Mot clé" />
+                                           onChange={setFilterInput} placeholder={t('filter.search')} />
                                 </div>
 
                             </div>
