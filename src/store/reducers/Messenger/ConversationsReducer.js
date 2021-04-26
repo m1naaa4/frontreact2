@@ -14,12 +14,16 @@ const initState = {
                     }
 
             case 'LOAD_CONVERSATIONS_SUCCESS':
-                action.res['conversations'].forEach(function (c) {
-                    let conversation = state.conversations ? state.conversations[action.res.id] : state.conversations|| {};
+                const allconversations = action?.res?.['conversations'];
+                allconversations.forEach(function (c) {
+                    let conversation = state.conversations?.[c.id] || {};
+                    // console.log('conversationssssssss', state?.conversations)
+                    // console.log('conversations0', conversation)
+                    // console.log('action?.res?.id', c.id)
                     conversation = {...conversation, ...c}
                     state.conversations = {...state.conversations, ...{[c.id]: conversation}};
                 })
-                console.log('conversations00', state.conversations)
+                // console.log('conversations00', state.conversations)
                 return {
                     ...state,
                     conversations:  state.conversations,
@@ -30,18 +34,19 @@ const initState = {
 
             case 'LOAD_MESSAGE_SUCCESS':
                 console.log('conversations1', state.conversations)
-                let conversation = state.conversations ? state.conversations[action.res.id] : state.conversations || {};
-                conversation.messages = state.conversations ? action.res.data.messages : {}
+                console.log('action.res.idddd', action.res.id)
+                const conversation = state?.conversations?.[action?.res?.id];
+                conversation.messages = action?.res?.data?.messages
                 // action.res['messages'].forEach(function (conversation) {
                 //     state.conversations[conversation.receiver_id] = conversation;
                 // })
-                // console.log('conversations', state.conversations)
+                console.log('convvvvvvvvversations', conversation)
                 // console.log('conversations10', conversation)
                 // console.log('conversations11', state.conversations)
                 // console.log('conversations2', {[action.res.id]: conversation.messages})
                 return {
                     ...state,
-                    conversations: {...state.conversations, ...conversation},
+                    conversations: {...state.conversations},
                     loading:false
                 }
 
