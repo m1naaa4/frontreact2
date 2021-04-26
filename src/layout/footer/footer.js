@@ -10,6 +10,8 @@ function Footer(props) {
         languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
     );
 
+
+
     return (
         <div>
             <footer className="Dadupa-Footer">
@@ -31,13 +33,7 @@ function Footer(props) {
                                     <li className="Dadupa-Link"><a href="#!"><Text tid="footer.menu.community" /></a></li>
                                     <li className="Dadupa-Link Lang-Switcher input-select">
 
-                                            <LanguageSelector
-                                                language={language}
-                                                handleSetLangue={language => {
-                                                    setLangue(language);
-                                                    storeLanguageInLocalStorage(language);
-                                                }}
-                                            />
+                                            <LanguageSelector language={language} />
 
                                     </li>
                                 </ul>
@@ -48,10 +44,6 @@ function Footer(props) {
             </footer>
         </div>
     )
-
-    function storeLanguageInLocalStorage(language) {
-        localStorage.setItem("language", language);
-    }
 }
 
 export default Footer;

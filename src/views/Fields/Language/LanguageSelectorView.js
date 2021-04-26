@@ -1,9 +1,15 @@
 import React, {useContext, useState} from "react";
 import { languageOptions } from '../../../languages';
 import { LanguageContext } from '../../../containers/Language';
+import { useTranslation } from 'react-i18next';
 
 
 function LanguageSelectorView() {
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng);
+    };
 
     const languageContext = useContext(LanguageContext);
     const languageStoredInLocalStorage = localStorage.getItem("language");
@@ -13,6 +19,8 @@ function LanguageSelectorView() {
         // set selected language by calling context method
         localStorage.setItem('language',selectedLanguage.id);
         languageContext.setLangue(selectedLanguage);
+
+        changeLanguage(selectedLanguage.id);
     };
 
     return (

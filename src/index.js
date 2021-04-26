@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css';
+import './style.css';
 import './bootstrap.css';
 import './plyr.css';
-import './style.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
 import { store } from './createStore';
+import './i18n';
 
 
 ReactDOM.render(
