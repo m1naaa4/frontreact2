@@ -1,7 +1,7 @@
 import React, { useState }  from 'react'
 
 
-export default function Header({conversation}) {
+export default function Header({messages}) {
 
   const [show, setShow] = useState(false);
   const handleshow = () =>{
@@ -10,13 +10,13 @@ export default function Header({conversation}) {
 
 return (
     <>
-        {conversation.user &&
+        {messages &&
     (<div className="Messenger-head">
         <div className="Messenger-head-left">
           <div className="Friend-Active"></div>
-          <div className="Messenger-head-user-thumb"><img src={conversation.user.profile.avatar_link} alt="avatar"/></div>
+          <div className="Messenger-head-user-thumb"><img src={messages?.avatar} alt="avatar"/></div>
           <div className="Messenger-head-user-info">
-            <label>{conversation.user.name}</label>
+            <label>{messages?.name}</label>
             <span>Online</span>
           </div>
         </div>

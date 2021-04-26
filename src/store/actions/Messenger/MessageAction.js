@@ -52,7 +52,7 @@ export const SendMessageAction = (data, props, current) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING_SEND_MESSAGE'});
+        dispatch({type:'LOADING_CONVERSATIONS'});
 
         Post(data, props, current).then((res) =>
             {

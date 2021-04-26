@@ -17,38 +17,38 @@ const initState = {
                 const allconversations = action?.res?.['conversations'];
                 allconversations.forEach(function (c) {
                     let conversation = state.conversations?.[c.id] || {};
-                    // console.log('conversationssssssss', state?.conversations)
-                    // console.log('conversations0', conversation)
-                    // console.log('action?.res?.id', c.id)
                     conversation = {...conversation, ...c}
                     state.conversations = {...state.conversations, ...{[c.id]: conversation}};
                 })
-                // console.log('conversations00', state.conversations)
                 return {
                     ...state,
                     conversations:  state.conversations,
-                    // hasMore      :  action.res.hasMore,
-                    // current      :  action.res.current,
                     loading      :  false
                 }
 
             case 'LOAD_MESSAGE_SUCCESS':
-                console.log('conversations1', state.conversations)
-                console.log('action.res.idddd', action.res.id)
-                const conversation = state?.conversations?.[action?.res?.id];
-                conversation.messages = action?.res?.data?.messages
-                // action.res['messages'].forEach(function (conversation) {
-                //     state.conversations[conversation.receiver_id] = conversation;
-                // })
-                console.log('convvvvvvvvversations', conversation)
-                // console.log('conversations10', conversation)
-                // console.log('conversations11', state.conversations)
-                // console.log('conversations2', {[action.res.id]: conversation.messages})
+                const conversation = state?.conversations?.[action?.res?.id] || {};
+                conversation.messages = action?.res?.data?.messages ;
                 return {
                     ...state,
                     conversations: {...state.conversations},
                     loading:false
                 }
+            
+            case 'SEND_MESSAGE_SUCCESS':
+                const convt = state?.conversations?.[action?.res?.message?.receiver_id] || {};
+                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzdddddddddddddddddzzzzzz', state?.conversations)
+                // console.log('dddddddddddddzzzz', action?.res?.message?.receiver_id)
+                // console.log('zzzzconversationszzzzz', state?.conversations?.[action?.res?.message?.receiver_id])
+                convt.messages = convt.messages.concat(action?.res?.message);
+                console.log('zzzzzz', convt)
+
+                return {
+                    ...state,
+                    // conversations:  {...state.conversations.messages, ...action.res.message},
+                    loading:false
+                }
+                
 
             case 'LOAD_CONVERSATIONS_ERROR':
 

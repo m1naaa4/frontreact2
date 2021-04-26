@@ -5,24 +5,26 @@ import SideLeftBar from './SideLeftBar';
 import Body from './MessengerWraps/Body';
 import Header from './MessengerWraps/Header';
 import SideRightBar from './SideRightBar';
+import { useParams } from 'react-router-dom';
 
 
 
 
-export default function MainMessengerView(props) { 
+export default function MainMessengerView() { 
    
-    const conversation = useSelector(state => state.messages);
-    // console.log('conversationnnnnnnnnnnnn', conversation);
+    const params = useParams();
+    const [messages, setMessages] = useState();
+    const conversation = useSelector(state => state.conversations);
     const showContent = () =>{
         console.log('salam')
         //setShow(conversation)
     }
     const [show, setShow] = useState(conversation);
     useEffect(() => {
-        setShow(conversation)
+        setMessages(conversation.conversations?.[params.id]);
+        setShow(conversation);
     }, [conversation]);
     //const showContent = () => setShow(true);
-
 
     return (
         <div className="Page-Profile">  
@@ -49,12 +51,12 @@ export default function MainMessengerView(props) {
                                     <div className="Messenger-wrapper">
                                         {show ? 
                                             (<div className="Messenger-box" rel="'+ userID+'">
-                                            <Header conversation={conversation} />
-                                            <Body conversation={conversation} />                       
+                                            <Header messages = {messages} />
+                                            <Body messages = {messages} />                       
                                             </div>): (<div className="Messenger-box" rel="'+ userID+'"></div>)
                                         }
 
-                                        <SideRightBar conversation={conversation} />
+                                        <SideRightBar messages = {messages} />
                                         
                                     </div>
                                 </div>

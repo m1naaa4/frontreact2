@@ -2,31 +2,31 @@ import React  from 'react'
 
 
 
-export default function SideRightBar({conversation}) {
+export default function SideRightBar({messages}) {
 
-  
+  console.log(messages)
 
 
   return (
     <>
-      {conversation.user  &&
+      {messages  &&
   (
     <div className="Messenger-user-profile">
       <div className="Messenger-profile-header">
         <div className="Messenger-Profile-Infos">
           <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-          <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${conversation.user.profile.avatar_link})`}} ></div>
-          <div className="Profile-Name">{conversation.user.profile.username}</div>
+          <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${messages.avatar})`}} ></div>
+          <div className="Profile-Name">{messages.name}</div>
         </div>
       </div>
       <div className="Messenger-Profile-Widgets">
       <div className="Messenger-Profile-Widget">
         <h3 className="Messenger-Widget-Title">Lieu de résidence</h3>
-        <p>{conversation.user.profile.address}</p>
+        <p>{messages.address}</p>
       </div>
       <div className="Messenger-Profile-Widget">
-        <h3 className="Messenger-Widget-Title">{conversation.user.bio}</h3>
-        <p>{conversation.user.profile.job}</p>
+        <h3 className="Messenger-Widget-Title">{messages.bio}</h3>
+        <p>{messages.job}</p>
       </div>
       <div className="Messenger-Profile-Widget">
         <h3 className="Messenger-Widget-Title">Offres</h3>

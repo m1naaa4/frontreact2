@@ -3,10 +3,10 @@ import BoxMessage from './BoxMessage';
 import Message from './Message';
 
 
-export default function Body({conversation}) {
+export default function Body({messages}) {
 
 
-  const [messages, setMessages] = useState();
+  const [msgs, setMsgs] = useState();
   // console.log('OLD_SEND_MESSAGE_SUCCESSconversation', conversation.messages)
   // console.log('OLD_SEND_MESSAGE_SUCCESSconversatiousern', conversation.user)
 
@@ -15,24 +15,23 @@ export default function Body({conversation}) {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(scrollToBottom, [messages]);
+  useEffect(scrollToBottom, [msgs]);
 
   useEffect(() => {          
-    if (conversation.messages !== undefined) {  
-      setMessages(conversation.messages);
-    }
-},[conversation])
+    setMsgs(messages?.messages);
+})
 
 
 return (        
     <div className="Messenger-body msg_wrap">
         <div className="Messenger-messages '+ userID+'">
-          {messages &&
-            messages.map((message, index) => (
+          {msgs &&
+            msgs.map((message, index) => (
               <div key={index}>
                 <Message message={message}/>
               </div>
-            ))}
+            ))
+          }
           <div ref={messagesEndRef} />
         </div>
         <BoxMessage/>

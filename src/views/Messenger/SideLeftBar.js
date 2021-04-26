@@ -21,7 +21,6 @@ export default function SideLeftBar() {
 
     useEffect(() => {          
         setListusers(users?.conversations);
-        console.log('listusers', users?.conversations) 
     },[users])
     
     useEffect(() => {
@@ -33,7 +32,7 @@ export default function SideLeftBar() {
         }
         setTimeout(() => {
             dispatch(GetConversationAction(data, 'messages/show', 1));
-          }, 5000)   
+          }, 500)   
     }, []);
 
     const showConversation =(id) =>{
@@ -57,7 +56,7 @@ export default function SideLeftBar() {
                     <div className="Msgs-Image"><img src={user.avatar} alt="avatar"/></div>
                     <div className="Msgs-Content">
                         <div className="Msgs-User">{user.name}</div>
-                        <div className="Msgs-Text">{user.content}</div>
+                        <div className="Msgs-Text">{user?.messages?.[0].content}</div>
                     <div className="Friend-Active"></div>
                     <span className="Msgs-N">{user.unread}</span>
                     </div>
