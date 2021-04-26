@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { GetMessagesListAction } from '../../store/actions/Messenger/MessageAction';
 import { GetConversationAction } from '../../store/actions/Messenger/MessageAction';
 import _map from 'lodash/map'
+import { wait } from '@testing-library/dom';
 
 
 export default function SideLeftBar() {
@@ -19,9 +20,8 @@ export default function SideLeftBar() {
     
 
     useEffect(() => {          
-        if (users !== 0 && users.conversations !== undefined && users.loading !== true) {  
-            setListusers(users.conversations);                     
-        }
+        setListusers(users?.conversations);
+        console.log('listusers', users?.conversations) 
     },[users])
     
     useEffect(() => {
@@ -31,7 +31,9 @@ export default function SideLeftBar() {
         let data = {
             receiver_id : params.id
         }
-        dispatch(GetConversationAction(data, 'messages/show', 1));
+        setTimeout(() => {
+            dispatch(GetConversationAction(data, 'messages/show', 1));
+          }, 5000)   
     }, []);
 
     const showConversation =(id) =>{
@@ -46,7 +48,7 @@ export default function SideLeftBar() {
     //         console.log(element);
     //     });
     //   }
-    console.log('listusers', listusers)
+    
     return (
         <div className="Msgs-List nav nav-pillss" style={{backgroundColor:'#f2fff8'}} id="v-pills-tab" role="tablist" aria-orientation="vertical">
         {listusers && 
