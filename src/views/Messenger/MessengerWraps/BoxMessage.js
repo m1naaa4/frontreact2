@@ -1,11 +1,11 @@
 import React, {useRef, useState }  from 'react'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { SendMessageAction } from '../../../store/actions/Messenger/MessageAction';
-import {PusherAction} from "../../../store/actions/Generale/PusherAction";
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 import useOutsideClick from '../../../helpers/useOutsideClick';
 import { useParams } from 'react-router';
+import PusherService from '../../../services/Pusher';
 
 
 export default function BoxMessage() {
@@ -21,6 +21,7 @@ export default function BoxMessage() {
   const [text, setText] = useState('');
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const dispatch = useDispatch();
+  const userProfile = useSelector(state => state.userProfile?.userProfile);
 
   const data = {
     action      : "store",
@@ -34,12 +35,12 @@ export default function BoxMessage() {
     setText('')
     dispatch(SendMessageAction(data, 'messages/store', ''));
 
-    const msgData = {
-      channel : 'message_' + params.id,
-      event   : 'message',
-      type    : 'SEND_MESSAGE_SUCCESS',
-    };
-    dispatch(PusherAction(msgData, params.id));
+    // const msgData = {
+    //   channel : 'message_' + params.id,
+    //   event   : 'message',
+    //   type    : 'SEND_MESSAGE_SUCCESS',
+    // };
+    // dispatch(PusherAction(msgData, params.id));
 
     const notifData = {
       channel : 'notification_' + params.id,
@@ -48,6 +49,13 @@ export default function BoxMessage() {
     };
     // dispatch(PusherAction(notifData)); 
   }
+
+  const pusher = new PusherService();
+  const onTyping = () =>{
+    pusher.echo.private("Message.User." + params.id).whisper('typing',{
+      user:userProfile?.name
+    });
+  };
 
   const handleImageClick = e => {
     hiddenImageInput.current.click();

@@ -56,9 +56,19 @@ function HeaderProfile() {
             pusher.echo.private("Message.User." + userProfile.id).listen(".NewMessage", data => {
                 console.log("private-Message.User." + userProfile.id);
                 console.log(data);
-                dispatch({type:'SEND_MESSAGE_SUCCESS', res : data});
+                dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
             }).listenForWhisper('typing', (e) => {
+                console.log(e)
+                if(e.user.id===userProfile.id){
 
+                    this.typingFriend=e.user;
+                    
+                  if(this.typingClock) clearTimeout();
+
+                    this.typingClock=setTimeout(()=>{
+                                          this.typingFriend={};
+                                      },9000);
+                }
                              
           });    
         }

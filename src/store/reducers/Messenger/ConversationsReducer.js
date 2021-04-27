@@ -37,15 +37,17 @@ const initState = {
             
             case 'SEND_MESSAGE_SUCCESS':
                 const convt = state?.conversations?.[action?.res?.message?.receiver_id] || {};
-                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzdddddddddddddddddzzzzzz', state?.conversations)
-                // console.log('dddddddddddddzzzz', action?.res?.message?.receiver_id)
-                // console.log('zzzzconversationszzzzz', state?.conversations?.[action?.res?.message?.receiver_id])
                 convt.messages = convt.messages.concat(action?.res?.message);
-                console.log('zzzzzz', convt)
-
                 return {
                     ...state,
-                    // conversations:  {...state.conversations.messages, ...action.res.message},
+                    loading:false
+                } 
+
+            case 'SEND_MESSAGE_SUCCESS_PUSHER':
+                const convtP = state?.conversations?.[action?.res?.message?.sender_id] || {};
+                convtP.messages = convtP.messages.concat(action?.res?.message);
+                return {
+                    ...state,
                     loading:false
                 }
                 
