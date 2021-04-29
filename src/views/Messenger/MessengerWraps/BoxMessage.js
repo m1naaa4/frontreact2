@@ -91,7 +91,7 @@ export default function BoxMessage() {
   return (
     <form onSubmit={ handleSubmitValue}>
       <div id="EmojiPicker" className="Messenger-footer">
-          <input autoFocus   type="text" value={text} name="text" onChange={handleChange} ref={refmessage} placeholder="Type messages here..."  data-emoji-picker="true"/>
+          <input autoFocus onKeyDown={onTyping} type="text" value={text} name="text" onChange={handleChange} ref={refmessage} placeholder="Type messages here..."  data-emoji-picker="true"/>
           
           <div  style={{position: 'absolute', bottom: '10px', zIndex: 1000, left: '10px', textDecoration: 'none'}} >
           <i  onClick={triggerPicker}   className="uil uil-smile"></i>

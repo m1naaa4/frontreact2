@@ -18,7 +18,7 @@ export default function Message({message}) {
                 <div className="message incoming-message">
                   <div className="avatar-wrapper avatar-small"><img src={message.sender.profile.avatar_link} alt="avatar"/></div>
                   <div className="incoming-bubbles">
-                    <div className={`${classe} bubble bubble-light`}><div className="message-text">{message.content}</div><span className="message-status"><i className={eye}></i>
+                    <div className='message-seen bubble bubble-light'><div className="message-text">{message.content}</div><span className="message-status"><i className='uil uil-eye'></i>
                       {message.created_at} </span></div>
                   </div>
                 </div>

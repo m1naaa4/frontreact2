@@ -3,8 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
-import {Dropdown} from "react-bootstrap";
-import { Link, useHistory, useParams  } from 'react-router-dom';
+import {  useHistory  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 import PusherService from '../../services/Pusher';
@@ -17,6 +16,7 @@ function HeaderProfile() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
+    const [audio] = useState(new Audio('https://dadupadisque.ams3.digitaloceanspaces.com/audio/notification.mp3'));
     
     const pusher = new PusherService();  
     
@@ -54,6 +54,7 @@ function HeaderProfile() {
     useEffect(() => {
         if(userProfile !== '' && userProfile != 'loading'){
             pusher.echo.private("Message.User." + userProfile.id).listen(".NewMessage", data => {
+                audio.play();
                 console.log("private-Message.User." + userProfile.id);
                 console.log(data);
                 dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
@@ -73,7 +74,7 @@ function HeaderProfile() {
           });    
         }
 
-    })
+    }, [userProfile])
 
     const userMenu = () => {
         $('.Dadupa-Mini-Profile').toggleClass('Mini-Profile-Active');
