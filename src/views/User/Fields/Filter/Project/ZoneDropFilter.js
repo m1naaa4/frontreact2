@@ -7,7 +7,7 @@ function ZoneDropFilter ({ label, ...others }) {
     const { t, i18n } = useTranslation();
 
     return (
-        <select className="user-type" name="project_area" defaultValue={'MA'} {...others}>
+        <select className="user-type" name="project_area" {...others} required={others.required && "required"}>
             {countries.map((item) => (
                 <option key={item.value} value={item.value} >{item.label}</option>
             ))}
