@@ -39,13 +39,13 @@ export default function AddComment(props) {
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
-        const pusher = new PusherService();        
-        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
-        channel.bind('NewComment', function(res) {    
-            let j = res.id;
-            let feed = res[j]       
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});            
-        });
+        // const pusher = new PusherService();        
+        // var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
+        // channel.bind('NewComment', function(res) {    
+        //     let j = res.id;
+        //     let feed = res[j]       
+        //     dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});            
+        // });
     
     }, [dispatch])
 

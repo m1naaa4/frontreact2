@@ -25,7 +25,7 @@ export default function AddComment({post}) {
             setAvatar(infoprofile.infoprofile.avatar);           
             setUserProfileId(infoprofile.infoprofile.id);           
             setUserId(infoprofile.infoprofile.user_id);  
-            setUserVisiterAvatar(user.profile.avatar_link);
+            // setUserVisiterAvatar(user.profile.avatar_link);
         }     
     })    
     

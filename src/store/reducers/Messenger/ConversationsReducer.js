@@ -29,6 +29,7 @@ const initState = {
             case 'LOAD_MESSAGE_SUCCESS':
                 const conversation = state?.conversations?.[action?.res?.id] || {};
                 conversation.messages = action?.res?.data?.messages ;
+                conversation.count = action?.res?.data?.count ;
                 return {
                     ...state,
                     conversations: {...state.conversations},

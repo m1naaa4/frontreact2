@@ -55,13 +55,13 @@ export default function(newavatar) {
     }
     
     useEffect(() => {
-        const pusher = new PusherService();        
-        var channel = pusher.config.subscribe('post_' + params.id);        
-        channel.bind('NewPost', function(res) {                
-            let j = res.id;
-            let feed = res[j]
-            dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', feed});            
-        });
+        // const pusher = new PusherService();        
+        // var channel = pusher.config.subscribe('post_' + params.id);        
+        // channel.bind('NewPost', function(res) {                
+        //     let j = res.id;
+        //     let feed = res[j]
+        //     dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', feed});            
+        // });
     
     }, [dispatch])
     

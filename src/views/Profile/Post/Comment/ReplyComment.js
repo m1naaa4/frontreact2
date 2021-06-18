@@ -30,14 +30,14 @@ export default function ReplyComment({comment, post}) {
 
     useEffect(() => {
         //dispatch(GetCommentAction(dataget));
-        const pusher = new PusherService();    
-        var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
-        channel.bind('NewComment', function(res) {    
-            let j = res.id;
-            let feed = res[j]
+        // const pusher = new PusherService();    
+        // var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
+        // channel.bind('NewComment', function(res) {    
+        //     let j = res.id;
+        //     let feed = res[j]
         
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', feed});        
-        });
+        //     dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', feed});        
+        // });
     
     }, [dispatch])
 
