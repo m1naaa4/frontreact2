@@ -5,6 +5,7 @@ import ProjectView from "./ProjectGridView";
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";
 import {useDispatch, useSelector} from "react-redux";
 import {loadProjectAction} from "../../store/actions/User/Project/ProjectActions";
+import {Redirect} from 'react-router-dom';
 
 
 export default function ListProjectView({filterInput, setFilterInput, props}) {
@@ -65,7 +66,7 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
                                 loading === true ? (
                                     <ProjectSkeleton/>
                                 ) : projects.success === false ? (
-                                    <div data-testid="error-message">ERROR</div>
+                                    <Redirect to={{pathname: '/opps'}} />
                                 ) : (
                                     () => {
                                         

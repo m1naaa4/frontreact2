@@ -1,12 +1,20 @@
-import React  from 'react'
+import React, { useState }  from 'react'
 import {useSelector} from "react-redux";
 import Moment from 'react-moment';
 
 
 export default function Message({message}) {
   const me = useSelector(state => state.userProfile.userProfile.id);
+  const [showtime, setShowtime] = useState(false);
   let eye = message.read_at ? 'uil uil-eye' : 'uil uil-eye-slash';
   let classe = message.read_at ? 'message-seen' : '';
+
+  const calendarStrings = {
+    lastDay : '[Yesterday at] LT',
+    sameDay : 'LT',
+    lastWeek : '[last] dddd [at] LT',
+    sameElse : 'L'
+};
   
   return (
     <>
@@ -34,9 +42,15 @@ export default function Message({message}) {
                 </div>
               )
             }
-                <div className="messages-date"><label className="messages-date-label">
-                <Moment fromNow>{message.created_at}</Moment>  
+            {
+              <div className="messages-date"><label className="messages-date-label">
+                <Moment calendar={calendarStrings}>
+                {message.created_at}
+                </Moment>
+                {/* <Moment start fromNowDuring='1'>{message.created_at}</Moment>   */}
                 </label></div>
+            }
+                
             </>
           )
         }    

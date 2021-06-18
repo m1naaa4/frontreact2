@@ -6,10 +6,13 @@ import ZoneDropFilter from "../../User/Fields/Filter/Project/ZoneDropFilter";
 import FinanceDropFilter from "../../User/Fields/Filter/Project/FinanceDropFilter";
 import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
 import { displayErrorMessages } from '../../../helpers/displayErr';
+import { useTranslation } from 'react-i18next';
+import $ from "jquery";
+import 'jquery-validation'
 
 export default function Step1View({formData, setForm,navigation, props}) {
 
-
+    const { t, i18n } = useTranslation();
     const dispatch = useDispatch();
     const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink } = formData;
     const project = useSelector(state => state.addproject.addproject);
@@ -39,13 +42,14 @@ export default function Step1View({formData, setForm,navigation, props}) {
             onLoad(reader.result);
         };
     };
-
     const handleSubmitValue = (e) => {
         e.preventDefault();
         clearAuthErrDiv();
-        formData.project_id = project !== "loading" ? project.projectid: '';
-        formData.action = 'create';
-        dispatch(AddProjectsAction(formData, props, '/create', navigation));
+        if($("#form-wizard").valid()){
+            formData.project_id = project !== "loading" ? project.projectid: '';
+            formData.action = 'create';
+            dispatch(AddProjectsAction(formData, props, '/create', navigation));
+        }  
     }
 
     const clearAuthErrDiv = () => {
@@ -70,8 +74,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                         <div className="col-md-4 col-lg-4 d-md-none d-lg-block">
 
                             <div className="page-header">
-                                <h3>Détails de l'offre</h3>
-                                <p>Enter details about the project <br/>to preceed further</p>
+                                <h3>{t('project.add.desc1')} </h3>
 
                                 <div id="authErr"></div>
                                 <div id="authResponse">
@@ -93,51 +96,47 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                 <ul id="wizardbar">
                                     <li className="active">
                                         <div className="Step-Number"><span>1</span><i className="uil uil-check"></i></div>
-                                        <div className="Step-Title">Détails de l'offre</div>
+                                        <div className="Step-Title">{t('project.add.detail_offre')} </div>
                                     </li>
                                     <li>
                                         <div className="Step-Number"><span>2</span><i className="uil uil-check"></i></div>
-                                        <div className="Step-Title">Upload vidéo</div>
+                                        <div className="Step-Title">{t('upload_video')}</div>
                                     </li>
                                     <li>
                                         <div className="Step-Number"><span>3</span><i className="uil uil-check"></i></div>
-                                        <div className="Step-Title">Description de l'offre</div>
+                                        <div className="Step-Title">{t('desc_offre')}</div>
                                     </li>
                                     <li>
                                         <div className="Step-Number"><span>4</span><i className="uil uil-check"></i></div>
-                                        <div className="Step-Title">Review Details</div>
+                                        <div className="Step-Title">{t('review_detail')}</div>
                                     </li>
                                 </ul>
 
                                 <fieldset className="wizard-fieldset">
-                                    <div className="fieldset-header">
-                                        <div className="Step-Title">Détails de l'offre</div>
-                                        <p>Enter details about the project <br/>to preceed further</p>
-                                    </div>
                                     <div className="form-inputs">
                                         <div className="form-row">
                                             <div className="col-md-12 input-row">
                                                 <input type="text" name="name" onChange={setForm} value={name}
-                                                       placeholder="Nom du projet" className="wizard-required" required/>
+                                                       placeholder={t('form.prject_name')} className="wizard-required" required/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <EtatDropFilter value={project_status} onChange={setForm}/>
+                                                <EtatDropFilter value={project_status} required={true} onChange={setForm}/>
                                             </div>
 
                                             <div className="col-md-6 input-row input-select">
-                                                <SectorDropFilter value={sector_id} onChange={setForm} />
-                                            </div>
-                                            <div className="col-md-12 input-row">
-                                                <ZoneDropFilter value={project_area}  onChange={setForm}/>
+                                                <SectorDropFilter value={sector_id} required={true} onChange={setForm} />
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                <FinanceDropFilter value={funding_search}  onChange={setForm}/>
+                                                <ZoneDropFilter value={project_area} required={true}  onChange={setForm}/>
+                                            </div>
+                                            <div className="col-md-12 input-row input-select">
+                                                <FinanceDropFilter value={funding_search} required={true}  onChange={setForm}/>
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
                                                     <input type="file" value={logolink} name="logolink" onChange={onChange}
                                                     className="custom-file-input" id="customFile"/>
-                                                    <label className="custom-file-label" htmlFor="customFile"></label>
+                                                    <label className="custom-file-label" htmlFor="customFile">{t('form.add_logo')}</label>
                                                 </div>
                                             </div>
 
@@ -145,19 +144,17 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                                 <div className="custom-control custom-switch">
                                                     <input type="checkbox" value={look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
                                                            name="angel"/>
-                                                    <label className="custom-control-label" htmlFor="switch1">Je
-                                                        cherche des mentors</label>
+                                                    <label className="custom-control-label" htmlFor="switch1">{t('form.want_mentors')}</label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <input type="text" value={url} name="url" onChange={setForm}
-                                                       placeholder="Ajouter un lien" className="wizard-required"
-                                                       required/>
+                                                       placeholder={t('form.add_url')} className="wizard-required" />
                                             </div>
 
                                         </div>
                                     </div>
-                                    <button type="button" onClick={(event) => { handleSubmitValue(event);}} name="next" className="next action-button">Continue <i
+                                    <button type="button" onClick={(event) => { handleSubmitValue(event);}} name="next" className="next action-button">{t('next')} <i
                                         className="uil uil-arrow-right"></i></button>
                                 </fieldset>
 

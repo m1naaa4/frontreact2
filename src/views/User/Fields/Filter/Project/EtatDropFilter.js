@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 
 
-function EtatDropFilter({ label, ...others }) {
+function EtatDropFilter(props) {
     const etats = [
         ["", "filter.etat_projet"],
         ["idee", "filter.etat_projet.idee"],
@@ -19,13 +19,16 @@ function EtatDropFilter({ label, ...others }) {
     // }, [dispatch])
 
     return (
-        <div className="input-row input-select">
-            <select className="user-type" name="project_status"  {...others}>
-                {etats.map(([value, name]) => (
-                    <option key={name} value={value}>{t(name)}</option>
-                ))}
-            </select>
+        <div>
+        <select className="user-type" name="project_status" {...props} required={props.required && "required"} >
+            {etats.map(([value, name]) => (
+                <option key={name} value={value}>{t(name)}</option>
+            ))}
+        </select>
         </div>
+        // <div className="input-row input-select">
+            
+        // </div>
     )
 }
 
