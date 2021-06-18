@@ -111,6 +111,8 @@ const en = {
     'form.add_url': "Ajouter un lien",
     'form.add_logo': "Ajouter le logo",
 
+    'comments' : 'Comment'
+
 
 
    // 'error.credentials' : "These credentials do not match our records.",

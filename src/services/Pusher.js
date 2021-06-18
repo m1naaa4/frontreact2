@@ -35,13 +35,15 @@ class PusherService {
     echo = new Echo({
         broadcaster: 'pusher',
         key: 'local',
-        // cluster: `${process.env.CLUSTER}`,
+        // cluster: 'eu',//`${process.env.CLUSTER}`,
         // encrypted: true,
         forceTLS:false,
         wsHost: `${process.env.REACT_APP_API_URL_NOT}`,
         wsPort: 6001,
+        // encrypted: false,
         disableStats: true,
         authEndpoint: `${process.env.REACT_APP_API_URL}` + 'broadcasting/auth',
+        // enabledTransports: ['ws'],
         auth:{
             headers:{
               'Accept':'application/json',

@@ -110,6 +110,7 @@ const fr = {
     'form.want_mentors': "Je cherche des mentors",
     'form.add_url': "Ajouter un lien",
     'form.add_logo': "Ajouter le logo",
+    'comments' : 'Commentaires',
 
 
 };

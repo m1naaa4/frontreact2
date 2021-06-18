@@ -22,10 +22,11 @@ const initState = {
                     loading  :  false
                 }
 
-            case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':                            
+            case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
+                console.log('actionqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', action.res.comments?.data)                            
                 return {
                     ...state,
-                    comments :  [action.feed.data, ...state.comments],
+                    comments :  [action.res.comments?.data, ...state.comments],
                     // hasMore  :  action.res.comment.meta,
                     // current  :  action.res.comment.meta,
                     loading  :  false

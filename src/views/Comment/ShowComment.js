@@ -1,5 +1,7 @@
-import React, { useState, useRef} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { useHistory, useParams } from 'react-router-dom';
+import PusherService from '../../services/Pusher';
 import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import {GetCommentAction} from "../../store/actions/Comment/CommentAction";
 
@@ -13,7 +15,10 @@ export default function ShowComment(comment, props) {
     const [replies, SetReplies] = useState(false);
     const [replyBox, SetReplyBox] = useState(false);
     const [body, setBody] = useState();
-    const refcomment = useRef(null)
+    const refcomment = useRef(null);
+    const history  = useHistory();
+    const pusher = new PusherService(); 
+    const params = useParams();
 
     const userProfile = useSelector(state => state.userProfile.userProfile);
 
@@ -36,6 +41,10 @@ export default function ShowComment(comment, props) {
         SetReplyBox(!replyBox)
     }
 
+    const gotToProfile = () => {
+        history.push('/profile/'+ comment.comment.profile_id);
+      };
+
     const data = {
         provider_id     : project.getproject.projectid,
         action          : 'reply',
@@ -43,6 +52,29 @@ export default function ShowComment(comment, props) {
         body            : body,
         commentable_id  : comment.comment.id,
     }
+
+    useEffect(() => {
+        if(userProfile !== '' && userProfile != 'loading'){
+            pusher.echo.private("project_comment_" + params.id).listen(".NewComment", data => {
+                console.log("project_comment_" + params.id);
+                console.log(data);
+                dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
+            }).listenForWhisper('typing', (e) => {
+                // console.log(e)
+                if(e.user.id===userProfile.id){
+
+                    this.typingFriend=e.user;
+                    
+                  if(this.typingClock) clearTimeout();
+
+                    this.typingClock=setTimeout(()=>{
+                                          this.typingFriend={};
+                                      },9000);
+                }                             
+          });    
+        }
+
+    },[])
         
     const submitReply = (e) => {
         e.preventDefault();
@@ -61,7 +93,7 @@ export default function ShowComment(comment, props) {
                 <>                                            
                     <div className="Comment-Col-2">
                         <div className="Comment-User-Thumb">
-                            <img src={comment.comment.avatar} alt=""/>
+                            <img onClick={gotToProfile} src={comment.comment.avatar} alt=""/>
                         </div>
                         <ul className="comment-reactions-list">
                             <li className="comment-reaction"><img
@@ -73,7 +105,7 @@ export default function ShowComment(comment, props) {
                         <div className="Comment-User">
                             <div className="Comment-Content">
                                 <div className="Comment-User-Name">
-                                    <a className="Comment-User-Profile" href="#">{comment.comment.user_name}</a>
+                                    <a className="Comment-User-Profile" onClick={gotToProfile} href="#">{comment.comment.user_name}</a>
                                     <span className="Comment-Date">{comment.comment.created_at} </span>
                                 </div>
                                 <div className="Comment-Text">

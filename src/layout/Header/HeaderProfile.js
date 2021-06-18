@@ -74,6 +74,8 @@ function HeaderProfile() {
           });    
         }
 
+        
+
     }, [userProfile])
 
     const userMenu = () => {

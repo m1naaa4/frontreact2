@@ -4,12 +4,18 @@ import ShowComment from "./ShowComment";
 import PusherService from '../../services/Pusher';
 import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import { GetCommentAction } from '../../store/actions/Comment/CommentAction';
+import { useTranslation } from 'react-i18next';
+import { useHistory, useParams } from 'react-router-dom';
+
 
 
 export default function AddComment(props) {
 
     const [body, setBody] = useState();
-    const refcomment = useRef(null)
+    const refcomment = useRef(null);
+    const [t, i18n] = useTranslation();
+    const history  = useHistory();
+    const params = useParams();
 
     const comment = useSelector(state => state.addComment);
     const project = useSelector(state => state.getproject);
@@ -29,6 +35,10 @@ export default function AddComment(props) {
         provider_id      : project.getproject.projectid,
     }
 
+    const gotToProfile = () => {
+        history.push('/profile/'+ userProfile.profile.id);
+      };
+
     const dispatch = useDispatch();
 
     const handleSubmitValue = (e) => {
@@ -36,6 +46,13 @@ export default function AddComment(props) {
         refcomment.current.value = ''
         dispatch(AddCommentAction(data, props, 'add'));       
     }
+
+    const pusher = new PusherService();
+    const onTyping = () =>{
+        pusher.echo.private("project_comment_" + params.id).whisper('typing',{
+        user:userProfile?.name
+        });
+    };
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
@@ -53,9 +70,9 @@ export default function AddComment(props) {
             <div id="Comments-Wrap" className="Comments-Wrap">
         <div className="Comments-Header">
             <div className="Comments-Title">
-                <h3>Comments</h3>
+                <h3>{t('comments')}</h3>
             </div>
-            <div className="Comments-Filter">
+            {/* <div className="Comments-Filter">
                 <div className="comment-select">
                     <select className="comments-filter-select" name="">
                         <option value="1" defaultValue="1">Newest</option>
@@ -63,20 +80,20 @@ export default function AddComment(props) {
                         <option value="3">Newest</option>
                     </select>
                 </div>
-            </div>
+            </div> */}
         </div>
         <div className="Comments-Box">
 
             <form className="Comment-Writing" onSubmit={ handleSubmitValue}>
                 <div className="Comment-Col-2">
-                    <div className="Comment-User-Thumb">
-                        <img src={userProfile.avatar} alt={userProfile.name} />
+                    <div onClick={gotToProfile} className="Comment-User-Thumb">
+                        <img  src={userProfile.profile.avatar_link} alt={userProfile.name} />
                     </div>
                 </div>
                 <div className="Comment-Col-10">
                     <div className="Comment-Area">
                         <div className="Comment-Input">
-                            <input type="text" name="body"
+                            <input type="text" name="body" onKeyDown={onTyping}
                                    onChange={e => setBody(e.target.value)} ref={refcomment}  placeholder="Write your comment"/>
                         </div>
                     </div>

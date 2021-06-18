@@ -4,12 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {Player} from 'video-react';
 import ProjectSkeleton from '../../skeleton/ProjectSkeleton';
 import AddComment from '../Comment/AddComment';
-import { useLocation, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function ShowProjectView(props) {
 
     const params = useParams();
-    const location = useLocation();
+    const history  = useHistory();
     const data = {
         project_id : params.id,
         action     : "getProject",
@@ -34,8 +34,7 @@ export default function ShowProjectView(props) {
          tags = [];
     }
     const goToEditproject = () => {
-        
-        location.history.push('/project/update/'+ data.project_id);
+        history.push('/project/update/'+ params.id);
     };
     return (
         <div className="Single-Wrapper">
