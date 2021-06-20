@@ -59,7 +59,7 @@ export default function AddComment({post}) {
             event   : 'NewComment',
             type    : 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS',
         };
-        dispatch(PusherAction(commentData));
+        // dispatch(PusherAction(commentData));
     
     }, [dispatch]) 
 

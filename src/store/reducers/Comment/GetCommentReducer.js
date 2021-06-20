@@ -23,7 +23,7 @@ const initState = {
                 }
 
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
-                console.log('actionqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', action.res.comments?.data)                            
+                console.log('actionqqqqqqqqqq', action.res.comments?.data)                            
                 return {
                     ...state,
                     comments :  [action.res.comments?.data, ...state.comments],

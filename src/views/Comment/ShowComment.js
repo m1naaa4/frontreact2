@@ -17,7 +17,6 @@ export default function ShowComment(comment, props) {
     const [body, setBody] = useState();
     const refcomment = useRef(null);
     const history  = useHistory();
-    const pusher = new PusherService(); 
     const params = useParams();
 
     const userProfile = useSelector(state => state.userProfile.userProfile);
@@ -52,29 +51,7 @@ export default function ShowComment(comment, props) {
         body            : body,
         commentable_id  : comment.comment.id,
     }
-
-    useEffect(() => {
-        if(userProfile !== '' && userProfile != 'loading'){
-            pusher.echo.private("project_comment_" + params.id).listen(".NewComment", data => {
-                console.log("project_comment_" + params.id);
-                console.log(data);
-                dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
-            }).listenForWhisper('typing', (e) => {
-                // console.log(e)
-                if(e.user.id===userProfile.id){
-
-                    this.typingFriend=e.user;
-                    
-                  if(this.typingClock) clearTimeout();
-
-                    this.typingClock=setTimeout(()=>{
-                                          this.typingFriend={};
-                                      },9000);
-                }                             
-          });    
-        }
-
-    },[])
+   
         
     const submitReply = (e) => {
         e.preventDefault();

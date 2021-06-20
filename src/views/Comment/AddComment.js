@@ -17,7 +17,7 @@ export default function AddComment(props) {
     const history  = useHistory();
     const params = useParams();
 
-    const comment = useSelector(state => state.addComment);
+    // const comment = useSelector(state => state.addComment);
     const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
@@ -66,6 +66,8 @@ export default function AddComment(props) {
     
     }, [dispatch])
 
+   
+
     return (
             <div id="Comments-Wrap" className="Comments-Wrap">
         <div className="Comments-Header">
@@ -87,7 +89,7 @@ export default function AddComment(props) {
             <form className="Comment-Writing" onSubmit={ handleSubmitValue}>
                 <div className="Comment-Col-2">
                     <div onClick={gotToProfile} className="Comment-User-Thumb">
-                        <img  src={userProfile.profile.avatar_link} alt={userProfile.name} />
+                        <img  src={userProfile?.profile?.avatar_link} alt={userProfile?.name} />
                     </div>
                 </div>
                 <div className="Comment-Col-10">

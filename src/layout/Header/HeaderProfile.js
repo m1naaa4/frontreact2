@@ -6,7 +6,6 @@ import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {  useHistory  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
-import PusherService from '../../services/Pusher';
 import $ from "jquery";
 import Messages from './Messages';
 
@@ -16,10 +15,7 @@ function HeaderProfile() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
-    const [audio] = useState(new Audio('https://dadupadisque.ams3.digitaloceanspaces.com/audio/notification.mp3'));
-    
-    const pusher = new PusherService();  
-    
+        
     useEffect(() => {
         $(document).on("click", function(event){
             if(!$(event.target).closest(".Dadupa-Popup-DropDown").length){
@@ -51,32 +47,7 @@ function HeaderProfile() {
 
     }, [dispatch])
 
-    useEffect(() => {
-        if(userProfile !== '' && userProfile != 'loading'){
-            pusher.echo.private("Message.User." + userProfile.id).listen(".NewMessage", data => {
-                audio.play();
-                console.log("private-Message.User." + userProfile.id);
-                console.log(data);
-                dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
-            }).listenForWhisper('typing', (e) => {
-                console.log(e)
-                if(e.user.id===userProfile.id){
-
-                    this.typingFriend=e.user;
-                    
-                  if(this.typingClock) clearTimeout();
-
-                    this.typingClock=setTimeout(()=>{
-                                          this.typingFriend={};
-                                      },9000);
-                }
-                             
-          });    
-        }
-
-        
-
-    }, [userProfile])
+    
 
     const userMenu = () => {
         $('.Dadupa-Mini-Profile').toggleClass('Mini-Profile-Active');

@@ -2,15 +2,14 @@ import Pusher from 'pusher-js';
 import config from '../Config';
 import Echo from 'laravel-echo'
 
-let   app_key       = config.pusher.api_key;
-let   app_cluster   = config.pusher.cluster;
+
 
 // Pusher.log = function(message) {
 //       console.log( JSON.stringify(message));
 
 //   };
 
- 
+ console.log(window.location.hostname)
 // console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.REACT_APP_API_URL}`)
 // console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_KEY}`)
 // console.log('dddddddddddddddddddddddddddddddddddddddddd',`${process.env.APP_CLUSTER}`)
@@ -35,17 +34,19 @@ class PusherService {
     echo = new Echo({
         broadcaster: 'pusher',
         key: 'local',
-        // cluster: 'eu',//`${process.env.CLUSTER}`,
+        cluster: 'eu',//`${process.env.CLUSTER}`,
         // encrypted: true,
         forceTLS:false,
-        wsHost: `${process.env.REACT_APP_API_URL_NOT}`,
+        wsHost: window.location.hostname,
         wsPort: 6001,
         // encrypted: false,
-        disableStats: true,
+        disableStats: false,
+        encrypted:true,
         authEndpoint: `${process.env.REACT_APP_API_URL}` + 'broadcasting/auth',
-        // enabledTransports: ['ws'],
+        enabledTransports: ['ws'],
         auth:{
             headers:{
+            //   'Content-Type':'application/json',
               'Accept':'application/json',
               'Authorization': localStorage.getItem('user-token')
             }
