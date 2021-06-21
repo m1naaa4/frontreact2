@@ -9,13 +9,14 @@ import Footer from "../../../layout/footer/footer";
 import {Text} from "../../../containers/Language";
 import SocialLogin from "./Social/SocialLogin";
 import $ from "jquery";
-import 'jquery-validation'
+import 'jquery-validation';
+import { useTranslation } from 'react-i18next';
 
 
 export default function LoginView(props) {
 
     const [place, sePlace] = useState();
-
+    const [t, i18n] = useTranslation();
 
 
 
@@ -45,10 +46,10 @@ export default function LoginView(props) {
         },
     [])
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
         if($("#form-login").valid()){
             dispatch(UserLoginAction(fields, props.props))
-        }  
+        }          
     }
 
     return (
@@ -71,7 +72,7 @@ export default function LoginView(props) {
                                      <div id="authErr" className="alert alert-danger"><Text tid={authResponse.error} /></div>
                                 }
 
-                                <form id="form-login" className="form-login">
+                                <form id="form-login" onSubmit={e => {e.preventDefault();handleLogin(e)}} className="form-login">
                                     <h3 className="form-title"><Text tid="welcomeDescription" />!</h3>
                                     <div className="form-inputs">
                                         <div className="input-row">
@@ -86,7 +87,7 @@ export default function LoginView(props) {
                                         </div>
                                         <div className="input-row">
                                             <ItemForm  id="password" name="password"
-                                               placeholder={<Text tid="welcomeDescription"/>}
+                                               placeholder={t('password')}
                                                className="input-password"
                                                type={passwordShown ? "text" : "password"}
                                                onChange={handleFieldChange}
@@ -100,13 +101,13 @@ export default function LoginView(props) {
                                             <label className="container-checkbox">
                                                 <input type="checkbox"/>
                                                     <span className="checkmark"></span>
-                                                    <span><Text tid="remember_me" /></span>
+                                                    <span> value={t('remember_me')}</span>
                                             </label>
                                         </div>
                                         <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
                                     </div>
                                     <div className="form-submit">
-                                        <button type="button" onClick={handleLogin} name="submit"><Text tid="login" /></button>
+                                        <button type="submit"  name="submit"> {t('login')} </button>
                                     </div>
                                 </form>
 
