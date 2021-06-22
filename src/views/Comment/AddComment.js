@@ -22,12 +22,7 @@ export default function AddComment(props) {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
 
-    const data = {
-        provider_id   : project.getproject.projectid,
-        action      : "add",
-        provider        : "project",
-        body        : body,
-    }
+    
 
     const dataget = {
         action           : 'get',
@@ -41,11 +36,7 @@ export default function AddComment(props) {
 
     const dispatch = useDispatch();
 
-    const handleSubmitValue = (e) => {
-        e.preventDefault();
-        refcomment.current.value = ''
-        dispatch(AddCommentAction(data, props, 'add'));       
-    }
+    
 
     const pusher = new PusherService();
     const onTyping = () =>{
@@ -65,6 +56,20 @@ export default function AddComment(props) {
         // });
     
     }, [dispatch])
+
+    const handleSubmitValue =  async (value, key) => {
+        
+        if (key === 13) {
+            const data = {
+                provider_id     : project.getproject.projectid,
+                action          : "add",
+                provider        : "project",
+                body            : value,
+            }
+            refcomment.current.value = ''
+        dispatch(AddCommentAction(data, props, 'add'));
+        }
+    }
 
    
 
@@ -86,7 +91,7 @@ export default function AddComment(props) {
         </div>
         <div className="Comments-Box">
 
-            <form className="Comment-Writing" onSubmit={ handleSubmitValue}>
+            <div className="Comment-Writing" >
                 <div className="Comment-Col-2">
                     <div onClick={gotToProfile} className="Comment-User-Thumb">
                         <img  src={userProfile?.profile?.avatar_link} alt={userProfile?.name} />
@@ -95,12 +100,12 @@ export default function AddComment(props) {
                 <div className="Comment-Col-10">
                     <div className="Comment-Area">
                         <div className="Comment-Input">
-                            <input type="text" name="body" onKeyDown={onTyping}
-                                   onChange={e => setBody(e.target.value)} ref={refcomment}  placeholder="Write your comment"/>
+                            <input type="text" name="body" onKeyUp={onTyping}
+                                   onKeyDown={(e) => handleSubmitValue(e.target.value, e.keyCode) } ref={refcomment}  placeholder="Write your comment"/>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
 
             <div className="User-Comments">
 
