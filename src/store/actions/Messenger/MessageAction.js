@@ -33,10 +33,10 @@ export const GetConversationAction = (data, props, current) =>{
 
         PostMessage(data, props, current).then((res) =>
             {
-                if(res.data.hasOwnProperty('success') && res.data.success === true){
+                if(res?.data?.hasOwnProperty('success') && res?.data?.success === true){
                     dispatch({type:'LOAD_MESSAGE_SUCCESS', res});
 
-                }else if(res.data.hasOwnProperty('success') && res.data.success === false) {
+                }else if(res?.data?.hasOwnProperty('success') && res?.data?.success === false) {
                     dispatch({type:'LOAD_MESSEGES_ERROR',res})
                 }
             },
@@ -56,10 +56,10 @@ export const SendMessageAction = (data, props, current) =>{
 
         Post(data, props, current).then((res) =>
             {
-                if(res.hasOwnProperty('success') && res.success === true){
+                if(res?.hasOwnProperty('success') && res?.success === true){
                     dispatch({type:'SEND_MESSAGE_SUCCESS', res});
 
-                }else if(res.hasOwnProperty('success') && res.success === false) {
+                }else if(res?.hasOwnProperty('success') && res?.success === false) {
                     dispatch({type:'SEND_MESSAGE_ERROR',res})
                 }
             },

@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import EtatDropFilter from "../../User/Fields/Filter/Project/EtatDropFilter";
 import SectorDropFilter from "../../User/Fields/Filter/Project/SectorDropFilter";
@@ -7,21 +7,21 @@ import FinanceDropFilter from "../../User/Fields/Filter/Project/FinanceDropFilte
 import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
 import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
 import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
+import { useTranslation } from 'react-i18next';
 
 export default function UpdateStep1View({formData, setForm, navigation, props}) {
 
 
     const dispatch = useDispatch();    
     const getproject = useSelector(state => state.getproject.getproject);
+    const { t } = useTranslation();
+    const [picture, setPicture] = useState(null);
 
     console.log("here updateeeeeeeeeee", getproject)
     
     const nameForm = useRef(null)
 
-    const onChange = e => {
-        getBase64(e.target.files[0]);
-    };
-
+    
     const data = {
         project_id  :  props.match.params.id,
         action      : "getProject",
@@ -29,7 +29,18 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
     useEffect(() => {
         console.log("here update", getproject)
         dispatch(getProjectAction(data, props));
+        setPicture(getproject?.project?.logo_link)
     }, [dispatch])
+    
+    useEffect(() => {
+        
+    })
+
+    const onChange = e => {
+        getBase64(e.target.files[0]);
+        setPicture(URL.createObjectURL(e.target.files[0]) );
+    };
+
 
     const onLoad = fileString => {
         formData.logo = fileString;
@@ -131,8 +142,13 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                <div className="col-md-12 input-row">
                                                    <div className="custom-file">
                                                        <input type="file"  onChange={onChange}
-                                                       className="custom-file-input" id="customFile"/>
-                                                       <label className="custom-file-label" htmlFor="customFile"></label>
+                                                       className="custom-file-input" id="customFile"/>  
+                                                       <label className="custom-file-label" htmlFor="customFile">
+                                                       {!picture ?( t('form.edit_logo')): ''}{picture ? (<img 
+                                                    style={{width:"50px"}} alt={picture} src={picture && picture}></img>)
+                                                    : (<img 
+                                                        style={{width:"50px"}} alt={picture} src={getproject.project.logo_link}></img>)}
+                                                       </label>
                                                    </div>
                                                </div>
    

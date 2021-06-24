@@ -28,12 +28,14 @@ export default function BoxMessage() {
     content     : text,
     receiver_id : params.id
   }
-  const handleSubmitValue = (e) => {
-    e.preventDefault();
-    refmessage.current.value = '';
-    refmessage.current.focus();
-    setText('')
-    dispatch(SendMessageAction(data, 'messages/store', ''));
+  const handleSubmitValue=  async (value, key) => {
+    if (key === 13 && value !== '') {
+      setText(value);
+      refmessage.current.value = '';
+      refmessage.current.focus();
+      dispatch(SendMessageAction(data, 'messages/store', ''));
+      setText('');
+    }
 
     // const msgData = {
     //   channel : 'message_' + params.id,
@@ -76,7 +78,7 @@ export default function BoxMessage() {
 
   const addEmoji = e => {
     let emoji = e.native;
-    setText(text + emoji)
+    setText(text + emoji);
   };
   const handleChange = e => {
     setText( e.target.value);
@@ -89,9 +91,10 @@ export default function BoxMessage() {
     console.log(refmessage)
   });
   return (
-    <form onSubmit={ handleSubmitValue}>
+    <div >
       <div id="EmojiPicker" className="Messenger-footer">
-          <input autoFocus onKeyDown={onTyping} type="text" value={text} name="text" onChange={handleChange} ref={refmessage} placeholder="Type messages here..."  data-emoji-picker="true"/>
+          <input autoFocus onKeyUp={onTyping} type="text" name="text" 
+          onKeyDown={(e) => handleSubmitValue(e.target.value, e.keyCode)} value={text} onChange={handleChange} ref={refmessage} placeholder="Type messages here..."  data-emoji-picker="true"/>
           
           <div  style={{position: 'absolute', bottom: '10px', zIndex: 1000, left: '10px', textDecoration: 'none'}} >
           <i  onClick={triggerPicker}   className="uil uil-smile"></i>
@@ -113,6 +116,6 @@ export default function BoxMessage() {
           <button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button>
         </div>
       </div>  
-    </form>
+    </div>
     )
 }

@@ -16,6 +16,7 @@ export default function AddComment(props) {
     const [t, i18n] = useTranslation();
     const history  = useHistory();
     const params = useParams();
+    const pusher = new PusherService();
 
     // const comment = useSelector(state => state.addComment);
     const project = useSelector(state => state.getproject);
@@ -36,11 +37,10 @@ export default function AddComment(props) {
 
     const dispatch = useDispatch();
 
-    
+     
 
-    const pusher = new PusherService();
     const onTyping = () =>{
-        pusher.echo.private("project_comment_" + params.id).whisper('typing',{
+        pusher.echo.private("project_comment").whisper('typing',{
         user:userProfile?.name
         });
     };
@@ -59,7 +59,7 @@ export default function AddComment(props) {
 
     const handleSubmitValue =  async (value, key) => {
         
-        if (key === 13) {
+        if (key === 13 && value !== '') {
             const data = {
                 provider_id     : project.getproject.projectid,
                 action          : "add",

@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link, useParams } from 'react-router-dom';
 import { AddCommentAction } from '../../../../store/actions/Comment/CommentAction';
-import {PusherAction} from "../../../../store/actions/Generale/PusherAction";
+// import {PusherAction} from "../../../../store/actions/Generale/PusherAction";
 
 
 export default function AddComment({post}) {
@@ -70,14 +70,14 @@ export default function AddComment({post}) {
             event   : 'notifpost',
             type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
         };
-        dispatch(PusherAction(notifData));
+        // dispatch(PusherAction(notifData));
 
         const notifDataa = {
             channel : 'notification_' + user_id,
             event   : 'notifpost',
             type    : 'GET_ADDED_NOTIFICATION_SUCCESS',
         };
-        dispatch(PusherAction(notifDataa));
+        // dispatch(PusherAction(notifDataa));
         
     }, [dispatch])
 

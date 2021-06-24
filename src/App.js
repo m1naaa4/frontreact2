@@ -13,16 +13,34 @@ function App() {
     
 
     const dispatch = useDispatch ();
-    let id = window.location.href.split("/").pop();
-    pusher.echo.private("project_comment_"+id).listen(".NewComment", data => {
+    pusher.echo.private("project_comment").listen(".NewComment", data => {
         
-        console.log("project_comment_"+id);
+        console.log("project_comment");
         // console.log(data);
         dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
     }).listenForWhisper('typing', (e) => {
         console.log('typing ... ',e)
                                 
-    });    
+    }); 
+    
+    pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
+        audio.play();
+        console.log(data);
+        dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
+    }).listenForWhisper('typing', (e) => {
+        console.log(e)
+        if(e.user.id===user_id){
+
+            this.typingFriend=e.user;
+
+          if(this.typingClock) clearTimeout();
+
+            this.typingClock=setTimeout(()=>{
+                                  this.typingFriend={};
+                              },9000);
+        }
+
+  });    
 
     
     return (

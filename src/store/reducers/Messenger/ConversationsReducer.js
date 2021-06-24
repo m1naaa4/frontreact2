@@ -38,7 +38,7 @@ const initState = {
             
             case 'SEND_MESSAGE_SUCCESS':
                 const convt = state?.conversations?.[action?.res?.message?.receiver_id] || {};
-                convt.messages = convt.messages.concat(action?.res?.message);
+                convt.messages = convt?.messages?.concat(action?.res?.message);
                 return {
                     ...state,
                     loading:false

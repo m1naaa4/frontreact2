@@ -3,11 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
-import {  useHistory  } from 'react-router-dom';
+import {  useHistory, useParams  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 import $ from "jquery";
 import Messages from './Messages';
+import PusherService from '../../services/Pusher';
 
 function HeaderProfile() {
     const history = useHistory();
@@ -15,6 +16,8 @@ function HeaderProfile() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
+    const params = useParams();
+    const pusher = new PusherService();
         
     useEffect(() => {
         $(document).on("click", function(event){
@@ -46,8 +49,6 @@ function HeaderProfile() {
         }
 
     }, [dispatch])
-
-    
 
     const userMenu = () => {
         $('.Dadupa-Mini-Profile').toggleClass('Mini-Profile-Active');

@@ -1,15 +1,18 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from 'video-react';
 import ProjectSkeleton from '../../skeleton/ProjectSkeleton';
 import AddComment from '../Comment/AddComment';
 import { useHistory, useParams } from 'react-router-dom';
+import { LikeAction } from '../../store/actions/Like/LikeAction';
 
 export default function ShowProjectView(props) {
 
     const params = useParams();
     const history  = useHistory();
+    const [like, setLike] = useState();
+    const [classe, setClasse] = useState();
     const data = {
         project_id : params.id,
         action     : "getProject",
@@ -18,6 +21,11 @@ export default function ShowProjectView(props) {
     useEffect(() => {
         dispatch(GetProjectAction(data, props));
     }, [dispatch])
+
+    useEffect(() => {
+        setLike(project?.project?.is_liked);
+        like ? setClasse('Dislike') : setClasse('Like');
+    })
 
     const project = useSelector(state => state.getproject.getproject);
 
@@ -36,6 +44,30 @@ export default function ShowProjectView(props) {
     const goToEditproject = () => {
         history.push('/project/update/'+ params.id);
     };
+
+    const likeAction = () => {
+        const dataa = {
+            action: "like",
+            provider_id: params.id,
+            provider: "project",
+            type    : 'like',
+        }
+        setClasse('Like')
+        dispatch(LikeAction(dataa, 'like/like', props));        
+    }
+
+    const dislikeAction = () => {
+        const dataa = {
+            action: "like",
+            provider_id: params.id,
+            provider: "project",
+            type    : 'dislike',
+        }
+        setClasse('Dislike')
+        dispatch(LikeAction(dataa, 'like/like', props));
+    }
+
+    
     return (
         <div className="Single-Wrapper">
             <div className="container">
@@ -80,28 +112,30 @@ export default function ShowProjectView(props) {
                                         <div className="reactions-box">
                                             <div className="row">
                                                 <div className="col-6 col-md-4 col-lg-6">
-                                                    <div className="reaction likes"><img src=""/><span>145</span></div>
+                                                    <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{project.project.likeCount}</span></div>
                                                     <div className="reaction views"><i className="uil uil-eye"></i>
-                                                        <span>1500</span></div>
+                                                        <span>{project.project.visit}</span></div>
                                                 </div>
                                                 <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                    <div className="reaction comments"><span>1.9K Comments</span></div>
+                                                    <div className="reaction comments"><span>{project.project.commentCount} Comments</span></div>
                                                     <div className="reaction shares"><span>380 Shares</span></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="reactions-buttons">
-                                        <button className="reaction-button reaction-like" type="button" name="button">
-                                            <img src="assets/images/icons/dadupa-like.svg" alt=""/>
-                                                Aimer
-                                        </button>
+                                        <button className={project.project.is_liked ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'} 
+                                            onClick={project.project.is_liked ? dislikeAction : likeAction} type="button" name="button">
+                                                <img src="/assets/images/icons/dadupa-clap-green.svg" alt=""/>
+                                                {classe}
+                                            </button>
+                                        
                                         <a className="reaction-button reaction-comment" href="#Comments-Wrap">
-                                            <img src="assets/images/icons/dadupa-comment.svg" alt=""/>
+                                            <img src="/assets/images/icons/dadupa-comment.svg" alt=""/>
                                                 Commenter
                                         </a>
                                         <button className="reaction-button" type="button" name="button">
-                                            <img src="assets/images/icons/dadupa-share.svg" alt=""/>
+                                            <img src="/assets/images/icons/dadupa-share.svg" alt=""/>
                                                 Partager
                                         </button>
                                     </div>

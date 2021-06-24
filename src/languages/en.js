@@ -108,8 +108,9 @@ const en = {
     'review_detail': "Vérification",
     'form.prject_name': "Nom du projet",
     'form.want_mentors': "Je cherche des mentors",
-    'form.add_url': "Ajouter un lien",
-    'form.add_logo': "Ajouter le logo",
+    'form.add_url': "Add URL",
+    'form.add_logo': "Add logo",
+    'form.edit_logo': "Edit logo",
 
     'comments' : 'Comment'
 

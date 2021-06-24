@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { AddPostAction } from "../../../store/actions/Post/PostAction";
 import FileUploadService from "../../../helpers/FileUploadService";
-import PusherService from '../../../services/Pusher';
+// import PusherService from '../../../services/Pusher';
 import Player from "video-react/lib/components/Player";
 import { useParams } from "react-router";
 import { useForm } from "react-hooks-helper";

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import EtatDropFilter from "../../User/Fields/Filter/Project/EtatDropFilter";
 import SectorDropFilter from "../../User/Fields/Filter/Project/SectorDropFilter";
@@ -16,9 +16,10 @@ export default function Step1View({formData, setForm,navigation, props}) {
     const dispatch = useDispatch();
     const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink } = formData;
     const project = useSelector(state => state.addproject.addproject);
-
+    const [picture, setPicture] = useState(null);
     const onChange = e => {
         getBase64(e.target.files[0]);
+        setPicture(URL.createObjectURL(e.target.files[0]) );
     };
 
 
@@ -136,7 +137,8 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                                 <div className="custom-file">
                                                     <input type="file" value={logolink} name="logolink" onChange={onChange}
                                                     className="custom-file-input" id="customFile"/>
-                                                    <label className="custom-file-label" htmlFor="customFile">{t('form.add_logo')}</label>
+                                                    <label className="custom-file-label" htmlFor="customFile">{!picture ?( t('form.add_logo')): ''}<img 
+                                                    style={{width:"50px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>
                                                 </div>
                                             </div>
 

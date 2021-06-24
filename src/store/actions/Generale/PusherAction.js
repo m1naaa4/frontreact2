@@ -1,10 +1,10 @@
-import PusherService from "../../../services/Pusher";
+// import PusherService from "../../../services/Pusher";
 
 export const PusherAction = (data, id) =>{
 
     return (dispatch)=>{
 
-        const pusher = new PusherService();    
+        // const pusher = new PusherService();    
         // var channel = pusher.config.subscribe(data.channel);        
         // channel.bind(data.event, function(res) {   
         //     let j = res.id;

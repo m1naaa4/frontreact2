@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { useHistory, useParams } from 'react-router-dom';
-import PusherService from '../../services/Pusher';
+import { useHistory} from 'react-router-dom';
+// import PusherService from '../../services/Pusher';
 import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import {GetCommentAction} from "../../store/actions/Comment/CommentAction";
 
@@ -10,14 +10,12 @@ export default function ShowComment(comment, props) {
 
     
     const dispatch = useDispatch();
-    const comments = useSelector(state => state.getComments);
     const project = useSelector(state => state.getproject);
     const [replies, SetReplies] = useState(false);
     const [replyBox, SetReplyBox] = useState(false);
     const [body, setBody] = useState();
     const refcomment = useRef(null);
     const history  = useHistory();
-    const params = useParams();
 
     const userProfile = useSelector(state => state.userProfile.userProfile);
 
@@ -36,9 +34,6 @@ export default function ShowComment(comment, props) {
         
     }
 
-    const showReplyBox = e => {
-        SetReplyBox(!replyBox)
-    }
 
     const gotToProfile = () => {
         history.push('/profile/'+ comment.comment.profile_id);
@@ -65,6 +60,11 @@ export default function ShowComment(comment, props) {
           }, 2000)
     }
 
+    const showReplyBox =  async (value, e) => {
+        SetReplyBox(!replyBox);
+        setBody('@'+value +' ');
+        
+    }
     return (
         
                 <>                                            
@@ -112,7 +112,7 @@ export default function ShowComment(comment, props) {
                                 <li className="comment-action">
                                     <button className="like-action">Like</button>
                                 </li>
-                                <li className="comment-action replay-action" onClick={showReplyBox}>Reply</li>
+                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.comment.user_name, e.keyCode)}>Reply</li>
                             </ul>
                         </div>
                     </div>
@@ -161,7 +161,7 @@ export default function ShowComment(comment, props) {
                             <div className="Comment-Col-10">
                                 <div className="Comment-Area">
                                     <div className="Comment-Input">
-                                        <input type="text" name="body"
+                                        <input type="text" name="body" defaultValue={body}
                                             onChange={e => setBody(e.target.value)} ref={refcomment}
                                             placeholder="Write your comment"/>
                                     </div>

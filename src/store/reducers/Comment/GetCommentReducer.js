@@ -23,10 +23,13 @@ const initState = {
                 }
 
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
-                console.log('actionqqqqqqqqqq', action.res.comments?.data)                            
+                let id = window.location.href.split("/").pop();
+                if (action.res.comments?.data?.commentable_id === id) {
+                    state.comments = [action.res.comments?.data, ...state.comments];
+                }                            
                 return {
                     ...state,
-                    comments :  [action.res.comments?.data, ...state.comments],
+                    comments :  state.comments,
                     // hasMore  :  action.res.comment.meta,
                     // current  :  action.res.comment.meta,
                     loading  :  false
