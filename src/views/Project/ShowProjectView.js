@@ -11,7 +11,10 @@ export default function ShowProjectView(props) {
 
     const params = useParams();
     const history  = useHistory();
-    const [like, setLike] = useState();
+    const [initial, setInitial] = useState(true);
+    const [like, setLike] = useState(false);
+    const [green, setGreen] = useState();
+    const [postliked, setPostliked] = useState();
     const [classe, setClasse] = useState();
     const data = {
         project_id : params.id,
@@ -23,8 +26,11 @@ export default function ShowProjectView(props) {
     }, [dispatch])
 
     useEffect(() => {
-        setLike(project?.project?.is_liked);
         like ? setClasse('Dislike') : setClasse('Like');
+        if (initial) {
+            setLike(project?.project?.is_liked);
+            console.log('initial',like)
+        }
     })
 
     const project = useSelector(state => state.getproject.getproject);
@@ -45,14 +51,18 @@ export default function ShowProjectView(props) {
         history.push('/project/update/'+ params.id);
     };
 
-    const likeAction = () => {
+    const likeAAction = () => {
+        setLike(!like);
+        setInitial(false)
         const dataa = {
             action: "like",
             provider_id: params.id,
             provider: "project",
-            type    : 'like',
+            type    : like?'like':'dislike',
         }
-        setClasse('Like')
+        setClasse('Dislike');
+        
+        console.log(like)
         dispatch(LikeAction(dataa, 'like/like', props));        
     }
 
@@ -63,7 +73,10 @@ export default function ShowProjectView(props) {
             provider: "project",
             type    : 'dislike',
         }
-        setClasse('Dislike')
+        setLike(false);
+        setClasse('Like');
+        setLike(like ? false : true);
+        console.log(like)
         dispatch(LikeAction(dataa, 'like/like', props));
     }
 
@@ -124,10 +137,10 @@ export default function ShowProjectView(props) {
                                         </div>
                                     </div>
                                     <div className="reactions-buttons">
-                                        <button className={project.project.is_liked ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'} 
-                                            onClick={project.project.is_liked ? dislikeAction : likeAction} type="button" name="button">
-                                                <img src="/assets/images/icons/dadupa-clap-green.svg" alt=""/>
-                                                {classe}
+                                        <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'} 
+                                            onClick={likeAAction} toggle="#password-field" type="button" name="button">
+                                                <img src={like?"/assets/images/icons/dadupa-clap-green.svg":"/assets/images/icons/dadupa-clap-green.svg"} alt=""/>
+                                                {like?"Dislike":"Like"}
                                             </button>
                                         
                                         <a className="reaction-button reaction-comment" href="#Comments-Wrap">
