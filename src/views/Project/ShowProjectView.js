@@ -13,6 +13,7 @@ export default function ShowProjectView(props) {
     const history  = useHistory();
     const [initial, setInitial] = useState(true);
     const [like, setLike] = useState(false);
+    const [likeCount, setLikeCount] = useState();
     const [green, setGreen] = useState();
     const [postliked, setPostliked] = useState();
     const [classe, setClasse] = useState();
@@ -29,7 +30,7 @@ export default function ShowProjectView(props) {
         like ? setClasse('Dislike') : setClasse('Like');
         if (initial) {
             setLike(project?.project?.is_liked);
-            console.log('initial',like)
+            setLikeCount(project?.project?.likeCount)
         }
     })
 
@@ -58,8 +59,9 @@ export default function ShowProjectView(props) {
             action: "like",
             provider_id: params.id,
             provider: "project",
-            type    : like?'like':'dislike',
+            type    : like?'dislike':'like',
         }
+        like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
         setClasse('Dislike');
         
         console.log(like)
@@ -125,7 +127,7 @@ export default function ShowProjectView(props) {
                                         <div className="reactions-box">
                                             <div className="row">
                                                 <div className="col-6 col-md-4 col-lg-6">
-                                                    <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{project.project.likeCount}</span></div>
+                                                    <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{likeCount}</span></div>
                                                     <div className="reaction views"><i className="uil uil-eye"></i>
                                                         <span>{project.project.visit}</span></div>
                                                 </div>
@@ -139,7 +141,7 @@ export default function ShowProjectView(props) {
                                     <div className="reactions-buttons">
                                         <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'} 
                                             onClick={likeAAction} toggle="#password-field" type="button" name="button">
-                                                <img src={like?"/assets/images/icons/dadupa-clap-green.svg":"/assets/images/icons/dadupa-clap-green.svg"} alt=""/>
+                                                <img src={like?"/assets/images/icons/dadupa-clap-green.svg":"/assets/images/icons/dadupa-clap.svg"} alt=""/>
                                                 {like?"Dislike":"Like"}
                                             </button>
                                         
