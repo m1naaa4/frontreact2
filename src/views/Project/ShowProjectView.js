@@ -14,6 +14,7 @@ export default function ShowProjectView(props) {
     const [initial, setInitial] = useState(true);
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
+    const [countcomment, setCountcomment] = useState();
     const [green, setGreen] = useState();
     const [postliked, setPostliked] = useState();
     const [classe, setClasse] = useState();
@@ -30,11 +31,18 @@ export default function ShowProjectView(props) {
         like ? setClasse('Dislike') : setClasse('Like');
         if (initial) {
             setLike(project?.project?.is_liked);
-            setLikeCount(project?.project?.likeCount)
+            setLikeCount(fullproject?.countlike)
+            setCountcomment(fullproject?.countcomment)
+        }
+        if(counter.notification){
+            console.log(counter?.notification)
+            setLikeCount(counter?.notification)
         }
     })
 
-    const project = useSelector(state => state.getproject.getproject);
+    const counter = useSelector(state => state.addednotification);
+    const fullproject = useSelector(state => state.getproject);
+    const project = fullproject?.getproject;
 
     let tags;
     if (project.project) {
@@ -61,7 +69,7 @@ export default function ShowProjectView(props) {
             provider: "project",
             type    : like?'dislike':'like',
         }
-        like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+        // like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
         setClasse('Dislike');
         
         console.log(like)
@@ -132,7 +140,7 @@ export default function ShowProjectView(props) {
                                                         <span>{project.project.visit}</span></div>
                                                 </div>
                                                 <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                    <div className="reaction comments"><span>{project.project.commentCount} Comments</span></div>
+                                                    <div className="reaction comments"><span>{countcomment} Comments</span></div>
                                                     <div className="reaction shares"><span>380 Shares</span></div>
                                                 </div>
                                             </div>

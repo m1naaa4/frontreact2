@@ -16,6 +16,8 @@ const getProjectReducer = (state = initState ||undefined, action) => {
             return {
                 ...state,
                 getproject: action.res,
+                countlike: action.res?.project?.likeCount,
+                countcomment: action.res?.project?.commentCount,
             }
 
         case 'GET_PROJECT_ERROR':

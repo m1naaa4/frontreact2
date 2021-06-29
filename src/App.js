@@ -22,6 +22,13 @@ function App() {
         console.log('typing ... ',e)
                                 
     }); 
+
+    pusher.echo.private("newNotification").listen(".notification", data => {
+        
+        console.log("newNotification--------------");
+        // console.log(data);
+        dispatch({type:'LIKED_SUCCESS', res : data});
+    })
     
     pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
         audio.play();
