@@ -67,7 +67,7 @@ export default function ShowComment({post}) {
                   </div>
                 </div>
                 
-                  <div className="comment-actions multi-options">
+                  {/* <div className="comment-actions multi-options">
                     { comment.replies.data.length > 0 && ( 
                       <div className="comment-replies-count" onClick={e => showReplies(comment.id)}>
                         <button className="comment-replies-button" type="button" name="button"><i className="uil uil-comment-notes"></i>
@@ -79,7 +79,7 @@ export default function ShowComment({post}) {
                         <li className="comment-action"><button className="like-action">Like</button></li>
                         <li className="comment-action replay-action" onClick={showReplyBox}>Reply</li>
                       </ul>
-                  </div>
+                  </div> */}
                                  
               </div>
               {replies == comment.id && 

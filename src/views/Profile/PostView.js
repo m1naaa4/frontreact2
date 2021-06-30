@@ -11,7 +11,7 @@ export default function PostView(props) {
         <div className="col-md-6">
             <div className="Center-Side">
 
-              <div className="Filter-Row">
+              {/* <div className="Filter-Row">
                 <form className="Filter-Form NoMargin-Top Margin-Bottom_30" action="#" method="post">
                   <div className="row">
                     <div className="col-sm-12 col-md-12 col-lg-12">
@@ -29,7 +29,7 @@ export default function PostView(props) {
                     </div>
                   </div>
                 </form>
-              </div>
+              </div> */}
 
               <AddPostView  {...props}/>
 

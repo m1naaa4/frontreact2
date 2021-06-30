@@ -36,7 +36,7 @@ export default function SideLeftProfileView() {
             {
             infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
             <div className="Left-Side">
-              <div className="Widget-BOX Profile-Info">
+              {/* <div className="Widget-BOX Profile-Info">
                 <h3 className="Widget-Title text-center">Les 7 derniers jours</h3>
                 <div className="Widget-Stats">
                   <div className="Stats-Field Stats-Field-Col-2">
@@ -48,7 +48,7 @@ export default function SideLeftProfileView() {
                     <div className="Stats-Text">Visites<br/> de profil</div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="Widget-BOX">
               {user_profile_id === infoprofile.infoprofile.id &&
                 <div className="Profile-Info Profile-Infos-Items">

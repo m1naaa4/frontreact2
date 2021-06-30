@@ -12,7 +12,8 @@ export default function SideRightProfileView() {
             {
               
             <div className="Right-Side">
-            <div className="Contact-Widget">
+
+            {/* <div className="Contact-Widget">
               <h3 className="Widget-Title">Invitations</h3>
               <div className="Suggestion-List">
                 <div className="Contact">
@@ -106,6 +107,7 @@ export default function SideRightProfileView() {
               </div>
               <a className="Contact-SeeMore" href="#">Voir plus</a>
             </div>
+             */}
             <div className="Widget-Conseils">
               <h3 className="Widget-Title">Conseils de DADUPA</h3>
               <div className="Featured-Post-Thumb"><img src="assets/images/conseils/Conseils-de-DADUPA.jpg"  alt=""/></div>

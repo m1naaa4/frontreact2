@@ -56,6 +56,14 @@ function HeaderProfile() {
         $('.Dadupa-Notifs-Box').removeClass('Notifs-Box-Active');
     }
 
+    $(window).bind('scroll', function () {
+        if ( $(window).scrollTop() > 70 ) {
+            $('.Dadupa-Header').addClass('Dadupa-Header-Fixed');
+        } else {
+            $('.Dadupa-Header').removeClass('Dadupa-Header-Fixed');
+        }
+      });
+
     const addMenu = () => {
         $('.Dadupa-Popup-DropDown').toggleClass('Dadupa-Popup-DropDown_Active');
         $('.Dadupa-Msgs-Box').removeClass('Msgs-Box-Active');
