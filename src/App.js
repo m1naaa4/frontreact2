@@ -16,8 +16,9 @@ function App() {
     pusher.echo.private("project_comment").listen(".NewComment", data => {
         
         console.log("project_comment");
-        // console.log(data);
+        console.log(data);
         dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
+        dispatch({type:'COMMENTED_SUCCESS', res : data});
     }).listenForWhisper('typing', (e) => {
         console.log('typing ... ',e)
                                 

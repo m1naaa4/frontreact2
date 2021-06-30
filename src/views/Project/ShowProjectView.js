@@ -6,6 +6,7 @@ import ProjectSkeleton from '../../skeleton/ProjectSkeleton';
 import AddComment from '../Comment/AddComment';
 import { useHistory, useParams } from 'react-router-dom';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
+import parse from 'html-react-parser';
 
 export default function ShowProjectView(props) {
 
@@ -34,10 +35,18 @@ export default function ShowProjectView(props) {
             setLikeCount(fullproject?.countlike)
             setCountcomment(fullproject?.countcomment)
         }
+
         if(counter.notification){
             console.log(counter?.notification)
             setLikeCount(counter?.notification)
         }
+        
+        if(counter?.countercomment){
+            console.log(counter?.notification)
+            setCountcomment(counter?.countercomment)
+        }
+
+
     })
 
     const counter = useSelector(state => state.addednotification);
@@ -162,7 +171,8 @@ export default function ShowProjectView(props) {
                                                 Partager
                                         </button>
                                     </div>
-                                    <div className="Signle-Offer-Text" dangerouslySetInnerHTML={{ __html: project.project.description }}>
+                                    <div className="Signle-Offer-Text">
+                                        {project.project.description ? parse(project.project.description) : project.project.description}
                                     </div>
 
                                 </div>

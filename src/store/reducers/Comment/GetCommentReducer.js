@@ -25,7 +25,7 @@ const initState = {
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
                 let id = window.location.href.split("/").pop();
                 if (action.res.comments?.data?.commentable_id === id) {
-                    state.comments = [action.res.comments?.data, ...state.comments];
+                    state.comments = [action?.res?.comments?.data, ...state?.comments];
                 }                            
                 return {
                     ...state,

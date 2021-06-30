@@ -25,7 +25,21 @@ const initState = {
                 ...state,
                 counterlike :  action.res?.count,
                 loading  :  false
-            }       
+            }
+        
+        case 'COMMENTED_SUCCESS':
+            console.log('GET_COMMENT_SUCCESS', action.res)
+            console.log('GET_COMMENT_SUCCESS', action.res?.count)
+            
+            let idd = window.location.href.split("/").pop();
+            if (action.res.comment?.provider_id === idd) {
+                state.comment = action.res?.count;
+            }                            
+            return {
+                ...state,
+                countercomment :  action.res?.count,
+                loading  :  false
+            }
 
             default:
                 return state

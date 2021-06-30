@@ -3042,7 +3042,7 @@ border-top: none;
 }
 .comments-clicked,
 .post-liked{
-  color: #00CC66;
+  color: #00CC66 !important;
 }
 .reaction-button img{
   height: 20px;

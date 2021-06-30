@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
     "emoji-mart": "^3.0.1",
+    "html-react-parser": "^1.2.7",
     "i18next": "^20.2.1",
     "jquery": "^3.6.0",
     "jquery-validation": "^1.19.3",
