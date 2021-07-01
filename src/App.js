@@ -17,6 +17,12 @@ function App() {
         
         console.log("project_comment");
         console.log(data);
+        if (data.type === "project") {
+            dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
+        }
+        if (data.type === "post") {
+            dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res : data});
+        }
         dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
         dispatch({type:'COMMENTED_SUCCESS', res : data});
     }).listenForWhisper('typing', (e) => {
@@ -26,9 +32,16 @@ function App() {
 
     pusher.echo.private("newNotification").listen(".notification", data => {
         
-        console.log("newNotification--------------");
+        // console.log("newNotification--------------");
         // console.log(data);
         dispatch({type:'LIKED_SUCCESS', res : data});
+    })
+
+    pusher.echo.private("new_post").listen(".newpost", data => {
+        
+        console.log("NewPost--------------");
+        // console.log(data);
+        dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', res : data});
     })
     
     pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {

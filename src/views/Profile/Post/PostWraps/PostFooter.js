@@ -20,11 +20,11 @@ export default function PostFooter({ post }) {
       // SetCommentBox(!commentBox)      
   }
 
-  const dataget = {
-    action           : 'get',
-    provider         : 'post',
-    provider_id      : post.id,
-  }
+  // const dataget = {
+  //   action           : 'get',
+  //   provider         : 'post',
+  //   provider_id      : post.id,
+  // }
 
   const showCommentBox = e => {
       SetCommentBox(!commentBox)

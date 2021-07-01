@@ -14,8 +14,8 @@ const initState = {
         //         }
         
         case 'LIKED_SUCCESS':
-            console.log('GET_NOTIFICATIONS_SUCCESS', action.res)
-            console.log('GET_NOTIFICATIONS_SUCCESS', action.res?.count)
+            // console.log('GET_NOTIFICATIONS_SUCCESS', action.res)
+            // console.log('GET_NOTIFICATIONS_SUCCESS', action.res?.count)
             
             let id = window.location.href.split("/").pop();
             if (action.res.notification?.provider_id === id) {
@@ -28,8 +28,8 @@ const initState = {
             }
         
         case 'COMMENTED_SUCCESS':
-            console.log('GET_COMMENT_SUCCESS', action.res)
-            console.log('GET_COMMENT_SUCCESS', action.res?.count)
+            // console.log('GET_COMMENT_SUCCESS', action.res)
+            // console.log('GET_COMMENT_SUCCESS', action.res?.count)
             
             let idd = window.location.href.split("/").pop();
             if (action.res.comment?.provider_id === idd) {

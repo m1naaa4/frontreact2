@@ -16,9 +16,9 @@ const initState = {
             case 'GET_COMMENT_SUCCESS':
                 return {
                     ...state,
-                    comments :  [...state.comments, ...action.res.comment.data],
-                    hasMore  :  action.res.comment.meta,
-                    current  :  action.res.comment.meta.current_page,
+                    comments :  [...state.comments, ...action.res.comment?.data],
+                    hasMore  :  action.res.comment?.meta,
+                    current  :  action.res.comment?.meta?.current_page,
                     loading  :  false
                 }
 
@@ -34,10 +34,11 @@ const initState = {
                     // current  :  action.res.comment.meta,
                     loading  :  false
                 }
-            case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':                
+            case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':
+                console.log(action.res.comments.data,'sperateeeeeeeeeeeeeeeeeeeeeee', state.comments)                
                 return {
                     ...state,
-                    comments :  [action.feed.data, ...state.comments],
+                    comments :  [action.res.comments.data, ...state.comments],
                     // hasMore  :  action.res.comment.meta,
                     // current  :  action.res.comment.meta,
                     loading  :  false

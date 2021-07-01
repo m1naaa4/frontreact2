@@ -39,8 +39,14 @@ const initState = {
                 }
 
             case 'ADD_TO_COLLECTION_POST_SUCCESS':
+                
+                let idd = window.location.href.split("/").pop();
+                console.log('action.feed', action.res.post?.profile_id, idd)
+                if (action.res.post?.profile_id === idd) {
+                    state.posts = [action.res.post, ...state.posts];
+                }     
                 return {
-                    posts :  [action.feed, ...state.posts],
+                    posts :  state.posts,
                     loading  :  false
                 }
 

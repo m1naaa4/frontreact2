@@ -27,8 +27,10 @@ export default function ShowComment({post}) {
         SetReplyBox(!replyBox)
     }
 
-    const showReplyBox = e => {
-        SetReplyBox(!replyBox)
+    console.log('commentsssssssssssssssssssssssssssssssssssss', comments.comments)
+
+    const showReplyBox = (value) => {
+        SetReplyBox(value)
     }
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function ShowComment({post}) {
                 </Link>
                 <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
-                  <label className="count-reactions">120</label>
+                  <label className="count-reactions">{comment.likeCount}</label>
                 </ul>
               </div>
               <div className="Comment-Col-10">
@@ -67,21 +69,24 @@ export default function ShowComment({post}) {
                   </div>
                 </div>
                 
-                  {/* <div className="comment-actions multi-options">
-                    { comment.replies.data.length > 0 && ( 
+                  <div className="comment-actions multi-options">
+                    {/* { comment.replies.data.length > 0 && ( 
                       <div className="comment-replies-count" onClick={e => showReplies(comment.id)}>
                         <button className="comment-replies-button" type="button" name="button"><i className="uil uil-comment-notes"></i>
                          <span>{comment.replies.data.length} </span><span> Replies</span>
                         </button>
                       </div>
-                    )}
+                    )} */}
+                      <div className="comment-replies-count">
+                      </div>
                       <ul className="comment-actions-list">
                         <li className="comment-action"><button className="like-action">Like</button></li>
-                        <li className="comment-action replay-action" onClick={showReplyBox}>Reply</li>
+                        <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>Reply</li>
                       </ul>
-                  </div> */}
+                  </div>
                                  
               </div>
+{/*               
               {replies == comment.id && 
               <div className="Comment-Replies">
                 { comment.replies.data &&  comment.replies.data.map((com, index) =>
@@ -120,8 +125,10 @@ export default function ShowComment({post}) {
                 )}
               </div>
               }
-             
-               <ReplyComment comment={comment} post={post} />
+              */}
+              {replyBox  === comment.id &&
+                <ReplyComment comment={comment} post={post} />
+              }
               
             </div>
          }
