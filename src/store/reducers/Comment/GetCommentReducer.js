@@ -37,19 +37,19 @@ const initState = {
             case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':
                 console.log(action.res.comments.data,'sperateeeeeeeeeeeeeeeeeeeeeee', state.comments)
 
-                const comments = state.comments;
-                comments.forEach(function (c) {
-                    let conversation = state.conversations?.[c.id] || {};
-                    conversation = {...conversation, ...c}
-                    state.conversations = {...state.conversations, ...{[c.id]: conversation}};
-                })
+                // const comments = state.comments;
+                // comments.forEach(function (c) {
+                //     let conversation = state.conversations?.[c.id] || {};
+                //     conversation = {...conversation, ...c}
+                //     state.conversations = {...state.conversations, ...{[c.id]: conversation}};
+                // })
 
-                if (action.res.comments?.data?.commentable_id === id) {
-                    state.comments = [action?.res?.comments?.data, ...state?.comments];
-                }
+                // if (action.res.comments?.data?.commentable_id === id) {
+                //     state.comments = [action?.res?.comments?.data, ...state?.comments];
+                // }
                 return {
                     ...state,
-                    comments :  [action.res.comments.data, ...state.comments],
+                    // comments :  [action.res.comments.data, ...state.comments],
                     // hasMore  :  action.res.comment.meta,
                     // current  :  action.res.comment.meta,
                     loading  :  false

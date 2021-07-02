@@ -43,7 +43,7 @@ export default function ShowComment({post}) {
         
         <> 
          <div className="User-Comments"  >
-         {comments && comments.comments.map((comment, index) => 
+         {post.comments && post.comments.map((comment, index) => 
          <div  key={index}>
          {post.id === comment.commentable_id &&
             <div className="User-Comment" key={index} >
