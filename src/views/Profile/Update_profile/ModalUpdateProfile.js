@@ -13,11 +13,17 @@ const  ModalUpdateProfile = () => {
     const dispatch = useDispatch();
     const [formData, setForm] = useForm({id:infoprofile.infoprofile.id, job:infoprofile.infoprofile.job, sector_id:infoprofile.infoprofile.sector, 
       type:infoprofile.infoprofile.email, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
-       networks:infoprofile.infoprofile.networks, bio:infoprofile.infoprofile.about});
-
-  const EditProfile =(id) =>{
-    dispatch(EditProfileAction(formData, '', ''));
-  }
+       
+      facebook:infoprofile.infoprofile.networks?.facebook,
+      twitter:infoprofile.infoprofile.networks?.twitter,
+      linkedin:infoprofile.infoprofile.networks?.linkedin,
+      instagram:infoprofile.infoprofile.networks?.instagram,
+      youtube:infoprofile.infoprofile.networks?.youtube,
+       
+      bio:infoprofile.infoprofile.about});
+    const EditProfile =(id) =>{
+      dispatch(EditProfileAction(formData, '', ''));
+    }
 
     return (        
       
@@ -37,11 +43,41 @@ const  ModalUpdateProfile = () => {
                 <div className="col-md-6 input-row">
                   <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Téléphone" className="wizard-required" required/>
                 </div>
-                <div className="col-md-6 input-row">
-                  <input type="email" name="networks" defaultValue={formData.networks} onChange={setForm} placeholder="Facebook" className="wizard-required" required/>
-                </div>
-                <div className="col-md-6 input-row">
-                  <input type="tel" name="networks" defaultValue={formData.networks} onChange={setForm} placeholder="Twitter" className="wizard-required" required/>
+                <div className="col-md-12 input-row">
+                  <div class="Profile-Info Profile-Infos-Items">
+                    <ul>
+                      <li>
+                        <div className="form-row">
+                          <div className="col-md-2"><i className="uil uil-facebook-f"></i></div>
+                          <div className="col-md-8"><input type="url" name="facebook" onChange={setForm} defaultValue={formData.facebook}  placeholder="Facebook" className="wizard-required" required/></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="form-row">
+                          <div className="col-md-2"><i className="uil uil-twitter-alt"></i></div>
+                          <div className="col-md-8"><input type="url" name="twitter" onChange={setForm} defaultValue={formData.twitter}  placeholder="Twitter" className="wizard-required" required/></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="form-row">
+                          <div className="col-md-2"><i className="uil uil-linkedin-alt"></i></div>
+                          <div className="col-md-8"><input type="url" name="linkedin" onChange={setForm} defaultValue={formData.linkedin}  placeholder="Linkedin" className="wizard-required" required/></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="form-row">
+                          <div className="col-md-2"><i className="uil uil-instagram-alt"></i></div>
+                          <div className="col-md-8"><input type="url" name="instagram" onChange={setForm} defaultValue={formData.instagram}  placeholder="Instagram" className="wizard-required" required/></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div className="form-row">
+                          <div className="col-md-2"><i className="uil-youtube"></i></div>
+                          <div className="col-md-8"><input type="url" name="youtube" onChange={setForm} defaultValue={formData.youtube}  placeholder="Youtube" className="wizard-required" required/></div>
+                        </div>
+                      </li>
+                    </ul>    
+                  </div>
                 </div>
                 <div className="col-md-12 input-row">
                   <textarea name="bio" placeholder="Bio" defaultValue={formData.bio} onChange={setForm}></textarea>

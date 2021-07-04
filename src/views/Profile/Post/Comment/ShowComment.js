@@ -27,7 +27,7 @@ export default function ShowComment({post}) {
         SetReplyBox(!replyBox)
     }
 
-    console.log('commentsssssssssssssssssssssssssssssssssssss', comments.comments)
+    // console.log('commentsssssssssssssssssssssssssssssssssssss', post.comments)
 
     const showReplyBox = (value) => {
         SetReplyBox(value)
@@ -35,7 +35,7 @@ export default function ShowComment({post}) {
 
   useEffect(() => {
     // if (post.commentCount > 0) {
-      dispatch(GetCommentAction(dataget));
+      // dispatch(GetCommentAction(dataget));
     // }   
   }, [])
 

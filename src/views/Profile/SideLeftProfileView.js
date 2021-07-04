@@ -22,14 +22,7 @@ export default function SideLeftProfileView() {
   })
   
    
-  let networks;
-  if (infoprofile.infoprofile.networks) {
-          
-    networks = <>{infoprofile.infoprofile.networks.map((name, index) => (
-              <li key={index}><i className={name.class}></i><a href={name.link}>@{name.name}</a> </li>
-          ))}
-    </>
-}
+
     return (
         
         <div className="col-md-3">
@@ -50,18 +43,26 @@ export default function SideLeftProfileView() {
                 </div>
               </div> */}
               <div className="Widget-BOX">
-              {user_profile_id === infoprofile.infoprofile.id &&
+              
                 <div className="Profile-Info Profile-Infos-Items">
+                {user_profile_id === infoprofile.infoprofile.id &&
                   <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#exampleModalCenter"><i className="uil uil-pen"></i></button>
+                }
                   <ul>
                     <li><i className="uil uil-user"></i> {infoprofile.infoprofile.age}</li>
                     <li><i className="uil uil-crosshair"></i> {infoprofile.infoprofile.job}</li>
                     <li><i className="uil uil-phone"></i> {infoprofile.infoprofile.phone}</li>
                     <li><i className="uil uil-envelope"></i> {infoprofile.infoprofile.email}</li>
-                    {networks}
+
+                    {infoprofile.infoprofile.networks?.facebook &&<li><i className="uil uil-facebook-f"></i><a href={infoprofile.infoprofile.networks.facebook} target="_blank">@facebook</a> </li>}
+                    {infoprofile.infoprofile.networks?.twitter && <li><i className="uil uil-twitter-alt"></i><a href={infoprofile.infoprofile.networks.twitter} target="_blank">@twitter</a> </li>}
+                    {infoprofile.infoprofile.networks?.linkedin && <li><i className="uil uil-linkedin-alt"></i><a href={infoprofile.infoprofile.networks.linkedin} target="_blank">@linkedin</a> </li>}
+                    {infoprofile.infoprofile.networks?.instagram && <li><i className="uil uil-instagram-alt"></i><a href={infoprofile.infoprofile.networks.instagram} target="_blank">@instagram</a> </li>}
+                    {infoprofile.infoprofile.networks?.youtube && <li><i className="uil-youtube"></i><a href={infoprofile.infoprofile.networks.youtube} target="_blank">@youtube</a> </li>}
+                  
                   </ul>
                 </div>
-              }
+              
                 <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <div className="DadupaModal-Header">
                         <h4>Update Infos</h4>

@@ -51,7 +51,7 @@ export default function Notifications() {
     <>
         <div className="Dadupa-Notifs-Box Notifs-Box-Active">
             <h3><Text tid="notifications"/></h3>
-          {usernotifications.user_id !== notifed_user_id &&  usernotifications.notifications.map((notification, index) =>
+          {  usernotifications.notifications.map((notification, index) =>
            (!notification.seen ? (<div className="Notifs-List" style={{backgroundColor:"#f2fff8", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
                 <div className="Notif-Item">
                     <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>

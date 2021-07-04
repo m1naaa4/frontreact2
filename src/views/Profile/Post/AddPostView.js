@@ -53,17 +53,17 @@ export default function AddPostView(props) {
                         </textarea>
                     </div>
                     <div className="WritePost-Options">
-                        <button type="button" name="button"><i className="uil uil-camera"></i> Photo/Video</button>
+                        <button type="button" onClick={handleShow} name="button"><i className="uil uil-camera"></i> Photo/Video</button>
                         <button type="button" name="button"><i className="uil uil-tag-alt"></i> Tag Friends</button>
                     </div>
 
                     <Modal show={show} onHide={handleClose}>
                         <div  id="SharingModal" tabIndex="-1" role="dialog" aria-labelledby="SharingModalTitle" >
                                 <div className="modal-content">
-                                    <div className="DadupaModal-Header">
+                                    {/* <div className="DadupaModal-Header">
                                         <h4>Publier un historique</h4>
                                         <button type="button" className="close" data-dismiss="modal" onClick={handleClose} aria-label="Close"><i className="uil uil-times"></i></button>
-                                    </div>
+                                    </div> */}
                                     <ModalAddPost  newavatar={user_visiter_avatar}/>
                                 </div>
                         </div>

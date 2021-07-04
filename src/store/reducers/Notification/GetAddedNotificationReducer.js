@@ -24,6 +24,7 @@ const initState = {
             return {
                 ...state,
                 counterlike :  action.res?.count,
+                contentNotif :  action.res.notification,
                 loading  :  false
             }
         

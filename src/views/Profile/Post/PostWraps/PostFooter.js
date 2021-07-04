@@ -1,4 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { LikeAction } from '../../../../store/actions/Like/LikeAction';
 import AddComment from '../Comment/AddComment';
 import ShowComment from '../Comment/ShowComment';
 
@@ -11,6 +13,49 @@ export default function PostFooter({ post }) {
 
     const [comments, SetComments] = useState(false);
     const [commentBox, SetCommentBox] = useState(false);
+    const [initial, setInitial] = useState(true);
+    const [like, setLike] = useState(false);
+    const [likeCount, setLikeCount] = useState();
+    const [classe, setClasse] = useState();
+
+    const commentss = useSelector(state => state.getComments);
+    const counter = useSelector(state => state.addednotification);
+    console.log(counter)
+    
+
+  useEffect(() => {
+    like ? setClasse('Dislike') : setClasse('Like');
+    if (initial) {
+        setLike(post.is_liked);
+        setLikeCount(post.likeCount)
+    }
+
+    if(counter?.counterlike){
+        setLikeCount(counter?.counterlike)
+        console.log(counter?.counterlike,'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+    }
+})
+
+  useEffect(() => {
+        setLikeCount(counter?.counterlike)
+        console.log(counter?.counterlike,'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+  },[counter?.counterlike])
+
+const dispatch = useDispatch();
+    const likeAAction = () => {
+      setLike(!like);
+      setInitial(false)
+      const dataa = {
+          action: "like",
+          provider_id: post.id,
+          provider: "post",
+          type    : like?'dislike':'like',
+      }
+      setClasse('Dislike');
+      
+      // console.log(like)
+      dispatch(LikeAction(dataa, 'like/like', ''));        
+  }
 
     const showComments = e =>  {
       console.log(e)
@@ -45,7 +90,7 @@ export default function PostFooter({ post }) {
         <div className="reactions-box">
           <div className="row">
             <div className="col-6 col-md-4 col-lg-6">
-              <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{post.likeCount}</span></div>
+              <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{likeCount}</span></div>
               <div className="reaction views"><i className="uil uil-eye"></i> <span>1500</span></div>
             </div>
             <div className="col-6 col-md-8 col-lg-6 text-right">
@@ -56,10 +101,17 @@ export default function PostFooter({ post }) {
         </div>
       </div>
       <div className="reactions-buttons">
-        <button className="reaction-button reaction-like" type="button" name="button">
+        {/* <button className="reaction-button reaction-like" type="button" name="button">
           <img src="/assets/images/icons/dadupa-clap-green.svg" alt="like"/>
           Aimer
+        </button> */}
+
+        <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'} 
+        onClick={likeAAction} toggle="#password-field" type="button" name="button">
+            <img src={like?"/assets/images/icons/dadupa-clap-green.svg":"/assets/images/icons/dadupa-clap.svg"} alt=""/>
+            {like?"Dislike":"Like"}
         </button>
+
         <button className="reaction-button reaction-comment" onClick={showCommentBox} type="button" name="button">
           <img src="/assets/images/icons/dadupa-comment.svg" alt="comment"/>
           Commenter
@@ -75,7 +127,7 @@ export default function PostFooter({ post }) {
           {commentBox &&            
               <AddComment post = {post} />                                       
           }
-          {comments && post.commentCount > 0 &&
+          {comments  &&
               <ShowComment  post = {post} />                 
           }
           

@@ -9,7 +9,6 @@ import { useForm } from "react-hooks-helper";
 
 export default function(newavatar) {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
     const [avatar, setAvatar] = useState();
     const [body, setBody] = useState();
     const [medialink, setMedialink] = useState();
@@ -23,6 +22,7 @@ export default function(newavatar) {
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
 
+    const handleClose = () => setShow(false);
     //let formData = new FormData();
     const [formData, setForm] = useForm({file:'', provider_id:'', type:'', url:'', provider:'profile', action:'uploadPost'});
 
@@ -49,7 +49,6 @@ export default function(newavatar) {
     const handleSubmitValue = (e) => {
         e.preventDefault();
         refbody.current.value = '';
-        handleClose()
         dispatch(AddPostAction(data));
               
     }

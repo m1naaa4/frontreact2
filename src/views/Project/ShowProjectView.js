@@ -162,7 +162,7 @@ export default function ShowProjectView(props) {
                                                 {like?"Dislike":"Like"}
                                             </button>
                                         
-                                        <a className="reaction-button reaction-comment" href="#Comments-Wrap">
+                                        <a className="reaction-button reaction-comment" href="">
                                             <img src="/assets/images/icons/dadupa-comment.svg" alt=""/>
                                                 Commenter
                                         </a>

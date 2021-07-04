@@ -52,12 +52,12 @@ export default function PostHeader({ post }) {
            {      
                 options_List && (
                 <ul className="PostOptions-List PostOptions-ListShow"  >
-                  <li className="PostFavorite">
+                  {/* <li className="PostFavorite">
                     <button><i className="uil uil-favorite"></i> Favorite</button>
                   </li>
                   <li className="PostKey">
                     <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
-                  </li>
+                  </li> */}
                   {user_id === post.user_id &&
                     <li className="PostDelete">
                       <button onClick={e => supprimePost(post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>

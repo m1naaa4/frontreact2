@@ -50,6 +50,25 @@ const initState = {
                     loading  :  false
                 }
 
+            case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':
+                const allposts = state.posts;
+                allposts.forEach(function (post) {
+                    if (action.res.comments?.data?.commentable_id === post.id) {                    
+                        console.log(post.comments.unshift(action.res.comments.data), '1')
+                        console.log('hereeeeeeeeeeeeeee', post.commentCount = action.res?.count)
+                    }                    
+                })                
+                return {
+                    ...state,
+                    posts :  state.posts,
+                    commentCount :  action.res?.count,
+                    // likeCount    :  likeCount,
+                    // comments :  [action.res.comments.data, ...state.comments],
+                    // hasMore  :  action.res.comment.meta,
+                    // current  :  action.res.comment.meta,
+                    loading  :  false
+                }
+
             case 'DELETE_POST_SUCCESS':
                 return {
                     ...state,

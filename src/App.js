@@ -18,12 +18,15 @@ function App() {
         console.log("project_comment");
         console.log(data);
         if (data.type === "project") {
+            console.log(data.type);
+        console.log(data);
             dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
         }
         if (data.type === "post") {
+            console.log(data.type);
+        // console.log(data);
             dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res : data});
         }
-        dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
         dispatch({type:'COMMENTED_SUCCESS', res : data});
     }).listenForWhisper('typing', (e) => {
         console.log('typing ... ',e)
@@ -32,8 +35,8 @@ function App() {
 
     pusher.echo.private("newNotification").listen(".notification", data => {
         
-        // console.log("newNotification--------------");
-        // console.log(data);
+        console.log("newNotification--------------");
+        console.log(data);
         dispatch({type:'LIKED_SUCCESS', res : data});
     })
 
