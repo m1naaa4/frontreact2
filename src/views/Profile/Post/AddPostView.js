@@ -9,7 +9,7 @@ import ModalAddPost from './ModalAddPost';
 
 export default function AddPostView(props) {
 
-    const [avatar, setAvatar] = useState();
+    // const [avatar, setAvatar] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
     const newavatar = useSelector(state => state.updateavatar);
     const user = useSelector(state => state.userProfile.userProfile);
@@ -26,16 +26,16 @@ export default function AddPostView(props) {
         
     if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
         if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
-            setAvatar(newavatar.avatar);                
+            // setAvatar(newavatar.avatar);                
             setUserVisiterAvatar(newavatar.avatar);
         }else{
-            setAvatar(infoprofile.infoprofile.avatar);
+            // setAvatar(infoprofile.infoprofile.avatar);
             if(user.profile){
                 setUserVisiterAvatar(user.profile.avatar_link);
             }
         }
     }     
-    })
+    },[infoprofile.infoprofile.avatar, newavatar.avatar, user.profile])
 
 
     return (

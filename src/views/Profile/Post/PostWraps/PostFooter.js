@@ -20,7 +20,7 @@ export default function PostFooter({ post }) {
 
     const commentss = useSelector(state => state.getComments);
     const counter = useSelector(state => state.addednotification);
-    console.log(counter)
+    // console.log(counter)
     
 
   useEffect(() => {

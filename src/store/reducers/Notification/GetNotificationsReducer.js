@@ -25,10 +25,10 @@ const initState = {
               }
 
             case 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS':
-                //console.log("usernotisssssssssss", action.res.user_id)
+                console.log("usernotisssssssssss", action.res)
 
                 return {
-                    notifications :  [action.feed, ...state.notifications],
+                    notifications :  [action.res, ...state.notifications],
                     loading       :  false
                 }
 

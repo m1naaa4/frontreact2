@@ -23,7 +23,7 @@ export default function PostHeader({ post }) {
       setUserProfileId(infoprofile.user_id);  
       setUserId(user.id);  
     }     
-  })
+  },[infoprofile.avatar, infoprofile.user_id, user.id])
 
   const data = {
       post_id     : post.id,

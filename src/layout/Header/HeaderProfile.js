@@ -45,7 +45,7 @@ function HeaderProfile() {
         if(userProfile == ""){
             dispatch(loadUserAction());
 
-        // dispatch( LoadNotificationAction());    
+        dispatch( LoadNotificationAction());    
         }
 
     }, [dispatch])

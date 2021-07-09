@@ -40,13 +40,19 @@ function App() {
         dispatch({type:'LIKED_SUCCESS', res : data});
     })
 
+    pusher.echo.private("App.User."+ user_id)
+    .notification((notification) => {
+        console.log(notification, 'notification.typessssssssssssssssssssssssssssss');
+        dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
+    });
+
     pusher.echo.private("new_post").listen(".newpost", data => {
         
         console.log("NewPost--------------");
         // console.log(data);
         dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', res : data});
     })
-    
+
     pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
         audio.play();
         console.log(data);

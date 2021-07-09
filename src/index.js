@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
 import { store } from './createStore';
 import './i18n';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 ReactDOM.render(
