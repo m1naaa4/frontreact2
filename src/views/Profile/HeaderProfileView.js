@@ -121,6 +121,9 @@ export default function HeaderProfileView({formData, setForm, props}) {
                             </>
                         }
                         <ul className="Profie-Menu">
+                            <li><Link to={`/profile/${params.id}/cvtheque`}><i class="uil uil-user-square"></i> Bio</Link></li>
+                            <li><Link to={`/profile/${params.id}/meoffre`}><i class="uil uil-layer-group"></i> Offres</Link></li>
+                            <li><Link to={`/profile/${params.id}`}><i class="uil uil-apps"></i> Historique</Link></li>
                             <li><Link to={`/messages/${params.id}`}><i className="uil uil-share-alt" /> Réseaux</Link></li>
                             <li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li>
                         </ul>

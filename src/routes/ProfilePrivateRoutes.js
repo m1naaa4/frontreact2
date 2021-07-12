@@ -1,20 +1,38 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from '../layout/Header/HeaderProfile';
-import MessengerPage from '../pages/Profile/ProfilePage';
+import NotFound from '../pages/404';
+import ProfilePage from '../pages/Profile/ProfilePage';
+import MainCvthequeView from '../views/Profile/Cvtheque/MainCvthequeView';
 
 
 export default function ProfilePrivateRoutes(props) {
-    console.log( props.history.location.pathname)
+    
     return (
         <div>
             <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
                 <Switch>
-                    <Route exact path={`${props.match.path}/:id`}  component = {MessengerPage} />
+                    <Route exact path={`${props.match.path}/:id`}  component = {ProfilePage} />
                     <Route exact path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/:id` }} />
                     )} />
+
+                    
+                    <Route exact path={`${props.match.path}/:id/cvtheque`}  component = {MainCvthequeView} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/:id/cvtheque` }} />
+                    )} />
+
+                    
+                    <Route exact path={`${props.match.path}/:id/meoffre`}  component = {MainCvthequeView} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/:id/meoffre` }} />
+                    )} />
+
+
+
+                    <Route component={NotFound} header="false" />
                 </Switch>
             </div>
         </div>

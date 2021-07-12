@@ -8,7 +8,6 @@ import { LoadNotificationAction } from '../../store/actions/Notification/LoadNot
 import Notifications from './Notifications';
 import $ from "jquery";
 import Messages from './Messages';
-import PusherService from '../../services/Pusher';
 
 function HeaderProfile() {
     const history = useHistory();
@@ -106,7 +105,7 @@ function HeaderProfile() {
             </div>
 
             {
-                userProfile !== '' && userProfile != 'loading'  ?
+                userProfile !== '' && userProfile !== 'loading'  ?
 
                 <header className="Dadupa-Header">
                     <div className="container-fluid">
@@ -120,7 +119,7 @@ function HeaderProfile() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                    <li className="Nav-Item Active-Nav"><a href=""className="Nav-Link" onClick={goToListproject}><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></a></li>
+                                    <li className="Nav-Item Active-Nav"><a href="" className="Nav-Link" onClick={goToListproject}><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></a></li>
                                     <li className="Nav-Item"><a href="bailleur-de-fonds"className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="donor"/></a></li>
                                     <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="accompanyingPerson"/></a></li>
                                     </ul>

@@ -60,17 +60,17 @@ export default function Notifications() {
                             <button onClick={setShowMark} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <i className="uil uil-ellipsis-h"></i>
                             </button>
-                         {mask == notification.id &&    
+                         {mask === notification.id &&    
                             <div className="dropdown-menu dropdown-menu-right show" x-placement="bottom-end" style={{position: "absolute"}}>
                                 <div className="dropdown-item" onClick={markAsRead} >Mark as read</div>
                                 <div className="dropdown-item" onClick={HideNotif} >Hide</div>
                             </div>
                          }   
                         </div>                        
-                    <div className="Notif-Content">
+                    <Link to={notification.link} className="Notif-Content">
                             <div className="Notif-Text">{notification.description} </div>
                             <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                        </div>
+                        </Link>
                 </div>
             </div>):
             (
@@ -82,7 +82,7 @@ export default function Notifications() {
                             <button onClick={setShowMark} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <i className="uil uil-ellipsis-h"></i>
                             </button>
-                         {mask == notification.id &&    
+                         {mask === notification.id &&    
                             <div className="dropdown-menu dropdown-menu-right show" x-placement="bottom-end" style={{position: "absolute"}}>
                                 <div className="dropdown-item" onClick={markAsRead} >Mark as read</div>
                                 <div className="dropdown-item" onClick={HideNotif} >Hide</div>

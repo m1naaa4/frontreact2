@@ -40,7 +40,7 @@ function App() {
         dispatch({type:'LIKED_SUCCESS', res : data});
     })
 
-    pusher.echo.private("App.User."+ user_id)
+    pusher.echo.private("App.Models.User."+ user_id)
     .notification((notification) => {
         console.log(notification, 'notification.typessssssssssssssssssssssssssssss');
         dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
