@@ -10,6 +10,7 @@ import {Provider} from 'react-redux'
 import { store } from './createStore';
 import './i18n';
 import 'react-toastify/dist/ReactToastify.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 ReactDOM.render(

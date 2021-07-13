@@ -38,6 +38,41 @@ export const UpdateProfile = (data) =>{
          });
 }
 
+export const Cvsave = (data) =>{
+    const http = new HttpService();
+    let cvUpUrl = "cvtheque/update";
+
+    return  http.postData(data, cvUpUrl,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
+export const CvUpdate = (data) =>{
+    const http = new HttpService();
+    let cvUpUrl = "cvtheque/update/raw";
+
+    return  http.postData(data, cvUpUrl,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
+
+
+export const Cvget = () =>{
+    const http = new HttpService();
+    let cvUpUrl = "cvtheque/get";
+    const tokenId = "user-token";
+
+    return  http.getData(cvUpUrl, tokenId).then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
 
 
 export const AddPost = (data, props, current) =>{

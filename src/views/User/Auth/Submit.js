@@ -11,7 +11,7 @@ const Submit = ({setForm, formData, navigation, props}) => {
     const UserRegister = (e) => {
         e.preventDefault();
 
-        clearAuthErrDiv();
+        // clearAuthErrDiv();
 
         dispatch(signUpAction(formData, props));
     }

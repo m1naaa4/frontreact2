@@ -17,6 +17,12 @@ const ProfileReducer = (state = initState, action) => {
                 ...state,
                 infoprofile: action.res.profile,
             }
+        
+        case 'LOAD_CVTHEQUE_SUCCESS':
+            return {
+                ...state,
+                cvtheque: action.res.cvtheque,
+            }
 
         case 'LOAD_PROFILE_ERROR':
             return {

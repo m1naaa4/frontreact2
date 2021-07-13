@@ -64,10 +64,9 @@ export default function SideLeftProfileView() {
                 </div>
               
                 <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div className="DadupaModal-Header">
-                        <h4>Update Infos</h4>
+                      {/* <div className="DadupaModal-Header">
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close"><i className="uil uil-times"></i></button>
-                      </div>
+                      </div> */}
                       <ModalUpdateProfile/>
                 </Modal>
 
