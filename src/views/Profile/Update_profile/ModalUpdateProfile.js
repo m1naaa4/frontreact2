@@ -7,7 +7,7 @@ import TypeDrop from '../../User/Fields/Signup/TypeDrop'
 
 
 
-const  ModalUpdateProfile = () => {
+const  ModalUpdateProfile = ({ show, handleClose}) => {
 
     const infoprofile = useSelector(state => state.infoProfile);
     const dispatch = useDispatch();
@@ -26,7 +26,9 @@ const  ModalUpdateProfile = () => {
     }
 
     return (        
-      
+      <>
+        {
+        show &&
         <div className="modal-body">
           <form className=""  method="post">
             <div className="form-inputs">
@@ -84,10 +86,11 @@ const  ModalUpdateProfile = () => {
                 </div>
               </div>
             </div>
-            <button type="button" onClick={EditProfile}  className="DadupaModal-BTNSubmit">Update</button>
+            <button type="button" onClick={() => {EditProfile(); handleClose()}}  className="DadupaModal-BTNSubmit">Update</button>
           </form>
         </div>
-      
+       }
+      </>
     )
 }
 export default ModalUpdateProfile;

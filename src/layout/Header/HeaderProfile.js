@@ -77,6 +77,10 @@ function HeaderProfile() {
         history.push("/project/create");
     };
 
+    const goToSetting = () => {
+        history.push("/profile/"+userProfile.profile_id+"/settings");
+    };
+
     const goToListproject = () => {
         history.push("/project/lists");
     };
@@ -171,10 +175,10 @@ function HeaderProfile() {
                                             <label className="Mini-Profile-Name">{userProfile.name}</label>
                                             <a className="Mini-Profile-Link" href="" onClick={gotToProfile}><Text tid='see_profile' /></a>
                                             <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><a href="#"><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </a></li>
-                                            <li className="Mini-Profile-Item"><a href="#"><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li>
-                                            <li className="Mini-Profile-Item"><a href="#"><i className="uil uil-setting"></i> <Text tid="setting"/></a></li>
-                                            <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
+                                            <li className="Mini-Profile-Item"><a href=""><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </a></li>
+                                            <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li>
+                                            <li className="Mini-Profile-Item"><a href="" onClick={goToSetting}><i className="uil uil-setting"></i> <Text tid="setting"/></a></li>
+                                            <li className="Mini-Profile-Item"><a href="" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>
                                     </div>

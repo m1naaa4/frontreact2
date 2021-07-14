@@ -6,7 +6,7 @@ import DropType from '../../../../utils/DropType';
 
 
 
-const  SkillsModal = () => {
+const  SkillsModal = ({ show, handleClose}) => {
     const dispatch = useDispatch();
     const dataCategory = [
         ['','filter.secteur'],
@@ -33,13 +33,13 @@ const  SkillsModal = () => {
     }
 
     const AddSkills =(id) =>{
-        console.log(data)
         dispatch(CvAction(data, '', ''));
       }
     
-
-    return (        
-      
+    return (  
+      <>
+      {
+     show &&
         <div className="modal-body">
             <div className="">
               <div className="form-inputs">
@@ -58,11 +58,13 @@ const  SkillsModal = () => {
               <div className="DadupaModal-Footer">
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft"></div>
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={AddSkills}>ADD NEW SKILL</button>
+                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {AddSkills(); handleClose()}}>ADD NEW SKILL</button>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+      }
+      </>
     )
 }
 export default SkillsModal;

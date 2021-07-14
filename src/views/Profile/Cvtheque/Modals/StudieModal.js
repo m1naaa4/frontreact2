@@ -4,11 +4,10 @@ import { useForm } from "react-hooks-helper";
 import { useDispatch} from 'react-redux';
 import { CvAction } from '../../../../store/actions/Profile/UserActions';
 import DropType from '../../../../utils/DropType';
-import Moment from 'moment';
 
 
 
-const  StudieModal = () => {
+const  StudieModal = ({ showstudies, handleCloseStudies}) => {
 
   const dispatch = useDispatch();
   const dataCategory = [
@@ -43,10 +42,13 @@ const  StudieModal = () => {
       dispatch(CvAction(data, '', ''));
     }
 
-    return (    
+    return (  
+      <>
+      {
+        showstudies &&  
 
         <div className="modal-body">
-            <form className="" action="index.html" method="post">
+            <div className=""  method="post">
               <div className="form-inputs">
                 <div className="form-row">
                   <div className="col-md-6 input-row">
@@ -81,11 +83,13 @@ const  StudieModal = () => {
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft">
                 </div>
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={AddStudies}>ADD NEW</button>
+                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {AddStudies(); handleCloseStudies()}}>ADD NEW</button>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
+          }
+        </>
     )
 }
 export default StudieModal;

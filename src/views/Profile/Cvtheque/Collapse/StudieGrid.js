@@ -5,7 +5,7 @@ import Moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
 import { CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
-
+import moment from 'moment';
 
 
 const  StudieGrid = ({study}) => {
@@ -48,7 +48,7 @@ const  StudieGrid = ({study}) => {
     return (    
       <>
         <li className="Section-Item">
-                    <label>{study.diplome}</label>
+                    <label>{moment(study.datefin).format('y')} - {study.diplome}</label>
                     <span>{study.lieu}</span>
                     <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
                     <div className="CollapsUpdate" style={{display:show?'block':'none'}}>

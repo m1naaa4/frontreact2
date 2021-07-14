@@ -6,7 +6,7 @@ import ExperienceModal from './Modals/ExperienceModal';
 import StudieGrid from './Collapse/StudieGrid';
 import ExperienceGrid from './Collapse/ExperienceGrid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCvthequeAction } from '../../../store/actions/Profile/UserActions';
+import { CvdeleteAction, getCvthequeAction } from '../../../store/actions/Profile/UserActions';
 
 
 export default function CvView(props) {
@@ -32,8 +32,12 @@ export default function CvView(props) {
 
     const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
 
-    console.log('cvtheque', cvtheque?.skills);
-
+    const deleteSkill =(id) =>{
+      let data = {
+        skills : {index : id}
+          }
+      dispatch(CvdeleteAction(data, '', ''));
+    }
 
     console.log('i am here now')
     return (
@@ -47,7 +51,7 @@ export default function CvView(props) {
                 <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
 
                 <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <SkillsModal/>
+                      <SkillsModal show={show} handleClose={handleClose}/>
                 </Modal>
 
                 <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Skills</h3>
@@ -55,7 +59,7 @@ export default function CvView(props) {
                   <ul>
                     {cvtheque?.skills &&
                         cvtheque.skills.map((skill, index) => (
-                            <li key={index}><span>{skill.name}</span><button className="delete-skill"><i className="uil uil-trash"></i></button></li>
+                            <li key={index}><span>{skill.name}</span><button className="delete-skill" onClick={e => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button></li>
                         ))
                     } 
                   </ul>
@@ -65,7 +69,7 @@ export default function CvView(props) {
                 <button type="button" className="UpdateInfos-BTN" onClick={handleShowStudies} data-toggle="modal" data-target="#EtudeModal"><i className="uil uil-plus"></i></button>
                 
                 <Modal show={showstudies} onHide={handleCloseStudies} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <StudieModal/>
+                      <StudieModal showstudies={showstudies} handleCloseStudies={handleCloseStudies}/>
                 </Modal>
                 
                 <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i> Etudes</h3>
@@ -84,12 +88,18 @@ export default function CvView(props) {
                 <button type="button" className="UpdateInfos-BTN" onClick={handleShowExperience} data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i></button>
                 
                 <Modal show={showexperience} onHide={handleCloseExperience} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <ExperienceModal/>
+                      <ExperienceModal showexperience={showexperience} handleCloseExperience={handleCloseExperience}/>
                 </Modal>
                 
                 <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Experiences</h3>
                 <ul className="Section-Items">
-                  <ExperienceGrid/>
+                {cvtheque?.experiences &&
+                        cvtheque.experiences.map((experience, index) => (
+                        <div key={index}>
+                            <ExperienceGrid experience={experience}/>
+                        </div>     
+                    ))
+                    }
                 </ul>
               </div>
               <div className="Profile-Section">

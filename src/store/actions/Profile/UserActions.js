@@ -1,4 +1,4 @@
-import {LoadUser, LoadProfile, UpdateProfile, Cvsave, Cvget, CvUpdate} from '../../../services/User/Profile/ProfileService'
+import {LoadUser, LoadProfile, UpdateProfile, Cvsave, Cvget, CvUpdate, Cvdelete, updateAccess, updateInfo} from '../../../services/User/Profile/ProfileService'
 
 
 export const loadUserAction = () =>{
@@ -114,6 +114,28 @@ export const CvUpdateAction = (data) =>{
     }   
 }
 
+export const CvdeleteAction = (data) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_CVTHEQUE'});
+
+        Cvdelete(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_CVTHEQUE_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_CVTHEQUE_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }   
+}
+
 export const getCvthequeAction = (data) =>{
     return (dispatch)=>{
 
@@ -134,4 +156,50 @@ export const getCvthequeAction = (data) =>{
         }
         )
     }   
+}
+
+export const AccessUserAction = (data) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_UPDATE_PROFILE'});
+
+        updateAccess(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const UserInfoAction = (data) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_UPDATE_PROFILE'});
+
+        updateInfo(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
 }

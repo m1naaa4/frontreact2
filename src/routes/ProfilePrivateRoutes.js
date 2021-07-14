@@ -3,6 +3,7 @@ import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from '../layout/Header/HeaderProfile';
 import NotFound from '../pages/404';
 import ProfilePage from '../pages/Profile/ProfilePage';
+import SettingPage from '../pages/Profile/SettingPage';
 import MainCvthequeView from '../views/Profile/Cvtheque/MainCvthequeView';
 
 
@@ -30,6 +31,11 @@ export default function ProfilePrivateRoutes(props) {
                         <Redirect to={{pathname: `${props.match.path}/:id/meoffre` }} />
                     )} />
 
+                    
+                    <Route exact path={`${props.match.path}/:id/settings`}  component = {SettingPage} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/:id/settings` }} />
+                    )} />
 
 
                     <Route component={NotFound} header="false" />

@@ -61,6 +61,16 @@ export const CvUpdate = (data) =>{
 }
 
 
+export const Cvdelete = (data) =>{
+    const http = new HttpService();
+    let cvUpUrl = "cvtheque/delete/raw";
+
+    return  http.postData(data, cvUpUrl,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
 
 export const Cvget = () =>{
     const http = new HttpService();
@@ -127,6 +137,27 @@ export const GetPost = (data, props) =>{
     });
 }
 
+export const updateAccess = (data) =>{
+    const http = new HttpService();
+    let Url = "password/resetpassword";
+
+    return  http.postData(data, Url,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
+export const updateInfo = (data) =>{
+    const http = new HttpService();
+    let cvUpUrl = "cvtheque/update";
+
+    return  http.postData(data, cvUpUrl,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
 
 
 
