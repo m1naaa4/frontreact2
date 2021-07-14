@@ -2,24 +2,30 @@ import React, { useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
 import { useDispatch } from 'react-redux';
+import { UserInfoAction } from '../../../../store/actions/Profile/UserActions';
+import ZoneDropFilter from '../../../User/Fields/Filter/Project/ZoneDropFilter';
 
 
 
-const  UpdateUserInfo = ({ showInfo, handleCloseInfo}) => {
+const  UpdateUserInfo = ({ showInfo, handleCloseInfo, profile}) => {
     const dispatch = useDispatch();
 
-    const [datedebut, setDatedebut] = useState(new Date());
+    const [birthday, setBirthday] = useState(new Date(profile.birthday));
 
-    const [formData, setForm] = useForm({name:'', categorie:'', level:''});
+    const [formData, setForm] = useForm({first_name:profile.username, last_name:profile.username, identifiant:profile.identifiant, country:profile.country, phone:profile.phone, city:profile.city});
 
     const data = {
-        skills : {name : formData.name,
-        category : formData.category,
-        level : formData.level}
+        first_name : formData.first_name,
+        last_name : formData.last_name,
+        identifiant : formData.identifiant,
+        country : formData.country,
+        birthday : birthday,
+        city : formData.city,
+        phone : formData.phone,
     }
 
     const updateInfo =(id) =>{
-        // dispatch(CvAction(data, '', ''));
+        dispatch(UserInfoAction(data, '', ''));
       }
     
     return (  
@@ -34,22 +40,31 @@ const  UpdateUserInfo = ({ showInfo, handleCloseInfo}) => {
                 </div>
                 <div className="form-row">
                 <div className="col-md-6 input-row">
-                    <input type="text" name="first-name" value="" placeholder="Nom" className="wizard-required" required />
+                    <input type="text" name="first_name" defaultValue={formData.first_name} onChange={setForm} placeholder="Nom" className="wizard-required" required />
                 </div>
                 <div className="col-md-6 input-row">
-                    <input type="text" name="last-name" value="" placeholder="Prénom" className="wizard-required" required />
+                    <input type="text" name="last_name" defaultValue={formData.last_name} onChange={setForm} placeholder="Prénom" className="wizard-required" required />
                 </div>
                 <div className="col-md-12 input-row">
-                    <input type="text" name="last-name" value="" placeholder="Identifiant unique" className="wizard-required" required />
+                    <input type="text" name="identifiant" defaultValue={formData.identifiant} onChange={setForm}  placeholder="Identifiant unique" className="wizard-required" required />
                 </div>
+
+                <div className="col-md-12 input-row">
+                    <input type="text" name="phone" defaultValue={formData.phone} onChange={setForm}  placeholder="Phone" className="wizard-required" required />
+                </div>
+
                 <div className="col-md-12 input-row">
                     <div id="datepicker" className="date" data-date-format="dd-mm-yyyy">
-                        <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
+                        <ReactDatePicker className="wizard-required" selected={birthday} onChange={(date) => setBirthday(date)} />
                         <span className="input-group-addon"><i className="glyphicon glyphicon-calendar"></i></span>
                     </div>
                 </div>
                 <div className="col-md-12 input-row">
-                    <input type="text" name="last-name" value="" placeholder="Pays" className="wizard-required" required />
+                    <ZoneDropFilter field='country' placeholder="Pays" defaultValue={formData.country} onChange={setForm} required/>
+                </div>
+
+                <div className="col-md-12 input-row">
+                    <input type="text" name="city" defaultValue={formData.city} onChange={setForm}  placeholder="City" className="wizard-required" required />
                 </div>
 
                 <div className="User-Settings-Footer">

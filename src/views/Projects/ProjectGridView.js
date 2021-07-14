@@ -17,7 +17,7 @@ const ProjectGridView = ({ project }) => {
                                 <span>{project.sector}</span>
                             </div>
                             <div className="offer-logo">
-                                <img src={project.logo_link} style={{ width: "30px"}}  title="Nom du projet" alt=""/>
+                                <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
                             </div>
                         </div>
                         <div className="offer-media">

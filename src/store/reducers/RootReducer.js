@@ -21,6 +21,7 @@ import GetCommentReducer from './Comment/GetCommentReducer'
 
 import ConversationsReducer from './Messenger/ConversationsReducer'
 import ConversationReducer from './Messenger/ConversationReducer'
+import OffreReducer from './Offre/OffreReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -40,6 +41,7 @@ const RootReducer = combineReducers({
 
   getnotifications:GetNotificationsReducer,
   addednotification:GetAddedNotificationReducer,
+  offres:OffreReducer,
 
   conversations:ConversationsReducer,
   messages:ConversationReducer

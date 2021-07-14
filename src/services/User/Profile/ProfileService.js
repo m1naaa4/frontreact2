@@ -1,14 +1,15 @@
 import HttpService from '../../HttpService';
 
-
+let http = new HttpService();
 export const LoadUser = () =>{
-    const http = new HttpService();
+    
     let profileUpUrl = "user";
     const tokenId = "user-token";
 
     return  http.getData(profileUpUrl, tokenId).then( data => {
         // console.log(data)
         localStorage.setItem('user_id', data.user.id);
+        localStorage.setItem('profile_id', data.user.profile_id);
         return data;
     }).catch((error)=> {
         return error;
@@ -16,7 +17,7 @@ export const LoadUser = () =>{
 }
 
 export const LoadProfile = (id) =>{
-    const http = new HttpService();
+    
     let profileUpUrl = "profile/getProfile/"+ id;
     const tokenId = "user-token";
 
@@ -39,7 +40,7 @@ export const UpdateProfile = (data) =>{
 }
 
 export const Cvsave = (data) =>{
-    const http = new HttpService();
+    
     let cvUpUrl = "cvtheque/update";
 
     return  http.postData(data, cvUpUrl,'').then( data => {
@@ -50,7 +51,7 @@ export const Cvsave = (data) =>{
 }
 
 export const CvUpdate = (data) =>{
-    const http = new HttpService();
+    
     let cvUpUrl = "cvtheque/update/raw";
 
     return  http.postData(data, cvUpUrl,'').then( data => {
@@ -62,7 +63,7 @@ export const CvUpdate = (data) =>{
 
 
 export const Cvdelete = (data) =>{
-    const http = new HttpService();
+    
     let cvUpUrl = "cvtheque/delete/raw";
 
     return  http.postData(data, cvUpUrl,'').then( data => {
@@ -73,7 +74,7 @@ export const Cvdelete = (data) =>{
 }
 
 export const Cvget = () =>{
-    const http = new HttpService();
+    
     let cvUpUrl = "cvtheque/get";
     const tokenId = "user-token";
 
@@ -87,7 +88,7 @@ export const Cvget = () =>{
 
 export const AddPost = (data, props, current) =>{
 
-    const http = new HttpService();
+    
     let addpost = 'post/addPost';
     const tokenId = "user-token";
     return http.postData(data, addpost, tokenId, '').then(data=>{
@@ -100,7 +101,7 @@ export const AddPost = (data, props, current) =>{
 
 export const DeletePost = (data, props, current) =>{
 
-    const http = new HttpService();
+    
     let addpost = 'post/deletePost';
     const tokenId = "user-token";
     return http.postData(data, addpost, tokenId, '').then(data=>{
@@ -113,7 +114,7 @@ export const DeletePost = (data, props, current) =>{
 
 export const GetPosts = (data, props, current) =>{
 
-    const http = new HttpService();
+    
     let getposts = 'post/getPosts?page='+current;
     const tokenId = "user-token";
     return http.postData(data, getposts, tokenId, '').then(data=>{
@@ -126,7 +127,7 @@ export const GetPosts = (data, props, current) =>{
 
 export const GetPost = (data, props) =>{
 
-    const http = new HttpService();
+    
     let getposts = 'post/getPost';
     const tokenId = "user-token";
     return http.postData(data, getposts, tokenId, '').then(data=>{
@@ -138,7 +139,7 @@ export const GetPost = (data, props) =>{
 }
 
 export const updateAccess = (data) =>{
-    const http = new HttpService();
+    
     let Url = "password/resetpassword";
 
     return  http.postData(data, Url,'').then( data => {
@@ -149,10 +150,33 @@ export const updateAccess = (data) =>{
 }
 
 export const updateInfo = (data) =>{
-    const http = new HttpService();
-    let cvUpUrl = "cvtheque/update";
+    
+    let Url = "user/update/info";
 
-    return  http.postData(data, cvUpUrl,'').then( data => {
+    return  http.postData(data, Url,'').then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
+export const language = (data) =>{
+    
+    let Url = "user/update/language";
+
+    return  http.postData(data, Url,'').then( data => {
+        localStorage.getItem(data.profile.language)
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
+export const confirme = (data) =>{
+    
+    const tokenId = "user-token";
+    let Url = "register/resendconfirmation";
+    return  http.getData(Url, tokenId).then( data => {
         return data;
     }).catch((error)=> {
         return error;

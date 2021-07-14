@@ -1,4 +1,4 @@
-import {LoadUser, LoadProfile, UpdateProfile, Cvsave, Cvget, CvUpdate, Cvdelete, updateAccess, updateInfo} from '../../../services/User/Profile/ProfileService'
+import {LoadUser, LoadProfile, UpdateProfile, Cvsave, Cvget, CvUpdate, Cvdelete, updateAccess, updateInfo, language, confirme} from '../../../services/User/Profile/ProfileService'
 
 
 export const loadUserAction = () =>{
@@ -203,3 +203,50 @@ export const UserInfoAction = (data) =>{
     }
     
 }
+
+export const LanguageAction = (data) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_UPDATE_PROFILE'});
+
+        language(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const ConfirmationAction = (data) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_UPDATE_PROFILE'});
+
+        confirme(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                //dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                //dispatch({type:'UPDATE_PROFILE_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+

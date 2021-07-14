@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
 
-import $ from "jquery";
 import { Modal } from 'react-bootstrap';
 import UpdateAccess from './Modals/UpdateAccess';
 import UpdateUserInfo from './Modals/UpdateUserInfo';
+import LanguageSelectorView from '../../Fields/Language/LanguageSelectorView';
+import { ConfirmationAction, LanguageAction } from '../../../store/actions/Profile/UserActions';
 
 
 
 export default function SideRightSettingView(props) { 
+    const infoprofile = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
     const params = useParams();
 
@@ -21,11 +23,30 @@ export default function SideRightSettingView(props) {
 
     const handleCloseInfo = () => setShowInfo(false);
     const handleShowInfo = () => setShowInfo(true);
+
+    let languageStoredInLocalStorage = localStorage.getItem("language");
+    let [language, setLangue] = useState(
+        languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
+    );
+
+    const updateInfo =(id) =>{
+        let data = {
+            language : language
+        }
+        dispatch(LanguageAction(data, '', ''));
+    }
     
+    const sendconfirm =(id) =>{
+        dispatch(ConfirmationAction({}, '', ''));
+    }
+    
+    console.log(infoprofile.profile)
 
     return (
         <>  
-            
+            {
+            infoprofile.profile !== "" && infoprofile.profile !== undefined ?
+
             <div className="col-md-12 col-lg-8">
               <div className="row">
                 <div className="col-lg-6">
@@ -36,25 +57,25 @@ export default function SideRightSettingView(props) {
                         <h3>Mon compte</h3>
                         <button type="button" className="UpdateInfos-BTN" onClick={handleShowInfo} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
                       </div>
-                      <Modal show={showInfo} onHide={handleCloseInfo} className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <UpdateUserInfo showInfo={showInfo} handleCloseInfo={handleCloseInfo}/>
-                    </Modal>
+                        <Modal show={showInfo} onHide={handleCloseInfo} className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <UpdateUserInfo showInfo={showInfo} handleCloseInfo={handleCloseInfo} profile={infoprofile.profile}/>
+                        </Modal>
                       <div className="form-row">
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value="" placeholder="Iya Abbass" className="wizard-required" readonly />
+                          <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="Iya Abbass" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value="" placeholder="Salaheddine" className="wizard-required" readonly />
+                          <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="Salaheddine" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value="" placeholder="@salaheddine1" className="wizard-required" readonly />
+                          <input type="text" name="project-name" value="" placeholder="@salaheddine1" className="wizard-required" readOnly />
                         </div>
 
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-areas" value="" placeholder="12/09/1994" className="wizard-required" readonly />
+                          <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder="Birthday" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-areas" value="" placeholder="Cameroun" className="wizard-required" readonly />
+                          <input type="text" name="project-areas" value={infoprofile.profile.country} placeholder="Cameroun" className="wizard-required" readOnly />
                         </div>
 
                       </div>
@@ -70,25 +91,23 @@ export default function SideRightSettingView(props) {
                         <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
                       </div>
 
-                      
-
                     <Modal show={show} onHide={handleClose} className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <UpdateAccess show={show} handleClose={handleClose}/>
                     </Modal>
 
                       <div className="form-row">
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-name" value="" placeholder="test@dadupa.com" className="wizard-required" readonly />
+                          <input type="text" name="project-name" value={infoprofile.profile.email} placeholder="test@dadupa.com" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="password" name="project-name" value="" placeholder="Mon mot de passe" value="Mon mot de passe" className="wizard-required" readonly />
+                          <input type="password" name="project-name" value="" placeholder="Mon mot de passe" value="Mon mot de passe" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 confirmation-message">
                           <div className="confirmation-message-text">
                             <p>Votre email n’est pas confirmé</p>
                           </div>
                           <div className="confirmation-message-action">
-                            <button type="button" name="button">Confirmer</button>
+                            <button type="button" onClick={sendconfirm} name="button">Confirmer</button>
                           </div>
                         </div>
 
@@ -98,29 +117,26 @@ export default function SideRightSettingView(props) {
                 </div>
               </div>
 
-
               <div className="User-Settings">
                 <div className="form-inputs">
 
                   <div className="User-Settings-Header">
                     <h3>Interface</h3>
-                    <button type="button" className="UpdateInfos-BTN UpdateInfos-BTNText">Update</button>
+                    <button type="button" className="UpdateInfos-BTN UpdateInfos-BTNText" onClick={updateInfo}>Update</button>
                   </div>
                   <div className="form-row">
                     <div className="col-md-12 input-row input-select">
-                      <select className="project-status" name="project-status" required >
-                        <option selected disabled>Langue</option>
-                        <option value="Un porteur de projet">Français</option>
-                        <option value="Un bailleur de fonds">Englais</option>
-                        <option value="Un accompagnateur">Arabe</option>
-                      </select>
+                        <LanguageSelectorView language={language} />
                     </div>
                   </div>
                 </div>
               </div>
 
             </div>
-        
+        :
+        infoprofile.success === false ?
+        infoprofile.message: <span/>
+        }
         </>
     
            

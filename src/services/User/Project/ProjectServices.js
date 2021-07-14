@@ -51,3 +51,16 @@ export const GetProject = (data, props, current) =>{
         return error;
     });
 }
+
+export const GetMyProject = (data, props, current) =>{
+
+    const http = new HttpService();
+    let getProjectUrl = "project/getmyprojectlist";
+    const tokenId = "user-token";
+    return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}

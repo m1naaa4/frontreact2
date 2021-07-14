@@ -1,4 +1,4 @@
-import {GetProject, ProjectServices} from "../../../../services/User/Project/ProjectServices";
+import {GetMyProject, GetProject, ProjectServices} from "../../../../services/User/Project/ProjectServices";
 
 
 export const AddProjectsAction = (data, props, url, navigation) =>{
@@ -48,3 +48,25 @@ export const GetProjectAction = (data, props, current) =>{
     }
     
 }
+
+export const getMyOffresAction = (data, props, current) =>{
+
+    return (dispatch) =>
+    {
+        GetMyProject(data,props, current).then((res)=>{
+
+            if(res.hasOwnProperty('success') && res.success === true){
+                dispatch({type:'GET_MY_PROJECT_SUCCESS', res});
+            }
+            else if(res.hasOwnProperty('success') && res.success === false) {
+                dispatch({type:'GET_MY_PROJECT_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'GET_ERROR',error});
+        }
+        )
+    }
+    
+}
+

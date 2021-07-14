@@ -5,6 +5,7 @@ class HttpService {
 
     postDataa = async (item, added_url, tokenId = "") =>
     {
+        item.profile_id = localStorage.getItem('profile_id');
         const token = await localStorage.getItem(tokenId);
 
         const requestOptions = this.postRequestOptions(token, item);
@@ -15,6 +16,8 @@ class HttpService {
 
     postData = async (item, added_url, tokenId = "") =>
     {
+        item.profile_id = localStorage.getItem('profile_id');
+
         return await axios({
             method: 'POST',
             url: "/" + added_url,
@@ -24,6 +27,7 @@ class HttpService {
 
     postUploadData = async (item, added_url, tokenId = "") =>
     {
+        item.profile_id = localStorage.getItem('profile_id');
         return await axios({
             method: 'POST',
             url: "/" + added_url,

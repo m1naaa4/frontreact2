@@ -77,7 +77,7 @@ export default function AddProject({filterInput, setFilterInput, props}) {
                                                 <SectorDropFilter value={sector} onChange={setFilterInput} />
                                             </div>
                                             <div className="col-md-12 input-row">
-                                                <ZoneDropFilter value={zone}  onChange={setFilterInput}/>
+                                                <ZoneDropFilter field='project_area' value={zone}  onChange={setFilterInput}/>
                                             </div>
                                             <div className="col-md-12 input-row input-select">
                                                 <FinanceDropFilter value={financement}  onChange={setFilterInput}/>

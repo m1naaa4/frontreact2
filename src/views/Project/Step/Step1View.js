@@ -128,7 +128,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                                 <SectorDropFilter value={sector_id} required={true} onChange={setForm} />
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                <ZoneDropFilter value={project_area} required={true}  onChange={setForm}/>
+                                                <ZoneDropFilter field='project_area' value={project_area} required={true}  onChange={setForm}/>
                                             </div>
                                             <div className="col-md-12 input-row input-select">
                                                 <FinanceDropFilter value={funding_search} required={true}  onChange={setForm}/>

@@ -134,7 +134,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                    <SectorDropFilter name="sector_id" value={getproject.project.sector_id} onChange={setForm} />
                                                </div>
                                                <div className="col-md-12 input-row">
-                                                   <ZoneDropFilter name="project_area" value={getproject.project.project_area}  onChange={setForm}/>
+                                                   <ZoneDropFilter field='project_area' name="project_area" value={getproject.project.project_area}  onChange={setForm}/>
                                                </div>
                                                <div className="col-md-12 input-row input-select">
                                                    <FinanceDropFilter name="funding_search" value={getproject.project.funding_search}  onChange={setForm}/>

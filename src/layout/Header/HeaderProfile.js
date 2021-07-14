@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
-import {  useHistory, useParams  } from 'react-router-dom';
+import {  Link, useHistory, useParams  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 import $ from "jquery";
@@ -73,23 +73,6 @@ function HeaderProfile() {
         dispatch(UserLogOutAction(history));
     }
 
-    const goToAddproject = () => {
-        history.push("/project/create");
-    };
-
-    const goToSetting = () => {
-        history.push("/profile/"+userProfile.profile_id+"/settings");
-    };
-
-    const goToListproject = () => {
-        history.push("/project/lists");
-    };
-
-    
-    const gotToProfile = () => {
-        history.push('/profile/'+ userProfile.profile_id);
-    };
-
     const openNotifications = () => {
         setShowNotifications(!showNotifications );
     };
@@ -123,7 +106,7 @@ function HeaderProfile() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                    <li className="Nav-Item Active-Nav"><a href="" className="Nav-Link" onClick={goToListproject}><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></a></li>
+                                    <li className="Nav-Item Active-Nav"><Link to={`/project/lists`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></Link></li>
                                     <li className="Nav-Item"><a href="bailleur-de-fonds"className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="donor"/></a></li>
                                     <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="accompanyingPerson"/></a></li>
                                     </ul>
@@ -135,7 +118,7 @@ function HeaderProfile() {
                                         <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
                                         <div className="Dadupa-Popup-DropDown">
                                             <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><a href="" onClick={goToAddproject}><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></a></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/project/create`} ><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></Link></li>
                                             <li className="Mini-Profile-Item"><a href="new-bailleur-offer"><i className="uil uil-briefcase-alt"></i> <Text tid="header.menu.finance"/></a></li>
                                             <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i> <Text tid="header.menu.mentoring"/></a></li>
                                             </ul>
@@ -143,22 +126,22 @@ function HeaderProfile() {
                                     </div>
                                     <div className="Dadupa-Notifications">
                                         <div className="Dadupa-Notifications-Items">
-                                            <div className="Dadupa-Notifications-Item Dadupa-Search">
+                                            {/* <div className="Dadupa-Notifications-Item Dadupa-Search">
                                                 <form className="search">
                                                     <input type="search" name="search" placeholder="Search Dadupa" />
                                                     <button type="submit" name="submit"><i className="uil uil-search"></i></button>
                                                 </form>
-                                            </div>
+                                            </div> */}
                                             <div className="Dadupa-Notifications-Item Dadupa-Alert-Popup">
                                                 <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
                                                     <span className="new-notif"></span><i className="uil uil-bell"></i>
                                                 </button>
                                                 {showNotifications && <Notifications/>}
                                             </div>
-                                            <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
+                                            {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
                                                 <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>
                                                 {showMessages && <Messages/>}
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <div className="Dadupa-User" onClick={userMenu}>
@@ -173,11 +156,11 @@ function HeaderProfile() {
                                         </ul>
                                         <div className="Dadupa-Mini-Profile">
                                             <label className="Mini-Profile-Name">{userProfile.name}</label>
-                                            <a className="Mini-Profile-Link" href="" onClick={gotToProfile}><Text tid='see_profile' /></a>
+                                            <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><a href=""><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </a></li>
                                             <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li>
-                                            <li className="Mini-Profile-Item"><a href="" onClick={goToSetting}><i className="uil uil-setting"></i> <Text tid="setting"/></a></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
                                             <li className="Mini-Profile-Item"><a href="" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>

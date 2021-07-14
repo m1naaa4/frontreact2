@@ -40,7 +40,7 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                                     <SectorDropFilter value={sector} onChange={setFilterInput} />
                                 </div>
                                 <div className="input-row input-select input-small">
-                                    <ZoneDropFilter value={zone} onChange={setFilterInput} />
+                                    <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} />
                                 </div>
                                 <div className="input-row input-select input-small">
                                     <FinanceDropFilter value={financement} onChange={setFilterInput} />
