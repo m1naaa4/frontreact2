@@ -29,6 +29,15 @@ export default function MainView(props) {
                             </div>     
                         ))
                         }
+                         {!offres?.projects?.length>0 &&
+                            <div className="col-md-12">
+                              <div className="offer-box">
+                                 <div className="offer-box">
+                                     no result found
+                                 </div>
+                              </div>
+                            </div>
+                         }
                     </div>
                     </div>
             </div>

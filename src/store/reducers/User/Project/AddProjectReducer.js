@@ -19,6 +19,13 @@ const initState = {
                   projectid:action.res.project.id,
                   success:action.res.success,
               }
+              case 'CLEAR_STATE_PROJECT_SUCCESS':
+                return {
+                    ...state,
+                    addproject:null,
+                    getproject:null,
+                    projectid:null,
+                }
 
               case 'ADD_PROJECT_ERROR':
                     return {

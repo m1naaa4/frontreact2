@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router';
 
 import { Modal } from 'react-bootstrap';
 import UpdateAccess from './Modals/UpdateAccess';
 import UpdateUserInfo from './Modals/UpdateUserInfo';
 import LanguageSelectorView from '../../Fields/Language/LanguageSelectorView';
 import { ConfirmationAction, LanguageAction } from '../../../store/actions/Profile/UserActions';
+import countries from '../../../countries';
 
 
 
 export default function SideRightSettingView(props) { 
     const infoprofile = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
-    const params = useParams();
 
     const [show, setShow] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
+    const [country, setCountry] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -39,6 +39,17 @@ export default function SideRightSettingView(props) {
     const sendconfirm =(id) =>{
         dispatch(ConfirmationAction({}, '', ''));
     }
+
+    useEffect(() => {
+      countries.map((key) => 
+        {if (key.value === infoprofile?.profile?.country) {
+          console.log(key.label)
+          setCountry(key.label)
+        }}
+      );
+    })
+
+     
     
     console.log(infoprofile.profile)
 
@@ -68,14 +79,14 @@ export default function SideRightSettingView(props) {
                           <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="Salaheddine" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value="" placeholder="@salaheddine1" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" defaultValue="" placeholder="@salaheddine1" className="wizard-required" readOnly />
                         </div>
 
                         <div className="col-md-6 input-row">
                           <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder="Birthday" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-areas" value={infoprofile.profile.country} placeholder="Cameroun" className="wizard-required" readOnly />
+                          <input type="text" name="project-areas" defaultValue={country} placeholder="Country" className="wizard-required"/>
                         </div>
 
                       </div>

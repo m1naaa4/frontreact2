@@ -8,6 +8,7 @@ import { LoadNotificationAction } from '../../store/actions/Notification/LoadNot
 import Notifications from './Notifications';
 import $ from "jquery";
 import Messages from './Messages';
+import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 
 function HeaderProfile() {
     const history = useHistory();
@@ -17,7 +18,6 @@ function HeaderProfile() {
     const [showMessages, setShowMessages] = useState(false);
     const counter = useSelector(state => state.addednotification); 
     
-    console.log('counterrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr', counter.contentNotif)
     useEffect(() => {
         $(document).on("click", function(event){
             if(!$(event.target).closest(".Dadupa-Popup-DropDown").length){
@@ -73,15 +73,16 @@ function HeaderProfile() {
         dispatch(UserLogOutAction(history));
     }
 
-    const openNotifications = () => {
-        setShowNotifications(!showNotifications );
-    };
+    const openNotifications = () => setShowNotifications(!showNotifications );
     
     const openMessages = () => {
         setShowMessages(!showMessages );
     };
 
 
+    const clearProject = () => {
+        dispatch(ClearProjectsAction());
+    }
 
     return (
         <div>
@@ -118,7 +119,7 @@ function HeaderProfile() {
                                         <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
                                         <div className="Dadupa-Popup-DropDown">
                                             <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><Link to={`/project/create`} ><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></Link></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/project/create`} onClick={clearProject}><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></Link></li>
                                             <li className="Mini-Profile-Item"><a href="new-bailleur-offer"><i className="uil uil-briefcase-alt"></i> <Text tid="header.menu.finance"/></a></li>
                                             <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i> <Text tid="header.menu.mentoring"/></a></li>
                                             </ul>
@@ -133,10 +134,7 @@ function HeaderProfile() {
                                                 </form>
                                             </div> */}
                                             <div className="Dadupa-Notifications-Item Dadupa-Alert-Popup">
-                                                <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
-                                                    <span className="new-notif"></span><i className="uil uil-bell"></i>
-                                                </button>
-                                                {showNotifications && <Notifications/>}
+                                                <Notifications/>
                                             </div>
                                             {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
                                                 <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>
@@ -158,7 +156,7 @@ function HeaderProfile() {
                                             <label className="Mini-Profile-Name">{userProfile.name}</label>
                                             <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
                                             <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><a href=""><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </a></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </Link></li>
                                             <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li>
                                             <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
                                             <li className="Mini-Profile-Item"><a href="" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>

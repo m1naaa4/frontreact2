@@ -36,7 +36,6 @@ export default function Step3View({formData, setForm, navigation, props}) {
 
         next()
     };
-    const projectt = useSelector(state => state.addproject);
 
     //console.log("project3", projectt)
 
@@ -52,7 +51,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
                             <div className="page-header">
                                 <h3>Détails de l'offre</h3>
                                 <p>Enter details about the project <br/>to preceed further</p>
-                                <img src="/assets/images/offer-thumbnail.svg"/>
+                                <img src="/assets/images/offer-thumbnail.svg" alt=""/>
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-8">

@@ -26,6 +26,16 @@ export const AddProjectsAction = (data, props, url, navigation) =>{
 
 }
 
+export const ClearProjectsAction = () =>{
+
+    return (dispatch)=>{
+
+        dispatch({type:'CLEAR_STATE_PROJECT_SUCCESS'});
+    }
+
+}
+
+
 export const GetProjectAction = (data, props, current) =>{
 
     return (dispatch) =>

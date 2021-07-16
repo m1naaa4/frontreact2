@@ -15,16 +15,19 @@ const initState = {
         
         case 'LIKED_SUCCESS':
             // console.log('GET_NOTIFICATIONS_SUCCESS', action.res)
-            // console.log('GET_NOTIFICATIONS_SUCCESS', action.res?.count)
+            
             
             let id = window.location.href.split("/").pop();
-            if (action.res.notification?.provider_id === id) {
-                state.notification = action.res?.count;
-            }                            
+            let counted
+            // console.log('GET_NOTIFICATIONS_SUCCESS', action.res?.count,  action.res.notification?.provider_id , id)
+            if (action.res.count) {
+                counted = action.res?.count;
+            } 
+            console.log('GET_NOTIFICATIONS_SUCCESS state.notification',counted )                           
             return {
                 ...state,
-                counterlike :  action.res?.count,
-                contentNotif :  action.res.notification,
+                counterlike :  counted,
+                // contentNotif :  action.res.notification,
                 loading  :  false
             }
         

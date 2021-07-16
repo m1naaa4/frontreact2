@@ -40,8 +40,8 @@ export default function PostHeader({ post }) {
   return (
   
         <div className="PostHeader">
-          <Link className="PostUser-Thumb" to={"/profile/"+ post.profile_id} ><img src={post.avatar} alt="avatar" /></Link>
-          <Link className="PostUser-Details" to={"/profile/"+ post.profile_id}>
+          <Link className="PostUser-Thumb" to={"/profile/"+ post.creator_profile_id} ><img src={post.avatar} alt="avatar" /></Link>
+          <Link className="PostUser-Details" to={"/profile/"+ post.creator_profile_id}>
             <div className="PostUser-Name">{post.creator_name}</div>
             <div className="PostUser-Time">{post.created_at.date}</div>
           </Link>

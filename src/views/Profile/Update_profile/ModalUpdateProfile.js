@@ -46,7 +46,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
                   <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Téléphone" className="wizard-required" required/>
                 </div>
                 <div className="col-md-12 input-row">
-                  <div class="Profile-Info Profile-Infos-Items">
+                  <div className="Profile-Info Profile-Infos-Items">
                     <ul>
                       <li>
                         <div className="form-row">

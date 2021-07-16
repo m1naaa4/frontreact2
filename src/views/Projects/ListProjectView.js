@@ -4,7 +4,7 @@ import FilterProject from "../User/Fields/Filter/FilterProject";
 import ProjectView from "./ProjectGridView";
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";
 import {useDispatch, useSelector} from "react-redux";
-import {loadProjectAction} from "../../store/actions/User/Project/ProjectActions";
+import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User/Project/ProjectActions";
 import {Redirect} from 'react-router-dom';
 
 
@@ -38,7 +38,7 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
 
     useEffect(() => {
         if(!isLoading){
-            dispatch(loadProjectAction( filterInput, props, 1));
+            dispatch(loadProjectOnceAction( filterInput, props, 1));
         }
     }, [dispatch]);  
 

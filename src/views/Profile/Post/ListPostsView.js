@@ -19,7 +19,7 @@ export default function ListPostsView() {
 
     const data = {
         action: 'getPosts',
-        profile_id: params.id,
+        profile_post_id: params.id,
     };
 
     const posts =  useSelector(state => state.posts.posts);

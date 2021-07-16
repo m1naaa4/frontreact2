@@ -2,11 +2,17 @@ import React, {useEffect, useState} from 'react'
 import {GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from 'video-react';
-import ProjectSkeleton from '../../skeleton/ProjectSkeleton';
 import AddComment from '../Comment/AddComment';
 import { useHistory, useParams } from 'react-router-dom';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import parse from 'html-react-parser';
+
+import sectors from '../../sectors';
+import { useTranslation } from 'react-i18next';
+import etats from '../../Etats';
+import countries from '../../countries';
+import finances from '../../finances';
+import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 
 export default function ShowProjectView(props) {
 
@@ -19,6 +25,12 @@ export default function ShowProjectView(props) {
     const [green, setGreen] = useState();
     const [postliked, setPostliked] = useState();
     const [classe, setClasse] = useState();
+    const [sector, setSector] = useState();
+    const [status, setStatus] = useState();
+    const [country, setCountry] = useState();
+    const [finance, setFinance] = useState();
+    const [t, i18n] = useTranslation();
+
     const data = {
         project_id : params.id,
         action     : "getProject",
@@ -45,6 +57,34 @@ export default function ShowProjectView(props) {
             console.log(counter?.notification)
             setCountcomment(counter?.countercomment)
         }
+
+        sectors.map((key) => 
+        // console.log(key[0], project?.project?.sector)
+          {if (key[0] === project?.project?.sector) {
+            setSector(key[1])
+          }}
+        );
+
+        
+        etats.map((key) => 
+        // console.log(key[0], sector_id)
+          {if (key[0] === project?.project?.project_status) {
+            setStatus(key[1])
+          }}
+        );
+
+        countries.map((key) => 
+        {if (key.value === project?.project?.project_area) {
+          console.log(key.label)
+          setCountry(key.label)
+        }}
+      );
+      
+      finances.map((key) => 
+        {if (key[0] === project?.project?.funding_search) {
+          setFinance(key[1])
+        }}
+      );
 
 
     })
@@ -96,7 +136,7 @@ export default function ShowProjectView(props) {
         setClasse('Like');
         setLike(like ? false : true);
         console.log(like)
-        dispatch(LikeAction(dataa, 'like/like', props));
+        // dispatch(LikeAction(dataa, 'like/like', props));
     }
 
     
@@ -107,7 +147,7 @@ export default function ShowProjectView(props) {
                 {/* <!-- SINGLE -->*/}
                     {
                             project.success === 'loading' || project === 'loading' ? (
-                                <ProjectSkeleton/>
+                                <ProjectSkeletonGrid/>
                             ) : project.success === true ? (
 
 
@@ -203,19 +243,19 @@ export default function ShowProjectView(props) {
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Etat du projet</label>
-                                        <span>{project.project.project_status}</span>
+                                        <span>{t(`${status}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Secteurs d’activité</label>
-                                        <span>{project.project.sector_id}</span>
+                                        <span>{t(`${sector}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Zones ciblées</label>
-                                        <span>{project.project.project_area}</span>
+                                        <span>{country}</span>
                                     </li>
                                     <li className="Offer-Item">
                                         <label>Financement recherché</label>
-                                        <span>{project.project.funding_search}</span>
+                                        <span>{t(`${finance}`)}</span>
                                     </li>
                                 </ul>
                             </div>

@@ -4,6 +4,7 @@ import ProgressBar from "../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
 import UploadService from '../../../helpers/FileUploadService';
 import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
+import { useLocation } from 'react-router-dom';
 
 
 export default function Step2View({formData, setForm, navigation, props}) {
@@ -17,13 +18,18 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
     const [project_id, setProject_id] = useState();
-    const [type, setType] = useState(undefined);
     const hiddenFileInput = useRef(null);
 
-    const mediaproject = useSelector(state => state.fileuploaded);
     const projectadd = useSelector(state => state.addproject);
     const getproject = useSelector(state => state.getproject);
 
+    const [changed, setChanged] = useState(false);
+
+    const location = useLocation();
+    useEffect(()=>{
+        console.log(location, 'changedddddd', )
+        setChanged(true)
+    },[location])
 
     useEffect(() => {
         if (projectadd.addproject) {
@@ -36,8 +42,12 @@ export default function Step2View({formData, setForm, navigation, props}) {
         
                     setProject_id(projectadd.addproject.projectid);
         
-                    dispatch( getProjectAction (data, props));                        
-                        setFile(getproject.getproject.project.media_link);
+                    dispatch( getProjectAction (data, props));
+                        if (projectadd.addproject.projectid === getproject.getproject.projectid) {
+                            setFile(getproject.getproject.project.media_link);
+                            setMedia(getproject.getproject.project.is_video);
+                        }
+                        
                         setMedia(getproject.getproject.project.is_video);
                         formData.medialink = getproject.getproject.project.media_link;
                         formData.logolink = getproject.getproject.project.logolink;
@@ -46,7 +56,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
                     } 
                 } 
             }               
-    }, [dispatch]);  
+    }, [dispatch]);
 
     const handleClick = e => {
         hiddenFileInput.current.click();

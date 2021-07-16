@@ -1,18 +1,19 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import EtatDropFilter from "../../User/Fields/Filter/Project/EtatDropFilter";
 import SectorDropFilter from "../../User/Fields/Filter/Project/SectorDropFilter";
 import ZoneDropFilter from "../../User/Fields/Filter/Project/ZoneDropFilter";
 import FinanceDropFilter from "../../User/Fields/Filter/Project/FinanceDropFilter";
-import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
+import {AddProjectsAction, ClearProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
 import { displayErrorMessages } from '../../../helpers/displayErr';
 import { useTranslation } from 'react-i18next';
 import $ from "jquery";
 import 'jquery-validation'
+import { useLocation } from 'react-router-dom';
 
 export default function Step1View({formData, setForm,navigation, props}) {
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink } = formData;
     const project = useSelector(state => state.addproject.addproject);
@@ -21,6 +22,14 @@ export default function Step1View({formData, setForm,navigation, props}) {
         getBase64(e.target.files[0]);
         setPicture(URL.createObjectURL(e.target.files[0]) );
     };
+
+    const [changed, setChanged] = useState(false);
+
+    const location = useLocation();
+    useEffect(()=>{
+        console.log(location, 'changedddddd', )
+        setChanged(true)
+    },[location])
 
 
     if (props.location.state){
@@ -47,7 +56,19 @@ export default function Step1View({formData, setForm,navigation, props}) {
         e.preventDefault();
         clearAuthErrDiv();
         if($("#form-wizard").valid()){
-            formData.project_id = project !== "loading" ? project.projectid: '';
+            // if (changed) {
+            //     if (location.pathname !== '/project/create') {
+            //         console.log(project.projectid, 'entreddddd');
+            //         formData.project_id = null;
+            //     }else{
+            //         formData.project_id =  project.projectid;
+            //     }
+                
+            // }else{
+                
+            // }
+            
+            formData.project_id = project !== "loading" ? project?.projectid: '';
             formData.action = 'create';
             dispatch(AddProjectsAction(formData, props, '/create', navigation));
         }  
@@ -61,7 +82,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
     const checkparameters = () => {
         if (project == 0 && project.addproject ==0) {
           return "loading...";
-        }else if(project.success === false){
+        }else if(project?.success === false){
             displayErrorMessages(project.errors, document.getElementById('authErr'))
         }        
       }

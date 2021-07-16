@@ -17,6 +17,7 @@ class HttpService {
     postData = async (item, added_url, tokenId = "") =>
     {
         item.profile_id = localStorage.getItem('profile_id');
+        item.user_id = localStorage.getItem('user_id');
 
         return await axios({
             method: 'POST',

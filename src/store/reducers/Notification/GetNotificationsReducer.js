@@ -13,8 +13,7 @@ const initState = {
                     loading:true
                 }
 
-            case 'GET_NOTIFICATIONS_SUCCESS':
-                //console.log('GET_NOTIFICATIONS_SUCCESS', action.res.notifications)
+            case 'GET_NOTIFICATIONS_SUCCESS':            
                 
               return {
                   ...state,
@@ -23,6 +22,32 @@ const initState = {
                   current:  action.res.current,
                   loading:false
               }
+
+            case 'SEEN_NOTIFICATION_SUCCESS':
+                [...state.notifications].filter(function (notification)
+                    {
+                        if (notification.id === action.data.notification_id) {
+                            notification.seen = true;  
+                            return true;
+                        }
+                    });
+                return {
+                    ...state,
+                    // notifications: [...state.notifications],
+                }
+
+            
+            case 'DELETE_NOTIFICATIONS_SUCCESS':
+                
+                // [...state.notifications].filter(item => item.id === action.data.notification_id);
+                
+              return {
+                  ...state,
+                  notifications: [...state.notifications].filter(item => item.id === action.data.notification_id),
+                  loading:false
+              }
+
+            
 
             case 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS':
                 console.log("usernotisssssssssss", action.res)

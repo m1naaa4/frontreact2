@@ -1,4 +1,4 @@
-import { LoadNotification , SeenNotification} from "../../../services/Generale/GeneraleService";
+import { deleteNotification, LoadNotification , SeenNotification} from "../../../services/Generale/GeneraleService";
 
 export const LoadNotificationAction = (data, props, current) =>{
 
@@ -27,12 +27,34 @@ export const SeenNotificationAction = (data) =>{
 
     return (dispatch)=>{
 
-        dispatch({type:'LOADING_SEEN_NOTIFICATIONS'});
 
         SeenNotification(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'SEEN_NOTIFICATION_SUCCESS', res});
+                    dispatch({type:'SEEN_NOTIFICATION_SUCCESS', data});
+
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'SEEN_NOTIFICATION_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+
+}
+
+export const DeleteNotificationAction = (data) =>{
+
+    return (dispatch)=>{
+
+        dispatch({type:'DELETE_NOTIFICATIONS_SUCCESS', data});
+
+        deleteNotification(data).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    // dispatch({type:'DELETE_NOTIFICATIONS_SUCCESS', res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'SEEN_NOTIFICATION_ERROR',res})

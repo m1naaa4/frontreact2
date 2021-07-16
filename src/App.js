@@ -15,16 +15,10 @@ function App() {
     const dispatch = useDispatch ();
     pusher.echo.private("project_comment").listen(".NewComment", data => {
         
-        console.log("project_comment");
-        console.log(data);
         if (data.type === "project") {
-            console.log(data.type);
-        console.log(data);
             dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
         }
         if (data.type === "post") {
-            console.log(data.type);
-        // console.log(data);
             dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res : data});
         }
         dispatch({type:'COMMENTED_SUCCESS', res : data});
@@ -42,20 +36,17 @@ function App() {
 
     pusher.echo.private("App.Models.User."+ user_id)
     .notification((notification) => {
-        console.log(notification, 'notification.typessssssssssssssssssssssssssssss');
         dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
     });
 
     pusher.echo.private("new_post").listen(".newpost", data => {
         
-        console.log("NewPost--------------");
         // console.log(data);
         dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', res : data});
     })
 
     pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
         audio.play();
-        console.log(data);
         dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
     }).listenForWhisper('typing', (e) => {
         console.log(e)

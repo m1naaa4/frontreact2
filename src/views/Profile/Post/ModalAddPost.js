@@ -41,7 +41,7 @@ export default function(newavatar) {
     const dispatch = useDispatch();
 
     const data = {
-        profile_id : params.id,
+        profile_post_id : params.id,
         body       : body,
         action     : 'addPost',
         type       : type,

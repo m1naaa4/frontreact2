@@ -1,18 +1,59 @@
-import React  from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState }  from 'react'
 import { Player } from 'video-react';
-
-
-
+import sectors from '../../../sectors';
+import { useTranslation } from 'react-i18next';
+import etats from '../../../Etats';
+import countries from '../../../countries';
+import finances from '../../../finances';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
     const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, url, media, project_id, medialink, logolink, mediatype } = formData;
     const {previous} = navigation;
+    const [sector, setSector] = useState();
+    const [status, setStatus] = useState();
+    const [country, setCountry] = useState();
+    const [finance, setFinance] = useState();
 
     const goToShowproject = () => {
         props.history.push('/project/show/'+ project_id );
     };
+    const [t, i18n] = useTranslation();
+
+    useEffect(() => {
+        sectors.map((key) => 
+        // console.log(key[0], sector_id)
+          {if (key[0] === sector_id) {
+            console.log(key[0], sector_id, key[1])
+            setSector(key[1])
+          }}
+        );
+
+        
+        etats.map((key) => 
+        // console.log(key[0], sector_id)
+          {if (key[0] === project_status) {
+            console.log(key[0], project_status, key[1])
+            setStatus(key[1])
+          }}
+        );
+
+        countries.map((key) => 
+        {if (key.value === project_area) {
+          console.log(key.label)
+          setCountry(key.label)
+        }}
+      );
+      
+      finances.map((key) => 
+        {if (key[0] === funding_search) {
+          setFinance(key[1])
+        }}
+      );
+
+
+
+      })
 
     return (
 
@@ -25,7 +66,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                             <div className="page-header">
                                 <h3>Détails de l'offre</h3>
                                 <p>Enter details about the project <br/>to preceed further</p>
-                                <img src="/assets/images/offer-thumbnail.svg"/>
+                                <img src="/assets/images/offer-thumbnail.svg" alt=""/>
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-8">
@@ -84,19 +125,19 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                             <div className="review-meta">
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Project Status</label>
-                                                    <span>{`${project_status}`}</span>
+                                                    <span>{t(`${status}`)}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Secteurs d'activité</label>
-                                                    <span>{`${sector_id}`}</span>
+                                                    <span>{t(`${sector}`)}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Zones du projet</label>
-                                                    <span>{`${project_area}`}</span>
+                                                    <span>{t(`${country}`)}</span>
                                                 </div>
                                                 <div className="review-meta-item">
                                                     <label htmlFor="">Financement</label>
-                                                    <span>{`${funding_search}`}</span>
+                                                    <span>{t(`${finance}`)}</span>
                                                 </div>
                                             </div>
                                             <div className="review-content" dangerouslySetInnerHTML={{ __html: descriptions }}>
