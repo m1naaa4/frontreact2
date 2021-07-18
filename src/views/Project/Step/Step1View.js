@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import $ from "jquery";
 import 'jquery-validation'
 import { useLocation } from 'react-router-dom';
-
+import Spinner from 'react-bootstrap/Spinner'
 export default function Step1View({formData, setForm,navigation, props}) {
 
     const { t } = useTranslation();
@@ -23,11 +23,11 @@ export default function Step1View({formData, setForm,navigation, props}) {
         setPicture(URL.createObjectURL(e.target.files[0]) );
     };
 
+    const [is_loading, setIsLoading] = useState(false);
     const [changed, setChanged] = useState(false);
 
     const location = useLocation();
     useEffect(()=>{
-        console.log(location, 'changedddddd', )
         setChanged(true)
     },[location])
 
@@ -53,6 +53,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
         };
     };
     const handleSubmitValue = (e) => {
+
         e.preventDefault();
         clearAuthErrDiv();
         if($("#form-wizard").valid()){
@@ -67,7 +68,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
             // }else{
                 
             // }
-            
+            setIsLoading(true)
             formData.project_id = project !== "loading" ? project?.projectid: '';
             formData.action = 'create';
             dispatch(AddProjectsAction(formData, props, '/create', navigation));
@@ -177,8 +178,15 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
                                         </div>
                                     </div>
-                                    <button type="button" onClick={(event) => { handleSubmitValue(event);}} name="next" className="next action-button">{t('next')} <i
-                                        className="uil uil-arrow-right"></i></button>
+                                    <button type="button" onClick={(event) => { handleSubmitValue(event);}} name="next" className="next action-button">{t('next')}                                    
+                                        {!is_loading ? <i className="uil uil-arrow-right"></i> : <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        /> }
+                                    </button>
                                 </fieldset>
 
                             </form>

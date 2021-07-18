@@ -6673,3 +6673,6 @@ border-top: none;
   }
 
 }
+button .spinner-border{
+  margin-left: 6px;
+}

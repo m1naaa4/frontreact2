@@ -8,6 +8,7 @@ import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectActi
 import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
 import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
 import { useTranslation } from 'react-i18next';
+import Spinner from 'react-bootstrap/Spinner'
 
 export default function UpdateStep1View({formData, setForm, navigation, props}) {
 
@@ -16,10 +17,9 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
     const getproject = useSelector(state => state.getproject.getproject);
     const { t } = useTranslation();
     const [picture, setPicture] = useState(null);
-
-    console.log("here updateeeeeeeeeee", getproject)
     
     const nameForm = useRef(null)
+    const [is_loading, setIsLoading] = useState(false);
 
     
     const data = {
@@ -71,6 +71,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         formData.description = getproject.project.description;
         formData.tags = getproject.project.tags;
         formData.action = 'create';
+        setIsLoading(true)
         dispatch(AddProjectsAction(formData, props, '/create', navigation));
     }
 
@@ -156,8 +157,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                    <div className="custom-control custom-switch">
                                                        <input type="checkbox" onChange={setForm}   className="custom-control-input" id="switch1"
                                                               name="look_angel"/>
-                                                       <label className="custom-control-label" htmlFor="switch1">Je
-                                                           cherche des mentors</label>
+                                                       <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_mentors')}</span></label>
                                                    </div>
                                                </div>
                                                <div className="col-md-6 input-row">
@@ -168,8 +168,15 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
    
                                            </div>
                                        </div>
-                                       <button type="button" onClick={(event) => { handleSubmitValue(event); next();}} name="next" className="next action-button">Continue <i
-                                           className="uil uil-arrow-right"></i></button>
+                                       <button type="button" onClick={(event) => { handleSubmitValue(event); next();}} name="next" className="next action-button">
+                                        {!is_loading ? <i className="uil uil-arrow-right"></i> : <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                            /> }
+                                        </button>
                                    </fieldset>
    
                                </form>
