@@ -167,7 +167,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                                 <div className="custom-control custom-switch">
                                                     <input type="checkbox" value={look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
                                                            name="angel"/>
-                                                    <label className="custom-control-label" htmlFor="switch1">{t('form.want_mentors')}</label>
+                                                    <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_mentors')}</span></label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 input-row">
