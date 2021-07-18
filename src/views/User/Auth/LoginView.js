@@ -11,13 +11,14 @@ import SocialLogin from "./Social/SocialLogin";
 import $ from "jquery";
 import 'jquery-validation';
 import { useTranslation } from 'react-i18next';
+import Spinner from 'react-bootstrap/Spinner'
 
 
 export default function LoginView(props) {
 
     const [place, sePlace] = useState();
     const [t, i18n] = useTranslation();
-
+    const [is_loading, setIsLoading] = useState(false);
 
 
     if (localStorage.getItem('user-token')) {
@@ -48,6 +49,8 @@ export default function LoginView(props) {
 
     const handleLogin = (e) => {
         if($("#form-login").valid()){
+            setIsLoading(true)
+
             dispatch(UserLoginAction(fields, props.props))
         }          
     }
@@ -107,7 +110,17 @@ export default function LoginView(props) {
                                         <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
                                     </div>
                                     <div className="form-submit">
-                                        <button type="submit"  name="submit"> {t('login')} </button>
+                                        <button type="submit"  name="submit"> 
+                                        {t('login')} 
+                                        {is_loading && <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        /> }
+                                        </button>
+
                                     </div>
                                 </form>
 
