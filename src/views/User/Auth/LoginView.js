@@ -101,7 +101,7 @@ export default function LoginView(props) {
                                             <label className="container-checkbox">
                                                 <input type="checkbox"/>
                                                     <span className="checkmark"></span>
-                                                    <span> value={t('remember_me')}</span>
+                                                    <span> {t('remember_me')}</span>
                                             </label>
                                         </div>
                                         <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
