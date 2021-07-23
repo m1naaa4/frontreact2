@@ -112,6 +112,8 @@ const fr = {
     'form.add_logo': "Ajouter le logo",
     'form.edit_logo': "Modifer le logo",
     'comments' : 'Commentaires',
+    or_copy_link : 'Ou copie le lien',
+    share : 'Partager',
 
 
 };

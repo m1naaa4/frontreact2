@@ -112,7 +112,10 @@ const en = {
     'form.add_logo': "Add logo",
     'form.edit_logo': "Edit logo",
 
-    'comments' : 'Comment'
+    'comments' : 'Comment',
+    or_copy_link : 'Or copy link',
+    share : 'Share',
+
 
 
 

@@ -4927,53 +4927,53 @@ border-top: none;
   right: 20px;
 }
 .Share-Facebook{
-  background: rgba(24, 119, 242, .1);
+  background: rgba(24, 119, 242, .1) !important;
   border: 2px solid #fff;
   color: #1877f2 !important;
   transition: all .30s linear;
 }
 .Share-Facebook:hover{
-  border-color: rgba(24, 119, 242, .1);
+  border-color: rgba(24, 119, 242, .1) !important;
   background-color: transparent;
 }
 .Share-Twitter{
-  background: rgba(29, 161, 242, .1);
+  background: rgba(29, 161, 242, .1) !important;
   color: #1da1f2 !important;
   border: 2px solid #fff;
   transition: all .30s linear;
 }
 .Share-Twitter:hover{
-  border-color:  rgba(29, 161, 242, .1);
+  border-color:  rgba(29, 161, 242, .1) !important;
   background-color: transparent;
 }
 .Share-Linkedin{
-  background: rgba(10, 102, 194, .1);
+  background: rgba(10, 102, 194, .1) !important;
   color: #0a66c2 !important;
   border: 2px solid #fff;
   transition: all .15s linear;
 }
 .Share-Linkedin:hover{
-  border-color:  rgba(10, 102, 194, .1);
+  border-color:  rgba(10, 102, 194, .1) !important;
   background-color: transparent;
 }
 .Share-Instagram{
-  background: rgba(195, 42, 163, .1);
+  background: rgba(195, 42, 163, .1) !important;
   color: #c32aa3 !important;
   border: 2px solid #fff;
   transition: all .15s linear;
 }
 .Share-Instagram:hover{
-  border-color:  rgba(195, 42, 163, .1);
+  border-color:  rgba(195, 42, 163, .1) !important;
   background-color: transparent;
 }
 .Share-Profile{
-  background: rgba(0, 206, 97, .1);
-  color: #00b601 !important;
+  background: rgba(0, 206, 97, .1) !important;
+  color: #0ecd68 !important;
   border: 2px solid #fff;
   transition: all .15s linear;
 }
 .Share-Profile:hover{
-  border-color:  rgba(0, 206, 97, .1);
+  border-color:  rgba(0, 206, 97, .1) !important;
   background-color: transparent;
 }
 .Share-Link:hover{
@@ -5022,7 +5022,7 @@ border-top: none;
   .ModalShare-Body .Share-Link{
     width: 55px;
     height: 55px;
-    font-size: 24px;
+    font-size: 24px !important;
     line-height: 48px;
   }
   .ModalShare-CopyLink{

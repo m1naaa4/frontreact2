@@ -4908,7 +4908,7 @@ border-top: none;
   width: 60px;
   height: 60px;
   text-align: center;
-  font-size: 24px;
+  font-size: 24px !important;
   line-height: 58px;
   border-radius: 50%;
 }
@@ -4925,7 +4925,7 @@ border-top: none;
   right: 20px;
 }
 .Share-Facebook{
-  background: rgba(24, 119, 242, .1);
+  background: rgba(24, 119, 242, .1) !important;
   border: 2px solid #fff;
   color: #1877f2 !important;
   transition: all .30s linear;
@@ -4935,7 +4935,7 @@ border-top: none;
   background-color: transparent;
 }
 .Share-Twitter{
-  background: rgba(29, 161, 242, .1);
+  background: rgba(29, 161, 242, .1) !important;
   color: #1da1f2 !important;
   border: 2px solid #fff;
   transition: all .30s linear;
@@ -4945,7 +4945,7 @@ border-top: none;
   background-color: transparent;
 }
 .Share-Linkedin{
-  background: rgba(10, 102, 194, .1);
+  background: rgba(10, 102, 194, .1) !important;
   color: #0a66c2 !important;
   border: 2px solid #fff;
   transition: all .15s linear;
@@ -4955,7 +4955,7 @@ border-top: none;
   background-color: transparent;
 }
 .Share-Instagram{
-  background: rgba(195, 42, 163, .1);
+  background: rgba(195, 42, 163, .1) !important;
   color: #c32aa3 !important;
   border: 2px solid #fff;
   transition: all .15s linear;
@@ -4965,7 +4965,7 @@ border-top: none;
   background-color: transparent;
 }
 .Share-Profile{
-  background: rgba(0, 206, 97, .1);
+  background: rgba(0, 206, 97, .1) !important;
   color: #0ecd68 !important;
   border: 2px solid #fff;
   transition: all .15s linear;
