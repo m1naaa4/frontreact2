@@ -107,8 +107,8 @@ function HeaderProfile() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                    <li className="Nav-Item Active-Nav"><Link to={`/project/lists`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></Link></li>
-                                    <li className="Nav-Item"><a href="bailleur-de-fonds"className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="donor"/></a></li>
+                                    <li className="Nav-Item Active-Nav"><Link to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></Link></li>
+                                    <li className="Nav-Item Active-Nav"><Link to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </Link></li>
                                     <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="accompanyingPerson"/></a></li>
                                     </ul>
                                 </div>
@@ -120,7 +120,7 @@ function HeaderProfile() {
                                         <div className="Dadupa-Popup-DropDown">
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><Link to={`/project/create`} onClick={clearProject}><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></Link></li>
-                                            <li className="Mini-Profile-Item"><a href="new-bailleur-offer"><i className="uil uil-briefcase-alt"></i> <Text tid="header.menu.finance"/></a></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/funder/create`} onClick={clearProject}><i className="uil uil-briefcase-alt"></i> Funder</Link></li>
                                             <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i> <Text tid="header.menu.mentoring"/></a></li>
                                             </ul>
                                         </div>
@@ -151,7 +151,7 @@ function HeaderProfile() {
                                             <span className="">{userProfile.name}</span>
                                             </li>
                                             <li className="profile-arrow"><i className="uil uil-angle-down"></i></li>
-                                        </ul>
+                                        </ul> 
                                         <div className="Dadupa-Mini-Profile">
                                             <label className="Mini-Profile-Name">{userProfile.name}</label>
                                             <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>

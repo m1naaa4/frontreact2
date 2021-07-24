@@ -7,6 +7,7 @@ import {Gaurd} from './Gaurd'
 import ProjectListPrivateRoutes from "./routes/ProjectListPrivateRoutes";
 import ProfilePrivateRoute from "./routes/ProfilePrivateRoutes";
 import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
+import FundersPrivateRoutes from './routes/FundersPrivateRoutes';
 import NotFound from './pages/404';
 import Opps from './pages/500';
 
@@ -24,6 +25,7 @@ const Routes = (props) => {
                         <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
                         <Gaurd  path="/profile" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
                         <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
+                        <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                 
                         <Route exact path="/oops" component={Opps} />
 

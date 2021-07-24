@@ -115,6 +115,14 @@ const en = {
     'comments' : 'Comment',
     or_copy_link : 'Or copy link',
     share : 'Share',
+    'funder.form.proposition' : 'Je propose également du mentorat',
+    'funder.form.you_are' : 'Vous êtes ?',
+    'funder.form.you_are.business_angle' : 'Business Angel',
+    'funder.form.you_are.fonds' : 'Fonds d\'investissement',
+    'funder.form.you_are.corporate' : 'Corporate',
+    'funder.form.financement' : 'Capacité de financement',
+    'funder.form.date' : 'Date limite de candidature',
+    url: 'URL',
 
 
 

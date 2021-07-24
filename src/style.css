@@ -2213,7 +2213,7 @@ border-top: none;
 ########
 */
 
-#form-wizard{
+#form-wizard, .form-wizard{
   margin-top: 35px;
   position: relative;
 }
@@ -6675,4 +6675,7 @@ border-top: none;
 }
 button .spinner-border{
   margin-left: 6px;
+}
+.react-datepicker-wrapper{
+  width: 100%;
 }
