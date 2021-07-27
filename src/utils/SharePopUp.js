@@ -1,4 +1,4 @@
-import React from "react";
+import React, {  useState} from 'react'
 import { useTranslation } from 'react-i18next';
 import {
     FacebookShareButton,
@@ -10,32 +10,46 @@ import Modal from 'react-bootstrap/Modal'
 
 function SharePopUp (props){
     const { t } = useTranslation();
-        
+    const url = props.url+'?share=';
+
+    const handleClose = () => props.handleOpen(false);
+
+    const copy = ( e) => {
+        e.preventDefault();
+        const el = document.createElement("input");
+        el.value = props.url+'?share=link';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+    }
+ 
+
     return (
-        <Modal show={props.open} contentClassName='ModalShare-Content' animation={true}>
+        <Modal show={props.open} contentClassName='ModalShare-Content' animation={true} onHide={handleClose}>
                 <Modal.Header className="ModalShare-Header" closeButton>
-                    <Modal.Title className="ModalShare-Title" id="exampleModalLongTitle">{t('share')}</Modal.Title>
+                    <Modal.Title className="ModalShare-Title">{t('share')}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body className="ModalShare-Body">
                 <ul className="Share-Items">
                         <li className="Share-Item">
-                            <LinkedinShareButton url={props.url} className="Share-Link Share-Linkedin" >
+                            <LinkedinShareButton url={url+'linkedin'} className="Share-Link Share-Linkedin" >
                                 <i className="uil uil-linkedin-alt"></i>
                             </LinkedinShareButton>
                         </li>  
                         <li className="Share-Item">
-                            <FacebookShareButton url={props.url} className="Share-Link Share-Facebook" >
+                            <FacebookShareButton url={url+'facebook'} className="Share-Link Share-Facebook" >
                                 <i className="uil uil-facebook-f"></i>
                             </FacebookShareButton>
                         </li>  
                         <li className="Share-Item">
-                            <TwitterShareButton url={props.url} className="Share-Link Share-Twitter" >
+                            <TwitterShareButton url={url+'twitter'} className="Share-Link Share-Twitter" >
                                 <i className="uil uil-twitter"></i>
                             </TwitterShareButton>    
                         </li>  
                         {/* <li className="Share-Item">
-                            <InstapaperShareButton url={props.url} className="Share-Link Share-Instagram" >
+                            <InstapaperShareButton url={url+'instagram'} className="Share-Link Share-Instagram" >
                                 <i className="uil uil-instagram"></i>
                             </InstapaperShareButton>
                         </li>   */}
@@ -45,8 +59,8 @@ function SharePopUp (props){
                     <div className="ModalShare-CopyLink">
                         <h5>{t('or_copy_link')}</h5>
                         <form data-copy='true'>
-                            <input type="text" value={props.url} data-click-select-all />
-                            <button type="submit" name="button"><i className="uil uil-copy"></i></button>
+                            <input type="text" value={url+'link'}/>
+                            <button onClick={copy} name="button"><i className="uil uil-copy"></i></button>
                         </form>
                     </div>
                 </Modal.Body>            
