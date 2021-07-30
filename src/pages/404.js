@@ -6,7 +6,7 @@ import Footer from "../layout/footer/footer";
 function NotFound(props) {
     return (
         <div>
-            {props.header == "show" && <HeaderLogo/>}
+            {props.header === "show" && <HeaderLogo/>}
         
             <div className="Dadupa-Login">
                 <div className="container">
@@ -27,7 +27,7 @@ function NotFound(props) {
                     </div>
                 </div>
             </div>
-            {props.header == "show" && <Footer/>}
+            {props.header === "show" && <Footer/>}
             
 
         </div>

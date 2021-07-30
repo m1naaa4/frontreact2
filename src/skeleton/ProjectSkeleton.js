@@ -19,7 +19,7 @@ const ProjectSkeleton  = () =>{
                                 <span><Skeleton height={25} width={100} /></span>
                             </div>
                             <div className="offer-logo">
-                                <Skeleton variant="circle" height={60} width={45} />
+                                <Skeleton variant="rect" height={45} width={45} />
                                 {/*<img src="/assets/images/porject-logo.png" title="Nom du projet" alt=""/>*/}
                             </div>
                         </div>
@@ -53,14 +53,14 @@ const ProjectSkeleton  = () =>{
                         <div className="offer-reactions">
                             <ul className="reactions-box">
                                 <li className="reaction likes"><i className="uil uil-thumbs-up"></i>
-                                    <span>145</span></li>
+                                    <span><Skeleton height={20} width={30} /></span></li>
                                 <li className="reaction views"><i className="uil uil-eye"></i>
-                                    <span>1500</span></li>
+                                    <span><Skeleton height={20} width={30} /></span></li>
                                 <li className="reaction comments"><i
-                                    className="uil uil-comment-dots"></i> <span>1.9K Comments</span>
+                                    className="uil uil-comment-dots"></i> <span><Skeleton height={20} width={80} /></span>
                                 </li>
                                 <li className="reaction shares"><i className="uil uil-share-alt"></i>
-                                    <span>380 Shares</span></li>
+                                    <span><Skeleton height={20} width={30} /></span></li>
                             </ul>
                         </div>
                     </div>

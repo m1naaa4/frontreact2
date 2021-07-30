@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
-import {  Link, useHistory, useParams  } from 'react-router-dom';
+import {  Link, NavLink, useHistory, useParams  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 import $ from "jquery";
@@ -107,8 +107,8 @@ function HeaderProfile() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                    <li className="Nav-Item Active-Nav"><Link to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></Link></li>
-                                    <li className="Nav-Item Active-Nav"><Link to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </Link></li>
+                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></NavLink></li>
+                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </NavLink></li>
                                     <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="accompanyingPerson"/></a></li>
                                     </ul>
                                 </div>
