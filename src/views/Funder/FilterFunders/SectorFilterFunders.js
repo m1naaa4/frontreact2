@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 
 const sectors = [
-    ['','filter.secteur'],
+    ['all','filter.secteur'],
     ['agroalimentaire','filter.secteur.agroalimentaire'],
     ['architecture','filter.secteur.architecture'],
     ['art','filter.secteur.art'],
@@ -31,11 +31,11 @@ const sectors = [
     ['other','filter.secteur.other'],
 ];
 
-function SectorDropFilterFunders ({ label, ...others }){
+function SectorFilterFunders ({ filter, ...others }){
     const { t, i18n } = useTranslation();
 
     return (
-        <select className="user-type" name="sector_id"  {...others} required={others.required && "required"}>
+        <select className="user-type" name="sector_id" defaultValue={filter.sector_id} {...others}>
             {sectors.map(([value, name]) => (
                 <option key={name} value={value}>{t(name)}</option>
             ))}
@@ -46,4 +46,4 @@ function SectorDropFilterFunders ({ label, ...others }){
     )
 }
 
-export default SectorDropFilterFunders;
+export default SectorFilterFunders;

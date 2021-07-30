@@ -6,7 +6,8 @@ import ProjectReducer  from '../reducers/User/Project/ProjectReducer'
 import GetProjectReducer  from '../reducers/User/Project/GetProjectReducer'
 import AddProjectReducer  from '../reducers/User/Project/AddProjectReducer'
 import uploadFileReducer from "./User/Project/UploadFileReducer";
-
+import CreateFunderReducer from './Funder/CreateFunderReducer'
+import FundersReducer from './Funder/FundersReducer'
 
 
 import AvatarReducer from './Post/AvatarReducer'
@@ -44,7 +45,10 @@ const RootReducer = combineReducers({
   offres:OffreReducer,
 
   conversations:ConversationsReducer,
-  messages:ConversationReducer
+  messages:ConversationReducer,
+
+  createFunder:CreateFunderReducer,
+  funders: FundersReducer, 
 })
 
 export default RootReducer

@@ -50,9 +50,6 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
         <>
             <div className="Page-Wrapper" >
                 <div className="container">
-                    <div className="page-header">
-                        <h3><Text tid="listproject" /></h3>
-                    </div>
                     <div>
                         <div className="Filter-Row">
                             <FilterProject

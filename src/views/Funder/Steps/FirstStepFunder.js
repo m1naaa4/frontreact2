@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 import $ from "jquery";
 import 'jquery-validation'
 import Spinner from 'react-bootstrap/Spinner'
-import ZoneDropFilterFunders from '../FilterFunders/ZoneDropFilterFunders';
-import SectorDropFilterFunders from '../FilterFunders/SectorDropFilterFunders';
+import ZoneFilterFunders from '../FilterFunders/ZoneFilterFunders';
+import SectorFilterFunders from '../FilterFunders/SectorFilterFunders';
 import DatePicker from "react-datepicker";
 import { CreateFunderAction } from '../../../store/actions/Funder/FunderActions'
 
@@ -82,16 +82,16 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
                                             <div className="col-md-12 input-row input-select">
                                                 <select className="bailleur-de-fonds" name="type" value={type} onChange={setForm}  required>
                                                     <option key='0' value='' >{ t('funder.form.you_are')}</option>
-                                                    <option key='1' value="1">{ t('funder.form.you_are.business_angle')}</option>
-                                                    <option key='2' value="2">{ t('funder.form.you_are.fonds')}</option>
-                                                    <option key='3' value="3">{ t('funder.form.you_are.corporate')}</option>
+                                                    <option key='1' value="business_angle">{ t('funder.form.you_are.business_angle')}</option>
+                                                    <option key='2' value="fonds">{ t('funder.form.you_are.fonds')}</option>
+                                                    <option key='3' value="corporate">{ t('funder.form.you_are.corporate')}</option>
                                                 </select>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <SectorDropFilterFunders value={sector_id} required={true} onChange={setForm} />
+                                                <SectorFilterFunders value={sector_id} required={true} onChange={setForm} />
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <ZoneDropFilterFunders field='project_area' name="zone" value={zone} required={true}  onChange={setForm}/>
+                                                <ZoneFilterFunders field='project_area' name="zone" value={zone} required={true}  onChange={setForm}/>
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="phone" onChange={setForm} value={phone} placeholder={t('phone')} className="wizard-required" required/>

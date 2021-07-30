@@ -838,7 +838,7 @@ label.error{
   color: #00b601;
   text-decoration: none;
 }
-.Dadupa-Nav .Active-Nav .Nav-Link{
+.Dadupa-Nav .Active-Nav.Nav-Link{
   color: #00b601;
 }
 .Dadupa-Nav .Nav-Link .uil{
@@ -2063,12 +2063,15 @@ border-top: none;
   font-weight: 900;
   margin-bottom: 2px;
 }
-.offer-title h3 a{
+.offer-title h3 a, .offer-title h3{
   color: #00b601;
   text-decoration: none;
   transition: all .20s cubic-bezier(.65,.05,.36,1);
 }
-.offer-box:hover .offer-title h3 a{
+.offer-title{
+  cursor: pointer;
+}
+.offer-box:hover .offer-title h3 a, .offer-box:hover .offer-title h3{
   color: #37474F;
 }
 .offer-box .offer-title span{

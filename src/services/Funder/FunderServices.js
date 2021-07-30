@@ -1,11 +1,10 @@
 import HttpService from '../HttpService';
 
-
+const base_route ="funders";
 export const FunderServices = (query, props, url) =>
 {
-   
     const http = new HttpService();
-    let searchProject = "funders"+url;
+    let searchProject = base_route+url;
    
     return http.postData(query,searchProject).then(data=>{
         // console.log(data)
@@ -26,12 +25,11 @@ export const UploadFileService = (formdata) =>
     });
 }
 
-export const LoadProject = (data, props, current) =>{
-
+export const Listing = (data, props, page_id) =>{
+    data.page = page_id
     const http = new HttpService();
-    let getProjectUrl = "project/getallProjects?page="+current;
     const tokenId = "user-token";
-    return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
+    return http.getRequest(data,base_route,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
         console.log(error)

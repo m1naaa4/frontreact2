@@ -2,6 +2,8 @@ import React from "react";
 import { useForm, useStep } from "react-hooks-helper";
 import FirstStepFunder from "./Steps/FirstStepFunder";
 import SecondStepFunder from "./Steps/SecondStepFunder";
+import ThirdStepFunder from "./Steps/ThirdStepFunder";
+import FinalStepFunder from "./Steps/FinalStepFunder";
 // import Step2View from "./Step/Step2View";
 // import Step3View from "./Step/Step3View";
 // import FinalView from "./Step/FinalView";
@@ -46,12 +48,12 @@ const MultiStepProjectFormFunder = ( props ) => {
     switch (id) {
         case "step1":
             return <FirstStepFunder {...data} />;
-         case "step2":
+        case "step2":
              return <SecondStepFunder {...data} />;
-        // case "step3":
-        //     return <Step3View {...data} />;
-        // case "final":
-        //     return <FinalView {...data} />;
+        case "step3":
+            return <ThirdStepFunder {...data} />;
+        case "final":
+             return <FinalStepFunder {...data} />;
         default:
             return null;
     }

@@ -122,7 +122,9 @@ const fr = {
     'funder.form.financement' : 'Capacité de financement',
     'funder.form.date' : 'Date limite de candidature',
     url: 'Site web',
-
+    'choose_file': 'Choisissez un fichier',
+    'filter.funder.type': 'Type de fonds',
+    'has_deadline': 'Il nya pas de deadline',
 
 };
 

@@ -3,11 +3,12 @@ import { useTranslation } from 'react-i18next';
 import countries from '../../../countries'
 
 
-function ZoneDropFilterFunders ({field, label, ...others }) {
+function ZoneFilterFunders ({filter, ...others }) {
     const { t, i18n } = useTranslation();
 
     return (
-        <select className="user-type" name={field} {...others} required={others.required && "required"}>
+        <select className="user-type" name="zone" {...others} defaultValue={filter.zone}>
+            <option key="all" value="all" >{t('localite')}</option>
             {countries.map((item) => (
                 <option key={item.value} value={item.value} >{item.label}</option>
             ))}
@@ -15,4 +16,4 @@ function ZoneDropFilterFunders ({field, label, ...others }) {
     )
 }
 
-export default ZoneDropFilterFunders;
+export default ZoneFilterFunders;

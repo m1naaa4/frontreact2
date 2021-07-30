@@ -16,7 +16,7 @@ const initState = {
               return {
                   ...state,
                   funder:action.res,
-                  projectid:action.res.project.id,
+                  funderId:action.res.project.id,
                   success:action.res.success,
               }
               case 'CLEAR_STATE_PROJECT_SUCCESS':
@@ -24,7 +24,7 @@ const initState = {
                     ...state,
                     funder:null,
                     getproject:null,
-                    projectid:null,
+                    funderId:null,
                 }
 
               case 'CREATE_FUNDER_ERROR':

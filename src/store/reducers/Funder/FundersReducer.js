@@ -1,36 +1,39 @@
 const initState = {
-    getproject: ''
+    data: '',
+    loading: true
 }
 
 
-const getProjectReducer = (state = initState ||undefined, action) => {
+const FundersReducer = (state = initState ||undefined, action) => {
 
     switch (action.type) {
-
-        case 'LOADING_GET_PROJECT':
+        case 'LOADING_ALL_FUNDERS':
             return {
                 ...state,
-                getproject: 'loading',
+                loading: true,
             }
-        case 'GET_PROJECT_SUCCESS':
+        case 'LOAD_FUNDER_ONCE_SUCCESS':
             return {
                 ...state,
-                getproject: action.res,
+                data: action.res,
+                loading: false,
                 countlike: action.res?.project?.likeCount,
                 countcomment: action.res?.project?.commentCount,
             }
 
-        case 'GET_PROJECT_ERROR':
+        case 'LOAD_FUNDER_ERROR':
 
             return {
                 ...state,
+                loading: false,
                 success: false,
             }
 
         case 'CODE_ERROR':
             return {
                 ...state,
-                getproject: 'there seems to be a problem please refresh your browser',
+                loading: false,
+                data: 'there seems to be a problem please refresh your browser',
             }
         default:
             return state
@@ -38,4 +41,4 @@ const getProjectReducer = (state = initState ||undefined, action) => {
     }
 }
 
-export default getProjectReducer;
+export default FundersReducer;

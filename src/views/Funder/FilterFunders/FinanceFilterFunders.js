@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 
 const finances = [
-    ['', 'filter.secteur.finance'],
+    ['all', 'filter.secteur.finance'],
     ['2500', 'filter.secteur.2500'],
     ['10000', 'filter.secteur.10000'],
     ['25000', 'filter.secteur.25000'],
@@ -13,11 +13,11 @@ const finances = [
     ['100000', 'filter.secteur.100000'],
 ];
 
-function FinanceDropFilterFunders ({ label, ...others }) {
+function FinanceFilterFunders ({ filter, ...others }) {
     const { t, i18n } = useTranslation();
 
     return (
-        <select className="user-type" name="funding_search"  {...others}  required={others.required && "required"}>
+        <select className="user-type" name="finances"  {...others} defaultValue={filter.finances}>
             {finances.map(([value, name]) => (
                 <option key={name} value={value}>{t(name)}</option>
             ))}
@@ -28,4 +28,4 @@ function FinanceDropFilterFunders ({ label, ...others }) {
     )
 }
 
-export default FinanceDropFilterFunders;
+export default FinanceFilterFunders;

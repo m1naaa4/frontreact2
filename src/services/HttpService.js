@@ -99,6 +99,16 @@ class HttpService {
     }
 
 
+    getRequest = async (item, url, tokenId = "") =>
+    {
+        item.user_id = localStorage.getItem('user_id');
+        return await axios({
+            method: 'GET',
+            url: "/" + url,
+            params: item
+        }).then(response => response.data)
+    }
+
 
 }
 

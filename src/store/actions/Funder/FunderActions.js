@@ -1,8 +1,7 @@
-import {GetMyProject, GetProject, FunderServices} from "../../../services/Funder/FunderServices";
+import {GetMyProject, GetProject, FunderServices, Listing} from "../../../services/Funder/FunderServices";
 
 
 export const CreateFunderAction = (data, props, url, navigation) =>{
-
     return (dispatch)=>{
 
         dispatch({type:'LOADING_CREATE_FUNDER'});
@@ -26,6 +25,30 @@ export const CreateFunderAction = (data, props, url, navigation) =>{
 
 }
 
+export const SaveDescriptionFunderAction = (data, props, url, navigation) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_CREATE_FUNDER'});
+
+        FunderServices(data, props, url, navigation).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'CREATE_FUNDER_SUCCESS',res});
+                    const { next } = navigation;
+                        next()
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'CREATE_FUNDER_ERROR',res})
+                }
+
+            },
+            error => {
+                dispatch({type:'CREATE_FUNDER_CODE_ERROR',error});
+            }
+        )
+    }
+}
+
+
 export const ClearProjectsAction = () =>{
 
     return (dispatch)=>{
@@ -33,6 +56,32 @@ export const ClearProjectsAction = () =>{
         dispatch({type:'CLEAR_STATE_PROJECT_SUCCESS'});
     }
 
+}
+
+export const GetFunders = (data, props, current) =>{
+
+    return (dispatch) =>
+    {
+        dispatch({type:'LOADING_ALL_FUNDERS'});
+        Listing(data,props, current).then((res)=>{
+
+            if(res.hasOwnProperty('success') && res.success === true){
+                dispatch({type:'LOAD_FUNDER_ONCE_SUCCESS', res});
+                /* if (res.filters == true) {
+                    dispatch({type:'LOAD_FUNDER_FILTERS_SUCCESS', res});
+                } */
+                
+            }
+            else if(res.hasOwnProperty('success') && res.success === false) {
+                dispatch({type:'LOAD_FUNDER_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
 }
 
 
