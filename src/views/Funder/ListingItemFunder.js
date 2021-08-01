@@ -4,29 +4,37 @@ import {Text} from "../../containers/Language";
 import { Player } from 'video-react';
 import VideoPlayer from 'simple-react-video-thumbnail'
 import SharePopUp from '../../utils/SharePopUp'
-import {countryName} from '../../helpers/Helpres'
+import { useHistory } from "react-router-dom";
 import config from '../../Config'
 import slugify from 'react-slugify';
-import { useHistory } from "react-router-dom";
+import {countryName, financeLabel, sectorName} from '../../helpers/Helpres'
+import { useTranslation } from 'react-i18next';
 
-const ProjectGridView = ({ project }) => {
+
+const ListingItemFunder = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     let history = useHistory();
-    let url_to_share = slugify(project.name, { prefix: config.urls.front+'/project/show/'+project.id });
+    const { t, i18n } = useTranslation();
 
-    const goToShowproject = (id) => {
-        history.push('/project/show/'+ id)
-     };
+    let url_to_share = slugify(project.name, { prefix: config.urls.front+'/funder/'+project.id });
+
+    const showPage = (id) => {
+         history.push('/funder/'+ id)
+    };
+
     return (
 
              <div className="offer-box">
                     <div className="offer-header">
-                        <div className="offer-title">
-                            <h3><NavLink to={`/project/show/${project.id}`}>{project.name}</NavLink></h3>
-                            <span>{project.sector}</span>
+                        <div className="offer-title" onClick={() => showPage(project.id) } >
+                            <h3>{project.name}</h3>
+                            <span>{t(sectorName(project.sector_id))}</span>
                         </div>
                         <div className="offer-logo">
-                            <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
+                            {/* <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
+                            {!project.date_limit && <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('has_deadline')}><i className="uil uil-bell"></i></label>}
+
+                            <img src={project.logo} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
                         </div>
                     </div>
                     <div className="offer-media">
@@ -48,34 +56,25 @@ const ProjectGridView = ({ project }) => {
                                     <img src="/assets/images/icons/marker.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
-                                    <span className="meta-title" onClick={() => goToShowproject(project.id) }><Text tid="targetAreas" /></span>
-                                    <span className="meta-value">{countryName(project.project_area)}</span>
+                                    <span className="meta-value">{countryName(project.zone)}</span>
                                 </div>
                             </li>
                             <li className="meta-item">
                                 <div className="meta-icon">
-                                    <img src="/assets/images/icons/cost.svg" alt=""/>
+                                    <img src="/assets/images/icons/value.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
-                                    <span className="meta-title"><Text tid="funding" /></span>
-                                    <span className="meta-value">{project.funding_search}</span>
+                                    <span className="meta-value">{ t(financeLabel(project.finances)) }</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     <div className="offer-reactions">
                         <ul className="reactions-box">
-                            <li className="reaction likes"><i className="dadupa-icon icon-clap"></i>
-                                <span>{project.likeCount}</span></li>
-                            <li className="reaction views"><i className="uil uil-eye"></i>
-                                <span>1500</span></li>
-                            <li className="reaction comments"><i
-                                className="uil uil-comment-dots"></i> <span>{project.commentCount}</span>
-                            </li>
-                            <li className="reaction shares" onClick={() => setShareUrl(true)}>
-                                <i className="uil uil-share-alt"></i>
-                                <span>380 Shares</span>
-                            </li>
+                            <li className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{project.likeCount}</span></li>
+                            <li className="reaction views"><i className="uil uil-eye"></i><span>{project.visit}</span></li>
+                            <li className="reaction comments"><i className="uil uil-comment-dots"></i> <span>{project.commentCount}</span></li>
+                            <li className="reaction shares" onClick={() => setShareUrl(true)}><i className="uil uil-share-alt"></i><span>{project.shared} {t('share')}</span></li>
                         </ul>
                     </div>
                     <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
@@ -84,4 +83,4 @@ const ProjectGridView = ({ project }) => {
     )
 }
 
-export default ProjectGridView;
+export default ListingItemFunder;

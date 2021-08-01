@@ -52,7 +52,7 @@ const ProjectSkeleton  = () =>{
                         </div>
                         <div className="offer-reactions">
                             <ul className="reactions-box">
-                                <li className="reaction likes"><i className="uil uil-thumbs-up"></i>
+                                <li className="reaction likes"><i className="dadupa-icon icon-clap"></i>
                                     <span><Skeleton height={20} width={30} /></span></li>
                                 <li className="reaction views"><i className="uil uil-eye"></i>
                                     <span><Skeleton height={20} width={30} /></span></li>

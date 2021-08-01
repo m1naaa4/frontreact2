@@ -12,7 +12,7 @@ import ZoneFilterFunders from './FilterFunders/ZoneFilterFunders';
 import SectorFilterFunders from './FilterFunders/SectorFilterFunders';
 import { useTranslation } from 'react-i18next';
 import NotFound from '../../pages/404';
-import ViewFunder from './ViewFunder';
+import ListingItemFunder from './ListingItemFunder';
 
 export default function ListingFunders(props) {
     const { t, i18n } = useTranslation();
@@ -26,7 +26,7 @@ export default function ListingFunders(props) {
     };
 
     const [filter, setFilter] = useForm(defaultFilter);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -46,17 +46,21 @@ export default function ListingFunders(props) {
             if (entries[0].isIntersecting && hasMore  ){  
               //  filterInput.filters = false;              
           //      dispatch(loadProjectAction( filterInput, props, current+1));
-                setIsLoading(true)
             }
         })
         if (node) observer.current.observe(node)
     }, [loading, hasMore])
 
     useEffect(() => {
-        if(!isLoading){
-           dispatch(GetFunders( filter, props, 1));
+        dispatch(GetFunders( filter, props, 1));
+    }, [dispatch]);
+
+    useEffect(() => {
+        if(projects.success === true){
+            setIsLoaded(true);
         }
-    }, [dispatch]);  
+
+    }, [projects])
 
     const handleFilter = (e) => {
         e.preventDefault();
@@ -100,7 +104,7 @@ export default function ListingFunders(props) {
                      <div className="offers-list">
                         <div className="row" >
                             {
-                                loading === true ? (
+                                !isLoaded ? (
                                     <ProjectSkeleton/>
                                 ) : projects.success === false ? (
                                     <Redirect to={{pathname: '/opps'}} />
@@ -118,25 +122,21 @@ export default function ListingFunders(props) {
                                                     if (projects.funders.data.length === index +1){
                                                         return (
                                                             <div  className="col-md-4" key={project.id} ref={lastProjectElementRef}>
-                                                                <ViewFunder project={project} />
+                                                                <ListingItemFunder project={project} />
                                                             </div>
                                                         )
 
                                                     }else{
                                                         return(
                                                             <div  className="col-md-4" key={project.id}>
-                                                                <ViewFunder  project={project} />
+                                                                <ListingItemFunder  project={project} />
                                                             </div>
 
                                                         )
                                                     }
                                                 })
                                             )
-                                        }else {
-                                            return (
-                                                <NotFound header="show" />
-                                            )
-                                        }  
+                                        }
                                     }
                                 )
                                 ()

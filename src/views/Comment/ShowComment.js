@@ -6,11 +6,11 @@ import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import {GetCommentAction} from "../../store/actions/Comment/CommentAction";
 import parse from 'html-react-parser';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
-
+import { useTranslation } from 'react-i18next';
 
 export default function ShowComment(comment, props) {
 
-    
+    const [t, i18n] = useTranslation();
     const dispatch = useDispatch();
     const project = useSelector(state => state.getproject);
     const [replies, SetReplies] = useState(false);
@@ -152,16 +152,15 @@ export default function ShowComment(comment, props) {
                                     
                             </div> */}
 
-                            <ul className="comment-actions-list">
+                          {/*   <ul className="comment-actions-list">
                                 <li className="comment-action">
-                                    {/* <button className="like-action">Lisdsdke</button> */}
                                     <button className={like ? 'like-action post-liked' : 'like-action'} 
                                             onClick={likeAAction} toggle="#password-field" type="button" name="button">
                                                 {like?"Dislikee":"Like"}
                                             </button>
                                 </li>
                                 <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.comment.user_name, e.keyCode)}>Reply</li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
 
@@ -188,7 +187,7 @@ export default function ShowComment(comment, props) {
                                         </div>
                                         <div className="comment-actions">
                                         <ul className="comment-actions-list">
-                                            <li className="comment-action"><button className="like-action">Like</button></li>
+                                            {/* <li className="comment-action"><button className="like-action">Like</button></li> */}
                                             {/* <li className="comment-action replay-action">Reply</li> */}
                                         </ul>
                                         </div>
@@ -212,7 +211,7 @@ export default function ShowComment(comment, props) {
                                         <span onClick={gotToProfile} style={{color: 'blue', textDecoration: 'underline'}}>{to}</span>
                                         <input type="text" name="body" defaultValue={body}
                                             onChange={e => setBody(e.target.value)} ref={refcomment}
-                                            placeholder="Write your comment"/>
+                                            placeholder={t('write_comment')}/>
                                     </div>
                                 </div>
                             </div>

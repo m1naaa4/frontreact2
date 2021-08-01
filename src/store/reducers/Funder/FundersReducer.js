@@ -21,6 +21,19 @@ const FundersReducer = (state = initState ||undefined, action) => {
                 countcomment: action.res?.project?.commentCount,
             }
 
+        case 'LOADING_GET_FUNDER':
+            return {
+                 ...state,
+                loading: true,
+        }
+
+        case 'GET_FUNDER_SUCCESS':
+            return {
+                 ...state,
+                data: action.res,
+                loading: false,
+        }
+        
         case 'LOAD_FUNDER_ERROR':
 
             return {

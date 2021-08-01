@@ -15,7 +15,7 @@ const initState = {
           case 'ADD_COMMENT_SUCCESS':
               return {
                   ...state,
-                  comment:action.res,
+                  comment:action.res.comment,
                   commentid:action.res.comment.id,
               }
 

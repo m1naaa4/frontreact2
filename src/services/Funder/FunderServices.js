@@ -24,6 +24,18 @@ export const UploadFileService = (formdata) =>
         return error;
     });
 }
+export const GetView = (id, props, current) =>{
+    const http = new HttpService();
+    let getProjectUrl = base_route+'/'+id;
+    const tokenId = "user-token";
+    return http.getRequest({},getProjectUrl,tokenId,'').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}
+
 
 export const Listing = (data, props, page_id) =>{
     data.page = page_id

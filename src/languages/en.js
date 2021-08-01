@@ -111,8 +111,8 @@ const en = {
     'form.add_url': "Add URL",
     'form.add_logo': "Add logo",
     'form.edit_logo': "Edit logo",
-
     'comments' : 'Comment',
+    'commenter' : 'Comment',
     or_copy_link : 'Or copy link',
     share : 'Share',
     'funder.form.proposition' : 'Je propose également du mentorat',
@@ -126,7 +126,13 @@ const en = {
     'choose_file': 'Choose file',
     'filter.funder.type': 'Type de fonds',
     'has_deadline': 'No deadline',
-
+    'postuler': 'Postuler',
+    'clap': 'Clap',
+    'tags': 'Tags',
+    'target_zone': 'Liuex ciblées',
+    'target_sector': 'Secteurs ciblées',
+    'published_at': 'Publié le',
+    'write_comment': 'Write your comment',
 
 
    // 'error.credentials' : "These credentials do not match our records.",

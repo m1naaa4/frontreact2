@@ -50,7 +50,7 @@ const ProjectSkeletonGrid  = () =>{
                         </div>
                         <div className="offer-reactions">
                             <ul className="reactions-box">
-                                <li className="reaction likes"><i className="uil uil-thumbs-up"></i>
+                                <li className="reaction likes"><i className="dadupa-icon icon-clap"></i>
                                     <span>145</span></li>
                                 <li className="reaction views"><i className="uil uil-eye"></i>
                                     <span>1500</span></li>

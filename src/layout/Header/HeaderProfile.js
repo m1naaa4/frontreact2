@@ -44,7 +44,7 @@ function HeaderProfile() {
         if(userProfile == ""){
             dispatch(loadUserAction());
 
-        dispatch( LoadNotificationAction());    
+            dispatch( LoadNotificationAction());    
         }
 
     }, [dispatch])
@@ -108,7 +108,7 @@ function HeaderProfile() {
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
                                     <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></NavLink></li>
-                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </NavLink></li>
+                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </NavLink></li>
                                     <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="accompanyingPerson"/></a></li>
                                     </ul>
                                 </div>

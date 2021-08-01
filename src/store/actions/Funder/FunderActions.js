@@ -1,4 +1,4 @@
-import {GetMyProject, GetProject, FunderServices, Listing} from "../../../services/Funder/FunderServices";
+import {GetMyProject, GetProject, FunderServices, Listing, GetView} from "../../../services/Funder/FunderServices";
 
 
 export const CreateFunderAction = (data, props, url, navigation) =>{
@@ -74,6 +74,31 @@ export const GetFunders = (data, props, current) =>{
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
                 dispatch({type:'LOAD_FUNDER_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+}
+
+export const GetFunder = (data, props, current) =>{
+
+    return (dispatch) =>
+    {
+        dispatch({type:'LOADING_GET_FUNDER'});
+        GetView(data,props, current).then((res)=>{
+
+            if(res.hasOwnProperty('success') && res.success === true){
+                dispatch({type:'GET_FUNDER_SUCCESS', res});
+                /* if (res.filters == true) {
+                    dispatch({type:'LOAD_FUNDER_FILTERS_SUCCESS', res});
+                } */
+                
+            }
+            else if(res.hasOwnProperty('success') && res.success === false) {
+                dispatch({type:'GET_FUNDER_ERROR',res})
             }
         },
         error=>{

@@ -9,6 +9,7 @@ body{
 .Dadupa-Page{
   background: #FCFCFC;
   padding-top: 70px;
+  padding-bottom: 50px;
 }
 .display-flex{
   display: flex;
@@ -6363,7 +6364,7 @@ border-top: none;
 }
 .icon-clap::before{
   content: "";
-  /* background: url('../public/assets/images/icons/dadupa-clap.svg') no-repeat; */
+  background: url('/assets/images/icons/dadupa-clap.svg') no-repeat;
   display: inline-block;
   width: 20px;
   height: 20px;
