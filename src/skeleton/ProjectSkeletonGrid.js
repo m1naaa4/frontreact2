@@ -8,63 +8,80 @@ import Skeleton from '@material-ui/lab/Skeleton';
 const ProjectSkeletonGrid  = () =>{
 
     return(
-        
-                <div className="col-md-12"  >
-                    <div className="offer-box">
-                        <div className="offer-header">
-                            <div className="offer-title">
-                                <h3><a href="#!" ><Skeleton height={30} width={200} /></a></h3>
-                                <span><Skeleton height={25} width={100} /></span>
-                            </div>
-                            <div className="offer-logo">
-                                <Skeleton variant="circle" height={60} width={45} />
-                                {/*<img src="/assets/images/porject-logo.png" title="Nom du projet" alt=""/>*/}
+        <div className="Single-Content">
+            <div className="row">
+                    <div className="col-md-8">
+                        <div className="single-header">
+                            <div className="single-offer-header">
+                                <h3 className="single-offer-name"><Skeleton height={20} width={200} /></h3>
                             </div>
                         </div>
-                        <div className="offer-media">
-                            <div className="player" >
-                                <Skeleton width={350} height={234}  />
+                        <div className="Company-Infos">
+                            <div className="Company-Left">
+                                <div className="single-offer-logo">
+                                    <Skeleton variant="rect" height={45} width={45} />
+                                </div>
+                                <div className="Company-Name"></div>
+                                <div className="Company-Email"><Skeleton height={20} width={200} /></div>
+                                <div className="Company-Addresse"><Skeleton height={20} width={200} /></div>
+                            </div>
+                            <div className="Company-Right">
+                                <div className="Company-Phone"><Skeleton height={20} width={100} /></div>
                             </div>
                         </div>
-                        <div className="offer-meta">
-                            <ul className="meta-items">
-                                <li className="meta-item">
-                                    <div className="meta-icon">
-                                        <Skeleton variant="circle" height={40} width={40} />
+                        <div className="Content-Wrap">
+                            <div className="Signle-Offer-Media">
+                                <Skeleton height={400}  /> 
+                            </div>
+            
+                            <div className="Signle-Offer-Content">
+                                <div className="reactions-wrap">
+                                    <div className="reactions-box">
+                                        
                                     </div>
-                                    <div className="meta-details">
-                                        <span className="meta-title"><Skeleton height={20} width={80} /></span>
-                                        <span className="meta-value"><Skeleton height={30} width={80} /></span>
-                                    </div>
-                                </li>
-                                <li className="meta-item">
-                                    <div className="meta-icon">
-                                        <Skeleton variant="circle" height={40} width={40} />
-                                    </div>
-                                    <div className="meta-details">
-                                        <span className="meta-title"><Skeleton height={20} width={80} /></span>
-                                        <span className="meta-value"><Skeleton height={30} width={80} /></span>
-                                    </div>
-                                </li>
-                            </ul>
+                                </div>
+                                <div className="reactions-buttons">
+                                    
+                                </div>
+                                <div className="Signle-Offer-Text">
+                                    <Skeleton height={20}  />
+                                    <Skeleton height={20}  />
+                                    <Skeleton height={20}  />
+                                    <Skeleton height={20} />
+                                    <Skeleton height={20} width={500} />
+                                </div>
+            
+                            </div>
                         </div>
-                        <div className="offer-reactions">
-                            <ul className="reactions-box">
-                                <li className="reaction likes"><i className="dadupa-icon icon-clap"></i>
-                                    <span>145</span></li>
-                                <li className="reaction views"><i className="uil uil-eye"></i>
-                                    <span>1500</span></li>
-                                <li className="reaction comments"><i
-                                    className="uil uil-comment-dots"></i> <span>1.9K Comments</span>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="Single-Offer-Details">
+                            <ul className="Offer-Details-List">
+                                <li className="Offer-Item">
+                                    <label> <Skeleton height={20} width={100}  /></label>
+                                    <span> <Skeleton height={20} width={150} /></span>
                                 </li>
-                                <li className="reaction shares"><i className="uil uil-share-alt"></i>
-                                    <span>380 Shares</span></li>
+                                <li className="Offer-Item">
+                                    <label> <Skeleton height={20} width={100}   /></label>
+                                    <span> <Skeleton height={20}  width={150} /></span>
+                                </li>
+                                <li className="Offer-Item">
+                                    <label> <Skeleton height={20} width={100}   /></label>
+                                    <span> <Skeleton height={20}  width={150} /></span>
+                                </li>
+                                <li className="Offer-Item">
+                                    <label> <Skeleton height={20} width={100}   /></label>
+                                    <span> <Skeleton height={20}  width={150} /></span>
+                                </li>
+                                <li className="Offer-Item">
+                                    <label> <Skeleton height={20} width={100}   /></label>
+                                    <span> <Skeleton height={20}  width={150} /></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                </div>
-
-            
+             </div>
+        </div>   
     )
 }
 export default ProjectSkeletonGrid

@@ -97,51 +97,51 @@ const ViewFunder = (props) => {
                             </div>
             
                             <div className="Content-Wrap">
-                            <div className="Signle-Offer-Media">
-                                {
-                                        project.is_video ? (
-                                        <Player width="100%" height="100%"
-                                            playsInline
-                                            poster="/assets/poster.png"
-                                            src={project.media_link}
-                                        />) : (<img width="100%" className="img-fluid" src={project.media_link} alt={project.name}/>)
-                                }    
-                            </div>
-            
-                            <div className="Signle-Offer-Content">
-                                <div className="reactions-wrap">
-                                    <div className="reactions-box">
-                                        <div className="row">
-                                        <div className="col-6 col-md-4 col-lg-6">
-                                            <div className="reaction likes"><i className="dadupa-icon icon-clap"></i> <span>{likeCount}</span></div>
-                                            <div className="reaction views"><i className="uil uil-eye"></i> <span>{project.visit}</span></div>
-                                        </div>
-                                        <div className="col-6 col-md-8 col-lg-6 text-right">
-                                            <div className="reaction comments"><span>{project.commentCount} {t('comments')}</span></div>
-                                            <div className="reaction shares"><span>{project.shared} {t('share')}</span></div>
-                                        </div>
+                                <div className="Signle-Offer-Media">
+                                    {
+                                            project.is_video ? (
+                                            <Player width="100%" height="100%"
+                                                playsInline
+                                                poster="/assets/poster.png"
+                                                src={project.media}
+                                            />) : (<img width="100%" className="img-fluid" src={project.media} alt={project.name}/>)
+                                    }    
+                                </div>
+                
+                                <div className="Signle-Offer-Content">
+                                    <div className="reactions-wrap">
+                                        <div className="reactions-box">
+                                            <div className="row">
+                                            <div className="col-6 col-md-4 col-lg-6">
+                                                <div className="reaction likes"><i className="dadupa-icon icon-clap"></i> <span>{likeCount}</span></div>
+                                                <div className="reaction views"><i className="uil uil-eye"></i> <span>{project.visit}</span></div>
+                                            </div>
+                                            <div className="col-6 col-md-8 col-lg-6 text-right">
+                                                <div className="reaction comments"><span>{project.commentCount} {t('comments')}</span></div>
+                                                <div className="reaction shares"><span>{project.shared} {t('share')}</span></div>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div className="reactions-buttons">
+                                        <button className={isLike ? "reaction-button reaction-like reaction-clicked post-liked" : "reaction-button reaction-like " } onClick={likeClick} type="button" name="button">
+                                            <img src="/assets/images/icons/dadupa-like.svg" alt="" />
+                                            {t('clap')}
+                                        </button>
+                                        <a className="reaction-button reaction-comment" href="#Comments-Wrap">
+                                            <img src="/assets/images/icons/dadupa-comment.svg" alt="" />
+                                            {t('commenter')}
+                                        </a>
+                                        <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
+                                            <img src="/assets/images/icons/dadupa-share.svg" alt="" />
+                                            {t('share')}
+                                        </button>
+                                    </div>
+                                    <div className="Signle-Offer-Text">
+                                        {project.description &&  parse(project.description)}
+                                    </div>
+                
                                 </div>
-                                <div className="reactions-buttons">
-                                    <button className={isLike ? "reaction-button reaction-like reaction-clicked post-liked" : "reaction-button reaction-like " } onClick={likeClick} type="button" name="button">
-                                        <img src="/assets/images/icons/dadupa-like.svg" alt="" />
-                                        {t('clap')}
-                                    </button>
-                                    <a className="reaction-button reaction-comment" href="#Comments-Wrap">
-                                        <img src="/assets/images/icons/dadupa-comment.svg" alt="" />
-                                        {t('commenter')}
-                                    </a>
-                                    <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
-                                        <img src="/assets/images/icons/dadupa-share.svg" alt="" />
-                                        {t('share')}
-                                    </button>
-                                </div>
-                                <div className="Signle-Offer-Text">
-                                    {project.description &&  parse(project.description)}
-                                </div>
-            
-                            </div>
                             </div>
             
                             {project.id && <Comments  provider_id={project.id} provider="funder" />}

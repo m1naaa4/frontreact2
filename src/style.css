@@ -3309,6 +3309,7 @@ border-top: none;
   background: #F8FBFC;
   padding: 12px;
   border-radius: 15px;
+  margin-bottom: 20px;
 }
 .Comment-User-Name{
   height: 25px;
@@ -6682,4 +6683,8 @@ button .spinner-border{
 }
 .react-datepicker-wrapper{
   width: 100%;
+}
+.MuiSkeleton-text{
+  transform: none !important;
+  margin-bottom: 20px !important;
 }

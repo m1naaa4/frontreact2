@@ -31,11 +31,11 @@ const sectors = [
     ['other','filter.secteur.other'],
 ];
 
-function SectorFilterFunders ({ filter, ...others }){
+function SectorFilterFunders ({ sector_id, ...others }){
     const { t, i18n } = useTranslation();
 
     return (
-        <select className="user-type" name="sector_id" defaultValue={filter.sector_id} {...others}>
+        <select className="user-type" name="sector_id" defaultValue={sector_id} {...others}>
             {sectors.map(([value, name]) => (
                 <option key={name} value={value}>{t(name)}</option>
             ))}

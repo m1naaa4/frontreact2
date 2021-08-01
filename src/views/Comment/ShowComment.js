@@ -117,7 +117,7 @@ export default function ShowComment(comment, props) {
                         <ul className="comment-reactions-list">
                             <li className="comment-reaction"><img
                                 src="assets/images/icons/dadupa-like.svg" alt=""/></li>
-                            <label className="count-reactions">{likeCount}</label>
+                            {/* <label className="count-reactions">{likeCount}</label> */}
                         </ul>
                     </div>
                     <div className="Comment-Col-10">

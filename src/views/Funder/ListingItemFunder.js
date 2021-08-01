@@ -44,9 +44,9 @@ const ListingItemFunder = ({ project }) => {
                                 <Player width="100%" height="100%"
                                     playsInline
                                     poster="/assets/poster.png"
-                                    src={project.media_link}
+                                    src={project.medi}
                                 />
-                                ) : (<img width="100%" height="300" src={project.media_link} alt="Project"/>)
+                                ) : (<img width="100%" height="300" src={project.media} alt="Project"/>)
                         } 
                     </div>
                     <div className="offer-meta">
