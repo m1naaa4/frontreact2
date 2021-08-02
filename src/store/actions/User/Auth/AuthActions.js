@@ -12,7 +12,6 @@ export const signUpAction = (credentials,props) =>
          dispatch({type:'LOADING_LOAD_USER'});
 
         SignUpService(credentials).then((res)=>{
-
             if(res.hasOwnProperty('success') && res.success===true &&  res.hasOwnProperty('token')){
 
                 localStorage.setItem('user-token','Bearer '+res.token);
@@ -22,7 +21,7 @@ export const signUpAction = (credentials,props) =>
                 dispatch({type:'LOGIN_SUCCESS', res});
                 dispatch({type:'LOAD_USER_SUCCESS',res});
                 setTimeout(() => {
-                    // props.history.push("/project/lists");
+                    props.history.push("/profile/"+res.user.profile_id);
                     dispatch({type:'RESTART_AUTH_RESPONSE'});
                 }, 10);
 

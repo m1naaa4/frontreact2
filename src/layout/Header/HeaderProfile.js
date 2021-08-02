@@ -147,9 +147,9 @@ function HeaderProfile() {
                                             <li className="profile-image">
                                             <img src={userProfile.profile.avatar_link} alt="avatar" />
                                             </li>
-                                            <li className="profile-name">
+                                            {/* <li className="profile-name">
                                             <span className="">{userProfile.name}</span>
-                                            </li>
+                                            </li> */}
                                             <li className="profile-arrow"><i className="uil uil-angle-down"></i></li>
                                         </ul> 
                                         <div className="Dadupa-Mini-Profile">
