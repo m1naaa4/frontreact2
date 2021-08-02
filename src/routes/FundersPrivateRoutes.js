@@ -1,14 +1,12 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from "../layout/Header/HeaderProfile";
-import ShowProjectView from '../views/Project/ShowProjectView';
-import ListProjectPage from '../pages/User/Project/ListProjectPage';
 import ListingFunders from '../views/Funder/ListingFunders'
-import UpdateProjectPage from '../pages/User/Project/UpdateProjectPage';
 import Footer from "../layout/footer/footer";
 import NotFound from '../pages/404';
 import CreateFunder from '../views/Funder/CreateFunder';
 import ViewFunder from '../views/Funder/ViewFunder';
+import UpdateFunder from '../views/Funder/UpdateFunder';
 
 
 export default function FundersRoutes(props) {
@@ -32,11 +30,11 @@ export default function FundersRoutes(props) {
                         <Redirect to={{pathname: `${props.match.path}/:id` }} />
                     )} />
 
-                    {/*
-                    <Route exact path={`${props.match.path}/update/:id`}  component = {UpdateProjectPage} />
+                    
+                    <Route exact path={`${props.match.path}/update/:id`}  component = {UpdateFunder} />
                     <Route exact path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/update/:id` }} />
-                    )} /> */}
+                    )} />
 
                     <Route component={NotFound} header="false" />
                 </Switch>

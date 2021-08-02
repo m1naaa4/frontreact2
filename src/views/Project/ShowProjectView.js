@@ -190,7 +190,7 @@ export default function ShowProjectView(props) {
                                                 </div>
                                                 <div className="col-6 col-md-8 col-lg-6 text-right">
                                                     <div className="reaction comments"><span>{countcomment} Comments</span></div>
-                                                    <div className="reaction shares"><span>380 Shares</span></div>
+                                                    <div className="reaction shares"><span>Shares</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,11 +229,11 @@ export default function ShowProjectView(props) {
                                     {/* <NavLink 
                                         title="Edit Post"  className="edit-button" to={`update/${data.project_id}`}><i className="uil uil-pen"></i></NavLink> */}
                                 </div>
-                                <div className="Send-Message">
+                                {/* <div className="Send-Message">
                                     <button className="Button-Send" type="button" name="button" data-toggle="tooltip"
                                             data-placement="bottom" title="Send a message">
                                         <span>Envoyer un message</span> <i className="uil uil-message"></i></button>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="Single-Offer-Details">
                                 <ul className="Offer-Details-List">

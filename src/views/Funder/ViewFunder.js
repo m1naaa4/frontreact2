@@ -60,6 +60,10 @@ const ViewFunder = (props) => {
         }
     }
 
+    const goToEdit = () => {
+        history.push('/funder/update/'+params.id)
+    }
+
     return (
         <div className="Single-Wrapper">
             <div className="container">
@@ -151,7 +155,7 @@ const ViewFunder = (props) => {
                             <div className="Post-Actions">
                                 {project.is_author && 
                                     <div className="Update-Post">
-                                        <button type="button" name="button"  data-toggle="tooltip" data-placement="bottom" title="Edit Post" className="edit-button"><i className="uil uil-pen"></i></button>
+                                        <button type="button" name="button" onClick={goToEdit}  data-toggle="tooltip" data-placement="bottom" title="Edit Post" className="edit-button"><i className="uil uil-pen"></i></button>
                                     </div>
                                 }
                             
