@@ -10,7 +10,7 @@ class HttpService {
 
         const requestOptions = this.postRequestOptions(token, item);
 
-        return fetch(this.url + "/" + added_url, requestOptions).then(
+        return fetch( "/" + added_url, requestOptions).then(
             response => response.json());
     }
 
