@@ -4,7 +4,6 @@ axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.headers.post['Accept'] = 'application/json';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 const dev = {
     urls: {
