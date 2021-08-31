@@ -145,7 +145,10 @@ function HeaderProfile() {
                                     <div className="Dadupa-User" onClick={userMenu}>
                                         <ul className="Dadupa-User-Infos">
                                             <li className="profile-image">
-                                            <img src={userProfile.profile.avatar_link} alt="avatar" />
+                                                {userProfile.profile.avatar_link ? 
+                                                    <img src={userProfile.profile.avatar_link} alt="avatar" />    
+                                                : <img src="/assets/images/avatar.png" alt="avatar" />}
+                                            
                                             </li>
                                             {/* <li className="profile-name">
                                             <span className="">{userProfile.name}</span>
