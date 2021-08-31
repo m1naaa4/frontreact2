@@ -39,7 +39,6 @@ export default function CvView(props) {
       dispatch(CvdeleteAction(data, '', ''));
     }
 
-    console.log('i am here now')
     return (
         
         <div className="col-md-6">
@@ -75,7 +74,7 @@ export default function CvView(props) {
                 <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i> Etudes</h3>
                 <ul className="Section-Items">
                     {cvtheque?.etudes &&
-                        cvtheque.etudes.map((study, index) => (
+                        cvtheque?.etudes.map((study, index) => (
                         <div key={index}>
                             <StudieGrid study={study}/>
                         </div>     

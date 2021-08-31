@@ -139,8 +139,8 @@ export default function ShowComment(comment, props) {
                         </div>
                         <div className="comment-actions">
                             
-                            {/* <div className="comment-actions multi-options">
-                            { comment.comment.replies.data.length > 0 && ( 
+                            <div className="comment-actions multi-options">
+                            {/* { comment.comment.replies.data.length > 0 && ( 
                                      <div className="comment-replies-count" onClick={showReplies}>
                                          <button className="comment-replies-button" type="button" name="button">
                                         <i className="uil uil-comment-notes"></i> 
@@ -148,11 +148,11 @@ export default function ShowComment(comment, props) {
                                         <span> Replies</span>
                                         </button>
                                     </div>
-                                )}
+                                )} */}
                                     
-                            </div> */}
+                            </div>
 
-                          {/*   <ul className="comment-actions-list">
+                            <ul className="comment-actions-list">
                                 <li className="comment-action">
                                     <button className={like ? 'like-action post-liked' : 'like-action'} 
                                             onClick={likeAAction} toggle="#password-field" type="button" name="button">
@@ -160,7 +160,7 @@ export default function ShowComment(comment, props) {
                                             </button>
                                 </li>
                                 <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.comment.user_name, e.keyCode)}>Reply</li>
-                            </ul> */}
+                            </ul>
                         </div>
                     </div>
 

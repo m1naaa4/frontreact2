@@ -73,13 +73,13 @@ export default function SideRightSettingView(props) {
                         </Modal>
                       <div className="form-row">
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="Iya Abbass" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" value={infoprofile.name} placeholder="first name" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="Salaheddine" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" value={infoprofile.name} placeholder="last name" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" defaultValue="" placeholder="@salaheddine1" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="pseudo" className="wizard-required" readOnly />
                         </div>
 
                         <div className="col-md-6 input-row">

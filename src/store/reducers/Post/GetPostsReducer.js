@@ -42,7 +42,7 @@ const initState = {
                 
                 let idd = window.location.href.split("/").pop();
                 console.log('action.feed', action.res.post?.profile_id, idd)
-                if (action.res.post?.profile_id === idd) {
+                if (action.res.post?.profile_id === idd || action.res.post?.profile_id+'#' === idd) {
                     state.posts = [action.res.post, ...state.posts];
                 }     
                 return {

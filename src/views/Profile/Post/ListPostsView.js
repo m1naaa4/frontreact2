@@ -15,7 +15,7 @@ export default function ListPostsView() {
     const params = useParams();
 
     const dispatch = useDispatch();
-    const observer = useRef()
+    const observer = useRef();
 
     const data = {
         action: 'getPosts',

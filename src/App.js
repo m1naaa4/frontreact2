@@ -27,41 +27,41 @@ function App() {
                                 
     }); 
 
-    pusher.echo.private("newNotification").listen(".notification", data => {
+    // pusher.echo.private("newNotification").listen(".notification", data => {
         
-        console.log("newNotification--------------");
-        console.log(data);
-        dispatch({type:'LIKED_SUCCESS', res : data});
-    })
+    //     console.log("newNotification--------------");
+    //     console.log(data);
+    //     dispatch({type:'LIKED_SUCCESS', res : data});
+    // })
 
-    pusher.echo.private("App.Models.User."+ user_id)
-    .notification((notification) => {
-        dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
-    });
+    // pusher.echo.private("App.Models.User."+ user_id)
+    // .notification((notification) => {
+    //     dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
+    // });
 
     pusher.echo.private("new_post").listen(".newpost", data => {
         
-        // console.log(data);
+        console.log(data);
         dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', res : data});
     })
 
-    pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
-        audio.play();
-        dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
-    }).listenForWhisper('typing', (e) => {
-        console.log(e)
-        if(e.user.id===user_id){
+//     pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
+//         audio.play();
+//         dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
+//     }).listenForWhisper('typing', (e) => {
+//         console.log(e)
+//         if(e.user.id===user_id){
 
-            this.typingFriend=e.user;
+//             this.typingFriend=e.user;
 
-          if(this.typingClock) clearTimeout();
+//           if(this.typingClock) clearTimeout();
 
-            this.typingClock=setTimeout(()=>{
-                                  this.typingFriend={};
-                              },9000);
-        }
+//             this.typingClock=setTimeout(()=>{
+//                                   this.typingFriend={};
+//                               },9000);
+//         }
 
-  });    
+//   });    
 
     
     return (

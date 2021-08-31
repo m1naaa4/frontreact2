@@ -4,7 +4,7 @@ import { useForm } from "react-hooks-helper";
 import Moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
-import { CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
+import { CvdeleteAction, CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
 import moment from 'moment';
 
 
@@ -45,12 +45,28 @@ const  StudieGrid = ({study}) => {
   const UpdateStudies =(id) =>{
     dispatch(CvUpdateAction(data, '', ''));
   }
+
+  const deleteStudy =() =>{
+    let data = {
+      studies : {index : study.index}
+        }
+    dispatch(CvdeleteAction(data, '', ''));
+  }
     return (    
       <>
         <li className="Section-Item">
                     <label>{moment(study.datefin).format('y')} - {study.diplome}</label>
                     <span>{study.lieu}</span>
-                    <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
+                    <div>
+                      <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
+                      <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button>
+                    <li className="Profile-Skills">
+                      
+                    </li>
+                    </div>
+                    
+                    
+                    
                     <div className="CollapsUpdate" style={{display:show?'block':'none'}}>
                         
                       <form className="" action="index.html" method="post">
