@@ -1,0 +1,15 @@
+# first building react project, using node base image
+FROM node:15.11.0-alpine as build-stage
+
+# setting working dir inside container
+WORKDIR /react-app
+
+# required to install packages
+COPY /react-app/package.*json ./
+
+RUN npm install
+
+# installing npm packages
+ENV REACT_APP_NAME=abdelkrim
+
+CMD ["nginx", "start"]

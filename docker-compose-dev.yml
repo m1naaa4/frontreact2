@@ -2,7 +2,7 @@ version: "3"
 
 
 networks :
-  frontend:
+  frontend_dev:
 
   dockergateway_backend_auth:
     external: true
@@ -12,10 +12,13 @@ services:
   frontend_nginx: 
     build: 
       context: .
-      dockerfile: Dockerfile
-    container_name: frontend_nginx
+      dockerfile: Dockerfile.dev
+    container_name: frontend_nginx_dev
     ports:
-      - "3000:80"
+      - "3001:3000"
+    
     networks: 
-      - frontend
+      - frontend_dev
       - dockergateway_backend_auth
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
