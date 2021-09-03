@@ -87,7 +87,10 @@ export default function AddComment({post}) {
             <form className="Comment-Writing" onSubmit={ handleSubmitValue}>
                 <div className="Comment-Col-2">
                     <Link className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id} >
-                        <img src={user_visiter_avatar} alt="avatar" />
+                        {/* <img src={user_visiter_avatar} alt="avatar" /> */}
+                        {user_visiter_avatar ? 
+                                <img src={user_visiter_avatar} alt="avatar" />    
+                            : <img src="/assets/images/avatar.png" alt="avatar" />}
                     </Link>
                 </div>
                 <div className="Comment-Col-10">

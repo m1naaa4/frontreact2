@@ -152,7 +152,12 @@ export default function(newavatar) {
 
                     <div className="CreatePost-Row">
                         <div className="CreatePost-ColLeft">
-                            <div className="CreatePost-UserThumb"><img src={newavatar.newavatar} alt="avatar"/></div>
+                            <div className="CreatePost-UserThumb">
+                                {/* <img src={newavatar.newavatar} alt="avatar"/> */}
+                                {newavatar.newavatar ? 
+                                <img src={newavatar.newavatar} alt="avatar" />    
+                            : <img src="/assets/images/avatar.png" alt="avatar" />}
+                            </div>
                                 <div className="CreatePost-OptionsRow">
                                     <div className="CreatePost-Options">
                                         <button type="button" className="CreatePost-Option CreatePost-OptionDate" data-toggle="tooltip" data-placement="right" title="Add date"><i className="uil uil-calendar-alt"></i></button>

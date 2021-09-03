@@ -45,7 +45,10 @@ export default function AddPostView(props) {
                 <div className="WritePost">
                     <div className="WritePost-Area">
                         <Link className="WritePost-UserThumb" to={"/profile/"+ infoprofile.infoprofile.id} >
-                            <img src={user_visiter_avatar} alt="avatar" />
+                            {/* <img src={user_visiter_avatar} alt="avatar" /> */}
+                            {user_visiter_avatar ? 
+                                <img src={user_visiter_avatar} alt="avatar" />    
+                            : <img src="/assets/images/avatar.png" alt="avatar" />}
                         </Link>
                         {/* <!-- <button type="button" className="UpdateInfos-BTN" ><i className="uil uil-pen"></i></button> --> */}
                         <textarea className="WritePost-TextArea js-elasticArea" onClick={handleShow} 
