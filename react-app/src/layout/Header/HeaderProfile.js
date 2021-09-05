@@ -160,7 +160,7 @@ function HeaderProfile() {
                                             <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </Link></li>
-                                            <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li>
+                                            {/* <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li> */}
                                             <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
                                             <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>

@@ -18,10 +18,10 @@ export default function PostHeader({ post }) {
   const showOptions = () =>{
     SetOptions_List(!options_List)
   }
-  useEffect(() => {          
+  useEffect(() => {
+    setUserId(user?.id);  
     if (infoprofile.avatar) {             
-      setUserProfileId(infoprofile.user_id);  
-      setUserId(user.id);  
+      setUserProfileId(infoprofile.user_id);   
     }     
   },[infoprofile.avatar, infoprofile.user_id, user.id])
 
@@ -40,13 +40,13 @@ export default function PostHeader({ post }) {
   return (
   
         <div className="PostHeader">
-          <Link className="PostUser-Thumb" to={"/profile/"+ post.creator_profile_id} >
+          <Link className="PostUser-Thumb" to={"/profile/"+ post.profile_id} >
             {/* <img src={post.avatar} alt="avatar" /> */}
             {post.avatar ? 
                 <img src={post.avatar} alt="avatar" />    
             : <img src="/assets/images/avatar.png" alt="avatar" />}
           </Link>
-          <Link className="PostUser-Details" to={"/profile/"+ post.creator_profile_id}>
+          <Link className="PostUser-Details" to={"/profile/"+ post.profile_id}>
             <div className="PostUser-Name">{post.creator_name}</div>
             <div className="PostUser-Time">{post.created_at.date}</div>
           </Link>

@@ -38,7 +38,7 @@ export default function MainCvthequeView(props) {
     });
 
     return (
-        <>  
+        <div class="Page-Wrapper Profile">  
             <ProfileHeaderForm {...props}/>     
             <div className="Profile-Wrapper">
                 <div className="container">
@@ -49,7 +49,7 @@ export default function MainCvthequeView(props) {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     
            
         

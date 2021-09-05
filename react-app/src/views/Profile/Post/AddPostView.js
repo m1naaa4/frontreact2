@@ -57,7 +57,7 @@ export default function AddPostView(props) {
                     </div>
                     <div className="WritePost-Options">
                         <button type="button" onClick={handleShow} name="button"><i className="uil uil-camera"></i> Photo/Video</button>
-                        <button type="button" name="button"><i className="uil uil-tag-alt"></i> Tag Friends</button>
+                        {/* <button type="button" name="button"><i className="uil uil-tag-alt"></i> Tag Friends</button> */}
                     </div>
 
                     <Modal show={show} onHide={handleClose}>

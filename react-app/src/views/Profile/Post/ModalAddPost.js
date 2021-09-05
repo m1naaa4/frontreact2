@@ -160,16 +160,16 @@ export default function(newavatar) {
                             </div>
                                 <div className="CreatePost-OptionsRow">
                                     <div className="CreatePost-Options">
-                                        <button type="button" className="CreatePost-Option CreatePost-OptionDate" data-toggle="tooltip" data-placement="right" title="Add date"><i className="uil uil-calendar-alt"></i></button>
+                                        {/* <button type="button" className="CreatePost-Option CreatePost-OptionDate" data-toggle="tooltip" data-placement="right" title="Add date"><i className="uil uil-calendar-alt"></i></button> */}
                                         <button type="button" className="CreatePost-Option CreatePost-OptionImage" data-toggle="tooltip" data-placement="right" title="Add Image">
                                             <input type="file" ref={hiddenImage} onChange={selectImage}  accept="image/jpeg, image/x-png" /><i className="uil uil-image"></i>
                                         </button>
                                         <button type="button" className="CreatePost-Option CreatePost-OptionVideo" data-toggle="tooltip" data-placement="right" title="Add Video">
                                             <input type="file" ref={hiddenVideo} onChange={selectVideo} accept="video/x-mpeg2, video/x-msvideo, video/quicktime, video/mp4" /><i className="uil uil-video"></i>
                                         </button>
-                                        <button type="button" className="CreatePost-Option CreatePost-OptionFile" data-toggle="tooltip" data-placement="right" title="Add File">
-                                            <input type="file" ref={hiddenFile} onChange={selectFile} accept="" /><i className="uil uil-file-alt"></i>
-                                        </button>
+                                        {/* <button type="button" className="CreatePost-Option CreatePost-OptionFile" data-toggle="tooltip" data-placement="right" title="Add File">
+                                            <input type="file" ref={hiddenFile} onChange={selectFile} accept="file" /><i className="uil uil-file-alt"></i>
+                                        </button> */}
                                     </div>
                                 </div>
                             </div>

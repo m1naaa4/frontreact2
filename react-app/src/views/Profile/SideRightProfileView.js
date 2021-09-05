@@ -110,9 +110,9 @@ export default function SideRightProfileView() {
              */}
             <div className="Widget-Conseils">
               <h3 className="Widget-Title">Conseils de DADUPA</h3>
-              <div className="Featured-Post-Thumb"><img src="assets/images/conseils/Conseils-de-DADUPA.jpg"  alt=""/></div>
+              <div className="Featured-Post-Thumb"><img src="/assets/images/conseils/Conseils-de-DADUPA.jpg"  alt=""/></div>
               <div className="Featured-Post-Content">
-                <div className="Featured-Post-Title"><a href="#!">Le marketing digital au service defdfdfdfdddfdf</a></div>
+                <div className="Featured-Post-Title"><a href="#!">Le marketing digital au service</a></div>
                 <div className="Featured-Post-Meta">
                   <ul>
                     <li><span>275 </span>Views</li>
@@ -127,7 +127,7 @@ export default function SideRightProfileView() {
 
               </div>
               <div className="Sponsored-Post-Content">
-                <div className="Sponsored-Post-Title"><a href="#!">Le marketing digital au service defdfdfdfdddfdf</a></div>
+                <div className="Sponsored-Post-Title"><a href="#!">Le marketing digital au service</a></div>
                 <div className="Sponsored-Post-Meta"><a href="#!">dadupa.com</a></div>
               </div>
             </div>

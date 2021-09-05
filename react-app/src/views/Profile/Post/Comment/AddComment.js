@@ -13,19 +13,19 @@ export default function AddComment({post}) {
 
     const comment = useSelector(state => state.addComment);
 
-    // const [avatar, setAvatar] = useState();
+    const [avatar, setAvatar] = useState();
     // const [user_profile_id, setUserProfileId] = useState();
     const [user_id, setUserId] = useState();
     const [user_visiter_avatar, setUserVisiterAvatar] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
-    // const user = useSelector(state => state.userProfile.userProfile);
+    const user = useSelector(state => state?.userProfile?.userProfile);
 
-    useEffect(() => {          
+    useEffect(() => {
+        setUserVisiterAvatar(user?.profile?.avatar_link);
         if (infoprofile.infoprofile.avatar) {             
-            // setAvatar(infoprofile.infoprofile.avatar);           
+            setAvatar(infoprofile.infoprofile.avatar);
             // setUserProfileId(infoprofile.infoprofile.id);           
             setUserId(infoprofile.infoprofile.user_id);  
-            // setUserVisiterAvatar(user.profile.avatar_link);
         }     
     },[infoprofile.infoprofile.avatar, infoprofile.infoprofile.id, infoprofile.infoprofile.user_id])    
     

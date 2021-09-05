@@ -112,7 +112,9 @@ export default function ShowComment(comment, props) {
                 <>                                            
                     <div className="Comment-Col-2">
                         <div className="Comment-User-Thumb">
-                            <img onClick={gotToProfile} src={comment.comment.avatar} alt=""/>
+                            {comment.comment.avatar ? 
+                                <img onClick={gotToProfile} src={comment.comment.avatar} alt="avatar" />    
+                            : <img onClick={gotToProfile} src="/assets/images/avatar.png" alt="avatar" />}
                         </div>
                         <ul className="comment-reactions-list">
                             <li className="comment-reaction"><img

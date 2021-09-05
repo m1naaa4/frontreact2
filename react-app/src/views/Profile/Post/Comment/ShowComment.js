@@ -49,12 +49,14 @@ export default function ShowComment({post}) {
             <div className="User-Comment" key={index} >
               <div className="Comment-Col-2">
                 <Link className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id}>
-                  <img src={comment.avatar} alt=""/>
+                  {comment.avatar ? 
+                      <img src={comment.avatar} alt="avatar" />    
+                  : <img src="/assets/images/avatar.png" alt="avatar" />}
                 </Link>
-                <ul className="comment-reactions-list">
+                {/* <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
                   <label className="count-reactions">{comment.likeCount}</label>
-                </ul>
+                </ul> */}
               </div>
               <div className="Comment-Col-10">
                 <div className="Comment-User">
@@ -80,7 +82,7 @@ export default function ShowComment({post}) {
                       <div className="comment-replies-count">
                       </div>
                       <ul className="comment-actions-list">
-                        <li className="comment-action"><button className="like-action">Like</button></li>
+                        {/* <li className="comment-action"><button className="like-action">Like</button></li> */}
                         <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>Reply</li>
                       </ul>
                   </div>

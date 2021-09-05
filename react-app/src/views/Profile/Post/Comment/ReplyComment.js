@@ -18,11 +18,11 @@ export default function ReplyComment({comment, post}) {
     const infoprofile = useSelector(state => state.infoProfile);
     const user = useSelector(state => state.userProfile.userProfile);
 
-    useEffect(() => {          
+    useEffect(() => {    
+        setUserVisiterAvatar(user?.profile?.avatar_link);       
         if (infoprofile.infoprofile.avatar) {             
             setAvatar(infoprofile.infoprofile.avatar)            
-            setProfileId(infoprofile.infoprofile.id)  
-            setUserVisiterAvatar(user.profile.avatar_link);          
+            setProfileId(infoprofile.infoprofile.id)           
         }     
     })    
     
@@ -40,7 +40,7 @@ export default function ReplyComment({comment, post}) {
         // });
     
     }, [dispatch])
-
+console.log(body)
     const data = {
         provider_id     : post.id,
         action          : 'reply',
@@ -61,7 +61,10 @@ export default function ReplyComment({comment, post}) {
             <div className="Comment-Writing">
                 <div className="Comment-Col-2">
                 <Link to={"/profile/"+ profile_id} className="Comment-User-Thumb">
-                    <img src={user_visiter_avatar} alt="avatar"/>
+                    
+                    {user_visiter_avatar ? 
+                        <img src={user_visiter_avatar} alt="avatar"/>    
+                    : <img src="/assets/images/avatar.png" alt="avatar" />}
                 </Link>
                 </div>
                 <div className="Comment-Col-10">

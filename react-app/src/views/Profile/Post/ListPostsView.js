@@ -64,13 +64,13 @@ export default function ListPostsView() {
                                         if (posts.length === index +1){
                                             return (
                                                 <>
-                                                <div className="PostWrap"  key={index +1} ref={lastProjectElementRef}>
+                                                <div className="PostWrap"  key={post.id} ref={lastProjectElementRef}>
                                                     <PostHeader post={post}/>
                                                     <PostBody post={post}/>
                                                     <PostFooter post={post}/>
                                                     
                                                 </div>
-                                                <div className="PostWrap"  key={index +1}>
+                                                <div className="PostWrap"  key={post.id+1}>
                                                     <PostHeader post={post}/>
                                                     <div className="PostBody">
                                                         <div className="PostBody-Text">
@@ -83,7 +83,7 @@ export default function ListPostsView() {
 
                                         }else{
                                             return(
-                                                <div className="PostWrap"  key={index +1}>
+                                                <div className="PostWrap"  key={post.id}>
                                                     <PostHeader  post={post}/>
                                                     <PostBody post={post}/>
                                                     <PostFooter post={post}/>

@@ -13,7 +13,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
     const dispatch = useDispatch();
     const [formData, setForm] = useForm({id:infoprofile.infoprofile.id, job:infoprofile.infoprofile.job, sector_id:infoprofile.infoprofile.sector, 
       type:infoprofile.infoprofile.email, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
-       
+      address:infoprofile.infoprofile.address,
       facebook:infoprofile.infoprofile.networks?.facebook,
       twitter:infoprofile.infoprofile.networks?.twitter,
       linkedin:infoprofile.infoprofile.networks?.linkedin,
@@ -44,6 +44,9 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
                 </div>
                 <div className="col-md-6 input-row">
                   <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Téléphone" className="wizard-required" required/>
+                </div>
+                <div className="col-md-12 input-row">
+                  <input type="tel" name="address" defaultValue={formData.address} onChange={setForm} placeholder="Residence" className="wizard-required" required/>
                 </div>
                 <div className="col-md-12 input-row">
                   <div className="Profile-Info Profile-Infos-Items">

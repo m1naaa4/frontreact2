@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
 import OffreGrid from './OffreGrid';
-
+import ProfileHeaderForm from '../ProfileFormData';
 
 
 export default function MainView(props) { 
@@ -18,6 +18,7 @@ export default function MainView(props) {
 
     return (
         <>  
+        <ProfileHeaderForm {...props}/>
         <div className="Page-Wrapper Profile">
             <div className="container">
                 <div className="offers-list">
