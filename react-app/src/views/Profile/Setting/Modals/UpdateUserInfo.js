@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UserInfoAction } from '../../../../store/actions/Profile/UserActions';
 import ZoneDropFilter from '../../../User/Fields/Filter/Project/ZoneDropFilter';
 
 
 
-const  UpdateUserInfo = ({ showInfo, handleCloseInfo, profile}) => {
+const  UpdateUserInfo = ({ showInfo, handleCloseInfo, user}) => {
     const dispatch = useDispatch();
 
-    const [birthday, setBirthday] = useState(new Date(profile.birthday));
+    const [birthday, setBirthday] = useState(new Date(user.profile.birthday));
 
-    const [formData, setForm] = useForm({first_name:profile.username, last_name:profile.username, identifiant:profile.identifiant, country:profile.country, phone:profile.phone, city:profile.city});
+    const [formData, setForm] = useForm({first_name:user.firstname, last_name:user.lastname, identifiant:user.profile.username, country:user.profile.country, phone:user.profile.phone, city:user.profile.city});
 
     const data = {
         first_name : formData.first_name,
@@ -23,6 +23,8 @@ const  UpdateUserInfo = ({ showInfo, handleCloseInfo, profile}) => {
         city : formData.city,
         phone : formData.phone,
     }
+    console.log("proddddddddddddddddddddddddddddddddddddddfile" , user)
+    const infoprofile = useSelector(state => state.userProfile.userProfile);
 
     const updateInfo =(id) =>{
         dispatch(UserInfoAction(data, '', ''));

@@ -35,6 +35,8 @@ const fr = {
     remember_me: 'Se souvenir de moi',
     q_register: "Pas de compte ? ",
     signUpWith : 'ou me connecter avec :',
+    username:'Identifiant',
+    country:'Pays',
     'footer.copyright': '2021 Tous droits réservés. dadupa Connect',
     'footer.menu.about': 'À propos',
     'footer.menu.user_agreement': "Conditions Générales d'Utilisation",

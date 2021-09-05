@@ -23,7 +23,9 @@ const defaultData = {
     lastName: '',
     type: '',
     phone: '',
-    city: ''
+    city: '',
+    username:'',
+    country:''
 };
 
 const MultiStepForm = ({ props }) => {

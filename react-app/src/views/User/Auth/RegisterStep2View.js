@@ -6,10 +6,11 @@ import {Text} from "../../../containers/Language";
 import TypeDrop from "../Fields/Signup/TypeDrop";
 import $ from "jquery";
 import 'jquery-validation'
+import ZoneDropFilter from '../Fields/Filter/Project/ZoneDropFilter';
 
 
 const RegisterStep2View = ({setForm, formData, navigation}) => {
-    const {firstName, lastName, type, phone, city} = formData;
+    const {firstName, lastName, type, phone, country, city, username} = formData;
     const {previous, next} = navigation;
 
     const validateForm = () => {
@@ -40,11 +41,21 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
                                 placeholder="Prenom" required/>
                     </div>
 
+                    <div className="input-row">
+                        <ItemForm type="text" name="username" value={username} onChange={setForm}
+                                placeholder="username" required/>
+                    </div>
+
                     <TypeDrop  name="type" value={type} onChange={setForm}/>
 
                     <div className="input-row">
                         <ItemForm type="tel" name="phone" value={phone} onChange={setForm}
                                 placeholder="Numéro de téléphone" required/>
+                    </div>
+
+                    <div className="input-row">
+                        <ZoneDropFilter field='country' placeholder="Pays" value={country} onChange={setForm}
+                            required/>
                     </div>
 
                     <div className="input-row">

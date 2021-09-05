@@ -49,10 +49,6 @@ export default function SideRightSettingView(props) {
       );
     })
 
-     
-    
-    console.log(infoprofile.profile)
-
     return (
         <>  
             {
@@ -69,14 +65,14 @@ export default function SideRightSettingView(props) {
                         <button type="button" className="UpdateInfos-BTN" onClick={handleShowInfo} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
                       </div>
                         <Modal show={showInfo} onHide={handleCloseInfo} className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <UpdateUserInfo showInfo={showInfo} handleCloseInfo={handleCloseInfo} profile={infoprofile.profile}/>
+                            <UpdateUserInfo showInfo={showInfo} handleCloseInfo={handleCloseInfo} user={infoprofile}/>
                         </Modal>
                       <div className="form-row">
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.name} placeholder="first name" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" value={infoprofile.firstname} placeholder="first name" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.name} placeholder="last name" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" value={infoprofile.lastname} placeholder="last name" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
                           <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="pseudo" className="wizard-required" readOnly />

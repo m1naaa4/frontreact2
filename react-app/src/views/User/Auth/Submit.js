@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {signUpAction} from "../../../store/actions/User/Auth/AuthActions";
 import {useDispatch} from "react-redux";
 import {Text} from "../../../containers/Language";
-
+import typeusers from "../../../data/typeusers"
+import { useTranslation } from 'react-i18next';
+import countries from "../../../countries";
 
 const Submit = ({setForm, formData, navigation, props}) => {
-    const { email, password, firstName, lastName, type, phone, city } = formData;
+    const { email, password, firstName, lastName, type, phone, country, city, username } = formData;
     const {go} = navigation;
+
+    const [typeuser, setTypeuser] = useState();
+    const [selectedcountry, setSelectedcountry] = useState();
+    const [t] = useTranslation();
 
     const UserRegister = (e) => {
         e.preventDefault();
@@ -22,6 +28,23 @@ const Submit = ({setForm, formData, navigation, props}) => {
         let authErr = document.querySelector("#authErr");
         authErr.innerHTML = "";
     }
+
+    useEffect(() => {
+        typeusers.map((key) => 
+            // console.log(key[0], key[1], type)
+            {if (key[0] === type) {
+                setTypeuser(key[1])
+            }}
+        );
+
+        countries.map((key) => 
+        {if (key.value === country) {
+          console.log(key.label)
+          setSelectedcountry(key.label)
+        }}
+      );
+    })
+
     return (
         <fieldset>
             <div className="form-inputs">
@@ -41,6 +64,10 @@ const Submit = ({setForm, formData, navigation, props}) => {
                             <div className="step-row">
                                 <div className="step-label"><Text tid="password" /></div>
                                 <div className="step-value">{`${password}`}</div>
+                            </div>
+                            <div className="step-row">
+                                <div className="step-label"><Text tid="username" /></div>
+                                <div className="step-value">{`${username}`}</div>
                             </div>
                         </div>
                     </div>
@@ -62,7 +89,7 @@ const Submit = ({setForm, formData, navigation, props}) => {
                             </div>
                             <div className="step-row">
                                 <div className="step-label"><Text tid="type" /></div>
-                                <div className="step-value">{`${type}`}</div>
+                                <div className="step-value">{t(`${typeuser}`)}</div>
                             </div>
                             <div className="step-row">
                                 <div className="step-label"><Text tid="phone" /></div>
@@ -71,6 +98,11 @@ const Submit = ({setForm, formData, navigation, props}) => {
                             <div className="step-row">
                                 <div className="step-label"><Text tid="city" /></div>
                                 <div className="step-value">{`${city}`}</div>
+                            </div>
+
+                            <div className="step-row">
+                                <div className="step-label"><Text tid="country" /></div>
+                                <div className="step-value">{`${selectedcountry}`}</div>
                             </div>
 
                         </div>
