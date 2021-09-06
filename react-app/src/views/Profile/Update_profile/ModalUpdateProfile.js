@@ -12,7 +12,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
     const infoprofile = useSelector(state => state.infoProfile);
     const dispatch = useDispatch();
     const [formData, setForm] = useForm({id:infoprofile.infoprofile.id, job:infoprofile.infoprofile.job, sector_id:infoprofile.infoprofile.sector, 
-      type:infoprofile.infoprofile.email, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
+      type:infoprofile.infoprofile.type, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
       address:infoprofile.infoprofile.address,
       facebook:infoprofile.infoprofile.networks?.facebook,
       twitter:infoprofile.infoprofile.networks?.twitter,
@@ -24,7 +24,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
     const EditProfile =(id) =>{
       dispatch(EditProfileAction(formData, '', ''));
     }
-
+console.log('infoprofile.infoprofssssssssssssssssssssile', formData.type)
     return (        
       <>
         {

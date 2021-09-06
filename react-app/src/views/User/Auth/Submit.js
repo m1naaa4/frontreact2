@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {Text} from "../../../containers/Language";
 import typeusers from "../../../data/typeusers"
 import { useTranslation } from 'react-i18next';
-import countries from "../../../countries";
+import countries from "../../../data/countries";
 
 const Submit = ({setForm, formData, navigation, props}) => {
     const { email, password, firstName, lastName, type, phone, country, city, username } = formData;

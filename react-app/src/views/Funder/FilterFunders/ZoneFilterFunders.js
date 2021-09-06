@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
-import countries from '../../../countries'
+import countries from "../../../data/countries";
 
 
 function ZoneFilterFunders ({zone, ...others }) {

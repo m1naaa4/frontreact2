@@ -31,6 +31,7 @@ const defaultData = {
     look_angel: 1,
     step: "1",
     url: '',
+    website_url: 1,
     tags: [],
     mediatype: '',
     media: '',

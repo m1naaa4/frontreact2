@@ -1,14 +1,14 @@
 import React, { useEffect, useState }  from 'react'
 import { Player } from 'video-react';
-import sectors from '../../../sectors';
+import sectors from '../../../data/sectors';
 import { useTranslation } from 'react-i18next';
-import etats from '../../../Etats';
-import countries from '../../../countries';
-import finances from '../../../finances';
+import etats from '../../../data/Etats';
+import countries from '../../../data/countries';
+import finances from '../../../data/finances';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
-    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, url, media, project_id, medialink, logolink, mediatype } = formData;
+    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, url, media, project_id, medialink, logolink, mediatype, website_url } = formData;
     const {previous} = navigation;
     const [sector, setSector] = useState();
     const [status, setStatus] = useState();

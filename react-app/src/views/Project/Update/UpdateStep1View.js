@@ -161,7 +161,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                    </div>
                                                </div>
                                                <div className="col-md-6 input-row">
-                                                   <input type="text" value={getproject.project.url} name="url" onChange={setForm}
+                                                   <input type="text" value={getproject.project.website_url} name="website_url" onChange={setForm}
                                                           placeholder="Ajouter un lien" className="wizard-required"
                                                           required/>
                                                </div>

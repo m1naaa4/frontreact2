@@ -1,6 +1,7 @@
-import countries from '../countries'
-import finances from '../finances'
-import sectors from '../sectors'
+import countries from "../data/countries"
+import finances from "../data/finances"
+import sectors from "../data/sectors"
+
 export const countryName = (code) =>
 {
     let obj = countries.filter(item => item.value === code).shift()

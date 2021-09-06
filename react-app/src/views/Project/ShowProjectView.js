@@ -7,12 +7,12 @@ import { useHistory, useParams } from 'react-router-dom';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import parse from 'html-react-parser';
 
-import sectors from '../../sectors';
 import { useTranslation } from 'react-i18next';
-import etats from '../../Etats';
-import countries from '../../countries';
-import finances from '../../finances';
 import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
+import sectors from '../../data/sectors';
+import etats from '../../data/Etats';
+import countries from '../../data/countries';
+import finances from '../../data/finances';
 
 export default function ShowProjectView(props) {
 

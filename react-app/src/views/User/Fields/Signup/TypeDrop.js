@@ -1,13 +1,5 @@
 import React from "react";
-import {Text} from "../../../../containers/Language";
-
-const types = [
-    ["", "Vous êtes ?"],
-    ["PP", "Porteur de projet"],
-    ["BF", "Investisseur"],
-    ["ACMPT", "Mentor"],
-    ["visitor", "Visiteur"],
-];
+import types from "../../../../data/types";
 
 const TypeDrop = ({ label, ...others }) => (
     <>

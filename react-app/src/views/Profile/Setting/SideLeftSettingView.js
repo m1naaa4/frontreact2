@@ -6,7 +6,7 @@ import UpdateAccess from './Modals/UpdateAccess';
 import UpdateUserInfo from './Modals/UpdateUserInfo';
 import LanguageSelectorView from '../../Fields/Language/LanguageSelectorView';
 import { ConfirmationAction, LanguageAction } from '../../../store/actions/Profile/UserActions';
-import countries from '../../../countries';
+import countries from '../../../data/countries';
 
 
 

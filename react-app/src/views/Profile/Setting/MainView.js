@@ -1,15 +1,12 @@
-import React, {useEffect} from 'react'
-import {useDispatch} from 'react-redux';
+import React from 'react'
 import { useParams } from 'react-router';
 
-import $ from "jquery";
 import SideLeftSettingView from './SideRightSettingView';
 import SideRightSettingView from './SideLeftSettingView';
 
 
 
 export default function MainView(props) { 
-    const dispatch = useDispatch();
     const params = useParams();
     
 

@@ -15,7 +15,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink } = formData;
+    const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink, website_url } = formData;
     const project = useSelector(state => state.addproject.addproject);
     const [picture, setPicture] = useState(null);
     const onChange = e => {
@@ -166,13 +166,13 @@ export default function Step1View({formData, setForm,navigation, props}) {
 
                                             <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
-                                                    <input type="checkbox" value={look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
-                                                           name="angel"/>
+                                                    <input type="checkbox" defaultChecked={look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
+                                                           name="look_angel"/>
                                                     <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_mentors')}</span></label>
                                                 </div>
                                             </div>
                                             <div className="col-md-6 input-row">
-                                                <input type="text" value={url} name="url" onChange={setForm}
+                                                <input type="text" value={website_url} name="website_url" onChange={setForm}
                                                        placeholder={t('form.add_url')} className="wizard-required" />
                                             </div>
 
