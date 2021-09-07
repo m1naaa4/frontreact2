@@ -16,7 +16,9 @@ function HeaderProfile() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
-    const counter = useSelector(state => state.addednotification); 
+    const [notif, setNotif] = useState(localStorage.setItem('notification', true));
+    const [classe, setClasse] = useState();
+    // const counter = useSelector(state => state.addednotification); 
     
     useEffect(() => {
         $(document).on("click", function(event){
@@ -133,7 +135,7 @@ function HeaderProfile() {
                                                     <button type="submit" name="submit"><i className="uil uil-search"></i></button>
                                                 </form>
                                             </div> */}
-                                            <div className="Dadupa-Notifications-Item Dadupa-Alert-Popup">
+                                            <div className=" Dadupa-Notifications-Item Dadupa-Alert-Popup">
                                                 <Notifications/>
                                             </div>
                                             {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">

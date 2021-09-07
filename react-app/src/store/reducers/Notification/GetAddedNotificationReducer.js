@@ -17,16 +17,11 @@ const initState = {
             // console.log('GET_NOTIFICATIONS_SUCCESS', action.res)
             
             
-            let id = window.location.href.split("/").pop();
-            let counted
             // console.log('GET_NOTIFICATIONS_SUCCESS', action.res?.count,  action.res.notification?.provider_id , id)
-            if (action.res.count) {
-                counted = action.res?.count;
-            } 
-            console.log('GET_NOTIFICATIONS_SUCCESS state.notification',counted )                           
+                                    
             return {
                 ...state,
-                counterlike :  counted,
+                counterlike :  action?.res?.count,
                 // contentNotif :  action.res.notification,
                 loading  :  false
             }

@@ -22,14 +22,12 @@ export default function ShowProjectView(props) {
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
     const [countcomment, setCountcomment] = useState();
-    const [green, setGreen] = useState();
-    const [postliked, setPostliked] = useState();
-    const [classe, setClasse] = useState();
+    const [ setClasse] = useState();
     const [sector, setSector] = useState();
     const [status, setStatus] = useState();
     const [country, setCountry] = useState();
     const [finance, setFinance] = useState();
-    const [t, i18n] = useTranslation();
+    const [t] = useTranslation();
 
     const data = {
         project_id : params.id,
@@ -46,11 +44,6 @@ export default function ShowProjectView(props) {
             setLike(project?.project?.is_liked);
             setLikeCount(fullproject?.countlike)
             setCountcomment(fullproject?.countcomment)
-        }
-
-        if(counter.notification){
-            console.log(counter?.notification)
-            setLikeCount(counter?.notification)
         }
         
         if(counter?.countercomment){
@@ -88,8 +81,11 @@ export default function ShowProjectView(props) {
 
 
     })
-
     const counter = useSelector(state => state.addednotification);
+    useEffect(() => {
+        setLikeCount(counter.counterlike)
+    },[counter?.counterlike])
+    
     const fullproject = useSelector(state => state.getproject);
     const project = fullproject?.getproject;
 

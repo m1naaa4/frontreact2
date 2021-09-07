@@ -27,17 +27,18 @@ function App() {
                                 
     }); 
 
-    // pusher.echo.private("newNotification").listen(".notification", data => {
+    pusher.echo.private("newNotification").listen(".notification", data => {
         
-    //     console.log("newNotification--------------");
-    //     console.log(data);
-    //     dispatch({type:'LIKED_SUCCESS', res : data});
-    // })
+        console.log("newNotification--------------");
+        console.log(data);
+        dispatch({type:'LIKED_SUCCESS', res : data});
+    })
 
-    // pusher.echo.private("App.Models.User."+ user_id)
-    // .notification((notification) => {
-    //     dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
-    // });
+    pusher.echo.private("App.Models.User."+ user_id)
+    .notification((notification) => {
+        localStorage.setItem('notification', true);
+        dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
+    });
 
     pusher.echo.private("new_post").listen(".newpost", data => {
         

@@ -19,7 +19,7 @@ export default function PostFooter({ post }) {
     const [classe, setClasse] = useState();
 
     const commentss = useSelector(state => state.getComments);
-    const counter = useSelector(state => state.addednotification);
+    const counter = useSelector(state => state.counter?.notification);
     // console.log(counter)
     
 
@@ -30,10 +30,9 @@ export default function PostFooter({ post }) {
         setLikeCount(post.likeCount)
     }
 
-    if(counter?.counterlike){
-        setLikeCount(counter?.counterlike)
-        console.log(counter?.counterlike,'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
-    }
+  //   if(counter?.counter !== undefined){
+  //     setLikeCount(counter?.counter)
+  // }
 })
 
   useEffect(() => {

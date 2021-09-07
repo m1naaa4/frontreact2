@@ -11,7 +11,7 @@ export const LikeAction = (data, props, current) =>{
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     // console.log('conversationnnnnnnnnnnnnnns', res)                    
-                    dispatch({type:'LIKED_SUCCESS', res});
+                    //dispatch({type:'LIKED_SUCCeESS', res}); no need because it comes from sockets
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'LIKE_ERROR',res})

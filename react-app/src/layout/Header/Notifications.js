@@ -7,23 +7,27 @@ import $ from "jquery";
 
 export default function Notifications() {
     const usernotifications = useSelector(state => state.getnotifications);
-    const [mask, setShowMark] = useState(true);
+    const [mask, setShowMark] = useState(false);
     const [notification_id, setNotification_id] = useState();
     const dispatch = useDispatch();
     const [showNotifications, setShowNotifications] = useState(false);
     const ref = useRef();
 
+    const [classe, setClasse] = useState();
+
     useEffect(() => {
+        let nottif = localStorage.getItem('notification');
+        nottif ? setClasse('new-notif') : setClasse('')
         $('.Dadupa-Msgs-Box').removeClass('Msgs-Box-Active');
         $('.Dadupa-Mini-Profile').removeClass('Mini-Profile-Active');
     });
 
     // console.log(usernotifications)
     
-    const show = (e) => {
-        console.log(e)
+    const show = () => {
+        console.log(mask)
         setShowMark(!mask);
-        setNotification_id(e);
+        // setNotification_id(e);
     };
 
     const markAsRead = (id, nofifid) => {
@@ -43,12 +47,19 @@ export default function Notifications() {
     };
 
     let user_id = localStorage.getItem('user_id')
-    const openNotifications = () => setShowNotifications(!showNotifications );
+    const openNotifications = () => {
+        setShowNotifications(!showNotifications )
+
+        localStorage.setItem('notification', false);
+        setClasse('')
+        console.log('ttttttttttttt', classe)
+        console.log('tttttttttttgggggggggggtt', localStorage.getItem('notification'))
+    };
 
     return (
     <>
         <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
-            <span className="new-notif"></span><i className="uil uil-bell"></i>
+            <span className={classe}></span><i className="uil uil-bell"></i>
         </button>
         {showNotifications && 
         <div className="Dadupa-Notifs-Box Notifs-Box-Active">
@@ -59,7 +70,7 @@ export default function Notifications() {
                         <div className="Notif-Item">
                             <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>
 
-                                <div className="Notif-Options show" onClick={ e =>show(notification.id)} >
+                                <div className="Notif-Options show" onClick={ show} >
                                     <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <i className="uil uil-ellipsis-h"></i>
                                     </button>
@@ -81,7 +92,7 @@ export default function Notifications() {
                         <div className="Notif-Item">
                             <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>
                         
-                                <div className="Notif-Options show" onClick={ e =>show(notification.id)} >
+                                <div className="Notif-Options show" onClick={ show} >
                                     <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <i className="uil uil-ellipsis-h"></i>
                                     </button>
