@@ -22,7 +22,7 @@ export default function ShowProjectView(props) {
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
     const [countcomment, setCountcomment] = useState();
-    const [ setClasse] = useState();
+    const [classe, setClasse] = useState();
     const [sector, setSector] = useState();
     const [status, setStatus] = useState();
     const [country, setCountry] = useState();
