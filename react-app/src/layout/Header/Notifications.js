@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
 import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import {Text} from "../../containers/Language";
-import $ from "jquery";
 
 export default function Notifications() {
     const usernotifications = useSelector(state => state.getnotifications);
-    const [mask, setShowMark] = useState(false);
+    // const [mask, setShowMark] = useState(false);
     const [notification_id, setNotification_id] = useState();
     const dispatch = useDispatch();
     const [showNotifications, setShowNotifications] = useState(false);
@@ -22,8 +21,6 @@ export default function Notifications() {
         }else{
             setClasse('');
         }
-        $('.Dadupa-Msgs-Box').removeClass('Msgs-Box-Active');
-        $('.Dadupa-Mini-Profile').removeClass('Mini-Profile-Active');
     });
 
     // console.log(usernotifications)
