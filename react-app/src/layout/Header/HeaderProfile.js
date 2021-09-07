@@ -16,8 +16,6 @@ function HeaderProfile() {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
-    const [notif, setNotif] = useState(localStorage.setItem('notification', true));
-    const [classe, setClasse] = useState();
     // const counter = useSelector(state => state.addednotification); 
     
     useEffect(() => {

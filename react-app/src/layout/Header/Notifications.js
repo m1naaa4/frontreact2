@@ -17,7 +17,11 @@ export default function Notifications() {
 
     useEffect(() => {
         let nottif = localStorage.getItem('notification');
-        nottif ? setClasse('new-notif') : setClasse('')
+        if (nottif == "true") {
+            setClasse('new-notif');
+        }else{
+            setClasse('');
+        }
         $('.Dadupa-Msgs-Box').removeClass('Msgs-Box-Active');
         $('.Dadupa-Mini-Profile').removeClass('Mini-Profile-Active');
     });
@@ -52,8 +56,6 @@ export default function Notifications() {
 
         localStorage.setItem('notification', false);
         setClasse('')
-        console.log('ttttttttttttt', classe)
-        console.log('tttttttttttgggggggggggtt', localStorage.getItem('notification'))
     };
 
     return (
