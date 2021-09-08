@@ -5,6 +5,7 @@ import { Player } from 'video-react';
 import UploadService from '../../../helpers/FileUploadService';
 import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
 import { useLocation } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 export default function Step2View({formData, setForm, navigation, props}) {
@@ -24,10 +25,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const getproject = useSelector(state => state.getproject);
 
     const [changed, setChanged] = useState(false);
+    const toastId = useRef(null);
 
     const location = useLocation();
     useEffect(()=>{
-        console.log(location, 'changedddddd', )
         setChanged(true)
     },[location])
 
@@ -91,8 +92,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
         setProgress(0);
         setCurrentFile(e);
         UploadService.upload(formData, (e) => {
-            console.log("progress", Math.round((100 * e.loaded) / e.total))
         setProgress(Math.round((100 * e.loaded) / e.total));
+            toastId.current = toast('Upload in Progress', {
+                progress: Math.round((100 * e.loaded) / e.total)
+            });
         
         })
         .then((response) => {
@@ -101,7 +104,8 @@ export default function Step2View({formData, setForm, navigation, props}) {
             formData.mediatype = response.data.type;
             setMedia(response.data.type);
             setSelectedFiles(undefined);
-            dispatch({type:'File_UPLOADED_SUCCESS', response})
+            dispatch({type:'File_UPLOADED_SUCCESS', response});
+            toast.done(toastId.current);
         })
         .then((files) => {
             setFile(files.data);
@@ -116,6 +120,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
     return (
 
         <div className="Page-Wrapper">
+            <ToastContainer
+                position="bottom-left"
+                hideProgressBar={false}
+            />
             <div className="container">
                 <div className="offer-wizard-wrapper">
                     <div className="row">
@@ -166,9 +174,9 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                                     />) : (<img width="100%" height="300" src={file} alt="Project"/>)
                                                 } 
 
-                                                {currentFile && (
+                                                {/* {currentFile && (
                                                     <ProgressBar percentage={progress} />
-                                                    )}                                                                                               
+                                                    )}                                                                                                */}
                                             </div>                                            
                                         </div>
                                     )}                                    
@@ -183,9 +191,9 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                                     </div>
                                                     {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}
                                                 </div>
-                                                {currentFile && (
+                                                {/* {currentFile && (
                                                     <ProgressBar percentage={progress} />
-                                                    )}
+                                                    )} */}
                                             </div>
                                             
                                     )}

@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ProgressBar from "../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
 import UploadService from '../../../helpers/FileUploadService';
 import { GetProjectAction } from '../../../store/actions/User/Project/ProjectAction';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 export default function UpdateStep2View({formData, setForm, navigation, props}) {
@@ -18,6 +19,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     const [message, setMessage] = useState("");
     const [project_id, setProject_id] = useState();
     const hiddenFileInput = React.useRef(null);
+    const toastId = useRef(null);
 
     const mediaproject = useSelector(state => state.fileuploaded);
     const projectadd = useSelector(state => state.addproject);
@@ -71,11 +73,11 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     };
 
     const handleUpload = async e => {
-        setProgress(0);
         setCurrentFile(e);
         UploadService.upload(formData, (e) => {
-            console.log("progress", Math.round((100 * e.loaded) / e.total))
-        setProgress(Math.round((100 * e.loaded) / e.total));
+            toastId.current = toast('Upload in Progress', {
+                progress: Math.round((100 * e.loaded) / e.total)
+            });
         
         })
         .then((response) => {
@@ -85,12 +87,12 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
             setMedia(response.data.type);
             setSelectedFiles(undefined);
             dispatch({type:'File_UPLOADED_SUCCESS', response})
+            toast.done(toastId.current);
         })
         .then((files) => {
             setFile(files.data);
         })
         .catch(() => {
-            setProgress(0);
             setMessage("Could not upload the file!");
             setCurrentFile(undefined);
         });        
@@ -99,6 +101,10 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     return (
 
         <div className="Page-Wrapper">
+            <ToastContainer
+                position="bottom-left"
+                hideProgressBar={false}
+            />
             <div className="container">
                 <div className="offer-wizard-wrapper">
                     <div className="row">
@@ -149,9 +155,9 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                                     />) : (<img width="100%" height="300" src={file} alt="Project"/>)
                                                 } 
 
-                                                {currentFile && (
+                                                {/* {currentFile && (
                                                     <ProgressBar percentage={progress} />
-                                                    )}                                                                                               
+                                                    )}                                                                                                */}
                                             </div>                                            
                                         </div>
                                     )}                                    
@@ -166,9 +172,9 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                                     </div>
                                                     {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}
                                                 </div>
-                                                {currentFile && (
+                                                {/* {currentFile && (
                                                     <ProgressBar percentage={progress} />
-                                                    )}
+                                                    )} */}
                                             </div>
                                             
                                     )}

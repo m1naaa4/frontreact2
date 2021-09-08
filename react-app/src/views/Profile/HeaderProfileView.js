@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import FileUploadService from '../../helpers/FileUploadService';
-
+import { toast, ToastContainer } from 'react-toastify';
 
 
 export default function HeaderProfileView({formData, setForm, props}) {
@@ -16,14 +16,16 @@ export default function HeaderProfileView({formData, setForm, props}) {
     const hiddenCoverInput = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [currentFile, setCurrentFile] = useState(undefined);
-    const [progress, setProgress] = useState(0);
-    const [message, setMessage] = useState("");
+    // const [progress, setProgress] = useState(0);
+    // const [message, setMessage] = useState("");
     const [fileAvatar, setFileAvatar] = useState();
     const [fileCover, setFileCover]   = useState();
     const [ newAvatar, setNewAvatar ] = useState()
     const [ newCover, setNewCover ] = useState()
     const [ user_id, setUserId ] = useState()
     const params = useParams();
+    
+    const toastId = useRef(null);
     
     
      useEffect(() => {        
@@ -70,23 +72,26 @@ export default function HeaderProfileView({formData, setForm, props}) {
     };
 
     const handleUpload = async e => {
-        setProgress(0);
+        // setProgress(0);
         setCurrentFile(e);
         FileUploadService.upload(formData, (e) => {
-            console.log("progress", Math.round((100 * e.loaded) / e.total))
-        setProgress(Math.round((100 * e.loaded) / e.total));
-        
+
+            toastId.current = toast('Upload in Progress', {
+                progress: Math.round((100 * e.loaded) / e.total)
+            });
+                    
         })
         .then((response) => {
             formData.type === 'avatar' ? setNewAvatar(response.data.url) : setNewCover(response.data.url)
-            setSelectedFiles(undefined);            
+            setSelectedFiles(undefined);
+            toast.done(toastId.current);
         })
         .then((files) => {
             //setFileAvatar(files.data);
         })
         .catch(() => {
-            setProgress(0);
-            setMessage("Could not upload the file!");
+            // setProgress(0);
+            // setMessage("Could not upload the file!");
             setCurrentFile(undefined);
         });        
     }
@@ -102,6 +107,10 @@ export default function HeaderProfileView({formData, setForm, props}) {
         {
             infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
             <div className="Profile-Cover" id="photoCover" style={{backgroundImage: `url(${ fileCover })`}}>
+                <ToastContainer
+                    position="bottom-left"
+                    hideProgressBar={false}
+                />
                 <div className="container">
                     <div className="Profile-Wrap">
                         <div className="Profile-Infos">

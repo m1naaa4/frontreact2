@@ -168,7 +168,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
    
                                            </div>
                                        </div>
-                                       <button type="button" onClick={(event) => { handleSubmitValue(event); next();}} name="next" className="next action-button">
+                                       <button type="button" onClick={(event) => { handleSubmitValue(event); next();}} name="next" className="next action-button">{t('next')}
                                         {!is_loading ? <i className="uil uil-arrow-right"></i> : <Spinner
                                             as="span"
                                             animation="border"

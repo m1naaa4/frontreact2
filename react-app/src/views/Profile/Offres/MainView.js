@@ -3,18 +3,23 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
 import OffreGrid from './OffreGrid';
 import ProfileHeaderForm from '../ProfileFormData';
+import { ProfileAction } from '../../../store/actions/Profile/UserActions';
+import { useLocation, useParams } from 'react-router';
 
 
 export default function MainView(props) { 
     const dispatch = useDispatch();
     const offres = useSelector(state => state.offres.offres);
+    const params = useParams();
+    const location = useLocation();
     console.log(offres)
     useEffect(() => { 
         let data = {
             action : 'getmyprojectlist'
         }       
         dispatch(getMyOffresAction(data, '', ''));
-    },[])
+        dispatch( ProfileAction(params.id));
+    },[dispatch , location])
 
     return (
         <>  
