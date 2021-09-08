@@ -7,6 +7,11 @@ import StudieGrid from './Collapse/StudieGrid';
 import ExperienceGrid from './Collapse/ExperienceGrid';
 import { useDispatch, useSelector } from 'react-redux';
 import { CvdeleteAction, getCvthequeAction } from '../../../store/actions/Profile/UserActions';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import RealizationGrid from '../Realization/RealizationGrid';
+import { getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
 
 
 export default function CvView(props) {
@@ -24,10 +29,24 @@ export default function CvView(props) {
     const handleCloseExperience = () => setShowexperience(false);
     const handleShowExperience = () => setShowexperience(true);
 
+    const realizations = useSelector(state => state.offres.offres);
+
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 2,
+      slidesToScroll: 1
+    };
+
     const dispatch = useDispatch();
 
-    useEffect(() => {        
+    useEffect(() => {
+        let data = {
+            action : 'getmyprojectlist'
+        } 
         dispatch(getCvthequeAction('', '', ''));
+        dispatch(getMyOffresAction(data, '', ''));
     },[dispatch])
 
     const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
@@ -104,44 +123,21 @@ export default function CvView(props) {
               <div className="Profile-Section">
                 <button type="button" className="UpdateInfos-BTN" data-toggle="modal" data-target="#ProjectModal"><i className="uil uil-plus"></i></button>
                 <h3 className="Profile-Section-Title"><i className="uil uil-presentation"></i> réalisations</h3>
-                <div id="Portfolio" className="Portfolio">
-                  <div className="Portfolio-Item">
-                    <button type="button" className="UpdateInfos-BTN CollapseUpdate-BTN" data-toggle="modal" data-target="#ProjectUpdateModal"><i className="uil uil-pen"></i></button>
-                    <div className="Project-Thumb">
+                <Slider {...settings}>
 
-                    </div>
-                    <div className="Project-Name">
-                      <a href="#!" target="_blank">Project Name</a>
-                    </div>
-                  </div>
-                  <div className="Portfolio-Item">
-                    <button type="button" className="UpdateInfos-BTN CollapseUpdate-BTN" data-toggle="modal" data-target="#ProjectUpdateModal"><i className="uil uil-pen"></i></button>
-                    <div className="Project-Thumb">
+                        {realizations?.projects &&
+                            realizations?.projects.map((realization, index) => (
+                              <div className="Portfolio-Item">
+                                <RealizationGrid realization={realization}/>
+                              </div>
+                        ))
+                        }
 
-                    </div>
-                    <div className="Project-Name">
-                      <a href="#!" target="_blank">Project Name</a>
-                    </div>
-                  </div>
-                  <div className="Portfolio-Item">
-                    <button type="button" className="UpdateInfos-BTN CollapseUpdate-BTN" data-toggle="modal" data-target="#ProjectUpdateModal"><i className="uil uil-pen"></i></button>
-                    <div className="Project-Thumb">
-
-                    </div>
-                    <div className="Project-Name">
-                      <a href="#!" target="_blank">Project Name</a>
-                    </div>
-                  </div>
-                  <div className="Portfolio-Item">
-                    <button type="button" className="UpdateInfos-BTN CollapseUpdate-BTN" data-toggle="modal" data-target="#ProjectUpdateModal"><i className="uil uil-pen"></i></button>
-                    <div className="Project-Thumb">
-
-                    </div>
-                    <div className="Project-Name">
-                      <a href="#!" target="_blank">Project Name</a>
-                    </div>
-                  </div>
-                </div>
+                    
+                </Slider>
+                
+                
+              
               </div>
 
 
