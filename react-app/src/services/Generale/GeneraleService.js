@@ -59,6 +59,19 @@ export const SeenNotification = (data) =>{
     });
 }
 
+export const MarkSeen = (data) =>{
+    const http = new HttpService();
+    let profileUpUrl = "notification/markseen";
+    const tokenId = "user-token";
+
+    return http.postData(data, profileUpUrl, tokenId, '').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}
+
 export const deleteNotification = (data) =>{
     const http = new HttpService();
     let profileUpUrl = "notification/delete";

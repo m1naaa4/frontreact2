@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
-import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import { DeleteNotificationAction, MarkSeenAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import {Text} from "../../containers/Language";
 
 export default function Notifications() {
@@ -16,7 +16,7 @@ export default function Notifications() {
 
     useEffect(() => {
         let nottif = localStorage.getItem('notification');
-        if (nottif == "true") {
+        if (nottif === "1") {
             setClasse('new-notif');
         }else{
             setClasse('');
@@ -51,7 +51,12 @@ export default function Notifications() {
     const openNotifications = () => {
         setShowNotifications(!showNotifications )
 
-        localStorage.setItem('notification', false);
+        let data = {
+            user_id : localStorage.getItem('user_id'),
+        }
+        dispatch( MarkSeenAction(data));
+
+        localStorage.setItem('notification', 0);
         setClasse('')
     };
 

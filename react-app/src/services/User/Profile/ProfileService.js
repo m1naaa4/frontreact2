@@ -10,6 +10,7 @@ export const LoadUser = () =>{
         // console.log(data)
         localStorage.setItem('user_id', data.user.id);
         localStorage.setItem('profile_id', data.user.profile_id);
+        localStorage.setItem('notification', data.user.new_notification ? data.user.new_notification : 0);
         return data;
     }).catch((error)=> {
         return error;
