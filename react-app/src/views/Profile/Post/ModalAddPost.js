@@ -7,7 +7,8 @@ import Player from "video-react/lib/components/Player";
 import { useParams } from "react-router";
 import { useForm } from "react-hooks-helper";
 import { ToastContainer, toast } from 'react-toastify';
-import ProgressBar from "../../../skeleton/ProgressBar";
+import YouTube from 'react-youtube';
+import $ from 'jquery'
 
 export default function(newavatar) {
     const [show, setShow] = useState(false);
@@ -21,7 +22,7 @@ export default function(newavatar) {
     const hiddenFile = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [youtube, setYoutube] = useState(false);
-    const [progress, setProgress] = useState(0);
+    const [youtubeId, setYoutubeId] = useState();
     const [message, setMessage] = useState("");
     const toastId = React.useRef(null);
 
@@ -45,6 +46,7 @@ export default function(newavatar) {
         body       : body,
         action     : 'addPost',
         type       : type,
+        youtubeId  : youtubeId,
         medialink : medialink,
     }
     console.log(type)
@@ -64,8 +66,14 @@ export default function(newavatar) {
         //     let feed = res[j]
         //     dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', feed});            
         // });
-        setYoutube(youtubee)
-    
+    })
+
+    useEffect(() => {
+        setYoutube(youtube_id);
+        if (type ==='youtube') {
+            setYoutubeId(youtube_id)
+            setMedialink('')
+        }
     })
     
     const selectFile = (e) => {   
@@ -74,13 +82,15 @@ export default function(newavatar) {
         getBase64(e.target.files[0]); 
     };
 
-    const selectImage = (e) => {   
+    const selectImage = (e) => {  
+        setYoutubeId(null); 
         setSelectedFiles(e.target.files[0]); 
         setType('image')    
         getBase64(e.target.files[0]); 
     };
 
-    const selectVideo = (e) => {   
+    const selectVideo = (e) => {
+        setYoutubeId(null);
         setSelectedFiles(e.target.files[0]);
         setType('video')     
         getBase64(e.target.files[0]); 
@@ -102,8 +112,8 @@ export default function(newavatar) {
         };
     };
 
-    const youtubee =  useSelector(state => state.youtube?.youtube?.message?.iframe);
-    console.log('dfdfdfdfdfdjjjjjjjjjjjjj', youtubee)
+    const youtube_id =  useSelector(state => state.youtube?.youtube?.message?.id);
+    console.log('dfdfdfdfdfdjjjjjjjjjjjjj', youtube_id)
 
     const getyoutube =(url)=>{
         console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllll', url, matchYoutubeUrl(url))
@@ -113,12 +123,22 @@ export default function(newavatar) {
         }
         if (matchYoutubeUrl(url)){
             dispatch(GetYoutubeAction(datayoutube, 'post/getYoutubeVideo', ''));
+            setType('youtube')
         }
     }
 
     const matchYoutubeUrl = (url) => {
         return url.match(/youtube\.com/) ? true : false ;
     }
+
+    const opts = {
+        height: '100%',
+        width: '380',
+        // playerVars: {
+        //   // https://developers.google.com/youtube/player_parameters
+        //   autoplay: 1,
+        // },
+      };
     
 
     const handleUpload = async e => {
@@ -172,7 +192,7 @@ export default function(newavatar) {
                             </div>
                             <div className="CreatePost-ColRight">
                                 <div className="CreatePost-Body">
-                                    <textarea name="post" onChange={e => {setBody(e.target.value); getyoutube(e.target.value)} } ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                                    <textarea id="textbody" name="post" onChange={e => {setBody(e.target.value); getyoutube(e.target.value)} } ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
                                     {
                                         medialink? (type === "video" ? (
                                             <Player width="100%" height="100%"
@@ -183,9 +203,8 @@ export default function(newavatar) {
                                             ) : (<img width="100%" height="300" src={medialink} alt="media"/>)): '' 
                                     }
                                     {
-                                        youtube && 
-                                        <div className="review-content"  width="100%" height="300"dangerouslySetInnerHTML={{ __html: youtube }}>
-                                            </div>
+                                        youtubeId && 
+                                        <YouTube videoId={youtubeId} opts={opts} />
                                     }
                                 </div>
                             </div>

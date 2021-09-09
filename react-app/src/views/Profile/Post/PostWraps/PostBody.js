@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Player from 'video-react/lib/components/Player';
 import $ from "jquery";
+import YouTube from 'react-youtube';
 
 
 
@@ -23,6 +24,14 @@ export default function PostBody({ post }) {
             }
         });
       });
+      const opts = {
+        height: '300',
+        width: '100%',
+        // playerVars: {
+        //   // https://developers.google.com/youtube/player_parameters
+        //   autoplay: 1,
+        // },
+      };
     return (
         
       <div className="PostBody">
@@ -35,7 +44,9 @@ export default function PostBody({ post }) {
                     poster="/assets/poster.png"
                     src={post.media_link}
                 />
-                ) : (<img width="100%" height="300" src={post.media_link} alt="Project"/>)): ''
+                ) : (<img width="100%" height="300" src={post.media_link} alt="Project"/>)): 
+                (post.type === 'youtube' ?
+                <YouTube videoId={post.media_link} opts={opts} />:'')
           } 
         </div>
     </div>        
