@@ -19,26 +19,25 @@ export default function PostFooter({ post }) {
     const [classe, setClasse] = useState();
 
     const commentss = useSelector(state => state.getComments);
-    const counter = useSelector(state => state.counter?.notification);
-    // console.log(counter)
+    const counter = useSelector(state => state.addednotification); // c'est ca qui declanche l'ajout de comment socket a ne pas supprimer
     
 
   useEffect(() => {
     like ? setClasse('Dislike') : setClasse('Like');
     if (initial) {
         setLike(post.is_liked);
-        setLikeCount(post.likeCount)
     }
+    setLikeCount(post.likeCount)
 
   //   if(counter?.counter !== undefined){
   //     setLikeCount(counter?.counter)
   // }
 })
 
-  useEffect(() => {
-        setLikeCount(counter?.counterlike)
-        console.log(counter?.counterlike,'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
-  },[counter?.counterlike])
+  // useEffect(() => {
+  //       setLikeCount(counter?.counterlike)
+  //       console.log(counter?.counterlike,'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+  // },[counter?.counterlike])
 
 const dispatch = useDispatch();
     const likeAAction = () => {

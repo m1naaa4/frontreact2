@@ -41,7 +41,7 @@ export default function AddPostView(props) {
     return (
         <>
         {
-            infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
+            infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' && infoprofile.infoprofile.id === user.profile_id?
                 <div className="WritePost">
                     <div className="WritePost-Area">
                         <Link className="WritePost-UserThumb" to={"/profile/"+ infoprofile.infoprofile.id} >

@@ -32,6 +32,7 @@ function App() {
         console.log("newNotification--------------");
         console.log(data);
         dispatch({type:'LIKED_SUCCESS', res : data});
+        dispatch({type:'ADD_Like_TO_POST_SUCCESS', res : data});
     })
 
     pusher.echo.private("App.Models.User."+ user_id)

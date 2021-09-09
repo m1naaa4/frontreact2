@@ -68,6 +68,19 @@ const initState = {
                     // current  :  action.res.comment.meta,
                     loading  :  false
                 }
+            
+                case 'ADD_Like_TO_POST_SUCCESS':                    
+                    const allpostslike = state.posts;
+                    allpostslike.forEach(function (post) {
+                        if (action.res?.notification?.provider_id === post.id) {     
+                            console.log('hereeeeeeeeeeeeeee', post.likeCount = action.res?.count)
+                        }                    
+                    })                
+                    return {
+                        ...state,
+                        posts :  state.posts,
+                        loading  :  false
+                    }
 
             case 'DELETE_POST_SUCCESS':
                 return {
