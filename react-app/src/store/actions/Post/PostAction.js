@@ -1,4 +1,4 @@
-import { AddPost, DeletePost, GetPosts } from "../../../services/User/Profile/ProfileService";
+import { AddPost, DeletePost, GetPosts, GetYoutube } from "../../../services/User/Profile/ProfileService";
 
 
 export const GetPostsAction = (data, props, current) =>{
@@ -60,6 +60,25 @@ export const DeletePostAction = (data, props) =>{
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'DELETE_POST_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+
+}
+
+export const GetYoutubeAction = (data, props) =>{
+
+    return (dispatch)=>{
+        GetYoutube(data, props).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'GET_YOUTUBE_SUCCESS', res});
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+
                 }
             },
             error => {

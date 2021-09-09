@@ -113,6 +113,19 @@ export const DeletePost = (data, props, current) =>{
     });
 }
 
+export const GetYoutube = (data, props, current) =>{
+
+    
+    let addpost = 'post/getYoutubeVideo';
+    const tokenId = "user-token";
+    return http.postData(data, addpost, tokenId, '').then(data=>{
+        return data
+    }).catch((error)=> {
+        console.log(error)
+        return error;
+    });
+}
+
 export const GetPosts = (data, props, current) =>{
 
     

@@ -89,10 +89,8 @@ export default function Step2View({formData, setForm, navigation, props}) {
     };
 
     const handleUpload = async e => {
-        setProgress(0);
         setCurrentFile(e);
         UploadService.upload(formData, (e) => {
-        setProgress(Math.round((100 * e.loaded) / e.total));
             toastId.current = toast('Upload in Progress', {
                 progress: Math.round((100 * e.loaded) / e.total)
             });
@@ -111,7 +109,6 @@ export default function Step2View({formData, setForm, navigation, props}) {
             setFile(files.data);
         })
         .catch(() => {
-            setProgress(0);
             setMessage("Could not upload the file!");
             setCurrentFile(undefined);
         });        

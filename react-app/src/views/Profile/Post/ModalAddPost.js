@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { AddPostAction } from "../../../store/actions/Post/PostAction";
+import { AddPostAction, GetYoutubeAction } from "../../../store/actions/Post/PostAction";
 import FileUploadService from "../../../helpers/FileUploadService";
 // import PusherService from '../../../services/Pusher';
 import Player from "video-react/lib/components/Player";
@@ -20,7 +20,7 @@ export default function(newavatar) {
     const hiddenVideo = useRef(null);
     const hiddenFile = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
-    const [currentFile, setCurrentFile] = useState(undefined);
+    const [youtube, setYoutube] = useState(false);
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
     const toastId = React.useRef(null);
@@ -64,8 +64,9 @@ export default function(newavatar) {
         //     let feed = res[j]
         //     dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', feed});            
         // });
+        setYoutube(youtubee)
     
-    }, [dispatch])
+    })
     
     const selectFile = (e) => {   
         setSelectedFiles(e.target.files[0]); 
@@ -101,47 +102,43 @@ export default function(newavatar) {
         };
     };
 
+    const youtubee =  useSelector(state => state.youtube?.youtube?.message?.iframe);
+    console.log('dfdfdfdfdfdjjjjjjjjjjjjj', youtubee)
+
+    const getyoutube =(url)=>{
+        console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllll', url, matchYoutubeUrl(url))
+        const datayoutube = {
+            profile_post_id : params.id,
+            youtube_source  : url,
+        }
+        if (matchYoutubeUrl(url)){
+            dispatch(GetYoutubeAction(datayoutube, 'post/getYoutubeVideo', ''));
+        }
+    }
+
+    const matchYoutubeUrl = (url) => {
+        return url.match(/youtube\.com/) ? true : false ;
+    }
     
 
     const handleUpload = async e => {
-        setProgress(0);
-        setCurrentFile(e);        
         FileUploadService.upload(formData, (e) => {
-            console.log("progress", Math.round((100 * e.loaded) / e.total))
-        setProgress(Math.round((100 * e.loaded) / e.total));
-        
-            if(toastId.current === null){
-                toastId.current = toast('Upload in Progress', {
-                    autoClose: false,
-                    progress: progress
+            toastId.current = toast('Upload in Progress', {
+                progress: Math.round((100 * e.loaded) / e.total)
             });
-            } else {
-                toast.update(toastId.current, {
-                    autoClose: false,
-                    progress: progress
-                })
-            }
         })
         .then((response) => {
-            toast.done(toastId.current,{
-                type: toast.TYPE.INFO, autoClose: 5000,
-                progress: 0
-            });
-            console.log(response.data)
             setMedialink(response.data.url)
             setType(response.data.type)
             setSelectedFiles(undefined);
+            toast.done(toastId.current);
         })
         .then((files) => {
             //setFileAvatar(files.data);
-            toast.done('done',{
-                progress: 0
-            });
+            toast.done(toastId.current);
         })
         .catch(() => {
-            setProgress(0);
             setMessage("Could not upload the file!");
-            setCurrentFile(undefined);
         });        
     }
 
@@ -175,7 +172,7 @@ export default function(newavatar) {
                             </div>
                             <div className="CreatePost-ColRight">
                                 <div className="CreatePost-Body">
-                                    <textarea name="post" onChange={e => setBody(e.target.value)} ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                                    <textarea name="post" onChange={e => {setBody(e.target.value); getyoutube(e.target.value)} } ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
                                     {
                                         medialink? (type === "video" ? (
                                             <Player width="100%" height="100%"
@@ -185,10 +182,12 @@ export default function(newavatar) {
                                             />
                                             ) : (<img width="100%" height="300" src={medialink} alt="media"/>)): '' 
                                     }
+                                    {
+                                        youtube && 
+                                        <div className="review-content"  width="100%" height="300"dangerouslySetInnerHTML={{ __html: youtube }}>
+                                            </div>
+                                    }
                                 </div>
-                                {currentFile && (
-                                    <ProgressBar percentage={progress} />
-                                )}
                             </div>
                         </div>
                         <div className="CreatePost-Footer">

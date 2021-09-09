@@ -23,6 +23,7 @@ import GetCommentReducer from './Comment/GetCommentReducer'
 import ConversationsReducer from './Messenger/ConversationsReducer'
 import ConversationReducer from './Messenger/ConversationReducer'
 import OffreReducer from './Offre/OffreReducer'
+import AddYoutubeReducer from './Post/AddYoutubeReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -36,6 +37,7 @@ const RootReducer = combineReducers({
   updateavatar: AvatarReducer,
   posts: GetPostsReducer,
   post: AddPostReducer,
+  youtube: AddYoutubeReducer,
 
   addComment:AddCommentReducer,
   getComments:GetCommentReducer,
