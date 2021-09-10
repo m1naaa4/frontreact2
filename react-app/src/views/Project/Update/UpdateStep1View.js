@@ -66,6 +66,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         formData.funding_search = `${form['funding_search'].value}`;
         formData.sector_id = `${form['sector_id'].value}`;
         formData.medialink = getproject.project.media_link;
+        formData.website_url = `${form['website_url'].value}`;
         formData.logolink  = getproject.project.logo_link;
         formData.mediatype = getproject.project.mediatype;
         formData.description = getproject.project.description;
@@ -132,7 +133,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                </div>
    
                                                <div className="col-md-6 input-row input-select">
-                                                   <SectorDropFilter name="sector_id" defaultValue={getproject.project.sector_id} onChange={setForm} />
+                                                   <SectorDropFilter name="sector_id" defaultValue={getproject.project.sector} onChange={setForm} />
                                                </div>
                                                <div className="col-md-12 input-row">
                                                    <ZoneDropFilter field='project_area' name="project_area" defaultValue={getproject.project.project_area}  onChange={setForm}/>
@@ -155,13 +156,13 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
    
                                                <div className="col-md-6 input-row">
                                                    <div className="custom-control custom-switch">
-                                                       <input type="checkbox" onChange={setForm}   className="custom-control-input" id="switch1"
+                                                       <input type="checkbox" defaultChecked={getproject.project.look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
                                                               name="look_angel"/>
                                                        <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_mentors')}</span></label>
                                                    </div>
                                                </div>
                                                <div className="col-md-6 input-row">
-                                                   <input type="text" value={getproject.project.website_url} name="website_url" onChange={setForm}
+                                                   <input type="text" defaultValue={getproject.project.website_url} name="website_url" onChange={setForm}
                                                           placeholder="Ajouter un lien" className="wizard-required"
                                                           required/>
                                                </div>

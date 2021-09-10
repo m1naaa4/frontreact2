@@ -13,8 +13,17 @@ import $ from "jquery";
 export default function MainProfileView(props) { 
     const dispatch = useDispatch();
     const params = useParams();
+    $(window).on('load', function(){
+        dispatch( ProfileAction(params.id));
+    });
+
     useEffect(() => {
-        dispatch( ProfileAction(params.id)); 
+        console.log('params.id', params.id)
+        // dispatch( ProfileAction(params.id));
+    },params.id)
+
+    useEffect(() => {
+        // dispatch( ProfileAction(params.id)); 
         
         var width = $(window).width();
 

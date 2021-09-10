@@ -190,7 +190,7 @@ export const UserInfoAction = (data) =>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  
-                dispatch({type:'LOAD_PROFILE_SUCCESS',res});
+                dispatch({type:'LOAD_USER_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
                 dispatch({type:'UPDATE_PROFILE_ERROR',res})

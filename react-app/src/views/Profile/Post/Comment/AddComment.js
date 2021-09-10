@@ -81,6 +81,12 @@ export default function AddComment({post}) {
         
     }, [dispatch])
 
+    useEffect(()=>{
+        if (user?.id === infoprofile.infoprofile.user_id) {
+            setUserVisiterAvatar(user?.profile.avatar_link)
+        }
+      },[user])
+
 
     return (
             <>

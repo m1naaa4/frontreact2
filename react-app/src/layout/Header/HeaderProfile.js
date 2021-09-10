@@ -42,11 +42,9 @@ function HeaderProfile() {
     });
     useEffect(() => {
         if(userProfile == ""){
-            dispatch(loadUserAction());
-
-            dispatch( LoadNotificationAction());    
+            dispatch(loadUserAction());dispatch( LoadNotificationAction()); 
         }
-
+         
     }, [dispatch])
 
     const userMenu = () => {
@@ -92,8 +90,7 @@ function HeaderProfile() {
                 </button>
             </div>
 
-            {
-                userProfile !== '' && userProfile !== 'loading'  ?
+            
 
                 <header className="Dadupa-Header">
                     <div className="container-fluid">
@@ -143,6 +140,10 @@ function HeaderProfile() {
                                         </div>
                                     </div>
                                     <div className="Dadupa-User" onClick={userMenu}>
+
+                                    {
+                                         userProfile !== '' && userProfile !== 'loading'  ?
+                <>
                                         <ul className="Dadupa-User-Infos">
                                             <li className="profile-image">
                                                 {userProfile.profile.avatar_link ? 
@@ -165,6 +166,14 @@ function HeaderProfile() {
                                             <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>
+                                        </>
+:
+                                        userProfile.success === false ?
+                                            userProfile.message
+                                            :
+                                            <span/>
+                                    }
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -172,12 +181,7 @@ function HeaderProfile() {
                     </div>
                 </header>
                 
-                    :
-                    userProfile.success === false ?
-                        userProfile.message
-                        :
-                        <span/>
-            }
+                    
         </div>
     )
 }

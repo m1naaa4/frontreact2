@@ -14,6 +14,7 @@ export default function PostHeader({ post }) {
   const [options_List, SetOptions_List] = useState(false);
   const [user_profile_id, setUserProfileId] = useState();
   const [user_id, setUserId] = useState();
+  const [avatar, setAvatar] = useState();
 
   const showOptions = () =>{
     SetOptions_List(!options_List)
@@ -37,13 +38,21 @@ export default function PostHeader({ post }) {
     SetOptions_List(!options_List)
   }
 
+  useEffect(()=>{
+    if (user?.id === post?.user_id) {
+      setAvatar(user?.profile.avatar_link)
+    }else{
+      setAvatar(post.avatar)
+    }
+  },[user])
+
   return (
   
         <div className="PostHeader">
           <Link className="PostUser-Thumb" to={"/profile/"+ post.profile_id} >
             {/* <img src={post.avatar} alt="avatar" /> */}
-            {post.avatar ? 
-                <img src={post.avatar} alt="avatar" />    
+            {avatar ? 
+                <img src={avatar} alt="avatar" />    
             : <img src="/assets/images/avatar.png" alt="avatar" />}
           </Link>
           <Link className="PostUser-Details" to={"/profile/"+ post.profile_id}>

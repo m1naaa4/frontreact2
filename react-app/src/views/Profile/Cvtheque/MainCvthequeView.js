@@ -13,8 +13,11 @@ import SideRightProfileView from '../SideRightProfileView';
 export default function MainCvthequeView(props) { 
     const dispatch = useDispatch();
     const params = useParams();
+    $(window).on('load', function(){
+        dispatch( ProfileAction(params.id));
+    });
     useEffect(() => {
-        dispatch( ProfileAction(params.id)); 
+        //dispatch( ProfileAction(params.id)); 
         
         var width = $(window).width();
 

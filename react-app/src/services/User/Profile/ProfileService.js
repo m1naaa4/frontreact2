@@ -74,12 +74,12 @@ export const Cvdelete = (data) =>{
          });
 }
 
-export const Cvget = () =>{
+export const Cvget = (data) =>{
     
     let cvUpUrl = "cvtheque/get";
     const tokenId = "user-token";
 
-    return  http.getData(cvUpUrl, tokenId).then( data => {
+    return  http.postData(data, cvUpUrl, tokenId).then( data => {
         return data;
     }).catch((error)=> {
         return error;

@@ -15,9 +15,9 @@ export default function ProfilePrivateRoutes(props) {
             <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
                 <Switch>
-                    <Route exact path={`${props.match.path}/:id`}  component = {ProfilePage} />
+                    <Route exact path={`${props.match.path}/:id/me`}  component = {ProfilePage} />
                     <Route exact path={props.match.path} render = { props => (
-                        <Redirect to={{pathname: `${props.match.path}/:id` }} />
+                        <Redirect to={{pathname: `${props.match.path}/:id/me` }} />
                     )} />
 
                     

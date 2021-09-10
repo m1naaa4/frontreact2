@@ -4,6 +4,7 @@ import Routes from './Routes';
 
 import { useDispatch, useSelector } from "react-redux";
 import PusherService from "./services/Pusher";
+import { ErrorBoundary } from './Errors/ErrorBoundary';
 
 
 function App() {
@@ -67,9 +68,12 @@ function App() {
 
     
     return (
-        <BrowserRouter>
-            <Routes/>
-        </BrowserRouter>
+        // <ErrorBoundary>
+            <BrowserRouter>
+                <Routes/>
+            </BrowserRouter>
+        // </ErrorBoundary>
+        
     );
 }
 

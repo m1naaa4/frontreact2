@@ -123,7 +123,8 @@ export default function(newavatar) {
         }
         if (matchYoutubeUrl(url)){
             dispatch(GetYoutubeAction(datayoutube, 'post/getYoutubeVideo', ''));
-            setType('youtube')
+            setType('youtube');
+            $('#textbody').val('')
         }
     }
 

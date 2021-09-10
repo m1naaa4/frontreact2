@@ -34,20 +34,20 @@ function ZoneDropFilter ({field, label, ...others }) {
       const onMenuClose = () => setIsMenuOpen(false);
 
     return (
-        // <select className="user-type" name={field} {...others} required={others.required && "required"}>
-        //     {countries.map((item) => (
-        //         <option key={item.value} value={item.value} >{item.label}</option>
-        //     ))}
-        // </select>
+        <select className="user-type" name={field} {...others} required={others.required && "required"}>
+            {countries.map((item) => (
+                <option key={item.value} value={item.value} >{item.label}</option>
+            ))}
+        </select>
         // <Select className="user-type" options={countries} name={field} {...others} required={others.required && "required"}/>
-        <Select 
-        className="user-type"
-        name={field}
-        inputId="aria-example-input"
-        onMenuOpen={onMenuOpen}
-        onMenuClose={onMenuClose}
-        options={countries}
-      />
+    //     <Select 
+    //     className="user-type"
+    //     name={field}
+    //     inputId="aria-example-input"
+    //     onMenuOpen={onMenuOpen}
+    //     onMenuClose={onMenuClose}
+    //     options={countries}
+    //   />
     )
 }
 

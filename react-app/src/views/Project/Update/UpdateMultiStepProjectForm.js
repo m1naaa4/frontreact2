@@ -35,6 +35,7 @@ const defaultData = {
     type: "",
     mediatype: '',
     media: "",
+    website_url: '',
 };
 
 const UpdateMultiStepProjectForm = ( props ) => {

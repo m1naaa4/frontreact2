@@ -5,6 +5,7 @@ import OffreGrid from './OffreGrid';
 import ProfileHeaderForm from '../ProfileFormData';
 import { ProfileAction } from '../../../store/actions/Profile/UserActions';
 import { useLocation, useParams } from 'react-router';
+import $  from 'jquery';
 
 
 export default function MainView(props) { 
@@ -13,12 +14,18 @@ export default function MainView(props) {
     const params = useParams();
     const location = useLocation();
     console.log(offres)
+    $(window).on('load', function(){
+        dispatch( ProfileAction(params.id));
+    });
+    const infoProfile = useSelector(state => state.infoProfile);
+    
     useEffect(() => { 
         let data = {
-            action : 'getmyprojectlist'
+            action : 'getmyprojectlist',
+            userIdd : infoProfile.user_id
         }       
         dispatch(getMyOffresAction(data, '', ''));
-        dispatch( ProfileAction(params.id));
+        //dispatch( ProfileAction(params.id));
     },[dispatch , location])
 
     return (

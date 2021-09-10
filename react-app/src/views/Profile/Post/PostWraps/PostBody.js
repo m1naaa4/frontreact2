@@ -8,7 +8,7 @@ import YouTube from 'react-youtube';
 
 export default function PostBody({ post }) {    
   useEffect(() => {
-    var fixLeft = $('.Left-Side').offset().top + $('.Left-Side').outerHeight() - window.innerHeight;       // get initial position of the element
+    var fixLeft = $('.Left-Side').offset()?.top + $('.Left-Side').outerHeight() - window.innerHeight;       // get initial position of the element
         $(window).scroll(function() {                  // assign scroll event listener
             var currentScroll = $(window).scrollTop(); // get current position
             if (currentScroll >= fixLeft) {           // apply position: fixed if you
@@ -44,9 +44,8 @@ export default function PostBody({ post }) {
                     poster="/assets/poster.png"
                     src={post.media_link}
                 />
-                ) : (<img width="100%" height="300" src={post.media_link} alt="Project"/>)): 
-                (post.type === 'youtube' ?
-                <YouTube videoId={post.media_link} opts={opts} />:'')
+                ) : (post.type === 'youtube' ?
+                (<YouTube videoId={post.media_link} opts={opts} />):(<img width="100%" height="300" src={post.media_link} alt="Project"/>))):''
           } 
         </div>
     </div>        

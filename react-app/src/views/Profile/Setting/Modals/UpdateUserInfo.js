@@ -23,9 +23,6 @@ const  UpdateUserInfo = ({ showInfo, handleCloseInfo, user}) => {
         city : formData.city,
         phone : formData.phone,
     }
-    console.log("proddddddddddddddddddddddddddddddddddddddfile" , user)
-    const infoprofile = useSelector(state => state.userProfile.userProfile);
-
     const updateInfo =(id) =>{
         dispatch(UserInfoAction(data, '', ''));
       }

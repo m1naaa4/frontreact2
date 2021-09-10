@@ -39,17 +39,24 @@ export default function CvView(props) {
       slidesToScroll: 1
     };
 
+    const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
+    const infoProfile = useSelector(state => state.infoProfile);
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
         let data = {
             action : 'getmyprojectlist'
-        } 
-        dispatch(getCvthequeAction('', '', ''));
+        }
+        let dataa ={
+          user_id : infoProfile.user_id
+        }
+        dispatch(getCvthequeAction(dataa, '', ''));
         dispatch(getMyOffresAction(data, '', ''));
     },[dispatch])
 
-    const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
+    
+    console.log('ttttttttttttttttttt', useSelector(state => state.infoProfile))
 
     const deleteSkill =(id) =>{
       let data = {
