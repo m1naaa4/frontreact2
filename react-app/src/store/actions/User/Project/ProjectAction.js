@@ -61,6 +61,7 @@ export const GetProjectAction = (data, props, current) =>{
 
 export const getMyOffresAction = (data, props, current) =>{
 
+    console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',data)
     return (dispatch) =>
     {
         GetMyProject(data,props, current).then((res)=>{

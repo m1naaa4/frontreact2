@@ -5,7 +5,7 @@ import ProjectView from "./ProjectGridView";
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";
 import {useDispatch, useSelector} from "react-redux";
 import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User/Project/ProjectActions";
-import {Redirect} from 'react-router-dom';
+import {Redirect, useLocation} from 'react-router-dom';
 
 
 export default function ListProjectView({filterInput, setFilterInput, props}) {
@@ -45,6 +45,9 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
     const goToShowproject = (id) => {
   //      props.history.push('/project/show/'+ id)
     };
+
+    const location = useLocation();
+    console.log(location.pathname)
 
     return (
         <>

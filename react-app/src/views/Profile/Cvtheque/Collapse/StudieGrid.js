@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
-import Moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
 import { CvdeleteAction, CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 
 
 const  StudieGrid = ({study}) => {
@@ -38,9 +38,17 @@ const  StudieGrid = ({study}) => {
         index : study.index,
     }
   }
-
+  const user = useSelector(state => state.userProfile.userProfile);
+  const [action, setAction] = useState(false);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
+  const params = useParams();
+
+  useEffect(() => {
+    if (user?.profile_id) {
+      user?.profile_id === params.id ? setAction(true) : setAction(false);
+    }
+  })
 
   const UpdateStudies =(id) =>{
     dispatch(CvUpdateAction(data, '', ''));
@@ -58,8 +66,14 @@ const  StudieGrid = ({study}) => {
                     <label>{moment(study.datefin).format('y')} - {study.diplome}</label>
                     <span>{study.lieu}</span>
                     <div>
-                      <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
-                      <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button>
+                      {
+                        action &&
+                        <>
+                          <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
+                          <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button>
+                        </>
+                      }
+                      
                     <li className="Profile-Skills">
                       
                     </li>

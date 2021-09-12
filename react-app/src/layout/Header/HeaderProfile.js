@@ -158,7 +158,7 @@ function HeaderProfile() {
                                         </ul> 
                                         <div className="Dadupa-Mini-Profile">
                                             <label className="Mini-Profile-Name">{userProfile.name}</label>
-                                            <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
+                                            <Link to={`/profile/`+userProfile.profile_id+'/me'} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </Link></li>
                                             {/* <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li> */}

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
+import { CvdeleteAction, CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
 import DropType from '../../../../utils/DropType';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -24,6 +25,16 @@ const  ExperienceGrid = ({experience}) => {
 
   const dispatch = useDispatch();
   const [formData, setForm] = useForm({present:experience.present, post:experience.post, sector:experience.sector, entreprise:experience.entreprise,lieu:experience.lieu, description:experience.description});
+
+  const params = useParams();
+  const user = useSelector(state => state.userProfile.userProfile);
+  const [action, setAction] = useState(false);
+
+  useEffect(() => {
+    if (user?.profile_id) {
+      user?.profile_id === params.id ? setAction(true) : setAction(false);
+    }
+  })
 
   const data = {
       experiences : {
@@ -46,12 +57,26 @@ const  ExperienceGrid = ({experience}) => {
     dispatch(CvUpdateAction(data, '', ''));
   }
 
+  const deleteStudy =() =>{
+    let data = {
+      experiences : {index : experience.index}
+        }
+    dispatch(CvdeleteAction(data, '', ''));
+  }
+
     return (    
       <>
         <li className="Section-Item">
           <label>{moment(experience.datedebut).format('MMMM y')} - {moment(experience.datefin).format('MMMM y')}</label>
           <span>{experience.post}- {experience.lieu}</span>
-          <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
+            {
+              action &&
+              <>
+                <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
+                <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button>
+              </>
+            }
+          
           <div className="CollapsUpdate" style={{display:show?'block':'none'}}>
             <form className="" action="index.html" method="post">
               <div className="form-inputs">

@@ -22,7 +22,7 @@ export default function MainView(props) {
     useEffect(() => { 
         let data = {
             action : 'getmyprojectlist',
-            userIdd : infoProfile.user_id
+            profileId : params.id
         }       
         dispatch(getMyOffresAction(data, '', ''));
         //dispatch( ProfileAction(params.id));

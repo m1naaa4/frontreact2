@@ -11,13 +11,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RealizationGrid from '../Realization/RealizationGrid';
-import { getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
+import { ClearProjectsAction, getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
+import { Link, useParams } from 'react-router-dom';
+import { Text } from '../../../containers/Language';
 
 
 export default function CvView(props) {
     const [show, setShow] = useState(false);
     const [showstudies, setShowstudies] = useState(false);
     const [showexperience, setShowexperience] = useState(false);
+    const [action, setAction] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -31,6 +34,8 @@ export default function CvView(props) {
 
     const realizations = useSelector(state => state.offres.offres);
 
+    const params = useParams();
+
     const settings = {
       dots: false,
       infinite: true,
@@ -40,20 +45,28 @@ export default function CvView(props) {
     };
 
     const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
-    const infoProfile = useSelector(state => state.infoProfile);
     
+    const user = useSelector(state => state.userProfile.userProfile);
+    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrjjjjjjjjjjjjjjjjjjjjjjjj',user)
     const dispatch = useDispatch();
 
     useEffect(() => {
         let data = {
-            action : 'getmyprojectlist'
+            action : 'getmyprojectlist',
+            profileId : params.id
         }
         let dataa ={
-          user_id : infoProfile.user_id
+          profileId : params.id
         }
         dispatch(getCvthequeAction(dataa, '', ''));
         dispatch(getMyOffresAction(data, '', ''));
     },[dispatch])
+
+    useEffect(() => {
+      if (user?.profile_id) {
+        user?.profile_id === params.id ? setAction(true) : setAction(false);
+      }
+    })
 
     
     console.log('ttttttttttttttttttt', useSelector(state => state.infoProfile))
@@ -65,6 +78,10 @@ export default function CvView(props) {
       dispatch(CvdeleteAction(data, '', ''));
     }
 
+    const clearProject = () => {
+      dispatch(ClearProjectsAction());
+  }
+
     return (
         
         <div className="col-md-6">
@@ -73,7 +90,10 @@ export default function CvView(props) {
 
 
               <div className="Profile-Section">
-                <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
+                {
+                  action && 
+                  <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
+                }
 
                 <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <SkillsModal show={show} handleClose={handleClose}/>
@@ -91,7 +111,10 @@ export default function CvView(props) {
                 </div>
               </div>
               <div className="Profile-Section">
-                <button type="button" className="UpdateInfos-BTN" onClick={handleShowStudies} data-toggle="modal" data-target="#EtudeModal"><i className="uil uil-plus"></i></button>
+                {
+                  action && 
+                  <button type="button" className="UpdateInfos-BTN" onClick={handleShowStudies} data-toggle="modal" data-target="#EtudeModal"><i className="uil uil-plus"></i></button>
+                }
                 
                 <Modal show={showstudies} onHide={handleCloseStudies} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <StudieModal showstudies={showstudies} handleCloseStudies={handleCloseStudies}/>
@@ -110,7 +133,10 @@ export default function CvView(props) {
                 </ul>
               </div>
               <div className="Profile-Section">
-                <button type="button" className="UpdateInfos-BTN" onClick={handleShowExperience} data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i></button>
+                {
+                  action && 
+                  <button type="button" className="UpdateInfos-BTN" onClick={handleShowExperience} data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i></button>
+                }
                 
                 <Modal show={showexperience} onHide={handleCloseExperience} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                       <ExperienceModal showexperience={showexperience} handleCloseExperience={handleCloseExperience}/>
@@ -128,7 +154,11 @@ export default function CvView(props) {
                 </ul>
               </div>
               <div className="Profile-Section">
-                <button type="button" className="UpdateInfos-BTN" data-toggle="modal" data-target="#ProjectModal"><i className="uil uil-plus"></i></button>
+                {
+                  action && 
+                  <Link className="UpdateInfos-BTN" to={`/project/create`} onClick={clearProject}><i className="uil uil-plus"></i>  
+                  </Link>
+                }
                 <h3 className="Profile-Section-Title"><i className="uil uil-presentation"></i> réalisations</h3>
                 <Slider {...settings}>
 
