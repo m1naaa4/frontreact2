@@ -17,12 +17,9 @@ export const LoadUser = () =>{
          });
 }
 
-export const GetInvitations = (data) =>{
+export const friends = (data) =>{
     
-    let Url = "friend/getInvitations";
-    const tokenId = "user-token";
-
-    return  http.postData(Url, tokenId).then( data => {
+    return  http.postData(data, data.url).then( data => {
         return data;
     }).catch((error)=> {
         return error;

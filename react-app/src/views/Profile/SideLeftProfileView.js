@@ -82,10 +82,10 @@ export default function SideLeftProfileView() {
                   <h3>Lieu de résidence</h3>
                   <span>{infoprofile.infoprofile.address}</span>
                 </div>
-                <div className="Profile-Adresse">
+                {/* <div className="Profile-Adresse">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.443077639317!2d-7.6081671853399175!3d33.593806480733214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd6c03865309%3A0x1281f2138bd13aab!2sRegus%20-%20Casablanca%2C%20Downtown!5e0!3m2!1sen!2sma!4v1593043725007!5m2!1sen!2sma" 
                         style={{width:"100%", height:"200", frameborder:"0", style:"border:0", allowfullscreen:"", ariaHidden:"false", tabindex:"0"}}></iframe>
-                </div>
+                </div> */}
               </div>
             </div>
             : infoprofile.success === false ?

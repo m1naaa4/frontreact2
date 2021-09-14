@@ -1,17 +1,28 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { InvitationsAction, SuggestionsAction } from '../../store/actions/Friend/FriendsAction';
 import Invitations from './Friend/Invitations'
 import SuggestionList from './Friend/SuggestionList'
-import { GetInvitationsAction} from "../../store/actions/Friend/InvitationsAction";
 
 
 
 
 export default function SideRightProfileView() {
 
+  const invitations = useSelector(state => state.userProfile.invitations);
+  const suggestions = useSelector(state => state.userProfile.suggestions);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(GetInvitationsAction()); 
+    let data = {
+      'url' : 'friend/getInvitations'
+    }
+    
+    let data1 = {
+      'url' : 'friend/getSuggestions'
+    }
+    dispatch(InvitationsAction(data)); 
+    dispatch(SuggestionsAction(data1)); 
   },[])
 
   return (
@@ -23,11 +34,21 @@ export default function SideRightProfileView() {
 
             <div className="Contact-Widget">
               <h3 className="Widget-Title">Invitations</h3>
-              <Invitations/>
+              <div className="Suggestion-List">
+              {invitations && invitations !=='loading' && invitations.map((invitation, index) => 
+                    <Invitations invitation={invitation} key={invitation.id}/>
+                     )
+                }
+              </div>
             </div>
             <div className="Contact-Widget">
               <h3 className="Widget-Title">Suggestion de contacts</h3>
-              <SuggestionList/>
+              <div className="Suggestion-List">
+              {suggestions && suggestions !=='loading' && suggestions.map((suggestion, index) => 
+                    <SuggestionList suggestion={suggestion} key={suggestion.id}/>
+                     )
+                }
+              </div>
               <a className="Contact-SeeMore" href="#">Voir plus</a>
             </div>
             

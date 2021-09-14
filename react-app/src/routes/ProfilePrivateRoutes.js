@@ -2,6 +2,7 @@ import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from '../layout/Header/HeaderProfile';
 import NotFound from '../pages/404';
+import FriendPage from '../pages/Profile/FriendPage';
 import OffrePage from '../pages/Profile/OffrePage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import SettingPage from '../pages/Profile/SettingPage';
@@ -36,6 +37,11 @@ export default function ProfilePrivateRoutes(props) {
                     <Route exact path={`${props.match.path}/:id/settings`}  component = {SettingPage} />
                     <Route exact path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/:id/settings` }} />
+                    )} />
+
+                    <Route exact path={`${props.match.path}/:id/friends`}  component = {FriendPage} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/:id/friends` }} />
                     )} />
 
 

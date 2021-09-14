@@ -18,6 +18,24 @@ const UserReducer = (state = initState, action) => {
                 userProfile: action.res.user,
             }
 
+        case 'LOADING_INVITATIONS_SUCCESS':
+            return {
+                ...state,
+                invitations: action.res.data,
+            }
+
+        case 'LOADING_SUGGESTIONS_SUCCESS':
+            return {
+                ...state,
+                suggestions: action.res.data,
+            }
+
+        case 'LOADING_FRIENDS_LIST_SUCCESS':
+            return {
+                ...state,
+                friends: action.res.data,
+            }
+
         case 'LOAD_USER_ERROR':
             return {
                 ...state,

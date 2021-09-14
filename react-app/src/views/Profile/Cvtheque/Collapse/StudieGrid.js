@@ -74,9 +74,9 @@ const  StudieGrid = ({study}) => {
                         </>
                       }
                       
-                    <li className="Profile-Skills">
+                    {/* <li className="Profile-Skills">
                       
-                    </li>
+                    </li> */}
                     </div>
                     
                     

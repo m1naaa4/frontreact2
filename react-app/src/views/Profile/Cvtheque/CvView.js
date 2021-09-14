@@ -47,7 +47,6 @@ export default function CvView(props) {
     const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
     
     const user = useSelector(state => state.userProfile.userProfile);
-    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrjjjjjjjjjjjjjjjjjjjjjjjj',user)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -69,7 +68,6 @@ export default function CvView(props) {
     })
 
     
-    console.log('ttttttttttttttttttt', useSelector(state => state.infoProfile))
 
     const deleteSkill =(id) =>{
       let data = {
@@ -164,7 +162,7 @@ export default function CvView(props) {
 
                         {realizations?.projects &&
                             realizations?.projects.map((realization, index) => (
-                              <div className="Portfolio-Item">
+                              <div className="Portfolio-Item" key={index}>
                                 <RealizationGrid realization={realization}/>
                               </div>
                         ))
