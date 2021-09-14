@@ -34,6 +34,7 @@ const UserReducer = (state = initState, action) => {
             return {
                 ...state,
                 friends: action.res.data,
+                count: action.res.count,
             }
 
         case 'LOAD_USER_ERROR':

@@ -138,3 +138,25 @@ export const FriendsAction = (data) =>{
 
 }
 
+export const RemoveFriendAction = (data) =>{
+
+    return (dispatch)=>{
+
+        // dispatch({type:'LOADING_INVITATIONS'});
+
+        friends(data).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'LOADING_REJECT_REQUEST_ADD_SUCCESS', res});
+
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'LOADING_SUGGESTIONS_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+
+}

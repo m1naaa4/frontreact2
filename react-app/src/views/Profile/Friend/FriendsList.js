@@ -12,8 +12,9 @@ export default function({props}){
         'url' : 'friend/getFriends'
         }
         dispatch(FriendsAction(data)); 
-    },[])
+    },[]);
     const friends = useSelector(state => state.userProfile.friends);
+    const count = useSelector(state => state.userProfile.count);
     console.log('friendssssssssssss', friends)
 
     return(
@@ -22,7 +23,7 @@ export default function({props}){
                     <div className="Center-Side">
                         <div className="Network-Header">
                             <div className="Network-HeaderLeft">
-                            <h2 className="Network-HeaderTitle"><span>1800</span> Contacts</h2>
+                            <h2 className="Network-HeaderTitle"><span>{count}</span> Contacts</h2>
                             </div>
                             <div className="Network-HeaderRight">
                             <a className="Network-HeaderLink" href="#">Voir les invitations</a>
