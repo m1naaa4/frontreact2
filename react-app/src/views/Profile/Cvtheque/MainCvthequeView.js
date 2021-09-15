@@ -41,20 +41,8 @@ export default function MainCvthequeView(props) {
     });
 
     return (
-        <div className="Page-Wrapper Profile">  
-            <ProfileHeaderForm {...props}/>     
-            <div className="Profile-Wrapper">
-                <div className="container">
-                    <div className="row">
-                        <SideLeftProfileView />
-                        <CvView  {...props}/>
-                        <SideRightProfileView/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-           
-        
+            
+        <CvView  {...props}/>
+                       
     )
 }

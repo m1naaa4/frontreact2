@@ -30,14 +30,14 @@ export default function MainView(props) {
 
     return (
         <>  
-        <ProfileHeaderForm {...props}/>
-        <div className="Page-Wrapper Profile">
+        <div className="col-md-6">
+                    <div className="Center-Side">
             <div className="container">
                 <div className="offers-list">
                     <div className="row">
                         {offres?.projects &&
                             offres?.projects.map((offre, index) => (
-                            <div div className="col-md-6 col-lg-4" key={index}>
+                            <div div className="col-md-6" key={index}>
                                 <OffreGrid offre={offre}/>
                             </div>     
                         ))
@@ -54,7 +54,8 @@ export default function MainView(props) {
                     </div>
                     </div>
             </div>
-        </div>
+            </div>
+            </div>
         
         </>
     

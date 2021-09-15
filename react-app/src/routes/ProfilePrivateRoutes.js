@@ -7,6 +7,9 @@ import OffrePage from '../pages/Profile/OffrePage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import SettingPage from '../pages/Profile/SettingPage';
 import MainCvthequeView from '../views/Profile/Cvtheque/MainCvthequeView';
+import ProfileHeaderForm from '../views/Profile/ProfileFormData';
+import SideLeftProfileView from '../views/Profile/SideLeftProfileView';
+import SideRightProfileView from '../views/Profile/SideRightProfileView';
 
 
 export default function ProfilePrivateRoutes(props) {
@@ -15,38 +18,49 @@ export default function ProfilePrivateRoutes(props) {
         <div>
             <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
-                <Switch>
-                    <Route exact path={`${props.match.path}/:id/me`}  component = {ProfilePage} />
-                    <Route exact path={props.match.path} render = { props => (
-                        <Redirect to={{pathname: `${props.match.path}/:id/me` }} />
-                    )} />
+                <div className="Page-Wrapper Profile">
+                    <ProfileHeaderForm {...props}/>
+                    <div className="Profile-Wrapper">
+                        <div className="container">
+                            <div className="row">
+                                <SideLeftProfileView />
+                                    <Switch>
+                            <Route exact path={`${props.match.path}`}  component = {ProfilePage} />
+                            <Route exact path={props.match.path} render = { props => (
+                                <Redirect to={{pathname: `${props.match.path}` }} />
+                            )} />
 
-                    
-                    <Route exact path={`${props.match.path}/:id/cvtheque`}  component = {MainCvthequeView} />
-                    <Route exact path={props.match.path} render = { props => (
-                        <Redirect to={{pathname: `${props.match.path}/:id/cvtheque` }} />
-                    )} />
+                            
+                            <Route exact path={`${props.match.path}/cvtheque`}  component = {MainCvthequeView} />
+                            <Route exact path={props.match.path} render = { props => (
+                                <Redirect to={{pathname: `${props.match.path}/cvtheque` }} />
+                            )} />
 
-                    
-                    <Route exact path={`${props.match.path}/:id/meoffre`}  component = {OffrePage} />
-                    <Route exact path={props.match.path} render = { props => (
-                        <Redirect to={{pathname: `${props.match.path}/:id/meoffre` }} />
-                    )} />
+                            
+                            <Route exact path={`${props.match.path}/meoffre`}  component = {OffrePage} />
+                            <Route exact path={props.match.path} render = { props => (
+                                <Redirect to={{pathname: `${props.match.path}/meoffre` }} />
+                            )} />
 
-                    
-                    <Route exact path={`${props.match.path}/:id/settings`}  component = {SettingPage} />
-                    <Route exact path={props.match.path} render = { props => (
-                        <Redirect to={{pathname: `${props.match.path}/:id/settings` }} />
-                    )} />
+                            
+                            <Route exact path={`${props.match.path}/settings`}  component = {SettingPage} />
+                            <Route exact path={props.match.path} render = { props => (
+                                <Redirect to={{pathname: `${props.match.path}/settings` }} />
+                            )} />
 
-                    <Route exact path={`${props.match.path}/:id/friends`}  component = {FriendPage} />
-                    <Route exact path={props.match.path} render = { props => (
-                        <Redirect to={{pathname: `${props.match.path}/:id/friends` }} />
-                    )} />
+                            <Route exact path={`${props.match.path}/friends`}  component = {FriendPage} />
+                            <Route exact path={props.match.path} render = { props => (
+                                <Redirect to={{pathname: `${props.match.path}/friends` }} />
+                            )} />
 
 
-                    <Route component={NotFound} header="false" />
-                </Switch>
+                            <Route component={NotFound} header="false" />
+                        </Switch>
+                                <SideRightProfileView/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

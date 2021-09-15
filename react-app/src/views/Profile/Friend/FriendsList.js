@@ -1,21 +1,32 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FriendsAction } from "../../../store/actions/Friend/FriendsAction";
+import { FriendsAction, MyFriendsAction } from "../../../store/actions/Friend/FriendsAction";
 import FriendGrid from "./FriendGrid";
+import { useParams } from 'react-router'
 
 
 export default function({props}){
 
     const dispatch = useDispatch();
+    const params = useParams();
+
     useEffect(() => {
         let data = {
-        'url' : 'friend/getFriends'
+        'url' : 'friend/getFriends',
+        'user_profile_id' : params.id
         }
-        dispatch(FriendsAction(data)); 
+        dispatch(FriendsAction(data));
     },[]);
+
     const friends = useSelector(state => state.userProfile.friends);
     const count = useSelector(state => state.userProfile.count);
-    console.log('friendssssssssssss', friends)
+
+    useEffect(()=>{
+        let data = {
+          'url' : 'friend/getmyfriends',
+          }
+        dispatch(MyFriendsAction(data));
+      },[])
 
     return(
         <>
@@ -32,7 +43,7 @@ export default function({props}){
                         </div>
                         
                         <div className="Network-Filter Filter-Row">
-                <form className="Filter-Form" action="#" method="post">
+                            <form className="Filter-Form" action="#" method="post">
                 <div className="row">
                     <div className="col-sm-12 col-md-12 col-lg-12">
                     <div className="display-flex">
@@ -54,7 +65,7 @@ export default function({props}){
                     </div>
                 </div>
                 </form>
-            </div>
+                        </div>
             
                         <div className="Networks">
 

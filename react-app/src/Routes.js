@@ -23,7 +23,7 @@ const Routes = (props) => {
                         <Route exact path="/login" component={UserLogin} />
                         <Route path="/register" component={UserRegister} />
                         <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
-                        <Gaurd  path="/profile" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
+                        <Gaurd  path="/profile/:id" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
                         <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />

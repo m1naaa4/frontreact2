@@ -1,18 +1,17 @@
 import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { ProfileAction } from '../../store/actions/Profile/UserActions';
 import PostView from './PostView';
-import ProfileHeaderForm from './ProfileFormData';
-import SideLeftProfileView from './SideLeftProfileView';
-import SideRightProfileView from './SideRightProfileView';
 import $ from "jquery";
 
 
 
-export default function MainProfileView(props) { 
+export default function HomeProfileView(props) { 
     const dispatch = useDispatch();
     const params = useParams();
+    const history = useHistory();
+    console.log('yyyyyyy', history)
     $(window).on('load', function(){
         dispatch( ProfileAction(params.id));
     });
@@ -47,20 +46,8 @@ export default function MainProfileView(props) {
     });
 
     return (
-        <>  
-            <ProfileHeaderForm {...props}/>     
-            <div className="Profile-Wrapper">
-                <div className="container">
-                    <div className="row">
-                        <SideLeftProfileView />
-                        <PostView  {...props}/>
-                        <SideRightProfileView/>
-                    </div>
-                </div>
-            </div>
-        </>
-    
+               
+        <PostView  {...props}/>
            
-        
     )
 }
