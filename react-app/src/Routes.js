@@ -10,6 +10,8 @@ import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
 import FundersPrivateRoutes from './routes/FundersPrivateRoutes';
 import NotFound from './pages/404';
 import Opps from './pages/500';
+import SettingPrivateRoutes from './routes/SettingPrivateRoutes';
+import FavoritePrivateRoutes from './routes/FavoritePrivateRoutes';
 
 const Routes = (props) => {
 
@@ -24,6 +26,8 @@ const Routes = (props) => {
                         <Route path="/register" component={UserRegister} />
                         <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
                         <Gaurd  path="/profile/:id" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
+                        <Gaurd  path="/user/:id" token='user-token' routeRedirect='/login' component={SettingPrivateRoutes} />
+                        <Gaurd  path="/favorite" token='user-token' routeRedirect='/login' component={FavoritePrivateRoutes} />
                         <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />

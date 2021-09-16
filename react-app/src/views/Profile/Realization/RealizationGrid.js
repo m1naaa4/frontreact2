@@ -12,7 +12,7 @@ export default function RealizationGrid({realization}) {
         if (user?.profile_id) {
         user?.profile_id === params.id ? setAction(true) : setAction(false);
         }
-    })
+    },[user.profile_id, params.id])
 
     const history  = useHistory();
     const goToEditproject = () => {

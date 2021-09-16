@@ -1,5 +1,4 @@
 import React, {useRef, useCallback, useState, useEffect} from 'react'
-import {Text} from "../../containers/Language";
 import FilterProject from "../User/Fields/Filter/FilterProject";
 import ProjectView from "./ProjectGridView";
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";

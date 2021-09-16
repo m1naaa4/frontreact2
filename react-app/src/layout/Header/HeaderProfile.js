@@ -3,11 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
-import {  Link, NavLink, useHistory, useParams  } from 'react-router-dom';
+import {  Link, NavLink, useHistory  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 import $ from "jquery";
-import Messages from './Messages';
+// import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 
 function HeaderProfile() {
@@ -161,8 +161,8 @@ function HeaderProfile() {
                                             <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </Link></li>
-                                            {/* <li className="Mini-Profile-Item"><a href=""><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </a></li> */}
-                                            <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/favorite`}><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </Link></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/user/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
                                             <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>

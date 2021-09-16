@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Modal } from 'react-bootstrap';
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import ModalUpdateProfile from './Update_profile/ModalUpdateProfile';
 
 
@@ -49,7 +49,7 @@ export default function SideLeftProfileView() {
                   <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#exampleModalCenter"><i className="uil uil-pen"></i></button>
                 }
                   <ul>
-                    <li><i className="uil uil-user"></i> {infoprofile.infoprofile.age}</li>
+                    {/* <li><i className="uil uil-user"></i> {infoprofile.infoprofile.age}</li> */}
                     <li><i className="uil uil-crosshair"></i> {infoprofile.infoprofile.job}</li>
                     <li><i className="uil uil-phone"></i> {infoprofile.infoprofile.phone}</li>
                     <li><i className="uil uil-envelope"></i> {infoprofile.infoprofile.email}</li>

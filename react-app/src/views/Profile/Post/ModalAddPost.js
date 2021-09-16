@@ -113,10 +113,8 @@ export default function(newavatar) {
     };
 
     const youtube_id =  useSelector(state => state.youtube?.youtube?.message?.id);
-    console.log('dfdfdfdfdfdjjjjjjjjjjjjj', youtube_id)
 
     const getyoutube =(url)=>{
-        console.log('llllllllllllllllllllllllllllllllllllllllllllllllllllllll', url, matchYoutubeUrl(url))
         const datayoutube = {
             profile_post_id : params.id,
             youtube_source  : url,

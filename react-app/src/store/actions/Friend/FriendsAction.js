@@ -1,4 +1,4 @@
-import { friends } from "../../../services/User/Profile/ProfileService";
+import { generalePost } from "../../../services/User/Profile/ProfileService";
 
 export const InvitationsAction = (data) =>{
 
@@ -6,7 +6,7 @@ export const InvitationsAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_INVITATIONS_SUCCESS', res});
@@ -29,7 +29,7 @@ export const SuggestionsAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_SUGGESTIONS_SUCCESS', res});
@@ -52,7 +52,7 @@ export const SendRequestFriendAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_SEND_SUGGESTION_SUCCESS', res});
@@ -75,7 +75,7 @@ export const AcceptFriendAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_ACCEPT_REQUEST_ADD_SUCCESS', res});
@@ -98,7 +98,7 @@ export const RejectFriendAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_REJECT_REQUEST_ADD_SUCCESS', res});
@@ -121,7 +121,7 @@ export const FriendsAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_FRIENDS_LIST_SUCCESS', res});
@@ -144,7 +144,7 @@ export const MyFriendsAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_MY_FRIENDS_LIST_SUCCESS', res});
@@ -167,7 +167,7 @@ export const RemoveFriendAction = (data) =>{
 
         // dispatch({type:'LOADING_INVITATIONS'});
 
-        friends(data).then((res) =>
+        generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_REJECT_REQUEST_ADD_SUCCESS', res});

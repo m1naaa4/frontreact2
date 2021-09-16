@@ -42,6 +42,12 @@ const UserReducer = (state = initState, action) => {
                 ...state,
                 myfriends: action.res.data,
             }
+            
+        case 'LOADING_MY_FAVORITES_LIST_SUCCESS':
+            return {
+                ...state,
+                favorites: action.res.data,
+            }
 
         case 'LOAD_USER_ERROR':
             return {

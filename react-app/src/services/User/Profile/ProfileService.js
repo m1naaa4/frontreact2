@@ -17,7 +17,7 @@ export const LoadUser = () =>{
          });
 }
 
-export const friends = (data) =>{
+export const generalePost = (data) =>{
     
     return  http.postData(data, data.url).then( data => {
         return data;

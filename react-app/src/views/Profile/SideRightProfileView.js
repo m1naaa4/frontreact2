@@ -65,7 +65,7 @@ export default function SideRightProfileView() {
                 </div>
               </div>
             </div>
-            <div className="Widget-Sponsored">
+            {/* <div className="Widget-Sponsored">
               <h3 className="Widget-Title">Sponsored</h3>
               <div className="Sponsored-Post-Thumb">
 
@@ -74,7 +74,7 @@ export default function SideRightProfileView() {
                 <div className="Sponsored-Post-Title"><a href="#!">Le marketing digital au service</a></div>
                 <div className="Sponsored-Post-Meta"><a href="#!">dadupa.com</a></div>
               </div>
-            </div>
+            </div> */}
           </div>
            
         }

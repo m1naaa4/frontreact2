@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState} from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router'
 import { AcceptFriendAction, RejectFriendAction } from '../../../store/actions/Friend/FriendsAction';
@@ -7,8 +7,8 @@ import { AcceptFriendAction, RejectFriendAction } from '../../../store/actions/F
 
 
 const  Invitations = ({invitation}) => {
-    const infoprofile = useSelector(state => state.infoProfile);
-    const user = useSelector(state => state.userProfile.userProfile);
+    // const infoprofile = useSelector(state => state.infoProfile);
+    // const user = useSelector(state => state.userProfile.userProfile);
     const [show, setShow] = useState(true);
 
     const dispatch = useDispatch();

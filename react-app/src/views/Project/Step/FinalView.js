@@ -8,7 +8,7 @@ import finances from '../../../data/finances';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
-    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, url, media, project_id, medialink, logolink, mediatype, website_url } = formData;
+    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, project_id, medialink, logolink, mediatype } = formData;
     const {previous} = navigation;
     const [sector, setSector] = useState();
     const [status, setStatus] = useState();
@@ -18,7 +18,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
     const goToShowproject = () => {
         props.history.push('/project/show/'+ project_id );
     };
-    const [t, i18n] = useTranslation();
+    const [t] = useTranslation();
 
     useEffect(() => {
         sectors.map((key) => 

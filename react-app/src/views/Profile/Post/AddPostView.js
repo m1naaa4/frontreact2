@@ -56,7 +56,7 @@ export default function AddPostView(props) {
                         </textarea>
                     </div>
                     <div className="WritePost-Options">
-                        <button type="button" onClick={handleShow} name="button"><i className="uil uil-camera"></i> Photo/Video</button>
+                        <button type="button" onClick={handleShow} name="button"><i className="uil uil-camera"></i> Photo <i className="uil uil-video"></i> Video<i className="uil-youtube"></i> Youtube</button>
                         {/* <button type="button" name="button"><i className="uil uil-tag-alt"></i> Tag Friends</button> */}
                     </div>
 

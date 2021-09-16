@@ -71,10 +71,14 @@ const  ExperienceGrid = ({experience}) => {
           <span>{experience.post}- {experience.lieu}</span>
             {
               action &&
-              <>
-                <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
-                <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button>
-              </>
+              <div className="Contact">
+              <div className="Add-Contact Invitation-Options">
+                    <button type="button" name="button" onClick={handleShow} className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
+                    <button type="button" name="button" onClick={deleteStudy} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
+                </div>
+                {/* <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
+                <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button> */}
+              </div>
             }
           
           <div className="CollapsUpdate" style={{display:show?'block':'none'}}>

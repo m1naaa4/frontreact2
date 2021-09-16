@@ -1,6 +1,6 @@
 
 const typeusers = [
-    ["", "Vous êtes ?"],
+    ["", "Type"],
     ["PP", "Porteur de projet"],
     ["BF", "Investisseur"],
     ["ACMPT", "Mentor"],

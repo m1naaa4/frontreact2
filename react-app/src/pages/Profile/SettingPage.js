@@ -3,9 +3,7 @@ import MainView from '../../views/Profile/Setting/MainView'
 
 export default function SettingPage(props) {
     return (
-        <div>
             <MainView {...props}/>
-        </div>
     )
 }
 

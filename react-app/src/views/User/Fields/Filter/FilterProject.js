@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import ZoneDropFilter from "./Project/ZoneDropFilter";
 import EtatDropFilter from "./Project/EtatDropFilter";
 import SectorDropFilter from "./Project/SectorDropFilter";
@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 
 function FilterProject({ filterInput, setFilterInput, props }) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const { zone, etat, sector, financement } = filterInput;
 
