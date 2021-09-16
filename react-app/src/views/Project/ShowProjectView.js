@@ -156,6 +156,7 @@ export default function ShowProjectView(props) {
                                 <div className="signle-offer-type">Project Business</div>
                                 <div className="single-offer-header">
                                     <div className="single-offer-logo">
+                                        <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i class="uil uil-bookmark"></i></button>
                                         <img src={project.project.logo_link} title="Nom du projet" alt=""/>
                                     </div>
                                     <h3 className="single-offer-name">{project.project.name}</h3>

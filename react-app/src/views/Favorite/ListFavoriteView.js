@@ -12,7 +12,7 @@ export default function ListFavoriteView(props) {
 
   useEffect(() => {
     let data = {
-      'url' : 'favorites'
+      'url' : 'favorite/getFavorites'
     }
     dispatch(ListFavoritesAction(data));
   },[])

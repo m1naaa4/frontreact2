@@ -8,11 +8,24 @@ import {countryName} from '../../helpers/Helpres'
 import config from '../../Config'
 import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
+import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
+import { useDispatch } from 'react-redux';
 
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
+    const dispatch = useDispatch();
+
     let history = useHistory();
     let url_to_share = slugify(project.name, { prefix: config.urls.front+'/project/show/'+project.id });
+
+    const addTofavorite = (id) => {
+        let data = {
+            'url' : 'favorite/addToFavorite',
+            'project_id' : id,
+            'provider' : 'project',
+        }
+        dispatch(AddFavoriteAction(data))
+    }
 
     const goToShowproject = (id) => {
         history.push('/project/show/'+ id)
@@ -26,6 +39,7 @@ const ProjectGridView = ({ project }) => {
                             <span>{project.sector}</span>
                         </div>
                         <div className="offer-logo">
+                            <button className="offer-bookmark" onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i class="uil uil-bookmark"></i></button>
                             <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
                         </div>
                     </div>
