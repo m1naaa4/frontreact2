@@ -12,12 +12,12 @@ export default function FavoriteGrid({favorite}) {
               <div className="offer-box">
                 <div className="offer-header">
                   <div className="offer-title">
-                    <h3><a href="single-offer.html">Nom du projet</a></h3>
+                    <h3><a href="single-offer.html"> {favorite.name} </a></h3>
                     <span>Secteur d’activité</span>
                   </div>
                   <div className="offer-logo">
                     <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                    <img src="/assets/images/majorel.png" title="Nom du projet" alt=""/>
+                    <img src={favorite.logo_link} title="Nom du projet" alt=""/>
                   </div>
                 </div>
                 <div className="offer-media">
@@ -33,7 +33,7 @@ export default function FavoriteGrid({favorite}) {
                         <img src="assets/images/icons/marker.svg" alt=""/>
                       </div>
                       <div className="meta-details">
-                        <span className="meta-value">Maroc</span>
+                        <span className="meta-value">{favorite.name}</span>
                       </div>
                     </li>
                     <li className="meta-item">
@@ -48,9 +48,9 @@ export default function FavoriteGrid({favorite}) {
                 </div>
                 <div className="offer-reactions">
                   <ul className="reactions-box">
-                    <li className="reaction likes"><i className="dadupa-icon icon-clap"></i> <span>145</span></li>
+                    <li className="reaction likes"><i className="dadupa-icon icon-clap"></i> <span>{favorite.likeCount}</span></li>
                     <li className="reaction views"><i className="uil uil-eye"></i> <span>1500</span></li>
-                    <li className="reaction comments"><i className="uil uil-comment-dots"></i> <span>1.9K</span></li>
+                    <li className="reaction comments"><i className="uil uil-comment-dots"></i> <span>{favorite.commentCount}</span></li>
                     <li className="reaction shares" data-toggle="modal" data-target="#SharingModal"><i className="uil uil-share-alt"></i> <span>380 Shares</span></li>
                   </ul>
                 </div>
