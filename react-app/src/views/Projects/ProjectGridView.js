@@ -13,15 +13,17 @@ import { useDispatch } from 'react-redux';
 
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
+    const [classe, setClasse] = useState(project?.favorite);
     const dispatch = useDispatch();
 
     let history = useHistory();
     let url_to_share = slugify(project.name, { prefix: config.urls.front+'/project/show/'+project.id });
 
     const addTofavorite = (id) => {
+        setClasse(!classe)
         let data = {
             'url' : 'favorite/addToFavorite',
-            'project_id' : id,
+            'provider_id' : id,
             'provider' : 'project',
         }
         dispatch(AddFavoriteAction(data))
@@ -39,7 +41,7 @@ const ProjectGridView = ({ project }) => {
                             <span>{project.sector}</span>
                         </div>
                         <div className="offer-logo">
-                            <button className="offer-bookmark" onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i class="uil uil-bookmark"></i></button>
+                            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i class="uil uil-bookmark"></i></button>
                             <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
                         </div>
                     </div>

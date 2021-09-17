@@ -13,12 +13,17 @@ import sectors from '../../data/sectors';
 import etats from '../../data/Etats';
 import countries from '../../data/countries';
 import finances from '../../data/finances';
+import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 
 export default function ShowProjectView(props) {
+
+    const fullproject = useSelector(state => state.getproject);
+    const project = fullproject?.getproject;
 
     const params = useParams();
     const history  = useHistory();
     const [initial, setInitial] = useState(true);
+    const [initialFavorite, setInitialFavorite] = useState(true);
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
     const [countcomment, setCountcomment] = useState();
@@ -28,6 +33,8 @@ export default function ShowProjectView(props) {
     const [country, setCountry] = useState();
     const [finance, setFinance] = useState();
     const [t] = useTranslation();
+
+    console.log('project?.project?.favorite', project?.project?.favorite, classe)
 
     const data = {
         project_id : params.id,
@@ -39,11 +46,14 @@ export default function ShowProjectView(props) {
     }, [dispatch])
 
     useEffect(() => {
-        like ? setClasse('Dislike') : setClasse('Like');
         if (initial) {
             setLike(project?.project?.is_liked);
-            setLikeCount(fullproject?.countlike)
-            setCountcomment(fullproject?.countcomment)
+            setLikeCount(fullproject?.countlike);
+            setCountcomment(fullproject?.countcomment); 
+        }
+
+        if (initialFavorite) {
+            setClasse(project?.project?.favorite)
         }
         
         if(counter?.countercomment){
@@ -85,9 +95,6 @@ export default function ShowProjectView(props) {
     useEffect(() => {
         setLikeCount(counter.counterlike)
     },[counter?.counterlike])
-    
-    const fullproject = useSelector(state => state.getproject);
-    const project = fullproject?.getproject;
 
     let tags;
     if (project.project) {
@@ -115,25 +122,22 @@ export default function ShowProjectView(props) {
             type    : like?'dislike':'like',
         }
         // like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
-        setClasse('Dislike');
+        // setClasse('Dislike');
         
         console.log(like)
         dispatch(LikeAction(dataa, 'like/like', props));        
     }
 
-    const dislikeAction = () => {
-        const dataa = {
-            action: "like",
-            provider_id: params.id,
-            provider: "project",
-            type    : 'dislike',
+    const addTofavorite = (id) => {
+        setClasse(!classe)
+        setInitialFavorite(false)
+        let data = {
+            'url' : 'favorite/addToFavorite',
+            'provider_id' : id,
+            'provider' : 'project',
         }
-        setLike(false);
-        setClasse('Like');
-        setLike(like ? false : true);
-        console.log(like)
-        // dispatch(LikeAction(dataa, 'like/like', props));
-    }
+        dispatch(AddFavoriteAction(data))
+      }
 
     
     return (
@@ -156,7 +160,7 @@ export default function ShowProjectView(props) {
                                 <div className="signle-offer-type">Project Business</div>
                                 <div className="single-offer-header">
                                     <div className="single-offer-logo">
-                                        <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i class="uil uil-bookmark"></i></button>
+                                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                                         <img src={project.project.logo_link} title="Nom du projet" alt=""/>
                                     </div>
                                     <h3 className="single-offer-name">{project.project.name}</h3>

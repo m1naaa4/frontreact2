@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import YouTube from 'react-youtube'
+import Player from 'video-react/lib/components/Player'
+import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 
 
 
@@ -6,25 +10,51 @@ import React from 'react'
 
 export default function FavoriteGrid({favorite}) { 
     
+    const dispatch = useDispatch();
+    const [classe, setClasse] = useState(true);
+    const opts = {
+      height: '300',
+      width: '100%'
+    };
+
+    const addTofavorite = (id, provider) => {
+      setClasse(!classe)
+      let data = {
+          'url' : 'favorite/addToFavorite',
+          'provider_id' : id,
+          'provider'  : provider,
+      }
+      dispatch(AddFavoriteAction(data))
+    }
 
     return (
           <div className="grid-item offres">
               <div className="offer-box">
                 <div className="offer-header">
                   <div className="offer-title">
-                    <h3><a href="single-offer.html"> {favorite.name} </a></h3>
+                    <h3> {favorite.provider && <a href="single-offer.html">{favorite.name}</a>}</h3>
                     <span>Secteur d’activité</span>
                   </div>
                   <div className="offer-logo">
-                    <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                     <img src={favorite.logo_link} title="Nom du projet" alt=""/>
                   </div>
                 </div>
+                {favorite.body && 
+                  <div className="PostBody"><div className="PostBody-Text">{favorite.body}</div></div>
+                }
                 <div className="offer-media">
-                  <video className="player" playsinline controls data-poster="assets/images/offer-thumb-1.jpg">
-                    <source src="assets/media/earth.mp4" type="video/mp4" />
-                    <source src="assets/media/earth.ogv" type="video/ogv" />
-                  </video>
+                
+                {
+                  favorite.media_link? (favorite.is_video ? (
+                      <Player width="100%" height="100%"
+                          playsInline
+                          poster="/assets/poster.png"
+                          src={favorite.media_link}
+                      />
+                      ) : (favorite.type === 'youtube' ?
+                      (<YouTube videoId={favorite.media_link} opts={opts} />):(<img width="100%" height="300" src={favorite.media_link} alt="Project"/>))):''
+                }
                 </div>
                 <div className="offer-meta">
                   <ul className="meta-items">

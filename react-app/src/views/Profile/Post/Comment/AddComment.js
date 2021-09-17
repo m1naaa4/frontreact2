@@ -83,7 +83,7 @@ export default function AddComment({post}) {
 
     useEffect(()=>{
         if (user?.id === infoprofile.infoprofile.user_id) {
-            setUserVisiterAvatar(user?.profile.avatar_link)
+            setUserVisiterAvatar(user?.profile?.avatar_link)
         }
       },[user])
 
