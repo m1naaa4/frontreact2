@@ -43,15 +43,13 @@ const initState = {
                 
               return {
                   ...state,
-                  notifications: [...state.notifications].filter(item => item.id === action.data.notification_id),
+                  notifications: [...state.notifications].filter(item => item.id !== action.data.notification_id),
                   loading:false
               }
 
             
 
             case 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS':
-                console.log("usernotisssssssssss", action.res)
-
                 return {
                     notifications :  [action.res, ...state.notifications],
                     loading       :  false

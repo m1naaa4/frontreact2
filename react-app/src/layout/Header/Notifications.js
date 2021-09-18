@@ -10,6 +10,7 @@ export default function Notifications() {
     const [notification_id, setNotification_id] = useState();
     const dispatch = useDispatch();
     const [showNotifications, setShowNotifications] = useState(false);
+    const [display, setDisplay] = useState(false);
     const ref = useRef();
 
     const [classe, setClasse] = useState();
@@ -26,8 +27,7 @@ export default function Notifications() {
     // console.log(usernotifications)
     
     const show = (e) => {
-        // console.log(mask)
-        // setShowMark(!mask);
+        setDisplay(true); 
         setNotification_id(e);
     };
 
@@ -36,10 +36,11 @@ export default function Notifications() {
             notification_id : nofifid,
             user_id_notifier : id
         }
-        dispatch( SeenNotificationAction(data));    
+        dispatch( SeenNotificationAction(data)); 
+        setDisplay(false);   
     };
 
-    const HideNotif = (id, nofifid) => {
+    const DeleteNotif = (id, nofifid) => {
         let data = {
             notification_id : nofifid,
             user_id_notifier : id
@@ -47,7 +48,6 @@ export default function Notifications() {
         dispatch( DeleteNotificationAction(data)); 
     };
 
-    let user_id = localStorage.getItem('user_id')
     const openNotifications = () => {
         setShowNotifications(!showNotifications )
 
@@ -69,23 +69,24 @@ export default function Notifications() {
         <div className="Dadupa-Notifs-Box Notifs-Box-Active">
             <h3><Text tid="notifications"/></h3>
           {  usernotifications.notifications.map((notification, index) => 
-           notification.notified_from.id !== user_id &&
+        //    notification.notified_from.id !== user_id && // to delete remember that 
                 (!notification.seen  ? (<div className="Notifs-List" style={{backgroundColor:"#f2fff8", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
                         <div className="Notif-Item">
-                            <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>
+                            <Link to={notification.link} className="Notif-Image">
+                                <img src={notification.notified_from_avatar} alt="avatar" /></Link>
 
-                                <div className="Notif-Options show" onClick={e => show(notification.id)} >
-                                    <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <div className="Notif-Options show">
+                                    <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <i className="uil uil-ellipsis-h"></i>
                                     </button>
-                                {notification_id ===  notification.id && 
+                                {notification_id ===  notification.id && display && 
                                     <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
                                         <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} >Mark as read</div>
-                                        <div className="dropdown-item" onClick={ e => HideNotif(notification.notified_from.id, notification.id)} >Delete</div>
+                                        <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} >Delete</div>
                                     </div> 
                                 }   
                                 </div>                        
-                            <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Content">
+                            <Link to={notification.link} className="Notif-Content">
                                     <div className="Notif-Text">{notification.description} </div>
                                     <div className="Notif-Time">{notification.created_at.for_humans} </div>
                                 </Link>
@@ -94,16 +95,17 @@ export default function Notifications() {
                     (
                         <div className="Notifs-List" key={index} >
                         <div className="Notif-Item">
-                            <Link to={"/profile/"+ notification.notified_from.profile_id} className="Notif-Image"><img src={notification.notified_from_avatar} alt="avatar" /></Link>
+                            <Link to={notification.link} className="Notif-Image">
+                                <img src={notification.notified_from_avatar} alt="avatar" /></Link>
                         
-                                <div className="Notif-Options show" onClick={ e => show(notification.id)} >
-                                    <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <div className="Notif-Options show">
+                                    <button onClick={ e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <i className="uil uil-ellipsis-h"></i>
                                     </button>
-                                {notification_id ===  notification.id &&    
+                                {notification_id ===  notification.id  && display &&    
                                     <div className="dropdown-menu dropdown-menu-right show" x-placement="bottom-end" style={{position: "absolute"}}>
                                         <div className="dropdown-item" onClick={e => markAsRead(notification.notified_from.id, notification.id)} >Mark as read</div>
-                                        <div className="dropdown-item" onClick={e => HideNotif(notification.notified_from.id, notification.id)} >Delete</div>
+                                        <div className="dropdown-item" onClick={e => DeleteNotif(notification.notified_from.id, notification.id)} >Delete</div>
                                     </div>
                                 }   
                                 </div>                        
