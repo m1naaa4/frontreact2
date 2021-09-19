@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
+import FriendGrid from "./Grid/FriendGrid";
+import { Tab, Tabs } from "react-bootstrap";
+import { FriendsAction, MyFriendsAction } from "../../../store/actions/Friend/FriendsAction";
 import { useDispatch, useSelector } from "react-redux";
-import { FriendsAction } from "../../../store/actions/Friend/FriendsAction";
-import FriendGrid from "./FriendGrid";
-import { useParams } from 'react-router'
-import DropType from "../../../utils/DropType";
-import typeusers from "../../../data/typeusers"
+import { useParams } from "react-router";
 import { useForm } from "react-hooks-helper";
+import Invitations from "./Invitations";
+import InvitationGrid from "./Grid/InvitationGrid";
+import SuggestionGrid from "./Grid/SuggestionGrid";
 
 
-export default function(){
-
-    const defaultData = {search  : '', type    : null};
-    const [filterInput, setFilterInput] = useForm(defaultData);
-    const { type, search } = filterInput;
-    const [order, setOrder] =   useState(true);
-    const [orderName, setOrderName] =  useState('Desc');
-
-    const orderfun = () => {
-        setOrder(!order)
-        order  ? setOrderName('Desc') : setOrderName('Asc')
-    }
+export default function({filterInput, setFilterInput, props}){
 
     const dispatch = useDispatch();
     const params = useParams();
+    const [key, setKey] = useState('friends');
+    const friends = useSelector(state => state.userProfile.friends);
+    const invitations = useSelector(state => state.userProfile.invitations);
+    const suggestions = useSelector(state => state.userProfile.suggestions);
+    const user = useSelector(state => state.userProfile.userProfile);
+
+    const data = { filterInput, setFilterInput, props };
+    useEffect(()=>{
+        let data = {
+          'url' : 'friend/getmyfriends',
+          }
+        dispatch(MyFriendsAction(data));
+      },[])
 
     useEffect(() => {
         let data = {
@@ -30,58 +34,32 @@ export default function(){
             'user_profile_id' : params.id,
             'search'  : filterInput.search,
             'type'  : filterInput.type,
-            'sort' : orderName,
+            'sort' : filterInput.orderName,
         }
         const timeoutId = setTimeout(() => dispatch(FriendsAction(data)), 1000);
         return () => clearTimeout(timeoutId);
-    },[filterInput, order]);
+    },[filterInput]);
 
-    const friends = useSelector(state => state.userProfile.friends);
-    const count = useSelector(state => state.userProfile.count);
 
     return(
         <>
                 <div className="col-md-6">
                     <div className="Center-Side">
-                        <div className="Network-Header">
-                            <div className="Network-HeaderLeft">
-                            <h2 className="Network-HeaderTitle"><span>{count}</span> Contacts</h2>
-                            </div>
-                            <div className="Network-HeaderRight">
-                            <a className="Network-HeaderLink" href="#">Voir les invitations</a>
-                            <a className="Network-HeaderLink" href="#">Voir les suggestions</a>
-                            </div>
-                        </div>
-                        
-                        <div className="Network-Filter Filter-Row">
-                            <form className="Filter-Form" action="#" method="post">
-                                <div className="row">
-                                    <div className="col-sm-12 col-md-12 col-lg-12">
-                                    <div className="display-flex">
-                                        <div className="input-row input-select input-small">
-                                            <DropType datas={typeusers} value={type} field='type' onChange={setFilterInput}/>
-                                        </div>
-                                        <div className="input-row">
-                                        <input type="text" name="search" defaultValue={search} placeholder="Rechercher un Contact" onChange={setFilterInput} required/>
-                                        </div>
-                                        <div className="input-row">
-                                        <button type="button" onClick={orderfun} className="OrderAlph">Ordre Alphabétique {orderName}</button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-            
-                        <div className="Networks">
 
-                            { friends &&
-                                friends?.map((friend, index) => (
-                                <FriendGrid friend={friend} key={index}/>
-                                ))
-                            }
-                        
-                        </div>
+                        <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+                            <Tab eventKey="friends" title="Friends">
+                                <FriendGrid friends={friends} {...data}/>
+                            </Tab>
+                            {params.id === user?.profile?.id &&
+                            <Tab eventKey="profile" title="Invitations">
+                                <InvitationGrid invitations={invitations} {...data}/>
+                            </Tab>}
+                            {params.id === user?.profile?.id &&
+                            <Tab eventKey="contact" title="Suggestions">
+                                <SuggestionGrid suggestions={suggestions} {...data}/>
+                            </Tab>}
+
+                        </Tabs>
                     </div>
                 </div>
         </>

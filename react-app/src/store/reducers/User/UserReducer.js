@@ -22,12 +22,14 @@ const UserReducer = (state = initState, action) => {
             return {
                 ...state,
                 invitations: action.res.data,
+                countinvitations: action.res.count,
             }
 
         case 'LOADING_SUGGESTIONS_SUCCESS':
             return {
                 ...state,
                 suggestions: action.res.data,
+                countsuggestions: action.res.count,
             }
 
         case 'LOADING_FRIENDS_LIST_SUCCESS':

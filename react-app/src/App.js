@@ -31,8 +31,6 @@ function App() {
     //counter like notifications
     pusher.echo.private("newNotification").listen(".notification", data => {
         
-        console.log("newNotification--------------");
-        console.log(data);
         dispatch({type:'LIKED_SUCCESS', res : data});
         dispatch({type:'ADD_Like_TO_POST_SUCCESS', res : data});
     })
@@ -40,14 +38,12 @@ function App() {
     //data notifications navbar
     pusher.echo.private("App.Models.User."+ user_id)
     .notification((notification) => {
-        console.log(notification);
         localStorage.setItem('notification', 1);
         dispatch({type:'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS', res : notification});
     });
 
     pusher.echo.private("new_post").listen(".newpost", data => {
         
-        console.log(data);
         dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', res : data});
     })
 

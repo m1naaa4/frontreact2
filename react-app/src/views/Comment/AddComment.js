@@ -111,7 +111,7 @@ export default function AddComment(props) {
 
                 {/*!--#### COMMENT 1 ### --*/}
                 <div className="User-Comment">
-                {comments && comments?.comments.map((comment, index) => 
+                {comments && comments?.comments && comments?.comments.map((comment, index) => 
                     <ShowComment comment={comment} key={comment.id}/>
                      )
                 }

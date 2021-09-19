@@ -4814,6 +4814,30 @@ border-top: none;
 .FriendBox-Delete{
   position: absolute;
   top: 8px;
+  left: 40px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: #fff;
+  color: red;
+  font-size: 18px;
+  visibility: hidden;
+  transform: scale(.8);
+  opacity: 0;
+  z-index: 9;
+  transition: all .20s linear;
+}
+.FriendBox-Delete:hover{
+  color: #fff;
+  background-color: red;
+  border-color: red;
+}
+
+.FriendBox-Accept{
+  position: absolute;
+  top: 8px;
   left: 8px;
   width: 30px;
   height: 30px;
@@ -4829,12 +4853,17 @@ border-top: none;
   z-index: 9;
   transition: all .20s linear;
 }
-.FriendBox-Delete:hover{
+.FriendBox-Accept:hover{
   color: #fff;
   background-color: #00b601;
   border-color: #00b601;
 }
 .FriendBox:hover .FriendBox-Delete{
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+.FriendBox:hover .FriendBox-Accept{
   visibility: visible;
   opacity: 1;
   transform: scale(1);
