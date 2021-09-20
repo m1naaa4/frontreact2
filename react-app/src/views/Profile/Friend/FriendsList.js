@@ -3,7 +3,7 @@ import FriendGrid from "./Grid/FriendGrid";
 import { Tab, Tabs } from "react-bootstrap";
 import { FriendsAction, MyFriendsAction } from "../../../store/actions/Friend/FriendsAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { useForm } from "react-hooks-helper";
 import Invitations from "./Invitations";
 import InvitationGrid from "./Grid/InvitationGrid";
@@ -14,7 +14,8 @@ export default function({filterInput, setFilterInput, props}){
 
     const dispatch = useDispatch();
     const params = useParams();
-    const [key, setKey] = useState('friends');
+    const history = useHistory();
+    const [key, setKey] = useState();
     const friends = useSelector(state => state.userProfile.friends);
     const invitations = useSelector(state => state.userProfile.invitations);
     const suggestions = useSelector(state => state.userProfile.suggestions);
@@ -40,6 +41,16 @@ export default function({filterInput, setFilterInput, props}){
         return () => clearTimeout(timeoutId);
     },[filterInput]);
 
+    useEffect(() => {
+        if (window.location.pathname == '/profile/'+user?.profile?.id+'/friends') {
+            setKey('friends');
+        } else if(window.location.pathname == '/profile/'+user?.profile?.id+'/friends/invitations') {
+            setKey('invitations');
+        }else if(history.location.pathname == '/profile/'+user?.profile?.id+'/friends/suggestions'){
+            setKey('suggestions');
+        }
+    })
+
 
     return(
         <>
@@ -51,11 +62,11 @@ export default function({filterInput, setFilterInput, props}){
                                 <FriendGrid friends={friends} {...data}/>
                             </Tab>
                             {params.id === user?.profile?.id &&
-                            <Tab eventKey="profile" title="Invitations">
+                            <Tab eventKey="invitations" title="Invitations">
                                 <InvitationGrid invitations={invitations} {...data}/>
                             </Tab>}
                             {params.id === user?.profile?.id &&
-                            <Tab eventKey="contact" title="Suggestions">
+                            <Tab eventKey="suggestions" title="Suggestions">
                                 <SuggestionGrid suggestions={suggestions} {...data}/>
                             </Tab>}
 

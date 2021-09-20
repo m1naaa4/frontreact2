@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
 import { InvitationsAction, SuggestionsAction } from '../../store/actions/Friend/FriendsAction';
 import Invitations from './Friend/Invitations'
 import SuggestionList from './Friend/SuggestionList'
@@ -9,6 +10,7 @@ import SuggestionList from './Friend/SuggestionList'
 
 export default function SideRightProfileView() {
 
+  const userProfile = useSelector(state => state.userProfile.userProfile);
   const invitations = useSelector(state => state.userProfile.invitations);
   const suggestions = useSelector(state => state.userProfile.suggestions);
 
@@ -25,6 +27,8 @@ export default function SideRightProfileView() {
     dispatch(SuggestionsAction(data1)); 
   },[])
 
+  
+
   return (
         
         <div className="col-md-3">
@@ -35,21 +39,22 @@ export default function SideRightProfileView() {
             <div className="Contact-Widget">
               <h3 className="Widget-Title">Invitations</h3>
               <div className="Suggestion-List">
-              {invitations && invitations !=='loading' && invitations.map((invitation, index) => 
+              {invitations && invitations !=='loading' && invitations.slice(0, 3).map((invitation, index) => 
                     <Invitations invitation={invitation} key={invitation.id}/>
                      )
                 }
               </div>
+               <Link to={`/profile/`+userProfile?.profile_id+`/friends/invitations`} className="Contact-SeeMore" href="#">Voir plus</Link>
             </div>
             <div className="Contact-Widget">
               <h3 className="Widget-Title">Suggestion de contacts</h3>
               <div className="Suggestion-List">
-              {suggestions && suggestions !=='loading' && suggestions.map((suggestion, index) => 
+              {suggestions && suggestions !=='loading' && suggestions.slice(0, 3).map((suggestion, index) => 
                     <SuggestionList suggestion={suggestion} key={suggestion.id}/>
                      )
                 }
               </div>
-              <a className="Contact-SeeMore" href="#">Voir plus</a>
+              {suggestions?.length >= 6 && <Link to={`/profile/`+userProfile?.profile_id+`/friends/suggestions`} className="Contact-SeeMore" href="#">Voir plus</Link>}
             </div>
             
             <div className="Widget-Conseils">
