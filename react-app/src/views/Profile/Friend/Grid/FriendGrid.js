@@ -10,7 +10,8 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
     const user = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
     const params = useParams();
-    const [exist, setExist] = useState(false);
+    const [showG, setShowG] = useState(true);
+    const [gridId, setGridId] = useState();
 
     const { search, type, orderName } = filterInput;
     const [order, setOrder] =   useState(true);
@@ -45,12 +46,18 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
     },[count])
     console.log("ids.includes(friend.id)", ids)
 
+    const show = (e) => {
+      setShowG(true); 
+      setGridId(e);
+  };
+
     const removeFriend = (id) =>{
       let data ={
           'request_id' : id,
           'url' : 'friend/friendRemove',
       }
-      dispatch(RemoveFriendAction(data)); 
+      dispatch(RemoveFriendAction(data));
+      setShowG(false)
     }
 
     const addFriend = (id) =>{
@@ -58,7 +65,8 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
           'friend_id' : id,
           'url' : 'friend/sendRequest',
       }
-      dispatch(SendRequestFriendAction(data)); 
+      dispatch(SendRequestFriendAction(data));
+      setShowG(false)
     }
     return (
         <>
@@ -91,13 +99,15 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
             <div className="Networks">
             { friends &&
                 friends?.map((friend, index) => (
-                <div className="FriendBox-Item" key={index}>
+                  <>
+                {showG && 
+                  <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
                       {params.id === user?.profile?.id ?
-                        <button type="button" onClick={() => {removeFriend(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
+                        <button type="button" onClick={() => {removeFriend(friend.id); show(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
                         : params.id !== user?.profile?.id && !friendsIds.includes(friend.id) && user?.profile?.id !== friend.profile.id ?
-                        <button type="button" onClick={() => {addFriend(friend.id)}} className="FriendBox-Accept"><i className="uil uil-user-plus"></i></button>
-                        : <button type="button" onClick={() => {removeFriend(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
+                        <button type="button" onClick={() => {addFriend(friend.id); show(friend.id)}} className="FriendBox-Accept"><i className="uil uil-user-plus"></i></button>
+                        : <button type="button" onClick={() => {removeFriend(friend.id); show(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
                       
                       }
                       {/* {friendsIds.includes(friend.id) && params.id === user?.profile?.id ? 
@@ -113,7 +123,9 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                         </div>
                       </Link>
                     </div>
-                </div>
+                  </div>
+                }
+                  </>
               ))
             }
             </div>        

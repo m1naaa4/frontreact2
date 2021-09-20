@@ -9,12 +9,18 @@ import typeusers from "../../../../data/typeusers"
 export default function InvitationGrid({invitations, filterInput, setFilterInput }) {
     const dispatch = useDispatch();
     const params = useParams();
-    const [show, setShow] = useState(true);
+    const [showG, setShowG] = useState(true);
+    const [gridId, setGridId] = useState();
 
     const { search, type, orderName } = filterInput;
     const [order, setOrder] =   useState(true);
 
     const count = useSelector(state => state.userProfile.countinvitations);
+
+    const show = (e) => {
+      setShowG(true); 
+      setGridId(e);
+  };
 
     const orderfun = () => {
       setOrder(!order)
@@ -36,14 +42,16 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
           'request_id' : id,
           'url' : 'friend/friendAccept',
       }
-      dispatch(AcceptFriendAction(data)); 
+      dispatch(AcceptFriendAction(data));
+      setShowG(false)
     }
     const rejectFriend = (id) =>{
         let data ={
             'request_id' : id,
             'url' : 'friend/friendReject',
         }
-        dispatch(RejectFriendAction(data)); 
+        dispatch(RejectFriendAction(data));
+        setShowG(false)
     }
 
     return (
@@ -78,13 +86,13 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
             { invitations &&
                 invitations?.map((invitation, index) => (
                 <>
-                {show &&
+                {showG &&
                 <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
 
                         <div className="Add-Contact Invitation-Options">
-                          <button type="button" onClick={() => {acceptFriend(invitation.id)}} className="FriendBox-Accept"><i className="uil uil-check"></i></button> 
-                          <button type="button" onClick={() => {rejectFriend(invitation.id)}} className="FriendBox-Delete"><i className="uil uil-times"></i></button> 
+                          <button type="button" onClick={() => {acceptFriend(invitation.id); show(invitation.id)}} className="FriendBox-Accept"><i className="uil uil-check"></i></button> 
+                          <button type="button" onClick={() => {rejectFriend(invitation.id); show(invitation.id)}} className="FriendBox-Delete"><i className="uil uil-times"></i></button> 
                         </div>
                       <Link to={`/profile/${invitation.profile.id}`}>
                         <div className="FriendThumb"><img src={invitation.profile.avatar_link} alt="avatar"/></div>
