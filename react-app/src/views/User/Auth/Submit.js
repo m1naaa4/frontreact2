@@ -5,6 +5,7 @@ import {Text} from "../../../containers/Language";
 import typeusers from "../../../data/typeusers"
 import { useTranslation } from 'react-i18next';
 import countries from "../../../data/countries";
+import Spinner from 'react-bootstrap/Spinner'
 
 const Submit = ({setForm, formData, navigation, props}) => {
     const { email, password, firstName, lastName, type, phone, country, city, username } = formData;
@@ -13,13 +14,15 @@ const Submit = ({setForm, formData, navigation, props}) => {
     const [typeuser, setTypeuser] = useState();
     const [selectedcountry, setSelectedcountry] = useState();
     const [t] = useTranslation();
+    const [is_loading, setIsLoading] = useState(false);
 
     const UserRegister = (e) => {
         e.preventDefault();
 
         // clearAuthErrDiv();
 
-        dispatch(signUpAction(formData, props));
+            dispatch(signUpAction(formData, props));
+            setIsLoading(true)
     }
 
     const dispatch = useDispatch();
@@ -110,7 +113,15 @@ const Submit = ({setForm, formData, navigation, props}) => {
                 </div>
             </div>
             <button type="submit" name="submit" className="submit action-button" onClick={UserRegister}
-                    value="Sign Up"><Text tid="register" /></button>
+                    value="Sign Up"><Text tid="register" />
+                    {is_loading && <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            /> }
+                    </button>
         </fieldset>
 
     );

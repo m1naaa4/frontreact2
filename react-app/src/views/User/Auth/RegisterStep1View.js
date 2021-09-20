@@ -30,9 +30,14 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
         });
     });
 
-    const validateForm = () => {
+    const validateForm = (value, key) => {
         if($("#form").valid()){
-            return navigation.next()
+            if (key === 13 && value !== '') {
+                return navigation.next()
+            }else if (value == 'next') {
+                return navigation.next()
+            }
+            
         }
     }
 
@@ -58,7 +63,8 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
                                     className="wizard-required" required/>
                     </div>
                     <div className="input-row">
-                        <input  id="password-field" name="password"
+                        <input onKeyDown={(e) => validateForm(e.target.value, e.keyCode) }  
+                                id="password-field" name="password"
                                 placeholder="Mot de passe (6 caractères minimum)" className="input-password"
                                 type={passwordShown ? "text" : "password"}
                                 value={password}
@@ -70,7 +76,7 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
 
                 </div>
 
-                <button type="button" name="next" onClick={validateForm} className="next action-button"><Text tid="next" /></button>
+                <button type="button" name="next" onClick={(e) => validateForm('next')} className="next action-button"><Text tid="next" /></button>
                 <div className="form-notice">
                     <Text tid="signup.message3" /> <br/><Text tid="signup.message4" />
                 </div>

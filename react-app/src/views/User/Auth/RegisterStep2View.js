@@ -13,9 +13,13 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
     const {firstName, lastName, type, phone, country, city, username} = formData;
     const {previous, next} = navigation;
 
-    const validateForm = () => {
+    const validateForm = (value, key) => {
         if($("#form").valid()){
-            return navigation.next()
+            if (key === 13 && value !== '') {
+                return navigation.next()
+            }else if (value == 'next') {
+                return navigation.next()
+            }
         }
     }
 
@@ -33,40 +37,40 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
             <form id="form">
                 <div className="form-inputs">
                     <div className="input-row">
-                        <ItemForm type="text" name="firstName" value={firstName} onChange={setForm}
+                        <ItemForm type="text" name="firstName" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={firstName} onChange={setForm}
                                 placeholder="Nom" required/>
                     </div>
                     <div className="input-row">
-                        <ItemForm type="text" name="lastName" value={lastName} onChange={setForm}
+                        <ItemForm type="text" name="lastName" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={lastName} onChange={setForm}
                                 placeholder="Prenom" required/>
                     </div>
 
                     <div className="input-row">
-                        <ItemForm type="text" name="username" value={username} onChange={setForm}
+                        <ItemForm type="text" name="username" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) }  value={username} onChange={setForm}
                                 placeholder="username" required/>
                     </div>
 
-                    <TypeDrop  name="type" value={type} onChange={setForm}/>
+                    <TypeDrop  name="type" value={type} onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } onChange={setForm}/>
 
                     <div className="input-row">
-                        <ItemForm type="tel" name="phone" value={phone} onChange={setForm}
+                        <ItemForm type="tel" name="phone" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={phone} onChange={setForm}
                                 placeholder="Numéro de téléphone" required/>
                     </div>
 
                     <div className="input-row">
-                        <ZoneDropFilter field='country' placeholder="Pays" value={country} onChange={setForm}
+                        <ZoneDropFilter field='country' name="country" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } placeholder="Pays" value={country} onChange={setForm}
                             required/>
                     </div>
 
                     <div className="input-row">
-                        <ItemForm type="text" name="city" value={city} onChange={setForm}
+                        <ItemForm type="text" name="city" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={city} onChange={setForm}
                                 placeholder="Ville" required/>
                     </div>
 
                     <button type="button" name="previous" onClick={previous}
                             className="flex-prev-btn previous action-button"
                     ><Text tid="previous" /></button>
-                    <button type="button" name="next" onClick={validateForm}
+                    <button type="button" name="next" onClick={(e) => validateForm('next')}
                             className="flex-next-btn next action-button"><Text tid="next" /></button>
                 </div>
             </form>
