@@ -44,7 +44,7 @@ export default function SideRightProfileView() {
                      )
                 }
               </div>
-               <Link to={`/profile/`+userProfile?.profile_id+`/friends/invitations`} className="Contact-SeeMore" href="#">Voir plus</Link>
+              {invitations?.length >= 4 && <Link to={`/profile/`+userProfile?.profile_id+`/friends/invitations`} className="Contact-SeeMore" href="#">Voir plus</Link>}
             </div>
             <div className="Contact-Widget">
               <h3 className="Widget-Title">Suggestion de contacts</h3>
@@ -54,7 +54,7 @@ export default function SideRightProfileView() {
                      )
                 }
               </div>
-              {suggestions?.length >= 6 && <Link to={`/profile/`+userProfile?.profile_id+`/friends/suggestions`} className="Contact-SeeMore" href="#">Voir plus</Link>}
+              {suggestions?.length >= 4 && <Link to={`/profile/`+userProfile?.profile_id+`/friends/suggestions`} className="Contact-SeeMore" href="#">Voir plus</Link>}
             </div>
             
             <div className="Widget-Conseils">

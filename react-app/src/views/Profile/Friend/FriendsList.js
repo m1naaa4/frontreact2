@@ -4,8 +4,6 @@ import { Tab, Tabs } from "react-bootstrap";
 import { FriendsAction, MyFriendsAction } from "../../../store/actions/Friend/FriendsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { useForm } from "react-hooks-helper";
-import Invitations from "./Invitations";
 import InvitationGrid from "./Grid/InvitationGrid";
 import SuggestionGrid from "./Grid/SuggestionGrid";
 
@@ -42,14 +40,14 @@ export default function({filterInput, setFilterInput, props}){
     },[filterInput]);
 
     useEffect(() => {
-        if (window.location.pathname == '/profile/'+user?.profile?.id+'/friends') {
+        if (history.location.pathname === '/profile/'+user?.profile?.id+'/friends/friends') {
             setKey('friends');
-        } else if(window.location.pathname == '/profile/'+user?.profile?.id+'/friends/invitations') {
+        } else if(history.location.pathname === '/profile/'+user?.profile?.id+'/friends/invitations') {
             setKey('invitations');
-        }else if(history.location.pathname == '/profile/'+user?.profile?.id+'/friends/suggestions'){
+        }else if(history.location.pathname === '/profile/'+user?.profile?.id+'/friends/suggestions'){
             setKey('suggestions');
         }
-    })
+    },[history.location.pathname])
 
 
     return(
