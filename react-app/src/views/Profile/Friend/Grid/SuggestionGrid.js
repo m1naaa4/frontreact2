@@ -4,6 +4,7 @@ import { SendRequestFriendAction } from '../../../../store/actions/Friend/Friend
 import { useDispatch } from 'react-redux';
 import typeusers from "../../../../data/typeusers"
 import sectors from '../../../../data/sectors';
+import { Text } from '../../../../containers/Language';
 
 export default function SuggestionGrid({suggestions}) {
     const dispatch = useDispatch();
@@ -45,8 +46,8 @@ export default function SuggestionGrid({suggestions}) {
                            - {
                              sectors.map((key) => 
                              // console.log(key[0], project?.project?.sector)
-                               {if (key[0] === suggestion.sectore) {
-                                 return key[1]
+                               {if ( suggestion.sector.includes(key[0])) {
+                                 return <Text tid={key[1]}/>
                                }}
                              )
                            }

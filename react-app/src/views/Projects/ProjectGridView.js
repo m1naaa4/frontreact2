@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {Text} from "../../containers/Language";
 import { Player } from 'video-react';
 import VideoPlayer from 'simple-react-video-thumbnail'
@@ -37,10 +37,20 @@ const ProjectGridView = ({ project }) => {
              <div className="offer-box">
                     <div className="offer-header">
                         <div className="offer-title">
-                            <h3><NavLink to={`/project/show/${project.id}`}>{project.name}</NavLink></h3>
+                            <h3><NavLink to={`/project/show/${project.id}`} data-toggle="tooltip" data-placement="top" title={project.name}>
+                                {project.name.substring(0, 10)}</NavLink></h3>
                             <span>{project.sector}</span>
                         </div>
                         <div className="offer-logo">
+
+                            {project.owner && project.owner.map((value) => 
+                                {
+                                    return <Link to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
+                                         {value.username.substring(0, 6)}
+                                    </Link>
+                                }
+                            )}
+
                             <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i class="uil uil-bookmark"></i></button>
                             <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
                         </div>
