@@ -3,7 +3,7 @@ import {GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from 'video-react';
 import AddComment from '../Comment/AddComment';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import parse from 'html-react-parser';
 
@@ -238,6 +238,20 @@ export default function ShowProjectView(props) {
                             </div>
                             <div className="Single-Offer-Details">
                                 <ul className="Offer-Details-List">
+                                    <li className="Offer-Item">
+                                        <label>Owners</label>
+                                        <span>
+                                            {project.project.owner && project.project.owner.map((value) => 
+                                                {
+                                                    return <Link to={`/profile/${value.profile_id}`}>
+                                                        <img style={{width: '40px', height: '40px', borderRadius: '4px', overflow: 'hidden'}} 
+                                                        src={value.avatar} className="uil uil-apps" alt=''/> {value.username}
+                                                    </Link>
+                                                }
+                                            )}
+                                        </span>
+                                        
+                                    </li>
                                     <li className="Offer-Item">
                                         <label>Publié le</label>
                                         <span>{project.project.date}</span>

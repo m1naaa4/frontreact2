@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router'
 import { SendRequestFriendAction } from '../../../store/actions/Friend/FriendsAction';
 
 
@@ -11,7 +10,6 @@ const  SuggestionList = ({suggestion}) => {
 
     const [show, setShow] = useState(true);
     const dispatch = useDispatch();
-    const params = useParams();
   
     const addFriend = (id) =>{
         let data ={

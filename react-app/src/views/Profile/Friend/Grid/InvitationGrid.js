@@ -9,7 +9,6 @@ import typeusers from "../../../../data/typeusers"
 export default function InvitationGrid({invitations, filterInput, setFilterInput }) {
     const dispatch = useDispatch();
     const params = useParams();
-    const [showG, setShowG] = useState(true);
     const [gridId, setGridId] = useState();
 
     const { search, type, orderName } = filterInput;
@@ -18,7 +17,6 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
     const count = useSelector(state => state.userProfile.countinvitations);
 
     const show = (e) => {
-      setShowG(true); 
       setGridId(e);
   };
 
@@ -43,7 +41,6 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
           'url' : 'friend/friendAccept',
       }
       dispatch(AcceptFriendAction(data));
-      setShowG(false)
     }
     const rejectFriend = (id) =>{
         let data ={
@@ -51,7 +48,6 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
             'url' : 'friend/friendReject',
         }
         dispatch(RejectFriendAction(data));
-        setShowG(false)
     }
 
     return (
@@ -86,7 +82,7 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
             { invitations &&
                 invitations?.map((invitation, index) => (
                 <>
-                {showG &&
+                {gridId !== invitation.id &&
                 <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
 
@@ -99,7 +95,13 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
                         <div className="FriendInfos">
                           <h3> {invitation.profile.username}</h3>
                           <span>{invitation.profile.job}</span>
-                          <span>Funder - Agriculture</span>
+                          <span>
+                            { typeusers.map((key) => 
+                                {if (key[0] === invitation.type) {
+                                    return key[1]
+                                }}
+                            )} 
+                            - Agriculture</span>
                         </div>
                       </Link>
                     </div>

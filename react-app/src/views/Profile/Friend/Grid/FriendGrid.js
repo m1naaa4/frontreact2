@@ -10,8 +10,8 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
     const user = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
     const params = useParams();
-    const [showG, setShowG] = useState(true);
     const [gridId, setGridId] = useState();
+    const [typeuser, setTypeuser] = useState();
 
     const { search, type, orderName } = filterInput;
     const [order, setOrder] =   useState(true);
@@ -46,8 +46,16 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
     },[count])
     console.log("ids.includes(friend.id)", ids)
 
+    useEffect(() => {
+      typeusers.map((key) => 
+          // console.log(key[0], key[1], type)
+          {if (key[0] === type) {
+              setTypeuser(key[1])
+          }}
+      );
+    })
+
     const show = (e) => {
-      setShowG(true); 
       setGridId(e);
   };
 
@@ -57,7 +65,6 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
           'url' : 'friend/friendRemove',
       }
       dispatch(RemoveFriendAction(data));
-      setShowG(false)
     }
 
     const addFriend = (id) =>{
@@ -66,7 +73,6 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
           'url' : 'friend/sendRequest',
       }
       dispatch(SendRequestFriendAction(data));
-      setShowG(false)
     }
     return (
         <>
@@ -100,7 +106,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
             { friends &&
                 friends?.map((friend, index) => (
                   <>
-                {showG && 
+                {gridId !== friend.id  && 
                   <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
                       {params.id === user?.profile?.id ?
@@ -119,7 +125,12 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                         <div className="FriendInfos">
                           <h3> {friend.profile.username}</h3>
                           <span>{friend.profile.job}</span>
-                          <span>Funder - Agriculture</span>
+                          <span>{ typeusers.map((key) => 
+                                {if (key[0] === friend.type) {
+                                    return key[1]
+                                }}
+                            )}
+                            - Agriculture</span>
                         </div>
                       </Link>
                     </div>

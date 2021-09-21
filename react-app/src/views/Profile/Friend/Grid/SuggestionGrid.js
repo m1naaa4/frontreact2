@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { SendRequestFriendAction } from '../../../../store/actions/Friend/FriendsAction';
 import { useDispatch } from 'react-redux';
+import typeusers from "../../../../data/typeusers"
+import sectors from '../../../../data/sectors';
 
 export default function SuggestionGrid({suggestions}) {
     const dispatch = useDispatch();
 
-    const [showG, setShowG] = useState(true);
     const [gridId, setGridId] = useState();
 
     const show = (e) => {
-      setShowG(true); 
       setGridId(e);
-  };
+    };
 
     const addFriend = (id) =>{
       let data ={
@@ -20,7 +20,6 @@ export default function SuggestionGrid({suggestions}) {
           'url' : 'friend/sendRequest',
       }
       dispatch(SendRequestFriendAction(data));
-      setShowG(false)
     }
     return (
         <>
@@ -28,7 +27,7 @@ export default function SuggestionGrid({suggestions}) {
             { suggestions &&
                 suggestions?.map((suggestion, index) => (
                   <>
-                {showG && <div className="FriendBox-Item" key={index}>
+                {gridId !== suggestion.id && <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
                         <button type="button" onClick={() => {addFriend(suggestion.id); show(suggestion.id)}} className="FriendBox-Accept"><i className="uil uil-user-plus"></i></button>
                         
@@ -37,7 +36,21 @@ export default function SuggestionGrid({suggestions}) {
                         <div className="FriendInfos">
                           <h3> {suggestion.profile.username}</h3>
                           <span>{suggestion.profile.job}</span>
-                          <span>Funder - Agriculture</span>
+                          <span>
+                          { typeusers.map((key) => 
+                                {if (key[0] === suggestion.type) {
+                                    return key[1]
+                                }}
+                            )}
+                           - {
+                             sectors.map((key) => 
+                             // console.log(key[0], project?.project?.sector)
+                               {if (key[0] === suggestion.sectore) {
+                                 return key[1]
+                               }}
+                             )
+                           }
+                           </span>
                         </div>
                       </Link>
                     </div>
