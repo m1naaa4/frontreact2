@@ -2,7 +2,7 @@ import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from '../layout/Header/HeaderProfile';
 import NotFound from '../pages/404';
-import SettingPage from '../pages/Profile/SettingPage';
+import SettingPage from '../pages/Setting/SettingPage';
 
 
 export default function SettingPrivateRoutes(props) {

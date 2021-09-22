@@ -4,9 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import UpdateAccess from './Modals/UpdateAccess';
 import UpdateUserInfo from './Modals/UpdateUserInfo';
-import LanguageSelectorView from '../../Fields/Language/LanguageSelectorView';
-import { ConfirmationAction, LanguageAction } from '../../../store/actions/Profile/UserActions';
-import countries from '../../../data/countries';
+import LanguageSelectorView from '../Fields/Language/LanguageSelectorView';
+import { ConfirmationAction, LanguageAction } from '../../store/actions/Profile/UserActions';
+import countries from '../../data/countries';
 
 
 
@@ -58,7 +58,7 @@ export default function SideRightSettingView(props) {
             {
             infoprofile.profile !== "" && infoprofile.profile !== undefined ?
 
-            <div className="col-md-12 col-lg-8">
+            <div className="col-md-12 ">
               <div className="row">
                 <div className="col-lg-6">
                   <div className="User-Settings">

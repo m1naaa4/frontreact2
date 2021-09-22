@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { UserInfoAction } from '../../../../store/actions/Profile/UserActions';
-import ZoneDropFilter from '../../../User/Fields/Filter/Project/ZoneDropFilter';
+import { UserInfoAction } from '../../../store/actions/Profile/UserActions';
+import ZoneDropFilter from '../../User/Fields/Filter/Project/ZoneDropFilter';
 
 
 

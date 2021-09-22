@@ -5,7 +5,6 @@ import NotFound from '../pages/404';
 import FriendPage from '../pages/Profile/FriendPage';
 import OffrePage from '../pages/Profile/OffrePage';
 import ProfilePage from '../pages/Profile/ProfilePage';
-import SettingPage from '../pages/Profile/SettingPage';
 import MainCvthequeView from '../views/Profile/Cvtheque/MainCvthequeView';
 import ProfileHeaderForm from '../views/Profile/ProfileFormData';
 import SideLeftProfileView from '../views/Profile/SideLeftProfileView';

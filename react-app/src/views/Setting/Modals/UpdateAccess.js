@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hooks-helper";
 import { useDispatch } from 'react-redux';
-import { useFormFields } from '../../../../helpers/hooksFormInput';
-import { AccessUserAction } from '../../../../store/actions/Profile/UserActions';
+import { AccessUserAction } from '../../../store/actions/Profile/UserActions';
 
 
 

@@ -24,6 +24,7 @@ import ConversationsReducer from './Messenger/ConversationsReducer'
 import ConversationReducer from './Messenger/ConversationReducer'
 import OffreReducer from './Offre/OffreReducer'
 import AddYoutubeReducer from './Post/AddYoutubeReducer'
+import SettingReducer from './Team/SettingReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -41,6 +42,8 @@ const RootReducer = combineReducers({
 
   addComment:AddCommentReducer,
   getComments:GetCommentReducer,
+
+  setting:SettingReducer,
 
   getnotifications:GetNotificationsReducer,
   addednotification:GetAddedNotificationReducer,
