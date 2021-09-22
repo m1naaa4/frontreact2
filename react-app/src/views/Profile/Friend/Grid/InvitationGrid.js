@@ -5,6 +5,8 @@ import { AcceptFriendAction, FriendsAction, RejectFriendAction } from '../../../
 import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
 import typeusers from "../../../../data/typeusers"
+import sectors from '../../../../data/sectors';
+import { Text } from '../../../../containers/Language';
 
 export default function InvitationGrid({invitations, filterInput, setFilterInput }) {
     const dispatch = useDispatch();
@@ -101,7 +103,15 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
                                     return key[1]
                                 }}
                             )} 
-                            - Agriculture</span>
+                            - {
+                             sectors.map((key) => 
+                             // console.log(key[0], project?.project?.sector)
+                               {if ( invitation.sector.includes(key[0])) {
+                                 return <Text tid={key[1]}/>
+                               }}
+                             )
+                           }
+                            </span>
                         </div>
                       </Link>
                     </div>

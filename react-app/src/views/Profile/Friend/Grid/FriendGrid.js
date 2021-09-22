@@ -5,6 +5,8 @@ import { FriendsAction, RemoveFriendAction, SendRequestFriendAction } from '../.
 import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
 import typeusers from "../../../../data/typeusers"
+import sectors from '../../../../data/sectors';
+import { Text } from '../../../../containers/Language';
 
 export default function FriendGrid({friends, filterInput, setFilterInput }) {
     const user = useSelector(state => state.userProfile.userProfile);
@@ -116,10 +118,6 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                         : <button type="button" onClick={() => {removeFriend(friend.id); show(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
                       
                       }
-                      {/* {friendsIds.includes(friend.id) && params.id === user?.profile?.id ? 
-                        <button type="button" onClick={() => {addFriend(friend.id)}} className="FriendBox-Accept"><i className="uil uil-user-plus"></i>11</button>
-                        : <button type="button" onClick={() => {removeFriend(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i>22</button>
-                      } */}
                       <Link to={`/profile/${friend.profile.id}`}>
                         <div className="FriendThumb"><img src={friend.profile.avatar_link} alt="avatar"/></div>
                         <div className="FriendInfos">
@@ -130,7 +128,15 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                                     return key[1]
                                 }}
                             )}
-                            - Agriculture</span>
+                            - {
+                             sectors.map((key) => 
+                             // console.log(key[0], project?.project?.sector)
+                               {if ( friend.sector.includes(key[0])) {
+                                 return <Text tid={key[1]}/>
+                               }}
+                             )
+                           }
+                            </span>
                         </div>
                       </Link>
                     </div>
