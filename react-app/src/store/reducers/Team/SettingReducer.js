@@ -23,6 +23,11 @@ const SettingReducer = (state = initState, action) => {
                 ...state,
                 teams : state.teams,
             }
+        case 'LIST_TEAM_MEMBERS_SUCCESS':
+            return{
+                ...state,
+                teams : action.res.teams,
+            }
 
         case 'EDIT_TEAMS_SUCCESS':
             

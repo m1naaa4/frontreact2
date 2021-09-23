@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap';
+import { Col, ListGroup, Modal, Nav, Row, Tab } from 'react-bootstrap';
 import { useForm } from 'react-hooks-helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditTeamAction } from '../../../store/actions/Setting/SettingActions';
 import Modale from './Modale';
+import AsyncSelect from 'react-select/async';
+import Member from './Member';
 
 
 
@@ -19,6 +21,9 @@ export default function TeamMain() {
     const handleClose = () => setShowmodal(false);
     const teams = useSelector(state => state.setting.teams);
 
+
+    const [value, onChange] = useState(null);
+
     const Update =(id) =>{
         let data = {
             'url'   : 'team/editTeam',
@@ -28,14 +33,75 @@ export default function TeamMain() {
           } 
         dispatch(EditTeamAction(data, '', ''));
       }
+
+      const INITIAL_DATA = {
+        value: 0,
+        label: '',
+      };
     
+      const [selectData, setselectData] = useState(INITIAL_DATA);
+      const mapResponseToValuesAndLabels = (data) => ({
+        value: data.id,
+        label: data.name,
+      });
+
+      async function callApi(value) {
+
+        const _url = 'https://api.dockergateway.test/src/public/api/getusers';
+        let _body = JSON.stringify({
+            search: value,
+        });
+        const _headers = {
+            'Authorization': localStorage.getItem('user-token'),
+            'Content-type': 'application/json; charset=UTF-8',
+        };
+        const _options = { method: 'POST', headers: _headers, body: _body };
+
+        const data = fetch(_url, _options)
+            .then((res) => res.json())
+            .then((json) => json.users.data)
+            .then((response) => response.map(mapResponseToValuesAndLabels))
+            .then((final) =>
+                final.filter((i) => i.label.toLowerCase().includes(value.toLowerCase()))
+            );
+        return data;
+      }
+
+      function handleSubmit() {
+        console.log(selectData);
+        setselectData(INITIAL_DATA);
+      }
+      
       
     return (
         <>  
-            <div classNameName="col-md-8 col-lg-8 d-md-none d-lg-block">
-              <div classNameName="User-Settings">
+            <div className="col-md-8 col-lg-8 d-md-none d-lg-block">
+              <div className="User-Settings">
                     <div className="Profile-Section">
-                        <button type="button" onClick={handleShow} className="UpdateInfos-BTN" data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i></button>
+                    {teams && teams?.map((team, index) => (
+                        <Tab.Container id="left-tabs-example" defaultActiveKey="first" key={index}>
+                            <Row>
+                                <Col sm={3}>
+                                <Nav variant="pills" className="flex-column">
+                                    <Nav.Item>
+                                        <Nav.Link eventKey={team.id}>{team.name}</Nav.Link>
+                                    </Nav.Item>
+                                    
+                                </Nav>
+                                </Col>
+                                <Col sm={9}>
+                                <Tab.Content>
+                                    <Tab.Pane eventKey={team.id}>
+                                        <Member team={team}/>
+                                    </Tab.Pane>
+                                    
+                                </Tab.Content>
+                                </Col>
+                            </Row>
+                        </Tab.Container>
+                    ))}
+{/*                        
+                         <button type="button" onClick={handleShow} className="UpdateInfos-BTN" data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i></button>
                         <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Teams</h3>
                         <ul className="Section-Items">
 
@@ -48,6 +114,28 @@ export default function TeamMain() {
                                     <form className="" action="index.html" method="post">
                                         <div className="form-inputs">
                                         <div className="form-row">
+                                        <div className="row">
+ 
+                                        
+                                            <div className="col-md-6 input-row">
+                                            <AsyncSelect
+                                                isMulti
+                                                cacheOptions
+                                                loadOptions={callApi}
+                                                onChange={(data) => {
+                                                setselectData(data);
+                                                }}
+                                                value={selectData}
+                                                defaultOptions
+                                            />
+
+                                            <div className="col-md-6 input-row">
+                                                <button type="button" onClick={handleSubmit}>
+                                                    Send
+                                                </button>
+                                            </div>
+
+                                            </div>
                                         
                                             <div className="col-md-6 input-row">
                                                 <input type="text" onChange={setForm} name="teamname" defaultValue={team.name} placeholder="Team name" className="wizard-required" required/>
@@ -73,7 +161,8 @@ export default function TeamMain() {
                                 <Modale showmodal={showmodal} handleClose={handleClose}/>
                             </Modal>
                        
-                        </ul>
+                        </ul> 
+                     */}
                     </div>
                 </div>
             </div>

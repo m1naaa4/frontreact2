@@ -1,4 +1,4 @@
-import { generalePost } from "../../../services/User/Profile/ProfileService";
+import { generaleGet, generalePost } from "../../../services/User/Profile/ProfileService";
 
 export const TeamsAction = (data) =>{
     return (dispatch)=>{
@@ -6,6 +6,28 @@ export const TeamsAction = (data) =>{
         dispatch({type:'LOADING_LOAD_TEAMS'});
 
         generalePost(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_TEAMS_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_TEAMS_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const PermissionsAction = (data) =>{
+    return (dispatch)=>{
+
+
+        generaleGet(data).then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  
@@ -31,6 +53,27 @@ export const CreateTeamsAction = (data) =>{
             if(res.hasOwnProperty('success') && res.success===true){
                  
                 dispatch({type:'ADD_TEAMS_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'ADD_TEAMS_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const TeamMembersAction = (data) =>{
+    return (dispatch)=>{
+
+        generaleGet(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LIST_TEAM_MEMBERS_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
                 dispatch({type:'ADD_TEAMS_ERROR',res})

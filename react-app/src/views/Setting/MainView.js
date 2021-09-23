@@ -5,7 +5,7 @@ import { Col, Nav, Row, Tab } from 'react-bootstrap';
 import TeamMain from './Team/TeamMain';
 import ManagementPermission from './Access/ManagementPermission';
 import { useDispatch } from 'react-redux';
-import { TeamsAction } from '../../store/actions/Setting/SettingActions';
+import { PermissionsAction, TeamMembersAction, TeamsAction } from '../../store/actions/Setting/SettingActions';
 
 
 
@@ -16,10 +16,14 @@ export default function MainView() {
        let data = {
         'url'   : 'team/getTeams'
         } 
-        dispatch(TeamsAction(data));
+        // dispatch(TeamsAction(data));
+        dispatch(TeamMembersAction('team/getMembers'));
+        dispatch(PermissionsAction('permission/get'));
+
+        
     },[])
 
-    
+    dispatch(TeamMembersAction('team/getMembers'));
     return (
         <>  
             <div classNameName="Page-Wrapper">

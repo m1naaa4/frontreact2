@@ -26,6 +26,16 @@ export const generalePost = (data) =>{
          });
 }
 
+export const generaleGet = (url) =>{
+    
+    const tokenId = "user-token";
+    return  http.getData(url, tokenId).then( data => {
+        return data;
+    }).catch((error)=> {
+        return error;
+         });
+}
+
 export const LoadProfile = (id) =>{
     
     let profileUpUrl = "profile/getProfile/"+ id;
