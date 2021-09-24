@@ -28,6 +28,13 @@ const SettingReducer = (state = initState, action) => {
                 ...state,
                 teams : action.res.teams,
             }
+        
+        case 'LOAD_CONTENTS_SUCCESS':
+            return{
+                ...state,
+                contents : action.res.contents,
+            }
+        
 
         case 'EDIT_TEAMS_SUCCESS':
             

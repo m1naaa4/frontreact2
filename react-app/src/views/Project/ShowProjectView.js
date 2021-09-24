@@ -14,6 +14,8 @@ import etats from '../../data/Etats';
 import countries from '../../data/countries';
 import finances from '../../data/finances';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
+import { Modal } from 'react-bootstrap';
+import Modale from './Share/Modale';
 
 export default function ShowProjectView(props) {
 
@@ -32,6 +34,9 @@ export default function ShowProjectView(props) {
     const [status, setStatus] = useState();
     const [country, setCountry] = useState();
     const [finance, setFinance] = useState();
+    const [showmodal, setShowmodal] = useState(false);
+    const handleShow = () => setShowmodal(true);
+    const handleClose = () => setShowmodal(false);
     const [t] = useTranslation();
 
     console.log('project?.project?.favorite', project?.project?.favorite, classe)
@@ -252,6 +257,20 @@ export default function ShowProjectView(props) {
                                         </span>
                                         
                                     </li>
+                                    
+                                    <li className="Offer-Item">
+                                        <button onClick={handleShow}>Share</button>
+                                        {/* <span> */}
+                                        <button type="button" onClick={handleShow} className="UpdateInfos-BTN" data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i>rt</button>
+                                            
+                                        {/* </span> */}
+
+                                        <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <Modale showmodal={showmodal} handleClose={handleClose}/>
+                                        </Modal>
+                                        
+                                    </li>
+
                                     <li className="Offer-Item">
                                         <label>Publié le</label>
                                         <span>{project.project.date}</span>

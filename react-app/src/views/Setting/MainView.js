@@ -5,7 +5,8 @@ import { Col, Nav, Row, Tab } from 'react-bootstrap';
 import TeamMain from './Team/TeamMain';
 import ManagementPermission from './Access/ManagementPermission';
 import { useDispatch } from 'react-redux';
-import { PermissionsAction, TeamMembersAction, TeamsAction } from '../../store/actions/Setting/SettingActions';
+import { ContentsAction, PermissionsAction, TeamMembersAction, TeamsAction } from '../../store/actions/Setting/SettingActions';
+import ContentMain from './Content/ContentMain';
 
 
 
@@ -15,6 +16,7 @@ export default function MainView() {
     useEffect(()=>{
         dispatch(TeamMembersAction('team/getMembers'));
         dispatch(PermissionsAction('permission/get'));
+        dispatch(ContentsAction('user/getcontents'));
 
         
     },[])
@@ -40,6 +42,9 @@ export default function MainView() {
                                                     <Nav.Link eventKey="second">Team</Nav.Link>
                                                 </Nav.Item>
                                                 <Nav.Item>
+                                                    <Nav.Link eventKey="four">Security Contents</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
                                                     <Nav.Link eventKey="third">Access Management</Nav.Link>
                                                 </Nav.Item>
                                             </Nav>
@@ -51,6 +56,9 @@ export default function MainView() {
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="second">
                                                 <TeamMain />
+                                            </Tab.Pane>
+                                            <Tab.Pane eventKey="four">
+                                                <ContentMain />
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="third">
                                                 <ManagementPermission />
