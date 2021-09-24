@@ -13,10 +13,6 @@ export default function MainView() {
     const dispatch = useDispatch();
     
     useEffect(()=>{
-       let data = {
-        'url'   : 'team/getTeams'
-        } 
-        // dispatch(TeamsAction(data));
         dispatch(TeamMembersAction('team/getMembers'));
         dispatch(PermissionsAction('permission/get'));
 

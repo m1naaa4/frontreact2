@@ -31,7 +31,7 @@ export const PermissionsAction = (data) =>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  
-                dispatch({type:'LOAD_TEAMS_SUCCESS',res});
+                dispatch({type:'LOAD_PERMISSIONS_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
                 dispatch({type:'LOAD_TEAMS_ERROR',res})

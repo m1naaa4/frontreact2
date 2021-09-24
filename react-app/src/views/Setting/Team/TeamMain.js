@@ -20,6 +20,7 @@ export default function TeamMain() {
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
     const teams = useSelector(state => state.setting.teams);
+    const roles = useSelector(state => state.setting.roles);
 
 
     const [value, onChange] = useState(null);
@@ -75,7 +76,7 @@ export default function TeamMain() {
       
     return (
         <>  
-            <div className="col-md-8 col-lg-8 d-md-none d-lg-block">
+            <div className="col-md-8 col-lg-12 d-md-none d-lg-block">
               <div className="User-Settings">
                     <div className="Profile-Section">
                     {teams && teams?.map((team, index) => (
@@ -92,7 +93,7 @@ export default function TeamMain() {
                                 <Col sm={9}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey={team.id}>
-                                        <Member team={team}/>
+                                        <Member team={team} roles={roles}/>
                                     </Tab.Pane>
                                     
                                 </Tab.Content>
