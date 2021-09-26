@@ -10,6 +10,7 @@ import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
 import FundersPrivateRoutes from './routes/FundersPrivateRoutes';
 import NotFound from './pages/404';
 import Opps from './pages/500';
+import Expired from './pages/Expired';
 import SettingPrivateRoutes from './routes/SettingPrivateRoutes';
 import FavoritePrivateRoutes from './routes/FavoritePrivateRoutes';
 
@@ -23,7 +24,9 @@ const Routes = (props) => {
                             <Redirect to={{pathname: '/login'}} />
                         )} />
                         <Route exact path="/login" component={UserLogin} />
-                        <Route path="/register" component={UserRegister} />
+                        <Route exact path="/login/:token" component={UserLogin} />
+                        <Route exact path="/register" component={UserRegister} />
+                        <Route path="/register/:token" component={UserRegister} />
                         <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
                         <Gaurd  path="/profile/:id" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
                         <Gaurd  path="/user/:id" token='user-token' routeRedirect='/login' component={SettingPrivateRoutes} />
@@ -32,6 +35,7 @@ const Routes = (props) => {
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                 
+                        <Route exact path="/expired" component={Expired} />
                         <Route exact path="/oops" component={Opps} />
 
                         <Route path="*" render={ props=>(

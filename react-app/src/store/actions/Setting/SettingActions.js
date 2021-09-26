@@ -45,6 +45,52 @@ export const PermissionsAction = (data) =>{
     
 }
 
+export const RolesAction = (data) =>{
+    return (dispatch)=>{
+
+
+        generaleGet(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_ROLES_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_ROLES_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const GiveAccessAction = (data) =>{
+    return (dispatch)=>{
+
+
+        generalePost(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_GIVE_ACCESS_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_GIVE_ACCESS_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+
+
 export const ContentsAction = (data) =>{
     return (dispatch)=>{
 

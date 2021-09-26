@@ -5,20 +5,32 @@ import { useTranslation } from 'react-i18next';
 import etats from '../../../data/Etats';
 import countries from '../../../data/countries';
 import finances from '../../../data/finances';
+import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';
+import { useDispatch } from 'react-redux';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
-    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, project_id, medialink, logolink, mediatype } = formData;
+    const { project_status, project_area, funding_search, tags, descriptions, name,  sector_id, project_id, medialink, logolink, mediatype, visibility } = formData;
     const {previous} = navigation;
     const [sector, setSector] = useState();
     const [status, setStatus] = useState();
     const [country, setCountry] = useState();
     const [finance, setFinance] = useState();
+    const [visibilitys, setVisibility] = useState(visibility);
 
     const goToShowproject = () => {
         props.history.push('/project/show/'+ project_id );
     };
     const [t] = useTranslation();
+
+    const dispatch = useDispatch();
+    const handleSubmit = async e => {
+        e.preventDefault();
+        formData.visibilitys   = visibilitys;
+        formData.project_id = project_id;
+        formData.action     = 'create';
+        dispatch(AddProjectsAction (formData, props, '/create', navigation));
+    };
 
     useEffect(() => {
         sectors.map((key) => 
@@ -159,17 +171,24 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                     </button>
-
+                                    {/* <Form.Select aria-label="Default select example">
+                                        <option>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </Form.Select> */}
                                     <button type="button" onClick={goToShowproject}  className="submit action-button">Review <i
                                         className="uil uil-arrow-right"></i></button>
                                     
                                     {/* <NavLink className="submit action-button" to={`show/${project_id}`}>Review <i
                                     className="uil uil-arrow-right"></i></NavLink> */}
-                                    {/*<select className="post-status" name="">
-                                        <option disabled selected>Statut de l’offre</option>
-                                        <option value="publish">Publier</option>
-                                        <option value="darft">Brouillon</option>
-                                    </select>*/}
+                                    <select className="post-status" name="visibility" onChange={(event) => {handleSubmit(event);}}  defaultValue={visibility} onChange={setVisibility}>
+                                        <option disabled selected>Project status</option>
+                                        <option value="public">Public</option>
+                                        <option value="shared">Shared</option>
+                                        <option value="team">Team</option>
+                                        <option value="private">Private</option>
+                                    </select>
                                 </fieldset>
 
                             </form>

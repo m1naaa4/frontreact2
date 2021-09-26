@@ -26,6 +26,7 @@ const defaultData = {
     funding_search: '',
     description: '',
     project_status: '',
+    visibility: 'private',
     action: 'create',
     look_mentor: 0,
     look_angel: 1,

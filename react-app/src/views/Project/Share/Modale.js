@@ -1,64 +1,62 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hooks-helper";
-import { useDispatch} from 'react-redux';
-import AsyncSelect from 'react-select/async';
+import { useDispatch, useSelector} from 'react-redux';
+import { GiveAccessAction, RolesAction } from '../../../store/actions/Setting/SettingActions';
+import AsyncCreatableSelect from 'react-select/async-creatable';
 
 
 
-const  Modale = ({ showmodal, handleClose}) => {
+const  Modale = ({ showmodal, datatype, handleClose}) => {
 
   const dispatch = useDispatch();
+  const roles = useSelector(state => state.setting.roles);
  
+    const [formData, setForm] = useForm({user_id:'', role:'viewer', description:''});
 
+    useEffect(()=>{
+      dispatch(RolesAction('permission/getroles'));
+    },[])
 
-  const [formData, setForm] = useForm({teamname:'', description:''});
+    const [selectData, setselectData] = useState();
+    const mapResponseToValuesAndLabels = (data) => ({
+        value: data.email,
+        label: data.name+'',
+    });
 
-    const Add =() =>{
-      let data = {
-        'url'   : 'team/create',
-        'name' : formData.teamname,
-        'description' : formData.description,
-      } 
-        // dispatch(CreateTeamsAction(data));
-      }
+    async function callApi(value) {
 
-
-      const INITIAL_DATA = {
-        value: 0,
-        label: '',
-      };
-    
-      const [selectData, setselectData] = useState(INITIAL_DATA);
-      const mapResponseToValuesAndLabels = (data) => ({
-        value: data.id,
-        label: data.name + 'e',
+      const _url = `${process.env.REACT_APP_API_URL}`+'/getusers';
+      let _body = JSON.stringify({
+          search: value,
       });
+      const _headers = {
+          'Authorization': localStorage.getItem('user-token'),
+          'Content-type': 'application/json; charset=UTF-8',
+      };
+      const _options = { method: 'POST', headers: _headers, body: _body };
 
-      async function callApi(value) {
+      const data = fetch(_url, _options)
+          .then((res) => res.json())
+          .then((json) => json.users.data)
+          .then((response) => response.map(mapResponseToValuesAndLabels))
+          .then((final) =>
+              final.filter((i) => i.label.toLowerCase().includes(value.toLowerCase()))
+          );
+      return data;
+    }
 
-        const _url = 'https://api.dockergateway.test/src/public/api/getusers';
-        let _body = JSON.stringify({
-            search: value,
-        });
-        const _headers = {
-            'Authorization': localStorage.getItem('user-token'),
-            'Content-type': 'application/json; charset=UTF-8',
-        };
-        const _options = { method: 'POST', headers: _headers, body: _body };
-
-        const data = fetch(_url, _options)
-            .then((res) => res.json())
-            .then((json) => json.users.data)
-            .then((response) => response.map(mapResponseToValuesAndLabels))
-            .then((final) =>
-                final.filter((i) => i.label.toLowerCase().includes(value.toLowerCase()))
-            );
-        return data;
-      }
-
-      function handleSubmit() {
-        console.log(selectData);
-        setselectData(INITIAL_DATA);
+     const Add =() =>{
+        setselectData();
+        let data = {
+          'url'   : 'permission/giveaccess',
+          'invite_user_id' : selectData,
+          'role' : formData.role,
+          'description' : formData.description,
+          'type' : datatype.type,
+          'content_id' : datatype.content_id,
+          'provider' : datatype.provider,
+        } 
+        dispatch(GiveAccessAction(data));
       }
 
     return (  
@@ -71,23 +69,37 @@ const  Modale = ({ showmodal, handleClose}) => {
               <div className="form-inputs">
                 <div className="form-row">
                   <div className="col-md-6 input-row">
-                  <AsyncSelect
+                  <AsyncCreatableSelect
                         isMulti
                         cacheOptions
                         loadOptions={callApi}
+                        placeholder="Search for a user"
                         onChange={(data) => {
                         setselectData(data);
                         }}
                         value={selectData}
                         defaultOptions
                     />
-                    <input type="text" name="teamname" defaultValue="" placeholder="Team name" className="wizard-required" onChange={setForm} required/>
                   </div>
                   <div className="col-md-6 input-row input-select input-select-multi">
+                  
+                  </div>
+                  <div className="col-md-12 input-row">
+                    {roles && roles.map((role, index) => (
+                        <div className="form-check" key={index}>
+                          <input className="form-check-input" type="radio" onChange={setForm} name="role" id={index}
+                           value={role.name} defaultChecked={role.name == 'viewer' ? true : false}
+                           />
+                          <label className="form-check-label" htmlFor={index}>
+                            {role.name}
+                          </label>
+                        </div>                        
+                    ))}
                   </div>
                   <div className="col-md-12 input-row">
                     <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
                   </div>
+                  
                 </div>
               </div>
               <div className="DadupaModal-Footer">

@@ -47,8 +47,16 @@ const SettingReducer = (state = initState, action) => {
         case 'LOAD_PERMISSIONS_SUCCESS':
             return{
                 ...state,
+                permissions : action.res.roles,
+            }
+        
+        case 'LOAD_ROLES_SUCCESS':
+            return{
+                ...state,
                 roles : action.res.roles,
             }
+        
+        
 
         case 'LOAD_TEAMS_ERROR':
             return {

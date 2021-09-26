@@ -42,9 +42,17 @@ export default function ShowProjectView(props) {
     console.log('project?.project?.favorite', project?.project?.favorite, classe)
 
     const data = {
-        project_id : params.id,
-        action     : "getProject",
+        provider_id : params.id,
+        action      : "getProject",
+        permission  : "consult project",
+        provider    : "project",
     }
+
+    const datatype = {
+        'provider'  : 'project',
+        'content_id'  : params.id,
+    }
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(GetProjectAction(data, props));
@@ -261,12 +269,11 @@ export default function ShowProjectView(props) {
                                     <li className="Offer-Item">
                                         <button onClick={handleShow}>Share</button>
                                         {/* <span> */}
-                                        <button type="button" onClick={handleShow} className="UpdateInfos-BTN" data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i>rt</button>
                                             
                                         {/* </span> */}
 
                                         <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <Modale showmodal={showmodal} handleClose={handleClose}/>
+                                            <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose}/>
                                         </Modal>
                                         
                                     </li>

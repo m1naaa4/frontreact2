@@ -20,7 +20,7 @@ export default function TeamMain() {
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
     const teams = useSelector(state => state.setting.teams);
-    const roles = useSelector(state => state.setting.roles);
+    const roles = useSelector(state => state.setting.permissions);
 
 
     const [value, onChange] = useState(null);
