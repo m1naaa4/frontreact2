@@ -13,6 +13,7 @@ import Opps from './pages/500';
 import Expired from './pages/Expired';
 import SettingPrivateRoutes from './routes/SettingPrivateRoutes';
 import FavoritePrivateRoutes from './routes/FavoritePrivateRoutes';
+import NoAuthorization from './pages/NoAuthorization';
 
 const Routes = (props) => {
 
@@ -35,6 +36,7 @@ const Routes = (props) => {
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                 
+                        <Route exact path="/noauthorization" component={NoAuthorization} />
                         <Route exact path="/expired" component={Expired} />
                         <Route exact path="/oops" component={Opps} />
 

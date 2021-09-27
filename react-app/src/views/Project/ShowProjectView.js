@@ -46,6 +46,7 @@ export default function ShowProjectView(props) {
         action      : "getProject",
         permission  : "consult project",
         provider    : "project",
+        provider_name    : localStorage.getItem('provider_name'),
     }
 
     const datatype = {
@@ -55,7 +56,7 @@ export default function ShowProjectView(props) {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(GetProjectAction(data, props));
+        dispatch(GetProjectAction(data, props, history));
     }, [dispatch])
 
     useEffect(() => {

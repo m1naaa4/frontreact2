@@ -36,19 +36,22 @@ export const ClearProjectsAction = () =>{
 }
 
 
-export const GetProjectAction = (data, props, current) =>{
+export const GetProjectAction = (data, props, history) =>{
 
     return (dispatch) =>
     {
         dispatch({type:'LOADING_GET_PROJECT'});
 
-        GetProject(data,props, current).then((res)=>{
-
+        GetProject(data).then((res)=>{
             if(res.hasOwnProperty('success') && res.success === true){
                 dispatch({type:'GET_PROJECT_SUCCESS', res});
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
-                dispatch({type:'GET_PROJECT_ERROR',res})
+                if (res.code === 403) {
+                    history.push("/noauthorization")
+                } else {
+                    dispatch({type:'GET_PROJECT_ERROR',res})
+                }
             }
         },
         error=>{

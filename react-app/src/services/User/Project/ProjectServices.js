@@ -39,7 +39,7 @@ export const LoadProject = (data, props, current) =>{
         return error;
     });
 }
-export const GetProject = (data, props, current) =>{
+export const GetProject = (data ) =>{
 
     const http = new HttpService();
     let getProjectUrl = "project/getProject";

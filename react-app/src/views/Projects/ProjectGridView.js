@@ -30,6 +30,7 @@ const ProjectGridView = ({ project }) => {
     }
 
     const goToShowproject = (id) => {
+        localStorage.setItem('provider_name', project.name)
         history.push('/project/show/'+ id)
      };
     return (
@@ -37,8 +38,8 @@ const ProjectGridView = ({ project }) => {
              <div className="offer-box">
                     <div className="offer-header">
                         <div className="offer-title">
-                            <h3><NavLink to={`/project/show/${project.id}`} data-toggle="tooltip" data-placement="top" title={project.name}>
-                                {project.name.substring(0, 10)}</NavLink></h3>
+                            <h3><span onClick={() => goToShowproject(project.id) } data-toggle="tooltip" data-placement="top" title={project.name}>
+                                {project.name.substring(0, 10)}</span></h3>
                             <span>{project.sector}</span>
                         </div>
                         <div className="offer-logo">

@@ -20,12 +20,12 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
     const [selectData, setselectData] = useState();
     const mapResponseToValuesAndLabels = (data) => ({
         value: data.email,
-        label: data.name+'',
+        label: data.profile.username+'',
     });
 
     async function callApi(value) {
 
-      const _url = `${process.env.REACT_APP_API_URL}`+'/getusers';
+      const _url = `${process.env.REACT_APP_API_URL}`+'/user/getusers';
       let _body = JSON.stringify({
           search: value,
       });
