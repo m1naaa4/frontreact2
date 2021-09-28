@@ -56,7 +56,7 @@ export default function ShowProjectView(props) {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(GetProjectAction(data, props, history));
+        dispatch(GetProjectAction(data, props, history, params.id));
     }, [dispatch])
 
     useEffect(() => {

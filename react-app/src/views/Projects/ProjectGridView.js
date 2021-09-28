@@ -30,6 +30,7 @@ const ProjectGridView = ({ project }) => {
     }
 
     const goToShowproject = (id) => {
+        localStorage.setItem('provider', 'project')
         localStorage.setItem('provider_name', project.name)
         history.push('/project/show/'+ id)
      };

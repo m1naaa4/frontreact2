@@ -1,9 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import HeaderLogo from "../layout/Header/HeaderLogo";
 import Footer from "../layout/footer/footer";
-import ProjectSkeletonGrid from '../skeleton/ProjectSkeletonGrid';
 import HeaderProfile from '../layout/Header/HeaderProfile';
+import ProjectSkeletonGridOne from '../skeleton/ProjectSkeletonOne';
 
 function NoAuthorization() {
     return (
@@ -13,7 +11,7 @@ function NoAuthorization() {
         <div className="Dadupa-Page" >
         <div className="Single-Wrapper" >
             <div className="container">
-                    <ProjectSkeletonGrid/>
+                <ProjectSkeletonGridOne/>
             </div>
         </div>
         </div>

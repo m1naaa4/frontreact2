@@ -36,7 +36,7 @@ const Routes = (props) => {
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                 
-                        <Route exact path="/noauthorization" component={NoAuthorization} />
+                        <Route exact path="/noauthorization/:id" component={NoAuthorization} />
                         <Route exact path="/expired" component={Expired} />
                         <Route exact path="/oops" component={Opps} />
 

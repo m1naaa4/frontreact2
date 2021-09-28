@@ -20,7 +20,11 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
     const [selectData, setselectData] = useState();
     const mapResponseToValuesAndLabels = (data) => ({
         value: data.email,
-        label: data.profile.username+'',
+        label: <span><div>
+                    <img style={{width: '40px', height: '40px', borderRadius: '4px', overflow: 'hidden'}} 
+                    src={data.profile.avatar_link ? data.profile.avatar_link : '/assets/images/avatar.png'} className="uil uil-apps" alt=''/> {data.profile.username}</div>
+                </span>
+        
     });
 
     async function callApi(value) {
@@ -38,10 +42,7 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
       const data = fetch(_url, _options)
           .then((res) => res.json())
           .then((json) => json.users.data)
-          .then((response) => response.map(mapResponseToValuesAndLabels))
-          .then((final) =>
-              final.filter((i) => i.label.toLowerCase().includes(value.toLowerCase()))
-          );
+          .then((response) => response.map(mapResponseToValuesAndLabels));
       return data;
     }
 
@@ -68,8 +69,8 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
             <div className=""  method="post">
               <div className="form-inputs">
                 <div className="form-row">
-                  <div className="col-md-6 input-row">
-                  <AsyncCreatableSelect
+                  <div className="col-md-12 input-row">
+                    <AsyncCreatableSelect
                         isMulti
                         cacheOptions
                         loadOptions={callApi}
@@ -78,7 +79,6 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
                         setselectData(data);
                         }}
                         value={selectData}
-                        defaultOptions
                     />
                   </div>
                   <div className="col-md-6 input-row input-select input-select-multi">

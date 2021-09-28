@@ -36,7 +36,7 @@ export const ClearProjectsAction = () =>{
 }
 
 
-export const GetProjectAction = (data, props, history) =>{
+export const GetProjectAction = (data, props, history, id) =>{
 
     return (dispatch) =>
     {
@@ -48,7 +48,7 @@ export const GetProjectAction = (data, props, history) =>{
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
                 if (res.code === 403) {
-                    history.push("/noauthorization")
+                    history.push("/noauthorization/"+id)
                 } else {
                     dispatch({type:'GET_PROJECT_ERROR',res})
                 }
