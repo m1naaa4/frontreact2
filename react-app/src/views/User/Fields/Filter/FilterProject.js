@@ -1,22 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ZoneDropFilter from "./Project/ZoneDropFilter";
-import EtatDropFilter from "./Project/EtatDropFilter";
 import SectorDropFilter from "./Project/SectorDropFilter";
 import FinanceDropFilter from "./Project/FinanceDropFilter";
 import {useDispatch} from "react-redux";
 import {loadProjectAction} from "../../../../store/actions/User/Project/ProjectActions";
 import { useTranslation } from 'react-i18next';
 import MultiselectCheckbox from '../../../../utils/MultiselectCheckbox';
-import typeusers from "../../../../data/typeusers"
-import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
-import AllMultiSelectCheckbox from '../../../../utils/AllMultiselectCheckbox';
+import sectors from "../../../../data/sectors"
+import etats from "../../../../data/etats"
+import finances from "../../../../data/finances"
+import countries from "../../../../data/countries"
+import AllMultiSelectCheckboxStatus from '../../../../utils/Filters/AllMultiselectCheckboxStatus';
+import AllMultiSelectCheckboxSector from '../../../../utils/Filters/AllMultiselectCheckboxSector';
+import AllMultiSelectCheckboxZone from '../../../../utils/Filters/AllMultiselectCheckboxZone';
+import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultiselectCheckboxFinance';
 
 
 
 function FilterProject({ filterInput, setFilterInput, props }) {
     const { t } = useTranslation();
 
-    const { zone, etat, sector, financement } = filterInput;
+    const [selectedstatus, setSelectedstatus] = useState();
+    const [selectedsector, setSelectedsector] = useState();
+    const [selectedfinance, setSelectedfinance] = useState();
+    const [selectedzone, setSelectedzone] = useState();
+    const [search, setSearch] = useState();
 
     const dispatch = useDispatch();
 
@@ -24,12 +32,33 @@ function FilterProject({ filterInput, setFilterInput, props }) {
         e.preventDefault();
         filterInput.filters = true;
 
-        dispatch(loadProjectAction(filterInput));
+        let dstatus = selectedstatus.map((name, index) => (
+            name.value
+        ))
+        
+        let dfinance = selectedfinance.map((name, index) => (
+            name.value
+        ))
+
+        let dzone = selectedzone.map((name, index) => (
+            name.value
+        ))
+
+        let dsector = selectedsector.map((name, index) => (
+            name.value
+        ))
+
+        let data = {
+            'project_status' : dstatus,
+            'funding_search' : dfinance,
+            'project_area'   : dzone,
+            'sector_id'      : dsector,
+            'search'         : search,
+            'filters'        : true,
+        }
+
+        dispatch(loadProjectAction(data));
     }
-    // fecth data on mounted
-    // useEffect(() => {
-    //     dispatch(loadProjectAction(filterInput,props));
-    // }, [dispatch])
 
     return (
             <div className="Filter-Row">
@@ -38,22 +67,25 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                         <div className="col-sm-11 col-md-12 col-lg-11">
                             <div className="display-flex">
                                 <div className="input-row input-select input-small">
-                                    <MultiselectCheckbox datas={typeusers} field='type'  onChange={setFilterInput}/>
+                                    <AllMultiSelectCheckboxStatus {...{ setSelectedstatus }}  datas={etats} onChange={setFilterInput}/>
+                                    {/* <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
                                 </div>
                                 <div className="input-row input-select input-small">
-                                    <SectorDropFilter value={sector} onChange={setFilterInput} />
-                                    <ReactMultiSelectCheckboxes onChange={setFilterInput} options={typeusers} />
+                                    {/* <SectorDropFilter value={sector} onChange={setFilterInput} /> */}
+                                    <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} onChange={setFilterInput}/>
                                 </div>
                                 <div className="input-row input-select input-small">
-                                <AllMultiSelectCheckbox datas={typeusers} />
-                                    <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} />
+                                    <AllMultiSelectCheckboxFinance {...{ setSelectedfinance }} datas={finances} onChange={setFilterInput}/>
+                                    {/* <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} /> */}
                                 </div>
                                 <div className="input-row input-select input-small">
-                                    <FinanceDropFilter value={financement} onChange={setFilterInput} />
+                                    {/* <FinanceDropFilter value={financement} onChange={setFilterInput} /> */}
+                                    {/* <AllMultiSelectCheckboxZone {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
+                                    <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/>
                                 </div>
                                 <div className="input-row">
                                     <input type="text" name="search" data-testid="filter-input-search"
-                                           onChange={setFilterInput} placeholder={t('filter.search')} />
+                                           onChange={setSearch} placeholder={t('filter.search')} />
                                 </div>
 
                             </div>

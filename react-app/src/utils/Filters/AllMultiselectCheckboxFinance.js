@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
 
-const AllMultiSelectCheckbox = ({datas}) => {
+const AllMultiSelectCheckboxFinance = ({datas, setSelectedfinance}) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [options, setOptions] = useState([]);
+  const { t } = useTranslation();
+
+  let options = datas.map((name, index) => (
+    {value : name.value, label: t(name.label)}
+  ))
 
   useEffect(() => {
-    setSelectedOptions([{ label: "All", value: "*" }, ...datas]);
+    setSelectedOptions([{ label: "", value: "" }]);
   }, []);
 
   function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
     if (value && value.some((o) => o.value === "*")) {
       return `${placeholderButtonLabel}: All`;
-    } else {
+    } else if(value.some((o) => o.value === '')) {
+      return `${placeholderButtonLabel}: ${value.length-1} selected`;
+    }else{
       return `${placeholderButtonLabel}: ${value.length} selected`;
     }
   }
@@ -33,12 +40,13 @@ const AllMultiSelectCheckbox = ({datas}) => {
     } else {
       this.setState(value);
     }
+    setSelectedfinance(value)
   }
 
   return (
-    <ReactMultiSelectCheckboxes name='funding_search'
-      options={[{ label: "All", value: "*" }, ...datas]}
-      placeholderButtonLabel="Type"
+    <ReactMultiSelectCheckboxes name='project_area'
+      options={[{ label: "All", value: "*" }, ...options]}
+      placeholderButtonLabel="Finance"
       getDropdownButtonLabel={getDropdownButtonLabel}
       value={selectedOptions}
       onChange={onChange}
@@ -47,4 +55,4 @@ const AllMultiSelectCheckbox = ({datas}) => {
   );
 };
 
-export default AllMultiSelectCheckbox;
+export default AllMultiSelectCheckboxFinance;

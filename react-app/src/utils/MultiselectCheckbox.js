@@ -20,21 +20,22 @@ const Option = (props) => {
     );
   };
 
-function MultiselectCheckbox ({datas, field, label, ...others }){
+function MultiselectCheckbox ({datas, setSelectedzone, label, ...others }){
 
     const [optionSelected, setOptionSelected] = useState(null);
     const { t, i18n } = useTranslation();
 
     const handleChange =  (selected) => {
         setOptionSelected(selected);
+        setSelectedzone(selected);
       };
 
     return (
         <span
-        className="user-type"
-            data-toggle="popover"
-            data-trigger="focus"
-            data-content="Please selecet account(s)"
+          className="user-type"
+          data-toggle="popover"
+          data-trigger="focus"
+          data-content="Please selecet account(s)"
         >
             <ReactSelect
             options={datas} name="funding_search"
