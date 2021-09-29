@@ -6,6 +6,10 @@ import FinanceDropFilter from "./Project/FinanceDropFilter";
 import {useDispatch} from "react-redux";
 import {loadProjectAction} from "../../../../store/actions/User/Project/ProjectActions";
 import { useTranslation } from 'react-i18next';
+import MultiselectCheckbox from '../../../../utils/MultiselectCheckbox';
+import typeusers from "../../../../data/typeusers"
+import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
+import AllMultiSelectCheckbox from '../../../../utils/AllMultiselectCheckbox';
 
 
 
@@ -34,12 +38,14 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                         <div className="col-sm-11 col-md-12 col-lg-11">
                             <div className="display-flex">
                                 <div className="input-row input-select input-small">
-                                    <EtatDropFilter value={etat} onChange={setFilterInput} />
+                                    <MultiselectCheckbox datas={typeusers} field='type'  onChange={setFilterInput}/>
                                 </div>
                                 <div className="input-row input-select input-small">
                                     <SectorDropFilter value={sector} onChange={setFilterInput} />
+                                    <ReactMultiSelectCheckboxes onChange={setFilterInput} options={typeusers} />
                                 </div>
                                 <div className="input-row input-select input-small">
+                                <AllMultiSelectCheckbox datas={typeusers} />
                                     <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} />
                                 </div>
                                 <div className="input-row input-select input-small">
