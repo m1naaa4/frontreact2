@@ -28,19 +28,20 @@ const AllMultiSelectCheckboxFinance = ({datas, setSelectedfinance}) => {
   function onChange(value, event) {
     if (event.action === "select-option" && event.option.value === "*") {
       this.setState(this.options);
-    } else if (
-      event.action === "deselect-option" &&
-      event.option.value === "*"
-    ) {
+      setSelectedfinance(this.options)
+    } else if (event.action === "deselect-option" && event.option.value === "*") {
+      setSelectedfinance([])
       this.setState([]);
     } else if (event.action === "deselect-option") {
+      setSelectedfinance(value.filter((o) => o.value !== "*"))
       this.setState(value.filter((o) => o.value !== "*"));
     } else if (value.length === this.options.length - 1) {
+      setSelectedfinance(this.options)
       this.setState(this.options);
     } else {
+      setSelectedfinance(value)
       this.setState(value);
     }
-    setSelectedfinance(value)
   }
 
   return (

@@ -14,7 +14,7 @@ export default function ListProjectView({ props}) {
         'project_area' : '',
         'funding_search' : '',
         'project_status' : '',
-        'sector_id' : '',
+        'sector' : '',
         'search' : '',
     });
 

@@ -28,22 +28,21 @@ const AllMultiSelectCheckboxZone = ({datas, setSelectedZone}) => {
 
   function onChange(value, event) {
     if (event.action === "select-option" && event.option.value === "*") {
-      console.log('1')
       this.setState(this.options);
+      setSelectedZone(this.options)
     } else if (event.action === "deselect-option" && event.option.value === "*") {
-      console.log('2')
+      setSelectedZone([])
       this.setState([]);
     } else if (event.action === "deselect-option") {
-      console.log('3')
+      setSelectedZone(value.filter((o) => o.value !== "*"))
       this.setState(value.filter((o) => o.value !== "*"));
-      console.log('4')
     } else if (value.length === this.options.length - 1) {
+      setSelectedZone(this.options)
       this.setState(this.options);
     } else {
-      console.log('5')
+      setSelectedZone(value)
       this.setState(value);
     }
-    setSelectedZone(value)
   }
 
   return (

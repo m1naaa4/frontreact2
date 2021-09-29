@@ -35,7 +35,7 @@ function FilterProject({ filterInput, setFilterInput, props }) {
         filterInput.filters = true;
 
         let dstatus = selectedstatus?.map((name, index) => (
-            filterInput.etat = name.value
+            name.value
         ))
         
         let dfinance = selectedfinance?.map((name, index) => (
@@ -43,17 +43,17 @@ function FilterProject({ filterInput, setFilterInput, props }) {
         ))
 
         let dzone = selectedzone?.map((name, index) => (
-            filterInput.zone = name.value
+            name.value
         ))
 
         let dsector = selectedsector?.map((name, index) => (
-            filterInput.sector = name.value
+            name.value
         ))
 
         filterInput.funding_search = dfinance
         filterInput.project_status = dstatus
         filterInput.project_area = dzone
-        filterInput.sector_id = dsector
+        filterInput.sector = dsector
         filterInput.search = search
 
         dispatch(loadProjectAction(filterInput));
