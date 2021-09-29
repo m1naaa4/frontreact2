@@ -7,7 +7,16 @@ import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User
 import {Redirect} from 'react-router-dom';
 
 
-export default function ListProjectView({filterInput, setFilterInput, props}) {
+export default function ListProjectView({ props}) {
+
+    const [filterInput, setFilterInput ]  = useState({
+        'filters' : true,
+        'project_area' : '',
+        'funding_search' : '',
+        'project_status' : '',
+        'sector_id' : '',
+        'search' : '',
+    });
 
     const data = { filterInput, setFilterInput, props };
 
@@ -52,7 +61,7 @@ export default function ListProjectView({filterInput, setFilterInput, props}) {
                     <div>
                         <div className="Filter-Row">
                             <FilterProject
-                                {...data}
+                               {...data}
                             />
                         </div>
                     </div>

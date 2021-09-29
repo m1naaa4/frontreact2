@@ -28,20 +28,22 @@ const AllMultiSelectCheckboxSector = ({datas, setSelectedsector}) => {
 
   function onChange(value, event) {
     if (event.action === "select-option" && event.option.value === "*") {
+      console.log('1', this.options)
+      setSelectedsector(this.options)
       this.setState(this.options);
-    } else if (
-      event.action === "deselect-option" &&
-      event.option.value === "*"
-    ) {
+    } else if (event.action === "deselect-option" && event.option.value === "*") {
+      console.log('2')
       this.setState([]);
     } else if (event.action === "deselect-option") {
+      console.log('3')
       this.setState(value.filter((o) => o.value !== "*"));
+      console.log('4')
     } else if (value.length === this.options.length - 1) {
       this.setState(this.options);
     } else {
+      console.log('5')
       this.setState(value);
     }
-    setSelectedsector(value)
   }
 
   return (

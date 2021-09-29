@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useTranslation } from 'react-i18next';
 import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
 
@@ -23,7 +22,6 @@ const Option = (props) => {
 function MultiselectCheckbox ({datas, setSelectedzone, label, ...others }){
 
     const [optionSelected, setOptionSelected] = useState(null);
-    const { t, i18n } = useTranslation();
 
     const handleChange =  (selected) => {
         setOptionSelected(selected);

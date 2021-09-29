@@ -44,7 +44,7 @@ const AllMultiSelectCheckboxFinance = ({datas, setSelectedfinance}) => {
   }
 
   return (
-    <ReactMultiSelectCheckboxes name='project_area'
+    <ReactMultiSelectCheckboxes
       options={[{ label: "All", value: "*" }, ...options]}
       placeholderButtonLabel="Finance"
       getDropdownButtonLabel={getDropdownButtonLabel}

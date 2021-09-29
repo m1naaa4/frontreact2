@@ -30,34 +30,33 @@ function FilterProject({ filterInput, setFilterInput, props }) {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
+
+        
         filterInput.filters = true;
 
-        let dstatus = selectedstatus.map((name, index) => (
-            name.value
+        let dstatus = selectedstatus?.map((name, index) => (
+            filterInput.etat = name.value
         ))
         
-        let dfinance = selectedfinance.map((name, index) => (
+        let dfinance = selectedfinance?.map((name, index) => (
             name.value
         ))
 
-        let dzone = selectedzone.map((name, index) => (
-            name.value
+        let dzone = selectedzone?.map((name, index) => (
+            filterInput.zone = name.value
         ))
 
-        let dsector = selectedsector.map((name, index) => (
-            name.value
+        let dsector = selectedsector?.map((name, index) => (
+            filterInput.sector = name.value
         ))
 
-        let data = {
-            'project_status' : dstatus,
-            'funding_search' : dfinance,
-            'project_area'   : dzone,
-            'sector_id'      : dsector,
-            'search'         : search,
-            'filters'        : true,
-        }
+        filterInput.funding_search = dfinance
+        filterInput.project_status = dstatus
+        filterInput.project_area = dzone
+        filterInput.sector_id = dsector
+        filterInput.search = search
 
-        dispatch(loadProjectAction(data));
+        dispatch(loadProjectAction(filterInput));
     }
 
     return (
@@ -67,21 +66,21 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                         <div className="col-sm-11 col-md-12 col-lg-11">
                             <div className="display-flex">
                                 <div className="input-row input-select input-small">
-                                    <AllMultiSelectCheckboxStatus {...{ setSelectedstatus }}  datas={etats} onChange={setFilterInput}/>
+                                    <AllMultiSelectCheckboxStatus {...{ setSelectedstatus }}  datas={etats} />
                                     {/* <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
                                 </div>
                                 <div className="input-row input-select input-small">
                                     {/* <SectorDropFilter value={sector} onChange={setFilterInput} /> */}
-                                    <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} onChange={setFilterInput}/>
+                                    <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
                                 </div>
                                 <div className="input-row input-select input-small">
-                                    <AllMultiSelectCheckboxFinance {...{ setSelectedfinance }} datas={finances} onChange={setFilterInput}/>
+                                    <AllMultiSelectCheckboxFinance {...{ setSelectedfinance }} datas={finances} />
                                     {/* <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} /> */}
                                 </div>
                                 <div className="input-row input-select input-small">
                                     {/* <FinanceDropFilter value={financement} onChange={setFilterInput} /> */}
                                     {/* <AllMultiSelectCheckboxZone {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
-                                    <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/>
+                                    <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} />
                                 </div>
                                 <div className="input-row">
                                     <input type="text" name="search" data-testid="filter-input-search"
