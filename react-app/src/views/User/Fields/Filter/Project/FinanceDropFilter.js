@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
-import finances from "../../../../../data/finances";
+import finances from "../../../../../data/financesCreate";
 
 
 

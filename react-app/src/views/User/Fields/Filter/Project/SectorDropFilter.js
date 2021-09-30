@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
-import sectors from "../../../../../data/sectors";
+import sectors from "../../../../../data/sectorsCreate";
 
 function SectorDropFilter ({ label, ...others }){
     const { t, i18n } = useTranslation();
