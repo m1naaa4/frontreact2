@@ -1,9 +1,9 @@
 
-const typeusers = [
-    { value: "PP", label: "Porteur de projet" },
-    { value: "BF", label: "Investisseur" },
-    { value: "ACMPT", label: "Mentor" },
-    { value: "visitor", label: "Visiteur" },
+const typeusersCreate = [
+    [  "PP",  "Porteur de projet" ],
+    [  "BF",  "Investisseur" ],
+    [  "ACMPT",  "Mentor" ],
+    [  "visitor",  "Visiteur" ],
 ];
 
-export default typeusers;
+export default typeusersCreate;

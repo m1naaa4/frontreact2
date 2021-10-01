@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 
 function DropType ({datas, field, label, ...others }){
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <select className="user-type" name={field}  {...others} required={others.required && "required"}>

@@ -44,6 +44,11 @@ export default function ProfilePrivateRoutes(props) {
                                         <Route exact path={props.match.path} render = { props => (
                                             <Redirect to={{pathname: `${props.match.path}/friends/:page` }} />
                                         )} />
+
+                                        <Route exact path={`${props.match.path}/friends`}  component = {FriendPage} />
+                                        <Route exact path={props.match.path} render = { props => (
+                                            <Redirect to={{pathname: `${props.match.path}/friends` }} />
+                                        )} />
                                         <Route component={NotFound} header="false" />
                                     </Switch>
                                 <SideRightProfileView/>

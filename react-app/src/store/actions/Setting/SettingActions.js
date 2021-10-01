@@ -223,3 +223,18 @@ export const DeleteTeamAction = (data) =>{
     }
 }
 
+export const InvitationsAccessAction = (data) =>{
+    return (dispatch)=>{
+        generaleGet(data).then((res)=>{
+            if(res.hasOwnProperty('success') && res.success===true){
+                dispatch({type:'LOAD_INVITATIONS_ACCESS_SUCCESS',res});
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_INVITATIONS_ACCESS_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+}

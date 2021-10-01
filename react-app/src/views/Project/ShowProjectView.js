@@ -10,7 +10,7 @@ import parse from 'html-react-parser';
 import { useTranslation } from 'react-i18next';
 import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 import sectors from '../../data/sectors';
-import etats from '../../data/Etats';
+import etats from '../../data/etats';
 import countries from '../../data/countries';
 import finances from '../../data/finances';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';

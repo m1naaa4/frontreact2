@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from 'react'
 import { Player } from 'video-react';
 import sectors from '../../../data/sectors';
 import { useTranslation } from 'react-i18next';
-import etats from '../../../data/Etats';
+import etats from '../../../data/etats';
 import countries from '../../../data/countries';
 import finances from '../../../data/finances';
 import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';

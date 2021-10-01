@@ -47,15 +47,19 @@ export default function({filterInput, setFilterInput, props}){
         }else if(history.location.pathname === '/profile/'+user?.profile?.id+'/friends/suggestions'){
             setKey('suggestions');
         }
-    },[history.location.pathname])
+    })
 
+    const tabs = (key) =>{
+        history.push('/profile/'+user?.profile?.id+'/friends/'+key)
+        setKey(key);
+    }
 
     return(
         <>
                 <div className="col-md-6">
                     <div className="Center-Side">
 
-                        <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+                        <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => tabs(k)} className="mb-3">
                             <Tab eventKey="friends" title="Friends">
                                 <FriendGrid friends={friends} {...data}/>
                             </Tab>

@@ -12,6 +12,11 @@ export default function SettingPrivateRoutes(props) {
             <HeaderProfile props={props}/>
             <div className="Dadupa-Page">
                 <Switch>
+                    <Route exact path={`${props.match.path}/settings/:tab`}  component = {SettingPage} />
+                    <Route exact path={props.match.path} render = { props => (
+                        <Redirect to={{pathname: `${props.match.path}/settings/:tab` }} />
+                        )} />
+                    
                     <Route exact path={`${props.match.path}/settings`}  component = {SettingPage} />
                     <Route exact path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/settings` }} />

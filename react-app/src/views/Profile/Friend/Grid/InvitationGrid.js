@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 import { AcceptFriendAction, FriendsAction, RejectFriendAction } from '../../../../store/actions/Friend/FriendsAction';
 import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
-import typeusers from "../../../../data/typeusers"
+import typeusers from "../../../../data/typeusersCreate"
 import sectors from '../../../../data/sectors';
 import { Text } from '../../../../containers/Language';
 

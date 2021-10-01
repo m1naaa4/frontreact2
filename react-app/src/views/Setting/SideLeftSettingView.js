@@ -14,10 +14,6 @@ export default function SideRightSettingView(props) {
     const infoprofile = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
 
-   
-
-    console.log('ddddddddddddd', infoprofile.profile?.id)
-
     const [show, setShow] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
     const [country, setCountry] = useState();

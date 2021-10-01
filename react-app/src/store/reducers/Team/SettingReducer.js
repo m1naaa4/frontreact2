@@ -35,6 +35,12 @@ const SettingReducer = (state = initState, action) => {
                 contents : action.res.contents,
             }
         
+        case 'LOAD_INVITATIONS_ACCESS_SUCCESS':
+            return{
+                ...state,
+                receivedinvitations : action.res.recieved_invitations,
+                sentinvitations     : action.res.sent_invitations,
+            }
 
         case 'EDIT_TEAMS_SUCCESS':
             

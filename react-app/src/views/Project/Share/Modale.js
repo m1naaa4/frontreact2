@@ -49,7 +49,7 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
      const Add =() =>{
         setselectData();
         let data = {
-          'url'   : 'permission/giveaccess',
+          'url'   : 'permission/sendinvitation',
           'invite_user_id' : selectData,
           'role' : formData.role,
           'description' : formData.description,
