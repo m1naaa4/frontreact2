@@ -50,6 +50,7 @@ export default function ShowProjectView(props) {
     }
 
     const datatype = {
+        'provider_name'  : localStorage.getItem('provider_name'),
         'provider'  : 'project',
         'content_id'  : params.id,
     }

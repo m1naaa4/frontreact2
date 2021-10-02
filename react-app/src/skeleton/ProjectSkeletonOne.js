@@ -26,7 +26,7 @@ const ProjectSkeletonGridOne  = () =>{
 
     const handleSend = () => {
         let data = {
-          'url'   : 'permission/AskforAccessAction',
+          'url'   : 'permission/askforaccess',
           'provider_id' : provider_id,
           'provider' : provider,
           'providername' : providername,

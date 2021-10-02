@@ -56,6 +56,7 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
           'type' : datatype.type,
           'content_id' : datatype.content_id,
           'provider' : datatype.provider,
+          'provider_name' : datatype.provider_name,
         } 
         dispatch(GiveAccessAction(data));
       }
