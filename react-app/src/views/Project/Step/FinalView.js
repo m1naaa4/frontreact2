@@ -24,9 +24,10 @@ export default function FinalView({formData, setFormData, navigation, props}) {
     const [t] = useTranslation();
 
     const dispatch = useDispatch();
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
+        setVisibility(e.target.value)
         e.preventDefault();
-        formData.visibilitys   = visibilitys;
+        formData.visibility   = visibilitys;
         formData.project_id = project_id;
         formData.action     = 'create';
         dispatch(AddProjectsAction (formData, props, '/create', navigation));
@@ -182,7 +183,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     
                                     {/* <NavLink className="submit action-button" to={`show/${project_id}`}>Review <i
                                     className="uil uil-arrow-right"></i></NavLink> */}
-                                    <select className="post-status" name="visibility" onChange={(event) => {handleSubmit(event);}}  defaultValue={visibility} onChange={setVisibility}>
+                                    <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={visibility}>
                                         <option disabled selected>Project status</option>
                                         <option value="public">Public</option>
                                         <option value="shared">Shared</option>

@@ -36,9 +36,9 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
             
             setFile(getproject?.getproject?.project?.media_link);
             setMedia(getproject?.getproject?.project?.is_video);
-            formData.medialink = getproject.getproject.project.media_link;
-            formData.logolink = getproject.getproject.project.logolink;
-            formData.mediatype = getproject.getproject.project.is_video;
+            formData.medialink = getproject.getproject.project?.media_link;
+            formData.logolink = getproject.getproject.project?.logolink;
+            formData.mediatype = getproject.getproject.project?.is_video;
             setProject_id(getproject.getproject.projectid);
              
     }, [dispatch]);  

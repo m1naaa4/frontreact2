@@ -6,7 +6,7 @@ import ZoneDropFilter from "../../User/Fields/Filter/Project/ZoneDropFilter";
 import FinanceDropFilter from "../../User/Fields/Filter/Project/FinanceDropFilter";
 import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
 import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
-import ProjectSkeleton from '../../../skeleton/ProjectSkeleton';
+import ProjectSkeletonGrid from '../../../skeleton/ProjectSkeletonGrid';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -23,7 +23,9 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
 
     
     const data = {
-        project_id  :  props.match.params.id,
+        provider_id : props.match.params.id,
+        permission  : "consult project",
+        provider    : "project",
         action      : "getProject",
     }
     useEffect(() => {
@@ -93,7 +95,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                             </div>
                         </div>
                         {   getproject === 'loading' ? (
-                                         <ProjectSkeleton/>
+                                         <ProjectSkeletonGrid/>
                                      ) : getproject.success === true ? (                                                                            
                                             () => 
                                                <div className="col-md-12 col-lg-8">

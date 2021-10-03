@@ -28,6 +28,7 @@ const defaultData = {
     project_status: "",
     action: "create",
     look_mentor: 0,
+    visibility: '',
     look_angel: 1,
     step: "1",
     url: "",

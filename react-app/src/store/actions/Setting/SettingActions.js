@@ -67,6 +67,28 @@ export const RolesAction = (data) =>{
     
 }
 
+export const AcceptInvitationAction = (data) =>{
+    return (dispatch)=>{
+
+
+        generaleGet(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_ROLES_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_ROLES_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
 export const GiveAccessAction = (data) =>{
     return (dispatch)=>{
 
@@ -79,6 +101,50 @@ export const GiveAccessAction = (data) =>{
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
                 dispatch({type:'LOAD_GIVE_ACCESS_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const reSendAction = (data) =>{
+    return (dispatch)=>{
+
+
+        generalePost(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_RESEND_ACCESS_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_RESEND_ACCESS_ERROR',res})
+            }
+        },
+        error=>{
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    }
+    
+}
+
+export const cancelInvitationAction = (data) =>{
+    return (dispatch)=>{
+
+
+        generalePost(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success===true){
+                 
+                dispatch({type:'LOAD_RESEND_ACCESS_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success===false) {
+                dispatch({type:'LOAD_RESEND_ACCESS_ERROR',res})
             }
         },
         error=>{

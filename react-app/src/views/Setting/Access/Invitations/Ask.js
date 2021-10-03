@@ -1,20 +1,43 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-
+import { AcceptInvitationAction, cancelInvitationAction } from '../../../../store/actions/Setting/SettingActions';
+import useOutsideClick from '../../../../helpers/useOutsideClick';
 
 
 
 export default function Ask() { 
     
-    const sentInvs = useSelector(state => state.setting.sentinvitations);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const ref = useRef();
+    const [open, setOpen] = useState(false);
     const gotInvs = useSelector(state => state.setting.receivedinvitations);
-    const handleSubmitValue = (e) => {
-
-         
+    const menu = (id) => {
+        setOpen(id)
+     }
+    
+     const accept = (token, route) => {
+        
+        dispatch(AcceptInvitationAction('permission/accept/'+token));
+        setTimeout(() => {
+           history.push(route);
+          }, 3000)
     }
+
+    const reject = (token) => {
+        let data = {
+            'url'   : 'permission/cancel',
+            'token' : token,
+          } 
+          dispatch(cancelInvitationAction(data));
+    }
+
+    useOutsideClick(ref, () => {
+        setOpen(false)
+    });
 
 
     return (
@@ -46,7 +69,17 @@ export default function Ask() {
                         <td>{got.categorie}</td>
                         <td><Link to={got.route} >{got.pro_name}</Link></td>
                         <td>{got.invite_date}</td>
-                        <td><button>Accept</button><button>Cancel</button></td>
+                        <td>
+                            <div class="New-Post" onClick={()=>menu(got.id)} >
+                                <button class="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i class="uil uil-ellipsis-v"></i></button>
+                                {open == got.id && <div ref={ref} class="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
+                                <ul class="Mini-Profile-Items">
+                                    <li class="Mini-Profile-Item"><a href="#" onClick={()=>accept(got.token, got.route)} ><i class="uil uil-check"></i>  Accept</a></li>
+                                    <li class="Mini-Profile-Item"><a href="#" onClick={()=>reject(got.deny_token)} ><i class="uil uil-cancel"></i> Reject</a></li>
+                                </ul>
+                                </div>}
+                            </div>
+                        </td>
                     </tr>
                     ))}
                     

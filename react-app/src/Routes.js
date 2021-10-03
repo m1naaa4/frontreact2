@@ -14,6 +14,7 @@ import Expired from './pages/Expired';
 import SettingPrivateRoutes from './routes/SettingPrivateRoutes';
 import FavoritePrivateRoutes from './routes/FavoritePrivateRoutes';
 import NoAuthorization from './pages/NoAuthorization';
+import NotificationsPrivateRoutes from './routes/NotificationsPrivateRoutes';
 
 const Routes = (props) => {
 
@@ -32,6 +33,7 @@ const Routes = (props) => {
                         <Gaurd  path="/profile/:id" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
                         <Gaurd  path="/user/:id" token='user-token' routeRedirect='/login' component={SettingPrivateRoutes} />
                         <Gaurd  path="/favorite" token='user-token' routeRedirect='/login' component={FavoritePrivateRoutes} />
+                        <Gaurd  path="/notifications" token='user-token' routeRedirect='/login' component={NotificationsPrivateRoutes} />
                         <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />

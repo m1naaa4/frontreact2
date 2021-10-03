@@ -12,7 +12,7 @@ export const AddProjectsAction = (data, props, url, navigation) =>{
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_PROJECT_SUCCESS',res});
                     const { next } = navigation;
-                        next()
+                        // next()
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'ADD_PROJECT_ERROR',res})
                 }
