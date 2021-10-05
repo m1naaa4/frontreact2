@@ -1,30 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link} from 'react-router-dom';
-import { DeleteNotificationAction, MarkSeenAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import {Text} from "../../containers/Language";
 
-export default function Notifications() {
-    const usernotifications = useSelector(state => state.getnotifications);
-    // const [mask, setShowMark] = useState(false);
-    const [notification_id, setNotification_id] = useState();
+export default function Notifications({notification}) {
     const dispatch = useDispatch();
-    const [showNotifications, setShowNotifications] = useState(false);
-    const [display, setDisplay] = useState(false);
     const ref = useRef();
 
-    const [classe, setClasse] = useState();
-
+    const [notification_id, setNotification_id] = useState();
+    const [seen, setSeen] = useState(false);
+    const [display, setDisplay] = useState(false);
+    const [stylo, setStylo] = useState();
+    
     useEffect(() => {
-        let nottif = localStorage.getItem('notification');
-        if (nottif === "1") {
-            setClasse('new-notif');
-        }else{
-            setClasse('');
-        }
+        setSeen(notification.seen);
     });
 
-    // console.log(usernotifications)
+    useEffect(() => {
+        !seen ?  setStylo( {
+            backgroundColor:"#f2fff8",
+            
+            borderColor:"gris"})
+            : setStylo()
+    },[seen]);
+
+    console.log(notification.id)
     
     const show = (e) => {
         setDisplay(true); 
@@ -48,78 +49,36 @@ export default function Notifications() {
         dispatch( DeleteNotificationAction(data)); 
     };
 
-    const openNotifications = () => {
-        setShowNotifications(!showNotifications )
-
-        let data = {
-            user_id : localStorage.getItem('user_id'),
-        }
-        dispatch( MarkSeenAction(data));
-
-        localStorage.setItem('notification', 0);
-        setClasse('')
-    };
-
     return (
-    <>
-        <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
-            <span className={classe}></span><i className="uil uil-bell"></i>
-        </button>
-        {showNotifications && 
-        <div className="Dadupa-Notifs-Box Notifs-Box-Active">
-            <h3><Text tid="notifications"/></h3>
-          {  usernotifications.notifications.map((notification, index) => 
-        //    notification.notified_from.id !== user_id && // to delete remember that 
-                (!notification.seen  ? (<div className="Notifs-List" style={{backgroundColor:"#f2fff8", paddingLeft:"2px", borderTop:"1px", borderBottom:"1px", borderColor:"gris"}} key={index} >
-                        <div className="Notif-Item">
-                            <Link to={notification.link} className="Notif-Image">
-                                <img src={notification.notified_from_avatar} alt="avatar" /></Link>
+        <>
+          
+           {/* notification.notified_from.id !== user_id && // to delete remember that  */}
+                <div className="Notifs-List" style={stylo} >
+                    <div className="Notif-Item">
+                        <Link to={notification.link} className="Notif-Image">
+                            <img src={notification.notified_from_avatar} alt="avatar" /></Link>
 
-                                <div className="Notif-Options show">
-                                    <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i className="uil uil-ellipsis-h"></i>
-                                    </button>
+                            <div className="Notif-Options show">
+                                <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i className="uil uil-ellipsis-h"></i>
+                                </button>
                                 {notification_id ===  notification.id && display && 
                                     <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
                                         <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} >Mark as read</div>
                                         <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} >Delete</div>
                                     </div> 
                                 }   
-                                </div>                        
-                            <Link to={notification.link} className="Notif-Content">
-                                    <div className="Notif-Text">{notification.description} </div>
-                                    <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                                </Link>
-                        </div>
-                    </div>):
-                    (
-                        <div className="Notifs-List" key={index} >
-                        <div className="Notif-Item">
-                            <Link to={notification.link} className="Notif-Image">
-                                <img src={notification.notified_from_avatar} alt="avatar" /></Link>
-                        
-                                <div className="Notif-Options show">
-                                    <button onClick={ e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i className="uil uil-ellipsis-h"></i>
-                                    </button>
-                                {notification_id ===  notification.id  && display &&    
-                                    <div className="dropdown-menu dropdown-menu-right show" x-placement="bottom-end" style={{position: "absolute"}}>
-                                        <div className="dropdown-item" onClick={e => markAsRead(notification.notified_from.id, notification.id)} >Mark as read</div>
-                                        <div className="dropdown-item" onClick={e => DeleteNotif(notification.notified_from.id, notification.id)} >Delete</div>
-                                    </div>
-                                }   
-                                </div>                        
-                            <div className="Notif-Content">
-                                    <div className="Notif-Text">{notification.description} </div>
-                                    <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                                </div>
-                        </div>
+                            </div>                        
+                        <Link to={notification.link} className="Notif-Content">
+                            <div className="Notif-Text">{notification.description} </div>
+                            <div className="Notif-Time">{notification.created_at.for_humans} </div>
+                        </Link>
                     </div>
-                    )
-                    )
-            )
-          }
-        </div>}
-    </>
+                </div>
+                <div className="All-Messages-Row">
+                    <Link to={`/notifications`} className="all-messages-button">See All Notifications</Link>
+                </div>
+        </>
+        
     )
 }

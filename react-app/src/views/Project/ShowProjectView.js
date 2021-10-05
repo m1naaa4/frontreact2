@@ -39,8 +39,6 @@ export default function ShowProjectView(props) {
     const handleClose = () => setShowmodal(false);
     const [t] = useTranslation();
 
-    console.log('project?.project?.favorite', project?.project?.favorite, classe)
-
     const data = {
         provider_id : params.id,
         action      : "getProject",

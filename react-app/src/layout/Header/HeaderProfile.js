@@ -1,21 +1,27 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {  Link, NavLink, useHistory  } from 'react-router-dom';
-import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import { LoadNotificationAction, MarkSeenAction } from '../../store/actions/Notification/LoadNotificationAction';
 import Notifications from './Notifications';
 import $ from "jquery";
-// import Messages from './Messages';
+import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
+import useOutsideClick from '../../helpers/useOutsideClick';
 
 function HeaderProfile() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const usernotifications = useSelector(state => state.getnotifications);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
+    const [display, setDisplay] = useState(false);
+    const ref = useRef();
+    
+    const [classe, setClasse] = useState();
     // const counter = useSelector(state => state.addednotification); 
     
     useEffect(() => {
@@ -39,12 +45,18 @@ function HeaderProfile() {
                 $('.ConversationOptions-List').removeClass('ConversationOptions-ListShow');
             }
         });
+        let nottif = localStorage.getItem('notification');
+        if (nottif === "1") {
+            setClasse('new-notif');
+        }else{
+            setClasse('');
+        }
     });
     useEffect(() => {
         if(userProfile == ""){
             dispatch(loadUserAction());dispatch( LoadNotificationAction()); 
         }
-         
+        userProfile?.new_notification ? setClasse('new-notif') : setClasse('')
     }, [dispatch])
 
     const userMenu = () => {
@@ -62,6 +74,7 @@ function HeaderProfile() {
       });
 
     const addMenu = () => {
+        setDisplay(!display); 
         $('.Dadupa-Popup-DropDown').toggleClass('Dadupa-Popup-DropDown_Active');
         $('.Dadupa-Msgs-Box').removeClass('Msgs-Box-Active');
         $('.Dadupa-Notifs-Box').removeClass('Notifs-Box-Active');
@@ -71,12 +84,25 @@ function HeaderProfile() {
         dispatch(UserLogOutAction(history));
     }
 
-    const openNotifications = () => setShowNotifications(!showNotifications );
+    const openNotifications = () => {
+        setShowNotifications(!showNotifications )
+
+        let data = {
+            user_id : localStorage.getItem('user_id'),
+        }
+        dispatch( MarkSeenAction(data));
+
+        localStorage.setItem('notification', 0);
+        setClasse('')
+    };
     
     const openMessages = () => {
         setShowMessages(!showMessages );
     };
 
+    useOutsideClick(ref, () => {
+        setDisplay(false)
+    });
 
     const clearProject = () => {
         dispatch(ClearProjectsAction());
@@ -114,13 +140,13 @@ function HeaderProfile() {
                                 <div className="right-nav">
                                     <div className="New-Post" onClick={addMenu}>
                                         <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
-                                        <div className="Dadupa-Popup-DropDown">
+                                        {display && <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active" ref={ref}>
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><Link to={`/project/create`} onClick={clearProject}><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></Link></li>
                                             <li className="Mini-Profile-Item"><Link to={`/funder/create`} onClick={clearProject}><i className="uil uil-briefcase-alt"></i> Funder</Link></li>
                                             <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i> <Text tid="header.menu.mentoring"/></a></li>
                                             </ul>
-                                        </div>
+                                        </div>}
                                     </div>
                                     <div className="Dadupa-Notifications">
                                         <div className="Dadupa-Notifications-Items">
@@ -131,7 +157,19 @@ function HeaderProfile() {
                                                 </form>
                                             </div> */}
                                             <div className=" Dadupa-Notifications-Item Dadupa-Alert-Popup">
-                                                <Notifications/>
+                                                <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
+                                                    <span className={classe}></span><i className="uil uil-bell"></i>
+                                                </button>
+                                                <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active">
+                                                    <h3><Text tid="notifications"/></h3>
+                                                    <div className={' Msgs-List'} >
+                                                    {   usernotifications.notifications.map((notification, index) => 
+                                                    
+                                                        <Notifications notification={notification} key={index} />
+                                                    
+                                                        
+                                                    )}</div>
+                                                </div>
                                             </div>
                                             {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
                                                 <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>
