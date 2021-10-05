@@ -1,30 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
 import { EditProfileAction } from '../../../store/actions/Profile/UserActions';
+import SelectSector from '../../../utils/SelectSector';
 import SectorDropFilter from '../../User/Fields/Filter/Project/SectorDropFilter'
 import TypeDrop from '../../User/Fields/Signup/TypeDrop'
-
+import countries from '../../../data/countries';
+import typeusers from '../../../data/typeusers';
+import sectors from '../../../data/sectors';
+import SelectCountry from '../../../utils/SelectCountry';
+import SelectTypeuser from '../../../utils/SelectTypeuser';
 
 
 const  ModalUpdateProfile = ({ show, handleClose}) => {
 
     const infoprofile = useSelector(state => state.infoProfile);
+    const userProfile = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
+    const [sector, setSector] = useState();
+    const [country, setCountry] = useState();
+    const [typeuser, setTypeuser] = useState();
+
     const [formData, setForm] = useForm({id:infoprofile.infoprofile.id, job:infoprofile.infoprofile.job, sector_id:infoprofile.infoprofile.sector, 
-      type:infoprofile.infoprofile.type, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
+      type:userProfile.type, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
       address:infoprofile.infoprofile.address,
       facebook:infoprofile.infoprofile.networks?.facebook,
       twitter:infoprofile.infoprofile.networks?.twitter,
       linkedin:infoprofile.infoprofile.networks?.linkedin,
       instagram:infoprofile.infoprofile.networks?.instagram,
       youtube:infoprofile.infoprofile.networks?.youtube,
+      country:infoprofile.infoprofile.country,
        
       bio:infoprofile.infoprofile.about});
     const EditProfile =(id) =>{
+      formData.country = country.value
+      formData.sector_id = sector.value
+      formData.type = typeuser.value
       dispatch(EditProfileAction(formData, '', ''));
     }
-console.log('infoprofile.infoprofssssssssssssssssssssile', formData.type)
+   
+    
     return (        
       <>
         {
@@ -34,10 +49,12 @@ console.log('infoprofile.infoprofssssssssssssssssssssile', formData.type)
             <div className="form-inputs">
               <div className="form-row">
                 <div className="col-md-6 input-row input-select input-select-multi">
-                  <TypeDrop className="project-status"   defaultValue={formData.type} onChange={setForm}/>
+                  {/* <TypeDrop className="project-status"   defaultValue={formData.type} onChange={setForm}/> */}
+                  <SelectTypeuser {...{ setTypeuser }} defaultValue={formData.type} datas={typeusers}/>
                 </div>
                 <div className="col-md-6 input-row input-select input-select-multi">
-                  <SectorDropFilter defaultValue={formData.sector_id} onChange={setForm} />
+                  {/* <SectorDropFilter defaultValue={formData.sector_id} onChange={setForm} /> */}
+                  <SelectSector {...{ setSector }} defaultValue={formData.sector_id} datas={sectors}/>
                 </div>
                 <div className="col-md-6 input-row">
                   <input type="email" name="job" defaultValue={formData.job} onChange={setForm} placeholder="job" className="wizard-required" required/>
@@ -45,7 +62,10 @@ console.log('infoprofile.infoprofssssssssssssssssssssile', formData.type)
                 <div className="col-md-6 input-row">
                   <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Téléphone" className="wizard-required" required/>
                 </div>
-                <div className="col-md-12 input-row">
+                <div className="col-md-6 input-row">
+                  <SelectCountry {...{ setCountry }} defaultValue={formData.country} datas={countries}/>
+                </div>
+                <div className="col-md-6 input-row">
                   <input type="tel" name="address" defaultValue={formData.address} onChange={setForm} placeholder="Residence" className="wizard-required" required/>
                 </div>
                 <div className="col-md-12 input-row">

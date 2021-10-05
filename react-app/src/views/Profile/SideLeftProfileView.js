@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import { Modal } from 'react-bootstrap';
 import { useSelector} from 'react-redux';
 import ModalUpdateProfile from './Update_profile/ModalUpdateProfile';
-
+import sectors from '../../data/sectorsCreate';
+import countries from '../../data/countries';
+import { Text } from '../../containers/Language';
 
 
 export default function SideLeftProfileView() {
@@ -42,6 +44,21 @@ export default function SideLeftProfileView() {
                   </div>
                 </div>
               </div> */}
+              <div className="Widget-BOX Profile-Info">
+                {/* <h3 className="Widget-Title text-center">Porteur project</h3> */}
+                <div className="Stats-Value"><span> </span><span className="counter">Porteur project</span></div>
+                <div className="Widget-Stats">
+                  <div className="Stats-Field Stats-Field-Col-4">
+                    {/* <div className="Stats-Value"><span> </span><span className="counter">Porteur project</span></div> */}
+                    <h3 className="Widget-Title text-center">Searching Funder</h3>
+                    <div className="Stats-Text">Nouvelle technologie <br/> Intelligence artificiel</div>
+                  </div>
+                  {/* <div className="Stats-Field Stats-Field-Col-4">
+                    <div className="Stats-Value"><span> </span><span className="counter">Nouvelle technologie</span></div>
+                    <div className="Stats-Text">Nouvelle technologie</div>
+                  </div> */}
+                </div>
+              </div>
               <div className="Widget-BOX">
               
                 <div className="Profile-Info Profile-Infos-Items">
@@ -76,10 +93,24 @@ export default function SideLeftProfileView() {
                 </div>
                 <div className="Profile-Info">
                   <h3>Secteur d’activité</h3>
-                  <span>{infoprofile.infoprofile.sector}</span>
+                  {
+                    sectors.map((key) => 
+                      {if ( infoprofile.infoprofile.sector === key[0]) {
+                        return <span><Text tid={key[1]}/></span>
+                      }}
+                    )
+                  }
                 </div>
                 <div className="Profile-Info">
                   <h3>Lieu de résidence</h3>
+                  {
+                    countries.map((key) => 
+                      {if ( infoprofile.infoprofile.country === key.value) {
+                        return <span>{key.label}</span>
+                      }}
+                    )
+                  }
+                  <br/>
                   <span>{infoprofile.infoprofile.address}</span>
                 </div>
                 {/* <div className="Profile-Adresse">

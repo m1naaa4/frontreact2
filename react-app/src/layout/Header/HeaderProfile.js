@@ -5,11 +5,11 @@ import {Text} from "../../containers/Language";
 import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {  Link, NavLink, useHistory  } from 'react-router-dom';
 import { LoadNotificationAction, MarkSeenAction } from '../../store/actions/Notification/LoadNotificationAction';
-import Notifications from './Notifications';
 import $ from "jquery";
 import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
+import NotificationMenu from '../../views/Notification/NotificationMenu';
 
 function HeaderProfile() {
     const history = useHistory();
@@ -102,6 +102,7 @@ function HeaderProfile() {
 
     useOutsideClick(ref, () => {
         setDisplay(false)
+        setShowNotifications(false)
     });
 
     const clearProject = () => {
@@ -160,16 +161,20 @@ function HeaderProfile() {
                                                 <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
                                                     <span className={classe}></span><i className="uil uil-bell"></i>
                                                 </button>
-                                                <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active">
-                                                    <h3><Text tid="notifications"/></h3>
-                                                    <div className={' Msgs-List'} >
-                                                    {   usernotifications.notifications.map((notification, index) => 
+                                               {showNotifications && 
+                                                    <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active" ref={ref}>
+                                                        <h3><Text tid="notifications"/></h3>
+                                                        <div className={' Msgs-List'} >
+                                                            { usernotifications.notifications.map((notification, index) =>
+                                                                <NotificationMenu notification={notification} key={index} />
+                                                            )}
+                                                            <div className="All-Messages-Row">
+                                                                <Link to={`/notifications`} className="all-messages-button">See All Notifications</Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     
-                                                        <Notifications notification={notification} key={index} />
-                                                    
-                                                        
-                                                    )}</div>
-                                                </div>
+                                                }
                                             </div>
                                             {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
                                                 <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>

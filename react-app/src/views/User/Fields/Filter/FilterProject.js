@@ -83,8 +83,8 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                                     <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} />
                                 </div>
                                 <div className="input-row">
-                                    <input type="text" name="search" data-testid="filter-input-search"
-                                           onChange={setSearch} placeholder={t('filter.search')} />
+                                    <input type="text"  data-testid="filter-input-search"
+                                           onChange={(e)=>setSearch(e.target.value)} placeholder={t('filter.search')} />
                                 </div>
 
                             </div>

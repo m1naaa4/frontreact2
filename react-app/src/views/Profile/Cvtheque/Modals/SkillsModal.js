@@ -47,12 +47,12 @@ const  SkillsModal = ({ show, handleClose}) => {
                   <div className="col-md-12 input-row">
                     <input type="text" name="name" onChange={setForm} defaultValue="" placeholder="Nom du Skill" className="wizard-required" required/>
                   </div>
-                  <div className="col-md-12 input-row input-select input-select-multi">
+                  {/* <div className="col-md-12 input-row input-select input-select-multi">
                     <DropType datas={dataCategory} field='category' defaultValue={formData.category} onChange={setForm}/>
                   </div>
                   <div className="col-md-12 input-row input-select input-select-multi">
                     <DropType datas={dataLevel} field='level' defaultValue={formData.level} onChange={setForm}/>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="DadupaModal-Footer">

@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link} from 'react-router-dom';
 import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
-import {Text} from "../../containers/Language";
 
-export default function Notifications({notification}) {
+export default function NotificationMenu({notification}) {
     const dispatch = useDispatch();
     const ref = useRef();
 
@@ -50,9 +49,7 @@ export default function Notifications({notification}) {
     };
 
     return (
-        <>
           
-           {/* notification.notified_from.id !== user_id && // to delete remember that  */}
                 <div className="Notifs-List" style={stylo} >
                     <div className="Notif-Item">
                         <Link to={notification.link} className="Notif-Image">
@@ -75,10 +72,6 @@ export default function Notifications({notification}) {
                         </Link>
                     </div>
                 </div>
-                <div className="All-Messages-Row">
-                    <Link to={`/notifications`} className="all-messages-button">See All Notifications</Link>
-                </div>
-        </>
         
     )
 }
