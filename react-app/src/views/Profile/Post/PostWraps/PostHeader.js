@@ -74,15 +74,15 @@ export default function PostHeader({ post }) {
          
             
           <div className="PostOptions">
-            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(post.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`}  type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
             <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
            {      
                 options_List && (
                 <ul className="PostOptions-List PostOptions-ListShow"  >
-                  {/* <li className="PostFavorite">
-                    <button><i className="uil uil-favorite"></i> Favorite</button>
+                  <li className="PostFavorite">
+                    <button onClick={e => addTofavorite(post.id)}><i className="uil uil-favorite"></i> Favorite</button>
                   </li>
-                  <li className="PostKey">
+                  {/* <li className="PostKey">
                     <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
                   </li> */}
                   {user_id === post.user_id &&
@@ -93,7 +93,7 @@ export default function PostHeader({ post }) {
                   
                 </ul>
                )
-          }
+            }
 
           </div>
            

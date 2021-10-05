@@ -10,8 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import YouTube from 'react-youtube';
 import $ from 'jquery'
 
-export default function(newavatar) {
-    const [show, setShow] = useState(false);
+export default function({newavatar, handleClose}) {
     const [avatar, setAvatar] = useState();
     const [body, setBody] = useState();
     const [medialink, setMedialink] = useState();
@@ -19,15 +18,13 @@ export default function(newavatar) {
     const refbody = useRef(null);
     const hiddenImage = useRef(null);
     const hiddenVideo = useRef(null);
-    const hiddenFile = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [youtube, setYoutube] = useState(false);
     const [youtubeId, setYoutubeId] = useState();
     const [message, setMessage] = useState("");
     const toastId = React.useRef(null);
 
-    const handleClose = () => setShow(false);
-    //let formData = new FormData();
+    console.log(newavatar)
     const [formData, setForm] = useForm({file:'', provider_id:'', type:'', url:'', provider:'profile', action:'uploadPost'});
 
     const params = useParams();
@@ -123,6 +120,7 @@ export default function(newavatar) {
             dispatch(GetYoutubeAction(datayoutube, 'post/getYoutubeVideo', ''));
             setType('youtube');
             $('#textbody').val('')
+            setBody('')
         }
     }
 
@@ -170,8 +168,8 @@ export default function(newavatar) {
                         <div className="CreatePost-ColLeft">
                             <div className="CreatePost-UserThumb">
                                 {/* <img src={newavatar.newavatar} alt="avatar"/> */}
-                                {newavatar.newavatar ? 
-                                <img src={newavatar.newavatar} alt="avatar" />    
+                                {newavatar?.newavatar ? 
+                                <img src={newavatar?.newavatar} alt="avatar" />    
                             : <img src="/assets/images/avatar.png" alt="avatar" />}
                             </div>
                                 <div className="CreatePost-OptionsRow">
@@ -213,7 +211,7 @@ export default function(newavatar) {
                                 <button type="button" className="CreatePost-AddTag"><i className="uil uil-plus"></i> Ajouter un tag</button>
                             </div> */}
                             <div className="CreatePost-FooterRight">
-                                <button name="button" className="CreatePost-PublishBTN" onClick={handleSubmitValue} >Publish</button>
+                                <button name="button" className="CreatePost-PublishBTN" onClick={(e)=>{handleSubmitValue(e); handleClose()}} >Publish</button>
                             </div>
                         </div>
                 </div>

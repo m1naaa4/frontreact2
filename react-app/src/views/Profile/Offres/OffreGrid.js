@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Player } from 'video-react';
+import useOutsideClick from '../../../helpers/useOutsideClick';
 
 export default function OffreGrid({offre}) {
+
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.userProfile.userProfile);
+
+    const [options_List, SetOptions_List] = useState(false);
+    const [user_id, setUserId] = useState();
+    const ref = useRef();
+
+    useEffect(() => {
+        setUserId(user.id);     
+    },[user])
+
+    const showOptions = () =>{
+        SetOptions_List(!options_List)
+    }
+    const addTofavorite = (id) => {
+    
+    }
+
+    useOutsideClick(ref, () => {
+        SetOptions_List(false)
+    });
+
+    const supprimePost =(id) =>{
+        // dispatch(DeleteContentAction(data, '', 'delete'));
+        dispatch({type:'DELETE_POST_SUCCESS', id});
+        SetOptions_List(!options_List)
+    }
     return (
         <>
             <div className="offer-box">
@@ -15,6 +45,29 @@ export default function OffreGrid({offre}) {
                     <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                     <img src={offre.logo_link} style={{ height: "50" , width: "40"}} title="Nom du projet" alt=""/>
                 </div>
+                
+
+                <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+           {      
+                options_List && (
+                <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+                  <li className="PostFavorite">
+                    <button onClick={e => addTofavorite(offre.id)}><i className="uil uil-favorite"></i> Favorite</button>
+                  </li>
+                  {/* <li className="PostKey">
+                    <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
+                  </li> */}
+                  {user_id == offre.owner[0].id &&
+                    <li className="PostDelete">
+                      <button onClick={e => supprimePost(offre.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                    </li>
+                  }
+                  
+                </ul>
+               )
+            }
+
+
                 </div>
                 <div className="offer-media">
                 {

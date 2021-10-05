@@ -67,7 +67,7 @@ export default function AddPostView(props) {
                                         <h4>Publier un historique</h4>
                                         <button type="button" className="close" data-dismiss="modal" onClick={handleClose} aria-label="Close"><i className="uil uil-times"></i></button>
                                     </div> */}
-                                    <ModalAddPost  newavatar={user_visiter_avatar}/>
+                                    <ModalAddPost  newavatar={user_visiter_avatar} handleClose={handleClose}/>
                                 </div>
                         </div>
                     </Modal>
