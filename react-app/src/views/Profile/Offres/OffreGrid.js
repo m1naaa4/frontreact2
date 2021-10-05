@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Player } from 'video-react';
 import useOutsideClick from '../../../helpers/useOutsideClick';
+import { Delete } from '../../../store/actions/Offres/DeleteContentAction';
 
 export default function OffreGrid({offre}) {
 
@@ -29,8 +30,13 @@ export default function OffreGrid({offre}) {
     });
 
     const supprimePost =(id) =>{
-        // dispatch(DeleteContentAction(data, '', 'delete'));
-        dispatch({type:'DELETE_POST_SUCCESS', id});
+        let data = {
+            action : 'content/delete',
+            provider_id : offre.id,
+            provider    : offre.provider
+        }  
+        dispatch(Delete(data, '', 'delete'));
+        dispatch({type:'DELETE_MY_PROJECT_LIST_SUCCESS', id});
         SetOptions_List(!options_List)
     }
     return (
