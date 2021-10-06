@@ -1,4 +1,4 @@
-import { generalePost, GetMyProject } from "../../../services/User/Profile/ProfileService";
+import { generaleGet, generalePost } from "../../../services/User/Profile/ProfileService";
 
 
 export const Delete = (data) =>{
@@ -8,10 +8,10 @@ export const Delete = (data) =>{
         generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'DELETE_MY_PROJECT_LIST_SUCCESS', res});
+                    dispatch({type:'DELETE_MY_CONTENT_SUCCESS', res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'LOADING_MY_PROJECT_ERROR',res})
+                    dispatch({type:'LOADING_MY_CONTENT_ERROR',res})
                 }
             },
             error => {
@@ -21,17 +21,17 @@ export const Delete = (data) =>{
     }
 }
 
-export const getMyOffresAction = (data, props, current) =>{
+export const getMyContentsAction = (data, props, current) =>{
 
     return (dispatch) =>
     {
-        GetMyProject(data,props, current).then((res)=>{
+        generalePost(data).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
-                dispatch({type:'GET_MY_PROJECT_SUCCESS', res});
+                dispatch({type:'GET_MY_CONTENTS_SUCCESS', res});
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
-                dispatch({type:'GET_MY_PROJECT_ERROR',res})
+                dispatch({type:'GET_MY_CONTENTS_ERROR',res})
             }
         },
         error=>{

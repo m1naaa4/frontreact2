@@ -13,6 +13,18 @@ const OffreReducer = (state = initState ||undefined, action) => {
                 offres: action.res
             }
 
+        case 'GET_MY_CONTENTS_SUCCESS':
+            return {
+                ...state,
+                mycontents: action.res.data
+            }
+
+        case 'DELETE_MY_CONTENT_SUCCESS':
+            return {
+                ...state,
+                mycontents: action.res.data
+            }
+
         case 'GET_MY_PROJECT_ERROR':
 
             return {

@@ -129,7 +129,10 @@ export default function HeaderProfileView({formData, setForm, props}) {
                             <div className="Profile-Picture" id="imageProfile"  style={{backgroundImage: `url('/assets/images/avatar.png')`}} />
                         }
                         
-                        <div className="Profile-Name">{infoprofile.infoprofile.username}</div>
+                        <div className="Profile-Name">
+                            <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                            {infoprofile.infoprofile.username}
+                        </div>
                         </div>
                         <div className="Profile-Navigation">
                         {user_id === params.id && <>

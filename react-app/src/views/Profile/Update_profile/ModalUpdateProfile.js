@@ -33,9 +33,10 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
        
       bio:infoprofile.infoprofile.about});
     const EditProfile =(id) =>{
-      formData.country = country.value
-      formData.sector_id = sector.value
-      formData.type = typeuser.value
+      console.log(country, sector, typeuser)
+      formData.country = country?.value ? country?.value : formData.country;
+      formData.sector_id = sector?.value ? sector?.value : formData.sector_id;
+      formData.type = typeuser?.value ? typeuser?.value : formData.type;
       dispatch(EditProfileAction(formData, '', ''));
     }
    
