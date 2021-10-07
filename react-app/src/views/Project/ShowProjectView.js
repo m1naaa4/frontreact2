@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
+import {AddProjectsAction, GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from 'video-react';
 import AddComment from '../Comment/AddComment';
@@ -14,12 +14,15 @@ import etats from '../../data/etats';
 import countries from '../../data/countries';
 import finances from '../../data/finances';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
-import { Modal } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 import Modale from './Share/Modale';
+import { GeneraleAction } from '../../store/actions/Generale/GeneraleAction';
+
 
 export default function ShowProjectView(props) {
 
     const fullproject = useSelector(state => state.getproject);
+    const visibility =  useSelector(state => state.generale.visibility);
     const project = fullproject?.getproject;
 
     const params = useParams();
@@ -38,6 +41,7 @@ export default function ShowProjectView(props) {
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
     const [t] = useTranslation();
+    const [is_loading, setIsLoading] = useState(false);
 
     const data = {
         provider_id : params.id,
@@ -57,6 +61,13 @@ export default function ShowProjectView(props) {
     useEffect(() => {
         dispatch(GetProjectAction(data, props, history, params.id));
     }, [dispatch])
+    console.log('fdsgsgdfsgfdg', visibility)
+    useEffect(() => {
+        console.log('rrrrrrrrrrrrrr', visibility, is_loading)
+        if (visibility === false) {
+           setIsLoading(visibility) 
+        }
+    }, [visibility])
 
     useEffect(() => {
         if (initial) {
@@ -150,8 +161,24 @@ export default function ShowProjectView(props) {
             'provider' : 'project',
         }
         dispatch(AddFavoriteAction(data))
-      }
+    }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true)
+        let data = {
+            'url'    : 'creation/visibility',
+            'visibility'    : e.target.value,
+            'provider_id'   : params.id,
+            'provider'      : 'project',
+            'type'          : {
+                'success'   : 'UPDATE_VISIBILITY_SUCCESS',
+                'error'     : 'UPDATE_VISIBILITY_ERROR',
+                'upload'    : 'LOADING_UPDATE_VISIBILITY',
+            },
+        }
+        dispatch(GeneraleAction (data, props));
+    };
     
     return (
         <div className="Single-Wrapper">
@@ -248,6 +275,24 @@ export default function ShowProjectView(props) {
                                             data-placement="bottom" title="Send a message">
                                         <span>Envoyer un message</span> <i className="uil uil-message"></i></button>
                                 </div> */}
+                                
+                                <div className="Send-Message input-row input-select">
+                                    <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
+                                        <option disabled selected>Project status</option>
+                                        <option value="public">Public</option>
+                                        <option value="shared">Shared</option>
+                                        <option value="team">Team</option>
+                                        <option value="private">Private</option>
+                                    </select>
+                                </div>
+                                {is_loading === true && <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        /> }
+
                             </div>
                             <div className="Single-Offer-Details">
                                 <ul className="Offer-Details-List">
@@ -265,7 +310,7 @@ export default function ShowProjectView(props) {
                                         </span>
                                         
                                     </li>
-                                    
+                                   { project.project.visibility !== 'public' &&
                                     <li className="Offer-Item">
                                         <button onClick={handleShow}>Share</button>
                                         {/* <span> */}
@@ -277,7 +322,7 @@ export default function ShowProjectView(props) {
                                         </Modal>
                                         
                                     </li>
-
+                                    }
                                     <li className="Offer-Item">
                                         <label>Publié le</label>
                                         <span>{project.project.date}</span>

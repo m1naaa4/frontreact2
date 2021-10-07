@@ -22,7 +22,7 @@ const OffreReducer = (state = initState ||undefined, action) => {
         case 'DELETE_MY_CONTENT_SUCCESS':
             return {
                 ...state,
-                mycontents: action.res.data
+                mycontents: [...state.mycontents].filter(item => item.id !== action.data.provider_id)
             }
 
         case 'GET_MY_PROJECT_ERROR':

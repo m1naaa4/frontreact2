@@ -25,12 +25,11 @@ export default function FinalView({formData, setFormData, navigation, props}) {
 
     const dispatch = useDispatch();
     const handleSubmit = async (e) => {
-        setVisibility(e.target.value)
         e.preventDefault();
-        formData.visibility   = visibilitys;
+        formData.visibility   = e.target.value;
         formData.project_id = project_id;
         formData.action     = 'create';
-        dispatch(AddProjectsAction (formData, props, '/create', navigation));
+        dispatch(AddProjectsAction (formData, props, '/create'));
     };
 
     useEffect(() => {

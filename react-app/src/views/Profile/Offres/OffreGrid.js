@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Player } from 'video-react';
 import useOutsideClick from '../../../helpers/useOutsideClick';
-import { Delete } from '../../../store/actions/Offres/MyContentAction';
+import { DeleteAction } from '../../../store/actions/Offres/MyContentAction';
 
 export default function OffreGrid({offre}) {
 
@@ -28,16 +28,16 @@ export default function OffreGrid({offre}) {
     useOutsideClick(ref, () => {
         SetOptions_List(false)
     });
-    console.log(offre.id)
+    console.log('offre.id',  offre.owner )
 
     const supprimePost =(id) =>{
         let data = {
-            action : 'creation/delete',
+            url         : 'creation/delete',
             provider_id : offre.id,
             provider    : offre.provider
-        }  
-        dispatch(Delete(data, '', 'delete'));
-        dispatch({type:'DELETE_MY_PROJECT_LIST_SUCCESS', id});
+        } 
+        dispatch(DeleteAction(data));
+        dispatch({type:'DELETE_MY_CONTENT_SUCCESS', data});
         SetOptions_List(!options_List)
     }
     return (
@@ -64,7 +64,7 @@ export default function OffreGrid({offre}) {
                   {/* <li className="PostKey">
                     <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
                   </li> */}
-                  {user_id == offre.owner[0].id &&
+                  {user_id === offre.owner[0].id &&
                     <li className="PostDelete">
                       <button onClick={e => supprimePost(offre.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
                     </li>

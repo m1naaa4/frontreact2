@@ -15,8 +15,8 @@ const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     const [classe, setClasse] = useState(project?.favorite);
     const dispatch = useDispatch();
-
     let history = useHistory();
+   
     let url_to_share = slugify(project.name, { prefix: config.urls.front+'/project/show/'+project.id });
 
     const addTofavorite = (id) => {
@@ -37,11 +37,12 @@ const ProjectGridView = ({ project }) => {
     return (
 
              <div className="offer-box">
-                    <div className="offer-header">
+                    <div className="offer-header" style={project.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}>
                         <div className="offer-title">
                             <h3><span onClick={() => goToShowproject(project.id) } data-toggle="tooltip" data-placement="top" title={project.name}>
                                 {project.name.substring(0, 10)}</span></h3>
                             <span>{project.sector}</span>
+                            <span>{project.visibility}</span>
                         </div>
                         <div className="offer-logo">
 

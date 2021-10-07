@@ -1,14 +1,14 @@
 import { generaleGet, generalePost } from "../../../services/User/Profile/ProfileService";
 
 
-export const Delete = (data) =>{
+export const DeleteAction = (data) =>{
 
     return (dispatch)=>{
 
         generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'DELETE_MY_CONTENT_SUCCESS', res});
+                    // dispatch({type:'DELETE_MY_CONTENT_SUCCESS', data});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'LOADING_MY_CONTENT_ERROR',res})

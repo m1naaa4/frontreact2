@@ -25,6 +25,7 @@ import ConversationReducer from './Messenger/ConversationReducer'
 import OffreReducer from './Offre/OffreReducer'
 import AddYoutubeReducer from './Post/AddYoutubeReducer'
 import SettingReducer from './Team/SettingReducer'
+import GeneraleReducer from './Generale/GeneraleReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -42,6 +43,8 @@ const RootReducer = combineReducers({
 
   addComment:AddCommentReducer,
   getComments:GetCommentReducer,
+
+  generale:GeneraleReducer,
 
   setting:SettingReducer,
 
