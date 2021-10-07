@@ -9,10 +9,10 @@ import parse from 'html-react-parser';
 
 import { useTranslation } from 'react-i18next';
 import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
-import sectors from '../../data/sectors';
-import etats from '../../data/etats';
+import sectors from '../../data/sectorsCreate';
+import etats from '../../data/etatsCreate';
 import countries from '../../data/countries';
-import finances from '../../data/finances';
+import finances from '../../data/financesCreate';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { Modal, Spinner } from 'react-bootstrap';
 import Modale from './Share/Modale';
@@ -63,7 +63,6 @@ export default function ShowProjectView(props) {
     }, [dispatch])
     console.log('fdsgsgdfsgfdg', visibility)
     useEffect(() => {
-        console.log('rrrrrrrrrrrrrr', visibility, is_loading)
         if (visibility === false) {
            setIsLoading(visibility) 
         }

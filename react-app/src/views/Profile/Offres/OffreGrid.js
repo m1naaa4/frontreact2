@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Player } from 'video-react';
 import useOutsideClick from '../../../helpers/useOutsideClick';
 import { DeleteAction } from '../../../store/actions/Offres/MyContentAction';
@@ -8,11 +8,13 @@ import { DeleteAction } from '../../../store/actions/Offres/MyContentAction';
 export default function OffreGrid({offre}) {
 
     const dispatch = useDispatch();
+    const history  = useHistory();
+    const ref = useRef();
     const user = useSelector(state => state.userProfile.userProfile);
 
     const [options_List, SetOptions_List] = useState(false);
     const [user_id, setUserId] = useState();
-    const ref = useRef();
+    
 
     useEffect(() => {
         setUserId(user.id);     
@@ -28,9 +30,12 @@ export default function OffreGrid({offre}) {
     useOutsideClick(ref, () => {
         SetOptions_List(false)
     });
-    console.log('offre.id',  offre.owner )
 
-    const supprimePost =(id) =>{
+    const edit =(id) =>{
+        history.push('/project/update/'+ id);
+    }
+
+    const deletecontent =(id) =>{
         let data = {
             url         : 'creation/delete',
             provider_id : offre.id,
@@ -65,9 +70,14 @@ export default function OffreGrid({offre}) {
                     <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
                   </li> */}
                   {user_id === offre.owner[0].id &&
-                    <li className="PostDelete">
-                      <button onClick={e => supprimePost(offre.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
-                    </li>
+                    <>
+                        <li className="PostDelete">
+                            <button onClick={e => edit(offre.id)}><i className="uil uil-pen"></i> Edit</button>
+                        </li>
+                        <li className="PostDelete">
+                            <button onClick={e => deletecontent(offre.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                        </li>
+                    </>
                   }
                   
                 </ul>
