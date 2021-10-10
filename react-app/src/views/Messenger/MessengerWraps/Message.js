@@ -24,7 +24,7 @@ export default function Message({message}) {
             {message.sender_id !== me ?
               (
                 <div className="message incoming-message">
-                  <Link className="avatar-wrapper avatar-small" to={"/profile/"+ message.sender.profile.id} >
+                  <Link className="avatar-wrapper avatar-small" to={"/profile/"+ message.sender.profile_id} >
                     <img  src={message.sender.profile.avatar_link} alt="avatar"/>
                   </Link>
                   <div className="incoming-bubbles">

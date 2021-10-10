@@ -1,6 +1,7 @@
 const fr = {
     exploreHeader: 'Explorer',
     welcomeDescription: 'Bonjour',
+    welcomeDescriptionadmin: 'Bonjour dans l`\interface administration',
     buttonClicked: 'Click ici',
     logout: 'Déconnexion',
     aboutMe: 'Dadupa',

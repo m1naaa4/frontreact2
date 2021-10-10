@@ -1,6 +1,7 @@
 const en = {
     exploreHeader: 'Explore',
     welcomeDescription: 'Hello',
+    welcomeDescriptionadmin: 'Hello in the administration interface',
     buttonClicked: 'Click',
     aboutMe: 'Dadupa',
     project: 'All project',

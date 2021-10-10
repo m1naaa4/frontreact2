@@ -67,11 +67,11 @@ function App() {
 
     
     return (
-        // <ErrorBoundary>
+        <ErrorBoundary>
             <BrowserRouter>
                 <Routes/>
             </BrowserRouter>
-        // </ErrorBoundary>
+        </ErrorBoundary>
         
     );
 }

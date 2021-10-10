@@ -32,7 +32,7 @@ export default function AddComment(props) {
     }
 
     const gotToProfile = () => {
-        history.push('/profile/'+ userProfile.profile.id);
+        history.push('/profile/'+ userProfile.profile_id);
       };
 
     const dispatch = useDispatch();
@@ -75,20 +75,7 @@ export default function AddComment(props) {
 
     return (
             <div id="Comments-Wrap" className="Comments-Wrap">
-        <div className="Comments-Header">
-            <div className="Comments-Title">
-                <h3>{t('comments')}</h3>
-            </div>
-            {/* <div className="Comments-Filter">
-                <div className="comment-select">
-                    <select className="comments-filter-select" name="">
-                        <option value="1" defaultValue="1">Newest</option>
-                        <option value="2">Newest</option>
-                        <option value="3">Newest</option>
-                    </select>
-                </div>
-            </div> */}
-        </div>
+        
         <div className="Comments-Box">
 
             <div className="Comment-Writing" >

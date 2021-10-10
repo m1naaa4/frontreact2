@@ -16,7 +16,7 @@ const initState = {
             case 'GET_COMMENT_SUCCESS':
                 return {
                     ...state,
-                    comments :  action.res.comment.data,
+                    comments :  action.res.comment?.data,
                     hasMore  :  action.res.comment?.meta,
                     current  :  action.res.comment?.meta?.current_page,
                     loading  :  false

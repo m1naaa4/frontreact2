@@ -21,11 +21,11 @@ export default function({newavatar, handleClose}) {
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [youtube, setYoutube] = useState(false);
     const [youtubeId, setYoutubeId] = useState();
-    const [message, setMessage] = useState("");
+    const [visibility, setVisibility] = useState();
     const toastId = React.useRef(null);
 
     console.log(newavatar)
-    const [formData, setForm] = useForm({file:'', provider_id:'', type:'', url:'', provider:'profile', action:'uploadPost'});
+    const [formData, setForm] = useForm({file:'',visibility:'', provider_id:'', type:'', url:'', provider:'profile', action:'uploadPost'});
 
     const params = useParams();
 
@@ -43,6 +43,7 @@ export default function({newavatar, handleClose}) {
         body       : body,
         action     : 'addPost',
         type       : type,
+        visibility : visibility,
         youtubeId  : youtubeId,
         medialink : medialink,
     }
@@ -54,16 +55,6 @@ export default function({newavatar, handleClose}) {
         dispatch(AddPostAction(data));
               
     }
-    
-    useEffect(() => {
-        // const pusher = new PusherService();        
-        // var channel = pusher.config.subscribe('post_' + params.id);        
-        // channel.bind('NewPost', function(res) {                
-        //     let j = res.id;
-        //     let feed = res[j]
-        //     dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', feed});            
-        // });
-    })
 
     useEffect(() => {
         setYoutube(youtube_id);
@@ -155,7 +146,6 @@ export default function({newavatar, handleClose}) {
             toast.done(toastId.current);
         })
         .catch(() => {
-            setMessage("Could not upload the file!");
         });        
     }
 
@@ -207,9 +197,19 @@ export default function({newavatar, handleClose}) {
                             </div>
                         </div>
                         <div className="CreatePost-Footer">
-                            {/* <div className="CreatePost-FooterLeft">
-                                <button type="button" className="CreatePost-AddTag"><i className="uil uil-plus"></i> Ajouter un tag</button>
-                            </div> */}
+                            <div className="CreatePost-FooterLeft">
+                            <div className="Send-Message input-row input-select">
+                                    <select className="CreatePost-AddTag" name="visibility" onChange={(e) => setVisibility(e.target.value)}  defaultValue="public">
+                                        <option disabled selected>Post status</option>
+                                        <option value="public">Public</option>
+                                        {/* <option value="shared">Shared</option> */}
+                                        {/* <option value="team">Team</option> */}
+                                        <option value="friends">Friends</option>
+                                        <option value="private">Only me</option>
+                                    </select>
+                                </div>
+                                {/* <button type="button" className="CreatePost-AddTag"><i className="uil uil-plus"></i> Ajouter un tag</button> */}
+                            </div>
                             <div className="CreatePost-FooterRight">
                                 <button name="button" className="CreatePost-PublishBTN" onClick={(e)=>{handleSubmitValue(e); handleClose()}} >Publish</button>
                             </div>

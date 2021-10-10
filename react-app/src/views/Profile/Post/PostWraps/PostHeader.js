@@ -90,6 +90,10 @@ export default function PostHeader({ post }) {
                       <button onClick={e => supprimePost(post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
                     </li>
                   }
+
+                  <li className="PostFavorite">
+                    <button onClick={e => addTofavorite(post.id)}><i className="uil uil-ban"></i> Report</button>
+                  </li>
                   
                 </ul>
                )
