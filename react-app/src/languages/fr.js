@@ -5,6 +5,8 @@ const fr = {
     buttonClicked: 'Click ici',
     logout: 'Déconnexion',
     aboutMe: 'Dadupa',
+    dashboard: 'Dashboard',
+    report: 'Report',
     project: 'Projet',
     listproject: 'Tous les Projets',
     projectState: 'Etat du projet',

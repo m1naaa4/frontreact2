@@ -10,6 +10,7 @@ import $ from "jquery";
 import 'jquery-validation';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-bootstrap/Spinner'
+import { AdminLoginAction } from '../../store/actions/Admin/AuthActions';
 
 
 export default function LoginView(props) {
@@ -20,7 +21,7 @@ export default function LoginView(props) {
 
 
     if (localStorage.getItem('admin-token')) {
-        props.props.history.push('/project/lists');
+        props.props.history.push('/admin/dashboard');
     }
     const [fields, handleFieldChange] = useFormFields({
         email: "",
@@ -37,19 +38,19 @@ export default function LoginView(props) {
     const authResponse = useSelector(state => state.userAuth.authResponse);
 
 
-    useEffect(() => {
-            dispatch(clearUserAuthState())
-            sePlace(<Text tid="welcomeDescription"/>)
+    // useEffect(() => {
+    //         dispatch(clearUserAuthState())
+    //         sePlace(<Text tid="welcomeDescription"/>)
 
-            console.log(place)
-        },
-    [])
+    //         console.log(place)
+    //     },
+    // [])
 
     const handleLogin = (e) => {
         if($("#form-login").valid()){
             setIsLoading(true)
 
-            dispatch(UserLoginAction(fields, props.props))
+            dispatch(AdminLoginAction(fields, props.props))
         }          
     }
 

@@ -4,6 +4,8 @@ const en = {
     welcomeDescriptionadmin: 'Hello in the administration interface',
     buttonClicked: 'Click',
     aboutMe: 'Dadupa',
+    dashboard: 'Dashboard',
+    report: 'Report',
     project: 'All project',
     listproject: 'Lists of projects',
     projectState: 'Project State',

@@ -1,10 +1,10 @@
 import React from 'react'
-import LoginView from '../../views/Admin/LoginView'
+import DashboardView from '../../views/Admin/Dashboard/DashboardView'
 
 export default function Dashboard(props) {
     return (
         <div>
-            <LoginView props={props}/>
+            <DashboardView props={props}/>
         </div>
     )
 }
