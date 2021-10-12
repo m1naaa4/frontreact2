@@ -26,6 +26,7 @@ import OffreReducer from './Offre/OffreReducer'
 import AddYoutubeReducer from './Post/AddYoutubeReducer'
 import SettingReducer from './Team/SettingReducer'
 import GeneraleReducer from './Generale/GeneraleReducer'
+import AdminAuthReducer from './Admin/AuthReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -57,6 +58,8 @@ const RootReducer = combineReducers({
 
   createFunder:CreateFunderReducer,
   funders: FundersReducer, 
+
+  adminAuth:AdminAuthReducer,
 })
 
 export default RootReducer

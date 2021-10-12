@@ -15,11 +15,11 @@ export const AdminLoginAction = (credentials,props) =>
 
                 axios.defaults.headers.common['Authorization'] = localStorage.getItem('admin-token');
 
-                dispatch({type:'LOGIN_SUCCESS', res});
+                dispatch({type:'LOGIN_ADMIN_SUCCESS', res});
                 
-                dispatch({type:'LOAD_ADMIN_SUCCESS',res});
+                // dispatch({type:'LOAD_ADMIN_SUCCESS',res});
                 setTimeout(() => {
-                    props.history.push("/project/lists");
+                    props.history.push("/admin/dashboard");
                     dispatch({type:'RESTART_AUTH_RESPONSE'}); 
                 }, 100);
                 

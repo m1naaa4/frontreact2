@@ -35,7 +35,7 @@ export default function LoginView(props) {
     
     const dispatch = useDispatch();
 
-    const authResponse = useSelector(state => state.userAuth.authResponse);
+    const authResponse = useSelector(state => state.adminAuth.user);
 
 
     // useEffect(() => {

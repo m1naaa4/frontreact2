@@ -11,10 +11,14 @@ import { AdminLogOutAction } from '../../store/actions/Admin/AuthActions';
 function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const ref = useRef();
+
     const admin = useSelector(state => state.admin);
     const [showNotifications, setShowNotifications] = useState(false);
     const [display, setDisplay] = useState(false);
-    const ref = useRef();
+   
+
+    const authResponse = useSelector(state => state.adminAuth.user);
     
     const [classe, setClasse] = useState();
     // const counter = useSelector(state => state.addednotification); 
@@ -95,10 +99,10 @@ function Header() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="dashboard"/></NavLink></li>
-                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Articles </NavLink></li>
-                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Reclamations </NavLink></li>
-                                    <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="report"/></a></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/dashboard`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="dashboard"/></NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-moneybag"></i> Articles </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/reclamations`} className="Nav-Link"><i className="uil uil-moneybag"></i> Reclamations </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/reports`} className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="report"/> </NavLink></li>
                                     </ul>
                                 </div>
                             </div>
