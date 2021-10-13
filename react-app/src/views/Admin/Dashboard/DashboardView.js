@@ -10,8 +10,8 @@ export default function DashboardView(props) {
     const authResponse = useSelector(state => state.adminAuth.user);
     return (
         <>  
-            <div class="Page-Wrapper Profile">
-                <div class="container">
+            <div className="Page-Wrapper Profile">
+                <div className="container">
                         salam
                 </div>
             </div>

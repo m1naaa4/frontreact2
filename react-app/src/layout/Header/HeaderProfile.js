@@ -53,8 +53,9 @@ function HeaderProfile() {
         }
     });
     useEffect(() => {
-        if(userProfile == ""){
-            dispatch(loadUserAction());dispatch( LoadNotificationAction()); 
+        if(userProfile === ""){
+            dispatch(loadUserAction());
+            dispatch( LoadNotificationAction()); 
         }
         userProfile?.new_notification ? setClasse('new-notif') : setClasse('')
     }, [dispatch])
@@ -186,7 +187,7 @@ function HeaderProfile() {
 
                                     {
                                          userProfile !== '' && userProfile !== 'loading'  ?
-                <>
+                                    <>
                                         <ul className="Dadupa-User-Infos">
                                             <li className="profile-image">
                                                 {userProfile.profile.avatar_link ? 
@@ -209,7 +210,7 @@ function HeaderProfile() {
                                             <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>
-                                        </>
+                                    </>
 :
                                         userProfile.success === false ?
                                             userProfile.message

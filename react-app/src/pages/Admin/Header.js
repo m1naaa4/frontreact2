@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {loadUserAction} from "../../store/actions/Profile/UserActions";
 import {Text} from "../../containers/Language";
 import {  Link, NavLink, useHistory  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import $ from "jquery";
 import useOutsideClick from '../../helpers/useOutsideClick';
 import { AdminLogOutAction } from '../../store/actions/Admin/AuthActions';
+import { AdminAction } from '../../store/actions/Admin/AdminActions';
 
 function Header() {
     const history = useHistory();
@@ -46,6 +46,19 @@ function Header() {
         });
         
     });
+
+    useEffect(() => {
+        let data = {
+            'url'   :   'admin'
+        }
+        if(authResponse === ""){
+            
+            dispatch(AdminAction(data));
+            dispatch( LoadNotificationAction()); 
+        }
+        dispatch(AdminAction(data));
+        authResponse?.new_notification ? setClasse('new-notif') : setClasse('')
+    }, [dispatch])
 
     const userMenu = () => {
         $('.Dadupa-Mini-Profile').toggleClass('Mini-Profile-Active');
@@ -151,15 +164,13 @@ function Header() {
                                             </div> */}
                                         </div>
                                     </div>
-                                    <div className="Dadupa-User" >
+                                    <div className="Dadupa-User" onClick={userMenu}>
 
                                     
-                <>
+                                    <>
                                         <ul className="Dadupa-User-Infos">
-                                            <li className="profile-image">
-                                                   
+                                            <li className="profile-image"> 
                                                 <img src="/assets/images/avatar.png" alt="avatar" />
-                                            
                                             </li>
                                             {/* <li className="profile-name">
                                             <span className="">{userProfile.name}</span>
@@ -176,7 +187,7 @@ function Header() {
                                             <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>
-                                        </>
+                                    </>
                                         
                                     </div>
                                 </div>
