@@ -1,60 +1,65 @@
 const initState = {
-    adminAuth:""
+    authAdmin:""
 }
      
 
-    const AdminAuthReducer = (state=initState, action) => {
+    const authAdminReducer = (state=initState, action) => {
 
         switch(action.type){
 
             case 'RESTART_AUTH_RESPONSE':
                 return {
                     ...state,
-                    adminAuth:""
+                    authAdmin:""
                 }
             case 'LOADING':
                 return {
                     ...state,
-                    adminAuth:'loading...'
+                    authAdmin:'loading...'
                 }
 
             case 'SIGNUP_SUCCESS':
                 return {
                   ...state,
-                  adminAuth:action.res,
+                  authAdmin:action.res,
                 }
     
             case 'SIGNUP_ERROR':
 
                 return {
                     ...state,
-                    adminAuth:action.res,
+                    authAdmin:action.res,
                 }
     
             case 'CODE_ERROR':
-                    return {
-                        ...state,
-                        adminAuth:'there seems to be a problem please refresh your browser',
-                    }
+                return {
+                    ...state,
+                    authAdmin:'there seems to be a problem please refresh your browser',
+                }
             case 'LOGIN_ADMIN_SUCCESS':
                 return {
                     ...state,
-                    adminAuth : action.res.user
+                    authAdmin : action.res.user
+                }
+            case 'LOAD_ADMIN_SUCCESS':
+                return {
+                    ...state,
+                    admin : action.res.user
                 }
             case 'LOGIN_ADMIN_ERROR':
                 return {
                     ...state,
-                    adminAuth:action.res,
+                    authAdmin:action.res,
                 }
             case 'LOGOUT_ADMIN_SUCCESS':
                 return {
                     ...state,
-                    adminAuth:action.res,
+                    authAdmin:action.res,
                 }
             case 'LOGOUT_ADMIN_ERROR':
                 return {
                     ...state,
-                    adminAuth:action.res,
+                    authAdmin:action.res,
                 }
     
             default:
@@ -63,4 +68,4 @@ const initState = {
         }
     }
     
-    export default AdminAuthReducer;
+    export default authAdminReducer;

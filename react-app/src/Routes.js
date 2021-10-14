@@ -17,6 +17,7 @@ import NoAuthorization from './pages/NoAuthorization';
 import NotificationsPrivateRoutes from './routes/NotificationsPrivateRoutes';
 import AdminLogin from './pages/Admin/AdminLogin';
 import AdminPrivateRoutes from './routes/AdminPrivateRoutes';
+import ReportPrivateRoutes from './routes/ReportPrivateRoutes';
 
 const Routes = (props) => {
 
@@ -28,7 +29,6 @@ const Routes = (props) => {
                             <Redirect to={{pathname: '/login'}} />
                         )} />
                         <Route exact path="/login" component={UserLogin} />
-                        <Route exact path="/admin/login" component={AdminLogin} />
                         <Route exact path="/login/:token" component={UserLogin} />
                         <Route exact path="/register" component={UserRegister} />
                         <Route path="/register/:token" component={UserRegister} />
@@ -42,9 +42,11 @@ const Routes = (props) => {
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                 
 
-                        <Gaurd  path="/admin" token='admin-token' routeRedirect='/admin/login' component={AdminPrivateRoutes} /> 
+                        <Route  path="/admin/login" component={AdminLogin} />
+                        <Gaurd  path="/admin" token='admin-token' routeRedirect='/admin/login' component={AdminPrivateRoutes} />
+                        <Gaurd  path="/reports" token='admin-token' routeRedirect='/admin/login' component={ReportPrivateRoutes} />
 
-                        <Route exact path="/noauthorization/:id" component={NoAuthorization} />
+                        <Gaurd path="/noauthorization/:id" token='user-token' routeRedirect='/login'  component={NoAuthorization} />
                         <Route exact path="/expired" component={Expired} />
                         <Route exact path="/oops" component={Opps} />
 

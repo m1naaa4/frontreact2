@@ -13,12 +13,12 @@ function Header() {
     const dispatch = useDispatch();
     const ref = useRef();
 
-    const admin = useSelector(state => state.admin);
+    const admin = useSelector(state => state.adminAuth.admin);
+    console.log("admin", admin)
     const [showNotifications, setShowNotifications] = useState(false);
     const [display, setDisplay] = useState(false);
-   
 
-    const authResponse = useSelector(state => state.adminAuth.user);
+    const authResponse = useSelector(state => state.adminAuth.adminAuth);
     
     const [classe, setClasse] = useState();
     // const counter = useSelector(state => state.addednotification); 
@@ -51,10 +51,12 @@ function Header() {
         let data = {
             'url'   :   'admin'
         }
+        let dataa = {
+            'url'   :   'notification'
+        }
         if(authResponse === ""){
-            
             dispatch(AdminAction(data));
-            dispatch( LoadNotificationAction()); 
+            dispatch(LoadNotificationAction(dataa)); 
         }
         dispatch(AdminAction(data));
         authResponse?.new_notification ? setClasse('new-notif') : setClasse('')
@@ -72,7 +74,18 @@ function Header() {
         } else {
             $('.Dadupa-Header').removeClass('Dadupa-Header-Fixed');
         }
-      });
+    });
+
+    const openNotifications = () => {
+        setShowNotifications(!showNotifications )
+
+        let data = {
+            user_id : localStorage.getItem('user_id'),
+        }
+
+        localStorage.setItem('notification', 0);
+        setClasse('')
+    };
 
     const addMenu = () => {
         setDisplay(!display); 
@@ -112,10 +125,10 @@ function Header() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/dashboard`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="dashboard"/></NavLink></li>
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-moneybag"></i> Articles </NavLink></li>
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/reclamations`} className="Nav-Link"><i className="uil uil-moneybag"></i> Reclamations </NavLink></li>
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/reports`} className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="report"/> </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/dashboard`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="dashboard"/></NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/articles`} className="Nav-Link"><i className="uil uil-moneybag"></i> Articles </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/reclamations`} className="Nav-Link"><i className="uil uil-moneybag"></i> Reclamations </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/reports`} className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="report"/> </NavLink></li>
                                     </ul>
                                 </div>
                             </div>
@@ -140,23 +153,22 @@ function Header() {
                                                 </form>
                                             </div> */}
                                             <div className=" Dadupa-Notifications-Item Dadupa-Alert-Popup">
-                                                {/* <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
+                                                <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
                                                     <span className={classe}></span><i className="uil uil-bell"></i>
                                                 </button>
                                                {showNotifications && 
                                                     <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active" ref={ref}>
                                                         <h3><Text tid="notifications"/></h3>
                                                         <div className={' Msgs-List'} >
-                                                            { usernotifications.notifications.map((notification, index) =>
+                                                            {/* { usernotifications.notifications.map((notification, index) =>
                                                                 <NotificationMenu notification={notification} key={index} />
-                                                            )}
+                                                            )} */}
                                                             <div className="All-Messages-Row">
                                                                 <Link to={`/notifications`} className="all-messages-button">See All Notifications</Link>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
-                                                } */}
+                                                }
                                             </div>
                                             {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
                                                 <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>
@@ -166,7 +178,8 @@ function Header() {
                                     </div>
                                     <div className="Dadupa-User" onClick={userMenu}>
 
-                                    
+                                    {
+                                        admin  &&
                                     <>
                                         <ul className="Dadupa-User-Infos">
                                             <li className="profile-image"> 
@@ -178,17 +191,14 @@ function Header() {
                                             <li className="profile-arrow"><i className="uil uil-angle-down"></i></li>
                                         </ul> 
                                         <div className="Dadupa-Mini-Profile">
-                                            <label className="Mini-Profile-Name">me</label>
-                                            <Link to={`/profile/`} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
+                                            <label className="Mini-Profile-Name">{admin.name}</label>
                                             <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><Link to={`/profile/`}><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </Link></li>
-                                            <li className="Mini-Profile-Item"><Link to={`/favorite`}><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </Link></li>
-                                            <li className="Mini-Profile-Item"><Link to={`/user/`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
-                                            <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
+                                                <li className="Mini-Profile-Item"><Link to={`/admin/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
+                                                <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
                                             </ul>
                                         </div>
                                     </>
-                                        
+                                    }
                                     </div>
                                 </div>
                             </div>

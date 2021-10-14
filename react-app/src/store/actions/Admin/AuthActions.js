@@ -36,11 +36,7 @@ export const AdminLoginAction = (credentials,props) =>
 
 export const AdminLogOutAction = (history) =>
 {
-    
-
  return (dispatch)=>{
-
-
     dispatch({type:'RESTART_AUTH_RESPONSE'});
      LogoutAdmin().then((res)=>{
         if(res.success===true){
@@ -51,14 +47,11 @@ export const AdminLogOutAction = (history) =>
 
         }else if(res.success===false){
             dispatch({type:'LOGOUT_ERROR',res})
-
         }
     },
     error=>{
         dispatch({type:'CODE_ERROR',error});
-    }
-    
-     )
+    })
  }   
 }
 

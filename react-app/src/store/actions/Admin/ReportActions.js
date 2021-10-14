@@ -1,19 +1,19 @@
-import { generaleGet } from "../../../services/Admin/AdminService";
+import { generaleGet, generalePost } from "../../../services/Admin/AdminService";
 
 
-export const AdminAction = (data) =>{
+export const ReportsAction = (data) =>{
     return (dispatch)=>{
 
-        dispatch({type:'LOADING_LOAD_ADMIN'});
+        dispatch({type:'LOADING_LOAD_REPORT'});
 
         generaleGet(data).then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  
-                dispatch({type:'LOAD_ADMIN_SUCCESS',res});
+                dispatch({type:'LOAD_REPORT_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'LOAD_ADMIN_ERROR',res})
+                dispatch({type:'LOAD_REPORT_ERROR',res})
             }
         },
         error=>{

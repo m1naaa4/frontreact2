@@ -70,7 +70,7 @@ export default function LoginView(props) {
                             <div className="form-wrapper">
                                 
                                
-                                { authResponse.success === false &&
+                                { authResponse?.success === false &&
                                      <div id="authErr" className="alert alert-danger"><Text tid={authResponse.error} /></div>
                                 }
 
