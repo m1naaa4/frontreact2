@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {BrowserRouter, useParams} from 'react-router-dom';
 import Routes from './Routes';
+import axios from 'axios';
 
 import { useDispatch, useSelector } from "react-redux";
 import PusherService from "./services/Pusher";
@@ -11,6 +12,15 @@ function App() {
     const pusher = new PusherService();
     const [audio] = useState(new Audio('https://dadupadisque.ams3.digitaloceanspaces.com/audio/notification.mp3'));
     let user_id = localStorage.getItem("user_id");
+
+
+    setTimeout(function() { var socket_id = pusher.echo.socketId(); 
+        axios.interceptors.request.use((config) => {
+            config.headers['X-Socket-ID'] = socket_id
+            return config
+          })
+    
+    }, 2000);
     
 
     const dispatch = useDispatch ();
