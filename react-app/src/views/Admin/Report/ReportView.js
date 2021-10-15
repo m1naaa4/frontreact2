@@ -15,7 +15,10 @@ export default function ReportView() {
     const [tableBodyHeight, setTableBodyHeight] = useState("400px");
     const [tableBodyMaxHeight, setTableBodyMaxHeight] = useState("");
 
-    const columns = ["Name", "Title", "Location"];
+    const reports = useSelector(state => state.reportsData.reports);
+    const admin   = useSelector(state => state.adminAuth.admin);
+
+    const columns = ["Priority", "Content type", "Link", "Description", "Reporter", "author", "Blocked", "Action"];
 
     const options = {
         filter: true,
@@ -24,27 +27,28 @@ export default function ReportView() {
         tableBodyHeight,
         tableBodyMaxHeight
     };
-    console.log('dssssssssssssssssssssss')
+    console.log('dssssssssssssssssssssss', reports)
 
 
-    const data = [
-        ["Gabby George", "Business Analyst", "Minneapolis"],
-        [
-        "Aiden Lloyd",
-        "Business Consultant for an International Company and CEO of Tony's Burger Palace",
-        "Dallas"
-        ],
-        ["Jaden Collins", "Attorney", "Santa Ana"],
-        ["Franky Rees", "Business Analyst", "St. Petersburg"],
-        ["Aaren Rose", null, "Toledo"],
-        ["Johnny Jones", "Business Analyst", "St. Petersburg"],
-        ["Jimmy Johns", "Business Analyst", "Baltimore"],
-        ["Jack Jackson", "Business Analyst", "El Paso"],
-        ["Joe Jones", "Computer Programmer", "El Paso"],
-        ["Jacky Jackson", "Business Consultant", "Baltimore"],
-        ["Jo Jo", "Software Developer", "Washington DC"],
-        ["Donna Marie", "Business Manager", "Annapolis"]
-    ];
+    const data = reports.map((value)=>{
+        console.log(value)
+        return [value.priority, value.provider, <a href={value.link}>link</a>, value.description,
+            <a href={value.reporter}>link</a>, <a href={value.author}>link</a>, value.blocked, 
+            <><button type="button" name="button"  className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
+            <button type="button" name="button"  className="Invitation-Option_Delete"><i className="uil uil-times"></i></button></>]
+    })
+
+    console.log('valueeeeeeeeeee', data)
+
+    // countries.map((key) => 
+    //   {if (key.value === defaultValue) {
+    //     setOptionSelected({value : key.value, label: t(key.label)})
+    //   }}
+    // );
+    // const data = [
+    //     ["Gabby George", "Business Analyst", "Minneapolis"],
+        
+    // ];
 
     useEffect(() => {
         let data = {
@@ -53,9 +57,6 @@ export default function ReportView() {
         dispatch(ReportsAction(data));
     }, [dispatch])
 
-
-    const reports = useSelector(state => state.adminAuth.reports);
-    const admin   = useSelector(state => state.adminAuth.admin);
     return (
             <div className="Page-Wrapper">
                 <div className="container">
@@ -96,7 +97,7 @@ export default function ReportView() {
                         </Select>
                     </FormControl>
                     <MUIDataTable
-                        title={"ACME Employee list"}
+                        title={"Reports list"}
                         data={data}
                         columns={columns}
                         options={options}
