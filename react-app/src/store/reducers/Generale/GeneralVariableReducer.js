@@ -1,0 +1,24 @@
+const initState = {
+    data : ''
+    }
+
+
+    const GeneraleVariableReducer = (state= initState | undefined, action) =>{
+        switch(action.type){
+
+            case 'TAG':
+                console.log(action.res)
+                return {
+                    ...state,
+                    tag : action.res,
+                }
+
+            default:
+                return {
+                    ...state,
+                    tagg : 'there seems to be a problem please refresh your browser',
+                }
+        }
+    }
+    
+    export default GeneraleVariableReducer;

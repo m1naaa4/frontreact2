@@ -100,37 +100,42 @@ export default function ShowProjectView(props) {
         );
 
         countries.map((key) => 
-        {if (key.value === project?.project?.project_area) {
-          console.log(key.label)
-          setCountry(key.label)
-        }}
-      );
+            {if (key.value === project?.project?.project_area) {
+                setCountry(key.label)
+            }}
+        );
       
-      finances.map((key) => 
-        {if (key[0] === project?.project?.funding_search) {
-          setFinance(key[1])
-        }}
-      );
+        finances.map((key) => 
+            {if (key[0] === project?.project?.funding_search) {
+                setFinance(key[1])
+            }}
+        );
 
 
     })
     const counter = useSelector(state => state.addednotification);
     useEffect(() => {
         setLikeCount(counter.counterlike)
-    },[counter?.counterlike])
+    },[counter?.counterlike]);
+
+    const goToSearch = (data) =>{
+        history.push('/project/lists');
+        dispatch({type:'TAG', res : data.innerText});
+    }
 
     let tags;
     if (project.project) {
          tags = <ul className="Tags-List">
             {project.project.tags.map((name, index) => (
                 <li className="Tag-Item" key={index}>
-                    {name}
+                    <span onClick={(e)=>goToSearch(e.target)}>{name}</span>
                 </li>
             ))}
         </ul>;
     }else{
          tags = [];
     }
+
     const goToEditproject = () => {
         history.push('/project/update/'+ params.id);
     };

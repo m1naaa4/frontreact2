@@ -1,12 +1,12 @@
-import { generaleGet } from "../../../services/Admin/AdminService";
+import { generaleGet, LoadAdmin } from "../../../services/Admin/AdminService";
 
 
-export const AdminAction = (data) =>{
+export const AdminAction = (data, history) =>{
     return (dispatch)=>{
 
         dispatch({type:'LOADING_LOAD_ADMIN'});
 
-        generaleGet(data).then((res)=>{
+        LoadAdmin(data, history).then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  

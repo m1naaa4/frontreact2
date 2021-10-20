@@ -28,6 +28,7 @@ import SettingReducer from './Team/SettingReducer'
 import GeneraleReducer from './Generale/GeneraleReducer'
 import AdminAuthReducer from './Admin/AuthReducer'
 import ReportReducer from './Report/ReportReducer'
+import GeneraleVariableReducer from './Generale/GeneralVariableReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -47,6 +48,7 @@ const RootReducer = combineReducers({
   getComments:GetCommentReducer,
 
   generale:GeneraleReducer,
+  generaleVariable:GeneraleVariableReducer,
 
   setting:SettingReducer,
 

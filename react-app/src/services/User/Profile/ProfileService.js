@@ -1,20 +1,23 @@
 import HttpService from '../../HttpService';
 
 let http = new HttpService();
-export const LoadUser = () =>{
+export const LoadUser = (url, history) =>{
     
-    let profileUpUrl = "user";
     const tokenId = "user-token";
 
-    return  http.getData(profileUpUrl, tokenId).then( data => {
-        // console.log(data)
+    return  http.getData(url.url, tokenId).then( data => {
         localStorage.setItem('user_id', data.user.id);
         localStorage.setItem('profile_id', data.user.profile_id);
         localStorage.setItem('notification', data.user.new_notification ? data.user.new_notification : 0);
         return data;
     }).catch((error)=> {
+        if(error.hasOwnProperty('success') === false){
+            console.log(error.success)
+            localStorage.removeItem('user-token');
+            history.push("/login")
+        }
         return error;
-         });
+    });
 }
 
 export const generalePost = (data) =>{
@@ -23,7 +26,7 @@ export const generalePost = (data) =>{
         return data;
     }).catch((error)=> {
         return error;
-         });
+    });
 }
 
 export const generaleGet = (url) =>{
@@ -33,7 +36,7 @@ export const generaleGet = (url) =>{
         return data;
     }).catch((error)=> {
         return error;
-         });
+    });
 }
 
 export const LoadProfile = (id) =>{
@@ -45,7 +48,7 @@ export const LoadProfile = (id) =>{
         return data;
     }).catch((error)=> {
         return error;
-         });
+    });
 }
 
 export const UpdateProfile = (data) =>{
@@ -56,7 +59,7 @@ export const UpdateProfile = (data) =>{
         return data;
     }).catch((error)=> {
         return error;
-         });
+    });
 }
 
 export const Cvsave = (data) =>{

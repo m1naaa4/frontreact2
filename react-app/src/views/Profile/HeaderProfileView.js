@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import FileUploadService from '../../helpers/FileUploadService';
 import { toast, ToastContainer } from 'react-toastify';
@@ -13,6 +13,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
     const infoprofile = useSelector(state => state.infoProfile);
     const infouser = useSelector(state => state.userProfile);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const hiddenFileInput = useRef(null);
     const hiddenCoverInput = useRef(null);
@@ -87,7 +88,10 @@ export default function HeaderProfileView({formData, setForm, props}) {
             formData.type === 'avatar' ? setNewAvatar(res.data.profile.avatar) : setNewCover(res.data.profile.cover)
             // dispatch({type:'LOAD_PROFILE_SUCCESS'}, res);
             console.log('ressssssssssssssssssssssss',res.data.profile)
-            dispatch(loadUserAction()); 
+            let data = {
+                'url' : 'user'
+            }
+            dispatch(loadUserAction(data, history)); 
             setSelectedFiles(undefined);
             toast.done(toastId.current);
         })

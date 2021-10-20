@@ -1,7 +1,7 @@
 import HttpServiceAdmin from "../HttpServiceAdmin";
 
 let http = new HttpServiceAdmin();
-export const LoadAdmin = (data) =>{
+export const LoadAdmin = (data, history) =>{
     
     let url = data.url;
     const tokenId = "admin-token";
@@ -11,6 +11,11 @@ export const LoadAdmin = (data) =>{
         localStorage.setItem('notification_admin', data.user.new_notification ? data.user.new_notification : 0);
         return data;
     }).catch((error)=> {
+        if(error.hasOwnProperty('success') === false){
+            console.log(error.success)
+            localStorage.removeItem('admin-token');
+            history.push("/admin/login")
+        }
         return error;
     });
 }

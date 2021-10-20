@@ -55,10 +55,10 @@ function Header() {
             'url'   :   'notification'
         }
         if(authResponse === ""){
-            dispatch(AdminAction(data));
+            dispatch(AdminAction(data, history));
             dispatch(LoadNotificationAction(dataa)); 
         }
-        dispatch(AdminAction(data));
+        // dispatch(AdminAction(data, history));
         authResponse?.new_notification ? setClasse('new-notif') : setClasse('')
     }, [dispatch])
 

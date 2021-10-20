@@ -1,12 +1,12 @@
 import {LoadUser, LoadProfile, UpdateProfile, Cvsave, Cvget, CvUpdate, Cvdelete, updateAccess, updateInfo, language, confirme} from '../../../services/User/Profile/ProfileService'
 
 
-export const loadUserAction = () =>{
+export const loadUserAction = (data, history) =>{
     return (dispatch)=>{
 
         dispatch({type:'LOADING_LOAD_USER'});
 
-        LoadUser().then((res)=>{
+        LoadUser(data, history).then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success===true){
                  

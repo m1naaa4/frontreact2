@@ -54,7 +54,10 @@ function HeaderProfile() {
     });
     useEffect(() => {
         if(userProfile === ""){
-            dispatch(loadUserAction());
+            let data = {
+                'url'     :   'user',
+            }
+            dispatch(loadUserAction(data, history));
             dispatch( LoadNotificationAction()); 
         }
         userProfile?.new_notification ? setClasse('new-notif') : setClasse('')

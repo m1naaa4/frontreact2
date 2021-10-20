@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ZoneDropFilter from "./Project/ZoneDropFilter";
 import SectorDropFilter from "./Project/SectorDropFilter";
 import FinanceDropFilter from "./Project/FinanceDropFilter";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loadProjectAction} from "../../../../store/actions/User/Project/ProjectActions";
 import { useTranslation } from 'react-i18next';
 import MultiselectCheckbox from '../../../../utils/MultiselectCheckbox';
@@ -19,12 +19,16 @@ import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultisel
 
 function FilterProject({ filterInput, setFilterInput, props }) {
     const { t } = useTranslation();
-
+    const tag = useSelector(state => state.generaleVariable.tag);
     const [selectedstatus, setSelectedstatus] = useState();
     const [selectedsector, setSelectedsector] = useState();
     const [selectedfinance, setSelectedfinance] = useState();
     const [selectedzone, setSelectedzone] = useState();
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState(tag);
+
+    
+
+    console.log('ttttttttttttttttttttttt', tag)
 
     const dispatch = useDispatch();
 
