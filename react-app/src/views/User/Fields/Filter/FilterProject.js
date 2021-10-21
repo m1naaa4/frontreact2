@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ZoneDropFilter from "./Project/ZoneDropFilter";
 import SectorDropFilter from "./Project/SectorDropFilter";
 import FinanceDropFilter from "./Project/FinanceDropFilter";
@@ -14,19 +14,33 @@ import AllMultiSelectCheckboxStatus from '../../../../utils/Filters/AllMultisele
 import AllMultiSelectCheckboxSector from '../../../../utils/Filters/AllMultiselectCheckboxSector';
 import AllMultiSelectCheckboxZone from '../../../../utils/Filters/AllMultiselectCheckboxZone';
 import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultiselectCheckboxFinance';
+import { Collapse } from 'react-bootstrap';
+import InputTags from '../../../../utils/tags/TagsInput';
 
 
 
 function FilterProject({ filterInput, setFilterInput, props }) {
     const { t } = useTranslation();
-    const tag = useSelector(state => state.generaleVariable.tag);
+    const tag_state = useSelector(state => state.generaleVariable.tag);
+    const tags = tag_state ? tag_state.split(" ") : [];
+    const [open, setOpen] = useState(false);
+
     const [selectedstatus, setSelectedstatus] = useState();
     const [selectedsector, setSelectedsector] = useState();
     const [selectedfinance, setSelectedfinance] = useState();
     const [selectedzone, setSelectedzone] = useState();
-    const [search, setSearch] = useState(tag);
+    const [search, setSearch] = useState();
+    const [tag, setTag] = useState(tags);
 
-    
+    useEffect(()=>{
+        if (tag_state) {
+            setOpen(true)
+        }
+    },[])
+
+    const selectedTags = tags => {
+        setTag(tags)
+    };
 
     console.log('ttttttttttttttttttttttt', tag)
 
@@ -59,13 +73,18 @@ function FilterProject({ filterInput, setFilterInput, props }) {
         filterInput.project_area = dzone
         filterInput.sector = dsector
         filterInput.search = search
+        filterInput.tags = tag
 
         dispatch(loadProjectAction(filterInput));
     }
 
+    const display = () =>{
+        setOpen(!open)
+    }
+
     return (
             <div className="Filter-Row">
-                <form className="Filter-Form" onSubmit={ handleSubmitValue} >
+                <div className="Filter-Form"  >
                     <div className="row">
                         <div className="col-sm-11 col-md-12 col-lg-11">
                             <div className="display-flex">
@@ -95,12 +114,27 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                         </div>
                         <div className="col-sm-1 col-md-12 col-lg-1">
                             <div className="input-row form-button">
-                                <button type="submit" name="submit" className="filter-button"><i
+                                <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button"><i
                                     className="uil uil-search"></i> <span>Filter</span></button>
                             </div>
                         </div>
+
+                        <button className="DadupaModal-BTNSubmit"
+                            onClick={display}
+                            aria-controls="example-collapse-text"
+                            aria-expanded={open}
+                        >
+                            Advanced Search
+                        </button>
+                        <Collapse in={open}>
+                            <div id="example-collapse-text">
+                                <div className="col-md-12 input-tags">
+                                    <InputTags  selectedTags={selectedTags} tags={tags}/>
+                                </div>
+                            </div>
+                        </Collapse>
                     </div>
-                </form>
+                </div>
             </div>
     )
 }

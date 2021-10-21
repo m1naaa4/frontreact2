@@ -16,6 +16,7 @@ export default function ListProjectView({ props}) {
         'project_status' : '',
         'sector' : '',
         'search' : '',
+        'tags'   : [],
     });
 
     const data = { filterInput, setFilterInput, props };
