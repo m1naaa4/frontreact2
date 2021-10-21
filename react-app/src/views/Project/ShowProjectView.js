@@ -61,7 +61,7 @@ export default function ShowProjectView(props) {
     useEffect(() => {
         dispatch(GetProjectAction(data, props, history, params.id));
     }, [dispatch])
-    console.log('fdsgsgdfsgfdg', visibility)
+    
     useEffect(() => {
         if (visibility === false) {
            setIsLoading(visibility) 
@@ -120,7 +120,8 @@ export default function ShowProjectView(props) {
 
     const goToSearch = (data) =>{
         history.push('/project/lists');
-        dispatch({type:'TAG', res : data.innerText});
+        let tagss = [];
+        dispatch({type:'TAG', res : [...tagss, data.innerText]});
     }
 
     let tags;

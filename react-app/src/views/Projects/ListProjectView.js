@@ -8,7 +8,9 @@ import {Redirect} from 'react-router-dom';
 
 
 export default function ListProjectView({ props}) {
-
+    const tag_state = useSelector(state => state.generaleVariable.tag);
+    const tags = tag_state ? tag_state : [];
+    
     const [filterInput, setFilterInput ]  = useState({
         'filters' : true,
         'project_area' : '',
@@ -16,7 +18,7 @@ export default function ListProjectView({ props}) {
         'project_status' : '',
         'sector' : '',
         'search' : '',
-        'tags'   : [],
+        'tags'   : tags,
     });
 
     const data = { filterInput, setFilterInput, props };

@@ -7,7 +7,6 @@ const initState = {
         switch(action.type){
 
             case 'TAG':
-                console.log(action.res)
                 return {
                     ...state,
                     tag : action.res,

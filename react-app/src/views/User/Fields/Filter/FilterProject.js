@@ -19,10 +19,10 @@ import InputTags from '../../../../utils/tags/TagsInput';
 
 
 
-function FilterProject({ filterInput, setFilterInput, props }) {
+function FilterProject({ filterInput }) {
     const { t } = useTranslation();
     const tag_state = useSelector(state => state.generaleVariable.tag);
-    const tags = tag_state ? tag_state.split(" ") : [];
+    const tags = tag_state ? tag_state : [];
     const [open, setOpen] = useState(false);
 
     const [selectedstatus, setSelectedstatus] = useState();
@@ -34,15 +34,17 @@ function FilterProject({ filterInput, setFilterInput, props }) {
 
     useEffect(()=>{
         if (tag_state) {
-            setOpen(true)
+            setOpen(true);
         }
     },[])
+
+    useEffect(()=>{
+        setTag(tag_state)   
+    },[tag_state])
 
     const selectedTags = tags => {
         setTag(tags)
     };
-
-    console.log('ttttttttttttttttttttttt', tag)
 
     const dispatch = useDispatch();
 
@@ -129,7 +131,7 @@ function FilterProject({ filterInput, setFilterInput, props }) {
                         <Collapse in={open}>
                             <div id="example-collapse-text">
                                 <div className="col-md-12 input-tags">
-                                    <InputTags  selectedTags={selectedTags} tags={tags}/>
+                                    <InputTags onChange={selectedTags}  selectedTags={selectedTags} tags={tags}/>
                                 </div>
                             </div>
                         </Collapse>

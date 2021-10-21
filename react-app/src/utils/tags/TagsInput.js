@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
+import { useDispatch } from 'react-redux';
 import '../../taginput.css'
 
 
 
 
 const InputTags = props => {
-    console.log('tagsss', props)
+    const dispatch = useDispatch();
     const [tags, setTags] = useState(props.tags);
+
     const removeTags = indexToRemove => {
         setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+        dispatch({type:'TAG', res : [...tags.filter((_, index) => index !== indexToRemove)]});
     };
     const addTags = event => {
         if (event.target.value !== "") {
@@ -33,7 +36,7 @@ const InputTags = props => {
             <input
                 type="text"
                 onKeyDown={event => event.keyCode === 13 ? addTags(event) : null}
-                placeholder="Press spacebar to add tags"
+                placeholder="Press enter to add tags"
             />
         </div>
     );
