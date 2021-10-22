@@ -30,7 +30,7 @@ export default function ReportView() {
     console.log('dssssssssssssssssssssss', reports)
 
 
-    const data = reports.map((value)=>{
+    const data = reports?.map((value)=>{
         console.log(value)
         return [value.priority, value.provider, <a href={value.link}>link</a>, value.description,
             <a href={value.reporter}>link</a>, <a href={value.author}>link</a>, value.blocked, 

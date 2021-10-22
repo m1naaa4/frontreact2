@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { AddFavoriteAction } from '../../../../store/actions/Favorite/FavoritesAction';
 import { DeletePostAction } from '../../../../store/actions/Post/PostAction';
+import ReportModal from '../../../Admin/Report/ReportModal';
 
 
 
@@ -17,6 +19,10 @@ export default function PostHeader({ post }) {
   const [user_id, setUserId] = useState();
   const [avatar, setAvatar] = useState();
   const [classe, setClasse] = useState(post?.favorite);
+  const [show, setShow] = useState(false);
+
+  const handleShow  = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const showOptions = () =>{
     SetOptions_List(!options_List)
@@ -90,10 +96,15 @@ export default function PostHeader({ post }) {
                       <button onClick={e => supprimePost(post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
                     </li>
                   }
+                  {user_id !== post.user_id &&
+                    <li className="PostFavorite">
+                      <button onClick={handleShow}><i className="uil uil-ban"></i> Report</button>
+                    </li>
+                  }
 
-                  <li className="PostFavorite">
-                    <button onClick={e => addTofavorite(post.id)}><i className="uil uil-ban"></i> Report</button>
-                  </li>
+                  <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <ReportModal post={post} provider='post' showstudies={show} handleCloseStudies={handleClose}/>
+                  </Modal>
                   
                 </ul>
                )

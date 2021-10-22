@@ -1,4 +1,5 @@
-import { generaleGet, generalePost } from "../../../services/Admin/AdminService";
+import { generaleGet } from "../../../services/Admin/AdminService";
+import { generalePost } from "../../../services/User/Profile/ProfileService";
 
 
 export const ReportsAction = (data) =>{
@@ -16,9 +17,32 @@ export const ReportsAction = (data) =>{
                 dispatch({type:'LOAD_REPORT_ERROR',res})
             }
         },
-        error=>{
+        error => {
             dispatch({type:'CODE_ERROR',error});
         }
         )
     } 
 }
+
+export const SendReportAction = (data) =>{
+    return (dispatch)=>{
+
+        dispatch({type:'LOADING_LOAD_REPORT'});
+
+        generalePost(data).then((res)=>{
+            
+            if(res.hasOwnProperty('success') && res.success === true){
+                 
+                dispatch({type:'ADD_REPORT_SUCCESS',res});
+                
+            }else if(res.hasOwnProperty('success') && res.success === false) {
+                dispatch({type:'ADD_REPORT_ERROR',res})
+            }
+        },
+        error => {
+            dispatch({type:'CODE_ERROR',error});
+        }
+        )
+    } 
+}
+
