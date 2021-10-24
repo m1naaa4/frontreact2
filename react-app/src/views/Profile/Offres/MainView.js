@@ -21,7 +21,7 @@ export default function MainView(props) {
     useEffect(() => { 
         let data = {
             url : 'creation/getContents',
-            profileId : params.id
+            user_profile_id : params.id
         }       
         dispatch(getMyContentsAction(data, '', ''));
         //dispatch( ProfileAction(params.id));

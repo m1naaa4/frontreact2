@@ -26,7 +26,7 @@ export default function SideRightSettingView(props) {
 
     let languageStoredInLocalStorage = localStorage.getItem("language");
     let [language, setLangue] = useState(
-        languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
+        languageStoredInLocalStorage ? languageStoredInLocalStorage : "en"
     );
 
     const updateInfo =(id) =>{
@@ -104,7 +104,7 @@ export default function SideRightSettingView(props) {
 
                       <div className="form-row">
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-name" value={infoprofile.profile.email} placeholder="test@dadupa.com" className="wizard-required" readOnly />
+                          <input type="text" name="project-name" value={infoprofile.email} placeholder="your email" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
                           <input type="password" name="project-name" value="" placeholder="Mon mot de passe" value="Mon mot de passe" className="wizard-required" readOnly />
@@ -133,7 +133,7 @@ export default function SideRightSettingView(props) {
                   </div>
                   <div className="form-row">
                     <div className="col-md-12 input-row input-select">
-                        <LanguageSelectorView language={language} />
+                        <LanguageSelectorView onChange={setLangue} language={language} />
                     </div>
                   </div>
                 </div>

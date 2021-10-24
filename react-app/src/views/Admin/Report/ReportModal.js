@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hooks-helper";
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { SendReportAction } from '../../../store/actions/Admin/ReportActions';
-
+import { toast } from 'react-toastify';
 
 
 const  ReportModal = ({post, provider, showstudies, handleCloseStudies}) => {
 
+  const report = useSelector(state => state.reportsData);
     const dispatch = useDispatch();
     const [open, SetOpen] = useState(false);
+    const toastId = React.useRef(null);
+    const notify = () => toastId.current = toast("Report sent successfully, thank you for your collaboration ");
+
     const problems = [
         ['stole_idea','Stole idea'],
         ['nudity','Nudity'],
@@ -32,7 +36,13 @@ const  ReportModal = ({post, provider, showstudies, handleCloseStudies}) => {
         description : formData.description
       }
       dispatch(SendReportAction(data));
+      notify()
     }
+    console.log('reportssssssssssssss', report)
+    useEffect(() => {
+      console.log('salam i m here')
+      toast.dismiss(toastId.current);
+    },[report])
     
     const display = (key) => {
       if (key === 'something_else') {
@@ -53,16 +63,16 @@ const  ReportModal = ({post, provider, showstudies, handleCloseStudies}) => {
               <div className="form-inputs">
                 <div className="form-row">
                 <h3>Please select a problem</h3>
-                  <p>If someone is in immediate danger, get help before reporting to Facebook. Don't wait</p>
+                  <p>If someone is in immediate danger, get help before reporting to Dadupa connect. Don't wait</p>
                   <br/>
 {/* <div className="col-md-12 input-row">
                     <input type="text" name="etablissement" defaultValue="" placeholder="Établissement" className="wizard-required" onChange={setForm} required/>
                   </div> */}
                   <div className="Send-Message col-md-12 input-row input-select">
-                      <select className="CreatePost-AddTag" name="priority" onChange={setForm}  defaultValue="medium">
-                          <option disabled selected>Report Priority</option>
+                      <select className="CreatePost-AddTag" name="priority" onChange={setForm}>
+                          <option disabled selected>Choose report level</option>
                           <option value="low">Low</option>
-                          <option value="mediul">Medium</option>
+                          <option value="medium">Medium</option>
                           <option value="high">High</option>
                       </select>
                   </div>

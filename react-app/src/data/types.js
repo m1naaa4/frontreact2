@@ -1,11 +1,11 @@
 
 
 const types = [
-    ["", "Vous êtes ?"],
-    ["PP", "Porteur de projet"],
-    ["BF", "Investisseur"],
+    ["", "You are ?"],
+    ["PP", "Project's holder"],
+    ["BF", "Investor"],
     ["ACMPT", "Mentor"],
-    ["visitor", "Visiteur"],
+    ["visitor", "Visitor"],
 ];
 
 export default types;

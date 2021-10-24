@@ -23,6 +23,7 @@ export default function ShowProjectView(props) {
 
     const fullproject = useSelector(state => state.getproject);
     const visibility =  useSelector(state => state.generale.visibility);
+    const user = useSelector(state => state.userProfile.userProfile);
     const project = fullproject?.getproject;
 
     const params = useParams();
@@ -281,7 +282,7 @@ export default function ShowProjectView(props) {
                                         <span>Envoyer un message</span> <i className="uil uil-message"></i></button>
                                 </div> */}
                                 
-                                <div className="Send-Message input-row input-select">
+                                {user.id == project.project.user_id && <div className="Send-Message input-row input-select">
                                     <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
                                         <option disabled selected>Project status</option>
                                         <option value="public">Public</option>
@@ -289,7 +290,7 @@ export default function ShowProjectView(props) {
                                         <option value="team">Team</option>
                                         <option value="private">Private</option>
                                     </select>
-                                </div>
+                                </div>}
                                 {is_loading === true && <Spinner
                                         as="span"
                                         animation="border"
@@ -315,7 +316,7 @@ export default function ShowProjectView(props) {
                                         </span>
                                         
                                     </li>
-                                   { project.project.visibility !== 'public' &&
+                                   { project.project.visibility !== 'public' && user.id == project.project.user_id &&
                                     <li className="Offer-Item">
                                         <button onClick={handleShow}>Share</button>
                                         {/* <span> */}

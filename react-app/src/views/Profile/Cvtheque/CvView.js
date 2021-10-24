@@ -52,10 +52,10 @@ export default function CvView(props) {
     useEffect(() => {
         let data = {
             action : 'getmyprojectlist',
-            profileId : params.id
+            user_profile_id : params.id
         }
         let dataa ={
-          profileId : params.id
+          user_profile_id : params.id
         }
         dispatch(getCvthequeAction(dataa, '', ''));
         dispatch(getMyOffresAction(data, '', ''));
@@ -102,7 +102,9 @@ export default function CvView(props) {
                   <ul>
                     {cvtheque?.skills &&
                         cvtheque.skills.map((skill, index) => (
-                            <li key={index}><span>{skill.name}</span><button className="delete-skill" onClick={e => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button></li>
+                            <li key={index}><span>{skill.name}</span>
+                              {action && <button className="delete-skill" onClick={e => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button>}
+                            </li>
                         ))
                     } 
                   </ul>

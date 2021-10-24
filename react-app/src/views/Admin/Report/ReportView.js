@@ -1,4 +1,4 @@
-import { FormControl, InputLabel } from '@material-ui/core';
+import { FormControl, InputLabel, Tooltip } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Select from "@material-ui/core/Select";
@@ -34,8 +34,11 @@ export default function ReportView() {
         console.log(value)
         return [value.priority, value.provider, <a href={value.link}>link</a>, value.description,
             <a href={value.reporter}>link</a>, <a href={value.author}>link</a>, value.blocked, 
-            <><button type="button" name="button"  className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
-            <button type="button" name="button"  className="Invitation-Option_Delete"><i className="uil uil-times"></i></button></>]
+            <>  <Tooltip title="Add comment" arrow><button type="button" name="button"  className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button></Tooltip>
+                <Tooltip title="Delete content" arrow><button type="button" name="button"  className="Invitation-Option_Delete"><i className="uil uil-times"></i></button></Tooltip>
+                <Tooltip title="Block content" arrow><button type="button" name="button"  className="Invitation-Option_Block"><i class="uil uil-ban"></i></button></Tooltip>
+            </>
+            ]
     })
 
     console.log('valueeeeeeeeeee', data)

@@ -5,6 +5,7 @@ import ModalUpdateProfile from './Update_profile/ModalUpdateProfile';
 import sectors from '../../data/sectorsCreate';
 import countries from '../../data/countries';
 import { Text } from '../../containers/Language';
+import typeusers from '../../data/types';
 
 
 export default function SideLeftProfileView() {
@@ -46,12 +47,24 @@ export default function SideLeftProfileView() {
               </div> */}
               <div className="Widget-BOX Profile-Info">
                 {/* <h3 className="Widget-Title text-center">Porteur project</h3> */}
-                <div className="Stats-Value"><span> </span><span className="counter">Porteur project</span></div>
+                <div className="Stats-Value"><span> </span><span className="counter">
+                  { typeusers.map((key) => 
+                      {if (key[0] === infoprofile.infoprofile.type) {
+                          return key[1]
+                      }}
+                  )} 
+                  </span></div>
                 <div className="Widget-Stats">
                   <div className="Stats-Field Stats-Field-Col-4">
-                    {/* <div className="Stats-Value"><span> </span><span className="counter">Porteur project</span></div> */}
-                    <h3 className="Widget-Title text-center">Searching Funder</h3>
-                    <div className="Stats-Text">Nouvelle technologie <br/> Intelligence artificiel</div>
+                    {infoprofile.infoprofile.look_angel && <h3 className="Widget-Title text-center">Searching Funder</h3>}
+                    {infoprofile.infoprofile.look_mentor && <h3 className="Widget-Title text-center">Searching Mentor</h3>}
+                    <div className="Stats-Text">
+                      { sectors.map((key) => 
+                          {if (key[0] === infoprofile.infoprofile.sector) {
+                              return key[1]
+                          }}
+                      )} 
+                    </div>
                   </div>
                   {/* <div className="Stats-Field Stats-Field-Col-4">
                     <div className="Stats-Value"><span> </span><span className="counter">Nouvelle technologie</span></div>

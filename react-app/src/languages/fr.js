@@ -113,6 +113,7 @@ const fr = {
     'review_detail': "Vérification",
     'form.prject_name': "Nom du projet",
     'form.want_mentors': "Je cherche des mentors",
+    'form.want_funder': "Je cherche des investisseurs",
     'form.add_url': "Ajouter un lien",
     'form.add_logo': "Ajouter le logo",
     'form.edit_logo': "Modifer le logo",

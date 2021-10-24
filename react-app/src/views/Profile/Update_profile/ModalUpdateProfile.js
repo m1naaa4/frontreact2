@@ -10,10 +10,12 @@ import typeusers from '../../../data/typeusers';
 import sectors from '../../../data/sectors';
 import SelectCountry from '../../../utils/SelectCountry';
 import SelectTypeuser from '../../../utils/SelectTypeuser';
+import { useTranslation } from 'react-i18next';
 
 
 const  ModalUpdateProfile = ({ show, handleClose}) => {
 
+    const { t } = useTranslation();
     const infoprofile = useSelector(state => state.infoProfile);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
 
     const [formData, setForm] = useForm({id:infoprofile.infoprofile.id, job:infoprofile.infoprofile.job, sector_id:infoprofile.infoprofile.sector, 
       type:userProfile.type, email:infoprofile.infoprofile.email, phone:infoprofile.infoprofile.phone,
+      look_angel:infoprofile.infoprofile.look_angel, look_mentor:infoprofile.infoprofile.look_mentor,
       address:infoprofile.infoprofile.address,
       facebook:infoprofile.infoprofile.networks?.facebook,
       twitter:infoprofile.infoprofile.networks?.twitter,
@@ -58,17 +61,33 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
                   <SelectSector {...{ setSector }} defaultValue={formData.sector_id} datas={sectors}/>
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="email" name="job" defaultValue={formData.job} onChange={setForm} placeholder="job" className="wizard-required" required/>
+                  <input type="text" name="job" defaultValue={formData.job} onChange={setForm} placeholder="job" className="wizard-required" required/>
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Téléphone" className="wizard-required" required/>
+                  <input type="tel" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Phone" className="wizard-required" required/>
                 </div>
                 <div className="col-md-6 input-row">
                   <SelectCountry {...{ setCountry }} defaultValue={formData.country} datas={countries}/>
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="tel" name="address" defaultValue={formData.address} onChange={setForm} placeholder="Residence" className="wizard-required" required/>
+                  <input type="text" name="address" defaultValue={formData.address} onChange={setForm} placeholder="Residence" className="wizard-required" required/>
                 </div>
+
+                <div className="col-md-6 input-row">
+                    <div className="custom-control custom-switch">
+                        <input type="checkbox" defaultChecked={formData.look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
+                                name="look_angel"/>
+                        <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_funder')}</span></label>
+                    </div>
+                </div>
+                <div className="col-md-6 input-row">
+                    <div className="custom-control custom-switch">
+                        <input type="checkbox" defaultChecked={formData.look_mentor}  onChange={setForm}   className="custom-control-input" id="switch2"
+                                name="look_mentor"/>
+                        <label className="custom-control-label" htmlFor="switch2"><span>{t('form.want_mentors')}</span></label>
+                    </div>
+                </div>
+
                 <div className="col-md-12 input-row">
                   <div className="Profile-Info Profile-Infos-Items">
                     <ul>

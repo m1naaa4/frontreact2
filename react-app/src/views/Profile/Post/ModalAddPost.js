@@ -39,7 +39,7 @@ export default function({newavatar, handleClose}) {
     const dispatch = useDispatch();
 
     const data = {
-        profile_post_id : params.id,
+        user_profile_id : params.id,
         body       : body,
         action     : 'addPost',
         type       : type,
@@ -104,7 +104,7 @@ export default function({newavatar, handleClose}) {
 
     const getyoutube =(url)=>{
         const datayoutube = {
-            profile_post_id : params.id,
+            user_profile_id : params.id,
             youtube_source  : url,
         }
         if (matchYoutubeUrl(url)){

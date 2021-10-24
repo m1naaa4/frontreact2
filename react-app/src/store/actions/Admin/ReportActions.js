@@ -26,14 +26,12 @@ export const ReportsAction = (data) =>{
 
 export const SendReportAction = (data) =>{
     return (dispatch)=>{
-
-        dispatch({type:'LOADING_LOAD_REPORT'});
-
+        
         generalePost(data).then((res)=>{
             
             if(res.hasOwnProperty('success') && res.success === true){
                  
-                dispatch({type:'ADD_REPORT_SUCCESS',res});
+                dispatch({type:'ADD_REPORT_SUCCESS', res});
                 
             }else if(res.hasOwnProperty('success') && res.success === false) {
                 dispatch({type:'ADD_REPORT_ERROR',res})

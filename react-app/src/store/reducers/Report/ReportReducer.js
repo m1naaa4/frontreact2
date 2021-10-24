@@ -18,7 +18,13 @@ const initState = {
                     ...state,
                     reports : action.res.reports
                 }
-            
+
+            case 'ADD_REPORT_SUCCESS':
+                return {
+                    ...state,
+                    report : true
+                }
+
             case 'LOGIN_ADMIN_ERROR':
                 return {
                     ...state,
