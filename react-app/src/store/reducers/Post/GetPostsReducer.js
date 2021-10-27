@@ -37,6 +37,14 @@ const initState = {
                     posts: [],
                     loading:false
                 }
+            
+            case 'ADD_POST_SUCCESS':
+
+                state.posts = [action.res.post, ...state.posts];
+                return {
+                    posts :  state.posts,
+                    loading  :  false
+                }
 
             case 'ADD_TO_COLLECTION_POST_SUCCESS':
                 

@@ -12,7 +12,7 @@ const initState = {
                         post:'loading'
                     }
 
-            case 'ADD_POST_SUCCESS':
+            case 'ADD_POSsT_SUCCESS':
                 return {
                   ...state,
                   post:action.res,

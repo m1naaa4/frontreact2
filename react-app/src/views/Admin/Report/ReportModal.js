@@ -5,7 +5,7 @@ import { SendReportAction } from '../../../store/actions/Admin/ReportActions';
 import { toast } from 'react-toastify';
 
 
-const  ReportModal = ({post, provider, showstudies, handleCloseStudies}) => {
+const  ReportModal = ({post, provider, showReport, handleCloseReport}) => {
 
   const report = useSelector(state => state.reportsData);
     const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const  ReportModal = ({post, provider, showstudies, handleCloseStudies}) => {
     return (  
       <>
       {
-        showstudies &&  
+        showReport &&  
 
         <div className="modal-body">
             <div className=""  method="post">
@@ -99,7 +99,7 @@ const  ReportModal = ({post, provider, showstudies, handleCloseStudies}) => {
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft">
                 </div>
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {sendReport(); handleCloseStudies()}}>SEND</button>
+                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {sendReport(); handleCloseReport()}}>SEND</button>
                 </div>
               </div>
             </div>

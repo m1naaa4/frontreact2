@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {AddProjectsAction, GetProjectAction} from "../../store/actions/User/Project/ProjectAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Player} from 'video-react';
@@ -17,7 +17,8 @@ import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction'
 import { Modal, Spinner } from 'react-bootstrap';
 import Modale from './Share/Modale';
 import { GeneraleAction } from '../../store/actions/Generale/GeneraleAction';
-
+import ReportModal from '../Admin/Report/ReportModal';
+import useOutsideClick from '../../helpers/useOutsideClick';
 
 export default function ShowProjectView(props) {
 
@@ -26,6 +27,7 @@ export default function ShowProjectView(props) {
     const user = useSelector(state => state.userProfile.userProfile);
     const project = fullproject?.getproject;
 
+    const ref = useRef();
     const params = useParams();
     const history  = useHistory();
     const [initial, setInitial] = useState(true);
@@ -39,8 +41,15 @@ export default function ShowProjectView(props) {
     const [country, setCountry] = useState();
     const [finance, setFinance] = useState();
     const [showmodal, setShowmodal] = useState(false);
+    const [options_List, SetOptions_List] = useState(false);
+    const [showReport, setShowReport] = useState(false);
+
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
+
+    const handleShowReport  = () => setShowReport(true);
+    const handleCloseReport = () => setShowReport(false);
+
     const [t] = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
 
@@ -185,6 +194,14 @@ export default function ShowProjectView(props) {
         }
         dispatch(GeneraleAction (data, props));
     };
+
+    const showOptions = () =>{
+        SetOptions_List(!options_List)
+      }
+
+    useOutsideClick(ref, () => {
+        SetOptions_List(false)
+    });
     
     return (
         <div className="Single-Wrapper">
@@ -205,11 +222,39 @@ export default function ShowProjectView(props) {
                             <div className="single-header">
                                 <div className="signle-offer-type">Project Business</div>
                                 <div className="single-offer-header">
-                                    <div className="single-offer-logo">
-                                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                                        <img src={project.project.logo_link} title="Nom du projet" alt=""/>
-                                    </div>
                                     <h3 className="single-offer-name">{project.project.name}</h3>
+                                </div>
+                            </div>
+
+                            <div class="Company-Infos">
+                                <div class="Company-Left">
+                                    <div class="single-offer-logo">
+                                        <img src={project.project.logo_link} title="Nom du projet" alt=""/>
+                                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                                        <label class="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i class="uil uil-bell"></i></label>
+                                    </div>
+                                    <div class="Company-Name"><a href="#!" target><i class="uil uil-globe"></i> {project.project.website_url}</a></div>
+                                </div>
+                                <div class="Company-Right">
+                                    <div class="Company-Phone"> 
+                                        <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                        {      
+                                            options_List && (
+                                            <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+                                                {user.id === project.project.user_id &&
+                                                    <li className="PostDelete">
+                                                        <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                    </li>
+                                                }
+                                            </ul>
+                                            )
+                                        }
+
+                                    <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <ReportModal project={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport}/>
+                                    </Modal>
+                                    </div>
+                                    <br/>
                                 </div>
                             </div>
 
