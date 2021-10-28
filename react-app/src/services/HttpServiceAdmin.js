@@ -37,7 +37,8 @@ class HttpServiceAdmin {
             method: 'GET',
             headers: {
                 'Authorization': token,
-                'Content-type': 'application/json',
+                'Content-type' : 'application/json',
+                'Accept'       : 'application/json',
             }
         }
         return requestOptions;
@@ -49,10 +50,11 @@ class HttpServiceAdmin {
             method: 'POST',
             headers: {
                 'Authorization': token,
-                'Content-type': 'Application/json',
+                'Content-type' : 'Application/json',
+                'Accept'       : 'Application/json',
             },
 
-            body: item,
+            data: item,
 
         }
         return requestOptions;

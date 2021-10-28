@@ -103,7 +103,7 @@ export default function PostHeader({ post }) {
                   }
 
                   <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <ReportModal post={post} provider='post' showReport={show} handleCloseReport={handleClose}/>
+                    <ReportModal providerObject={post} provider='post' showReport={show} handleCloseReport={handleClose}/>
                   </Modal>
                   
                 </ul>

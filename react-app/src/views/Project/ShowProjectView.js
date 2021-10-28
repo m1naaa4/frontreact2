@@ -233,7 +233,7 @@ export default function ShowProjectView(props) {
                                         <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                                         <label class="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i class="uil uil-bell"></i></label>
                                     </div>
-                                    <div class="Company-Name"><a href="#!" target><i class="uil uil-globe"></i> {project.project.website_url}</a></div>
+                                    {project.project.website_url && <div class="Company-Name"><a href="#!" target><i class="uil uil-globe"></i> {project.project.website_url}</a></div>}
                                 </div>
                                 <div class="Company-Right">
                                     <div class="Company-Phone"> 
@@ -251,7 +251,7 @@ export default function ShowProjectView(props) {
                                         }
 
                                     <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <ReportModal project={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport}/>
+                                        <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport}/>
                                     </Modal>
                                     </div>
                                     <br/>

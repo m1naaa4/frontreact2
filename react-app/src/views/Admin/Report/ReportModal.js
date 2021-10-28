@@ -5,7 +5,7 @@ import { SendReportAction } from '../../../store/actions/Admin/ReportActions';
 import { toast } from 'react-toastify';
 
 
-const  ReportModal = ({post, provider, showReport, handleCloseReport}) => {
+const  ReportModal = ({providerObject, provider, showReport, handleCloseReport}) => {
 
   const report = useSelector(state => state.reportsData);
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const  ReportModal = ({post, provider, showReport, handleCloseReport}) => {
     const sendReport = () => {
       const data = {
         url         : 'report/add',
-        provider_id : post.id,
+        provider_id : providerObject.id,
         provider    : provider,
         priority    : formData.priority,
         problem     : formData.problem,
