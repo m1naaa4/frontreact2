@@ -20,7 +20,7 @@ function App() {
             return config
           })
     
-    }, 2000);
+    }, 3000);
     
 
     const dispatch = useDispatch ();
