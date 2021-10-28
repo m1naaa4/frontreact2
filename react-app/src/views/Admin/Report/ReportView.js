@@ -5,7 +5,6 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import MUIDataTable from "mui-datatables";
 import { ReportsAction } from '../../../store/actions/Admin/ReportActions';
-import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import { BlockContentAction } from '../../../store/actions/Admin/AdminActions';
