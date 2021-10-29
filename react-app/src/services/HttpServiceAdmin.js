@@ -50,8 +50,8 @@ class HttpServiceAdmin {
             method: 'POST',
             headers: {
                 'Authorization': token,
-                'Content-type' : 'Application/json',
-                'Accept'       : 'Application/json',
+                'Content-type' : 'application/json',
+                'Accept'       : 'application/json',
             },
 
             data: item,
