@@ -1,25 +1,26 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ShowComment from "./ShowComment";
 import PusherService from '../../services/Pusher';
 import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import { GetCommentAction } from '../../store/actions/Comment/CommentAction';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 
-export default function AddComment(props) {
+export default function AddComment({providerObject, providerType, setCountcomment}) {
 
-    const [body, setBody] = useState();
+    console.log('testing', providerObject)
+    // const [body, setBody] = useState();
     const refcomment = useRef(null);
     const [t, i18n] = useTranslation();
     const history  = useHistory();
-    const params = useParams();
     const pusher = new PusherService();
+    const dispatch = useDispatch();
 
     // const comment = useSelector(state => state.addComment);
-    const project = useSelector(state => state.getproject);
+    // const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
 
@@ -27,17 +28,13 @@ export default function AddComment(props) {
 
     const dataget = {
         action           : 'get',
-        provider         : 'project',
-        provider_id      : project.getproject.projectid,
+        provider         : providerType,
+        provider_id      : providerObject.projectid,
     }
 
     const gotToProfile = () => {
         history.push('/profile/'+ userProfile.profile_id);
-      };
-
-    const dispatch = useDispatch();
-
-     
+    };
 
     const onTyping = () =>{
         pusher.echo.private("project_comment").whisper('typing',{
@@ -47,27 +44,20 @@ export default function AddComment(props) {
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
-        // const pusher = new PusherService();        
-        // var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
-        // channel.bind('NewComment', function(res) {    
-        //     let j = res.id;
-        //     let feed = res[j]       
-        //     dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', feed});            
-        // });
-    
+        setCountcomment();
     }, [dispatch])
 
     const handleSubmitValue =  async (value, key) => {
         
         if (key === 13 && value !== '') {
             const data = {
-                provider_id     : project.getproject.projectid,
+                provider_id     : providerObject.projectid,
                 action          : "add",
-                provider        : "project",
+                provider        : providerType,
                 body            : value,
             }
             refcomment.current.value = ''
-        dispatch(AddCommentAction(data, props, 'add'));
+        dispatch(AddCommentAction(data, '', 'add'));
         }
     }
 
@@ -88,7 +78,7 @@ export default function AddComment(props) {
                     <div className="Comment-Area">
                         <div className="Comment-Input">
                             <input type="text" name="body" onKeyUp={onTyping}
-                                   onKeyDown={(e) => handleSubmitValue(e.target.value, e.keyCode) } ref={refcomment}  placeholder="Write your comment"/>
+                                onKeyDown={(e) => handleSubmitValue(e.target.value, e.keyCode) } ref={refcomment}  placeholder="Write your comment"/>
                         </div>
                     </div>
                 </div>
@@ -96,11 +86,10 @@ export default function AddComment(props) {
 
             <div className="User-Comments">
 
-                {/*!--#### COMMENT 1 ### --*/}
                 <div className="User-Comment">
                 {comments && comments?.comments && comments?.comments.map((comment, index) => 
                     <ShowComment comment={comment} key={comment.id}/>
-                     )
+                    )
                 }
                 
                 </div>

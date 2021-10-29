@@ -3,7 +3,7 @@ const initState = {
     }
 
 
-    const GetCommentReducer = (state = initState | undefined, action) =>{
+    const CommentReducer = (state = initState | undefined, action) =>{
         switch (action.type) {
 
             case 'LOADING_GET_COMMENT':
@@ -19,7 +19,20 @@ const initState = {
                     comments :  action.res.comment?.data,
                     hasMore  :  action.res.comment?.meta,
                     current  :  action.res.comment?.meta?.current_page,
+                    count    :  action.res.comment?.data.length,
                     loading  :  false
+                }
+
+            case 'ADD_COMMENT_SUCCESS':
+                let idd = window.location.href.split("/").pop();
+                if (action.res.comment?.data?.commentable_id === idd) {
+                    state.comments = [action?.res?.comment?.data, ...state?.comments];
+                }
+                return {
+                    ...state,
+                    comments    :  state.comments,
+                    count       :  state.comments.length,
+                    loading     :  false
                 }
 
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
@@ -82,4 +95,4 @@ const initState = {
         }
     }
     
-    export default GetCommentReducer;
+    export default CommentReducer;

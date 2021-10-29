@@ -11,6 +11,11 @@ const initState = {
                     ...state,
                     tag : action.res,
                 }
+            case 'COUNT_COMMENT_PROJECT':
+                return {
+                    ...state,
+                    countCommentProject : action.res,
+                }
 
             default:
                 return {

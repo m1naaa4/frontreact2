@@ -5,7 +5,7 @@ const prod = {
         'api'   : `${process.env.REACT_APP_API_URL}`
     },
     facebook:{
-        appId      : '2711133325873185'
+        appId      : `${process.env.FACEBOOK_APP_ID}`
     }
 };
 

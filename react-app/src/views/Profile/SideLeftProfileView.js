@@ -56,8 +56,8 @@ export default function SideLeftProfileView() {
                   </span></div>
                 <div className="Widget-Stats">
                   <div className="Stats-Field Stats-Field-Col-4">
-                    {infoprofile.infoprofile.look_angel && <h3 className="Widget-Title text-center">Searching Funder</h3>}
-                    {infoprofile.infoprofile.look_mentor && <h3 className="Widget-Title text-center">Searching Mentor</h3>}
+                    {infoprofile.infoprofile.look_angel !== 0 && <h3 className="Widget-Title text-center">Searching Funder</h3>}
+                    {infoprofile.infoprofile.look_mentor !== 0  && <h3 className="Widget-Title text-center">Searching Mentor</h3>}
                     <div className="Stats-Text">
                       { sectors.map((key) => 
                           {if (key[0] === infoprofile.infoprofile.sector) {

@@ -25,6 +25,7 @@ export default function ShowProjectView(props) {
     const fullproject = useSelector(state => state.getproject);
     const visibility =  useSelector(state => state.generale.visibility);
     const user = useSelector(state => state.userProfile.userProfile);
+    const comments = useSelector(state => state.getComments);
     const project = fullproject?.getproject;
 
     const ref = useRef();
@@ -82,7 +83,7 @@ export default function ShowProjectView(props) {
         if (initial) {
             setLike(project?.project?.is_liked);
             setLikeCount(fullproject?.countlike);
-            setCountcomment(fullproject?.countcomment); 
+            setCountcomment(fullproject?.countcomment);
         }
 
         if (initialFavorite) {
@@ -120,13 +121,17 @@ export default function ShowProjectView(props) {
                 setFinance(key[1])
             }}
         );
-
-
     })
+
     const counter = useSelector(state => state.addednotification);
+
     useEffect(() => {
         setLikeCount(counter.counterlike)
     },[counter?.counterlike]);
+
+    useEffect(() => {
+        setCountcomment(countcomment + 1)
+    }, [comments])
 
     const goToSearch = (data) =>{
         history.push('/project/lists');
@@ -160,7 +165,7 @@ export default function ShowProjectView(props) {
             provider: "project",
             type    : like?'dislike':'like',
         }
-        // like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+        like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
         // setClasse('Dislike');
         
         console.log(like)
@@ -310,7 +315,7 @@ export default function ShowProjectView(props) {
                                 </div>
                             </div>
 
-                            <AddComment  project={project}/>
+                            <AddComment providerObject={project} providerType='project' setCountcomment={setCountcomment}/>
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">

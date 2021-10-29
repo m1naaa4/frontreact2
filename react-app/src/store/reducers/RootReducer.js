@@ -17,8 +17,7 @@ import GetPostsReducer from './Post/GetPostsReducer'
 import GetNotificationsReducer from './Notification/GetNotificationsReducer'
 import GetAddedNotificationReducer from './Notification/GetAddedNotificationReducer'
 
-import AddCommentReducer from './Comment/AddCommentReducer'
-import GetCommentReducer from './Comment/GetCommentReducer'
+import GetCommentReducer from './Comment/CommentReducer'
 
 import ConversationsReducer from './Messenger/ConversationsReducer'
 import ConversationReducer from './Messenger/ConversationReducer'
@@ -44,7 +43,6 @@ const RootReducer = combineReducers({
   post: AddPostReducer,
   youtube: AddYoutubeReducer,
 
-  addComment:AddCommentReducer,
   getComments:GetCommentReducer,
 
   generale:GeneraleReducer,
