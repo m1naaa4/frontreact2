@@ -46,49 +46,37 @@ const initState = {
                     loading  :  false
                 }
 
-            case 'ADD_TO_COLLECTION_POST_SUCCESS':
-                
-                let idd = window.location.href.split("/").pop();
-                console.log('action.feed', action.res.post?.profile_id, idd)
-                if (action.res.post?.profile_id === idd || action.res.post?.profile_id+'#' === idd) {
-                    state.posts = [action.res.post, ...state.posts];
-                }     
-                return {
-                    posts :  state.posts,
-                    loading  :  false
-                }
-
             case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':
+                console.log('hereeeeeeeeeeeeeee', action.res.comments)
                 const allposts = state.posts;
                 allposts.forEach(function (post) {
-                    if (action.res.comments?.data?.commentable_id === post.id) {                    
-                        console.log(post.comments.unshift(action.res.comments.data), '1')
-                        console.log('hereeeeeeeeeeeeeee', post.commentCount = action.res?.count)
+                    if (action.res.comments?.commentable_id === post.id) {
+                       post.comments.unshift(action.res.comments);
+                    }                    
+                });
+                return {
+                    ...state,
+                    posts :  allposts,
+                    commentCount :  action.res?.commentcount,
+                    // likeCount    :  likeCount,
+                    // comments :  [action.res.comments.data, ...state.comments],
+                    // hasMore  :  action.res.comment.meta,
+                    // current  :  action.res.comment.meta,
+                    // loading  :  false
+                }
+            
+            case 'ADD_Like_TO_POST_SUCCESS':                    
+                const allpostslike = state.posts;
+                allpostslike.forEach(function (post) {
+                    if (action.res?.notification?.provider_id === post.id) {     
+                        console.log('hereeeeeeeeeeeeeee', post.likeCount = action.res?.count)
                     }                    
                 })                
                 return {
                     ...state,
                     posts :  state.posts,
-                    commentCount :  action.res?.count,
-                    // likeCount    :  likeCount,
-                    // comments :  [action.res.comments.data, ...state.comments],
-                    // hasMore  :  action.res.comment.meta,
-                    // current  :  action.res.comment.meta,
                     loading  :  false
                 }
-            
-                case 'ADD_Like_TO_POST_SUCCESS':                    
-                    const allpostslike = state.posts;
-                    allpostslike.forEach(function (post) {
-                        if (action.res?.notification?.provider_id === post.id) {     
-                            console.log('hereeeeeeeeeeeeeee', post.likeCount = action.res?.count)
-                        }                    
-                    })                
-                    return {
-                        ...state,
-                        posts :  state.posts,
-                        loading  :  false
-                    }
 
             case 'DELETE_POST_SUCCESS':
                 return {
@@ -99,7 +87,7 @@ const initState = {
             case 'GET_POSTS_ERROR':
                 return {
                     ...state,
-                    posts:action.res,
+                    posts:state.posts,
                 }
             case 'CODE_ERROR':
                 return {

@@ -2,16 +2,15 @@ import React, {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ShowComment from "./ShowComment";
 import PusherService from '../../services/Pusher';
-import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
+import { AddCommentProjectAction } from '../../store/actions/Comment/CommentAction';
 import { GetCommentAction } from '../../store/actions/Comment/CommentAction';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 
 
-export default function AddComment({providerObject, providerType, setCountcomment}) {
+export default function AddComment({providerObject, providerType}) {
 
-    console.log('testing', providerObject)
     // const [body, setBody] = useState();
     const refcomment = useRef(null);
     const [t, i18n] = useTranslation();
@@ -44,7 +43,7 @@ export default function AddComment({providerObject, providerType, setCountcommen
 
     useEffect(() => {
         dispatch(GetCommentAction(dataget));
-        setCountcomment();
+        // setCountcomment();
     }, [dispatch])
 
     const handleSubmitValue =  async (value, key) => {
@@ -57,7 +56,7 @@ export default function AddComment({providerObject, providerType, setCountcommen
                 body            : value,
             }
             refcomment.current.value = ''
-        dispatch(AddCommentAction(data, '', 'add'));
+        dispatch(AddCommentProjectAction(data, '', 'add'));
         }
     }
 

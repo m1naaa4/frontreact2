@@ -21,7 +21,7 @@ export default function({newavatar, handleClose}) {
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [youtube, setYoutube] = useState(false);
     const [youtubeId, setYoutubeId] = useState();
-    const [visibility, setVisibility] = useState();
+    const [visibility, setVisibility] = useState('public');
     const toastId = React.useRef(null);
 
     console.log(newavatar)
@@ -119,6 +119,10 @@ export default function({newavatar, handleClose}) {
         return url.match(/youtube\.com/) ? true : false ;
     }
 
+    useEffect(() => {
+        if(refbody.current) refbody.current.focus(); 
+       }, [refbody])
+
     const opts = {
         height: '100%',
         width: '380',
@@ -179,7 +183,7 @@ export default function({newavatar, handleClose}) {
                             </div>
                             <div className="CreatePost-ColRight">
                                 <div className="CreatePost-Body">
-                                    <textarea id="textbody" name="post" onChange={e => {setBody(e.target.value); getyoutube(e.target.value)} } ref={refbody} placeholder="De quoi souhaitez-vous discuter ?"></textarea>
+                                    <textarea id="textbody" name="post" onChange={e => {setBody(e.target.value); getyoutube(e.target.value)} } ref={refbody} placeholder="What in your mind ?"></textarea>
                                     {
                                         medialink? (type === "video" ? (
                                             <Player width="100%" height="100%"
@@ -200,12 +204,11 @@ export default function({newavatar, handleClose}) {
                             <div className="CreatePost-FooterLeft">
                             <div className="Send-Message input-row input-select">
                                     <select className="CreatePost-AddTag" name="visibility" onChange={(e) => setVisibility(e.target.value)}  defaultValue="public">
-                                        <option disabled selected>Post status</option>
-                                        <option value="public">Public</option>
+                                        <option value="public" selected> Public </option>
                                         {/* <option value="shared">Shared</option> */}
                                         {/* <option value="team">Team</option> */}
-                                        <option value="friends">Friends</option>
-                                        <option value="private">Only me</option>
+                                        <option value="friends"> Friends </option>
+                                        <option value="private"> Only me </option>
                                     </select>
                                 </div>
                                 {/* <button type="button" className="CreatePost-AddTag"><i className="uil uil-plus"></i> Ajouter un tag</button> */}

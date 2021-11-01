@@ -25,6 +25,7 @@ export default function ShowProjectView(props) {
     const fullproject = useSelector(state => state.getproject);
     const visibility =  useSelector(state => state.generale.visibility);
     const user = useSelector(state => state.userProfile.userProfile);
+    const counter = useSelector(state => state.addednotification);
     const comments = useSelector(state => state.getComments);
     const project = fullproject?.getproject;
 
@@ -79,11 +80,30 @@ export default function ShowProjectView(props) {
         }
     }, [visibility])
 
+    ///////////comment counter/////////
+    useEffect(() => {
+        setCountcomment(fullproject?.countcomment);
+    }, [fullproject?.countcomment])
+
+    useEffect(() => {
+        setCountcomment(counter?.countercomment);
+    }, [counter?.countercomment])
+    //////////finish /////////////////
+
+    ///////////like counter//////////
+    useEffect(() => {
+        setLikeCount(fullproject?.countlike);
+    }, [fullproject?.countlike])
+
+    useEffect(() => {
+        setLikeCount(counter.counterlike)
+    },[counter?.counterlike]);
+    //////////finish /////////
+
     useEffect(() => {
         if (initial) {
             setLike(project?.project?.is_liked);
-            setLikeCount(fullproject?.countlike);
-            setCountcomment(fullproject?.countcomment);
+            // setLikeCount(fullproject?.countlike);
         }
 
         if (initialFavorite) {
@@ -92,7 +112,7 @@ export default function ShowProjectView(props) {
         
         if(counter?.countercomment){
             console.log(counter?.notification)
-            setCountcomment(counter?.countercomment)
+            // setCountcomment(counter?.countercomment)
         }
 
         sectors.map((key) => 
@@ -123,15 +143,9 @@ export default function ShowProjectView(props) {
         );
     })
 
-    const counter = useSelector(state => state.addednotification);
-
     useEffect(() => {
-        setLikeCount(counter.counterlike)
-    },[counter?.counterlike]);
-
-    useEffect(() => {
-        setCountcomment(countcomment + 1)
-    }, [comments])
+        setCountcomment(comments.count)
+    }, [comments.count])
 
     const goToSearch = (data) =>{
         history.push('/project/lists');
@@ -238,7 +252,7 @@ export default function ShowProjectView(props) {
                                         <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                                         <label class="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i class="uil uil-bell"></i></label>
                                     </div>
-                                    {project.project.website_url && <div class="Company-Name"><a href="#!" target><i class="uil uil-globe"></i> {project.project.website_url}</a></div>}
+                                    {project.project.website_url && <div class="Company-Name"><a href={project.project.website_url} target="_blanc"><i class="uil uil-globe"></i> {project.project.website_url}</a></div>}
                                 </div>
                                 <div class="Company-Right">
                                     <div class="Company-Phone"> 
@@ -315,7 +329,7 @@ export default function ShowProjectView(props) {
                                 </div>
                             </div>
 
-                            <AddComment providerObject={project} providerType='project' setCountcomment={setCountcomment}/>
+                            <AddComment providerObject={project} providerType='project'/>
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">

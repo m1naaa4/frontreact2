@@ -16,29 +16,29 @@ const initState = {
             case 'GET_COMMENT_SUCCESS':
                 return {
                     ...state,
-                    comments :  action.res.comment?.data,
-                    hasMore  :  action.res.comment?.meta,
-                    current  :  action.res.comment?.meta?.current_page,
-                    count    :  action.res.comment?.data.length,
+                    comments :  action.res.comments,
+                    hasMore  :  action.res.comments?.meta,
+                    current  :  action.res.comments?.meta?.current_page,
+                    count    :  action.res.commentcount,
                     loading  :  false
                 }
 
             case 'ADD_COMMENT_SUCCESS':
                 let idd = window.location.href.split("/").pop();
-                if (action.res.comment?.data?.commentable_id === idd) {
-                    state.comments = [action?.res?.comment?.data, ...state?.comments];
+                if (action.res.comment?.commentable_id === idd) {
+                    state.comments = [action?.res?.comment, ...state?.comments];
                 }
                 return {
                     ...state,
                     comments    :  state.comments,
-                    count       :  state.comments.length,
+                    count       :  action?.res?.commentcount,
                     loading     :  false
                 }
 
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
                 let id = window.location.href.split("/").pop();
-                if (action.res.comments?.data?.commentable_id === id) {
-                    state.comments = [action?.res?.comments?.data, ...state?.comments];
+                if (action.res.comments?.commentable_id === id) {
+                    state.comments = [action?.res?.comments, ...state?.comments];
                 }                            
                 return {
                     ...state,

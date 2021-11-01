@@ -7,11 +7,12 @@ import { AddCommentAction } from '../../../../store/actions/Comment/CommentActio
 
 export default function AddComment({post}) {
 
+    const dispatch = useDispatch();
     const [body, setBody] = useState();
     const refcomment = useRef(null);
     // const params = useParams();
 
-    const comment = useSelector(state => state.addComment);
+    const comment = useSelector(state => state.getComments);
 
     const [avatar, setAvatar] = useState();
     // const [user_profile_id, setUserProfileId] = useState();
@@ -37,14 +38,6 @@ export default function AddComment({post}) {
         body        : body,
     }
 
-    const dataget = {
-        action           : 'get',
-        provider         : 'post',
-        provider_id      : post.id,
-    }
-
-    const dispatch = useDispatch();
-
     const handleSubmitValue = (e) => {
         e.preventDefault();
         refcomment.current.value = '';
@@ -52,40 +45,11 @@ export default function AddComment({post}) {
         
     }
 
-    useEffect(() => {
-        //dispatch(GetCommentAction(dataget));
-        const commentData = {
-            channel : 'post_comment_' + post.id,
-            event   : 'NewComment',
-            type    : 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS',
-        };
-        // dispatch(PusherAction(commentData));
-    
-    }, [dispatch]) 
-
-    useEffect(() => { 
-        console.log(user_id)
-        const notifData = {
-            channel : 'notification_' + user_id,
-            event   : 'notifpost',
-            type    : 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS',
-        };
-        // dispatch(PusherAction(notifData));
-
-        const notifDataa = {
-            channel : 'notification_' + user_id,
-            event   : 'notifpost',
-            type    : 'GET_ADDED_NOTIFICATION_SUCCESS',
-        };
-        // dispatch(PusherAction(notifDataa));
-        
-    }, [dispatch])
-
     useEffect(()=>{
         if (user?.id === infoprofile.infoprofile.user_id) {
             setUserVisiterAvatar(user?.profile?.avatar_link)
         }
-      },[user])
+    },[user])
 
 
     return (

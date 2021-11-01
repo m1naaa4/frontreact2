@@ -10,22 +10,23 @@ import PostHeader from './PostWraps/PostHeader';
 
 export default function ListPostsView() {
 
-    const [isLoading, setIsLoading] = useState(false);
-
-    const params = useParams();
-
+    
     const dispatch = useDispatch();
+    const params = useParams();
     const observer = useRef();
 
-    const data = {
-        action: 'getPosts',
-        user_profile_id: params.id,
-    };
-
+    const [isLoading, setIsLoading] = useState(false);
+    const user = useSelector(state => state.userProfile.userProfile);
     const posts =  useSelector(state => state.posts.posts);
     const hasMore = useSelector(state => state.posts.hasMore);
     const current = useSelector(state => state.posts.current);
     const loading = useSelector(state => state.posts.loading);
+    
+    const data = {
+        action: 'getPosts',
+        user_profile_id: params.id,
+    };
+    
     const lastProjectElementRef = useCallback( node =>{
         if (posts.loading) return
        
@@ -37,7 +38,7 @@ export default function ListPostsView() {
             }
         })
         if (node) observer.current.observe(node)
-    }, [loading, hasMore])
+    }, [loading, hasMore]);
 
     useEffect(() => {
         if(!isLoading){
@@ -71,10 +72,10 @@ export default function ListPostsView() {
                                                     
                                                 </div>
                                                 <div className="PostWrap"  key={post.id+1}>
-                                                    <PostHeader post={post}/>
+                                                    {/* <PostHeader post={post}/> */}
                                                     <div className="PostBody">
                                                         <div className="PostBody-Text">
-                                                            Born
+                                                        subscribe at - {user.created_at?.date}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,7 +103,7 @@ export default function ListPostsView() {
                                                     {/* <PostHeader post={}/> */}
                                                     <div className="PostBody">
                                                         <div className="PostBody-Text">
-                                                            Born
+                                                            subscribe at - {user.created_at?.date}
                                                         </div>
                                                     </div>
                                                 </div>
