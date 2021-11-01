@@ -47,7 +47,7 @@ export default function OffreGrid({offre}) {
     }
     return (
         <>
-            <div className="offer-box">
+            <div className="offer-box" style={offre.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}>
                 <div className="offer-header">
                 <div className="offer-title">
                     <h3><Link to={`/project/show/${offre.id}`}>{offre.name}</Link></h3>
