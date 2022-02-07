@@ -47,6 +47,7 @@ const Routes = (props) => {
                         <Gaurd  path="/reports" token='admin-token' routeRedirect='/admin/login' component={ReportPrivateRoutes} />
 
                         <Gaurd path="/noauthorization/:id" token='user-token' routeRedirect='/login'  component={NoAuthorization} />
+                        <Gaurd path="/notfound/:id" token='user-token' routeRedirect='/login'  component={NotFound} />
                         <Route exact path="/expired" component={Expired} />
                         <Route exact path="/oops" component={Opps} />
 

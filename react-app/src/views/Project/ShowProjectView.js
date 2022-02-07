@@ -260,7 +260,7 @@ export default function ShowProjectView(props) {
                                         {      
                                             options_List && (
                                             <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-                                                {user.id === project.project.user_id &&
+                                                {user.id !== project.project.user_id &&
                                                     <li className="PostDelete">
                                                         <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
                                                     </li>
