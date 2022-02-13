@@ -4130,8 +4130,8 @@ border-top: none;
   padding-left: 5px;
   position: relative;
   padding-left: 10px;
-  flex: 0 0 125px;
-  max-width: 125px;
+  flex: 0 0 120px;
+  max-width: 120px;
 }
 .Contact .Contact-Infos h4{
   font-size: 12px;
@@ -4144,8 +4144,8 @@ border-top: none;
   color: #859BA6;
 }
 .Contact .Add-Contact{
-  flex: 0 0 55px;
-  max-width: 55px;
+  flex: 0 0 50px;
+  max-width: 50px;
   display: flex;
   justify-content: flex-end;
 }
@@ -6796,4 +6796,50 @@ button .spinner-border{
 }
 .footer-title span i{
   font-size: 15px;
+}
+
+.list-group .Notif-Image{
+  float: left;
+  margin-right: 20px;
+}
+.list-group .Notif-Text{
+  float: left;
+}
+.list-group .Notif-Options{
+  text-align: right;
+}
+.list-group button.btn{
+  font-size: 20px;
+}
+.list-group .Notif-Content{
+  color: #838383;
+}
+.dadupa-box{
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px rgb(0 0 0 / 5%);
+  border-radius: 15px;
+}
+
+.dadupa-box .list-group-item {
+  border: none !important;
+  background: transparent !important;
+}
+.dadupa-box .list-group{
+  border-bottom: 1px solid #eeeeee;
+}
+.dadupa-box .Notif-Options .dropdown-menu.show{
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px rgb(0 0 0 / 5%);
+  background: #fff;
+  border-radius: 0;
+}
+.dadupa-box .Notif-Options .dropdown-item{
+  font-size: 13px;
+}
+.dadupa-box .Notif-Options .dropdown-item:nth-child(1){
+  border-bottom: 1px solid #eeeeee;
+}
+.dadupa-box .Notif-Options .dropdown-item i{
+  font-size: 16px;
+}
+.dadupa-box .Notif-Options .dropdown-item i.uis-check{
+  font-size: 19px;
 }

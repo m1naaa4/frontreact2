@@ -29,8 +29,7 @@ function NotificationGrid({notification}) {
     useEffect(() => {
         
         !seen ?  setStylo( {
-            backgroundColor:"#f2fff8", 
-            borderColor:"gris"})
+            backgroundColor:"rgb(238 238 238 / 55%)"})
             : setStylo()
     },[seen]);
 
@@ -78,47 +77,40 @@ function NotificationGrid({notification}) {
     return (
         
             <div className="grid">
-                <div className="list-group">
-                    
-                    <a href="#" style={stylo} className="list-group-item list-group-item-action flex-column align-items-start">
+                <div className="list-group" style={stylo}>
+                    <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
-                        {notification && <div className="Notifs-List" >
-                        <div className="Notif-Item">
-                            <Link to={notification.link} className="Notif-Image"  >
-                                <img src={notification.notified_from_avatar} alt="avatar" style={{width:'40px', height:'40px'}}/></Link>
-
-                                <div className="Notif-Options show">
-                                    <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <i className="uil uil-ellipsis-h"></i>
-                                    </button>
-                                {notification_id ===  notification.id && display && 
-                                    <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                        <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} >Mark as read</div>
-                                        <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} >Delete</div>
-                                    </div> 
-                                }   
-                                </div>                        
-                            
+                            {notification && <div className="Notifs-List" >
+                                <div className="Notif-Item">
+                                    <Link to={notification.link} className="Notif-Image"  >
+                                        <img src={notification.notified_from_avatar} alt="avatar" style={{width:'50px', height:'50px'}}/></Link>
+                                        <div className="Notif-Text">{notification.description} </div>
+                                    
+                                        <div className="Notif-Options show">
+                                        <small>
+                                        <Link to={notification.link} className="Notif-Content">
+                                                <div className="Notif-Time">{notification.created_at.for_humans} </div>
+                                            </Link>
+                                        </small>
+                                            <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <i className="uil uil-ellipsis-h"></i>
+                                            </button>
+                                        {notification_id ===  notification.id && display && 
+                                            <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
+                                                <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} ><i class="uis uis-check"></i>Mark as read</div>
+                                                <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} ><i class="uil uil-trash-alt"></i> Delete</div>
+                                            </div> 
+                                        }   
+                                        </div>                        
+                                    
+                                    </div>
+                                </div>
+                            }
                         </div>
-                    </div>
-                    
-                    }
-                        <small>
-                           
-                        </small>
-                        </div>
-                        <small>
-                            <div className="Notif-Text">{notification.description} </div>
-                            <Link to={notification.link} className="Notif-Content">
-                                <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                            </Link>
-                        </small>
-                    </a>
-                    
-                    </div>
+                    </a>    
+                </div>
                 <div className="grid-sizer col-1"></div>
-            </div>
-                        
+            </div>                   
     )
 }
 
