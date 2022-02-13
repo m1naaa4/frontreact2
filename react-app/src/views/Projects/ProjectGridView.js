@@ -37,25 +37,29 @@ const ProjectGridView = ({ project }) => {
     return (
 
              <div className="offer-box">
-                    <div className="offer-header" style={project.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}>
+                    <div className="offer-header" >
+                      {/* style={project.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}> */}
                         <div className="offer-title">
+                            <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
                             <h3><span onClick={() => goToShowproject(project.id) } data-toggle="tooltip" data-placement="top" title={project.name}>
                                 {project.name.substring(0, 10)}</span></h3>
-                            <span>{project.sector}</span>
-                            <span>{project.visibility}</span>
+                            <div className='footer-title'>
+                                <span className='mr-5'>{project.sector.charAt(0).toUpperCase()+ project.sector.slice(1)}, </span>
+                                {project.owner && project.owner.map((value) => 
+                                    {
+                                        return <Link to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
+                                            {value.username.substring(0, 6)}
+                                        </Link>
+                                    }
+                                )} 
+                                <span>{project.visibility == 'public' ? <i className="uil uil-globe"></i> : ''}</span>
+                            </div>
                         </div>
                         <div className="offer-logo">
-
-                            {project.owner && project.owner.map((value) => 
-                                {
-                                    return <Link to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
-                                         {value.username.substring(0, 6)}
-                                    </Link>
-                                }
-                            )}
-
-                            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                            <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
+                            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
+                                    {console.log(classe)}
+                                <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i>
+                            </button>
                         </div>
                     </div>
                     <div className="offer-media">

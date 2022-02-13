@@ -2013,21 +2013,21 @@ border-top: none;
 .offer-box{
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 0 30px 0 rgba(0,0,0, .06);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px rgb(0 0 0 / 5%);
   margin-bottom: 30px;
 }
 .offer-header{
   display: flex;
   flex-wrap: wrap;
-  padding: 20px 15px;
+  padding: 15px;
 }
 .offer-header .offer-title{
-  max-width: 80%;
-  flex: 0 0 80%;
+  max-width: 90%;
+  flex: 0 0 90%;
 }
 .offer-header .offer-logo{
-  max-width: 20%;
-  flex: 0 0 20%;
+  max-width: 10%;
+  flex: 0 0 10%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -2037,7 +2037,7 @@ border-top: none;
   background-color: transparent;
   color: #78909C;
   font-size: 18px;
-  padding: 0 4px;
+  padding: 0 ;
   border: none;
   line-height: 10px;
   transition: all .25s linear;
@@ -2078,6 +2078,7 @@ border-top: none;
 .offer-box .offer-title span{
   color: #78909C;
   font-size: 11px;
+  margin-top: 7px;
 }
 .offer-media video,
 .offer-media img{
@@ -2089,7 +2090,7 @@ border-top: none;
   transition: all .20s cubic-bezier(.65,.05,.36,1);
 }
 .offer-box:hover img{
-  opacity: .8;
+  /* opacity: .8; */
 }
 .meta-items{
   margin: 0;
@@ -2695,8 +2696,8 @@ border-top: none;
   font-weight: 900;
   margin-bottom: 0px;
   margin-top: 0px;
-  max-width: 80%;
-  flex: 0 0 80%;
+  max-width: 90%;
+  flex: 0 0 90%;
 }
 .review-offer-logo{
     max-width: 20%;
@@ -6770,4 +6771,29 @@ button .spinner-border{
 .tags-input input{
   width: 200px !important;
   flex: none !important;
+}
+
+.offer-title img{
+  float: left;
+  margin-right: 10px;
+  max-height: 35px;
+}
+.footer-title{
+  float: left;
+    clear: both;
+}
+.footer-title a{
+  font-size: 12px;
+  color: #505050;
+}
+.footer-title span{
+  display: inline-block;
+  font-size: 13px !important;
+  margin-top: 0px !important;
+}
+.mr-5{
+  margin-right: 5px !important;
+}
+.footer-title span i{
+  font-size: 15px;
 }
