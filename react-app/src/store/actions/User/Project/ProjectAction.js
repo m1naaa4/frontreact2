@@ -45,13 +45,16 @@ export const GetProjectAction = (data, props, history, id) =>{
     {
         dispatch({type:'LOADING_GET_PROJECT'});
 
-        GetProject(data).then((res)=>{
+        GetProject(data, history, id).then((res)=>{
             if(res.hasOwnProperty('success') && res.success === true){
                 dispatch({type:'GET_PROJECT_SUCCESS', res});
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
                 if (res.code === 403) {
                     history.push("/noauthorization/"+id)
+                }
+                else if (res.code === 404) {
+                    history.push("/notfound/"+id)
                 } else {
                     dispatch({type:'GET_PROJECT_ERROR',res})
                 }

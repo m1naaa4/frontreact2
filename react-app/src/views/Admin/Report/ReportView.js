@@ -52,8 +52,8 @@ export default function ReportView() {
         return [value.priority, value.provider, <a href={value.link}>link</a>, value.description,
             <a href={value.reporter}>link</a>, <a href={value.author}>link</a>, value.blocked, 
             <>  <Tooltip title="Add comment" arrow><button variant="outlined" onClick={()=>handleClickOpen(value.id, value.provider_id, value.provider)} type="button" name="button"  className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button></Tooltip>
-                <Tooltip title="Delete content" arrow><button type="button" name="button"  className="Invitation-Option_Delete"><i className="uil uil-times"></i></button></Tooltip>
-                <Tooltip title="Block content" arrow><button type="button" name="button"  className="Invitation-Option_Block"><i class="uil uil-ban"></i></button></Tooltip>
+                <Tooltip title="Delete content" arrow><button type="button" onClick={()=>handleDelete(value.id, value.provider_id, value.provider)} name="button"  className="Invitation-Option_Delete"><i className="uil uil-times"></i></button></Tooltip>
+                <Tooltip title="Block content" arrow><button type="button" onClick={()=>handleBlock(value.id, value.provider_id, value.provider)} name="button"  className="Invitation-Option_Block"><i class="uil uil-ban"></i></button></Tooltip>
             </>
             ]
     })
@@ -70,7 +70,17 @@ export default function ReportView() {
         setOpen(false);
     };
 
-
+    const handleDelete = () => {
+        console.log(providerId, provider)
+        let data = {
+            'url'    : 'admin/report/delete',
+            'report_id'     : reportId,
+            'provider_id'   : providerId,
+            'provider'      : provider,
+        }
+        dispatch(BlockContentAction (data));
+        setOpen(false);
+    };
     // countries.map((key) => 
     //   {if (key.value === defaultValue) {
     //     setOptionSelected({value : key.value, label: t(key.label)})
@@ -101,8 +111,7 @@ export default function ReportView() {
                     </DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
+                        are you sure you want to +{}+ content.
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
