@@ -18,9 +18,7 @@ export default function NotificationMenu({notification}) {
 
     useEffect(() => {
         !seen ?  setStylo( {
-            backgroundColor:"#f2fff8",
-            
-            borderColor:"gris"})
+            backgroundColor:"rgb(238 238 238 / 55%)"})
             : setStylo()
     },[seen]);
 
@@ -50,7 +48,7 @@ export default function NotificationMenu({notification}) {
 
     return (
           
-                <div className="Notifs-List" style={stylo} >
+                <div className="Notifs-List notification-list-menu" style={stylo} >
                     <div className="Notif-Item">
                         <Link to={notification.link} className="Notif-Image">
                             <img src={notification.notified_from_avatar} alt="avatar" /></Link>
@@ -61,8 +59,8 @@ export default function NotificationMenu({notification}) {
                                 </button>
                                 {notification_id ===  notification.id && display && 
                                     <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                        <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} >Mark as read</div>
-                                        <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} >Delete</div>
+                                        <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} ><i class="uis uis-check"></i> Mark as read</div>
+                                        <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} ><i class="uil uil-trash-alt"></i> Delete</div>
                                     </div> 
                                 }   
                             </div>                        

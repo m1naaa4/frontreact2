@@ -1020,6 +1020,7 @@ label.error{
   padding-right: 35px;
 }
 .Dadupa-Notifs-Box .Notif-Text{
+  color: #495057;
   /* border-radius: 10px;
   overflow: hidden; */
 }
@@ -1057,13 +1058,13 @@ label.error{
   overflow: hidden;
   border-radius: 15px;
   top: 50px;
-  right: -100px;
+  right: -90px;
   opacity: 0.0001;
   transition: 0.3s cubic-bezier(.2, 0, 0, 1.6);
   transform: scale(0.6) translateY(-20%);
   -webkit-transform: scale(0.1) translateY(-20%);
   z-index: -1;
-  padding: 20px;
+  padding: 20px 0px;
 }
 .Dadupa-Msgs-Box::before{
   content: "";
@@ -1096,7 +1097,7 @@ label.error{
 }
 .Dadupa-Msgs-Box.Msgs-Box-Active .Msgs-List{
   margin-top: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
   height: calc(100vh - 100px);
   padding-bottom: 50px;
@@ -1133,6 +1134,7 @@ label.error{
 .Dadupa-Msgs-Box h3{
   font-size: 18px;
   font-weight: 900;
+  padding: 0 15px;
 }
 .Messenger-List .Msgs-Item,
 .Dadupa-Msgs-Box .Msgs-Item{
@@ -6801,6 +6803,8 @@ button .spinner-border{
 .list-group .Notif-Image{
   float: left;
   margin-right: 20px;
+  border-radius: 10px !important;
+  overflow: hidden;
 }
 .list-group .Notif-Text{
   float: left;
@@ -6826,15 +6830,16 @@ button .spinner-border{
 .dadupa-box .list-group{
   border-bottom: 1px solid #eeeeee;
 }
-.dadupa-box .Notif-Options .dropdown-menu.show{
+.dadupa-box .Notif-Options .dropdown-menu.show, .notification-list-menu .Notif-Options .dropdown-menu.dropdown-menu-right{
   box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px rgb(0 0 0 / 5%);
   background: #fff;
   border-radius: 0;
+  cursor: pointer;
 }
 .dadupa-box .Notif-Options .dropdown-item{
   font-size: 13px;
 }
-.dadupa-box .Notif-Options .dropdown-item:nth-child(1){
+.dadupa-box .Notif-Options .dropdown-item:nth-child(1), .notification-list-menu .Notif-Options .dropdown-menu.dropdown-menu-right .dropdown-item:nth-child(1){
   border-bottom: 1px solid #eeeeee;
 }
 .dadupa-box .Notif-Options .dropdown-item i{
@@ -6842,4 +6847,17 @@ button .spinner-border{
 }
 .dadupa-box .Notif-Options .dropdown-item i.uis-check{
   font-size: 19px;
+}
+.Dadupa-Notifs-Box .Notifs-List{
+  padding: 0 15px;
+  border-top: 1px solid #eeeeee;
+}
+.notification-list-menu .Notif-Options{
+  right: 0;
+}
+.notification-list-menu .Notif-Options button{
+  font-size: 15px;
+}
+.notification-list-menu .Notif-Options .dropdown-menu.dropdown-menu-right{
+  right: 10px;
 }
