@@ -25,10 +25,10 @@ function FilterProject({ filterInput }) {
     const tags = tag_state ? tag_state : [];
     const [open, setOpen] = useState(false);
 
+    const [selectedzone, setSelectedcountry] = useState();
     const [selectedstatus, setSelectedstatus] = useState();
     const [selectedsector, setSelectedsector] = useState();
     const [selectedfinance, setSelectedfinance] = useState();
-    const [selectedzone, setSelectedzone] = useState();
     const [search, setSearch] = useState();
     const [tag, setTag] = useState(tags);
 
@@ -88,50 +88,72 @@ function FilterProject({ filterInput }) {
             <div className="Filter-Row">
                 <div className="Filter-Form"  >
                     <div className="row">
-                        <div className="col-sm-11 col-md-12 col-lg-11">
+                        <div className="col-sm-11 col-md-12 col-lg-12">
                             <div className="display-flex">
-                                <div className="input-row input-select input-small">
+                                <div className="input-row input-multi-filter input-small">
                                     <AllMultiSelectCheckboxStatus {...{ setSelectedstatus }}  datas={etats} />
                                     {/* <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
                                 </div>
-                                <div className="input-row input-select input-small">
+                                <div className="input-row input-multi-filter input-small">
                                     {/* <SectorDropFilter value={sector} onChange={setFilterInput} /> */}
                                     <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
                                 </div>
-                                <div className="input-row input-select input-small">
+                                <div className="input-row input-multi-filter input-small">
                                     <AllMultiSelectCheckboxFinance {...{ setSelectedfinance }} datas={finances} />
                                     {/* <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} /> */}
                                 </div>
-                                <div className="input-row input-select input-small">
+                                <div className="input-row input-multi-filter input-small">
                                     {/* <FinanceDropFilter value={financement} onChange={setFilterInput} /> */}
                                     {/* <AllMultiSelectCheckboxZone {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
-                                    <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} />
+                                    {/* <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} /> */}
+                                <AllMultiSelectCheckboxZone {...{ setSelectedcountry }} datas={countries}/>
                                 </div>
                                 <div className="input-row">
-                                    <input type="text"  data-testid="filter-input-search"
-                                           onChange={(e)=>setSearch(e.target.value)} placeholder={t('filter.search')} />
+                                    <div className="input-row form-button">
+                                        <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn"><i
+                                        className="uil uil-search"></i> <span>Filter</span></button>
+                                    </div>
+                                    <button className="DadupaModal-BTNSubmit"
+                                        onClick={display}
+                                        aria-controls="example-collapse-text"
+                                        aria-expanded={open}
+                                        >
+                                        Advanced Search
+                                    </button>
                                 </div>
-
                             </div>
                         </div>
                         <div className="col-sm-1 col-md-12 col-lg-1">
-                            <div className="input-row form-button">
+                            {/* <button className="DadupaModal-BTNSubmit"
+                                onClick={display}
+                                aria-controls="example-collapse-text"
+                                aria-expanded={open}
+                            >
+                                Advanced Search
+                            </button> */}
+                            {/* <div className="input-row form-button">
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button"><i
                                     className="uil uil-search"></i> <span>Filter</span></button>
-                            </div>
+                            </div> */}
                         </div>
 
-                        <button className="DadupaModal-BTNSubmit"
+                        {/* <button className="DadupaModal-BTNSubmit"
                             onClick={display}
                             aria-controls="example-collapse-text"
                             aria-expanded={open}
                         >
                             Advanced Search
-                        </button>
-                        <Collapse in={open}>
-                            <div id="example-collapse-text">
-                                <div className="col-md-12 input-tags">
-                                    <InputTags onChange={selectedTags}  selectedTags={selectedTags} tags={tags}/>
+                        </button> */}
+                        <Collapse in={open} className="mt-10">
+                            <div className="col-sm-11 col-md-12 col-lg-12">
+                                <div className="display-flex">
+                                    <div className="input-row w300">
+                                        <input type="text"  data-testid="filter-input-search"
+                                                onChange={(e)=>setSearch(e.target.value)} placeholder={t('filter.search')} /> 
+                                    </div>
+                                    <div className="input-row input-tags">
+                                        <InputTags onChange={selectedTags}  selectedTags={selectedTags} tags={tags}/>
+                                    </div>
                                 </div>
                             </div>
                         </Collapse>

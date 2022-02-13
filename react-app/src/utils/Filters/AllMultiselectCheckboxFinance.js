@@ -52,6 +52,7 @@ const AllMultiSelectCheckboxFinance = ({datas, setSelectedfinance}) => {
       value={selectedOptions}
       onChange={onChange}
       setState={setSelectedOptions}
+      hideSearch={true}
     />
   );
 };

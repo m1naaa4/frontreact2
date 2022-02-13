@@ -53,6 +53,7 @@ const AllMultiSelectCheckboxSector = ({datas, setSelectedsector}) => {
       value={selectedOptions}
       onChange={onChange}
       setState={setSelectedOptions}
+      hideSearch={true}
     />
   );
 };

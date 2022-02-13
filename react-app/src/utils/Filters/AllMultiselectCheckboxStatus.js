@@ -52,6 +52,7 @@ const AllMultiSelectCheckboxStatus = ({datas, setSelectedstatus}) => {
       value={selectedOptions}
       onChange={onChange}
       setState={setSelectedOptions}
+      hideSearch={true}
     />
   );
 };
