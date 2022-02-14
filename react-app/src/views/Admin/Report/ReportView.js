@@ -1,4 +1,6 @@
-import { DialogContentText, FormControl, InputLabel, Tooltip } from '@material-ui/core';
+import { DialogContentText, FormControl, IconButton, InputLabel, Tooltip } from '@material-ui/core';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BlockIcon from '@mui/icons-material/Block';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Select from "@material-ui/core/Select";
@@ -22,6 +24,7 @@ export default function ReportView() {
     const [provider, setProvider] = useState();
     const [providerId, setProviderId] = useState();
     const [reportId, setReportId] = useState();
+    const [blockstate, setBlockstate] = useState();
 
 
     const reports = useSelector(state => state.reportsData.reports);
@@ -37,10 +40,12 @@ export default function ReportView() {
         tableBodyMaxHeight
     };
     
-    const handleClickOpen = (idReport, id, provider) => {
+    const handleClickOpen = (idReport, id, provider, blocked) => {
+        const blockedd = blocked ? 'Deblock' : 'Block';
         setProviderId(id);
         setProvider(provider);
         setReportId(idReport);
+        setBlockstate(blockedd);
         setOpen(true);
     };
 
@@ -51,9 +56,16 @@ export default function ReportView() {
     const data = reports?.map((value)=>{
         return [value.priority, value.provider, <a href={value.link}>link</a>, value.description,
             <a href={value.reporter}>link</a>, <a href={value.author}>link</a>, value.blocked, 
-            <>  <Tooltip title="Add comment" arrow><button variant="outlined" onClick={()=>handleClickOpen(value.id, value.provider_id, value.provider)} type="button" name="button"  className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button></Tooltip>
-                <Tooltip title="Delete content" arrow><button type="button" onClick={()=>handleDelete(value.id, value.provider_id, value.provider)} name="button"  className="Invitation-Option_Delete"><i className="uil uil-times"></i></button></Tooltip>
-                <Tooltip title="Block content" arrow><button type="button" onClick={()=>handleBlock(value.id, value.provider_id, value.provider)} name="button"  className="Invitation-Option_Block"><i class="uil uil-ban"></i></button></Tooltip>
+            <>  <Tooltip title="Action to content" arrow>
+                    <IconButton aria-label="Action to content" onClick={()=>handleClickOpen(value.id, value.provider_id, value.provider, value.blocked)}>
+                        <BlockIcon/>
+                    </IconButton>
+                 </Tooltip>
+                <Tooltip title="Delete content" arrow>
+                    <IconButton aria-label="delete" onClick={()=>handleDelete(value.id, value.provider_id, value.provider)}>
+                        <DeleteIcon />
+                    </IconButton>
+                </Tooltip>
             </>
             ]
     })
@@ -111,7 +123,7 @@ export default function ReportView() {
                     </DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        are you sure you want to +{}+ content.
+                        are you sure you want to {blockstate} content.
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
