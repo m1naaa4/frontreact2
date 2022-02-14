@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Dropdown, Table } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { cancelInvitationAction, reSendAction } from '../../../../store/actions/Setting/SettingActions';
-
+import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material';
 
 
 
@@ -38,7 +38,40 @@ export default function Invitations() {
 
     return (
         <>     
-            <Table striped bordered hover>
+        <TableContainer >
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                <TableRow>
+                    <TableCell>To</TableCell>
+                    <TableCell align="right">Categorie</TableCell>
+                    <TableCell align="right">Link</TableCell>
+                    <TableCell align="right">Role</TableCell>
+                    <TableCell align="right">date</TableCell>
+                    <TableCell align="right">Action</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                 {sentInvs && sentInvs?.map((row) => (
+                    <TableRow
+                    key={row.email}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                    <TableCell component="th" scope="row">
+                        {row.email}
+                    </TableCell>
+                    <TableCell align="right">{row.categorie}</TableCell>
+                    <TableCell align="right"><Link to={row.route} >{row.pro_name}</Link></TableCell>
+                    <TableCell align="right">{row.role}</TableCell>
+                    <TableCell align="right">{row.invite_date}</TableCell>
+                    <TableCell align="right">Action</TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+
+        
+            {/* <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>To</th>
@@ -72,7 +105,7 @@ export default function Invitations() {
                     ))}
                     
                 </tbody>
-            </Table>
+            </Table> */}
         </>
     
            

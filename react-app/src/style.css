@@ -10,6 +10,7 @@ body{
   background: #FCFCFC;
   padding-top: 70px;
   padding-bottom: 50px;
+  min-height: 100vh;
 }
 .display-flex{
   display: flex;
@@ -2422,7 +2423,7 @@ border-top: none;
   max-height: 410px;
 }
 .User-Settings:first-child .form-inputs{
-  margin-top: 35px;
+  /* margin-top: 35px; */
 }
 .User-Settings-Header{
   position: relative;
@@ -6860,4 +6861,70 @@ button .spinner-border{
 }
 .notification-list-menu .Notif-Options .dropdown-menu.dropdown-menu-right{
   right: 10px;
+}
+.mt-45{
+  margin-top: 45px;
+}
+.menu-settings{
+  padding: 0;
+}
+.menu-settings.Contact-Widget .Widget-Title{
+  border-bottom: 1px solid #ccc;
+  padding: 0px;
+  margin: 0;
+  color: #4d4b4b;
+  font-weight: 100;
+}
+.menu-settings.Contact-Widget .Widget-Title a{
+  color: #4d4b4b;
+  padding: 20px;
+  display: block;
+}
+.menu-settings.Contact-Widget .Widget-Title a:hover{
+  text-decoration: none;
+}
+.menu-settings.Contact-Widget .Widget-Title:last-child{
+  border: none;
+}
+.menu-settings.Contact-Widget .Widget-Title a.Active-Nav {
+  font-weight: 600;
+  color: #00b602 !important;
+}
+.sub-menu-settings{
+  margin-top: 0px;
+  font-size: 13px;
+  display: none;
+}
+.menu-settings.Contact-Widget .Widget-Title .sub-menu-settings a{
+  padding: 15px 20px;
+  border-radius: 0;
+}
+.menu-settings.Contact-Widget .Widget-Title .sub-menu-settings a.active{
+  background: rgb(213 238 210 / 38%);
+}
+
+.menu-settings.Contact-Widget .Widget-Title a.Active-Nav + .sub-menu-settings{
+  display: block;
+}
+.custom-btn-table-action{
+  margin: 0 auto;
+}
+.custom-btn-table-action.New-Post .Add-New{
+  margin: 0 auto;
+}
+.custom-btn-table-action button{
+  border: none;
+  color: #00b602;
+  font-size: 22px;
+  background: #fcfcfc;
+  padding: 0;
+}
+.custom-btn-table-action .Dadupa-Popup-DropDown{
+  width: 100px;
+  top: 102px;
+  right: 30px;
+}
+.custom-btn-table-action .Dadupa-Popup-DropDown .Mini-Profile-Item a {
+  font-size: 13px;
+  padding: 8px 4px;
 }

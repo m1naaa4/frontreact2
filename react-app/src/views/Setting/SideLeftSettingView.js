@@ -56,7 +56,7 @@ export default function SideRightSettingView(props) {
 
             <div className="col-md-12 ">
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-12">
                   <div className="User-Settings">
                     <div className="form-inputs">
 
@@ -89,7 +89,7 @@ export default function SideRightSettingView(props) {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6">
+                <div className="col-lg-12">
                   <div className="User-Settings">
                     <div className="form-inputs">
 

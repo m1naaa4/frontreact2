@@ -10,6 +10,7 @@ import ContentMain from './Content/ContentMain';
 import ManagementInvitationToAccess from './Access/ManagementInvitationToAccess';
 import { useHistory, useParams } from 'react-router';
 
+import { Link,NavLink } from 'react-router-dom';
 
 
 export default function MainView() { 
@@ -26,8 +27,10 @@ export default function MainView() {
         dispatch(InvitationsAccessAction('team/invitations'));
     },[])
 
-    console.log(history.location.pathname)
     useEffect(() => {
+        if(history.location.pathname === '/user/'+user?.profile?.id+'/settings'){
+            history.push('/user/'+user?.profile?.id+'/settings/generale')
+        }
         if (history.location.pathname === '/user/'+user?.profile?.id+'/settings/generale') {
             setKey('generale');
         } else if(history.location.pathname === '/user/'+user?.profile?.id+'/settings/team') {
@@ -43,28 +46,53 @@ export default function MainView() {
         }
     })
 
-    const tabs = (key) =>{
-        history.push('/user/'+user?.profile?.id+'/settings/'+key)
-        setKey(key); 
-    }
-
     return (
         <>  
-            <div classNameName="Page-Wrapper">
-             <div classNameName="container">
-                <div classNameName="offer-wizard-wrapper">
-                    <div classNameName="row">
-                        <div className="col-md-12">
-                            <div className="row">
-                            <div className="container">
-                                {params.id === user?.profile?.id &&
+            <div className="Page-Wrapper">
+             <div className="container">
+                 <div className='mt-45'></div>
+                <div className="offer-wizard-wrapper">
+                    <div className="">
+                    {key &&
+                        <div className='row'>
+                            <div className="col-md-3">
+                                <div className="left-Side">
+                                <div className="Contact-Widget menu-settings">
+                                    <h3 className="Widget-Title"> <NavLink activeClassName="Active-Nav" to={`/user/`+user?.profile?.id+`/settings/generale`}>General</NavLink></h3>
+                                        <h3 className="Widget-Title">
+                                            <NavLink activeClassName="Active-Nav" to={`/user/`+user?.profile?.id+`/settings/accessmanagementinvitations`}>Invitations to content</NavLink>
+                                            <Nav variant="pills" className="flex-column sub-menu-settings">
+                                                <Nav.Item>
+                                                    <Nav.Link className={history.location.hash == '#invitations' ? 'active' : ''} href='#invitations'>Sent Invitations</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link className={history.location.hash == '#received' ? 'active' : ''} href='#received'>Received invitations</Nav.Link>
+                                                </Nav.Item>
+                                                <Nav.Item>
+                                                    <Nav.Link className={history.location.hash == '#access' ? 'active' : ''} href='#access'>Ask Access</Nav.Link>
+                                                </Nav.Item>
+                                                
+                                            </Nav>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-9">
+                                {key==='generale' &&  <SideRightSettingView />}
+                                {key==='accessmanagementinvitations' &&  <ManagementInvitationToAccess section={history.location.hash} />}
+                            </div>
+                        </div>
+                    }
+                        {/* <div className="col-md-9">
+                            {params.id === user?.profile?.id &&
+                                    
                                     <Tabs id="controlled-tab-example"  activeKey={key} onSelect={(k) => tabs(k)} className="mb-3">
                                     
                                         <Tab eventKey="generale" title="General">
                                             <SideRightSettingView />
                                         </Tab>
                                         
-                                        <Tab eventKey="team" title="Team">
+                                         <Tab eventKey="team" title="Team">
                                             <TeamMain />
                                         </Tab>
                                         
@@ -84,58 +112,11 @@ export default function MainView() {
                                     </Tabs> 
                                 }
 
-                                {/* <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                                    <Row>
-                                        <Col sm={3}>
-                                            <Nav variant="pills" className="flex-column">
-                                                <Nav.Item>
-                                                    <Nav.Link eventKey="first">General</Nav.Link>
-                                                </Nav.Item>
-                                                <Nav.Item>
-                                                    <Nav.Link eventKey="second">Team</Nav.Link>
-                                                </Nav.Item>
-                                                <Nav.Item>
-                                                    <Nav.Link eventKey="four">Security Contents</Nav.Link>
-                                                </Nav.Item>
-                                                <Nav.Item>
-                                                    <Nav.Link eventKey="third">Access Management</Nav.Link>
-                                                </Nav.Item>
-                                                <Nav.Item>
-                                                    <Nav.Link eventKey="five">Access Management Invitations</Nav.Link>
-                                                </Nav.Item>
-                                            </Nav>
-                                        </Col>
-                                        <Col sm={9}>
-                                        <Tab.Content>
-                                            <Tab.Pane eventKey="first">
-                                                <SideRightSettingView />
-                                            </Tab.Pane>
-                                            <Tab.Pane eventKey="second">
-                                                <TeamMain />
-                                            </Tab.Pane>
-                                            <Tab.Pane eventKey="four">
-                                                <ContentMain />
-                                            </Tab.Pane>
-                                            <Tab.Pane eventKey="third">
-                                                <ManagementPermission />
-                                            </Tab.Pane>
-                                            <Tab.Pane eventKey="five">
-                                                <ManagementInvitationToAccess />
-                                            </Tab.Pane>
-                                        </Tab.Content>
-                                        </Col>
-                                    </Row>
-                                </Tab.Container> */}
-                            </div>
-                            </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
              </div>
             </div>
         </>
-    
-           
-        
     )
 }
