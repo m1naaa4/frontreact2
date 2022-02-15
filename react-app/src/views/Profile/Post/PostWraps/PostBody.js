@@ -12,15 +12,24 @@ export default function PostBody({ post }) {
         $(window).scroll(function() {                  // assign scroll event listener
             var currentScroll = $(window).scrollTop(); // get current position
             if (currentScroll >= fixLeft) {           // apply position: fixed if you
+                var mtStatic = ($('.Dadupa-Header').outerHeight() + 10);
                 $('.Left-Side').css({                      // scroll to that element or below it
                     position: 'fixed',
-                    bottom: '15px',
+                    bottom: '-'+(mtStatic+15)+'px',
                     width: '255',
+                });
+                $('.Right-Side').css({                      // scroll to that element or below it
+                      position: 'fixed',
+                      bottom: '-'+mtStatic+'px',
+                      width: '255',
                 });
             } else {                                   // apply position: static
                 $('.Left-Side').css({                      // if you scroll above it
                     position: 'static'
                 });
+                $('.Right-Side').css({                      // if you scroll above it
+                  position: 'static'
+              });
             }
         });
       });

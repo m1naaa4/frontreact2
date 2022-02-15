@@ -4066,9 +4066,9 @@ border-top: none;
   font-weight: 15;
 }
 .Right-Side.fixed{
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
-  width: 255px;
+  width: 255px; */
 }
 .Contact-Widget{
   padding: 15px 20px;
