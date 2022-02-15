@@ -55,6 +55,7 @@ export default function Ask() {
                 </TableHead>
                 <TableBody>
                  {gotInvs && gotInvs?.map((row) => (
+                     row.type == 'request' && 
                     <TableRow
                     key={row.email}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

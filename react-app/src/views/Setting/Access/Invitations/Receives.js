@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { AcceptInvitationAction, cancelInvitationAction } from '../../../../store/actions/Setting/SettingActions';
 import useOutsideClick from '../../../../helpers/useOutsideClick';
+import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material';
 
 
 
@@ -43,7 +43,48 @@ export default function Receives() {
 
     return (
         <>     
-            <Table striped bordered hover>
+        <TableContainer >
+            <Table sx={{ minWidth: 650 }} aria-label="table">
+                <TableHead>
+                <TableRow>
+                    <TableCell>From</TableCell>
+                    <TableCell align="center">Categorie</TableCell>
+                    <TableCell align="center">Link</TableCell>
+                    <TableCell align="center">date</TableCell>
+                    <TableCell align="center">Action</TableCell>
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                 {gotInvs && gotInvs?.map((row) => (
+                     row.type == 'invite' &&  
+                    <TableRow
+                    key={row.email}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                    <TableCell component="th" scope="row">
+                        {row.email}
+                    </TableCell>
+                    <TableCell align="center">{row.categorie}</TableCell>
+                    <TableCell align="left"><Link to={row.route} >{row.pro_name}</Link></TableCell>
+                    <TableCell align="center">{row.invite_date}</TableCell>
+                    <TableCell align="center">
+                        <div className="custom-btn-table-action" onClick={()=>menu(row.id)} >
+                            <button className="Add-New" data-toggle="tooltip" data-placement="bottom"><i className="uil uil-ellipsis-h"></i></button>
+                            {open == row.id && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
+                            <ul className="Mini-Profile-Items">
+                               <li className="Mini-Profile-Item"><a href="#" onClick={()=>accept(row.token, row.route)} > Accept</a></li>
+                                <li className="Mini-Profile-Item"><a href="#" onClick={()=>reject(row.deny_token)} > Reject</a></li>
+                            </ul>
+                            </div>}
+                        </div>
+                    </TableCell>
+                    </TableRow>
+                    
+                ))}
+                </TableBody>
+            </Table>
+        </TableContainer>  
+            {/* <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>From</th>
@@ -88,7 +129,7 @@ export default function Receives() {
                     ))}
                     
                 </tbody>
-            </Table>
+            </Table> */}
         </>
     )
 }

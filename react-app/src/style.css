@@ -6928,3 +6928,9 @@ button .spinner-border{
   font-size: 13px;
   padding: 8px 4px;
 }
+.MuiTableContainer-root{
+  background: #fff;
+  border-radius: 14px;
+  min-height: 35vh;
+  box-shadow: 0 0 30px 0 rgb(0 0 0 / 5%);
+}
