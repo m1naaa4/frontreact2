@@ -134,7 +134,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
                         }
                         
                         <div className="Profile-Name">
-                            <span class="Profile-Icon"><i class="uil uil-lightbulb-alt"></i></span>
+                            <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                             {infoprofile.infoprofile.username}
                         </div>
                         </div>

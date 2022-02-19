@@ -18,6 +18,8 @@ export default function({filterInput, setFilterInput, props}){
     const invitations = useSelector(state => state.userProfile.invitations);
     const suggestions = useSelector(state => state.userProfile.suggestions);
     const user = useSelector(state => state.userProfile.userProfile);
+    const count_freinds = 12;
+    const count_invitations = 3;
 
     const data = { filterInput, setFilterInput, props };
     useEffect(()=>{
@@ -40,7 +42,7 @@ export default function({filterInput, setFilterInput, props}){
     },[filterInput]);
 
     useEffect(() => {
-        if (history.location.pathname === '/profile/'+user?.profile?.id+'/friends/friends') {
+        if (history.location.pathname === '/profile/'+user?.profile?.id+'/friends') {
             setKey('friends');
         } else if(history.location.pathname === '/profile/'+user?.profile?.id+'/friends/invitations') {
             setKey('invitations');
@@ -56,15 +58,15 @@ export default function({filterInput, setFilterInput, props}){
 
     return(
         <>
-                <div className="col-md-6">
-                    <div className="Center-Side">
+                <div className="col-md-9">
+                    <div className="Center-Side friends-section">
 
                         <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => tabs(k)} className="mb-3">
-                            <Tab eventKey="friends" title="Friends">
+                            <Tab eventKey="friends" title={'Friends ('+count_freinds+')'}>
                                 <FriendGrid friends={friends} {...data}/>
                             </Tab>
                             {params.id === user?.profile?.id &&
-                            <Tab eventKey="invitations" title="Invitations">
+                            <Tab eventKey="invitations" title={'Invitations ('+count_invitations+')'} >
                                 <InvitationGrid invitations={invitations} {...data}/>
                             </Tab>}
                             {params.id === user?.profile?.id &&

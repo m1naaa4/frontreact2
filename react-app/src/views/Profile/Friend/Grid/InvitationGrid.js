@@ -54,13 +54,6 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
 
     return (
         <>
-            <div className="Network-Header">
-                <div className="Network-HeaderLeft">
-                <h2 className="Network-HeaderTitle"><span>{count}</span> Invitations</h2>
-                </div>
-                
-            </div>
-            
             <div className="Network-Filter Filter-Row">
                 <form className="Filter-Form" action="#" method="post">
                     <div className="row">
