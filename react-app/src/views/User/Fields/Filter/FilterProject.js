@@ -113,7 +113,7 @@ function FilterProject({ filterInput }) {
                                         <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn"><i
                                         className="uil uil-search"></i> <span>Filter</span></button>
                                     </div>
-                                    <button className="DadupaModal-BTNSubmit"
+                                    <button className="DadupaModal-BTNSubmit advenced-btn-search"
                                         onClick={display}
                                         aria-controls="example-collapse-text"
                                         aria-expanded={open}

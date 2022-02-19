@@ -5107,7 +5107,7 @@ border-top: none;
   background: #00b601;
   color: #fff;
   font-size: 10px;
-  padding: 0 15px;
+  padding: 0 35px;
   line-height: 36px;
   transition: all .20s cubic-bezier(.65,.05,.36,1);
   text-transform: uppercase;
@@ -5115,6 +5115,7 @@ border-top: none;
   float: left;
   position: relative;
   z-index: 9;
+  border-radius: 40px;
 }
 
 .UpdateInfos-BTN{
@@ -6747,7 +6748,7 @@ button .spinner-border{
   float: left;
   width: 45px;
 }
-.DadupaModal-BTNSubmit::after{
+.DadupaModal-BTNSubmit::after,.DadupaModal-BTNSubmit::before{
   float: right;
   width: 40px;
   height: 40px;
@@ -6755,9 +6756,15 @@ button .spinner-border{
   position: absolute;
   background: #00b602;
   top: 0;
-  right: -20px;
   border-radius: 50%;
   z-index: -2;
+  display: none;
+}
+.DadupaModal-BTNSubmit::after{
+  right: -20px;
+}
+.DadupaModal-BTNSubmit::before{
+  left: 0;
 }
 .mt-10{
   margin-top: 10px;
@@ -6950,8 +6957,10 @@ button .spinner-border{
 .friends-section .nav-tabs{
   border: none;
 }
-.OrderAlph.DadupaModal-BTNSubmit::after{
-  display: none;
+.DadupaModal-BTNSubmit.advenced-btn-search{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0 15px;
 }
 .Network-Filter .Filter-Form .input-row{
   width: 33.3333%;
@@ -6976,4 +6985,8 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 .Network-Filter .Filter-Form .dropdown-item .dropdown-item.active, .dropdown-item:active{
   background-color: #00b602;
+}
+.Send-Message.input-row.input-select::before{
+  right: 10px;
+  top: 9px;
 }

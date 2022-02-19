@@ -29,7 +29,7 @@ export default function MainView(props) {
 
     return (
         <>  
-        <div className="col-md-6">
+        <div className="col-md-9">
                     <div className="Center-Side">
             <div className="container">
                 <div className="offers-list">
