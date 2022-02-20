@@ -286,7 +286,7 @@ export default function ShowProjectView(props) {
                                             playsInline
                                             poster="/assets/poster.png"
                                             src={project.project.media_link}
-                                        />) : (<img width="100%" height="300" src={project.project.media_link} alt="Project"/>)
+                                        />) : (<img src={project.project.media_link} alt="Project"/>)
                                     }                             
                                 </div>
 

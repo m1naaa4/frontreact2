@@ -6990,3 +6990,9 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   right: 10px;
   top: 9px;
 }
+.Signle-Offer-Media{
+  text-align: center;
+}
+.Signle-Offer-Media img{
+  max-height: 400px;
+}
