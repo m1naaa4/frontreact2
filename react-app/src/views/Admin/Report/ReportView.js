@@ -119,7 +119,7 @@ export default function ReportView() {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title">
-                    {"Use Google's location service?"}
+                    {"Block content?"}
                     </DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
