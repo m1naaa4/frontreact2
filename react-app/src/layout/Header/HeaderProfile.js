@@ -10,6 +10,8 @@ import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
 import NotificationMenu from '../../views/Notification/NotificationMenu';
+import config from '../../Config'
+
 
 function HeaderProfile() {
     const history = useHistory();
@@ -128,8 +130,10 @@ function HeaderProfile() {
                         <div className="row">
                             <div className="col-2 col-md-2">
                                 <div className="left-nav">
-                                    <img src="/assets/images/dadupa-brand-text.svg" alt="Dadupa Connect" className="Logo-Desktop" />
-                                    <img src="/assets/images/dadupa-responsive.svg" alt="Dadupa Connect" className="Logo-Responsive" />
+                                    <a href={config.urls.front}>
+                                        <img src="/assets/images/dadupa-brand-text.svg" alt="Dadupa Connect" className="Logo-Desktop" />
+                                        <img src="/assets/images/dadupa-responsive.svg" alt="Dadupa Connect" className="Logo-Responsive" />
+                                    </a>
                                 </div>
                             </div>
                             <div className="col-md-5 d-none d-lg-block">
@@ -205,7 +209,7 @@ function HeaderProfile() {
                                         </ul> 
                                         <div className="Dadupa-Mini-Profile">
                                             <label className="Mini-Profile-Name">{userProfile.name}</label>
-                                            <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link"><Text tid='see_profile' /></Link>
+                                            <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link profil-link"><Text tid='see_profile' /></Link>
                                             <ul className="Mini-Profile-Items">
                                             <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i> <Text tid="my_offre"/> </Link></li>
                                             <li className="Mini-Profile-Item"><Link to={`/favorite`}><i className="uil uil-favorite"></i> <Text tid="my_favorite"/>  </Link></li>
