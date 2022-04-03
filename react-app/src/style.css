@@ -462,6 +462,7 @@ label.error{
 
 .form-signup{
   min-height: 420px;
+  margin-top: 50px;
 }
 .form-signup.move-form{
   min-height: 520px;
@@ -478,7 +479,7 @@ label.error{
 }
 .form-signup fieldset{
   width: 100%;
-  position: absolute;
+  /* position: absolute; */
 }
 .form-signup fieldset:not(:first-of-type) {
 	display: none;
@@ -6995,4 +6996,18 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 .Signle-Offer-Media img{
   max-height: 400px;
+}
+.profil-link:hover{
+  background: #00b602;
+  color: #fff;
+}
+.profil-link{
+  font-weight: bold;
+  background: #fff;
+  border: 1px solid #00b602;
+  color: #00b601;
+  padding: 3px 40px;
+  margin-left: 12px;
+  border-radius: 30px;
+  display: inline-block;
 }

@@ -33,10 +33,9 @@ const Submit = ({setForm, formData, navigation, props}) => {
     }
 
     useEffect(() => {
-        typeusers.map((key) => 
-            // console.log(key[0], key[1], type)
-            {if (key[0] === type) {
-                setTypeuser(key[1])
+        typeusers.map((key) => {
+            if (key.value === type) {
+                setTypeuser(key.label)
             }}
         );
 
@@ -64,10 +63,10 @@ const Submit = ({setForm, formData, navigation, props}) => {
                                 <div className="step-label"><Text tid="email" /></div>
                                 <div className="step-value">{`${email}`}</div>
                             </div>
-                            <div className="step-row">
+                            {/* <div className="step-row">
                                 <div className="step-label"><Text tid="password" /></div>
                                 <div className="step-value">{`${password}`}</div>
-                            </div>
+                            </div> */}
                             <div className="step-row">
                                 <div className="step-label"><Text tid="username" /></div>
                                 <div className="step-value">{`${username}`}</div>
