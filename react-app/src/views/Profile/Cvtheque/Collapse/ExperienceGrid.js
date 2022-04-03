@@ -67,7 +67,8 @@ const  ExperienceGrid = ({experience}) => {
     return (    
       <>
         <li className="Section-Item">
-          <label>{moment(experience.datedebut).format('MMMM y')} - {moment(experience.datefin).format('MMMM y')}</label>
+          <label>{moment(experience.datedebut).format('MMMM y')} - {experience.present ? 'Present' : moment(experience.datefin).format('MMMM y')}
+          </label>
           <span>{experience.post}- {experience.lieu}</span>
             {
               action &&
