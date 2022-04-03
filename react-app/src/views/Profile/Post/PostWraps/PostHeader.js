@@ -80,7 +80,7 @@ export default function PostHeader({ post }) {
          
             
           <div className="PostOptions">
-            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`}  type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+            {/* <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`}  type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
             <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
            {      
                 options_List && (
