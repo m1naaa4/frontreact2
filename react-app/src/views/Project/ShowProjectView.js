@@ -20,10 +20,13 @@ import { GeneraleAction } from '../../store/actions/Generale/GeneraleAction';
 import ReportModal from '../Admin/Report/ReportModal';
 import useOutsideClick from '../../helpers/useOutsideClick';
 import $ from "jquery";
+import config from '../../Config'
+import slugify from 'react-slugify';
+import SharePopUp from '../../utils/SharePopUp'
 
 
 export default function ShowProjectView(props) {
-
+    const [shareUrl, setShareUrl] = useState(false);
     const fullproject = useSelector(state => state.getproject);
     const visibility =  useSelector(state => state.generale.visibility);
     const user = useSelector(state => state.userProfile.userProfile);
@@ -57,6 +60,7 @@ export default function ShowProjectView(props) {
     const [t] = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
 
+    var url_to_share = false;
     const data = {
         provider_id : params.id,
         action      : "getProject",
@@ -101,7 +105,6 @@ export default function ShowProjectView(props) {
         setLikeCount(counter.counterlike)
     },[counter?.counterlike]);
     //////////finish /////////
-
     useEffect(() => {
         $('.reaction-comment').click(function(){
             $(this).toggleClass('comments-clicked');
@@ -136,7 +139,6 @@ export default function ShowProjectView(props) {
             setSector(key[1])
           }}
         );
-
         
         etats.map((key) => 
         // console.log(key[0], sector_id)
@@ -170,6 +172,8 @@ export default function ShowProjectView(props) {
 
     let tags;
     if (project.project) {
+        url_to_share = slugify(project.project.name, { prefix: config.urls.front+'/project/show/'+params.id });
+
          tags = <ul className="Tags-List">
             {project.project.tags.map((name, index) => (
                 <li className="Tag-Item" key={index}>
@@ -267,7 +271,7 @@ export default function ShowProjectView(props) {
                                         <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                                         <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
                                     </div>
-                                    {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i> {project.project.website_url}</a></div>}
+                                    {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
                                 </div>
                                 <div className="Company-Right">
                                     <div className="Company-Phone"> 
@@ -332,10 +336,11 @@ export default function ShowProjectView(props) {
                                             <img src="/assets/images/icons/dadupa-comment.svg" alt=""/>
                                                 Commenter
                                         </a>
-                                        <button className="reaction-button" type="button" name="button">
+                                        <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
                                             <img src="/assets/images/icons/dadupa-share.svg" alt=""/>
                                                 Partager
                                         </button>
+                                        <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
                                     <div className="Signle-Offer-Text">
                                         {project.project.description ? parse(project.project.description) : project.project.description}
