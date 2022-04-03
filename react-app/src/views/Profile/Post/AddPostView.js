@@ -22,20 +22,17 @@ export default function AddPostView(props) {
     const handleShow = () => setShow(true);
     
     
-    useEffect(() => {  
-        
+    useEffect(() => {      
     if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
         if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
-            // setAvatar(newavatar.avatar);                
             setUserVisiterAvatar(newavatar.avatar);
         }else{
-            // setAvatar(infoprofile.infoprofile.avatar);
             if(user.profile){
                 setUserVisiterAvatar(user.profile.avatar_link);
             }
         }
     }     
-    },[infoprofile.infoprofile.avatar, newavatar.avatar, user.profile])
+    },[infoprofile.infoprofile.avatar, newavatar.avatar, user.profile, user_visiter_avatar])
 
     return (
         <>

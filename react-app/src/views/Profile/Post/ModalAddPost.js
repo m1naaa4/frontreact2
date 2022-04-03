@@ -161,9 +161,10 @@ export default function({newavatar, handleClose}) {
                     <div className="CreatePost-Row">
                         <div className="CreatePost-ColLeft">
                             <div className="CreatePost-UserThumb">
+                                { console.log(newavatar)}
                                 {/* <img src={newavatar.newavatar} alt="avatar"/> */}
-                                {newavatar?.newavatar ? 
-                                <img src={newavatar?.newavatar} alt="avatar" />    
+                                {newavatar ? 
+                                <img src={newavatar} alt="avatar" />    
                             : <img src="/assets/images/avatar.png" alt="avatar" />}
                             </div>
                                 <div className="CreatePost-OptionsRow">
