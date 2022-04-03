@@ -25,6 +25,11 @@ const Submit = ({setForm, formData, navigation, props}) => {
             setIsLoading(true)
     }
 
+    const [passwordShown, setPasswordShown] = useState(false);
+    const TogglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
+
     const dispatch = useDispatch();
 
     const clearAuthErrDiv = () => {
@@ -63,10 +68,14 @@ const Submit = ({setForm, formData, navigation, props}) => {
                                 <div className="step-label"><Text tid="email" /></div>
                                 <div className="step-value">{`${email}`}</div>
                             </div>
-                            {/* <div className="step-row">
+                            <div className="step-row">
                                 <div className="step-label"><Text tid="password" /></div>
-                                <div className="step-value">{`${password}`}</div>
-                            </div> */}
+                                <div className="step-value step-value-password">
+                                    {passwordShown ? password : "********"}
+                                    <span onClick={TogglePasswordVisiblity}
+                                className="uil uil-eye field-icon toggle-password"></span>
+                                </div>
+                            </div>
                             <div className="step-row">
                                 <div className="step-label"><Text tid="username" /></div>
                                 <div className="step-value">{`${username}`}</div>
