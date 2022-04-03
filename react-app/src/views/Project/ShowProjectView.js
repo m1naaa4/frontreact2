@@ -19,6 +19,8 @@ import Modale from './Share/Modale';
 import { GeneraleAction } from '../../store/actions/Generale/GeneraleAction';
 import ReportModal from '../Admin/Report/ReportModal';
 import useOutsideClick from '../../helpers/useOutsideClick';
+import $ from "jquery";
+
 
 export default function ShowProjectView(props) {
 
@@ -101,6 +103,19 @@ export default function ShowProjectView(props) {
     //////////finish /////////
 
     useEffect(() => {
+        $('.reaction-comment').click(function(){
+            $(this).toggleClass('comments-clicked');
+        });
+        
+        $('.reaction-comment').click(function(e){
+            e.preventDefault();
+            var target = $($(this).attr('href'));
+            if(target.length){
+              var scrollTo = target.offset().top - 80;
+              $('body, html').animate({scrollTop: scrollTo+'px'}, 800);
+            }
+        });
+
         if (initial) {
             setLike(project?.project?.is_liked);
             // setLikeCount(fullproject?.countlike);
@@ -245,17 +260,17 @@ export default function ShowProjectView(props) {
                                 </div>
                             </div>
 
-                            <div class="Company-Infos">
-                                <div class="Company-Left">
-                                    <div class="single-offer-logo">
+                            <div className="Company-Infos">
+                                <div className="Company-Left">
+                                    <div className="single-offer-logo">
                                         <img src={project.project.logo_link} title="Nom du projet" alt=""/>
                                         <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                                        <label class="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i class="uil uil-bell"></i></label>
+                                        <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
                                     </div>
-                                    {project.project.website_url && <div class="Company-Name"><a href={project.project.website_url} target="_blanc"><i class="uil uil-globe"></i> {project.project.website_url}</a></div>}
+                                    {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i> {project.project.website_url}</a></div>}
                                 </div>
-                                <div class="Company-Right">
-                                    <div class="Company-Phone"> 
+                                <div className="Company-Right">
+                                    <div className="Company-Phone"> 
                                         <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
                                         {      
                                             options_List && (
@@ -313,7 +328,7 @@ export default function ShowProjectView(props) {
                                                 {like?"Dislike":"Like"}
                                             </button>
                                         
-                                        <a className="reaction-button reaction-comment" href="">
+                                        <a className="reaction-button reaction-comment" href="#Comments-Wrap">
                                             <img src="/assets/images/icons/dadupa-comment.svg" alt=""/>
                                                 Commenter
                                         </a>
