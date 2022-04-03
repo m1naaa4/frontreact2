@@ -34,38 +34,29 @@ export default function FinalView({formData, setFormData, navigation, props}) {
 
     useEffect(() => {
         sectors.map((key) => 
-        // console.log(key[0], sector_id)
-          {if (key[0] === sector_id) {
-            console.log(key[0], sector_id, key[1])
-            setSector(key[1])
+          {if (key.value === sector_id) {
+            setSector(key.label)
           }}
         );
-
         
         etats.map((key) => 
-        // console.log(key[0], sector_id)
-          {if (key[0] === project_status) {
-            console.log(key[0], project_status, key[1])
-            setStatus(key[1])
+          {if (key.value === project_status) {
+            setStatus(key.label)
           }}
         );
 
         countries.map((key) => 
-        {if (key.value === project_area) {
-          console.log(key.label)
-          setCountry(key.label)
-        }}
-      );
+            {if (key.value === project_area) {
+            setCountry(key.label)
+            }}
+        );
       
-      finances.map((key) => 
-        {if (key[0] === funding_search) {
-          setFinance(key[1])
-        }}
-      );
-
-
-
-      })
+       finances.map((key) => 
+            {if (key.value === funding_search) {
+            setFinance(key.label)
+            }}
+        );
+    })
 
     return (
 
