@@ -5076,7 +5076,8 @@ border-top: none;
 /* MODAL */
 
 .DadupaModal .modal-content{
-  background-color: #f2fff8;
+  background-color: rgb(251 255 253);
+  /* background-color: #f2fff8; */
   border: none;
   border-radius: 15px;
 }

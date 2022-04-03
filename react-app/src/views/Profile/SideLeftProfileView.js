@@ -61,7 +61,7 @@ export default function SideLeftProfileView() {
                     <div className="Stats-Text">
                       { sectors.map((key) => 
                           {if (key[0] === infoprofile.infoprofile.sector) {
-                              return key[1]
+                            return <Text tid={key[1]}/>
                           }}
                       )} 
                     </div>
