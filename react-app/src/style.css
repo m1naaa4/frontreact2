@@ -7020,3 +7020,8 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   top: -5px;
   right: 0;
 }
+.read-more-button{
+  color: #282828;
+  font-weight: 600;
+  cursor: pointer;
+}

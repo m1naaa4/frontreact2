@@ -6,7 +6,7 @@ import sectors from '../../data/sectorsCreate';
 import countries from '../../data/countries';
 import { Text } from '../../containers/Language';
 import typeusers from '../../data/types';
-
+import ReadMoreReact from 'read-more-react';
 
 export default function SideLeftProfileView() {
 
@@ -102,7 +102,10 @@ export default function SideLeftProfileView() {
 
                 <div className="Profile-Info Profile-Bio">
                   <h3>Bio</h3>
-                  <span>{infoprofile.infoprofile.about}</span>
+                  <ReadMoreReact text={infoprofile.infoprofile.about}
+                  ideal={280}
+                  max={280}/>
+
                 </div>
                 <div className="Profile-Info">
                   <h3>Secteur d’activité</h3>
