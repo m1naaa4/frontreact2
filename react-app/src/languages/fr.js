@@ -40,7 +40,7 @@ const fr = {
     signUpWith : 'ou me connecter avec :',
     username:'Identifiant',
     country:'Pays',
-    'footer.copyright': '2021 Tous droits réservés. dadupa Connect',
+    'footer.copyright': '2022 Tous droits réservés. dadupa Connect',
     'footer.menu.about': 'À propos',
     'footer.menu.user_agreement': "Conditions Générales d'Utilisation",
     'footer.menu.privacy': "Politique d'Utilisation des Données ",

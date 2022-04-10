@@ -40,7 +40,7 @@ const en = {
     signUpWith : 'or Sign Up with',
     username:'Username',
     country:'Country',
-    'footer.copyright': '2021 All Rights Reserved. Dadupa Connect',
+    'footer.copyright': '2022 All Rights Reserved. Dadupa Connect',
     'footer.menu.about': 'About',
     'footer.menu.user_agreement': "Conditions Générales d'Utilisation ",
     'footer.menu.privacy': "Privacy Policy",

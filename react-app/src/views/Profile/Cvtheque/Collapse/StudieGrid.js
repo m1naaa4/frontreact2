@@ -6,10 +6,11 @@ import DropType from '../../../../utils/DropType';
 import { CvdeleteAction, CvUpdateAction } from '../../../../store/actions/Profile/UserActions';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-
+import sectors from "../../../../data/sectors"
+import { useTranslation } from 'react-i18next';
 
 const  StudieGrid = ({study}) => {
-
+  const { t } = useTranslation();
   const [datedebut, setDatedebut] = useState(new Date(study.datedebut));
   const [datefin, setDatefin] = useState(new Date(study.datefin));
   const dataCategory = [
@@ -111,7 +112,11 @@ const  StudieGrid = ({study}) => {
                               <input type="text" name="diplome" defaultValue={formData.diplome} placeholder="Diplôme obtenu" className="wizard-required" onChange={setForm} required/>
                             </div>
                             <div className="col-md-6 input-row input-select input-select-multi">
-                              <DropType datas={dataCategory} field='sector' defaultValue={formData.sector} onChange={setForm}/>
+                                <select className="user-type" name='sector' defaultValue={formData.sector} onChange={setForm}>
+                                    {sectors.map((item, key) => (
+                                        <option key={key} value={item.value}>{t(item.label)}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="col-md-12 input-row">
                               <textarea name="description" placeholder="Description " defaultValue={formData.description} onChange={setForm}></textarea>

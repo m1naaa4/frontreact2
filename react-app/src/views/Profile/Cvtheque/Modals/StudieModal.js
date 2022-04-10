@@ -4,21 +4,14 @@ import { useForm } from "react-hooks-helper";
 import { useDispatch} from 'react-redux';
 import { CvAction } from '../../../../store/actions/Profile/UserActions';
 import DropType from '../../../../utils/DropType';
+import sectors from "../../../../data/sectors"
+import { useTranslation } from 'react-i18next';
 
 
 
 const  StudieModal = ({ showstudies, handleCloseStudies}) => {
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const dataCategory = [
-      ['','filter.secteur'],
-      ['agroalimentaire','filter.secteur.agroalimentaire'],
-      ['architecture','filter.secteur.architecture'],
-      ['art','filter.secteur.art'],
-      ['big_data','filter.secteur.big_data'],
-      ['bio','filter.secteur.bio'],
-      ['btp','filter.secteur.btp']
-  ]
 
   const [datedebut, setDatedebut] = useState(new Date());
   const [datefin, setDatefin] = useState(new Date());
@@ -72,7 +65,12 @@ const  StudieModal = ({ showstudies, handleCloseStudies}) => {
                     <input type="text" name="diplome" defaultValue="" placeholder="Diplôme obtenu" className="wizard-required" onChange={setForm} required/>
                   </div>
                   <div className="col-md-6 input-row input-select input-select-multi">
-                    <DropType datas={dataCategory} field='sector' defaultValue={formData.sector} onChange={setForm}/>
+                    
+                    <select className="user-type" name='sector' defaultValue={formData.sector} onChange={setForm}>
+                        {sectors.map((item, key) => (
+                            <option key={key} value={item.value}>{t(item.label)}</option>
+                        ))}
+                    </select>
                   </div>
                   <div className="col-md-12 input-row">
                     <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
