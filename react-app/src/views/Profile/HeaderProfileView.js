@@ -127,8 +127,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
                             <label htmlFor="imageUpload" style={{cursor: "pointer"}}>
                                 <i className="uil uil-camera" />
                             </label></>
-                        }
-                        
+                        }            
                         {fileAvatar ? <div className="Profile-Picture" id="imageProfile"  style={{backgroundImage: `url(${fileAvatar})`}} /> :
                             <div className="Profile-Picture" id="imageProfile"  style={{backgroundImage: `url('/assets/images/avatar.png')`}} />
                         }
@@ -138,12 +137,12 @@ export default function HeaderProfileView({formData, setForm, props}) {
                             {infoprofile.infoprofile.username}
                         </div>
                         </div>
-                        <div className="Profile-Navigation">
                         {user_id === params.id && <>
                             <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
                             <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
                             </>
                         }
+                        <div className="Profile-Navigation">
                         <ul className="Profie-Menu">
                             <li><Link to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</Link></li>
                             <li><Link to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</Link></li>
