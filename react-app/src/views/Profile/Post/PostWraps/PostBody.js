@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Player from 'video-react/lib/components/Player';
 import $ from "jquery";
 import YouTube from 'react-youtube';
+import { LightgalleryItem } from "react-lightgallery";
 
 
 
@@ -41,6 +42,29 @@ export default function PostBody({ post }) {
         //   autoplay: 1,
         // },
       };
+
+    const PhotoItem = ({ image,group }) => (
+        <div>
+            <LightgalleryItem group={group} src={image}>
+              <img src={image} width="100%" />
+            </LightgalleryItem>
+        </div>
+    );
+
+    const VideoItem = ({ src,group }) => (
+      <div>
+          <LightgalleryItem group={group} src={src}>
+            <img src={src} width="100%" />
+          </LightgalleryItem>
+      </div>
+     );
+     const YoutubeItem = ({ src,group }) => (
+      <div>
+          <LightgalleryItem group={group} src={'//www.youtube.com/watch?v='+src+'&autoplay=1'}>
+            <img src={'https://img.youtube.com/vi/'+src+'/maxresdefault.jpg'} width="100%" />
+          </LightgalleryItem>
+      </div>
+  );
     return (
         
       <div className="PostBody">
@@ -48,14 +72,10 @@ export default function PostBody({ post }) {
           {post.body}
           {
             post.media_link? (post.is_video ? (
-                <Player width="100%" height="100%"
-                    playsInline
-                    poster="/assets/poster.png"
-                    src={post.media_link}
-                />
+              <VideoItem  src={post.media_link} group={post.id}></VideoItem>
                 ) : (post.type === 'youtube' ?
-                (<YouTube videoId={post.media_link} opts={opts} />):(<img width="100%" height="300" src={post.media_link} alt="Project"/>))):''
-          } 
+                (<YoutubeItem  src={post.media_link} group={post.id}></YoutubeItem>):(<PhotoItem image={post.media_link} group={post.id}></PhotoItem>))):''
+          }
         </div>
     </div>        
 

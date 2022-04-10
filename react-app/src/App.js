@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import PusherService from "./services/Pusher";
 import { ErrorBoundary } from './Errors/ErrorBoundary';
 
+import "lightgallery.js/dist/css/lightgallery.css";
+import { LightgalleryProvider } from "react-lightgallery";
+ 
 
 function App() {
     const pusher = new PusherService();
@@ -78,9 +81,20 @@ function App() {
     
     return (
         // <ErrorBoundary>
-            <BrowserRouter>
-                <Routes/>
-            </BrowserRouter>
+        <LightgalleryProvider
+                lightgallerySettings={
+                    {
+                        plugins: ['lg-video.js']
+                        // settings: https://sachinchoolur.github.io/lightgallery.js/docs/api.html
+                    }
+                }
+                galleryClassName="dadupa_gallery"
+            >
+                <BrowserRouter>
+                    <Routes/>
+                </BrowserRouter>
+            </LightgalleryProvider>
+           
         // </ErrorBoundary>
         
     );
