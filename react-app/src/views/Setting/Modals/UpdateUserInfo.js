@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,15 @@ import ZoneDropFilter from '../../User/Fields/Filter/Project/ZoneDropFilter';
 const  UpdateUserInfo = ({ showInfo, handleCloseInfo, user}) => {
     const dispatch = useDispatch();
 
-    const [birthday, setBirthday] = useState(new Date(user.profile.birthday));
+    const [birthday, setBirthday] = useState(new Date());
 
     const [formData, setForm] = useForm({first_name:user.firstname, last_name:user.lastname, identifiant:user.profile.username, country:user.profile.country, phone:user.profile.phone, city:user.profile.city});
+
+    useEffect(()=>{
+        if(user.profile.birthday != '' && user.profile.birthday != undefined){
+            setBirthday(new Date(user.profile.birthday))
+        }
+    },[])
 
     const data = {
         first_name : formData.first_name,

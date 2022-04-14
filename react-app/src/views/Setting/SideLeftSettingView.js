@@ -52,8 +52,7 @@ export default function SideRightSettingView(props) {
     return (
         <>  
             {
-            infoprofile.profile !== "" && infoprofile.profile !== undefined ?
-
+            infoprofile.profile !== "" && infoprofile.profile !== undefined ?                
             <div className="col-md-12 ">
               <div className="row">
                 <div className="col-lg-12">
@@ -82,7 +81,7 @@ export default function SideRightSettingView(props) {
                           <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder="Birthday" className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-areas" defaultValue={country} placeholder="Country" className="wizard-required"/>
+                          <input type="text" name="project-areas" defaultValue={country} placeholder="Country" className="wizard-required" readOnly/>
                         </div>
 
                       </div>

@@ -30,7 +30,7 @@ const  UpdateAccess = ({ show, handleClose}) => {
       {
      show &&
      
-        <div class="ModalUpdate modal-dialog modal-dialog-centered" role="document">
+        <div class="ModalUpdate" role="document">
         <div class="ModalUpdate-Content modal-content">
             <div className="User-Settings">
              <div className="form-inputs">
