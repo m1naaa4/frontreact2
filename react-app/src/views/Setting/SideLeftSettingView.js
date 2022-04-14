@@ -108,15 +108,16 @@ export default function SideRightSettingView(props) {
                         <div className="col-md-12 input-row">
                           <input type="password" name="project-name" value="" placeholder="Mon mot de passe" value="Mon mot de passe" className="wizard-required" readOnly />
                         </div>
-                        <div className="col-md-12 confirmation-message">
-                          <div className="confirmation-message-text">
-                            <p>Votre email n’est pas confirmé</p>
+                        {!infoprofile.email_verified_at  && <div className="col-md-12 confirmation-message">
+                            <div className="confirmation-message-text">
+                              <p>{infoprofile.email_verification_sent ? 'Votre email n’est pas confirmé' : "Renvoyer l'email de confirmation " }</p>
+                            </div>
+                            <div className="confirmation-message-action">
+                              <button type="button" onClick={sendconfirm} name="button">Confirmer</button>
+                            </div>
                           </div>
-                          <div className="confirmation-message-action">
-                            <button type="button" onClick={sendconfirm} name="button">Confirmer</button>
-                          </div>
-                        </div>
-
+                        }
+                        
                       </div>
                     </div>
                   </div>
