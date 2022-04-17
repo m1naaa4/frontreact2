@@ -8,6 +8,7 @@ import PusherService from "./services/Pusher";
 import { ErrorBoundary } from './Errors/ErrorBoundary';
 
 import "lightgallery.js/dist/css/lightgallery.css";
+
 import { LightgalleryProvider } from "react-lightgallery";
  
 
@@ -84,7 +85,7 @@ function App() {
         <LightgalleryProvider
                 lightgallerySettings={
                     {
-                        plugins: ['lg-video.js']
+                        plugins: ["lg-fullscreen.js", "lg-thumbnail.js", "lg-video.js", "lg-zoom.js"]
                         // settings: https://sachinchoolur.github.io/lightgallery.js/docs/api.html
                     }
                 }

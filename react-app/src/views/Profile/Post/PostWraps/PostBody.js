@@ -54,7 +54,7 @@ export default function PostBody({ post }) {
     const VideoItem = ({ src,group }) => (
       <div>
           <LightgalleryItem group={group} src={src}>
-            <img src={src} width="100%" />
+            <img src={src.replace("mp4", "jpg")} width="100%" />
           </LightgalleryItem>
       </div>
      );
