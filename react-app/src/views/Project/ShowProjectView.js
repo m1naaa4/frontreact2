@@ -268,7 +268,7 @@ export default function ShowProjectView(props) {
                                 <div className="Company-Left">
                                     <div className="single-offer-logo">
                                         <img src={project.project.logo_link} title="Nom du projet" alt=""/>
-                                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uis-bookmark"></i></button>
                                         <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
                                     </div>
                                     {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
@@ -353,13 +353,12 @@ export default function ShowProjectView(props) {
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">
-                                <div className="Update-Post">
+                                {user.id == project.project.user_id && <div className="Update-Post">
                                     <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
                                             title="Edit Post"  className="edit-button"><i className="uil uil-pen"></i>
                                     </button>
-                                    {/* <NavLink 
-                                        title="Edit Post"  className="edit-button" to={`update/${data.project_id}`}><i className="uil uil-pen"></i></NavLink> */}
-                                </div>
+                                </div>}
+                                
                                 {/* <div className="Send-Message">
                                     <button className="Button-Send" type="button" name="button" data-toggle="tooltip"
                                             data-placement="bottom" title="Send a message">

@@ -51,7 +51,7 @@ export default function ProfilePrivateRoutes(props) {
                                         )} />
                                         <Route component={NotFound} header="false" />
                                     </Switch>
-                                {props.location.pathname.indexOf('/friends') < 0 && <SideRightProfileView/>}
+                                {(props.location.pathname.indexOf('/friends') < 0 && props.location.pathname.indexOf('/meoffre') < 0)  && <SideRightProfileView/>}
                                 
                             </div>
                         </div>
