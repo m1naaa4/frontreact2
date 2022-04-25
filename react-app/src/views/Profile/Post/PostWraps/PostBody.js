@@ -1,13 +1,36 @@
-import React, { useEffect } from 'react'
-import Player from 'video-react/lib/components/Player';
+import React, { useRef, useEffect } from 'react'
 import $ from "jquery";
 import YouTube from 'react-youtube';
 import { LightgalleryItem } from "react-lightgallery";
-
-
+import VideoJS from '../../../../helpers/VideoJS';
 
 
 export default function PostBody({ post }) {    
+  const playerRef = useRef(null);
+  const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    sources: [{
+      src: post.media_link,
+      type: 'video/mp4'
+    }]
+  };
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    // You can handle player events here, for example:
+    player.on('waiting', () => {
+      player.log('player is waiting');
+    });
+
+    player.on('dispose', () => {
+      player.log('player will dispose');
+    });
+  };
+
   useEffect(() => {
     var fixLeft = $('.Left-Side').offset()?.top + $('.Left-Side').outerHeight() - window.innerHeight;       // get initial position of the element
         $(window).scroll(function() {                  // assign scroll event listener
@@ -50,31 +73,17 @@ export default function PostBody({ post }) {
             </LightgalleryItem>
         </div>
     );
-
-    const VideoItem = ({ src,group }) => (
-      <div>
-          <LightgalleryItem group={group} src={src}>
-            <img src={src.replace("mp4", "jpg")} width="100%" />
-          </LightgalleryItem>
-      </div>
-     );
-     const YoutubeItem = ({ src,group }) => (
-      <div>
-          <LightgalleryItem group={group} src={'//www.youtube.com/watch?v='+src+'&autoplay=1'}>
-            <img src={'https://img.youtube.com/vi/'+src+'/maxresdefault.jpg'} width="100%" />
-          </LightgalleryItem>
-      </div>
-  );
     return (
         
       <div className="PostBody">
         <div className="PostBody-Text">
+        
           {post.body}
           {
             post.media_link? (post.is_video ? (
-              <VideoItem  src={post.media_link} group={post.id}></VideoItem>
+              <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
                 ) : (post.type === 'youtube' ?
-                (<YoutubeItem  src={post.media_link} group={post.id}></YoutubeItem>):(<PhotoItem image={post.media_link} group={post.id}></PhotoItem>))):''
+                (<YouTube videoId={post.media_link} opts={opts} />):(<PhotoItem image={post.media_link} group={post.id}></PhotoItem>))):''
           }
         </div>
     </div>        
