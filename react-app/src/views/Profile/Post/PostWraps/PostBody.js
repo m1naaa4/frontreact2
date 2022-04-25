@@ -8,7 +8,7 @@ import VideoJS from '../../../../helpers/VideoJS';
 export default function PostBody({ post }) {    
   const playerRef = useRef(null);
   const videoJsOptions = {
-    autoplay: true,
+    autoplay: false,
     controls: true,
     responsive: true,
     fluid: true,
