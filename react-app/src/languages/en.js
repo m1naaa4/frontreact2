@@ -1,13 +1,17 @@
 const en = {
     exploreHeader: 'Explore',
     welcomeDescription: 'Hello!',
+    welcomeDescriptionadmin: 'Hello in the administration interface',
     buttonClicked: 'Click',
     aboutMe: 'Dadupa',
+    dashboard: 'Dashboard',
+    report: 'Report',
     project: 'All project',
     listproject: 'Lists of projects',
     projectState: 'Venture status',
     activityArea: 'Industry',
     fundingSearch: 'Funding wanted',
+    targetAreas: 'Target areas',
     funding: 'Funding',
     projectHolder: 'Entrepreneur',
     donor: 'Investor',
@@ -42,7 +46,7 @@ const en = {
     signUpWith : 'Or register with :',
     username:'Username',
     country:'Localisation',
-    'footer.copyright': '2021 All Rights Reserved. dadupa Consulting SARL',
+    'footer.copyright': '2022 All Rights Reserved. dadupa Consulting SARL',
     'footer.menu.about': 'About us',
     'footer.menu.user_agreement': "Terms and Conditions of Use",
     'footer.menu.privacy': "Data Usage Policy",
@@ -299,10 +303,6 @@ const en = {
     monthsingle : 'month ago',
     monthplural : 'months ago',
     sponsored:'Sponsored',
-    
-
-
-   // 'error.credentials' : "These credentials do not match our records.",
 
 };
 
