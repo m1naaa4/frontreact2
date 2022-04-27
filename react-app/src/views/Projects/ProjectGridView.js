@@ -65,12 +65,7 @@ const ProjectGridView = ({ project }) => {
                     <div className="offer-media">
                         {
                             project.is_video ? (
-                                // <VideoPlayer videoUrl={project.media_link} snapshotAt={10} />
-                                <Player width="100%" height="100%"
-                                    playsInline
-                                    poster="/assets/poster.png"
-                                    src={project.media_link}
-                                />
+                                <img width="100%" height="300" src={project.media_link} alt="Project"/>
                                 ) : (<img width="100%" height="300" src={project.media_link} alt="Project"/>)
                         } 
                     </div>

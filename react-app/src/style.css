@@ -7030,3 +7030,81 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   font-weight: 600;
   cursor: pointer;
 }
+.video-file {
+  margin: 0 auto;
+  text-align: center;
+  /* border-right: 1px solid #363643; */
+}
+.youtube-dwn {
+  margin: 0 auto;
+  text-align: center;
+}
+.upload-videooz h3 {
+  color: #1c1b1b;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 35px;
+  margin-bottom: 3px;
+}
+.upload-videooz span {
+  color: #6e6f70;
+  font-size: 12px;
+}
+
+.youtube-dwn form input[type="text"] {
+  color: #C3C3D2;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 38px;
+  background-color: #e2ebef;
+  border-radius: 30px;
+  width: 100%;
+  height: 38px;
+  border: none;
+  padding: 0 16px;
+}
+
+.youtube-dwn form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.upload-videooz form label, .youtube-dwn form button {
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 38px;
+  background-color: #00b602;
+  border-radius: 30px;
+  height: 38px;
+  padding: 0 33px;
+  cursor: pointer;
+  border: 0;
+}
+.youtube-dwn form {
+  position: relative;
+}
+.upload-videooz form {
+  margin-top: 64px;
+}
+.br-right{
+  border-right: 1px solid #cccccc5e;
+}
+#file-upload{
+  display: none;
+}
+.upload-videooz i {
+  color: #36474f;
+  font-size: 60px;
+}
+.edit-btn-video{
+  position: absolute;
+  z-index: 9;
+  right: 60px;
+  top: 80px;
+}
+.edit-btn-video:hover {
+  background: #36474f;
+  color: #fcfcfc;
+  border-color: #36474f;
+}

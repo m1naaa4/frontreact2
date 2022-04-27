@@ -5,13 +5,14 @@ import { Player } from 'video-react';
 import UploadService from '../../../helpers/FileUploadService';
 import { GetProjectAction } from '../../../store/actions/User/Project/ProjectAction';
 import { toast, ToastContainer } from 'react-toastify';
+import VideoJS from '../../../helpers/VideoJS';
 
 
 export default function UpdateStep2View({formData, setForm, navigation, props}) {
-
     const dispatch = useDispatch();
     const { medialink, mediatype } = formData;
     const [selectedFiles, setSelectedFiles] = useState(undefined);
+    const [editVideo, setEditVideo] = useState(false);
     const [file, setFile] = useState(medialink);
     const [media, setMedia] = useState(mediatype);
     const [currentFile, setCurrentFile] = useState(undefined);
@@ -38,7 +39,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
             setMedia(getproject?.getproject?.project?.is_video);
             formData.medialink = getproject.getproject.project?.media_link;
             formData.logolink = getproject.getproject.project?.logolink;
-            formData.mediatype = getproject.getproject.project?.is_video;
+            formData.mediatype = (getproject.getproject.project?.is_video) ? 'video' : getproject.getproject.project?.type;
             setProject_id(getproject.getproject.projectid);
              
     }, [dispatch]);  
@@ -75,28 +76,43 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     const handleUpload = async e => {
         setCurrentFile(e);
         UploadService.upload(formData, (e) => {
-            toastId.current = toast('Upload in Progress', {
-                progress: Math.round((100 * e.loaded) / e.total)
-            });
-        
+            const progress = e.loaded / e.total;
+            if (toastId.current === null) {
+                toastId.current = toast('Upload in Progress', { progress });
+            } else {
+                toast.update(toastId.current, { progress });
+            }
         })
         .then((response) => {
             setFile(response.data.url);
             formData.medialink = response.data.url;
-            formData.mediatype = response.data.type;
-            setMedia(response.data.type);
+            formData.mediatype = (response.data.is_video) ? 'video' : response.data.type;
             setSelectedFiles(undefined);
             dispatch({type:'File_UPLOADED_SUCCESS', response})
             toast.done(toastId.current);
+
+            setMedia(response.data.is_video);
+            setEditVideo(false)
         })
         .then((files) => {
-            setFile(files.data);
+           // setFile(files.data);
         })
         .catch(() => {
             setMessage("Could not upload the file!");
             setCurrentFile(undefined);
         });        
     }
+
+    const videoJsOptions = {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: [{
+          src: file,
+          type: 'video/mp4'
+        }]
+      };
     
     return (
 
@@ -143,51 +159,56 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                         <div className="Step-Title">Upload vidéo</div>
                                         <p>Enter details about the project <br/>to preceed further</p>
                                     </div>
-                                    {file && ( 
+                                    
+                                    {(file && !editVideo) && ( 
                                         <div className="form-inputs">
+                                            <button type="button" name="button"  onClick={() =>  setEditVideo(true)} className="edit-button edit-btn-video"><i className="uil uil-pen"></i></button>
+
                                             <div  className="col-md-12 input-row">
                                                 {
                                                 media ? (
-                                                    <Player width="100%" height="100%"
-                                                        playsInline
-                                                        poster="/assets/poster.png"
-                                                        src={file}
-                                                    />) : (<img width="100%" height="300" src={file} alt="Project"/>)
+                                                    <VideoJS options={videoJsOptions} />
+                                                    ) : (<img width="100%" height="300" src={file} alt="Project"/>)
                                                 } 
-
-                                                {/* {currentFile && (
-                                                    <ProgressBar percentage={progress} />
-                                                    )}                                                                                                */}
                                             </div>                                            
                                         </div>
                                     )}                                    
                                       
-                                    {!file && ( 
-                                         <div className="form-inputs">
-                                            <div  className="col-md-12 input-row" style={{ height: "350px" , width: "100%" , display: "grid", placeItems: "center"}} onClick={handleClick}>
-                                                    {/* <input type="file" onChange={onChange} /> */}
-                                                    <div  className="btn btn-default" style={{ margin: "auto", display: "block"}}>
-                                                        <input ref={hiddenFileInput}
-                                                            style={{display: 'none'}} type="file" onChange={selectFile} /> Choose file
+                                    
+
+                                    {(!file || editVideo) && ( 
+                                        <div className="form-inputs upload-videooz">
+                                            <div className="row">
+                                                <div className="col-lg-6 br-right">
+                                                    <div className="video-file">
+                                                        <i className="uil-upload-alt"></i>
+                                                        <h3>Select video files to upload</h3>
+                                                        <span>or drag &amp; drop video files</span>
+                                                        <form>
+                                                            <label htmlFor="file-upload" className="custom-file-upload">
+                                                                Upload Video
+                                                            </label>
+                                                            <input ref={hiddenFileInput} onChange={selectFile} id="file-upload" type="file" />
+                                                        </form>
                                                     </div>
-                                                    {/* <button  onClick={handleUpload}   name="next" className="next action-button">Start upload</button> */}
                                                 </div>
-                                                {/* {currentFile && (
-                                                    <ProgressBar percentage={progress} />
-                                                    )} */}
+                                                <div className="col-lg-6">
+                                                    <div className="youtube-dwn">
+                                                        <i className="uil-download-alt"></i>
+                                                        <h3>Import videos from YouTube or Vimeo</h3>
+                                                        <span>Copy / Paste your video link here</span>
+                                                        <form>
+                                                            <input type="text" name="import_video" placeholder="Paste link here" />
+                                                            <button onChange={selectFile}>Preview Video</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            
+                                        </div>
                                     )}
                                    
                                     <button  onClick={previous} name="previous" className="previous action-button">
                                         <i className="uil uil-arrow-left  "></i> Previous</button>
-
-                                        {file && ( 
-                                            <label className="btn btn-default">Choose another file
-                                                <input  ref={hiddenFileInput} style={{display: 'none'}} type="file" onChange={selectFile}/>
-                                            </label>
-                                        )}
-                                    
                                     <button
                                         // disabled={fileurl.url.url === undefined ? true:false}
                                         onClick={next} disabled={!file}

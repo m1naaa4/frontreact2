@@ -7,6 +7,7 @@ import countries from '../../../data/countries';
 import finances from '../../../data/finances';
 import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';
 import { useDispatch } from 'react-redux';
+import VideoJS from '../../../helpers/VideoJS';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
@@ -57,6 +58,17 @@ export default function FinalView({formData, setFormData, navigation, props}) {
             }}
         );
     })
+
+    const videoJsOptions = {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: [{
+          src: medialink,
+          type: 'video/mp4'
+        }]
+      };
 
     return (
 
@@ -116,10 +128,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
 
                                                 {
                                                     `${mediatype}` === 'video' ? (
-                                                        <Player width="100%" height="100%"
-                                                            playsInline
-                                                            poster="/assets/poster.png"
-                                                            src={medialink}
+                                                        <VideoJS options={videoJsOptions}
                                                         />) : (<img width="100%" height="300" src={medialink} alt="Project"/>)
                                                 }
 

@@ -23,6 +23,7 @@ import $ from "jquery";
 import config from '../../Config'
 import slugify from 'react-slugify';
 import SharePopUp from '../../utils/SharePopUp'
+import VideoJS from '../../helpers/VideoJS';
 
 
 export default function ShowProjectView(props) {
@@ -240,6 +241,17 @@ export default function ShowProjectView(props) {
     useOutsideClick(ref, () => {
         SetOptions_List(false)
     });
+
+    const videoJsOptions = {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: [{
+          src: project?.project?.media_link,
+          type: 'video/mp4'
+        }]
+      };
     
     return (
         <div className="Single-Wrapper">
@@ -248,7 +260,8 @@ export default function ShowProjectView(props) {
                 {/* <!-- SINGLE -->*/}
                     {
                             project.success === 'loading' || project === 'loading' ? (
-                                <ProjectSkeletonGrid/>
+                               <div></div>
+                                // <ProjectSkeletonGrid/>
                             ) : project.success === true ? (
 
 
@@ -298,14 +311,10 @@ export default function ShowProjectView(props) {
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-
                                     {
                                         project.project.is_video ? (
-                                        <Player width="100%" height="100%"
-                                            playsInline
-                                            poster="/assets/poster.png"
-                                            src={project.project.media_link}
-                                        />) : (<img src={project.project.media_link} alt="Project"/>)
+                                            <VideoJS options={videoJsOptions}
+                                            />) : (<img src={project.project.media_link} alt="Project"/>)
                                     }                             
                                 </div>
 
