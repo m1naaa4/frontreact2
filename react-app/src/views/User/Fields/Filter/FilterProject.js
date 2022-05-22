@@ -7,7 +7,10 @@ import {loadProjectAction} from "../../../../store/actions/User/Project/ProjectA
 import { useTranslation } from 'react-i18next';
 import MultiselectCheckbox from '../../../../utils/MultiselectCheckbox';
 import sectors from "../../../../data/sectors"
-import etats from "../../../../data/etats"
+//import etats from "../../../../data/etats"
+
+import etats from '../../../../data/etats';
+
 import finances from "../../../../data/finances"
 import countries from "../../../../data/countries"
 import AllMultiSelectCheckboxStatus from '../../../../utils/Filters/AllMultiselectCheckboxStatus';

@@ -8,6 +8,8 @@ import finances from '../../../data/finances';
 import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';
 import { useDispatch } from 'react-redux';
 import VideoJS from '../../../helpers/VideoJS';
+import Vimeo from '@u-wave/react-vimeo';
+import YouTube from 'react-youtube';
 
 export default function FinalView({formData, setFormData, navigation, props}) {
 
@@ -119,19 +121,22 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                                 </div>
                                             </div>
                                             <div className="review-media">
-
-                                                {/* <Player width="300" height="300"
-                                                        playsInline
-                                                        poster="/assets/poster.png"
-                                                        src={`${url}`}
-                                                /> */}
-
-                                                {
-                                                    `${mediatype}` === 'video' ? (
-                                                        <VideoJS options={videoJsOptions}
-                                                        />) : (<img width="100%" height="300" src={medialink} alt="Project"/>)
-                                                }
-
+                                                {(function() {
+                                                    if(mediatype == 'youtube'){
+                                                        return <YouTube videoId={medialink} />;
+                                                    }else{
+                                                        if(mediatype == 'vimeo'){
+                                                            return <Vimeo width={640} height={380} video={medialink} />
+                                                        }else{
+                                                            if(mediatype == 'video'){
+                                                               return <VideoJS options={videoJsOptions}/>
+                                                            }else{
+                                                               return <img width="100%" height="300" src={medialink} alt="Project"/>
+                                                            }
+                                                        }
+                                                    }
+                                                })()}
+                                   
 
                                             </div>
                                             <div className="review-meta">

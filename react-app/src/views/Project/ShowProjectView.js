@@ -25,6 +25,8 @@ import slugify from 'react-slugify';
 import SharePopUp from '../../utils/SharePopUp'
 import VideoJS from '../../helpers/VideoJS';
 
+import Vimeo from '@u-wave/react-vimeo';
+import YouTube from 'react-youtube';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -311,11 +313,21 @@ export default function ShowProjectView(props) {
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-                                    {
-                                        project.project.is_video ? (
-                                            <VideoJS options={videoJsOptions}
-                                            />) : (<img src={project.project.media_link} alt="Project"/>)
-                                    }                             
+                                   {(function() {
+                                        if(project.project.media_type == 'youtube'){
+                                             return <YouTube videoId={project.project.media_link} />;
+                                        }else{
+                                          if(project.project.media_type == 'vimeo'){
+                                                 return <Vimeo width={640} height={380} video={project.project.media_link} />
+                                          }else{
+                                             if(project.project.is_video){
+                                                  return <VideoJS options={videoJsOptions}/>
+                                              }else{
+                                                     return <img width="100%" height="300" src={project.project.media_link} alt="Project"/>
+                                                 }
+                                          }
+                                         }
+                                  })()}                           
                                 </div>
 
                                 <div className="Signle-Offer-Content">

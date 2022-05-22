@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import ProgressBar from "../../../skeleton/ProgressBar";
-import { Player } from 'video-react';
 import UploadService from '../../../helpers/FileUploadService';
 import { GetProjectAction } from '../../../store/actions/User/Project/ProjectAction';
 import { toast, ToastContainer } from 'react-toastify';
 import VideoJS from '../../../helpers/VideoJS';
+import Vimeo from '@u-wave/react-vimeo';
+import YouTube from 'react-youtube';
+import {AddProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
 
 
 export default function UpdateStep2View({formData, setForm, navigation, props}) {
@@ -15,6 +16,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
     const [editVideo, setEditVideo] = useState(false);
     const [file, setFile] = useState(medialink);
     const [media, setMedia] = useState(mediatype);
+    const [videoEmbed, setvideoEmbed] = useState('');
     const [currentFile, setCurrentFile] = useState(undefined);
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
@@ -36,10 +38,16 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
             dispatch( GetProjectAction (data, props));
             
             setFile(getproject?.getproject?.project?.media_link);
-            setMedia(getproject?.getproject?.project?.is_video);
             formData.medialink = getproject.getproject.project?.media_link;
             formData.logolink = getproject.getproject.project?.logolink;
-            formData.mediatype = (getproject.getproject.project?.is_video) ? 'video' : getproject.getproject.project?.type;
+            
+            if(getproject.getproject.project?.media_type == 'youtube' || getproject.getproject.project?.media_type == 'vimeo'){
+                setvideoEmbed(getproject.getproject.project?.media_link)
+                setMedia(getproject.getproject.project?.media_type)
+            }else{
+                formData.mediatype = (getproject.getproject.project?.is_video) ? 'video' : getproject.getproject.project?.type;
+                setMedia(getproject?.getproject?.project?.is_video);
+            }
             setProject_id(getproject.getproject.projectid);
              
     }, [dispatch]);  
@@ -113,6 +121,39 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
           type: 'video/mp4'
         }]
       };
+
+    const saveVideoLink = (e) => {
+        const link = e.target.value;
+        if(link.includes('youtube')){
+            var video_id = link.split('v=')[1];
+            setvideoEmbed(video_id)
+            setMedia('youtube')
+        }else{
+            if(link.includes('vimeo')){
+                var regExp = /^.*vimeo.com\/(\d+)($|\/)/;
+                var video_id = link.match(regExp);
+                setvideoEmbed(video_id[1])
+                setMedia('vimeo');
+            }
+        }
+    }
+
+    const displayEmbedVideo = (e) => {
+        setEditVideo(false)
+    }
+
+    const nextStepAction = (e) => {
+        if(media == 'youtube' || media == 'vimeo'){
+            formData.medialink = videoEmbed;
+            formData.mediatype = media;
+            formData.project_id = project_id;
+            formData.action     = 'create';
+            dispatch(AddProjectsAction (formData, props, '/create', navigation));
+        }else{
+            const { next } = navigation;
+            next()
+        }
+    }
     
     return (
 
@@ -160,16 +201,29 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                         <p>Enter details about the project <br/>to preceed further</p>
                                     </div>
                                     
-                                    {(file && !editVideo) && ( 
+                                    {((file || videoEmbed != '') && !editVideo) && ( 
                                         <div className="form-inputs">
                                             <button type="button" name="button"  onClick={() =>  setEditVideo(true)} className="edit-button edit-btn-video"><i className="uil uil-pen"></i></button>
 
                                             <div  className="col-md-12 input-row">
-                                                {
-                                                media ? (
-                                                    <VideoJS options={videoJsOptions} />
-                                                    ) : (<img width="100%" height="300" src={file} alt="Project"/>)
-                                                } 
+                                                {(function() {
+                                                    if(videoEmbed != '') {
+                                                        if(media == 'youtube'){
+                                                            console.log(videoEmbed)
+                                                            return <YouTube videoId={videoEmbed} />;
+                                                        }else{
+                                                            if(media == 'vimeo'){
+                                                                return <Vimeo width={640} height={380} video={videoEmbed} />
+                                                            }
+                                                        }
+                                                    } else {
+                                                        if(media){
+                                                            return <VideoJS options={videoJsOptions} />
+                                                        }else{
+                                                            return <img width="100%" height="300" src={file} alt="Project"/>
+                                                        }
+                                                    }
+                                                })()}
                                             </div>                                            
                                         </div>
                                     )}                                    
@@ -198,8 +252,8 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                                         <h3>Import videos from YouTube or Vimeo</h3>
                                                         <span>Copy / Paste your video link here</span>
                                                         <form>
-                                                            <input type="text" name="import_video" placeholder="Paste link here" />
-                                                            <button onChange={selectFile}>Preview Video</button>
+                                                            <input type="text" name="import_video" onChange={saveVideoLink} placeholder="Paste link here" />
+                                                            <button onClick={displayEmbedVideo}>Preview Video</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -211,7 +265,7 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                         <i className="uil uil-arrow-left  "></i> Previous</button>
                                     <button
                                         // disabled={fileurl.url.url === undefined ? true:false}
-                                        onClick={next} disabled={!file}
+                                        onClick={nextStepAction} disabled={!file}
 
                                              name="next" className="next action-button">Continue
                                         <i className="uil uil-arrow-right"></i></button>
