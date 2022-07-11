@@ -13,7 +13,7 @@ import { useLocation } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner'
 import AllMultiSelectCheckboxStatus from '../../../utils/Filters/AllMultiselectCheckboxStatus';
 import AllMultiSelectCheckboxGeneral from '../../../utils/Filters/AllMultiselectCheckboxGeneral';
-import etats from '../../../data/etats';
+import etats from '../../../data/Etats';
 import finances from '../../../data/finances';
 import sectors from '../../../data/sectors';
 import countries from '../../../data/countries';
