@@ -99,14 +99,15 @@ export default function SideLeftProfileView() {
                       </div> */}
                       <ModalUpdateProfile show={show} handleClose={handleClose}/>
                 </Modal>
-
-                <div className="Profile-Info Profile-Bio">
-                  <h3>Bio</h3>
-                  <ReadMoreReact text={infoprofile.infoprofile.about}
-                  ideal={280}
-                  max={280}/>
-
-                </div>
+                  <div className="Profile-Info Profile-Bio">
+                    <h3>Bio</h3>
+                    {infoprofile.infoprofile.about && 
+                      <ReadMoreReact text={infoprofile.infoprofile.about}
+                      ideal={280}
+                      max={280}/>
+                    }
+                  </div>
+                
                 <div className="Profile-Info">
                   <h3>Secteur d’activité</h3>
                   {
