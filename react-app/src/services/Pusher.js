@@ -9,7 +9,7 @@ class PusherService {
         key: 'local',
         cluster: 'eu',//`${process.env.CLUSTER}`,
         encrypted: true,
-        wsHost: 'api.dadupa.com',
+        wsHost: `${process.env.WS_HOST}`,
         wsPort: 6001,
         wssPort: 6001,
         forceTLS: true,
