@@ -204,6 +204,10 @@ select:focus{
   transition: all .30s linear;
   background-color: #fff;
 }
+.input-row textarea:focus{
+  border-color: #00b601 !important;
+}
+
 .input-select::before{
   display: block;
   content: '\eb3a';
@@ -7108,3 +7112,28 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   color: #fcfcfc;
   border-color: #36474f;
 }
+
+/* profile page cvtheque modal styles */
+.cvtheque-modal input,textarea, select{
+  box-shadow: 0px 0px 20px 0px #e7e7e7!important;
+}
+.cvtheque-modal input:focus, textarea:focus, select:focus{
+  box-shadow: 0px 1px 15px -3px #00b601!important;
+}
+.cvtheque-modal textarea:focus-visible{
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.switch-present {
+  border: none;
+  padding: 0;
+  width: initial;
+  height: initial;
+  line-height: initial;
+}
+.switch-present * {
+  padding: 0;
+}
+
