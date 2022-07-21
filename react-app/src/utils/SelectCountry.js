@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import countries from '../data/countries';
 
-export default function SelectCountry({datas, setCountry, defaultValue, ...others }) {
+
+
+export default function SelectCountry({datas, setCountry, defaultValue, SelectStyleWithScroll,...others }) {
 
   const { t } = useTranslation();
   const [optionSelected, setOptionSelected] = useState(defaultValue);
@@ -30,6 +32,8 @@ export default function SelectCountry({datas, setCountry, defaultValue, ...other
         options={alloptions} name="funding_search"
         value={optionSelected}
         onChange={handleChange}
+        styles={SelectStyleWithScroll}
+        className="Select"
     />
   )
 }
