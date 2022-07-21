@@ -211,7 +211,11 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
                 </div>
               </div>
             </div>
-            <button type="button" onClick={() => {EditProfile(); handleClose()}}  className="DadupaModal-BTNSubmit">Update</button>
+            <div className="DadupaModal-Footer">
+              <div className="w-100">
+                <button type="button" onClick={() => {EditProfile(); handleClose()}}  className="DadupaModal-BTNSubmit">Update</button>
+              </div>
+            </div>
           </form>
         </div>
        }
