@@ -411,9 +411,8 @@ export default function ShowProjectView(props) {
                                         <span>
                                             {project.project.owner && project.project.owner.map((value) => 
                                                 {
-                                                    return <Link to={`/profile/${value.profile_id}`}>
-                                                        <img style={{width: '40px', height: '40px', borderRadius: '4px', overflow: 'hidden'}} 
-                                                        src={value.avatar} className="uil uil-apps" alt=''/> {value.username}
+                                                    return <Link className='projectOwner' to={`/profile/${value.profile_id}`}>
+                                                        <img src={value.avatar} className="uil uil-apps" alt=''/> {value.username}
                                                     </Link>
                                                 }
                                             )}
