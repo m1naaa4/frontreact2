@@ -7114,13 +7114,13 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 
 /* profile page cvtheque modal styles */
-.cvtheque-modal input, .cvtheque-modal textarea, .cvtheque-modal select{
+.modal-body input, .modal-body textarea, .modal-body select{
   box-shadow: 0px 0px 20px 0px #e7e7e7!important;
 }
-.cvtheque-modal input:focus, .cvtheque-modal textarea:focus, .cvtheque-modal select:focus{
+.modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus{
   box-shadow: 0px 1px 15px -3px #00b601!important;
 }
-.cvtheque-modal textarea:focus-visible{
+.modal-body textarea:focus-visible{
   outline: none;
   border: none;
   box-shadow: none;
@@ -7135,6 +7135,10 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 .switch-present * {
   padding: 0;
+}
+
+.DadupaModal-Footer .DadupaModal-BTNSubmit {
+  width: 100%;
 }
 
 /* profile page subscribed at div */
