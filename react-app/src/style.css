@@ -7141,3 +7141,18 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   padding: 0;
 }
 
+#shareButton{
+  display: flex;
+  height: 35px;
+  border:none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius:40px;
+  background: #00b601;
+  color: #fff;
+  width:125px;
+}
+
+#image_share{
+  margin-left:5px;
+}
