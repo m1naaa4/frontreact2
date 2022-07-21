@@ -5088,6 +5088,8 @@ border-top: none;
   background-color: rgb(251 255 253);
   /* background-color: #f2fff8; */
   border: none;
+}
+.modal-content {
   border-radius: 15px;
 }
 .DadupaModal .modal-body{
@@ -5284,9 +5286,6 @@ border-top: none;
   position: absolute;
   top: 30px;
   right: 30px;
-}
-.CreatePost-Modal .modal-content{
-  border-radius: 15px;
 }
 .CreatePost-Row{
   display: flex;
@@ -5638,7 +5637,6 @@ border-top: none;
 .PerformanceModal .modal-content{
   background-color: #f2fff8;
   border: none;
-  border-radius: 15px;
 }
 .PerformanceModal .modal-body{
   padding: 20px 35px 35px;
@@ -6623,7 +6621,6 @@ border-top: none;
     right: 10px;
   }
   .Search-Modal .modal-content{
-    border-radius: 15px;
     border: none;
   }
 
