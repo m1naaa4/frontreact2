@@ -7138,6 +7138,13 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   width: 100%;
 }
 
+.CreatePost-Body textarea {
+  box-shadow: none!important;
+}
+.CreatePost-Body textarea:focus {
+  box-shadow: none!important;
+}
+
 /* profile page subscribed at div */
 .subscribedAt {
   padding: 1.5em 3em;
