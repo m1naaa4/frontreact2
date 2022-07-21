@@ -47,47 +47,78 @@ const  ExperienceModal = ({ showexperience, handleCloseExperience}) => {
     <>
       {
       showexperience &&
-        <div className="modal-body">
+        <div className="modal-body cvtheque-modal">
             <div className="" >
               <div className="form-inputs">
                 <div className="form-row">
-                  <div className="col-md-6 input-row">
-                    <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
+                  <div className="col-12 input-row">
+                    <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Experiences</h3>
                   </div>
-                  <div className="col-md-6 input-row input-flex">
-                    <ReactDatePicker className="wizard-required" selected={datefin} onChange={(date) => setDatefin(date)} />
-                    <label className="container-checkbox">
-                    <input type="checkbox" name="present" onChange={setForm}/>
-                      <span className="checkmark"></span>
-                      <span>Présent</span>
+                  <div className="col-md-5 input-row">
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Date de début</span>
+                      <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
                     </label>
                   </div>
-                  <div className="col-md-12 input-row">
-                    <input type="text" name="entreprise" defaultValue="" placeholder="Entreprise" className="wizard-required" onChange={setForm} required/>
+                  <div className="col-md-5 input-row mb-4">
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Date de fin</span>
+                      <ReactDatePicker className="wizard-required" selected={datefin} onChange={(date) => setDatefin(date)} />
+                    </label>
                   </div>
-                  <div className="col-md-12 input-row">
-                    <input type="text" name="post" defaultValue="" placeholder="Poste" className="wizard-required" onChange={setForm} required/>
+                  <div className="col-md-2 input-row mb-4">
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Présent</span>
+                      <div className="custom-control custom-switch switch-present">
+                          <input type="checkbox" onChange={setForm} className="custom-control-input" id="switch-present"
+                            name="present" />
+                          <label className="custom-control-label" htmlFor="switch-present"></label>
+                        </div>
+                      {/* <div>
+                        <input type="checkbox" name="present" onChange={setForm} />
+                        <span className="checkmark"></span>
+                      </div> */}
+                    </label>
                   </div>
                   <div className="col-md-6 input-row">
-                    <input type="text" name="lieu" defaultValue="" placeholder="Lieu" className="wizard-required" onChange={setForm} required/>
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Entreprise</span>
+                      <input type="text" name="entreprise" defaultValue="" placeholder="Entreprise" className="wizard-required" onChange={setForm} required/>
+                    </label>
+                  </div>
+                  <div className="col-md-6 input-row">
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Poste</span>
+                      <input type="text" name="post" defaultValue="" placeholder="Poste" className="wizard-required" onChange={setForm} required/>
+                    </label>
+                  </div>
+                  <div className="col-md-6 input-row">
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Lieu</span>
+                      <input type="text" name="lieu" defaultValue="" placeholder="Lieu" className="wizard-required" onChange={setForm} required/>
+                    </label>
                   </div>
                   <div className="col-md-6 input-row input-select input-select-multi">
-                    <select className="user-type" name='sector' defaultValue={formData.sector} onChange={setForm}>
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Secteur</span>
+                      <select className="user-type" name='sector' defaultValue={formData.sector} onChange={setForm}>
                         {sectors.map((item, key) => (
                             <option key={key} value={item.value}>{t(item.label)}</option>
                         ))}
-                    </select>
+                      </select>
+                    </label>
                   </div>
                   <div className="col-md-12 input-row">
-                  <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
+                    <label className='d-flex flex-column mb-0'>
+                      <span className='mb-2'>Description</span>
+                      <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
+                    </label>
                   </div>
                 </div>
               </div>
               <div className="DadupaModal-Footer">
-                <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft">
-                </div>
-                <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {AddEperience(); handleCloseExperience()}}>ADD NEW Experince</button>
+                <div className="w-100">
+                  <button type="button" className="DadupaModal-BTNSubmit w-100" onClick={() => {AddEperience(); handleCloseExperience()}}>ADD NEW Experince</button>
                 </div>
               </div>
             </div>
