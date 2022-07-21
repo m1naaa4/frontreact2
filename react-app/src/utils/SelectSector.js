@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import sectors from '../data/sectors';
 
-export default function SelectSector({datas, setSector, defaultValue, ...others }) {
+
+export default function SelectSector({datas, setSector, defaultValue, SelectStyleWithScroll,...others }) {
 
   const { t } = useTranslation();
   const [optionSelected, setOptionSelected] = useState(defaultValue);
@@ -26,10 +27,15 @@ export default function SelectSector({datas, setSector, defaultValue, ...others 
   };
  
   return (
-    <Select
-        options={alloptions} name="funding_search"
-        value={optionSelected}
-        onChange={handleChange}
-    />
+    <div>
+      <Select
+          options={alloptions} name="funding_search"
+          value={optionSelected}
+          onChange={handleChange}
+          styles={SelectStyleWithScroll}
+          className="Select"
+      />
+    </div>
+
   )
 }

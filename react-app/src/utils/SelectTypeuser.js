@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import typeusers from '../data/typeusers';
 
-export default function SelectTypeuser({datas, setTypeuser, defaultValue, ...others }) {
+
+
+export default function SelectTypeuser({datas, setTypeuser, defaultValue,SelectWithoutScroll, ...others }) {
 
   const { t } = useTranslation();
   const [optionSelected, setOptionSelected] = useState(defaultValue);
@@ -30,6 +32,8 @@ export default function SelectTypeuser({datas, setTypeuser, defaultValue, ...oth
         options={alloptions} name="funding_search"
         value={optionSelected}
         onChange={handleChange}
+        styles={SelectWithoutScroll}
+        className="Select"
     />
   )
 }

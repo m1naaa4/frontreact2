@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ProgressBar from "../../../skeleton/ProgressBar";
 import { Player } from 'video-react';
+import ReactPlayer from 'react-player';
 import UploadService from '../../../helpers/FileUploadService';
 import { getProjectAction } from '../../../store/actions/User/Project/GetProjectActions';
 import { useLocation } from 'react-router-dom';
@@ -17,6 +18,10 @@ export default function Step2View({formData, setForm, navigation, props}) {
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [file, setFile] = useState(medialink);
     const [media, setMedia] = useState(mediatype);
+
+    const [isLink,setLink] = useState(false);
+    const [linkUrl, setLinkUrl] = useState('');
+
     const [currentFile, setCurrentFile] = useState(undefined);
     const [progress, setProgress] = useState(0);
     const [message, setMessage] = useState("");
@@ -113,6 +118,7 @@ export default function Step2View({formData, setForm, navigation, props}) {
         
         })
         .then((response) => {
+            //console.log(response.data.url);
             setFile(response.data.url);
             formData.medialink = response.data.url;
             formData.mediatype = (response.data.is_video) ? 'video' : response.data.type;
@@ -129,6 +135,23 @@ export default function Step2View({formData, setForm, navigation, props}) {
             setMessage("Could not upload the file!");
             setCurrentFile(undefined);
         });        
+    }
+
+    const HandlePreview = (e)=>{
+            e.preventDefault();
+            setFile(linkUrl);
+            formData.medialink = linkUrl;
+            const domaine=(new URL(linkUrl)).hostname.replace('www.','');
+            const exactdomaine = domaine.replace('.com','');
+            
+            formData.mediatype = exactdomaine;
+            setSelectedFiles(undefined);
+            if(exactdomaine == "youtube"){
+                dispatch({type:'GET_YOUTUBE_SUCCESS', linkUrl});
+            }
+            setMedia(exactdomaine);
+            setEditVideo(false);
+            setLink(true);
     }
     
     return (
@@ -176,19 +199,35 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                         <div className="Step-Title">Upload vidéo</div>
                                         <p>Enter details about the project <br/>to preceed further</p>
                                     </div>
-                                    {(file && !editVideo) && ( 
+                                    {(file && !editVideo && !isLink) && ( 
                                         <div className="form-inputs">
                                             <button type="button" name="button"  onClick={() =>  setEditVideo(true)} className="edit-button edit-btn-video"><i className="uil uil-pen"></i></button>
 
                                             <div  className="col-md-12 input-row">
-                                                {
+                                                { 
                                                 media ? (
                                                     <VideoJS options={videoJsOptions} />
                                                     ) : (<img width="100%" height="300" src={file} alt="Project"/>)
-                                                } 
+    
+                                                }
                                             </div>                                            
                                         </div>
-                                    )}    
+                                    )}
+
+
+                                    {( file && !editVideo && isLink) && ( 
+                                        <div className="form-inputs">
+                                            <button type="button" name="button"  onClick={() =>  {setEditVideo(true); setLink(false)}} className="edit-button edit-btn-video"><i className="uil uil-pen"></i></button>
+
+                                            <div  className="col-md-12 input-row">
+                                                { 
+                                                
+                                                    <ReactPlayer url={formData.medialink} controls={true} />
+                                                }
+                                            </div>                                            
+                                        </div>
+                                    )}      
+
 
                                     {(!file || editVideo) && ( 
                                         <div className="form-inputs upload-videooz">
@@ -211,10 +250,11 @@ export default function Step2View({formData, setForm, navigation, props}) {
                                                         <i className="uil-download-alt"></i>
                                                         <h3>Import videos from YouTube or Vimeo</h3>
                                                         <span>Copy / Paste your video link here</span>
-                                                        <form>
-                                                            <input type="text" name="import_video" placeholder="Paste link here" />
-                                                            <button onChange={selectFile}>Preview Video</button>
+                                                        <form onSubmit={HandlePreview}>
+                                                            <input type="text" name="import_video" placeholder="Paste link here" onChange={(e)=> setLinkUrl(e.target.value)}/>
+                                                            <button>Preview Video</button>
                                                         </form>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
