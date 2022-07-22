@@ -61,9 +61,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
           ...provided,
           borderRadius: "35px",
           overflow: 'hidden',
-          border: '0.1px solid #00b602',
-          width: '150px',
-          marginLeft: "150px",
+          border: '0.5px solid #00b602',
         }),
   
         menuList: (provided, state) => ({
@@ -90,11 +88,9 @@ export default function FinalView({formData, setFormData, navigation, props}) {
         control: (base, state) => ({
           ...base,
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          width: '150px',
-          height: '50px',
           borderRadius: '30px',
-          border: '0.1px solid #00b602',
-          marginRight: '100px',  
+          border: '1px solid #e7e7e7',
+          height: '50px',
           "&:hover":{
             boxShadow: "none",
           },
@@ -253,22 +249,46 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                             </div>
                                         </div>
                                     </div>
-                                    <button onClick={previous} type="button" name="previous" className="previous action-button"><i
-                                        className="uil uil-arrow-left  "></i> Previous
-                                    </button>
-                                    
-                                        <button type="button" onClick={goToShowproject}  className="submit action-button">Review <i
-                                        className="uil uil-arrow-right"></i></button>
-                                               
-                                    
-                                        <Select
-                                                 options={alloptions} 
-                                                 value={optionSelected}
-                                                 onChange={handleChange}
-                                                 styles={SelectStyleWithScrollbar}
-                                                 className="Select"
-                                         />
 
+                                    <div className="d-flex justify-content-between">
+                                    <div>
+                                        <button onClick={previous} type="button" name="previous" className="previous action-button"><i
+                                        className="uil uil-arrow-left  "></i> Previous
+                                        </button>
+                                    </div>
+                                        
+
+                                     <div className="w-25 h-100">
+                                        <Select
+                                                    options={alloptions} 
+                                                    value={optionSelected}
+                                                    onChange={handleChange}
+                                                    styles={SelectStyleWithScrollbar}
+                                                    className="Select"
+                                            />
+                                     </div>
+                                            
+                                    
+                                        
+                                    {/* <Form.Select aria-label="Default select example">
+                                        <option>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </Form.Select> */}
+                                        <div>
+                                            <button type="button" onClick={goToShowproject}  className="submit action-button">Review <i
+                                        className="uil uil-arrow-right"></i></button>
+                                        </div>
+                                        
+                                    
+                                    {/* <NavLink className="submit action-button" to={`show/${project_id}`}>Review <i
+                                    className="uil uil-arrow-right"></i></NavLink> */}
+                                   
+
+                                    </div>
+                                    
+                                  
                                 </fieldset>
 
                             </form>
