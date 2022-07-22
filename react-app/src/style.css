@@ -4125,10 +4125,10 @@ border-top: none;
   width: 18px;
   height: 18px;
   background: #00b601;
-  color: #fff;
+  color: #fff!important;
   line-height: 18px;
   margin-left: 0;
-  font-size: 10px;
+  font-size: 10px!important;
 }
 .Contact div{
   display: inline-block;
@@ -4171,6 +4171,7 @@ border-top: none;
   max-width: 50px;
   display: flex;
   justify-content: flex-end;
+  margin-left: auto;
 }
 .Contact .Add-Contact button{
   font-size: 18px;
