@@ -3478,6 +3478,19 @@ border-top: none;
   display: block;
   margin-bottom: 20px;
 }
+.projectOwner {
+  color:rgba(0, 206, 97, 1)
+}
+.projectOwner:hover {
+  color: #00b601;
+  text-decoration: none;
+}
+.projectOwner img {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5em;
+}
 .Offer-Details-List .Offer-Item label{
   display: block;
   font-size: 12px;
