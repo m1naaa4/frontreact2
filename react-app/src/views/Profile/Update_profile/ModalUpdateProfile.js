@@ -44,45 +44,14 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
       dispatch(EditProfileAction(formData, '', ''));
     }
 
-    const SelectWithoutScrollbar = {
-      option: (provided, state) => ({
-        ...provided,
-        backgroundColor: state.isSelected ? "#12e313" : "white",
-        textAlign: 'center',
-        "&:hover":{
-          backgroundColor: "#9dfc9d",
-        },
-        '&:nth-child(1) ': {
-          marginTop: '0px',
-          borderTopLeftRadius: '29px',
-          borderTopRightRadius: '29px',
-      },
-      '&:last-child ': {
-        borderBottomLeftRadius: '29px',
-        borderBottomRightRadius: '29px',
-      }}),
-      menuList: (provided, state) => ({
-      ...provided,
-      backgroundColor: 'transparent',
-      padding: '0',
-    
-      }),
-      control: (base, state) => ({
-        ...base,
-        boxShadow: state.isFocused ? "0px 0px 3px 0px green ":"none ",
-        "&:hover":{
-          boxShadow: "none",
-        },
-      }),
-    }
-
     const SelectStyleWithScrollbar = {
       option: (provided, state) => ({
         ...provided,
-        backgroundColor: state.isSelected ? "#12e313" : "white",
+        backgroundColor: state.isSelected ? "#e8fbf1" : "white",
+        color: "black",
         textAlign: 'center',
         "&:hover":{
-          backgroundColor: "#9dfc9d",
+          backgroundColor: "#e8fbf1",
         },
         '&:nth-child(1) ': {
           marginTop: '0px',
@@ -94,13 +63,21 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
         borderBottomRightRadius: '20px',
       }}),
       
+      menu: (provided) => ({
+        ...provided,
+        borderRadius: "35px",
+        overflow: 'hidden',
+        border: '0.5px solid #00b602',
+      }),
+
       menuList: (provided, state) => ({
       ...provided,
-      backgroundColor: 'transparent',
-      borderRadius: "30px",
+      // border: '1px solid green',
+      borderRadius: "32px",
       padding: '0',
       "&::-webkit-scrollbar": {
-        width: "4px",
+        width: "5px",
+        
       },
       "&::-webkit-scrollbar-track": {
         background: "#f1f1f1",
@@ -113,18 +90,18 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
       "&::-webkit-scrollbar-thumb:hover": {
         background: "#555"
       }
-    
-    
       }),
       control: (base, state) => ({
         ...base,
-        boxShadow: state.isFocused ? "0px 0px 3px 0px green ":"none ",
+        boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
+        borderRadius: '30px',
+        border: '1px solid #e8fbf1',
+
         "&:hover":{
           boxShadow: "none",
         },
       }),
     }
-   
     
     return (        
       <>
@@ -136,7 +113,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
               <div className="form-row">
                 <div className="col-md-6 input-row input-select input-select-multi">
                   {/* <TypeDrop className="project-status"   defaultValue={formData.type} onChange={setForm}/> */}
-                  <SelectTypeuser {...{ setTypeuser }} defaultValue={formData.type} datas={typeusers} SelectWithoutScroll={SelectWithoutScrollbar}/>
+                  <SelectTypeuser {...{ setTypeuser }} defaultValue={formData.type} datas={typeusers} SelectStyleWithScroll={SelectStyleWithScrollbar}/>
                 </div>
                 <div className="col-md-6 input-row input-select input-select-multi">
                   {/* <SectorDropFilter defaultValue={formData.sector_id} onChange={setForm} /> */}

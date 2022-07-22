@@ -5,7 +5,7 @@ import typeusers from '../data/typeusers';
 
 
 
-export default function SelectTypeuser({datas, setTypeuser, defaultValue,SelectWithoutScroll, ...others }) {
+export default function SelectTypeuser({datas, setTypeuser, defaultValue,SelectStyleWithScroll, ...others }) {
 
   const { t } = useTranslation();
   const [optionSelected, setOptionSelected] = useState(defaultValue);
@@ -32,7 +32,7 @@ export default function SelectTypeuser({datas, setTypeuser, defaultValue,SelectW
         options={alloptions} name="funding_search"
         value={optionSelected}
         onChange={handleChange}
-        styles={SelectWithoutScroll}
+        styles={SelectStyleWithScroll}
         className="Select"
     />
   )

@@ -7110,20 +7110,10 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   border-color: #36474f;
 }
 
-.Select > div{
-    border-radius: 30px;
-    border: 1px solid green;
-}
-
- .Select > div:focus{
-  border: 2px solid green;
-} 
-
-
 .Select svg{
     fill:#00b602;
 }
-=======
+
 /* profile page cvtheque modal styles */
 .modal-body input, .modal-body textarea, .modal-body select{
   box-shadow: 0px 0px 20px 0px #e7e7e7!important;
