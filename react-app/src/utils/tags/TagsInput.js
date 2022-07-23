@@ -22,11 +22,6 @@ const InputTags = props => {
     };
     return (
         <div className="tags-input">
-            <input
-                type="text"
-                onKeyDown={event => event.keyCode === 13 ? addTags(event) : null}
-                placeholder="Add Tags(Press enter to add)"
-            />
             <ul id="tags">
                 {tags.map((tag, index) => (
                     <li key={index} className="tag">
@@ -38,6 +33,11 @@ const InputTags = props => {
                     </li>
                 ))}
             </ul>
+            <input
+                type="text"
+                onKeyDown={event => event.keyCode === 13 ? addTags(event) : null}
+                placeholder="Add Tags(Press enter to add)"
+            />
         </div>
     );
 };
