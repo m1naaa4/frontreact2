@@ -6801,7 +6801,7 @@ button .spinner-border{
   width: 300px;
 }
 .tags-input input{
-  width: 100% !important;
+  width: 190px !important;
   flex: none !important;
   padding: .5em!important;
 }
