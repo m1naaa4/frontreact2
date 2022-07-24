@@ -254,7 +254,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <div class="d-flex justify-content-between">
                                     <div>
                                     <div class="d-flex justify-content-start">
-                                       <div>
+                                       <div className="mr-2">
                                         <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                         </button>
