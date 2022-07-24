@@ -90,6 +90,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
           borderRadius: '30px',
           border: '1px solid #e7e7e7',
+          width:'150px',
           height: '50px',
           "&:hover":{
             boxShadow: "none",
@@ -250,15 +251,17 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                         </div>
                                     </div>
 
-                                    <div className="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between">
                                     <div>
+                                    <div class="d-flex justify-content-start">
+                                       <div>
                                         <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                         </button>
-                                    </div>
+                                       </div> 
                                         
 
-                                     <div className="w-25 h-100">
+                                      <div>
                                         <Select
                                                     options={alloptions} 
                                                     value={optionSelected}
@@ -266,6 +269,8 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                                     styles={SelectStyleWithScrollbar}
                                                     className="Select"
                                             />
+                                      </div>
+                                    </div>
                                      </div>
                                             
                                     
