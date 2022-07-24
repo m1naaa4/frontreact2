@@ -8181,7 +8181,7 @@ button .spinner-border {
   border: none;
   color: #00b602;
   font-size: 22px;
-  background: #fcfcfc;
+  background: transparent;
   padding: 0;
 }
 
@@ -8469,4 +8469,19 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 .ql-container.ql-snow {
   height: 250px;
+}
+
+/* -------------------- */
+/* Settings - Access tables */
+/* -------------------- */
+
+.accessTables-container table thead {
+  background: #00b602;
+}
+
+.accessTables-container table thead th {
+  color: #ffffff;
+}
+.accessTables-container table tbody tr:nth-child(even){
+  background-color: #00b60215;
 }
