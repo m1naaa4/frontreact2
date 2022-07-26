@@ -2417,7 +2417,6 @@ border-top: none;
   box-shadow: 0 0 30px 0 rgba(0,0,0, .08);
   margin-top: 35px;
   margin-bottom: 30px;
-  max-height: 410px;
 }
 .User-Settings .form-inputs{
   background: #fff;
@@ -3478,6 +3477,19 @@ border-top: none;
   display: block;
   margin-bottom: 20px;
 }
+.projectOwner {
+  color:rgba(0, 206, 97, 1)
+}
+.projectOwner:hover {
+  color: #00b601;
+  text-decoration: none;
+}
+.projectOwner img {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5em;
+}
 .Offer-Details-List .Offer-Item label{
   display: block;
   font-size: 12px;
@@ -4113,10 +4125,10 @@ border-top: none;
   width: 18px;
   height: 18px;
   background: #00b601;
-  color: #fff;
+  color: #fff!important;
   line-height: 18px;
   margin-left: 0;
-  font-size: 10px;
+  font-size: 10px!important;
 }
 .Contact div{
   display: inline-block;
@@ -4159,6 +4171,7 @@ border-top: none;
   max-width: 50px;
   display: flex;
   justify-content: flex-end;
+  margin-left: auto;
 }
 .Contact .Add-Contact button{
   font-size: 18px;
@@ -5088,6 +5101,8 @@ border-top: none;
   background-color: rgb(251 255 253);
   /* background-color: #f2fff8; */
   border: none;
+}
+.modal-content {
   border-radius: 15px;
 }
 .DadupaModal .modal-body{
@@ -5284,9 +5299,6 @@ border-top: none;
   position: absolute;
   top: 30px;
   right: 30px;
-}
-.CreatePost-Modal .modal-content{
-  border-radius: 15px;
 }
 .CreatePost-Row{
   display: flex;
@@ -5638,7 +5650,6 @@ border-top: none;
 .PerformanceModal .modal-content{
   background-color: #f2fff8;
   border: none;
-  border-radius: 15px;
 }
 .PerformanceModal .modal-body{
   padding: 20px 35px 35px;
@@ -6623,7 +6634,6 @@ border-top: none;
     right: 10px;
   }
   .Search-Modal .modal-content{
-    border-radius: 15px;
     border: none;
   }
 
@@ -6785,13 +6795,22 @@ button .spinner-border{
 }
 .tags-input{
   border: none !important;
+  padding: 0!important;
 }
 .Filter-Form .input-row.w300{
   width: 300px;
 }
 .tags-input input{
-  width: 200px !important;
+  width: 190px !important;
   flex: none !important;
+  padding: .5em!important;
+}
+.tags-input input::placeholder {
+  font-size: 12px;
+}
+
+.tags-input input:focus {
+  border-bottom: 1px solid #00CC66!important;
 }
 
 .offer-title img{
@@ -7118,13 +7137,13 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 
 /* profile page cvtheque modal styles */
-.cvtheque-modal input,textarea, select{
+.modal-body input, .modal-body textarea, .modal-body select{
   box-shadow: 0px 0px 20px 0px #e7e7e7!important;
 }
-.cvtheque-modal input:focus, textarea:focus, select:focus{
+.modal-body input:focus, .modal-body textarea:focus, .modal-body select:focus{
   box-shadow: 0px 1px 15px -3px #00b601!important;
 }
-.cvtheque-modal textarea:focus-visible{
+.modal-body textarea:focus-visible{
   outline: none;
   border: none;
   box-shadow: none;
@@ -7141,6 +7160,7 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   padding: 0;
 }
 
+
 #shareButton{
   display: flex;
   height: 35px;
@@ -7155,4 +7175,42 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 #image_share{
   margin-left:5px;
+}
+.DadupaModal-Footer .DadupaModal-BTNSubmit {
+  width: 100%;
+}
+
+.CreatePost-Body textarea {
+  box-shadow: none!important;
+}
+.CreatePost-Body textarea:focus {
+  box-shadow: none!important;
+}
+
+/* profile page subscribed at div */
+.subscribedAt {
+  padding: 1.5em 3em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.subscribedAt img {
+  height: 50px;
+}
+
+.subscribedAt h5 {
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #4fcd67;
+}
+
+/* -------------------- */
+/* Add Project step 3 */
+/* -------------------- */
+
+.ql-container.ql-snow {
+  height: 250px;
 }
