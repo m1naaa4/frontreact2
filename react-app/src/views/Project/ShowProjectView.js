@@ -27,6 +27,7 @@ import VideoJS from '../../helpers/VideoJS';
 
 import Vimeo from '@u-wave/react-vimeo';
 import YouTube from 'react-youtube';
+import Select from 'react-select';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -53,6 +54,7 @@ export default function ShowProjectView(props) {
     const [showmodal, setShowmodal] = useState(false);
     const [options_List, SetOptions_List] = useState(false);
     const [showReport, setShowReport] = useState(false);
+    const [optionSelected, setOptionSelected] = useState();
 
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
@@ -62,7 +64,7 @@ export default function ShowProjectView(props) {
 
     const [t] = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
-
+    const datas=[{value : 'public', label: 'Public'},{value : 'shared', label: 'Shared'},{value : 'team', label: 'Team'},{value : 'private', label: 'Private'}];
     var url_to_share = false;
     const data = {
         provider_id : params.id,
@@ -89,6 +91,70 @@ export default function ShowProjectView(props) {
         }
     }, [visibility])
 
+ 
+    let alloptions = datas.map((name, index) => (
+        {value : name.value, label: name.label}
+      ));
+
+      const SelectStyleWithScrollbar = {
+        option: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isSelected ? "#e8fbf1" : "white",
+          color: "black",
+          textAlign: 'center',
+          "&:hover":{
+            backgroundColor: "#e8fbf1",
+          },
+          '&:nth-child(1) ': {
+            marginTop: '0px',
+            borderTopLeftRadius: '30px',
+            borderTopRightRadius: '20px',
+        },
+        '&:last-child ': {
+          borderBottomLeftRadius: '30px',
+          borderBottomRightRadius: '20px',
+        }}),
+        
+        menu: (provided) => ({
+          ...provided,
+          borderRadius: "35px",
+          overflow: 'hidden',
+          border: '0.5px solid #00b602',
+        }),
+  
+        menuList: (provided, state) => ({
+        ...provided,
+        // border: '1px solid green',
+        borderRadius: "32px",
+        padding: '0',
+        "&::-webkit-scrollbar": {
+          width: "5px",
+          
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#f1f1f1",
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          borderRadius: "10px",
+          background: "#888",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#555"
+        }
+        }),
+        control: (base, state) => ({
+          ...base,
+          boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
+          borderRadius: '30px',
+          border: '1px solid #e7e7e7',
+          height: '50px',
+          width: '150px',
+          "&:hover":{
+            boxShadow: "none",
+          },
+        }),
+      }
     ///////////comment counter/////////
     useEffect(() => {
         setCountcomment(fullproject?.countcomment);
@@ -138,15 +204,15 @@ export default function ShowProjectView(props) {
 
         sectors.map((key) => 
         // console.log(key[0], project?.project?.sector)
-          {if (key[0] === project?.project?.sector) {
-            setSector(key[1])
+          {if (key.value === project?.project?.sector) {
+            setSector(key.label)
           }}
         );
         
         etats.map((key) => 
         // console.log(key[0], sector_id)
-          {if (key[0] === project?.project?.project_status) {
-            setStatus(key[1])
+          {if (key.value === project?.project?.project_status) {
+            setStatus(key.label)
           }}
         );
 
@@ -157,8 +223,8 @@ export default function ShowProjectView(props) {
         );
       
         finances.map((key) => 
-            {if (key[0] === project?.project?.funding_search) {
-                setFinance(key[1])
+            {if (key.value === project?.project?.funding_search) {
+                setFinance(key.label)
             }}
         );
     })
@@ -219,12 +285,12 @@ export default function ShowProjectView(props) {
         dispatch(AddFavoriteAction(data))
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleChange = async (selected) => {
+        setOptionSelected(selected);
         setIsLoading(true)
         let data = {
             'url'    : 'creation/visibility',
-            'visibility'    : e.target.value,
+            'visibility'    : selected.value,
             'provider_id'   : params.id,
             'provider'      : 'project',
             'type'          : {
@@ -387,13 +453,21 @@ export default function ShowProjectView(props) {
                                 </div> */}
                                 
                                 {user.id == project.project.user_id && <div className="Send-Message input-row input-select">
-                                    <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
+                                    {/* <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
                                         <option disabled selected>Project status</option>
                                         <option value="public">Public</option>
                                         <option value="shared">Shared</option>
                                         <option value="team">Team</option>
                                         <option value="private">Private</option>
-                                    </select>
+                                    </select> */}
+                                    <Select
+                                                    options={alloptions} 
+                                                    value={optionSelected}
+                                                    placeholder={project.project.visibility}
+                                                    onChange={handleChange}
+                                                    styles={SelectStyleWithScrollbar}
+                                                    className="Select"
+                                            />
                                 </div>}
                                 {is_loading === true && <Spinner
                                         as="span"

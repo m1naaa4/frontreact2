@@ -38,6 +38,9 @@ export default function Step1View({formData, setForm,navigation, props}) {
     // useEffect(() => {
     //     dispatch(AddProjectsAction(formData, props, '/create'));
     // }, [dispatch])
+    useEffect(()=>{
+        console.log(props.location);
+    })
 
     const onLoad = fileString => {
         formData.logo   = fileString;
@@ -143,17 +146,22 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                                        placeholder={t('form.prject_name')} className="wizard-required" required/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <EtatDropFilter value={project_status} required={true} onChange={setForm}/>
+                                                {/* <EtatDropFilter value={project_status} required={true} onChange={setForm}/> */}
+                                                <EtatDropFilter formData={formData}/>
+
                                             </div>
 
                                             <div className="col-md-6 input-row input-select">
-                                                <SectorDropFilter value={sector_id} required={true} onChange={setForm} />
+                                                {/* <SectorDropFilter value={sector_id} required={true} onChange={setForm} /> */}
+                                                <SectorDropFilter formData={formData} />
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                <ZoneDropFilter field='project_area' value={project_area} required={true}  onChange={setForm}/>
+                                                {/* <ZoneDropFilter field='project_area' value={project_area} required={true}  onChange={setForm}/> */}
+                                                <ZoneDropFilter formData={formData}/>
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                <FinanceDropFilter value={funding_search} required={true}  onChange={setForm}/>
+                                                {/* <FinanceDropFilter value={funding_search} required={true}  onChange={setForm}/> */}
+                                                <FinanceDropFilter formData={formData}/>
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
