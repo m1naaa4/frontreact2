@@ -73,9 +73,10 @@ export default function ListPostsView() {
                                                 </div>
                                                 <div className="PostWrap"  key={post.id+1}>
                                                     {/* <PostHeader post={post}/> */}
-                                                    <div className="PostBody">
-                                                        <div className="PostBody-Text">
-                                                        subscribe at - {user.created_at?.date}
+                                                    <div className="PostBody subscribedAt">
+                                                        <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect"/>
+                                                        <div className="mt-2">
+                                                            <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -101,9 +102,10 @@ export default function ListPostsView() {
                                                 <div className="offer-box">
                                                 <div className="PostWrap">
                                                     {/* <PostHeader post={}/> */}
-                                                    <div className="PostBody">
-                                                        <div className="PostBody-Text">
-                                                            subscribe at - {user.created_at?.date}
+                                                    <div className="PostBody subscribedAt">
+                                                        <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect"/>
+                                                        <div className="mt-2">
+                                                            <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
                                                         </div>
                                                     </div>
                                                 </div>
