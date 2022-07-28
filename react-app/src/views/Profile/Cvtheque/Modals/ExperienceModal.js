@@ -47,7 +47,7 @@ const  ExperienceModal = ({ showexperience, handleCloseExperience}) => {
     <>
       {
       showexperience &&
-        <div className="modal-body cvtheque-modal">
+        <div className="modal-body">
             <div className="" >
               <div className="form-inputs">
                 <div className="form-row">

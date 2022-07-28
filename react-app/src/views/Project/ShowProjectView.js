@@ -420,22 +420,19 @@ export default function ShowProjectView(props) {
                                         </span>
                                         
                                     </li>
-                                   { project.project.visibility !== 'public' && user.id == project.project.user_id &&
-                                    <li className="Offer-Item">
-                                        <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
-                                            Share
-                                            <img src="/assets/images/icons/dadupa-share.svg" alt="" id="image_share"/>
-                                        </button>
-                                        {/* <span> */}
-                                            
-                                        {/* </span> */}
+                                    {project.project.visibility !== 'public' && user.id == project.project.user_id &&
+                                                <li className="Offer-Item">
+                                                    <button onClick={handleShow}>Share</button>
+                                                    {/* <span> */}
 
-                                        <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose}/>
-                                        </Modal>
-                                        
-                                    </li>
-                                    }
+                                                    {/* </span> */}
+
+                                                    <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
+                                                    </Modal>
+
+                                                </li>
+                                            }
                                     <li className="Offer-Item">
                                         <label>Publié le</label>
                                         <span>{project.project.date}</span>
