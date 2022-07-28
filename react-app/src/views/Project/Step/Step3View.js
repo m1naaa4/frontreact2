@@ -83,7 +83,7 @@ export default function Step3View({formData, setForm, navigation, props}) {
                                     <div className="form-inputs">
                                         <div className="col-md-12 input-row">
                                             {/*<div id="editor">This is some sample content.</div>*/}
-                                            <ReactQuill id="editor" style={{ height: "250px"}} theme="snow" name="description" defaultValue={description} onChange={setDescription}/>
+                                            <ReactQuill id="editor" theme="snow" name="description" defaultValue={description} onChange={setDescription}/>
                                         </div>
                                         <div className="col-md-12 input-tags">
                                             {/*<input type="text" data-role="tagsinput" value="" placeholder="Ajouter Tag"/>*/}

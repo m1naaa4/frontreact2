@@ -36,7 +36,7 @@ const InputTags = props => {
             <input
                 type="text"
                 onKeyDown={event => event.keyCode === 13 ? addTags(event) : null}
-                placeholder="Press enter to add tags"
+                placeholder="Add Tags(Press enter to add)"
             />
         </div>
     );

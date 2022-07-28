@@ -56,8 +56,7 @@ const  SkillsModal = ({ show, handleClose}) => {
                 </div>
               </div>
               <div className="DadupaModal-Footer">
-                <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft"></div>
-                <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
+                <div className="w-100">
                   <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {AddSkills(); handleClose()}}>ADD NEW SKILL</button>
                 </div>
               </div>

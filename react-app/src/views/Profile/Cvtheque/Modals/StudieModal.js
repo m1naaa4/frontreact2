@@ -40,7 +40,7 @@ const StudieModal = ({ showstudies, handleCloseStudies }) => {
       {
         showstudies &&
 
-        <div className="modal-body cvtheque-modal">
+        <div className="modal-body">
           <div className="" method="post">
             <div className="form-inputs">
               <div className="form-row">

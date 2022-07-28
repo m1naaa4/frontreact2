@@ -422,10 +422,7 @@ export default function ShowProjectView(props) {
                                     </li>
                                    { project.project.visibility !== 'public' && user.id == project.project.user_id &&
                                     <li className="Offer-Item">
-                                        <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
-                                            Share
-                                            <img src="/assets/images/icons/dadupa-share.svg" alt="" id="image_share"/>
-                                        </button>
+                                        <button onClick={handleShow}>Share</button>
                                         {/* <span> */}
                                             
                                         {/* </span> */}
