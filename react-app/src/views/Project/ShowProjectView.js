@@ -207,15 +207,15 @@ export default function ShowProjectView(props) {
 
         sectors.map((key) =>
         // console.log(key[0], project?.project?.sector)
-          {if (key.value === project?.project?.sector) {
-            setSector(key.label)
+          {if (key[0] === project?.project?.sector) {
+            setSector(t(key[1]))
           }}
         );
 
         etats.map((key) =>
         // console.log(key[0], sector_id)
-          {if (key.value === project?.project?.project_status) {
-            setStatus(key.label)
+          {if (key[0] === project?.project?.project_status) {
+            setStatus(t(key[1]))
           }}
         );
 
@@ -226,8 +226,8 @@ export default function ShowProjectView(props) {
         }
         );
         finances.map((key) => 
-            {if (key.value === project?.project?.funding_search) {
-                setFinance(key.label)
+            {if (key[0] === project?.project?.funding_search) {
+                setFinance(t(key[1]))
             }}
         );
     })

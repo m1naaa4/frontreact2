@@ -2,11 +2,12 @@ import React, { useEffect,useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 
-const etats = [
-        {value:"business_angle",label: "Business Angle"},
-        {value:"fonds", label: "Fonds"},
-        {value:"corporate",label:  "corporate"},
-    ];
+const typeusersCreate = [
+  [  "PP",  "Porteur de projet" ],
+  [  "BF",  "Investisseur" ],
+  [  "ACMPT",  "Mentor" ],
+  [  "visitor",  "Visiteur" ],
+];
 
 function TypeFilterFunders({formData}) {
     
@@ -79,6 +80,9 @@ function TypeFilterFunders({formData}) {
         }),
       }
 
+      const alloptions = typeusersCreate.map(([value, name]) => (
+        {value: value,label: t(name)}
+    ))
 
     return (
         // <select className="project-state" name="type" defaultValue={filter.type}  {...others} >
@@ -87,7 +91,7 @@ function TypeFilterFunders({formData}) {
         //     ))}
         // </select>
         <Select
-                options={etats}
+                options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}

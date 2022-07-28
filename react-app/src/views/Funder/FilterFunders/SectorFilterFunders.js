@@ -2,63 +2,36 @@ import React, { useEffect,useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 
-// const sectors = [
-//     ['all','filter.secteur'],
-//     ['agroalimentaire','filter.secteur.agroalimentaire'],
-//     ['architecture','filter.secteur.architecture'],
-//     ['art','filter.secteur.art'],
-//     ['big_data','filter.secteur.big_data'],
-//     ['bio','filter.secteur.bio'],
-//     ['btp','filter.secteur.btp'],
-//     ['commerce','filter.secteur.commerce'],
-//     ['communication','filter.secteur.communication'],
-//     ['design','filter.secteur.design'],
-//     ['divertissement','filter.secteur.divertissement'],
-//     ['droit','filter.secteur.droit'],
-//     ['ecommerce','filter.secteur.ecommerce'],
-//     ['education','filter.secteur.education'],
-//     ['energie','filter.secteur.energie'],
-//     ['environement','filter.secteur.environement'],
-//     ['finance','filter.secteur.finance'],
-//     ['information','filter.secteur.information'],
-//     ['ia','filter.secteur.ia'],
-//     ['internet_objets','filter.secteur.internet_objets'],
-//     ['mode','filter.secteur.mode'],
-//     ['robotique','filter.secteur.robotique'],
-//     ['sante','filter.secteur.sante'],
-//     ['villes_intelligences','filter.secteur.villes_intelligences'],
-//     ['technologie','filter.secteur.technologie'],
-//     ['transport','filter.secteur.transport'],
-//     ['other','filter.secteur.other'],
-// ];
 const sectors = [
-    {value:'agroalimentaire', label: 'Agroalimentaire'},
-    {value:'architecture', label: 'Architecture'},
-    {value:'art', label: 'Art'},
-    {value:'big_data', label: 'Big data'},
-    {value:'bio', label: 'Bio'},
-    {value:'btp', label: 'Btp'},
-    {value:'commerce', label: 'Commerce'},
-    {value:'communication', label: 'Communication'},
-    {value:'design', label: 'Design'},
-    {value:'divertissement', label: 'Divertissement'},
-    {value:'droit', label: 'Droit'},
-    {value:'ecommerce', label: 'Ecommerce'},
-    {value:'education', label: 'Education'},
-    {value:'energie', label: 'Energie'},
-    {value:'environement', label: 'Environement'},
-    {value:'finance', label: 'Finance'},
-    {value:'information', label: 'Information'},
-    {value:'ia', label: 'IA'},
-    {value:'internet_objets', label: 'internet des objets'},
-    {value:'mode', label: 'Mode'},
-    {value:'robotique', label: 'Robotique'},
-    {value:'sante', label: 'Sante'},
-    {value:'villes_intelligences', label: 'Villes Intelligences'},
-    {value:'technologie', label: 'Technologie'},
-    {value:'transport', label: 'Transport'},
-    {value:'other', label: 'Other'},
+    ['all','filter.secteur'],
+    ['agroalimentaire','filter.secteur.agroalimentaire'],
+    ['architecture','filter.secteur.architecture'],
+    ['art','filter.secteur.art'],
+    ['big_data','filter.secteur.big_data'],
+    ['bio','filter.secteur.bio'],
+    ['btp','filter.secteur.btp'],
+    ['commerce','filter.secteur.commerce'],
+    ['communication','filter.secteur.communication'],
+    ['design','filter.secteur.design'],
+    ['divertissement','filter.secteur.divertissement'],
+    ['droit','filter.secteur.droit'],
+    ['ecommerce','filter.secteur.ecommerce'],
+    ['education','filter.secteur.education'],
+    ['energie','filter.secteur.energie'],
+    ['environement','filter.secteur.environement'],
+    ['finance','filter.secteur.finance'],
+    ['information','filter.secteur.information'],
+    ['ia','filter.secteur.ia'],
+    ['internet_objets','filter.secteur.internet_objets'],
+    ['mode','filter.secteur.mode'],
+    ['robotique','filter.secteur.robotique'],
+    ['sante','filter.secteur.sante'],
+    ['villes_intelligences','filter.secteur.villes_intelligences'],
+    ['technologie','filter.secteur.technologie'],
+    ['transport','filter.secteur.transport'],
+    ['other','filter.secteur.other'],
 ];
+
 
 function SectorFilterFunders ({formData}){
     const { t, i18n } = useTranslation();
@@ -131,6 +104,9 @@ function SectorFilterFunders ({formData}){
         }),
       }
 
+      const alloptions = sectors.map(([value, name]) => (
+        {value: value,label: t(name)}
+    ))
     return (
         // <select className="user-type" name="sector_id" defaultValue={sector_id} {...others}>
         //     {sectors.map(([value, name]) => (
@@ -138,11 +114,11 @@ function SectorFilterFunders ({formData}){
         //     ))}
         // </select>
         <Select
-                options={sectors}
+                options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={(formData.sector_id==='')?"Secteur d'activité":formData.sector_id}
+                placeholder={(formData?.sector_id==='')?"Secteur d'activité":formData?.sector_id}
                 required={true}
                 className="Select"
         />

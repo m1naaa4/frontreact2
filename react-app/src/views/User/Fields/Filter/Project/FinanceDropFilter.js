@@ -76,6 +76,10 @@ function FinanceDropFilter ({formData}) {
           },
         }),
       }
+      
+      const alloptions = finances.map(([value, name]) => (
+        {value: value,label: t(name)}
+    ))
 
 
     return (
@@ -88,7 +92,7 @@ function FinanceDropFilter ({formData}) {
            
         </div> */
         <Select
-            options={finances}
+            options={alloptions}
             onChange={HandleChange}
             value={optionSelected}
             styles={SelectStyleWithScrollbar}

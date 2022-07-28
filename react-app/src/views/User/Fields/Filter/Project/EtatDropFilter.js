@@ -84,6 +84,9 @@ function EtatDropFilter({formData}) {
         }),
       }
 
+      const alloptions = etats.map(([value, name]) => (
+        {value: value,label: t(name)}
+    ))
 
     return (
         <>
@@ -92,8 +95,9 @@ function EtatDropFilter({formData}) {
                 <option key={name} value={value}>{t(name)}</option>
             ))}
         </select> */}
+        
         <Select
-                options={etats}
+                options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}

@@ -73,6 +73,9 @@ function SectorDropFilter ({formData}){
           },
         }),
       }
+      const alloptions = sectors.map(([value, name]) => (
+        {value: value,label: t(name)}
+    ))
 
     return (
         // <select className="user-type" name="sector_id"  {...others} required={others.required && "required"}>
@@ -92,7 +95,7 @@ function SectorDropFilter ({formData}){
         // />
 
         <Select
-                options={sectors}
+                options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
