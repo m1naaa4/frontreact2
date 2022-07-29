@@ -83,7 +83,8 @@ export default function ShowProjectView(props) {
         'provider': 'project',
         'content_id': params.id,
     }
-
+    
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(GetProjectAction(data, props, history, params.id));
     }, [dispatch])
@@ -513,7 +514,7 @@ export default function ShowProjectView(props) {
                                         
                                     </li>
                                     }
-                                    <li className="Offer-Item">
+                                     <li className="Offer-Item">
                                         <label>Publié le</label>
                                         <span>{project.project.date}</span>
                                     </li>
@@ -540,16 +541,18 @@ export default function ShowProjectView(props) {
                                     {tags}
                             </div>
                         </div>
+                    </div>
+                        </div>
+
+                                
+                            ) : (
+                                // console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
+                                <div data-testid="error-message">ERROR</div>
+                                     )
+                                }
 
 
-                    ) : (
-                        // console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
-                        <div data-testid="error-message">ERROR</div>
-                    )
-                }
-
-
-
+                
 
             </div>
         </div>
