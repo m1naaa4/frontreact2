@@ -3779,7 +3779,7 @@ label.error {
 }
 
 .Comments-Wrap {
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .Comments-Header {
@@ -4125,17 +4125,17 @@ label.error {
 }
 
 .Single-Offer-Tags {
-  padding: 30px 30px 15px;
+  padding: 25px 30px 15px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .03);
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .Single-Offer-Tags h3 {
   font-size: 20px;
   font-weight: 900;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .Co-Porteurs {
@@ -4394,7 +4394,7 @@ label.error {
   flex-wrap: wrap;
   font-size: 13px;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .05);
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 .Company-Left {
