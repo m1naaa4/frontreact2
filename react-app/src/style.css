@@ -4165,6 +4165,18 @@ label.error {
   padding: 12px 15px;
   margin-bottom: 15px;
   margin-right: 10px;
+  box-shadow: 1px 1px 1px 1px #76aa8b;
+}
+.Tag-Item:hover {
+  display: inline-block;
+  background: #EEFAF3;
+  font-size: 12px;
+  border-radius: 15px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px #20cb67;
+  cursor:pointer;
 }
 
 .Co-Porteurs {
