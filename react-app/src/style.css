@@ -3435,8 +3435,8 @@ label.error {
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: left;
+  text-align: left;
 }
 
 .single-header .signle-offer-type {
@@ -3447,7 +3447,7 @@ label.error {
 .Post-Actions {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 45px;
+  margin-bottom: 22px;
 }
 
 .Send-Message {
