@@ -8503,3 +8503,11 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   background-color: #00b60215;
 
 }
+
+.active-profile-link {
+  background: #00b601!important;
+  color: #ffffff!important;
+}
+.active-profile-link i {
+  color: #ffffff!important;
+}
