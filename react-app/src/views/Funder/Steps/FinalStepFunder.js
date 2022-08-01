@@ -8,6 +8,10 @@ import { useTranslation } from 'react-i18next';
 
 
 const FinalStepFunder = ( {formData, setForm, navigation, props} ) => {
+
+    useEffect(()=>{
+        console.log(formData);
+    });
     
     
     return (

@@ -10,6 +10,8 @@ import ZoneFilterFunders from '../FilterFunders/ZoneFilterFunders';
 import SectorFilterFunders from '../FilterFunders/SectorFilterFunders';
 import DatePicker from "react-datepicker";
 import { CreateFunderAction } from '../../../store/actions/Funder/FunderActions'
+import FinanceFilterFunders from '../FilterFunders/FinanceFilterFunders';
+import TypeFilterFunder from '../FilterFunders/TypeFilterFunders';
 
 
 const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
@@ -30,6 +32,10 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
     useEffect(()=>{
         setChanged(true)
     },[location])
+
+    useEffect(()=>{
+        console.log(formData);
+    });
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
@@ -80,18 +86,21 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
                                     <div className="form-inputs">
                                         <div className="form-row">
                                             <div className="col-md-12 input-row input-select">
-                                                <select className="bailleur-de-fonds" name="type" value={type} onChange={setForm}  required>
+                                                {/* <select className="bailleur-de-fonds" name="type" value={type} onChange={setForm}  required>
                                                     <option key='0' value='' >{ t('funder.form.you_are')}</option>
                                                     <option key='1' value="business_angle">{ t('funder.form.you_are.business_angle')}</option>
                                                     <option key='2' value="fonds">{ t('funder.form.you_are.fonds')}</option>
                                                     <option key='3' value="corporate">{ t('funder.form.you_are.corporate')}</option>
-                                                </select>
+                                                </select> */}
+                                                <TypeFilterFunder formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <SectorFilterFunders value={sector_id} required={true} onChange={setForm} />
+                                                {/* <SectorFilterFunders value={sector_id} required={true} onChange={setForm} /> */}
+                                                <SectorFilterFunders  formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <ZoneFilterFunders field='project_area' name="zone" value={zone} required={true}  onChange={setForm}/>
+                                                {/* <ZoneFilterFunders field='project_area' name="zone" value={zone} required={true}  onChange={setForm}/> */}
+                                                <ZoneFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="phone" onChange={setForm} value={phone} placeholder={t('phone')} className="wizard-required" required/>
@@ -100,7 +109,7 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
                                                 <input type="url" name="url" value={url} placeholder={t('url')} className="wizard-required" onChange={setForm} />
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                <select value={finances} onChange={setForm} name="finances"  required>
+                                                {/* <select value={finances} onChange={setForm} name="finances"  required>
                                                     <option key='0' >{ t('funder.form.financement') }</option>
                                                     <option key="2500" value="2500">{ t('filter.secteur.2500') }</option>
                                                     <option key="10000" value="10000">{ t('filter.secteur.10000') }</option>
@@ -110,7 +119,8 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
                                                     <option key="70000" value="70000">{ t('filter.secteur.70000') }</option>
                                                     <option key="85000" value="85000">{ t('filter.secteur.85000') }</option>
                                                     <option key="100000" value="100000">{ t('filter.secteur.100000') }</option>
-                                                </select>
+                                                </select> */}
+                                                <FinanceFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row"> 
                                                 <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={startDate} />

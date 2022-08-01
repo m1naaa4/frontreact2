@@ -7,4 +7,5 @@ const etatsCreate = [
     ["first_sale", "filter.etat_projet.first_sale"],
 ];
 
+
 export default etatsCreate;
