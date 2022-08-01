@@ -131,17 +131,17 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                                           placeholder="Nom du projet" className="wizard-required" required/>
                                                </div>
                                                <div className="col-md-6 input-row input-select">
-                                                   <EtatDropFilter name="project_status" defaultValue={getproject.project.project_status} onChange={setForm}/>
+                                               <EtatDropFilter formData={formData}/>
                                                </div>
    
                                                <div className="col-md-6 input-row input-select">
-                                                   <SectorDropFilter name="sector_id" defaultValue={getproject.project.sector} onChange={setForm} />
+                                               <SectorDropFilter formData={formData} />
                                                </div>
                                                <div className="col-md-12 input-row">
-                                                   <ZoneDropFilter field='project_area' name="project_area" defaultValue={getproject.project.project_area}  onChange={setForm}/>
+                                               <ZoneDropFilter formData={formData}/>
                                                </div>
                                                <div className="col-md-12 input-row input-select">
-                                                   <FinanceDropFilter name="funding_search" defaultValue={getproject.project.funding_search}  onChange={setForm}/>
+                                               <FinanceDropFilter formData={formData}/>
                                                </div>
                                                <div className="col-md-12 input-row">
                                                    <div className="custom-file">

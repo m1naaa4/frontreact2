@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useRef ,useState } from 'react'
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
@@ -12,6 +12,7 @@ export default function Invitations() {
 
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
+    const ref = useRef();
     
     const sentInvs = useSelector(state => state.setting.sentinvitations);
     const resend = (id) => {
@@ -30,10 +31,25 @@ export default function Invitations() {
           dispatch(cancelInvitationAction(data));
     }
     
-    
-    const menu = () => {
-       setOpen(!open)
+    const accept = (token, route) => {
+        
+        // dispatch(AcceptInvitationAction('permission/accept/'+token));
+        // setTimeout(() => {
+        //    history.push(route);
+        //   }, 3000)
     }
+
+    const reject = (token) => {
+        // let data = {
+        //     'url'   : 'permission/cancel',
+        //     'token' : token,
+        //   } 
+        //   dispatch(cancelInvitationAction(data));
+    }
+    
+    const menu = (id) => {
+        setOpen(id)
+     }
 
 
     return (
@@ -43,11 +59,11 @@ export default function Invitations() {
                 <TableHead>
                 <TableRow>
                     <TableCell>To</TableCell>
-                    <TableCell align="right">Categorie</TableCell>
-                    <TableCell align="right">Link</TableCell>
-                    <TableCell align="right">Role</TableCell>
-                    <TableCell align="right">date</TableCell>
-                    <TableCell align="right">Action</TableCell>
+                    <TableCell align="center">Categorie</TableCell>
+                    <TableCell align="center">Link</TableCell>
+                    <TableCell align="center">Role</TableCell>
+                    <TableCell align="center">date</TableCell>
+                    <TableCell align="center">Action</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
@@ -59,11 +75,21 @@ export default function Invitations() {
                     <TableCell component="th" scope="row">
                         {row.email}
                     </TableCell>
-                    <TableCell align="right">{row.categorie}</TableCell>
-                    <TableCell align="right"><Link to={row.route} >{row.pro_name}</Link></TableCell>
-                    <TableCell align="right">{row.role}</TableCell>
-                    <TableCell align="right">{row.invite_date}</TableCell>
-                    <TableCell align="right">Action</TableCell>
+                    <TableCell align="center">{row.categorie}</TableCell>
+                    <TableCell align="center"><Link to={row.route} >{row.pro_name}</Link></TableCell>
+                    <TableCell align="center">{row.role}</TableCell>
+                    <TableCell align="center">{row.invite_date}</TableCell>
+                    <TableCell align="center">
+                    <div className="custom-btn-table-action" onClick={()=>menu(row.id)} >
+                            <button className="Add-New" data-toggle="tooltip" data-placement="bottom"><i className="uil uil-ellipsis-h"></i></button>
+                            {open == row.id && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
+                            <ul className="Mini-Profile-Items">
+                               <li className="Mini-Profile-Item"><a href="#" onClick={()=>accept(row.token, row.route)} > Accept</a></li>
+                                <li className="Mini-Profile-Item"><a href="#" onClick={()=>reject(row.deny_token)} > Reject</a></li>
+                            </ul>
+                            </div>}
+                        </div>
+                    </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

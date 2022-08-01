@@ -27,4 +27,5 @@ const sectors = [
     ['transport',  'filter.secteur.transport'],
     ['other',  'filter.secteur.other']
 ];
+
 export default sectors;
