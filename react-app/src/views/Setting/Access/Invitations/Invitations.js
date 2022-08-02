@@ -1,38 +1,47 @@
-import React, {useRef ,useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { cancelInvitationAction, reSendAction } from '../../../../store/actions/Setting/SettingActions';
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material';
+import useOutsideClick from '../../../helpers/useOutsideClick';
 
 
-
-export default function Invitations() { 
+export default function Invitations() {
 
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const ref = useRef();
-    
+
+    const [options_List, SetOptions_List] = useState(false);
+    const showOptions = () => {
+        SetOptions_List(!options_List)
+    }
+
+    useOutsideClick(ref, () => {
+        SetOptions_List(false)
+    });
+
     const sentInvs = useSelector(state => state.setting.sentinvitations);
     const resend = (id) => {
         let data = {
-            'url'   : 'permission/resendinvite',
-            'id'    : id,
-          } 
-          dispatch(reSendAction(data));
+            'url': 'permission/resendinvite',
+            'id': id,
+        }
+        dispatch(reSendAction(data));
     }
 
     const cancel = (token) => {
         let data = {
-            'url'   : 'permission/cancel',
-            'token' : token,
-          } 
-          dispatch(cancelInvitationAction(data));
+            'url': 'permission/cancel',
+            'token': token,
+        }
+        dispatch(cancelInvitationAction(data));
     }
-    
+
     const accept = (token, route) => {
-        
+
         // dispatch(AcceptInvitationAction('permission/accept/'+token));
         // setTimeout(() => {
         //    history.push(route);
@@ -46,57 +55,57 @@ export default function Invitations() {
         //   } 
         //   dispatch(cancelInvitationAction(data));
     }
-    
+
     const menu = (id) => {
         setOpen(id)
-     }
+    }
 
 
     return (
-        <>     
-        <TableContainer >
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                <TableRow>
-                    <TableCell>To</TableCell>
-                    <TableCell align="center">Categorie</TableCell>
-                    <TableCell align="center">Link</TableCell>
-                    <TableCell align="center">Role</TableCell>
-                    <TableCell align="center">date</TableCell>
-                    <TableCell align="center">Action</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                 {sentInvs && sentInvs?.map((row) => (
-                    <TableRow
-                    key={row.email}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                    <TableCell component="th" scope="row">
-                        {row.email}
-                    </TableCell>
-                    <TableCell align="center">{row.categorie}</TableCell>
-                    <TableCell align="center"><Link to={row.route} >{row.pro_name}</Link></TableCell>
-                    <TableCell align="center">{row.role}</TableCell>
-                    <TableCell align="center">{row.invite_date}</TableCell>
-                    <TableCell align="center">
-                    <div className="custom-btn-table-action" onClick={()=>menu(row.id)} >
-                            <button className="Add-New" data-toggle="tooltip" data-placement="bottom"><i className="uil uil-ellipsis-h"></i></button>
-                            {open == row.id && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
-                            <ul className="Mini-Profile-Items">
-                               <li className="Mini-Profile-Item"><a href="#" onClick={()=>accept(row.token, row.route)} > Accept</a></li>
-                                <li className="Mini-Profile-Item"><a href="#" onClick={()=>reject(row.deny_token)} > Reject</a></li>
-                            </ul>
-                            </div>}
-                        </div>
-                    </TableCell>
-                    </TableRow>
-                ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <>
+            <TableContainer >
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>To</TableCell>
+                            <TableCell align="center">Categorie</TableCell>
+                            <TableCell align="center">Link</TableCell>
+                            <TableCell align="center">Role</TableCell>
+                            <TableCell align="center">date</TableCell>
+                            <TableCell align="center">Action</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {sentInvs && sentInvs?.map((row) => (
+                            <TableRow
+                                key={row.email}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.email}
+                                </TableCell>
+                                <TableCell align="center">{row.categorie}</TableCell>
+                                <TableCell align="center"><Link to={row.route} >{row.pro_name}</Link></TableCell>
+                                <TableCell align="center">{row.role}</TableCell>
+                                <TableCell align="center">{row.invite_date}</TableCell>
+                                <TableCell align="center">
+                                    <div className="custom-btn-table-action" onClick={() => menu(row.id)} >
+                                        <button onClick={showOptions} className="Add-New" data-toggle="tooltip" data-placement="bottom"><i className="uil uil-ellipsis-h"></i></button>
+                                        {options_List && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
+                                            <ul className="Mini-Profile-Items">
+                                                <li className="Mini-Profile-Item"><a href="#" onClick={() => accept(row.token, row.route)} > Accept</a></li>
+                                                <li className="Mini-Profile-Item"><a href="#" onClick={() => reject(row.deny_token)} > Reject</a></li>
+                                            </ul>
+                                        </div>}
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
-        
+
             {/* <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -133,8 +142,8 @@ export default function Invitations() {
                 </tbody>
             </Table> */}
         </>
-    
-           
-        
+
+
+
     )
 }
