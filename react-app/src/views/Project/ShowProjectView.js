@@ -153,7 +153,7 @@ export default function ShowProjectView(props) {
           borderRadius: '30px',
           border: '1px solid #e7e7e7',
           height: '50px',
-          width: '150px',
+          width: '106px',
           "&:hover":{
             boxShadow: "none",
           },
