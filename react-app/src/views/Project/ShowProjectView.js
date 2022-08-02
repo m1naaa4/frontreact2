@@ -152,11 +152,32 @@ export default function ShowProjectView(props) {
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
           borderRadius: '30px',
           border: '1px solid #e7e7e7',
-          height: '50px',
+          height: '30px',
           width: '106px',
+          align:' center',
           "&:hover":{
             boxShadow: "none",
           },
+        }),
+        indicatorSeparator: (base, state) => ({
+            ...base,
+            height: '20px',
+        }),
+        placeholder: (base, state) => ({
+            ...base,
+        }),
+        dropdownIndicator: (base,state) => ({
+            ...base,
+            paddingBottom: '25px',
+        }),
+        valueContainer: (base,state) => ({
+            ...base,
+            height: '30px',
+            marginBottom: '20px',
+        }),
+        singleValue: (base,state) => ({
+            ...base,
+            marginTop: '7px',
         }),
       }
     ///////////comment counter/////////
