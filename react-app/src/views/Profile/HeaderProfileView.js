@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import FileUploadService from '../../helpers/FileUploadService';
 import { toast, ToastContainer } from 'react-toastify';
 import { loadUserAction, ProfileAction } from '../../store/actions/Profile/UserActions';
@@ -144,10 +144,10 @@ export default function HeaderProfileView({formData, setForm, props}) {
                         }
                         <div className="Profile-Navigation">
                         <ul className="Profie-Menu">
-                            <li><Link to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</Link></li>
-                            <li><Link to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</Link></li>
-                            <li><Link to={`/profile/${params.id}`}><i className="uil uil-apps"></i> Historique</Link></li>
-                            <li><Link to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" /> Réseaux</Link></li>
+                            <li><NavLink activeClassName='active-profile-link' to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</NavLink></li>
+                            <li><NavLink activeClassName='active-profile-link' to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</NavLink></li>
+                            <li><NavLink activeClassName='active-profile-link' to={`/profile/${params.id}`}><i className="uil uil-apps"></i> Historique</NavLink></li>
+                            <li><NavLink activeClassName='active-profile-link' to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" /> Réseaux</NavLink></li>
                             {/*<li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li> */}
                         </ul>
                         </div>
