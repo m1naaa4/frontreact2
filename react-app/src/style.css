@@ -2370,7 +2370,7 @@ label.error {
   flex: 0 0 10%;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .offer-bookmark {
