@@ -5,7 +5,7 @@ import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { cancelInvitationAction, reSendAction } from '../../../../store/actions/Setting/SettingActions';
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material';
-import useOutsideClick from '../../../helpers/useOutsideClick';
+import useOutsideClick from '../../../../helpers/useOutsideClick';
 
 
 export default function Invitations() {
