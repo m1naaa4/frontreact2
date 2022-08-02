@@ -3865,6 +3865,10 @@ label.error {
   position: relative;
 }
 
+.Comment-Reply .Comment-Col-10 {
+  max-width: 90.667%;
+}
+
 .Comment-Col-2 {
   flex: 0 0 8.333333%;
   max-width: 8.333333%;
@@ -3880,7 +3884,9 @@ label.error {
 }
 
 .Comment-User-Thumb img {
+  object-fit: cover;
   width: 100%;
+  min-height: 100%;
 }
 
 .Comment-Input input[type="text"] {
@@ -3897,7 +3903,6 @@ label.error {
   background: #F8FBFC;
   padding: 12px;
   border-radius: 15px;
-  margin-bottom: 20px;
 }
 
 .Comment-User-Name {
@@ -3952,12 +3957,14 @@ label.error {
   border-bottom: 0;
   padding-bottom: 0;
   margin-bottom: 5px;
+  justify-content: space-between;
 }
 
 .comment-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: 7px;
 }
 
 .comment-replies-count,
@@ -4028,6 +4035,7 @@ label.error {
   align-items: center;
   margin: 0;
   padding: 0;
+  padding-right: 0.8em;
   width: 100%;
   padding-top: 0px;
 }
@@ -8433,21 +8441,22 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 
 
-#shareButton{
+#shareButton {
   display: flex;
   height: 35px;
-  border:none;
+  border: none;
   font-weight: bold;
   font-size: 15px;
-  border-radius:40px;
+  border-radius: 40px;
   background: #00b601;
   color: #fff;
-  width:125px;
+  width: 125px;
 }
 
-#image_share{
-  margin-left:5px;
+#image_share {
+  margin-left: 5px;
 }
+
 .DadupaModal-Footer .DadupaModal-BTNSubmit {
   width: 100%;
 }
@@ -8499,15 +8508,17 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 .accessTables-container table thead th {
   color: #ffffff;
 }
-.accessTables-container table tbody tr:nth-child(even){
+
+.accessTables-container table tbody tr:nth-child(even) {
   background-color: #00b60215;
 
 }
 
 .active-profile-link {
-  background: #00b601!important;
-  color: #ffffff!important;
+  background: #00b601 !important;
+  color: #ffffff !important;
 }
+
 .active-profile-link i {
-  color: #ffffff!important;
+  color: #ffffff !important;
 }
