@@ -1180,6 +1180,8 @@ label.error {
 
 .Dadupa-Notifs-Box .Notif-Image img {
   width: 100%;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .Dadupa-Notifs-Box .Notif-Content {
@@ -1603,6 +1605,8 @@ label.error {
 
 .Dadupa-User .profile-image img {
   width: 100%;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .Dadupa-User .profile-name {
@@ -4176,6 +4180,7 @@ label.error {
   margin-right: 10px;
   box-shadow: 1px 1px 1px 1px #76aa8b;
 }
+
 .Tag-Item:hover {
   display: inline-block;
   background: #EEFAF3;
@@ -4185,7 +4190,7 @@ label.error {
   margin-bottom: 15px;
   margin-right: 10px;
   box-shadow: 1.5px 1.5px 1.5px 1.5px #20cb67;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .Co-Porteurs {
@@ -5194,7 +5199,8 @@ label.error {
 
 .PostHeader .PostUser-Thumb img {
   width: 100%;
-  height: auto;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .PostHeader .PostUser-Details {
@@ -8030,7 +8036,10 @@ button .spinner-border {
 .offer-title img {
   float: left;
   margin-right: 10px;
-  max-height: 35px;
+  border-radius: 100%;
+  max-width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 
 .footer-title {
