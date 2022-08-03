@@ -46,7 +46,7 @@ const ProjectGridView = ({ project }) => {
                             <h3><span onClick={() => goToShowproject(project.id) } data-toggle="tooltip" data-placement="top" title={project.name}>
                                 {project.name.substring(0, 10)}</span></h3>
                             <div className='footer-title'>
-                                <span className='mr-5'>{project.sector.charAt(0).toUpperCase()+ project.sector.slice(1)}, </span>
+                                <span className='mr-5'>{project.sector && (project.sector.charAt(0).toUpperCase() + project.sector.slice(1))}, </span>
                                 {project.owner && project.owner.map((value) => 
                                     {
                                         return <Link to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
