@@ -40,7 +40,9 @@ const ProjectGridView = ({ project }) => {
                     <div className="offer-header" >
                       {/* style={project.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}> */}
                         <div className="offer-title">
-                            <img src={project.logo_link} style={{ height: "60" , width: "40"}}  title="Nom du projet" alt=""/>
+                            {(project.logo_link==='/assets/images/porject-logo.png')?<img src={project.logo_link} style={{ height: "35px" , width: "45px"}}  title="Nom du projet" alt=""/>: 
+                            <img src={project.logo_link} style={{ height: "35px" , width: "45px",borderRadius: "10px"}}  title="Nom du projet" alt=""/>}
+                            
                             <h3><span onClick={() => goToShowproject(project.id) } data-toggle="tooltip" data-placement="top" title={project.name}>
                                 {project.name.substring(0, 10)}</span></h3>
                             <div className='footer-title'>
