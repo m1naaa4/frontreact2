@@ -42,7 +42,7 @@ const ProjectSkeletonGridOne = () => {
                         <div className="single-offer-header">
                             <div className="offer-title" >
                                 <h4 style={{ fontSize: "16px !important" }} className="single-offer-name">{providername}</h4>
-                                <span style={{ fontSize: "14px !important" }} className="text-danger">You are not authorize to access this content contact the owner to get access</span>
+                                <span style={{ fontSize: "14px !important", marginBottom: "30px" }} className="text-danger">You are not authorize to access this content contact the owner to get access</span>
                             </div>
                             <div className="Update-Post">
                                 {/* <button type="button" onClick={handleShow} name="button" data-toggle="tooltip" data-placement="bottom"
@@ -52,7 +52,18 @@ const ProjectSkeletonGridOne = () => {
                                         title="Edit Post"  className="edit-button" to={`update/${data.project_id}`}><i className="uil uil-pen"></i></NavLink> */}
                             </div>
                         </div>
-                        <img style={{ height: '50vh' }} src="/assets/images/project-auth.png" alt="Auth needed to view project" />
+                        <div class="d-flex justify-content-start">
+                            <img style={{ height: '60vh',width: '60vh', marginBottom: "30px", marginRight: "10px" }} src="/assets/images/project-auth.png" alt="Auth needed to view project" />
+                            <p style={{ padding: '10px'}}>
+                                Lorem ipsum dolor sit amet. Ex autem quasi ut rerum voluptate aut deleniti expedita aut culpa dolorem. Aut unde voluptatem et consectetur voluptate qui dolorum commodi quo assumenda nulla id impedit sapiente nam minima praesentium. Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure.
+
+                                Eum corrupti autem qui doloribus doloremque est omnis tenetur sit dolores quam? Eos mollitia fugiat At voluptatibus distinctio et enim temporibus.
+
+                                Non omnis consequatur nam officia consequatur non deleniti reprehenderit. Eum facilis temporibus ut Quis ab tempora obcaecati et molestias blanditiis sapiente ratione et corrupti soluta.
+                            </p>
+
+                        </div>
+                        
                         <div>
                             <button onClick={goback} style={{ width: '200px' }} name="previous" className="previous action-button">
                                 <i className="uil uil-arrow-left  "></i> Previous

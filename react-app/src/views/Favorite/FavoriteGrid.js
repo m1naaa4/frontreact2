@@ -28,7 +28,7 @@ export default function FavoriteGrid({favorite}) {
     }
 
     return (
-          <div className="grid-item offres">
+          <div className="grid-item offres" style={{width:'370px'}}>
               <div className="offer-box">
                 <div className="offer-header">
                   <div className="offer-title">
