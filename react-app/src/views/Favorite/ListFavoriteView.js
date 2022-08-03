@@ -26,13 +26,18 @@ export default function ListFavoriteView(props) {
           <button className="button" data-filter=".historiques">Historiques</button>
           <button className="button" data-filter=".offres">Offres</button>
         </div>
-
-        <div className="grid">
+        <div className="row">
           {
             favorites &&
-            favorites?.map((favorite, index) => (
-              <FavoriteGrid favorite={favorite} key={index} />
-            ))
+            favorites?.map((favorite, index) => {
+
+              return (
+                <div  className="col-4"   key={index +1}>
+                    <FavoriteGrid favorite={favorite} key={index} />
+               </div>
+              )
+              
+            })
           }
           <div className="grid-sizer col-1"></div>
         </div>
