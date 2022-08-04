@@ -6,6 +6,7 @@ import FileUploadService from '../../helpers/FileUploadService';
 import { toast, ToastContainer } from 'react-toastify';
 import { loadUserAction, ProfileAction } from '../../store/actions/Profile/UserActions';
 import { LoadUser } from '../../services/User/Profile/ProfileService';
+import HeaderProfileSkeleton from '../../skeleton/profile/HeaderProfileSkeleton';
 
 
 export default function HeaderProfileView({formData, setForm, props}) {
@@ -156,7 +157,7 @@ export default function HeaderProfileView({formData, setForm, props}) {
             </div>
             :
             infoprofile.success === false ?
-            infoprofile.message: <span/>
+            infoprofile.message : <HeaderProfileSkeleton/>
             }
         </>
     
