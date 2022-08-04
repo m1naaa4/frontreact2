@@ -9,6 +9,10 @@ import { useParams } from 'react-router-dom';
 import sectors from "../../../../data/sectors"
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogContentText, FormControl, IconButton, InputLabel, Tooltip } from '@material-ui/core';
+import Button from '@mui/material/Button';
+
 
 
 const ExperienceGrid = ({ experience }) => {
@@ -64,6 +68,7 @@ const ExperienceGrid = ({ experience }) => {
       experiences: { index: experience.index }
     }
     dispatch(CvdeleteAction(data, '', ''));
+    setOpen(false);
   }
 
   const alloptions = sectors.map((item) => (
@@ -140,6 +145,18 @@ const ExperienceGrid = ({ experience }) => {
     }),
   }
 
+  const [open,setOpen] = useState(false);
+
+  const HandleClickOpen = ()=>{
+    setOpen(true);
+    console.log("click to open")
+  }
+
+  const HandleClose = ()=>{
+    setOpen(false);
+    console.log("click to close")
+  }
+
 
   return (
     <>
@@ -151,7 +168,28 @@ const ExperienceGrid = ({ experience }) => {
             <div className="Contact">
               <div className="Add-Contact Invitation-Options">
                 <button type="button" name="button" onClick={handleShow} className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
-                <button type="button" name="button" onClick={deleteStudy} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
+                <button type="button" name="button" onClick={HandleClickOpen} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
+                <Dialog
+                    open={open}
+                    onClose={HandleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                    {"Confirm to delete experience"}
+                    </DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        are you sure you want to delete this experience content?
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={HandleClose}>NO</Button>
+                    <Button onClick={deleteStudy} autoFocus>
+                        YES
+                    </Button>
+                    </DialogActions>
+                </Dialog>
               </div>
               {/* <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
                 <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button> */}

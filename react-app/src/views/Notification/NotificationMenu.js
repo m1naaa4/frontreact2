@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link} from 'react-router-dom';
 import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import useOutsideClick from '../../helpers/useOutsideClick';
 
 export default function NotificationMenu({notification}) {
     const dispatch = useDispatch();
@@ -45,6 +46,11 @@ export default function NotificationMenu({notification}) {
         }
         dispatch( DeleteNotificationAction(data)); 
     };
+
+    useOutsideClick(ref, () => {
+        setDisplay(false)
+        console.log("clicked outside");
+    });
 
     return (
           
