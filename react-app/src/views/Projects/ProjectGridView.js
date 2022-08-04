@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { Text } from "../../containers/Language";
 import { Player } from 'video-react';
@@ -11,11 +11,21 @@ import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch } from 'react-redux';
 
+
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     const [classe, setClasse] = useState(project?.favorite);
     const dispatch = useDispatch();
     let history = useHistory();
+
+    const ref = useRef();
+    const [options_List, SetOptions_List] = useState(false);
+    const showOptions = () => {
+        SetOptions_List(true)
+    }
+    const hideOptions = () => {
+        SetOptions_List(false)
+    }
 
     let url_to_share = slugify(project.name, { prefix: config.urls.front + '/project/show/' + project.id });
 
@@ -38,8 +48,7 @@ const ProjectGridView = ({ project }) => {
 
         <div className="offer-box">
             <div className="offer-header" >
-                {/* style={project.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}> */}
-                <div className="offer-title">
+                <div className="offer-title" onMouseEnter={showOptions} onMouseLeave={hideOptions}>
                     {(project.logo_link === '/assets/images/porject-logo.png') ? <img src={project.logo_link} title="Nom du projet" alt="" /> :
                         <img src={project.logo_link} title="Nom du projet" alt="" />}
 
@@ -55,7 +64,20 @@ const ProjectGridView = ({ project }) => {
                         )}
                         <span>{project.visibility == 'public' ? <i className="uil uil-globe"></i> : ''}</span>
                     </div>
+                    {options_List && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details">
+                        {project.owner && project.owner.map((value) => {
+                            return <div className="project-popup-item">
+                                <Link className='project-popup-item-avatar' to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link>
+                                <div className="project-popup-item-username">
+                                    <Link to={`/profile/${value.profile_id}`}><h5>{value.username}</h5></Link>
+                                    <Link to={`/profile/${value.profile_id}`}><span>{value.type}</span></Link>
+                                </div>
+                            </div>
+                        }
+                        )}
+                    </div>}
                 </div>
+
                 <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
                         {console.log(classe)}

@@ -1690,6 +1690,36 @@ label.error {
   z-index: 999;
 }
 
+.popup_project_details {
+  top: 100px;
+  right: calc(33%/1.5);
+  padding: 5px 5px 0 5px;
+}
+.project-popup-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.project-popup-item-avatar {
+  width: 40px;
+  height: 40px;
+}
+.project-popup-item-avatar img {
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+.project-popup-item-username {
+  display: flex;
+  flex-direction: column;
+  margin-left: 7px;
+}
+.project-popup-item-username a * {
+  margin: 0;
+  margin-top: 0!important;
+}
+
 .Mini-Profile-Name {
   color: #37474F;
   font-weight: 700;
@@ -8035,7 +8065,7 @@ button .spinner-border {
   border-bottom: 1px solid #00CC66 !important;
 }
 
-.offer-title img {
+.offer-title > img {
   float: left;
   margin-right: 10px;
   border-radius: 10px;
