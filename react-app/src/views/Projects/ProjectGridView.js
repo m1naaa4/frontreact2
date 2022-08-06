@@ -10,6 +10,7 @@ import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch } from 'react-redux';
+import AvatarTooltip from '../../utils/AvatarTooltip';
 
 
 const ProjectGridView = ({ project }) => {
@@ -19,13 +20,6 @@ const ProjectGridView = ({ project }) => {
     let history = useHistory();
 
     const ref = useRef();
-    const [options_List, SetOptions_List] = useState(false);
-    const showOptions = () => {
-        SetOptions_List(true)
-    }
-    const hideOptions = () => {
-        SetOptions_List(false)
-    }
 
     let url_to_share = slugify(project.name, { prefix: config.urls.front + '/project/show/' + project.id });
 
@@ -48,7 +42,7 @@ const ProjectGridView = ({ project }) => {
 
         <div className="offer-box">
             <div className="offer-header" >
-                <div className="offer-title" onMouseEnter={showOptions} onMouseLeave={hideOptions}>
+                <div className="offer-title">
                     {(project.logo_link === '/assets/images/porject-logo.png') ? <img src={project.logo_link} title="Nom du projet" alt="" /> :
                         <img src={project.logo_link} title="Nom du projet" alt="" />}
 
@@ -57,25 +51,14 @@ const ProjectGridView = ({ project }) => {
                     <div className='footer-title'>
                         <span className='mr-5'>{project.sector && (project.sector.charAt(0).toUpperCase() + project.sector.slice(1))}, </span>
                         {project.owner && project.owner.map((value) => {
-                            return <Link to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
+                            return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
+                                <AvatarTooltip myRef={ref} data={value}/>
                             </Link>
                         }
                         )}
                         <span>{project.visibility == 'public' ? <i className="uil uil-globe"></i> : ''}</span>
                     </div>
-                    {options_List && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details">
-                        {project.owner && project.owner.map((value) => {
-                            return <div className="project-popup-item">
-                                <Link className='project-popup-item-avatar' to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link>
-                                <div className="project-popup-item-username">
-                                    <Link to={`/profile/${value.profile_id}`}><h5>{value.username}</h5></Link>
-                                    <Link to={`/profile/${value.profile_id}`}><span>{value.type}</span></Link>
-                                </div>
-                            </div>
-                        }
-                        )}
-                    </div>}
                 </div>
 
                 <div className="offer-logo">

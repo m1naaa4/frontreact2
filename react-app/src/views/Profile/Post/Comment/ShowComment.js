@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
 import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
+import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
 
 
@@ -10,6 +11,8 @@ export default function ShowComment({post}) {
     const dispatch = useDispatch();
     const comments = useSelector(state => state.getComments);
     const project = useSelector(state => state.getproject);
+
+    const refAvatar = useRef(null);
 
     const dataget = {
         action           : 'get', 
@@ -48,11 +51,12 @@ export default function ShowComment({post}) {
          {post.id === comment.commentable_id &&
             <div className="User-Comment" key={index} >
               <div className="Comment-Col-2">
-                <Link className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id}>
+                <Link ref={refAvatar} className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id}>
                   {comment.avatar ? 
                       <img src={comment.avatar} alt="avatar" />    
                   : <img src="/assets/images/avatar.png" alt="avatar" />}
                 </Link>
+                {/* <AvatarTooltip userId={comment.profile_id} myRef={refAvatar}/> */}
                 {/* <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
                   <label className="count-reactions">{comment.likeCount}</label>

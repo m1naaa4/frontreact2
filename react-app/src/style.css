@@ -1691,9 +1691,9 @@ label.error {
 }
 
 .popup_project_details {
-  top: 100px;
+  top: 10px;
   right: calc(33%/1.5);
-  padding: 5px 5px 0 5px;
+  padding: 5px;
 }
 .project-popup-item {
   display: flex;
@@ -8575,4 +8575,11 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 .active-profile-link i {
   color: #ffffff !important;
+}
+
+.tooltip-add-btn {
+  width: 100%;
+  height: 30px;
+  font-size: 11px;
+  line-height: 30px;
 }
