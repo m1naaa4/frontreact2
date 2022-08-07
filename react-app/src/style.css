@@ -2401,8 +2401,8 @@ label.error {
 }
 
 .single-offer-logo img {
-  width: 100%;
-  height: auto;
+  width: 55px !important;
+  height: 45px !important;
   border: 2px solid #F5F5F5;
   border-radius: 10px;
 }
@@ -3517,10 +3517,6 @@ label.error {
   margin-right: 15px;
 }
 
-.single-offer-logo img {
-  width: 100%;
-  height: auto;
-}
 
 .Signle-Offer-Content {
   padding: 0 30px;
@@ -4441,7 +4437,8 @@ label.error {
 }
 
 .Company-Infos .single-offer-logo img {
-  height: auto;
+  height: 45px !important;
+  width: 55px !important;
   margin-right: 8px;
 }
 
@@ -8036,9 +8033,10 @@ button .spinner-border {
 .offer-title img {
   float: left;
   margin-right: 10px;
-  border-radius: 100%;
-  max-width: 40px;
-  height: 40px;
+  border-radius: 10px;
+  max-width: 54px;
+  width: 49px !important;
+  height: 39px !important;
   object-fit: cover;
 }
 
