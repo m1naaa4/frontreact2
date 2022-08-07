@@ -1,80 +1,80 @@
-import React, {useEffect, useState, useRef} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState, useRef } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
 
 
-export default function ShowComment({post}) {
-    
-    const dispatch = useDispatch();
-    const comments = useSelector(state => state.getComments);
-    const project = useSelector(state => state.getproject);
+export default function ShowComment({ post }) {
 
-    const refAvatar = useRef(null);
+  const dispatch = useDispatch();
+  const comments = useSelector(state => state.getComments);
+  const project = useSelector(state => state.getproject);
 
-    const dataget = {
-        action           : 'get', 
-        provider         : 'post',
-        provider_id      : post.id,
-    }
+  const refAvatar = useRef(null);
 
-    const [replies, SetReplies] = useState(false);
-    const [replyBox, SetReplyBox] = useState(false); 
+  const dataget = {
+    action: 'get',
+    provider: 'post',
+    provider_id: post.id,
+  }
 
-    const showReplies = e =>  {
+  const [replies, SetReplies] = useState(false);
+  const [replyBox, SetReplyBox] = useState(false);
 
-      console.log('replies' , e)
-        SetReplies(e)
-        SetReplyBox(!replyBox)
-    }
+  const showReplies = e => {
 
-    // console.log('commentsssssssssssssssssssssssssssssssssssss', post.comments)
+    console.log('replies', e)
+    SetReplies(e)
+    SetReplyBox(!replyBox)
+  }
 
-    const showReplyBox = (value) => {
-        SetReplyBox(value)
-    }
+  // console.log('commentsssssssssssssssssssssssssssssssssssss', post.comments)
+
+  const showReplyBox = (value) => {
+    SetReplyBox(value)
+  }
 
   useEffect(() => {
     // if (post.commentCount > 0) {
-      // dispatch(GetCommentAction(dataget));
+    // dispatch(GetCommentAction(dataget));
     // }   
   }, [])
 
-    return (
-        
-        <> 
-         <div className="User-Comments"  >
-         {post.comments && post.comments.map((comment, index) => 
-         <div  key={index}>
-         {post.id === comment.commentable_id &&
-            <div className="User-Comment" key={index} >
-              <div className="Comment-Col-2">
-                <Link ref={refAvatar} className="Comment-User-Thumb" to={"/profile/"+ comment.profile_id}>
-                  {comment.avatar ? 
-                      <img src={comment.avatar} alt="avatar" />    
-                  : <img src="/assets/images/avatar.png" alt="avatar" />}
-                </Link>
-                {/* <AvatarTooltip userId={comment.profile_id} myRef={refAvatar}/> */}
-                {/* <ul className="comment-reactions-list">
+  return (
+
+    <>
+      <div className="User-Comments"  >
+        {post.comments && post.comments.map((comment, index) =>
+          <div key={index}>
+            {post.id === comment.commentable_id &&
+              <div className="User-Comment" key={index} >
+                <div className="Comment-Col-2">
+                  <Link ref={refAvatar} className="Comment-User-Thumb" to={"/profile/" + comment.profile_id}>
+                    {comment.avatar ?
+                      <img src={comment.avatar} alt="avatar" />
+                      : <img src="/assets/images/avatar.png" alt="avatar" />}
+                    <AvatarTooltip data={comment} myRef={refAvatar} />
+                  </Link>
+                  {/* <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
                   <label className="count-reactions">{comment.likeCount}</label>
                 </ul> */}
-              </div>
-              <div className="Comment-Col-10">
-                <div className="Comment-User">
-                  <div className="Comment-Content">
-                    <div className="Comment-User-Name">
-                      <Link className="Comment-User-Profile" to={"/profile/"+ comment.profile_id}  >{comment.user_name}</Link>
-                      <span className="Comment-Date">{comment.created_at}</span>
-                    </div>
-                    <div className="Comment-Text">
-                      <span>{comment.body} </span>
+                </div>
+                <div className="Comment-Col-10">
+                  <div className="Comment-User">
+                    <div className="Comment-Content">
+                      <div className="Comment-User-Name">
+                        <Link className="Comment-User-Profile" to={"/profile/" + comment.profile_id}  >{comment.user_name}</Link>
+                        <span className="Comment-Date">{comment.created_at}</span>
+                      </div>
+                      <div className="Comment-Text">
+                        <span>{comment.body} </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                
+
                   <div className="comment-actions multi-options">
                     {/* { comment.replies.data.length > 0 && ( 
                       <div className="comment-replies-count" onClick={e => showReplies(comment.id)}>
@@ -83,16 +83,16 @@ export default function ShowComment({post}) {
                         </button>
                       </div>
                     )} */}
-                      <div className="comment-replies-count">
-                      </div>
-                      <ul className="comment-actions-list">
-                        {/* <li className="comment-action"><button className="like-action">Like</button></li> */}
-                        <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>Reply</li>
-                      </ul>
+                    <div className="comment-replies-count">
+                    </div>
+                    <ul className="comment-actions-list">
+                      {/* <li className="comment-action"><button className="like-action">Like</button></li> */}
+                      <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>Reply</li>
+                    </ul>
                   </div>
-                                 
-              </div>
-{/*               
+
+                </div>
+                {/*               
               {replies == comment.id && 
               <div className="Comment-Replies">
                 { comment.replies.data &&  comment.replies.data.map((com, index) =>
@@ -132,20 +132,20 @@ export default function ShowComment({post}) {
               </div>
               }
               */}
-              {replyBox  === comment.id &&
-                <ReplyComment comment={comment} post={post} />
-              }
-              
-            </div>
-         }
-         </div>
-          )
-                          
-        }             
-                  
-          </div>
-        </>
-                                    
+                {replyBox === comment.id &&
+                  <ReplyComment comment={comment} post={post} />
+                }
 
-    )
+              </div>
+            }
+          </div>
+        )
+
+        }
+
+      </div>
+    </>
+
+
+  )
 }

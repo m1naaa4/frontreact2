@@ -3891,6 +3891,7 @@ label.error {
 .User-Comment {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .Comment-Col-10 {

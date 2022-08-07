@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { LoadProfile } from '../services/User/Profile/ProfileService'
 
 
 export default function AvatarTooltip({ myRef, data }) {
     const [isVisible, setIsVisible] = useState(false);
-    const [profileData, setProfileData] = useState(null);
+
 
     useEffect(() => {
-
         const showTooltip = () => {
             setIsVisible(true)
-            // LoadProfile(userId).then(value => setProfileData(value.profile))
         }
         const hideTooltip = () => {
             setIsVisible(false)
