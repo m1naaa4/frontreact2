@@ -1599,7 +1599,7 @@ label.error {
 .Dadupa-User .profile-image {
   width: 40px;
   height: 40px;
-  border-radius: 4px;
+  border-radius: 100%;
   overflow: hidden;
 }
 
@@ -4901,7 +4901,8 @@ label.error {
 
 .Contact .Contact-Thumb img {
   width: 100%;
-  height: auto;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .Contact .Contact-Infos {
@@ -5090,7 +5091,7 @@ label.error {
   width: 50px;
   height: 50px;
   /* background-color: #000; */
-  border-radius: 10px;
+  border-radius: 100%;
   overflow: hidden;
   position: absolute;
   top: 20px;
@@ -5101,6 +5102,7 @@ label.error {
   /* width: 100%;
   height: auto; */
   height: 100%;
+  object-fit: cover;
 }
 
 .WritePost-TextArea {
@@ -5193,7 +5195,7 @@ label.error {
   width: 50px;
   height: 50px;
   /* background-color: #000; */
-  border-radius: 10px;
+  border-radius: 100%;
   overflow: hidden;
 }
 
@@ -8036,9 +8038,9 @@ button .spinner-border {
 .offer-title img {
   float: left;
   margin-right: 10px;
-  border-radius: 100%;
-  max-width: 40px;
+  border-radius: 10px;
   height: 40px;
+  min-width: 50px;
   object-fit: cover;
 }
 
