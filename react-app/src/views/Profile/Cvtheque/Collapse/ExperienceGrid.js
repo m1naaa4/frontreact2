@@ -163,11 +163,13 @@ const ExperienceGrid = ({ experience }) => {
           <form className="" action="index.html" method="post">
             <div className="form-inputs">
               <div className="form-row">
-                <div className="col-md-6 input-row">
+                <div className="col-md-4 input-row">
                   <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
                 </div>
-                <div className="col-md-6 input-row input-flex">
+                <div className="col-md-4 input-row">
                   <ReactDatePicker className="wizard-required" selected={datefin} onChange={(date) => setDatefin(date)} />
+                </div>
+                <div className="col-md-4 input-row input-flex">
                   <label className="container-checkbox">
                     <input type="checkbox" defaultChecked={formData.present} />
                     <span className="checkmark"></span>
