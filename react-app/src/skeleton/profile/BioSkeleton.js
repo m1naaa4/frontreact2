@@ -2,7 +2,7 @@ import React from 'react'
 import Skeleton from '@material-ui/lab/Skeleton';
 
 
-export default function CvView(props) {
+export default function BioSkeleton(props) {
     return (
         <div className="col-md-6">
             <div className="Center-Side">

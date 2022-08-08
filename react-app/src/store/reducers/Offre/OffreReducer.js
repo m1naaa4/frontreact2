@@ -3,20 +3,28 @@ const initState = {
 }
 
 
-const OffreReducer = (state = initState ||undefined, action) => {
+const OffreReducer = (state = initState || undefined, action) => {
 
     switch (action.type) {
 
+        case 'LOADING_GET_MY_PROJECT':
+            return {
+                ...state,
+                offres: state.offres,
+                loading: true
+            }
         case 'GET_MY_PROJECT_SUCCESS':
             return {
                 ...state,
-                offres: action.res
+                offres: action.res,
+                loading: false
             }
 
         case 'GET_MY_CONTENTS_SUCCESS':
             return {
                 ...state,
-                mycontents: action.res.data
+                mycontents: action.res.data,
+                loading: false
             }
 
         case 'DELETE_MY_CONTENT_SUCCESS':
