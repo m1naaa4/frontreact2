@@ -4939,6 +4939,7 @@ label.error {
   padding-left: 10px;
   flex: 0 0 120px;
   max-width: 120px;
+  padding-top: 12px;
 }
 
 .Contact .Contact-Infos h4 {
@@ -8496,14 +8497,32 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 #shareButton {
   display: flex;
-  height: 35px;
-  border: none;
+  justify-content: center;
+  height: 32px;
+  border: 1px solid #00b601;
+  border-radius: 10px;
+  background-color: #00b601;
+  width: 80px;
+  margin-left: auto;
+  margin-right: 0;
+  color:white;
+  font-size: 13px;
   font-weight: bold;
-  font-size: 15px;
-  border-radius: 40px;
-  background: #00b601;
-  color: #fff;
-  width: 125px;
+}
+
+#shareButton:hover{
+  box-shadow: 1px 1px 1px 0px #74ed74;
+}
+
+#shareButton .uil{
+  color:white;
+  margin-right: 0;
+}
+
+#shareButtonText{
+  color:white;
+  margin-right: 6px;
+  font-size: 13px;
 }
 
 #image_share {
