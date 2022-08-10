@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { Text } from "../../containers/Language";
 import { Player } from 'video-react';
@@ -10,12 +10,16 @@ import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch } from 'react-redux';
+import AvatarTooltip from '../../utils/AvatarTooltip';
+
 
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     const [classe, setClasse] = useState(project?.favorite);
     const dispatch = useDispatch();
     let history = useHistory();
+
+    const ref = useRef();
 
     let url_to_share = slugify(project.name, { prefix: config.urls.front + '/project/show/' + project.id });
 
@@ -38,7 +42,6 @@ const ProjectGridView = ({ project }) => {
 
         <div className="offer-box">
             <div className="offer-header" >
-                {/* style={project.visibility ==='public'  ? {backgroundColor: '#F3FFF8'} : {}}> */}
                 <div className="offer-title">
                     {(project.logo_link === '/assets/images/porject-logo.png') ? <img src={project.logo_link} title="Nom du projet" alt="" /> :
                         <img src={project.logo_link} title="Nom du projet" alt="" />}
@@ -48,14 +51,16 @@ const ProjectGridView = ({ project }) => {
                     <div className='footer-title'>
                         <span className='mr-5'>{project.sector && (project.sector.charAt(0).toUpperCase() + project.sector.slice(1))}, </span>
                         {project.owner && project.owner.map((value) => {
-                            return <Link to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
+                            return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
+                                <AvatarTooltip myRef={ref} data={value}/>
                             </Link>
                         }
                         )}
                         <span>{project.visibility == 'public' ? <i className="uil uil-globe"></i> : ''}</span>
                     </div>
                 </div>
+
                 <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
                         {console.log(classe)}
