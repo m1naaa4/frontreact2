@@ -534,9 +534,8 @@ export default function ShowProjectView(props) {
                                             {project.project.visibility !== 'public' && user.id == project.project.user_id &&
                                                <>
                                                     <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
-                                                        {/* <img src="/assets/images/icons/dadupa-shareProjectIcon.svg" style={{ width:"13px",height:"13px",fill:"white",marginLeft:"5px" }} alt="" id="image_share" /> */}
-                                                        <i className="uil uil-share"></i>
-                                                        <span id="shareButtonText">Share</span>
+                                                        <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{width: "13px",height:"13px"}} alt="" id="image_share" />
+               
                                                     </button>
                                                     {/* <span> */}
 

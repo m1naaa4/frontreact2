@@ -8071,7 +8071,7 @@ button .spinner-border {
   max-width: 54px;
   width: 49px !important;
   height: 39px !important;
-  object-fit: cover;
+  border:1px solid white;
 }
 
 .footer-title {
@@ -8496,34 +8496,27 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 
 #shareButton {
-  display: flex;
-  justify-content: center;
-  height: 32px;
-  border: 1px solid #00b601;
-  border-radius: 10px;
-  background-color: #00b601;
-  width: 80px;
-  margin-left: auto;
-  margin-right: 0;
-  color:white;
-  font-size: 13px;
-  font-weight: bold;
+    margin-left: auto;
+    margin-right: 0;
+    background: #00b601;
+    border: 2px solid #00b601;
+    color: #fff;
+    font-size: 5px;
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 12px;
+    /* margin-top: 2px; */
+    padding:0;
+    padding-left:2px;
 }
 
 #shareButton:hover{
   box-shadow: 1px 1px 1px 0px #74ed74;
 }
 
-#shareButton .uil{
-  color:white;
-  margin-right: 0;
-}
-
-#shareButtonText{
-  color:white;
-  margin-right: 6px;
-  font-size: 13px;
-}
 
 #image_share {
   margin-left: 5px;
