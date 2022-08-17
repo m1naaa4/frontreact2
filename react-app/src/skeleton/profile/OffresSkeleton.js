@@ -11,7 +11,7 @@ export default function OffresSkeleton() {
                         <div className="row">
 
                             {Array(5).fill().map((e, index) => (
-                                <div key={index + 1} div className="col-md-6">
+                                <div key={index + 1} className="col-md-6">
                                     <div className="offer-box">
                                         <div className="offer-header">
                                             <div className="offer-title">
