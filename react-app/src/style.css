@@ -3479,6 +3479,7 @@ label.error {
 }
 
 .Post-Actions {
+  margin-top: 16px;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 36px;
@@ -3534,7 +3535,8 @@ label.error {
   font-size: 22px;
   font-weight: 900;
   color: #37474F;
-  margin: 0;
+  margin:0;
+  padding-top: 10px;
 }
 
 .single-offer-header .offer-bookmark {
@@ -3542,7 +3544,7 @@ label.error {
 }
 
 .single-offer-logo {
-  width: 100px;
+  width: 60px;
   height: auto;
   margin-right: 15px;
 }
@@ -5260,7 +5262,7 @@ label.error {
   height: 35px;
   padding: 0;
   font-size: 26px;
-  line-height: 35px;
+  line-height: 2px;
   background: transparent;
   border: none;
 }

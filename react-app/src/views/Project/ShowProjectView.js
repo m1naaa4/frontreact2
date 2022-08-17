@@ -373,11 +373,49 @@ export default function ShowProjectView(props) {
                                     <div className="single-header">
                                         <div className="signle-offer-type">Project Business</div>
                                         <div className="single-offer-header">
-                                            <h3 className="single-offer-name">{project.project.name}</h3>
+                                        <div className="Company-Left">
+                                            <div className="d-flex">
+                                                <div className="single-offer-logo">
+                                                    <img src={project.project.logo_link} title="Nom du projet" alt="" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="single-offer-name">{project.project.name}</h3>
+                                                </div>
+                                                <div style={{paddingTop:"15px",paddingLeft:"10px"}}>
+                                                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uis-bookmark"></i></button>
+                                                    <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
+                                                </div>
+                                                <div style={{paddingTop:"15px",paddingLeft:"4px"}}>
+                                                     {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="Company-Right">
+                                            <div className="Company-Phone">
+                                                <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                                {
+                                                    options_List && (
+                                                        <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+                                                            {user.id !== project.project.user_id &&
+                                                                <li className="PostDelete">
+                                                                    <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    )
+                                                }
+
+                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
+                                                </Modal>
+                                            </div>
+                                            <br />
+                                        </div>
+                                            
                                         </div>
                                     </div>
 
-                                    <div className="Company-Infos">
+                                    {/* <div className="Company-Infos">
                                         <div className="Company-Left">
                                             <div className="single-offer-logo">
                                                 <img src={project.project.logo_link} title="Nom du projet" alt="" />
@@ -407,7 +445,7 @@ export default function ShowProjectView(props) {
                                             </div>
                                             <br />
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     <div className="Content-Wrap">
                                         <div className="Signle-Offer-Media">
