@@ -60,9 +60,9 @@ export default function SideLeftProfileView() {
                   {infoprofile.infoprofile.look_angel !== 0 && <h3 className="Widget-Title text-center">Searching Funder</h3>}
                   {infoprofile.infoprofile.look_mentor !== 0 && <h3 className="Widget-Title text-center">Searching Mentor</h3>}
                   <div className="Stats-Text">
-                    {sectors.map((key) => {
-                      if (key[0] === infoprofile.infoprofile.sector) {
-                        return <Text tid={key[1]} />
+                    {sectors.map((value, key) => {
+                      if (value[0] === infoprofile.infoprofile.sector) {
+                        return <Text tid={value[1]} key={key}/>
                       }
                     }
                     )}
@@ -113,9 +113,9 @@ export default function SideLeftProfileView() {
               <div className="Profile-Info">
                 <h3>Secteur d’activité</h3>
                 {
-                  sectors.map((key) => {
-                    if (infoprofile.infoprofile.sector === key[0]) {
-                      return <span><Text tid={key[1]} /></span>
+                  sectors.map((value, key) => {
+                    if (infoprofile.infoprofile.sector === value[0]) {
+                      return <span key={key}><Text tid={value[1]} key={key}/></span>
                     }
                   }
                   )
@@ -124,9 +124,9 @@ export default function SideLeftProfileView() {
               <div className="Profile-Info">
                 <h3>Lieu de résidence</h3>
                 {
-                  countries.map((key) => {
-                    if (infoprofile.infoprofile.country === key.value) {
-                      return <span>{key.label}</span>
+                  countries.map((value, key) => {
+                    if (infoprofile.infoprofile.country === value.value) {
+                      return <span key={key}>{value.label}</span>
                     }
                   }
                   )

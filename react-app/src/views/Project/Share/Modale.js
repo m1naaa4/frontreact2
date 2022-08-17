@@ -29,7 +29,7 @@ const  Modale = ({ showmodal, datatype, handleClose}) => {
 
     async function callApi(value) {
 
-      const _url = `${process.env.REACT_APP_API_URL}`+'/user/getusers';
+      const _url = `${process.env.REACT_APP_API_URL}`+'user/getusers';
       let _body = JSON.stringify({
           search: value,
       });

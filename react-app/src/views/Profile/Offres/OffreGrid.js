@@ -55,6 +55,7 @@ export default function OffreGrid({ offre }) {
                                 ? <img src={offre.logo_link} style={{ height: "50", width: "40" }} title="Nom du projet" alt="" />
                                 : <img src="/assets/images/porject-logo.png" style={{ height: "50", width: "40" }} title="Nom du projet" alt="" />
                         }
+
                         <h3><Link to={`/project/show/${offre.id}`}>{offre.name}</Link></h3>
                         <span>{offre.sector}</span>
                     </div>

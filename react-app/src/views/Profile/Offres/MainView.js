@@ -38,7 +38,7 @@ export default function MainView(props) {
                         <div className="row">
                             {offres &&
                                 offres.map((offre, index) => (
-                                    <div div className="col-md-6" key={index}>
+                                    <div className="col-md-6" key={index}>
                                         <OffreGrid offre={offre} />
                                     </div>
                                 ))

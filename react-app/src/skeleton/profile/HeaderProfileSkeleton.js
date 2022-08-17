@@ -17,10 +17,10 @@ export default function HeaderProfileSkeleton() {
                     <label style={{width: "170px", height:"50px"}} htmlFor="coverUpload" className="coverUpload"/>
                     <div className="Profile-Navigation">
                         <ul className="Profie-Menu">
-                            <li><a activeClassName='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
-                            <li><a activeClassName='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
-                            <li><a activeClassName='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
-                            <li><a activeClassName='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
+                            <li><a className='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
+                            <li><a className='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
+                            <li><a className='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
+                            <li><a className='active-profile-link d-flex'><Skeleton className="rounded-circle" width={24} height={24} /> <Skeleton width={60} height={24} /></a></li>
                         </ul>
                     </div>
                 </div>

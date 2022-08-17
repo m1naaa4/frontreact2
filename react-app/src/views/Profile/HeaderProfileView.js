@@ -159,10 +159,10 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                 }
                                 <div className="Profile-Navigation">
                                     <ul className="Profie-Menu">
-                                        <li><NavLink className={currentPage === 'bio' && 'active-profile-link'} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</NavLink></li>
-                                        <li><NavLink className={currentPage === 'offres' && 'active-profile-link'} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</NavLink></li>
-                                        <li><NavLink className={currentPage === 'historique' && 'active-profile-link'} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> Historique</NavLink></li>
-                                        <li><NavLink className={currentPage === 'friends' && 'active-profile-link'} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" /> Réseaux</NavLink></li>
+                                        <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</NavLink></li>
+                                        <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</NavLink></li>
+                                        <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> Historique</NavLink></li>
+                                        <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" /> Réseaux</NavLink></li>
                                         {/*<li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li> */}
                                     </ul>
                                 </div>
