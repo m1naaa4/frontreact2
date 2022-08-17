@@ -514,25 +514,28 @@ export default function ShowProjectView(props) {
                                         <ul className="Offer-Details-List">
                                             <li className="Offer-Item">
                                                 <label className='mb-3'>Owners</label>
+                                                <div class="d-flex align-items-start">
                                                 <span>
                                                     {project.project.owner && project.project.owner.map((value) => {
                                                         return <div className="Contact">
+                                                            <div class="d-flex align-items-start">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                                                             <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link></div>
                                                             <div className="Contact-Infos">
                                                                 <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
+                                                            </div>
                                                             </div>
                                                         </div>
                                                     }
                                                     )}
                                                 </span>
 
-                                            </li>
+                                            
                                             {project.project.visibility !== 'public' && user.id == project.project.user_id &&
-                                                <li className="Offer-Item">
+                                               <>
                                                     <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
-                                                        Share
-                                                        <img src="/assets/images/icons/dadupa-share.svg" alt="" id="image_share" />
+                                                        <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{width: "13px",height:"13px"}} alt="" id="image_share" />
+               
                                                     </button>
                                                     {/* <span> */}
 
@@ -542,8 +545,10 @@ export default function ShowProjectView(props) {
                                                         <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
                                                     </Modal>
 
-                                                </li>
+                                               </>
                                             }
+                                            </div>
+                                            </li>
                                             <li className="Offer-Item">
                                                 <label>Publié le</label>
                                                 <span>{project.project.date}</span>
