@@ -47,7 +47,7 @@ export default function OffreGrid({ offre }) {
     }
     return (
         <>
-            <div className="offer-box" style={offre.visibility === 'public' ? { backgroundColor: '#F3FFF8' } : {}}>
+            <div className="offer-box">
                 <div className="offer-header">
                     <div className="offer-title">
                         {/* <img src="/assets/images/porject-logo.png" style={{ height: "50", width: "40" }} title="Nom du projet" alt="" /> */}
@@ -56,7 +56,7 @@ export default function OffreGrid({ offre }) {
 
 
                         <h3><Link to={`/project/show/${offre.id}`}>{offre.name}</Link></h3>
-                        <span>{offre.sector}</span>
+                        <span>{offre.sector} {offre.visibility === 'public' && <i class="uil uil-globe"></i>}</span>
                     </div>
                     <div className="offer-logo">
                         <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
