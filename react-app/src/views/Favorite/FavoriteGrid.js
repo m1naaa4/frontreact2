@@ -36,7 +36,8 @@ export default function FavoriteGrid({favorite}) {
                     <span>Secteur d’activité</span>
                   </div>
                   <div className="offer-logo">
-                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                    {/* <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
+                    <span style={{ fontWeight:"bold",fontSize:"10px",color:"orange" }}>favorite</span>
                     <img src={favorite.logo_link} title="Nom du projet" alt=""/>
                   </div>
                 </div>
