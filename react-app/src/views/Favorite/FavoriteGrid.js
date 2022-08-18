@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import YouTube from 'react-youtube'
 import Player from 'video-react/lib/components/Player'
@@ -30,16 +30,18 @@ export default function FavoriteGrid({favorite}) {
     return (
           <div className="grid-item offres" style={{width:'370px'}}>
               <div className="offer-box">
-                <div className="offer-header" style={{display:"flex",padding:"20px 15px"}}>
-                  <div className="offer-title" style={{flex:"0 0 80%",maxWidth:"67%"}}>
-                    <h3> {favorite.provider && <a href="single-offer.html">{favorite.name}</a>}</h3>
-                    <span>Secteur d’activité</span>
+                <div className="offer-header">
+                  <div className="offer-title">
+                  {(favorite.logo_link) ? <img style={{width:"51px"}} src={favorite.logo_link} title="Nom du projet" alt=""/> :
+                        <img src='/assets/images/porject-logo.png' title="Nom du projet" alt=""/>}
+                    <h3><span style={{fontSize:"12px"}}> {favorite.provider && <a href="single-offer.html">{favorite.name}</a>}</span></h3>
+                    <div className="footer-title">
+                      {/* <span className='mr-5'>Secteur d’activité</span> */}
+                      <span className='mr-5'>{favorite.sector}</span>
+                    </div>
                   </div>
-                  <div className="offer-logo" style={{maxWidth:"100%",flex:"0 0 20%",display:"flex",justifyContent:"flex-end",alignItems:"flex-start"}}>
-                    {/* <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
-                    <span style={{ fontWeight:"bold",fontSize:"10px",color:"orange" }}>favorite</span>
-                    {(favorite.logo_link) ? <img style={{width:"51px"}} src={favorite.logo_link} title="Nom du projet" alt=""/> :
-                        <img style={{width:"51px"}} src='/assets/images/porject-logo.png' title="Nom du projet" alt=""/>}
+                  <div className="offer-logo">
+                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                   </div>
                 </div>
                 {favorite.body && 

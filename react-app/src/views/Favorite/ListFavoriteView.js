@@ -22,9 +22,10 @@ export default function ListFavoriteView(props) {
     return (
       <div className="Favoris-List">
         <div className="button-group filter-button-group">
-          <button className="button" data-filter="*">Tous</button>
+          {/* <button className="button" data-filter="*">Tous</button>
           <button className="button" data-filter=".historiques">Historiques</button>
-          <button className="button" data-filter=".offres">Offres</button>
+          <button className="button" data-filter=".offres">Offres</button> */}
+          <div style={{marginLeft:"20px"}}><span style={{fontWeight:"bold",fontSize:"20px",color:"#00b601"}}>Favorites Page</span></div>
         </div>
         <div className="row">
           {
