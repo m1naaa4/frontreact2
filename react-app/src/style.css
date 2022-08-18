@@ -2460,9 +2460,10 @@ label.error {
   color: #37474F;
 }
 
-.offer-box .offer-title span {
-  color: #78909C;
-  font-size: 11px;
+.offer-box .offer-title h3 span {
+  color: #00b601;
+  font-size: 14px;
+  font-weight: 900;
   margin-top: 7px;
 }
 

@@ -39,7 +39,7 @@ export default function SideRightProfileView() {
               {invitations && invitations !== 'loading' ? invitations.slice(0, 3).map((invitation, index) =>
                 <Invitations invitation={invitation} key={invitation.id} />
               ) : Array(3).fill().map((item, index) => (
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center" key={index}>
                   <Skeleton width={40} height={40} style={{ borderRadius: "100%" }} /> &nbsp; <Skeleton width={150} height={24} />
                 </div>
               ))
