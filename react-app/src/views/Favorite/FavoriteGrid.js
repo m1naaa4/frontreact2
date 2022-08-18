@@ -37,7 +37,7 @@ export default function FavoriteGrid({favorite}) {
                   </div>
                   <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                    <img src={favorite.logo_link} title="Nom du projet" alt=""/>
+                    <img src={favorite.logo_link ? favorite.logo_link : "/assets/images/porject-logo.png"} title="Nom du projet" alt=""/>
                   </div>
                 </div>
                 {favorite.body && 
