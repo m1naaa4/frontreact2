@@ -27,7 +27,7 @@ export default function AvatarTooltip({ myRef, data }) {
 
     if (isVisible) {
         return (
-            <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details">
+            <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details" style={{marginTop:"67px",marginRight:"69px"}}>
                 <div className="project-popup-item">
                     <Link className='project-popup-item-avatar' to={`/profile/${data.profile_id}`}><img src={data.avatar} alt={data.username} /></Link>
                     <div className="project-popup-item-username">
