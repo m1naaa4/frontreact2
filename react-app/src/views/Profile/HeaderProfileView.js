@@ -137,7 +137,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                         />
                         <div className="container">
                             <div className="Profile-Wrap">
-                                <div className="Profile-Infos">
+                                <div className="Profile-Infos" style={{top:"5px"}}>
                                     {user_id === params.id && <> <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
                                         <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
                                             <i className="uil uil-camera" />
@@ -149,7 +149,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
 
                                     <div className="Profile-Name">
                                         <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                        {infoprofile.infoprofile.username}
+                                        <span style={{color:"white",fontSize:"20px"}}>{infoprofile.infoprofile.username}</span>
                                     </div>
                                 </div>
                                 {user_id === params.id && <>
@@ -157,7 +157,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                     <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
                                 </>
                                 }
-                                <div className="Profile-Navigation">
+                                <div className="Profile-Navigation" style={{top:"5px"}}>
                                     <ul className="Profie-Menu">
                                         <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</NavLink></li>
                                         <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</NavLink></li>
