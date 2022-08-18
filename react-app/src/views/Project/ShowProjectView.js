@@ -390,20 +390,20 @@ export default function ShowProjectView(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="Company-Right">
-                                            <div className="Company-Phone">
-                                                <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
-                                                {
-                                                    options_List && (
-                                                        <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-                                                            {user.id !== project.project.user_id &&
-                                                                <li className="PostDelete">
-                                                                    <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    )
-                                                }
+                                          {user.id !== project.project.user_id && (<div className="Company-Right">
+                                                <div className="Company-Phone">
+                                                    <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                                    {
+                                                        options_List && (
+                                                            <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+                                                                
+                                                                    <li className="PostDelete">
+                                                                        <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                                    </li>
+                                                                
+                                                            </ul>
+                                                        )
+                                                    }
 
                                                 <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
@@ -411,7 +411,7 @@ export default function ShowProjectView(props) {
                                             </div>
                                             <br />
                                         </div>
-                                            
+                                            )}
                                         </div>
                                     </div>
 

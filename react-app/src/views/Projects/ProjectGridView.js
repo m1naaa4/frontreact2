@@ -9,7 +9,7 @@ import config from '../../Config'
 import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 
 
@@ -18,7 +18,7 @@ const ProjectGridView = ({ project }) => {
     const [classe, setClasse] = useState(project?.favorite);
     const dispatch = useDispatch();
     let history = useHistory();
-
+    const user = useSelector(state => state.userProfile.userProfile);
     const ref = useRef();
 
     let url_to_share = slugify(project.name, { prefix: config.urls.front + '/project/show/' + project.id });
@@ -32,6 +32,12 @@ const ProjectGridView = ({ project }) => {
         }
         dispatch(AddFavoriteAction(data))
     }
+
+    useEffect(()=>{
+        console.log("testttt");
+        console.log(user.id);
+        console.log(project.owner[0].id)
+    })
 
     const goToShowproject = (id) => {
         localStorage.setItem('provider', 'project')
@@ -53,7 +59,8 @@ const ProjectGridView = ({ project }) => {
                         {project.owner && project.owner.map((value) => {
                             return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
-                                <AvatarTooltip myRef={ref} data={value}/>
+
+                                { (user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} />):("")}
                             </Link>
                         }
                         )}
