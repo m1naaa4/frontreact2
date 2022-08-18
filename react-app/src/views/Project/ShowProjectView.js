@@ -386,27 +386,29 @@ export default function ShowProjectView(props) {
                                             </div>
                                             {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
                                         </div>
-                                        <div className="Company-Right">
-                                            <div className="Company-Phone">
-                                                <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
-                                                {
-                                                    options_List && (
-                                                        <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-                                                            {user.id !== project.project.user_id &&
-                                                                <li className="PostDelete">
-                                                                    <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    )
-                                                }
+                                        {
+                                            user.id !== project.project.user_id && (
+                                                <div className="Company-Right">
+                                                    <div className="Company-Phone">
+                                                        <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                                        {
+                                                            options_List && (
+                                                                <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+                                                                    <li className="PostDelete">
+                                                                        <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                                    </li>
+                                                                </ul>
+                                                            )
+                                                        }
 
-                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
-                                                </Modal>
-                                            </div>
-                                            <br />
-                                        </div>
+                                                        <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
+                                                        </Modal>
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                            )
+                                        }
                                     </div>
 
                                     <div className="Content-Wrap">
@@ -515,39 +517,39 @@ export default function ShowProjectView(props) {
                                             <li className="Offer-Item">
                                                 <label className='mb-3'>Owners</label>
                                                 <div class="d-flex align-items-start">
-                                                <span>
-                                                    {project.project.owner && project.project.owner.map((value) => {
-                                                        return <div className="Contact">
-                                                            <div class="d-flex align-items-start">
-                                                            <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                                            <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link></div>
-                                                            <div className="Contact-Infos">
-                                                                <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
+                                                    <span>
+                                                        {project.project.owner && project.project.owner.map((value) => {
+                                                            return <div className="Contact">
+                                                                <div class="d-flex align-items-start">
+                                                                    <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
+                                                                    <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link></div>
+                                                                    <div className="Contact-Infos">
+                                                                        <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            </div>
-                                                        </div>
+                                                        }
+                                                        )}
+                                                    </span>
+
+
+                                                    {project.project.visibility !== 'public' && user.id == project.project.user_id &&
+                                                        <>
+                                                            <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
+                                                                <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{ width: "13px", height: "13px" }} alt="" id="image_share" />
+
+                                                            </button>
+                                                            {/* <span> */}
+
+                                                            {/* </span> */}
+
+                                                            <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
+                                                            </Modal>
+
+                                                        </>
                                                     }
-                                                    )}
-                                                </span>
-
-                                            
-                                            {project.project.visibility !== 'public' && user.id == project.project.user_id &&
-                                               <>
-                                                    <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
-                                                        <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{width: "13px",height:"13px"}} alt="" id="image_share" />
-               
-                                                    </button>
-                                                    {/* <span> */}
-
-                                                    {/* </span> */}
-
-                                                    <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                        <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
-                                                    </Modal>
-
-                                               </>
-                                            }
-                                            </div>
+                                                </div>
                                             </li>
                                             <li className="Offer-Item">
                                                 <label>Publié le</label>
