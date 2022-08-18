@@ -9,7 +9,7 @@ class PusherService {
         key: 'local',
         cluster: 'eu',//`${process.env.CLUSTER}`,
         encrypted: true,
-        wsHost: `${process.env.WS_HOST}`,
+        wsHost: `${process.env.REACT_APP_WS_HOST}`,
         wsPort: 6001,
         wssPort: 6001,
         forceTLS: true,
