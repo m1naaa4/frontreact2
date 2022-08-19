@@ -7,6 +7,8 @@ export const ListFavoritesAction = (data) =>{
 
         generalePost(data).then((res) =>
             {
+                dispatch({ type: 'LOADING_GET_FAVORITES', res });
+
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'LOADING_MY_FAVORITES_LIST_SUCCESS', res});
 
