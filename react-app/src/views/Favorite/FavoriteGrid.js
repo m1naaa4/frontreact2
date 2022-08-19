@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import YouTube from 'react-youtube'
 import Player from 'video-react/lib/components/Player'
@@ -32,12 +32,16 @@ export default function FavoriteGrid({favorite}) {
               <div className="offer-box">
                 <div className="offer-header">
                   <div className="offer-title">
-                    <h3> {favorite.provider && <a href="single-offer.html">{favorite.name}</a>}</h3>
-                    <span>Secteur d’activité</span>
+                  {(favorite.logo_link) ? <img style={{width:"51px"}} src={favorite.logo_link} title="Nom du projet" alt=""/> :
+                        <img src='/assets/images/porject-logo.png' title="Nom du projet" alt=""/>}
+                    <h3><span style={{fontSize:"12px"}}> {favorite.provider && <a href="single-offer.html">{favorite.name}</a>}</span></h3>
+                    <div className="footer-title">
+                      {/* <span className='mr-5'>Secteur d’activité</span> */}
+                      <span className='mr-5'>{favorite.sector}</span>
+                    </div>
                   </div>
                   <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                    <img src={favorite.logo_link ? favorite.logo_link : "/assets/images/porject-logo.png"} title="Nom du projet" alt=""/>
                   </div>
                 </div>
                 {favorite.body && 
@@ -53,7 +57,7 @@ export default function FavoriteGrid({favorite}) {
                           src={favorite.media_link}
                       />
                       ) : (favorite.type === 'youtube' ?
-                      (<YouTube videoId={favorite.media_link} opts={opts} />):(<img width="100%" height="300" src={favorite.media_link} alt="Project"/>))):''
+                      (<YouTube videoId={favorite.media_link} opts={opts} />):(<img style={{width:"340px",height:"211px"}} src={favorite.media_link} alt="Project"/>))):''
                 }
                 </div>
                 <div className="offer-meta">
