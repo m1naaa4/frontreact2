@@ -370,7 +370,7 @@ export default function ShowProjectView(props) {
                                 <div className="col-md-8">
 
                                     {/*!--PAGE HEADER --*/}
-                                    <div className="single-header">
+                                    <div className="single-header" style={{marginBottom: "15px",marginTop:"15px"}}>
                                         <div className="signle-offer-type">Project Business</div>
                                         <div className="single-offer-header">
                                         <div className="Company-Left">
