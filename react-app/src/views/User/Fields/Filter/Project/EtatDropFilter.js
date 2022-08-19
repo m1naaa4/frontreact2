@@ -101,7 +101,7 @@ function EtatDropFilter({formData}) {
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={ (formData?.project_status==='')? 'Venture Status': formData?.project_status}
+                placeholder={ (formData?.project_status==='')? 'Venture Status': t(formData?.project_status)}
                 required={true}
                 className="Select"
         />

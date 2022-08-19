@@ -62,13 +62,13 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         const form = nameForm.current
 
         formData.project_id = getproject.project !== "loading" ? getproject.projectid: '';
-        formData.name = `${form['name'].value}`;
-        formData.project_area   = `${form['project_area'].value}`;
-        formData.project_status = `${form['project_status'].value}`;
-        formData.funding_search = `${form['funding_search'].value}`;
-        formData.sector_id = `${form['sector_id'].value}`;
+        formData.name = getproject.project.name;
+        formData.project_area   = getproject.project.project_area;
+        formData.project_status = getproject.project.project_status;
+        formData.funding_search = getproject.project.funding_search;
+        formData.sector_id = getproject.project.sector;
         formData.medialink = getproject.project.media_link;
-        formData.website_url = `${form['website_url'].value}`;
+        formData.website_url = getproject.project.website_url;
         formData.logolink  = getproject.project.logo_link;
         formData.mediatype = getproject.project.mediatype;
         formData.description = getproject.project.description;
@@ -127,21 +127,23 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
                                        <div className="form-inputs">
                                            <div className="form-row">
                                                <div className="col-md-12 input-row">
-                                                   <input type="text" name="name" onChange={setForm} defaultValue={getproject.project.name}
+                                                   {/* <input type="text" name="name" onChange={setForm} defaultValue={getproject.project.name}
+                                                          placeholder="Nom du projet" className="wizard-required" required/> */}
+                                                    <input type="text" name="name" onChange={(e)=>{getproject.project.name = e.target.value}} defaultValue={getproject.project.name}
                                                           placeholder="Nom du projet" className="wizard-required" required/>
                                                </div>
                                                <div className="col-md-6 input-row input-select">
-                                               <EtatDropFilter formData={formData}/>
+                                               <EtatDropFilter formData={getproject.project}/>
                                                </div>
    
                                                <div className="col-md-6 input-row input-select">
-                                               <SectorDropFilter formData={formData} />
+                                               <SectorDropFilter formData={getproject.project} />
                                                </div>
                                                <div className="col-md-12 input-row">
-                                               <ZoneDropFilter formData={formData}/>
+                                               <ZoneDropFilter formData={getproject.project}/>
                                                </div>
                                                <div className="col-md-12 input-row input-select">
-                                               <FinanceDropFilter formData={formData}/>
+                                               <FinanceDropFilter formData={getproject.project}/>
                                                </div>
                                                <div className="col-md-12 input-row">
                                                    <div className="custom-file">

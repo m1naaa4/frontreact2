@@ -9,7 +9,12 @@ function SectorDropFilter ({formData}){
 
     const HandleChange = (selected)=>{
         setOptionSelected(selected);
-        formData.sector_id=selected.value;
+        if(formData.sector){
+           formData.sector=selected.value;
+        }else{
+          formData.sector_id=selected.value;
+        }
+       
     }
     
 
@@ -99,7 +104,7 @@ function SectorDropFilter ({formData}){
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={ (formData?.sector_id==='') ? "Secteur d'activité" : formData?.sector_id}
+                placeholder={ ( (formData?.sector || formData?.sector_id) === '') ? "Secteur d'activité" : t((formData?.sector || formData?.sector_id ) )}
                 required={true}
                 className="Select"
         />
