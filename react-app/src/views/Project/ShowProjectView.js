@@ -383,7 +383,7 @@ export default function ShowProjectView(props) {
                                                 </div>
                                                 <div style={{paddingTop:"15px",paddingLeft:"10px"}}>
                                                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uis-bookmark"></i></button>
-                                                    <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
+                                                    {/* <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label> */}
                                                 </div>
                                                 <div style={{paddingTop:"15px",paddingLeft:"4px"}}>
                                                      {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
