@@ -9,7 +9,7 @@ import config from '../../Config'
 import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 
 
@@ -33,10 +33,11 @@ const ProjectGridView = ({ project }) => {
         dispatch(AddFavoriteAction(data))
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("testttt");
         console.log(user.id);
         console.log(project.owner[0].id)
+        console.log("project", project)
     })
 
     const goToShowproject = (id) => {
@@ -60,7 +61,7 @@ const ProjectGridView = ({ project }) => {
                             return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
 
-                                { (user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} />):("")}
+                                {(user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} />) : ("")}
                             </Link>
                         }
                         )}
@@ -79,7 +80,7 @@ const ProjectGridView = ({ project }) => {
                 {
                     project.is_video ? (
                         <img width="100%" height="300" src={project.media_link} alt="Project" />
-                    ) : (<img width="100%" height="300" src={project.media_link} alt="Project" />)
+                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img width="100%" height="300" src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img width="100%" height="300" src={project.media_link} alt="Project" />
                 }
             </div>
             <div className="offer-meta">
