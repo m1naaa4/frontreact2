@@ -115,10 +115,10 @@ export default function OffreGrid({ offre }) {
                         </li>
                         <li className="meta-item">
                             <div className="meta-icon">
-                                <img src="/assets/images/icons/value.svg" alt="" />
+                                <img src="/assets/images/icons/cost.svg" alt="" />
                             </div>
                             <div className="meta-details">
-                                <span className="meta-value">Type 3</span>
+                                <span className="meta-value">{offre.funding_search}</span>
                             </div>
                         </li>
                     </ul>
