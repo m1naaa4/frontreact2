@@ -35,10 +35,10 @@ const ProjectSkeletonGridOne = () => {
     }
 
     return (
-        <div className="Single-Content">
+        <div className="">
             <div className="row">
                 <div className="col-12">
-                    <div className="single-header">
+                    <div className="single-header text-center align-items-center">
                         <div className="single-offer-header">
                             <div className="offer-title" >
                                 <h4 style={{ fontSize: "16px !important" }} className="single-offer-name">{providername}</h4>
@@ -52,14 +52,10 @@ const ProjectSkeletonGridOne = () => {
                                         title="Edit Post"  className="edit-button" to={`update/${data.project_id}`}><i className="uil uil-pen"></i></NavLink> */}
                             </div>
                         </div>
-                        <div class="d-flex justify-content-start">
-                            <img style={{ height: '60vh',width: '60vh', marginBottom: "30px", marginRight: "10px" }} src="/assets/images/project-auth.png" alt="Auth needed to view project" />
+                        <div class="d-flex justify-content-start flex-column align-items-center">
+                            <img style={{ height: '40vh',width: '60vh'}} src="/assets/images/no-permission.svg" alt="Auth needed to view project" />
                             <p style={{ padding: '10px'}}>
-                                Lorem ipsum dolor sit amet. Ex autem quasi ut rerum voluptate aut deleniti expedita aut culpa dolorem. Aut unde voluptatem et consectetur voluptate qui dolorum commodi quo assumenda nulla id impedit sapiente nam minima praesentium. Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure.
-
-                                Eum corrupti autem qui doloribus doloremque est omnis tenetur sit dolores quam? Eos mollitia fugiat At voluptatibus distinctio et enim temporibus.
-
-                                Non omnis consequatur nam officia consequatur non deleniti reprehenderit. Eum facilis temporibus ut Quis ab tempora obcaecati et molestias blanditiis sapiente ratione et corrupti soluta.
+                                Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure.
                             </p>
 
                         </div>
