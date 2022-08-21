@@ -72,11 +72,12 @@ const ProjectSkeletonGridOne = () => {
                     </div>
                     <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
+                            <div class="modal-content" style={{padding: "0 2em"}}>
                                 <h5>Contact the owner to get get access to this content</h5>
-                                <span>{providername}</span>
+                                {/* <span><b>Project: </b>{providername}</span> */}
+                                <img style={{width: "50%", alignSelf: "center"}} src="/assets/images/ask-permission.svg" alt="ask for permission"/>
                                 <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
-                                    title="Edit Post" className="edit-button"><i className="uil-fast-mail"></i>
+                                    title="Edit Post" className="edit-button permission-button"><i className="uil-fast-mail"></i>
                                 </button>
                             </div>
 

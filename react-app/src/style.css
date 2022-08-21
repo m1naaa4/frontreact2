@@ -3519,6 +3519,13 @@ label.error {
   margin-top: 5px;
 }
 
+.permission-button {
+  width: 100%;
+  height: auto;
+  border-radius: 1em;
+  font-size: 2em;
+}
+
 .Content-Wrap {
   background: #fff;
   border-radius: 15px;
