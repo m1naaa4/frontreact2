@@ -72,15 +72,16 @@ const ProjectGridView = ({ project }) => {
                 <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
                         {console.log(classe)}
-                        <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i>
+                        {/* <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i> */}
+                        <i className="uil uil-bookmark"></i>
                     </button>
                 </div>
             </div>
             <div className="offer-media">
                 {
                     project.is_video ? (
-                        <img width="100%" height="300" src={project.media_link} alt="Project" />
-                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img width="100%" height="300" src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img width="100%" height="300" src={project.media_link} alt="Project" />
+                        <img src={project.media_link} alt="Project" />
+                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img style={{width:"340px",height:"268px"}} src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img style={{width:"350px",height:"268px"}} src={project.media_link} alt="Project" />
                 }
             </div>
             <div className="offer-meta">
