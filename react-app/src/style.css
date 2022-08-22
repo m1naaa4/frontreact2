@@ -1840,14 +1840,12 @@ label.error {
 }
 
 .filter-button {
-  width: 50px;
-  height: 50px;
   background-color: #00b601;
   border: 2px solid #00b601;
-  border-radius: 50%;
+  border-radius: 1em;
   color: #fff;
   transition: all .20s cubic-bezier(.65, .05, .36, 1);
-  padding: 0;
+  padding: 0 .5em;
   font-size: 24px;
 }
 
@@ -8003,15 +8001,11 @@ button .spinner-border {
 }
 
 .custom-filter-btn {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  width: 40px;
   height: 40px;
 }
 
 .Filter-Form .form-button {
   float: left;
-  width: 45px;
 }
 
 .DadupaModal-BTNSubmit::after,
@@ -8289,9 +8283,12 @@ button .spinner-border {
 }
 
 .DadupaModal-BTNSubmit.advenced-btn-search {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  padding: 0 15px;
+  font-size: 24px;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border-radius: 100%;
+  margin-right: 10px;
 }
 
 .Network-Filter .Filter-Form .input-row {
