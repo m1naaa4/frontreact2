@@ -20,6 +20,7 @@ function ResetPasswordWithToken(props) {
   const [valid, setValid] = useState();
   const [redirect,setRedirect] = useState(false);
   let { token } = useParams();
+  const [data,setData] = useState(false)
   const dispatch = useDispatch();
   const authResponse = useSelector((state) => state.userAuth.authResponse);
   const [fields, setfield] = useFormFields({
@@ -38,10 +39,13 @@ function ResetPasswordWithToken(props) {
     } else {
       setValid(false);
     }
+    setData(true);
   };
 
   useEffect(() => {
-    verifToken();
+    if(!data){
+      verifToken();
+    }
   });
 
   const HandlePassword = ()=>{
