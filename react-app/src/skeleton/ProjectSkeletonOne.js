@@ -4,9 +4,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { AskforAccessAction } from '../store/actions/Setting/SettingActions';
-
-
-
+import { Link } from 'react-router-dom';
 
 
 const ProjectSkeletonGridOne = () => {
@@ -56,13 +54,13 @@ const ProjectSkeletonGridOne = () => {
                             </div>
                         </div>
                         <div class="d-flex justify-content-start flex-column align-items-center">
-                            <img style={{ height: '40vh',width: '60vh'}} src="/assets/images/no-permission.svg" alt="Auth needed to view project" />
-                            <p style={{ padding: '10px'}}>
+                            <img style={{ height: '40vh', width: '60vh' }} src="/assets/images/no-permission.svg" alt="Auth needed to view project" />
+                            <p style={{ padding: '10px' }}>
                                 Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure.
                             </p>
 
                         </div>
-                        
+
                         <div>
                             <button onClick={goback} style={{ width: '200px' }} name="previous" className="previous action-button">
                                 <i className="uil uil-arrow-left  "></i> Previous
@@ -75,16 +73,24 @@ const ProjectSkeletonGridOne = () => {
                     </div>
                     <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style={{padding: "0 2em"}}>
+                            <div class="modal-content" style={{ padding: "0 2em" }}>
+                                <h2>providername</h2>
                                 <h5>Contact the owner to get get access to this content</h5>
-                                <h5>Contact <img  src={ownerAvatar} alt="avatar"/></h5>
-                                <h5>owner username {ownerName}</h5>
-                                <h5>id owner {idOfOwner}</h5>
-                                <span><b>Project: </b>{providername}</span>
-                                <img style={{width: "50%", alignSelf: "center"}} src="/assets/images/ask-permission.svg" alt="ask for permission"/>
-                                <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
-                                    title="Edit Post" className="edit-button permission-button"><i className="uil-fast-mail"></i>
-                                </button>
+                                <img style={{ width: "50%", alignSelf: "center" }} src="/assets/images/ask-permission.svg" alt="ask for permission" />
+                                <div className="d-flex justify-content-between">
+                                    <div className="Contact mb-0 mr-4">
+                                        <div class="d-flex align-items-start">
+                                            <div className="Contact-Thumb"> <Link to={`/profile/${idOfOwner}`}><img src={ownerAvatar} alt={ownerName} /></Link></div>
+                                            <div className="Contact-Infos">
+                                                <Link to={`/profile/${idOfOwner}`}><h4>{ownerName}</h4></Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
+                                        title="Edit Post" className="edit-button permission-button"><i className="uil-fast-mail"></i>
+                                    </button>
+                                </div>
+
                             </div>
 
                         </div>

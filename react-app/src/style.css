@@ -3520,7 +3520,7 @@ label.error {
 }
 
 .permission-button {
-  width: 100%;
+  width: -webkit-fill-available;
   height: auto;
   border-radius: 1em;
   font-size: 2em;
