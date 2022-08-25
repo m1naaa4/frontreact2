@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import YouTube from 'react-youtube'
 import Player from 'video-react/lib/components/Player'
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
@@ -27,6 +28,10 @@ export default function FavoriteGrid({favorite}) {
       dispatch(AddFavoriteAction(data))
     }
 
+    useEffect(()=>{
+      console.log(favorite);
+    })
+
     return (
           <div className="grid-item offres" style={{width:'370px'}}>
               <div className="offer-box">
@@ -34,7 +39,7 @@ export default function FavoriteGrid({favorite}) {
                   <div className="offer-title">
                   {(favorite.logo_link) ? <img style={{width:"51px"}} src={favorite.logo_link} title="Nom du projet" alt=""/> :
                         <img src='/assets/images/porject-logo.png' title="Nom du projet" alt=""/>}
-                    <h3><span style={{fontSize:"12px"}}> {favorite.provider && <a href="single-offer.html">{favorite.name}</a>}</span></h3>
+                    <h3><span style={{fontSize:"12px"}}> {favorite.provider && <NavLink to={`/project/show/${favorite.id}`}>{favorite.name}</NavLink>}</span></h3>
                     <div className="footer-title">
                       {/* <span className='mr-5'>Secteur d’activité</span> */}
                       <span className='mr-5'>{favorite.sector}</span>

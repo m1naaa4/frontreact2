@@ -235,6 +235,7 @@ const en = {
     'review_detail': "Review",
     'form.prject_name': "Venture name",
     'form.want_mentors': "I am seeking mentors",
+    'form.want_funder': "I am seeking funders",
     'form.add_url': "Add URL",
     'form.add_logo': "Add logo",
     'form.edit_logo': "Edit logo",
