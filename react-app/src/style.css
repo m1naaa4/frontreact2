@@ -1695,29 +1695,34 @@ label.error {
   right: calc(33%/1.5);
   padding: 5px;
 }
+
 .project-popup-item {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
+
 .project-popup-item-avatar {
   width: 40px;
   height: 40px;
 }
+
 .project-popup-item-avatar img {
   width: 100%;
   min-height: 100%;
   object-fit: cover;
   border-radius: 100%;
 }
+
 .project-popup-item-username {
   display: flex;
   flex-direction: column;
   margin-left: 7px;
 }
+
 .project-popup-item-username a * {
   margin: 0;
-  margin-top: 0!important;
+  margin-top: 0 !important;
 }
 
 .Mini-Profile-Name {
@@ -3536,7 +3541,7 @@ label.error {
   font-size: 22px;
   font-weight: 900;
   color: #37474F;
-  margin:0;
+  margin: 0;
   padding-top: 10px;
 }
 
@@ -8067,14 +8072,14 @@ button .spinner-border {
   border-bottom: 1px solid #00CC66 !important;
 }
 
-.offer-title > img {
+.offer-title>img {
   float: left;
   margin-right: 10px;
   border-radius: 10px;
   max-width: 54px;
   width: 49px !important;
   height: 39px !important;
-  border:1px solid white;
+  border: 1px solid white;
 }
 
 .footer-title {
@@ -8499,24 +8504,24 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 
 #shareButton {
-    margin-left: auto;
-    margin-right: 0;
-    background: #00b601;
-    border: 2px solid #00b601;
-    color: #fff;
-    font-size: 5px;
-    display: block;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 12px;
-    /* margin-top: 2px; */
-    padding:0;
-    padding-left:2px;
+  margin-left: auto;
+  margin-right: 0;
+  background: #00b601;
+  border: 2px solid #00b601;
+  color: #fff;
+  font-size: 5px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 12px;
+  /* margin-top: 2px; */
+  padding: 0;
+  padding-left: 2px;
 }
 
-#shareButton:hover{
+#shareButton:hover {
   box-shadow: 1px 1px 1px 0px #74ed74;
 }
 
@@ -8596,4 +8601,53 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   height: 30px;
   font-size: 11px;
   line-height: 30px;
+}
+
+
+/* ---------------------------------------- */
+/* --------- Create Article Page ---------- */
+/* ---------------------------------------- */
+.create-article .main-heading {
+  font-size: 20px;
+  color: #37474F;
+  font-weight: 700;
+}
+
+.create-article .input-row {
+  padding: 0px;
+}
+
+.create-article .title-input {
+  border: 1px solid #ccc !important;
+  border-radius: 1.5em !important;
+}
+
+.create-article .title-input:focus {
+  border-color: #00b601 !important;
+}
+
+.create-article .ql-toolbar {
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+}
+
+.create-article .ql-container {
+  background: #ffffff;
+  border-bottom-left-radius: 1.5em;
+  border-bottom-right-radius: 1.5em;
+  min-height: 50vh;
+}
+
+.sidebar {
+  background: #ffffff;
+  border-radius: 1.5em;
+  padding: 1em 1.5em;
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 3%);
+  margin-left: 1.5em;
+}
+
+.sidebar .sidebar-title{
+  font-size: 16px;
+  color: #37474F;
+  font-weight: 700;
 }
