@@ -1846,7 +1846,7 @@ label.error {
   color: #fff;
   transition: all .20s cubic-bezier(.65, .05, .36, 1);
   padding: 0 .5em;
-  font-size: 24px;
+  font-size: 15px;
 }
 
 .filter-button:hover {
@@ -8283,12 +8283,13 @@ button .spinner-border {
 }
 
 .DadupaModal-BTNSubmit.advenced-btn-search {
-  font-size: 24px;
-  height: 40px;
-  width: 40px;
+  font-size: 15px;
+  height: 25px;
+  width: 25px;
   padding: 0;
-  border-radius: 100%;
+  line-height: 15px;
   margin-right: 10px;
+  margin-top: 7.5px;
 }
 
 .Network-Filter .Filter-Form .input-row {
