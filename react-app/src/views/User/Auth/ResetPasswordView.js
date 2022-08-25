@@ -22,21 +22,13 @@ function ResetPasswordView(props) {
     email: "",
   });
 
-  // const Resetpassword = async () => {
-  //   const res = await axios.post("/password/create", fields);
-  //   if (res.status === 200) {
-  //     setSuccess(true);
-  //     console.log(res.data);
-  //   } else {
-  //     setSuccess(false);
-  //     console.log(res.data);
-  //   }
-  // };
 
   const HandleReset = ()=>{
 
-    dispatch(ResetpasswordAction(fields, props.props));
-    console.log(authResponse)
+    if($("#form-login").valid()){
+        dispatch(ResetpasswordAction(fields, props.props));
+        console.log(authResponse)
+    };
   }
 
   return (
