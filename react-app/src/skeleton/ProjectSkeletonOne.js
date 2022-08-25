@@ -14,6 +14,9 @@ const ProjectSkeletonGridOne = () => {
     const dispatch = useDispatch();
     const [providername, setProvidername] = useState(localStorage.getItem('provider_name'));
     const [provider, setProvider] = useState(localStorage.getItem('provider'));
+    const [ownerName, setOwner] = useState(localStorage.getItem('owner_of_provider'));
+    const [ownerAvatar, setOwnerAvatar] = useState(localStorage.getItem('owner_avatar'));
+    const [idOfOwner, setIdOfOwner] = useState(localStorage.getItem('id_of_owner'));
     const [provider_id, setProvider_id] = useState(window.location.href.split("/").pop());
     const [showmodal, setShowmodal] = useState(false);
     const handleShow = () => setShowmodal(true);
@@ -74,7 +77,10 @@ const ProjectSkeletonGridOne = () => {
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content" style={{padding: "0 2em"}}>
                                 <h5>Contact the owner to get get access to this content</h5>
-                                {/* <span><b>Project: </b>{providername}</span> */}
+                                <h5>Contact <img  src={ownerAvatar} alt="avatar"/></h5>
+                                <h5>owner username {ownerName}</h5>
+                                <h5>id owner {idOfOwner}</h5>
+                                <span><b>Project: </b>{providername}</span>
                                 <img style={{width: "50%", alignSelf: "center"}} src="/assets/images/ask-permission.svg" alt="ask for permission"/>
                                 <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
                                     title="Edit Post" className="edit-button permission-button"><i className="uil-fast-mail"></i>
