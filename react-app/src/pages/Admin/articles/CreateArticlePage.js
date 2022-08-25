@@ -26,13 +26,13 @@ export default function CreateArticlePage() {
                         <div className='row'>
                             <div className="col-md-12 d-flex flex-column sidebar">
                                 <h4 className="sidebar-title">Publish</h4>
-                                <p><span>Status: </span> <b>Draft</b> <button className='edit-btn' onClick={() => { }}>Edit</button></p>
-                                <p><span>Visibility: </span> <b>Public</b> <button className='edit-btn' onClick={() => { }}>Edit</button></p>
-                                <p><span>Publish: </span> <b>Immediately</b> <button className='edit-btn' onClick={() => { }}>Edit</button></p>
-                                <div className='d-flex justify-content-evenly'>
-                                    <button className='action-btn' onClick={() => { }}>Draft</button>
-                                    <button className='action-btn' onClick={() => { }}>Preview</button>
-                                    <button className='action-btn' onClick={() => { }}>Publish</button>
+                                <p><span>Status: </span> <b>Draft</b> <button className='edit-btn' onClick={() => { }}><i class="uil uil-pen"></i>edit</button></p>
+                                <p><span>Visibility: </span> <b>Public</b> <button className='edit-btn' onClick={() => { }}><i class="uil uil-pen"></i>edit</button></p>
+                                <p><span>Publish: </span> <b>Immediately</b> <button className='edit-btn' onClick={() => { }}><i class="uil uil-pen"></i>edit</button></p>
+                                <div className='d-flex justify-content-around'>
+                                    <button className='action-btn' onClick={() => { }}><i class="uil uil-file-bookmark-alt"></i>Draft</button>
+                                    <button className='action-btn' onClick={() => { }}><i class="uil uil-eye"></i>Preview</button>
+                                    <button className='action-btn' onClick={() => { }}><i class="uil uil-share"></i>Publish</button>
                                 </div>
                             </div>
                         </div>

@@ -8638,16 +8638,30 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   min-height: 50vh;
 }
 
-.sidebar {
+.create-article .sidebar {
   background: #ffffff;
   border-radius: 1.5em;
-  padding: 1em 1.5em;
+  padding: 1em;
   box-shadow: 0 0 20px 0 rgb(0 0 0 / 3%);
   margin-left: 1.5em;
 }
 
-.sidebar .sidebar-title{
+.create-article .sidebar .sidebar-title {
   font-size: 16px;
   color: #37474F;
   font-weight: 700;
+}
+
+.create-article .sidebar .edit-btn {
+  border: none;
+  background: none;
+  color: #00b601;
+}
+
+.create-article .sidebar .action-btn {
+  border-radius: 1em;
+  border: 1px solid #00b601;
+  background: #00b601;
+  color: #ffffff;
+  padding: .4em;
 }
