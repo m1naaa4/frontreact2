@@ -23,6 +23,8 @@ export default function ListPostsView() {
     const current = useSelector(state => state.posts.current);
     const loading = useSelector(state => state.posts.loading);
 
+    console.log("loading", loading)
+
     const data = {
         action: 'getPosts',
         user_profile_id: params.id,
@@ -52,15 +54,13 @@ export default function ListPostsView() {
 
         <div className="Posts-List">
             {
-                loading === true ?
+                loading === true || !loading ?
                     <ListPostsSkeleton />
                     : posts.success === false ? (
                         <div data-testid="error-message">ERROR</div>
                     ) : (
                         () => {
-
-                            if (posts.success !== false && posts !== undefined && posts !== "loading" && posts.length > 0) {
-
+                            if (posts.length > 0) {
                                 return (
                                     posts.map((post, index) => {
                                         if (posts.length === index + 1) {
@@ -98,24 +98,21 @@ export default function ListPostsView() {
                                 )
                             } else {
                                 return (
-                                    <>
-                                        <ListPostsSkeleton />
-                                        <div className="col-md-12">
+                                    <div className="col-md-12">
+                                        <div className="offer-box">
                                             <div className="offer-box">
-                                                <div className="offer-box">
-                                                    <div className="PostWrap">
-                                                        {/* <PostHeader post={}/> */}
-                                                        <div className="PostBody subscribedAt">
-                                                            <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect" />
-                                                            <div className="mt-2">
-                                                                <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
-                                                            </div>
+                                                <div className="PostWrap">
+                                                    {/* <PostHeader post={}/> */}
+                                                    <div className="PostBody subscribedAt">
+                                                        <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect" />
+                                                        <div className="mt-2">
+                                                            <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </>
+                                    </div>
                                 )
                             }
                         }
