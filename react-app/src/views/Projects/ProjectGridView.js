@@ -61,7 +61,7 @@ const ProjectGridView = ({ project }) => {
                             return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
 
-                                { (user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} styles={{marginTop:"67px",marginRight:"69px"}} />):("")}
+                                { (user?.profile_id != project.owner[0].profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{marginTop:"67px",marginRight:"69px"}} />):("")}
                             </Link>
                         }
                         )}
