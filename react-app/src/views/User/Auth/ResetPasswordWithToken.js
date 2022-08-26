@@ -18,13 +18,14 @@ function ResetPasswordWithToken(props) {
   const [t, i18n] = useTranslation();
   const history = useHistory();
   const [valid, setValid] = useState();
-  const [redirect,setRedirect] = useState(false);
+  const [tokenData,setTokenData] = useState({})
+  const [redirect,setRedirect] = useState('');
   let { token } = useParams();
   const [data,setData] = useState(false)
   const dispatch = useDispatch();
   const authResponse = useSelector((state) => state.userAuth.authResponse);
   const [fields, setfield] = useFormFields({
-    email: "",
+    password: ""
   });
   const [passwordShown, setPasswordShown] = useState(false);
   const TogglePasswordVisiblity = () => {
@@ -32,15 +33,29 @@ function ResetPasswordWithToken(props) {
   };
   const verifToken = async () => {
     const res = await axios.get(
-      `https://api.dadupa.com/api/password/find/${token}`
+      `${process.env.REACT_APP_API_URL}/password/find/${token}`
     );
     if (res.status === 200) {
+      setTokenData(res.data);
       setValid(true);
     } else {
       setValid(false);
     }
     setData(true);
   };
+
+  const ChangePass = async ()=>{
+      let datachange = {email: tokenData.email,token: tokenData.token, password: fields.password };
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/password/reset`,datachange);
+      if(res.status === 200){
+        setRedirect('true');
+        setTimeout(() => {
+          history.push("/login");
+        }, 3000);
+      }else{
+          setRedirect('false');
+      }
+  }
 
   useEffect(() => {
     if(!data){
@@ -51,11 +66,7 @@ function ResetPasswordWithToken(props) {
   const HandlePassword = ()=>{
 
     if($("#form-login").valid()){
-        console.log("clicked to change!");
-        setRedirect(true);
-        setTimeout(() => {
-           history.push("/login");
-        }, 3000);
+        ChangePass();
     };
   }
 
@@ -88,9 +99,15 @@ function ResetPasswordWithToken(props) {
                   }}
                 >
 
-                {redirect  && (
+                {redirect === 'true'  && (
                   <div className="alert alert-success">
                      Password Changed Successfully! Redirection in progress ....
+                  </div>
+                )}
+
+                {redirect === 'false'  && (
+                  <div className="alert alert-danger">
+                     Error while changing password, Please try again!
                   </div>
                 )}
 
