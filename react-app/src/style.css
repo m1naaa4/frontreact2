@@ -4920,7 +4920,7 @@ label.error {
 }
 
 .Contact div {
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .Contact:last-child {

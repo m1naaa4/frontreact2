@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { useDispatch } from "react-redux";
+import React, { useState, useRef } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { AskforAccessAction } from '../store/actions/Setting/SettingActions';
 import { Link } from 'react-router-dom';
+import AvatarTooltip from '../utils/AvatarTooltip';
 
 
 const ProjectSkeletonGridOne = () => {
@@ -12,18 +13,21 @@ const ProjectSkeletonGridOne = () => {
     const dispatch = useDispatch();
     const [providername, setProvidername] = useState(localStorage.getItem('provider_name'));
     const [provider, setProvider] = useState(localStorage.getItem('provider'));
-    const [ownerName, setOwner] = useState(localStorage.getItem('owner_of_provider'));
-    const [ownerAvatar, setOwnerAvatar] = useState(localStorage.getItem('owner_avatar'));
-    const [idOfOwner, setIdOfOwner] = useState(localStorage.getItem('id_of_owner'));
+    const [owner, setOwner] = useState(JSON.parse(localStorage.getItem('owner_of_provider')));
     const [provider_id, setProvider_id] = useState(window.location.href.split("/").pop());
     const [showmodal, setShowmodal] = useState(false);
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
+    const user = useSelector(state => state.userProfile.userProfile);
+
 
     const goback = () => {
         history.push('/project/lists')
     }
 
+    console.log(owner)
+
+    const ref = useRef();
 
     const handleSend = () => {
         let data = {
@@ -74,22 +78,26 @@ const ProjectSkeletonGridOne = () => {
                     <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content" style={{ padding: "0 2em" }}>
-                                <h2>providername</h2>
-                                <h5>Contact the owner to get get access to this content</h5>
-                                <img style={{ width: "50%", alignSelf: "center" }} src="/assets/images/ask-permission.svg" alt="ask for permission" />
-                                <div className="d-flex justify-content-between">
-                                    <div className="Contact mb-0 mr-4">
-                                        <div class="d-flex align-items-start">
-                                            <div className="Contact-Thumb"> <Link to={`/profile/${idOfOwner}`}><img src={ownerAvatar} alt={ownerName} /></Link></div>
-                                            <div className="Contact-Infos">
-                                                <Link to={`/profile/${idOfOwner}`}><h4>{ownerName}</h4></Link>
+                                <div className='d-flex'>
+                                    <img style={{ width: "50%", alignSelf: "center" }} src="/assets/images/ask-permission.svg" alt="ask for permission" />
+                                    <div className='d-flex flex-column ml-5'>
+                                        <h2>{providername}</h2>
+                                        <div className="Contact mb-4">
+                                            <div class="d-flex align-items-center">
+                                                <div className="Contact-Thumb" ref={ref}> <Link to={`/profile/${owner.id}`}><img src={owner.avatar} alt={owner.username} /></Link></div>
+                                                <div className="Contact-Infos pt-0">
+                                                    <Link to={`/profile/${owner.id}`}><h4>{owner.username}</h4></Link>
+                                                    {(user?.id != owner.id) && <AvatarTooltip myRef={ref} data={owner} styles={{ marginTop: "10px", marginRight: "0" }} />}
+                                                </div>
                                             </div>
                                         </div>
+                                        <h5>Contact the owner to get get access to this content</h5>
+                                        <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
+                                            title="Edit Post" className="edit-button permission-button mt-auto"><i className="uil-fast-mail"></i>
+                                        </button>
                                     </div>
-                                    <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
-                                        title="Edit Post" className="edit-button permission-button"><i className="uil-fast-mail"></i>
-                                    </button>
                                 </div>
+
 
                             </div>
 

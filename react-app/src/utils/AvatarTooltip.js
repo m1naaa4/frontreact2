@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-export default function AvatarTooltip({ myRef, data }) {
+export default function AvatarTooltip({ myRef, data, styles }) {
     const [isVisible, setIsVisible] = useState(false);
 
 
@@ -27,8 +27,8 @@ export default function AvatarTooltip({ myRef, data }) {
 
     if (isVisible) {
         return (
-            <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details" style={{marginTop:"67px",marginRight:"69px"}}>
-                <div className="project-popup-item">
+            <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details" style={styles}>
+                <div className="project-popup-item d-flex">
                     <Link className='project-popup-item-avatar' to={`/profile/${data.profile_id}`}><img src={data.avatar} alt={data.username} /></Link>
                     <div className="project-popup-item-username">
                         <Link to={`/profile/${data.id}`}><h5>{data.username}</h5></Link>

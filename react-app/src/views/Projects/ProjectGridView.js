@@ -42,9 +42,7 @@ const ProjectGridView = ({ project }) => {
     const goToShowproject = (id) => {
         localStorage.setItem('provider', 'project')
         localStorage.setItem('provider_name', project.name)
-        localStorage.setItem('owner_of_provider', project.owner[0].username)
-        localStorage.setItem('owner_avatar', project.owner[0].avatar)
-        localStorage.setItem('id_of_owner', project.owner[0].id)
+        localStorage.setItem('owner_of_provider', JSON.stringify(project.owner[0]))
         history.push('/project/show/' + id)
     };
     return (
@@ -63,7 +61,7 @@ const ProjectGridView = ({ project }) => {
                             return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
 
-                                { (user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} />):("")}
+                                { (user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} styles={{marginTop:"67px",marginRight:"69px"}} />):("")}
                             </Link>
                         }
                         )}
