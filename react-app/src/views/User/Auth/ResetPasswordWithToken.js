@@ -66,7 +66,11 @@ function ResetPasswordWithToken(props) {
   const HandlePassword = ()=>{
 
     if($("#form-login").valid()){
+      if(fields.password.length>6){
         ChangePass();
+      }else{
+        setRedirect('false');
+      }
     };
   }
 
