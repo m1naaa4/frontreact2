@@ -22,12 +22,12 @@ function ResetPasswordView(props) {
     email: "",
   });
 
-
+ 
   const HandleReset = ()=>{
 
     if($("#form-login").valid()){
         dispatch(ResetpasswordAction(fields, props.props));
-        console.log(authResponse)
+        
     };
   }
 
@@ -52,20 +52,12 @@ function ResetPasswordView(props) {
                 style={{
                   width: "100%",
                   height: "100%",
-                  border: "10px solid #00CC66",
-                  borderTopRightRadius: "20px",
-                  borderBottomLeftRadius: "20px",
                   padding: "10px",
                 }}
               >
                 {authResponse === 'false' && (
                   <div className="alert alert-danger">
                      Please verify if the email is correct and try again!
-                  </div>
-                )}
-                {authResponse === 'true'  && (
-                  <div className="alert alert-success">
-                     Please Check Your Inbox to reset your Password!
                   </div>
                 )}
                 <form
@@ -88,15 +80,15 @@ function ResetPasswordView(props) {
                           paddingTop: "5px",
                           paddingBottom: "5px",
                           fontSize: "12px",
-                          borderTopRightRadius: "10px",
-                          borderBottomLeftRadius: "10px",
+                          borderRadius:"30px"
                         }}
                       >
                         {t("S'INSCRIRE")}
                       </span>
                     </NavLink>
                   </div>
-                  <h3
+
+                  { (authResponse !== 'true') && (<><h3
                     className="form-title"
                     style={{ fontSize: "20px", paddingBottom: "30px" }}
                   >
@@ -141,15 +133,21 @@ function ResetPasswordView(props) {
                       style={{
                         width: "50%",
                         marginBottom: "50px",
-                        borderTopLeftRadius: "0px",
-                        borderBottomRightRadius: "0px",
-                        borderTopRightRadius: "15px",
-                        borderBottomLeftRadius: "15px",
+                        borderRadius: "30px"
                       }}
                     >
                       {t("RÉINITIALISER")}
                     </button>
-                  </div>
+                  </div></>)}
+
+                  {
+                    (authResponse ==='true' ) && (
+                      <div className="alert alert-success">
+                         Please Check Your Inbox to reset your Password!
+                      </div>
+                    )
+                  }
+                  
                 </form>
               </div>
             </div>
