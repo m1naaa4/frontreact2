@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch,Route,Redirect} from 'react-router-dom';
-import  Header from '../pages/Admin/Header';
+import Header from '../pages/Admin/Header';
 import Report from '../pages/Admin/Report';
 
 

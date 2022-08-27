@@ -41,13 +41,13 @@ const Routes = (props) => {
                         <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
-                        <Gaurd  path="/article" token='user-token' routeRedirect='/login' component={ArticlePrivateRoutes} />
+                        <Gaurd  path="/articles" token='user-token' routeRedirect='/login' component={ArticlePrivateRoutes} />
 
-                
 
                         <Route  path="/admin/login" component={AdminLogin} />
                         <Gaurd  path="/admin" token='admin-token' routeRedirect='/admin/login' component={AdminPrivateRoutes} />
                         <Gaurd  path="/reports" token='admin-token' routeRedirect='/admin/login' component={ReportPrivateRoutes} />
+
 
                         <Gaurd path="/noauthorization/:id" token='user-token' routeRedirect='/login'  component={NoAuthorization} />
                         <Gaurd path="/notfound/:id" token='user-token' routeRedirect='/login'  component={NotFound} />

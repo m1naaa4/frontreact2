@@ -8665,3 +8665,40 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   color: #ffffff;
   padding: .4em;
 }
+
+.article-box {
+  display: flex;
+  margin-bottom: 2em;
+  align-items: center;
+}
+.article-thumb {
+  width: 150px;
+  height: calc(150px / 1.7);
+  margin-right: 1.5em;
+  object-fit: cover;
+}
+
+.article-categories {
+  font-size: 13px;
+}
+
+.article-title {
+  font-weight: 700;
+  color: #00b601;
+}
+
+.article-desc {
+  margin: 0;
+  font-size: 15px;
+}
+
+.articles-list-sidebar h4 {
+  font-weight: 700;
+  color: #37474F;
+  font-size: 1.7em;
+}
+
+.article-sidebar-title {
+  color: #00b601;
+  font-size: 1.7rem;
+}
