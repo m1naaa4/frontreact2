@@ -7,11 +7,7 @@ import $ from "jquery";
 import "jquery-validation";
 import { useTranslation } from "react-i18next";
 import ItemForm from "./ItemForm";
-import { Text } from "../../../containers/Language";
 import { useFormFields } from "../../../helpers/hooksFormInput";
-import { resetWarningCache } from "prop-types";
-import axios from "axios";
-import config from "../../../Config";
 import { ResetpasswordAction } from '../../../store/actions/User/Auth/AuthActions'
 
 function ResetPasswordView(props) {
