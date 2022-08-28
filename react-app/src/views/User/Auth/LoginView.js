@@ -107,7 +107,7 @@ export default function LoginView(props) {
                                                     <span> {t('remember_me')}</span>
                                             </label>
                                         </div>
-                                        <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
+                                        <div className="forgot-password"><NavLink to="/resetPassword"><Text tid="forget_password" /></NavLink></div>
                                     </div>
                                     <div className="form-submit">
                                         <button type="submit"  name="submit"> 

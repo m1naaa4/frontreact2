@@ -26,6 +26,14 @@ class HttpService {
         }).then(response => response.data)
     }
 
+    resetPasswordData = async (item, added_url) => {
+        return await axios({
+            method: 'POST',
+            url: "/" + added_url,
+            data: item
+        }).then(response => response.data)
+    }
+
     postUploadData = async (item, added_url, tokenId = "") =>
     {
         item.profile_id = localStorage.getItem('profile_id');
