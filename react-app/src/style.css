@@ -3517,6 +3517,13 @@ label.error {
   margin-top: 5px;
 }
 
+.permission-button {
+  width: -webkit-fill-available;
+  height: auto;
+  border-radius: 1em;
+  font-size: 2em;
+}
+
 .Content-Wrap {
   background: #fff;
   border-radius: 15px;
@@ -4911,7 +4918,7 @@ label.error {
 }
 
 .Contact div {
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .Contact:last-child {

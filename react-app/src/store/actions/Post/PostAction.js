@@ -10,7 +10,6 @@ export const GetPostsAction = (data, props, current) => {
         GetPosts(data, props, current).then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
                 dispatch({ type: 'GET_POSTS_SUCCESS', res });
-
             } else if (res.hasOwnProperty('success') && res.success === false) {
                 dispatch({ type: 'GET_POSTS_ERROR', res })
             }
