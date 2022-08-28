@@ -34,7 +34,7 @@ const GetPostsReducer = (state = initState || undefined, action) => {
         case 'CLEAR_POSTS_LIST':
             return {
                 posts: [],
-                loading: false
+                loading: true
             }
 
         case 'ADD_POST_SUCCESS':

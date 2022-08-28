@@ -7,6 +7,7 @@ import { GetPostsAction } from '../../../store/actions/Post/PostAction';
 import PostBody from './PostWraps/PostBody';
 import PostFooter from './PostWraps/PostFooter';
 import PostHeader from './PostWraps/PostHeader';
+import {Redirect} from 'react-router-dom';
 
 
 export default function ListPostsView() {
@@ -22,8 +23,6 @@ export default function ListPostsView() {
     const hasMore = useSelector(state => state.posts.hasMore);
     const current = useSelector(state => state.posts.current);
     const loading = useSelector(state => state.posts.loading);
-
-    console.log("loading", loading)
 
     const data = {
         action: 'getPosts',
@@ -54,10 +53,10 @@ export default function ListPostsView() {
 
         <div className="Posts-List">
             {
-                loading === true || !loading ?
+                loading === true ?
                     <ListPostsSkeleton />
                     : posts.success === false ? (
-                        <div data-testid="error-message">ERROR</div>
+                        <Redirect to={{pathname: '/opps'}} />
                     ) : (
                         () => {
                             if (posts.length > 0) {
