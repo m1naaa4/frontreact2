@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {LoginUser,SignUpService,LogoutUser} from '../../../../services/User/AuthService'
+import {LoginUser,SignUpService,LogoutUser,ResetpasswordUser} from '../../../../services/User/AuthService'
 
 
 export const signUpAction = (credentials,props) =>
@@ -68,6 +68,18 @@ export const UserLoginAction = (credentials,props) =>
     }
 }
 
+    export const ResetpasswordAction = (credentials,props) =>
+{
+    return (dispatch)=>{
+       
+        ResetpasswordUser(credentials,dispatch).then((res)=>{
+           
+        },
+        error=>{
+            console.log(error);
+        })
+    }
+}
 
 export const UserLogOutAction = (history) =>
 {

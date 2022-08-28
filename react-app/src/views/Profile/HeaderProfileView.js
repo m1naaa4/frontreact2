@@ -149,7 +149,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
 
                                     <div className="Profile-Name">
                                         <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                        <span style={{color:"white",fontSize:"20px"}}>{infoprofile.infoprofile.username}</span>
+                                        <span style={{color:"white",fontSize:"20px"}}>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
                                     </div>
                                 </div>
                                 {user_id === params.id && <>
