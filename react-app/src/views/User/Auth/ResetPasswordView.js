@@ -8,11 +8,13 @@ import "jquery-validation";
 import { useTranslation } from "react-i18next";
 import ItemForm from "./ItemForm";
 import { useFormFields } from "../../../helpers/hooksFormInput";
-import { ResetpasswordAction } from '../../../store/actions/User/Auth/AuthActions'
+import { ResetpasswordAction } from '../../../store/actions/User/Auth/AuthActions';
+import Spinner from 'react-bootstrap/Spinner';
 
 function ResetPasswordView(props) {
   const [t, i18n] = useTranslation();
   const dispatch = useDispatch();
+  const [clicked,setClicked] = useState(false)
   const authResponse = useSelector(state => state.userAuth.authResponse);
   const [fields, setfield] = useFormFields({
     email: "",
@@ -23,7 +25,7 @@ function ResetPasswordView(props) {
 
     if($("#form-login").valid()){
         dispatch(ResetpasswordAction(fields, props.props));
-        
+        setClicked(true)
     };
   }
 
@@ -133,6 +135,13 @@ function ResetPasswordView(props) {
                       }}
                     >
                       {t("RÉINITIALISER")}
+                      {(clicked) &&  <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        />}
                     </button>
                   </div></>)}
 
