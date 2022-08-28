@@ -10,7 +10,7 @@ import { useFormFields } from "../../../helpers/hooksFormInput";
 import axios from "axios";
 import HeaderProfileSkeleton from "../../../skeleton/profile/HeaderProfileSkeleton";
 import { toast, ToastContainer } from "react-toastify";
-
+import Spinner from "react-bootstrap/Spinner";
 
 function ResetPasswordWithToken(props) {
   const [t, i18n] = useTranslation();
@@ -21,8 +21,9 @@ function ResetPasswordWithToken(props) {
   let { token } = useParams();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(false);
-  const [messageStatus,setMessageStatus] = useState();
-  const [hiddButton,setHiddeButton] = useState(false);
+  const [messageStatus, setMessageStatus] = useState();
+  const [hiddButton, setHiddeButton] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const toastId = useRef(null);
   const [fields, setfield] = useFormFields({
     password: "",
@@ -53,30 +54,33 @@ function ResetPasswordWithToken(props) {
       token: tokenData.token,
       password: fields.password,
     };
-    await axios.post(
-      `${process.env.REACT_APP_API_URL}/password/reset`,
-      datachange
-    ).then(res => {
-      setMessageStatus();
-      setHiddeButton(true);
-      setRedirect("true");
-      toastId.current = toast("Password Changed! Redirection in Progress....", 90);
-      setTimeout(() => {
-        history.push("/login");
-      }, 3000);
-    }).catch(err => {if(err.response.status === 401){
-      console.log("hereeee")
-      setMessageStatus("new password can not be the old password!");
-      setRedirect("false");
-    }else{setRedirect("false");}});
-
-
-
+    await axios
+      .post(`${process.env.REACT_APP_API_URL}/password/reset`, datachange)
+      .then((res) => {
+        setMessageStatus();
+        setHiddeButton(true);
+        setRedirect("true");
+        toastId.current = toast(
+          "Password Changed! Redirection in Progress....",
+          90
+        );
+        setTimeout(() => {
+          history.push("/login");
+        }, 3000);
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          setMessageStatus("new password can not be the old password!");
+          setRedirect("false");
+        } else {
+          setRedirect("false");
+        }
+      });
   };
 
   useEffect(() => {
     if (!data) {
-      setLoading(true)
+      setLoading(true);
       verifToken();
     }
   }, []);
@@ -84,6 +88,7 @@ function ResetPasswordWithToken(props) {
   const HandlePassword = () => {
     if ($("#form-login").valid()) {
       if (fields.password.length >= 6) {
+        setClicked(true);
         ChangePass();
       } else {
         setMessageStatus("Minimum 6 characters in password!");
@@ -98,21 +103,24 @@ function ResetPasswordWithToken(props) {
       <div className="Dadupa-Login">
         <div className="container">
           <div className="row">
-                <div className="col-md-6 col-lg-7 d-none d-sm-block d-md-none d-lg-block">
-                  <div className="page-image">
-                    <img
-                      src="/assets/images/passwordReset.svg"
-                      alt="Dadupa Connect"
-                    />
-                  </div>
-                </div>
-            {(loading) ? (
+            <div className="col-md-6 col-lg-7 d-none d-sm-block d-md-none d-lg-block">
+              <div className="page-image">
+                <img
+                  src="/assets/images/passwordReset.svg"
+                  alt="Dadupa Connect"
+                />
+              </div>
+            </div>
+            {loading ? (
               // <ProjectSkeleton />
-              <div className="col-md-6 col-lg-5"> <HeaderProfileSkeleton /> </div>
+              <div className="col-md-6 col-lg-5">
+                {" "}
+                <HeaderProfileSkeleton />{" "}
+              </div>
             ) : (
               <>
                 <div className="col-md-6 col-lg-5">
-                  {(valid) && (
+                  {valid && (
                     <div
                       className="form-wrapper"
                       style={{
@@ -121,15 +129,18 @@ function ResetPasswordWithToken(props) {
                         padding: "10px",
                       }}
                     >
-                      {(redirect === "true") && (
+                      {redirect === "true" && (
                         // <div className="alert alert-success" style={{fontWeight:"bold"}}>
                         //   Password Changed Successfully! Redirection in progress
                         //   ....
                         // </div>
-                        <ToastContainer position="bottom-left" hideProgressBar={false} />
+                        <ToastContainer
+                          position="bottom-left"
+                          hideProgressBar={false}
+                        />
                       )}
 
-                      {(redirect === "false" && !messageStatus ) && (
+                      {redirect === "false" && !messageStatus && (
                         <div className="alert alert-danger">
                           Error while changing password, Please try again!
                         </div>
@@ -170,12 +181,15 @@ function ResetPasswordWithToken(props) {
                               onChange={setfield}
                               required
                             />
-                            <br/>
+                            <br />
                             {messageStatus && (
-                        <div className="alert alert-danger" style={{fontWeight:"bold"}}>
-                          {messageStatus}
-                        </div>
-                      )}
+                              <div
+                                className="alert alert-danger"
+                                style={{ fontWeight: "bold" }}
+                              >
+                                {messageStatus}
+                              </div>
+                            )}
                             <span
                               toggle="#password-field"
                               onClick={TogglePasswordVisiblity}
@@ -192,36 +206,43 @@ function ResetPasswordWithToken(props) {
                             alignItems: "center",
                           }}
                         >
-                          
-
-                        {(!hiddButton) && (<button
-                            type="submit"
-                            name="submit"
-                            onClick={HandlePassword}
-                            style={{
-                              width: "50%",
-                              marginBottom: "50px",
-                              borderRadius: "30px"
-                            }}
-                          >
-                            {t("CHANGER MOT DE PASSE")}
-                          </button>)}
-                          
+                          {!hiddButton && (
+                            <button
+                              type="submit"
+                              name="submit"
+                              onClick={HandlePassword}
+                              style={{
+                                width: "50%",
+                                marginBottom: "50px",
+                                borderRadius: "30px",
+                              }}
+                            >
+                              {t("CHANGER MOT DE PASSE")}
+                              {clicked && (
+                                <Spinner
+                                  as="span"
+                                  animation="border"
+                                  size="sm"
+                                  role="status"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </button>
+                          )}
                         </div>
                       </form>
                     </div>
                   )}
 
-                  {(!valid) && (
+                  {!valid && (
                     <>
-                    
                       <NavLink
                         to="/resetPassword"
                         style={{ textDecoration: "none" }}
                       >
                         <span
                           style={{
-                            color:"#00CC66",
+                            color: "#00CC66",
                             fontWeight: "bold",
                             border: "3px solid #00CC66",
                             paddingLeft: "15px",
@@ -229,13 +250,14 @@ function ResetPasswordWithToken(props) {
                             paddingTop: "5px",
                             paddingBottom: "5px",
                             fontSize: "15px",
-                            borderRadius:"30px"
+                            borderRadius: "30px",
                           }}
                         >
                           {t("Go to reset password page")}
                         </span>
                       </NavLink>
-                      <br/><br/>
+                      <br />
+                      <br />
                       <span
                         style={{
                           fontSize: "25px",
@@ -247,7 +269,6 @@ function ResetPasswordWithToken(props) {
                       </span>{" "}
                     </>
                   )}
-
                 </div>
               </>
             )}
