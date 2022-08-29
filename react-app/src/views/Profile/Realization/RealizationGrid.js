@@ -27,14 +27,14 @@ export default function RealizationGrid({realization}) {
               </>
             }
             
-            <div className="Project-Thumb">
-                <img width="100%" height="300" src={realization.media_link} alt="Project"/>
+            <div className="Project-Thumb" style={{height:"120px",borderBottomLeftRadius:"0px",borderBottomRightRadius:"0px",marginBottom:"0px",backgroundColor:"#0c61cf"}}>
+            <Link to={`/project/show/${realization.id}`}> <img style={{height:"200px"}} src={realization.media_link} alt="Project"/> </Link>
             </div>
-            <div className="Project-Name">
+            <div className="Project-Name"style={{padding:"5px",height:"30px",backgroundColor:"#dfe6e3",borderBottomLeftRadius:"10px",borderBottomRightRadius:"10px",fontSize:"12px"}}>
             {
               action &&
               <>
-                <Link to={`/project/show/${realization.id}`}>{realization.name}</Link>
+                <span style={{fontWeight:"bold",paddingRight:"10px",fontSize:"12px"}}>Project:</span><Link to={`/project/show/${realization.id}`}>{realization.name}</Link>
               </>
             }
                 
