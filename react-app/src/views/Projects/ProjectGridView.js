@@ -11,6 +11,9 @@ import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
+import {
+    FacebookShareCount,
+  } from "react-share";
 
 
 const ProjectGridView = ({ project }) => {
@@ -21,7 +24,7 @@ const ProjectGridView = ({ project }) => {
     const user = useSelector(state => state.userProfile.userProfile);
     const ref = useRef();
 
-    let url_to_share = slugify(project.name, { prefix: config.urls.front + '/project/show/' + project.id });
+    let url_to_share = [project.name, `${process.env.REACT_APP_FRONT_URL}` + '/project/show/' + project.id ];
 
     const addTofavorite = (id) => {
         setClasse(!classe)
@@ -117,6 +120,9 @@ const ProjectGridView = ({ project }) => {
                     </li>
                     <li className="reaction shares" onClick={() => setShareUrl(true)}>
                         <i className="uil uil-share-alt"></i>
+                        <FacebookShareCount url={shareUrl}>
+  {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+</FacebookShareCount>
                         <span>380 Shares</span>
                     </li>
                 </ul>
