@@ -43,6 +43,7 @@ const ProjectGridView = ({ project }) => {
     const goToShowproject = (id) => {
         localStorage.setItem('provider', 'project')
         localStorage.setItem('provider_name', project.name)
+        localStorage.setItem('owner_of_provider', JSON.stringify(project.owner[0]))
         history.push('/project/show/' + id)
     };
     return (
@@ -60,8 +61,7 @@ const ProjectGridView = ({ project }) => {
                         {project.owner && project.owner.map((value) => {
                             return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
-
-                                {(user?.id != project.owner[0].id) ? (<AvatarTooltip myRef={ref} data={value} />) : ("")}
+                                { (user?.profile_id != project.owner[0].profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{marginTop:"67px",marginRight:"69px"}} />):("")}
                             </Link>
                         }
                         )}
@@ -72,15 +72,16 @@ const ProjectGridView = ({ project }) => {
                 <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
                         {console.log(classe)}
-                        <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i>
+                        {/* <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i> */}
+                        <i className="uil uil-bookmark"></i>
                     </button>
                 </div>
             </div>
             <div className="offer-media">
                 {
                     project.is_video ? (
-                        <img width="100%" height="300" src={project.media_link} alt="Project" />
-                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img width="100%" height="300" src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img width="100%" height="300" src={project.media_link} alt="Project" />
+                        <img src={project.media_link} alt="Project" />
+                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img style={{width:"340px",height:"268px"}} src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img style={{width:"350px",height:"268px"}} src={project.media_link} alt="Project" />
                 }
             </div>
             <div className="offer-meta">

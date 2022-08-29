@@ -6,7 +6,7 @@ import {Text} from "../../../containers/Language";
 import TypeDrop from "../Fields/Signup/TypeDrop";
 import $ from "jquery";
 import 'jquery-validation'
-import ZoneDropFilter from '../Fields/Filter/Project/ZoneDropFilter';
+import Zonedropfilter from '../Fields/Signup/Zonedropfilter';
 
 
 const RegisterStep2View = ({setForm, formData, navigation}) => {
@@ -58,8 +58,9 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
                     </div>
 
                     <div className="input-row">
-                        <ZoneDropFilter field='country' name="country" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } placeholder="Pays" value={country} onChange={setForm}
-                            required/>
+                        {/* <ZoneDropFilter field='country' name="country" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } placeholder="Pays" value={country} onChange={setForm}
+                            required/> */}
+                           <Zonedropfilter formData={formData}/>
                     </div>
 
                     <div className="input-row">

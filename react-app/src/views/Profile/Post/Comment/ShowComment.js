@@ -55,7 +55,7 @@ export default function ShowComment({ post }) {
                     {comment.avatar ?
                       <img src={comment.avatar} alt="avatar" />
                       : <img src="/assets/images/avatar.png" alt="avatar" />}
-                    <AvatarTooltip data={comment} myRef={refAvatar} />
+                    <AvatarTooltip data={comment} myRef={refAvatar} styles={{marginTop:"67px",marginRight:"69px"}} />
                   </Link>
                   {/* <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>

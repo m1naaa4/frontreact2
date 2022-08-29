@@ -15,6 +15,18 @@ const initState = {
                         ...state,
                         authResponse:'loading...'
                     }
+          
+          case 'RESET_SUCCESS':
+              return {
+                ...state,
+                authResponse: "true",
+              }
+
+          case 'RESET_ERROR':
+              return {
+                ...state,
+                authResponse: "false",
+              }
 
           case 'SIGNUP_SUCCESS':
               return {

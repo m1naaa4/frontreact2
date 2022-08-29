@@ -18,6 +18,8 @@ import NotificationsPrivateRoutes from './routes/NotificationsPrivateRoutes';
 import AdminLogin from './pages/Admin/AdminLogin';
 import AdminPrivateRoutes from './routes/AdminPrivateRoutes';
 import ReportPrivateRoutes from './routes/ReportPrivateRoutes';
+import Resetpassword from './pages/User/Auth/Resetpassword';
+import Resetpass from './pages/User/Auth/Resetpass';
 
 const Routes = (props) => {
 
@@ -32,6 +34,8 @@ const Routes = (props) => {
                         <Route exact path="/login/:token" component={UserLogin} />
                         <Route exact path="/register" component={UserRegister} />
                         <Route path="/register/:token" component={UserRegister} />
+                        <Route path="/resetPassword" component={Resetpassword} />
+                        <Route path="/password/:token" component={Resetpass} />
                         <Gaurd  path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
                         <Gaurd  path="/profile/:id" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
                         <Gaurd  path="/user/:id" token='user-token' routeRedirect='/login' component={SettingPrivateRoutes} />

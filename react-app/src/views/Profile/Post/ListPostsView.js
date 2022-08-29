@@ -7,6 +7,7 @@ import { GetPostsAction } from '../../../store/actions/Post/PostAction';
 import PostBody from './PostWraps/PostBody';
 import PostFooter from './PostWraps/PostFooter';
 import PostHeader from './PostWraps/PostHeader';
+import {Redirect} from 'react-router-dom';
 
 
 export default function ListPostsView() {
@@ -55,12 +56,10 @@ export default function ListPostsView() {
                 loading === true ?
                     <ListPostsSkeleton />
                     : posts.success === false ? (
-                        <div data-testid="error-message">ERROR</div>
+                        <Redirect to={{pathname: '/opps'}} />
                     ) : (
                         () => {
-
-                            if (posts.success !== false && posts !== undefined && posts !== "loading" && posts.length > 0) {
-
+                            if (posts.length > 0) {
                                 return (
                                     posts.map((post, index) => {
                                         if (posts.length === index + 1) {
@@ -98,24 +97,21 @@ export default function ListPostsView() {
                                 )
                             } else {
                                 return (
-                                    <>
-                                        <ListPostsSkeleton />
-                                        <div className="col-md-12">
+                                    <div className="col-md-12">
+                                        <div className="offer-box">
                                             <div className="offer-box">
-                                                <div className="offer-box">
-                                                    <div className="PostWrap">
-                                                        {/* <PostHeader post={}/> */}
-                                                        <div className="PostBody subscribedAt">
-                                                            <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect" />
-                                                            <div className="mt-2">
-                                                                <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
-                                                            </div>
+                                                <div className="PostWrap">
+                                                    {/* <PostHeader post={}/> */}
+                                                    <div className="PostBody subscribedAt">
+                                                        <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect" />
+                                                        <div className="mt-2">
+                                                            <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </>
+                                    </div>
                                 )
                             }
                         }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch , useSelector} from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import YouTube from 'react-youtube'
 import Player from 'video-react/lib/components/Player'
@@ -87,6 +87,30 @@ export default function FavoriteGrid({ favorite }) {
             <li className="meta-item">
               <div className="meta-icon">
                 <img src="assets/images/icons/marker.svg" alt="" />
+
+                      </div>
+                      <div className="meta-details">
+                        <span className="meta-value">{favorite.name}</span>
+                      </div>
+                    </li>
+                    <li className="meta-item">
+                      <div className="meta-icon">
+                        <img src="assets/images/icons/value.svg" alt=""/>
+                      </div>
+                      <div className="meta-details">
+                        <span className="meta-value">Type 3</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="offer-reactions">
+                  <ul className="reactions-box">
+                    <li className="reaction likes"><i className="dadupa-icon icon-clap"></i> <span>{favorite.likeCount}</span></li>
+                    <li className="reaction views"><i className="uil uil-eye"></i> <span>1500</span></li>
+                    <li className="reaction comments"><i className="uil uil-comment-dots"></i> <span>{favorite.commentCount}</span></li>
+                    <li className="reaction shares" data-toggle="modal" data-target="#SharingModal"><i className="uil uil-share-alt"></i> <span>380 Shares</span></li>
+                  </ul>
+                </div>
               </div>
               <div className="meta-details">
                 <span className="meta-title" onClick={() => goToShowproject(favorite.id)}><Text tid="targetAreas" /></span>
