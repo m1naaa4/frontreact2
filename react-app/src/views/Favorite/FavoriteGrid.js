@@ -4,14 +4,16 @@ import { NavLink } from 'react-router-dom';
 import YouTube from 'react-youtube'
 import Player from 'video-react/lib/components/Player'
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
-
-
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogContentText, FormControl, IconButton, InputLabel, Tooltip } from '@material-ui/core';
+import Button from '@mui/material/Button';
 
 
 
 export default function FavoriteGrid({favorite}) { 
     
     const dispatch = useDispatch();
+    const [open,setOpen] = useState(false);
     const [classe, setClasse] = useState(true);
     const opts = {
       height: '300',
@@ -25,12 +27,21 @@ export default function FavoriteGrid({favorite}) {
           'provider_id' : id,
           'provider'  : provider,
       }
-      dispatch(AddFavoriteAction(data))
+      dispatch(AddFavoriteAction(data));
+      setOpen(false);
     }
 
     useEffect(()=>{
       console.log(favorite);
-    })
+    });
+
+    const HandleClose = ()=>{
+      setOpen(false);
+    }
+    
+    const HandleClickOpen = () =>{
+      setOpen(true);
+    }
 
     return (
           <div className="grid-item offres" style={{width:'370px'}}>
@@ -46,7 +57,29 @@ export default function FavoriteGrid({favorite}) {
                     </div>
                   </div>
                   <div className="offer-logo">
-                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                    {/* <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
+                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                    <Dialog
+                    open={open}
+                    onClose={HandleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">
+                        {"Confirm To Remove Rrom Favorite"}
+                        </DialogTitle>
+                        <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            are you sure you want to remove this post from favorite?
+                        </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={HandleClose}>NO</Button>
+                        <Button onClick={(e)=>addTofavorite(favorite.id, favorite.provider)} autoFocus>
+                            YES
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
                   </div>
                 </div>
                 {favorite.body && 
