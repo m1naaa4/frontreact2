@@ -27,6 +27,8 @@ const StudieGrid = ({ study }) => {
     ['btp', 'filter.secteur.btp']
   ]
 
+  console.log("study", study)
+
   const dispatch = useDispatch();
   const [formData, setForm] = useForm({ present: study.present, etablissement: study.etablissement, sector: study.sector, lieu: study.lieu, diplome: study.diplome, description: study.description });
 
@@ -197,7 +199,7 @@ const StudieGrid = ({ study }) => {
                     </li> */}
           </div>
         </div>
-        <span>{study.lieu}</span>
+        <span className='text-uppercase'>{study?.sector} - {study.etablissement} - {study.lieu}</span>
 
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
           <form className="" action="index.html" method="post">
