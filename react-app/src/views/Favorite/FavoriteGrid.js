@@ -4,9 +4,7 @@ import { NavLink } from 'react-router-dom';
 import YouTube from 'react-youtube'
 import Player from 'video-react/lib/components/Player'
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { DialogContentText, FormControl, IconButton, InputLabel, Tooltip } from '@material-ui/core';
-import Button from '@mui/material/Button';
+import DialogWarning from '../../utils/DialogWarning';
 
 
 
@@ -15,12 +13,14 @@ export default function FavoriteGrid({favorite}) {
     const dispatch = useDispatch();
     const [open,setOpen] = useState(false);
     const [classe, setClasse] = useState(true);
+    const titleDialog = "Confirm To Remove From Favorite";
+    const ContentDialog = "are you sure you want to remove this post from favorite?";
     const opts = {
       height: '300',
       width: '100%'
     };
 
-    const addTofavorite = (id, provider) => {
+    const HandleConfirmation = (id, provider) => {
       setClasse(!classe)
       let data = {
           'url' : 'favorite/addToFavorite',
@@ -59,27 +59,14 @@ export default function FavoriteGrid({favorite}) {
                   <div className="offer-logo">
                     {/* <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                    <Dialog
-                    open={open}
-                    onClose={HandleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title">
-                        {"Confirm To Remove Rrom Favorite"}
-                        </DialogTitle>
-                        <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            are you sure you want to remove this post from favorite?
-                        </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                        <Button onClick={HandleClose}>NO</Button>
-                        <Button onClick={(e)=>addTofavorite(favorite.id, favorite.provider)} autoFocus>
-                            YES
-                        </Button>
-                        </DialogActions>
-                    </Dialog>
+                    <DialogWarning 
+                        title={titleDialog} 
+                        ContentText={ContentDialog} 
+                        open={open} 
+                        HandleConfirmation={(e)=>HandleConfirmation(favorite.id,favorite.provider)}
+                        HandleClose={HandleClose}
+                    />
+
                   </div>
                 </div>
                 {favorite.body && 
