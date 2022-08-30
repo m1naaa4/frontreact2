@@ -27,10 +27,10 @@ export default function RealizationGrid({realization}) {
               </>
             }
             
-            <div className="Project-Thumb" style={{height:"120px",borderBottomLeftRadius:"0px",borderBottomRightRadius:"0px",marginBottom:"0px",backgroundColor:"#0c61cf"}}>
-            <Link to={`/project/show/${realization.id}`}> <img style={{height:"200px"}} src={realization.media_link} alt="Project"/> </Link>
+            <div className="Project-Thumb" style={{height:"120px",borderBottomLeftRadius:"0px",borderBottomRightRadius:"0px",marginBottom:"0px",backgroundColor:"#A0F6CD"}}>
+             {(realization.media_link==="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/16303b54d3f2aa-650x600.jpg" || realization.media_link==="https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png")?(<Link to={`/project/show/${realization.id}`}> <img style={{width:"200px",height:"130px"}} src={"/assets/images/offer-thumbnail.svg"} alt="Project"/> </Link>):(<Link to={`/project/show/${realization.id}`}> <img style={{height:"200px"}} src={realization.media_link} alt="Project"/> </Link>)}
             </div>
-            <div className="Project-Name"style={{padding:"5px",height:"30px",backgroundColor:"#dfe6e3",borderBottomLeftRadius:"10px",borderBottomRightRadius:"10px",fontSize:"12px"}}>
+            <div className="Project-Name"style={{padding:"5px",height:"30px",backgroundColor:"#00b60117",borderBottomLeftRadius:"10px",borderBottomRightRadius:"10px",fontSize:"12px"}}>
             {
               action &&
               <>
