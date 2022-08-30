@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect, useState } from 'react'
 import UilLinkedin from '@iconscout/react-unicons/icons/uil-linkedin-alt'
 import HttpService from "../../../../../services/HttpService";
 import config from "../../../../../Config";
@@ -6,6 +6,7 @@ import LinkedIn from './LinkedIn';
 
 export default function LinkedInButton(props) {
 
+    const [client_id, setClient_id] = useState(`${process.env.REACT_APP_LKEDIN_CLIENT_ID}`);
     const callbackLinkedIn = (error, code, redirectUri) => {
         var credentials = {
             code : code
@@ -27,10 +28,10 @@ export default function LinkedInButton(props) {
     return (
         <div>
             <LinkedIn
-                clientId="7742laxwuilhzo"
-                callback={callbackLinkedIn}
-                scope={["r_liteprofile","r_emailaddress"]}
-                text="Login With LinkedIn"
+                clientId= {client_id}
+                callback= {callbackLinkedIn}
+                scope= {["r_liteprofile","r_emailaddress"]}
+                text= "Login With LinkedIn"
             />
         </div>
 

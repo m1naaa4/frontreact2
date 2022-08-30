@@ -10,7 +10,7 @@ export default function FacebookButton(props) {
         }
         window.fbAsyncInit = function() {
             window.FB.init({
-                appId      : config.facebook.appId,
+                appId      : `${process.env.REACT_APP_FB_APP_ID}`,
                 cookie     : true,
                 xfbml      : true,
                 version    : 'v7.0'
@@ -18,6 +18,8 @@ export default function FacebookButton(props) {
 
             window.FB.AppEvents.logPageView();
         };
+        console.log('FB_APP_ID', `${process.env.REACT_APP_FB_APP_ID}`);
+        console.log('REACT_APP_API_URL', `${process.env.REACT_APP_API_URL}`);
 
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
