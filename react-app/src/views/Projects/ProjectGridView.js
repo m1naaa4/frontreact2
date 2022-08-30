@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 import {
     FacebookShareCount,
-  } from "react-share";
+} from "react-share";
 
 
 const ProjectGridView = ({ project }) => {
@@ -24,7 +24,7 @@ const ProjectGridView = ({ project }) => {
     const user = useSelector(state => state.userProfile.userProfile);
     const ref = useRef();
 
-    let url_to_share = [project.name, `${process.env.REACT_APP_FRONT_URL}` + '/project/show/' + project.id ];
+    let url_to_share = [project.name, `${process.env.REACT_APP_FRONT_URL}` + '/project/show/' + project.id];
 
     const addTofavorite = (id) => {
         setClasse(!classe)
@@ -64,7 +64,7 @@ const ProjectGridView = ({ project }) => {
                         {project.owner && project.owner.map((value) => {
                             return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
-                                { (user?.profile_id != project.owner[0].profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{marginTop:"67px",marginRight:"69px"}} />):("")}
+                                {(user?.profile_id != project.owner[0].profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                             </Link>
                         }
                         )}
@@ -83,8 +83,13 @@ const ProjectGridView = ({ project }) => {
             <div className="offer-media">
                 {
                     project.is_video ? (
-                        <img src={project.media_link} alt="Project" />
-                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img style={{width:"340px",height:"268px"}} src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img style={{width:"350px",height:"268px"}} src={project.media_link} alt="Project" />
+                        <>
+                            <span className='thumb-play-btn'>
+                                <i className="uil uil-play"></i>
+                            </span>
+                            <img src={project.media_link} alt="Project" />
+                        </>
+                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img style={{ width: "340px", height: "268px" }} src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img style={{ width: "350px", height: "268px" }} src={project.media_link} alt="Project" />
                 }
             </div>
             <div className="offer-meta">
@@ -121,8 +126,8 @@ const ProjectGridView = ({ project }) => {
                     <li className="reaction shares" onClick={() => setShareUrl(true)}>
                         <i className="uil uil-share-alt"></i>
                         <FacebookShareCount url={shareUrl}>
-  {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
-</FacebookShareCount>
+                            {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+                        </FacebookShareCount>
                         <span>380 Shares</span>
                     </li>
                 </ul>
