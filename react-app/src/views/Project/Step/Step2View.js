@@ -16,7 +16,7 @@ export default function Step2View({ formData, setForm, navigation, props }) {
   const [selectedFiles, setSelectedFiles] = useState(undefined);
   const [file, setFile] = useState(medialink);
   const [media, setMedia] = useState(mediatype);
-
+  const [show,setShow] = useState(false);
   const [isLink, setLink] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
 
@@ -145,7 +145,7 @@ export default function Step2View({ formData, setForm, navigation, props }) {
 
   const HandlePreview = (e) => {
     e.preventDefault();
-    if (linkUrl.indexOf("www.youtube.com") > -1) {
+    if (linkUrl.includes("youtube.com")) {
       setFile(linkUrl);
       formData.medialink = linkUrl;
       formData.mediatype = "youtube";
@@ -154,6 +154,18 @@ export default function Step2View({ formData, setForm, navigation, props }) {
       setMedia("youtube");
       setEditVideo(false);
       setLink(true);
+      setShow(false);
+    }else if(linkUrl.includes("vimeo.com")){
+      setFile(linkUrl);
+      formData.medialink = linkUrl;
+      formData.mediatype = "vimeo";
+      setSelectedFiles(undefined);
+      setMedia("vimeo");
+      setEditVideo(false);
+      setLink(true);
+      setShow(false);
+    }else{
+      setShow(true);
     }
   };
 
@@ -307,6 +319,8 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                               />
                               <button disabled={disable}>Preview Video</button>
                             </form>
+                            
+                            {(show) && (<div class="alert alert-danger" style={{marginTop:"5px",borderRadius:"30px"}}> <span style={{fontSeize:"12px"}}>Only youtube or vimeo links are allowed!</span> </div>)}
                           </div>
                         </div>
                       </div>
