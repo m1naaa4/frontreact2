@@ -14,11 +14,14 @@ import AvatarTooltip from '../../utils/AvatarTooltip';
 import {
     FacebookShareCount,
   } from "react-share";
-
+import DialogWarning from '../../utils/DialogWarning';
 
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     const [classe, setClasse] = useState(project?.favorite);
+    const [open,setOpen] = useState(false);
+    const [titleDialog,setTitleDialog] = useState("Confirm To add to Favorite");
+    const [ContentDialog,setContentDialog] = useState("are you sure you want to add this post to favorite?");
     const dispatch = useDispatch();
     let history = useHistory();
     const user = useSelector(state => state.userProfile.userProfile);
@@ -33,14 +36,18 @@ const ProjectGridView = ({ project }) => {
             'provider_id': id,
             'provider': 'project',
         }
-        dispatch(AddFavoriteAction(data))
+        dispatch(AddFavoriteAction(data));
+        setOpen(false);
     }
 
     useEffect(() => {
-        console.log("testttt");
-        console.log(user.id);
-        console.log(project.owner[0].id)
-        console.log("project", project)
+        if(classe){
+            setTitleDialog("Confirm To Remove From Favorite");
+            setContentDialog("are you sure you want to remove this post from favorite?");
+        }else{
+            setTitleDialog("Confirm To add to Favorite");
+            setContentDialog("are you sure you want to add this post to favorite?");
+        }
     })
 
     const goToShowproject = (id) => {
@@ -49,6 +56,15 @@ const ProjectGridView = ({ project }) => {
         localStorage.setItem('owner_of_provider', JSON.stringify(project.owner[0]))
         history.push('/project/show/' + id)
     };
+
+    const HandleClose = ()=>{
+        setOpen(false);
+      }
+      
+      const HandleClickOpen = () =>{
+        setOpen(true);
+      }  
+
     return (
 
         <div className="offer-box">
@@ -73,11 +89,18 @@ const ProjectGridView = ({ project }) => {
                 </div>
 
                 <div className="offer-logo">
-                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
+                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
                         {console.log(classe)}
                         {/* <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i> */}
                         <i className="uil uil-bookmark"></i>
                     </button>
+                    <DialogWarning 
+                        title={titleDialog} 
+                        ContentText={ContentDialog} 
+                        open={open} 
+                        HandleConfirmation={e => addTofavorite(project.id)}
+                        HandleClose={HandleClose}
+                    />
                 </div>
             </div>
             <div className="offer-media">
