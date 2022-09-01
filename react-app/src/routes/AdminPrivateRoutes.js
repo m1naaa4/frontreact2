@@ -7,6 +7,7 @@ import Header from '../pages/Admin/Header';
 import Report from '../pages/Admin/Report';
 import ArticlesList from '../pages/Admin/articles/ArticlesList';
 import CreateArticlePage from '../pages/Admin/articles/CreateArticlePage';
+import ArticleDetails from '../pages/Admin/articles/ArticleDetails';
 
 
 export default function AdminPrivateRoutes(props) {
@@ -35,6 +36,11 @@ export default function AdminPrivateRoutes(props) {
                     <Route exact path={`${props.match.path}/articles/create`} component={CreateArticlePage} />
                     <Route exact path={props.match.path} render={props => (
                         <Redirect to={{ pathname: `${props.match.path}/articles/create` }} />
+                    )} />
+
+                    <Route exact path={`${props.match.path}/articles/view`} component={ArticleDetails} />
+                    <Route exact path={props.match.path} render={props => (
+                        <Redirect to={{ pathname: `${props.match.path}/articles/view` }} />
                     )} />
 
                     {/* 
