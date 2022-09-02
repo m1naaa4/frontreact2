@@ -11,10 +11,12 @@ import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
+import DialogWarning from '../../utils/DialogWarning';
 import {
     FacebookShareCount,
   } from "react-share";
 import DialogWarning from '../../utils/DialogWarning';
+
 
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
