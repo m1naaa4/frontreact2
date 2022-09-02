@@ -28,6 +28,7 @@ import VideoJS from '../../helpers/VideoJS';
 import Vimeo from '@u-wave/react-vimeo';
 import YouTube from 'react-youtube';
 import Select from 'react-select';
+import DialogWarning from '../../utils/DialogWarning';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -55,6 +56,9 @@ export default function ShowProjectView(props) {
     const [options_List, SetOptions_List] = useState(false);
     const [showReport, setShowReport] = useState(false);
     const [optionSelected, setOptionSelected] = useState();
+    const [open,setOpen] = useState(false);
+    const [titleDialog,setTitleDialog] = useState("Confirm To add to Favorite");
+    const [ContentDialog,setContentDialog] = useState("are you sure you want to add this post to favorite?");
 
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
@@ -314,7 +318,8 @@ export default function ShowProjectView(props) {
             'provider_id': id,
             'provider': 'project',
         }
-        dispatch(AddFavoriteAction(data))
+        dispatch(AddFavoriteAction(data));
+        setOpen(false);
     }
 
     const handleChange = async (selected) => {
@@ -341,6 +346,25 @@ export default function ShowProjectView(props) {
     useOutsideClick(ref, () => {
         SetOptions_List(false)
     });
+
+    const HandleClose = ()=>{
+        setOpen(false);
+      }
+      
+    const HandleClickOpen = () =>{
+        setOpen(true);
+    }
+    
+    useEffect(() => {
+        if(classe){
+            setTitleDialog("Confirm To Remove From Favorite");
+            setContentDialog("are you sure you want to remove this post from favorite?");
+        }else{
+            setTitleDialog("Confirm To add to Favorite");
+            setContentDialog("are you sure you want to add this post to favorite?");
+        }
+    })
+
 
     const videoJsOptions = {
         autoplay: false,
@@ -382,8 +406,15 @@ export default function ShowProjectView(props) {
                                                     <h3 className="single-offer-name">{project.project.name}</h3>
                                                 </div>
                                                 <div style={{paddingTop:"15px",paddingLeft:"10px"}}>
-                                                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                                                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
                                                     {/* <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label> */}
+                                                    <DialogWarning 
+                                                        title={titleDialog} 
+                                                        ContentText={ContentDialog} 
+                                                        open={open} 
+                                                        HandleConfirmation={e => addTofavorite(project.project.id)}
+                                                        HandleClose={HandleClose}
+                                                    />
                                                 </div>
                                                 <div style={{paddingTop:"15px",paddingLeft:"4px"}}>
                                                      {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
