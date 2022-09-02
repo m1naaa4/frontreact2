@@ -140,6 +140,9 @@ const fr = {
     'published_at': 'Publié le',
     'write_comment': 'Ecrivez un commentaire...',
 
+     
+    articles_suggestedArticle: 'Suggested Article',
+    articles_topArticle: 'Top Article',
 };
 
 export default fr;
