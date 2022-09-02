@@ -120,10 +120,7 @@ export default function FavoriteGrid({favorite}) {
             </li>
                   </ul>
                 </div>
-                
-              </div>            
-        </div>
-        <div className="offer-reactions">
+                <div className="offer-reactions">
           <ul className="reactions-box">
             <li className="reaction likes"><i className="dadupa-icon icon-clap"></i> <span>{favorite.likeCount}</span></li>
             <li className="reaction views"><i className="uil uil-eye"></i> <span>1500</span></li>
@@ -131,8 +128,8 @@ export default function FavoriteGrid({favorite}) {
             <li className="reaction shares" data-toggle="modal" data-target="#SharingModal"><i className="uil uil-share-alt"></i> <span>380 Shares</span></li>
           </ul>
         </div>
+                
+        </div>
       </div>
-    </div>
-
   )
 }
