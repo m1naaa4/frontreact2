@@ -1052,6 +1052,17 @@ label.error {
   background: transparent;
   padding: 0;
   border: none;
+  position: relative;
+}
+
+.notifications-badge {
+  background-color: #00b602;
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  position: absolute;
+  top: 7px;
+  right: 7px;
 }
 
 .Dadupa-Notifs-Box {
