@@ -9,14 +9,14 @@ import { useParams } from 'react-router-dom';
 import sectors from "../../../../data/sectors"
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { DialogContentText, FormControl, IconButton, InputLabel, Tooltip } from '@material-ui/core';
-import Button from '@mui/material/Button';
+import DialogWarning from '../../../../utils/DialogWarning';
 
 const StudieGrid = ({ study }) => {
   const { t } = useTranslation();
   const [datedebut, setDatedebut] = useState(new Date(study.datedebut));
   const [datefin, setDatefin] = useState(new Date(study.datefin));
+  const titleDialog = "Confirm to delete study";
+  const ContentDialog = "are you sure you want to delete this study content?";
   const dataCategory = [
     ['', 'filter.secteur'],
     ['agroalimentaire', 'filter.secteur.agroalimentaire'],
@@ -26,6 +26,8 @@ const StudieGrid = ({ study }) => {
     ['bio', 'filter.secteur.bio'],
     ['btp', 'filter.secteur.btp']
   ]
+
+  console.log("study", study)
 
   const dispatch = useDispatch();
   const [formData, setForm] = useForm({ present: study.present, etablissement: study.etablissement, sector: study.sector, lieu: study.lieu, diplome: study.diplome, description: study.description });
@@ -165,7 +167,7 @@ const StudieGrid = ({ study }) => {
                 <div className="Add-Contact Invitation-Options">
                   <button type="button" name="button" onClick={handleShow} className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
                   <button type="button" name="button" onClick={HandleClickOpen} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
-                  <Dialog
+                  {/* <Dialog
                     open={open}
                     onClose={HandleClose}
                     aria-labelledby="alert-dialog-title"
@@ -185,7 +187,16 @@ const StudieGrid = ({ study }) => {
                         YES
                     </Button>
                     </DialogActions>
-                </Dialog>
+                </Dialog> */}
+
+                    <DialogWarning 
+                        title={titleDialog} 
+                        ContentText={ContentDialog} 
+                        open={open} 
+                        HandleConfirmation={deleteStudy}
+                        HandleClose={HandleClose}
+                    />
+
                 </div>
                 {/* <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
                           <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button> */}
@@ -197,7 +208,7 @@ const StudieGrid = ({ study }) => {
                     </li> */}
           </div>
         </div>
-        <span>{study.lieu}</span>
+        <span className='text-uppercase'>{study?.sector} - {study.etablissement} - {study.lieu}</span>
 
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
           <form className="" action="index.html" method="post">

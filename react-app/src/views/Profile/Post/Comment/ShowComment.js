@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import useOutsideClick from '../../../../helpers/useOutsideClick';
 import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
@@ -11,8 +12,13 @@ export default function ShowComment({ post }) {
   const dispatch = useDispatch();
   const comments = useSelector(state => state.getComments);
   const project = useSelector(state => state.getproject);
-
+  const user = useSelector(state => state.userProfile.userProfile);
+  let [currentCommentid,setCurrentcommentid] = useState();
+  let [curentcommentuser,setcurentcommentuser] = useState();
+  const [options_List, SetOptions_List] = useState(false);
+  const [user_id, setUserId] = useState();
   const refAvatar = useRef(null);
+  const [display,setDisplay] = useState(false);
 
   const dataget = {
     action: 'get',
@@ -36,11 +42,37 @@ export default function ShowComment({ post }) {
     SetReplyBox(value)
   }
 
+  useEffect(()=>{
+    setUserId(user?.id); 
+  },[])
+
   useEffect(() => {
     // if (post.commentCount > 0) {
     // dispatch(GetCommentAction(dataget));
     // }   
+    console.log(post.comments);
   }, [])
+
+  const showOptions = (id,user) =>{
+    setCurrentcommentid(id);
+    setcurentcommentuser(user);
+    SetOptions_List(!options_List);
+
+  }
+
+  const dataComment = {
+    post_id     : currentCommentid,
+    provider    : "comment",
+    user_id     : curentcommentuser,
+}
+
+  const supprimeComment =(id) =>{
+    console.log("delete comment");
+  }
+
+  const reportComment =(id) =>{
+    console.log("report comment");
+  }
 
   return (
 
@@ -67,7 +99,34 @@ export default function ShowComment({ post }) {
                     <div className="Comment-Content">
                       <div className="Comment-User-Name">
                         <Link className="Comment-User-Profile" to={"/profile/" + comment.profile_id}  >{comment.user_name}</Link>
-                        <span className="Comment-Date">{comment.created_at}</span>
+                        <span className="Comment-Date">{comment.created_at} &nbsp; 
+                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id)}>
+                              <i className="uil uil-ellipsis-h"></i>
+                          </button>
+                          {      
+                              (options_List && currentCommentid === comment.id) && (
+                              <ul className="PostOptions-List PostOptions-ListShow"  >
+                                {user_id === comment.user_id &&
+                                  <li className="PostDelete">
+                                    <button onClick={e => supprimeComment(comment.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                                  </li>
+                                }
+                                {user_id !== comment.user_id &&
+                                  <li className="PostFavorite">
+                                    <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i> Report</button>
+                                  </li>
+                                }
+
+                                {/* <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <ReportModal providerObject={post} provider='comment' showReport={show} handleCloseReport={handleClose}/>
+                                </Modal>
+                                 */}
+                              </ul>
+                            )
+                          }
+                        </span>
+                       
+                         
                       </div>
                       <div className="Comment-Text">
                         <span>{comment.body} </span>
