@@ -11,6 +11,7 @@ import Modal from 'react-bootstrap/Modal'
 function SharePopUp (props){
     const { t } = useTranslation();
     const url = props.url+'?share=';
+    const sharedUrl = props.url[1]+'?share=';
 
     const handleClose = () => props.handleOpen(false);
 
@@ -34,17 +35,20 @@ function SharePopUp (props){
                 <Modal.Body className="ModalShare-Body">
                 <ul className="Share-Items">
                         <li className="Share-Item">
-                            <LinkedinShareButton url={url+'linkedin'} className="Share-Link Share-Linkedin" >
+                            <LinkedinShareButton url={sharedUrl+'linkedin'} quote={url[0]} 
+                            hashtag="#dadupa connect" className="Share-Link Share-Linkedin" >
                                 <i className="uil uil-linkedin-alt"></i>
                             </LinkedinShareButton>
                         </li>  
                         <li className="Share-Item">
-                            <FacebookShareButton url={url+'facebook'} className="Share-Link Share-Facebook" >
+                            <FacebookShareButton url={sharedUrl+'facebook'} quote={url[0]} 
+                            hashtag="#dadupa connect" className="Share-Link Share-Facebook" >
                                 <i className="uil uil-facebook-f"></i>
                             </FacebookShareButton>
                         </li>  
                         <li className="Share-Item">
-                            <TwitterShareButton url={url+'twitter'} className="Share-Link Share-Twitter" >
+                            <TwitterShareButton url={sharedUrl+'twitter'} quote={url[0]}
+                            hashtag="#dadupa connect" className="Share-Link Share-Twitter" >
                                 <i className="uil uil-twitter"></i>
                             </TwitterShareButton>    
                         </li>  
@@ -59,7 +63,7 @@ function SharePopUp (props){
                     <div className="ModalShare-CopyLink">
                         <h5>{t('or_copy_link')}</h5>
                         <form data-copy='true'>
-                            <input type="text" value={url+'link'}/>
+                            <input type="text" value={sharedUrl+'link'}/>
                             <button onClick={copy} name="button"><i className="uil uil-copy"></i></button>
                         </form>
                     </div>
