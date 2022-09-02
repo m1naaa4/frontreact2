@@ -24,9 +24,9 @@ export default function ArticleDetails(props) {
                             </div>
 
                             <div className="Content-Wrap">
-                                {/* <div className="Signle-Offer-Media">
-                                    <img width="100%" height="300" src="{project.project.media_link}" alt="Project" />
-                                </div> */}
+                                <div className="Signle-Offer-Media">
+                                    <img width="100%" src="https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg" alt="Project" />
+                                </div>
 
                                 <div className="Signle-Offer-Content">
                                     <div className="Signle-Offer-Text">
