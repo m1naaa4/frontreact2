@@ -15,7 +15,7 @@ import DialogWarning from '../../utils/DialogWarning';
 import {
     FacebookShareCount,
   } from "react-share";
-
+import DialogWarning from '../../utils/DialogWarning';
 
 
 const ProjectGridView = ({ project }) => {
@@ -129,7 +129,7 @@ const ProjectGridView = ({ project }) => {
                         </div>
                         <div className="meta-details">
                             <span className="meta-title"><Text tid="funding" /></span>
-                            <span className="meta-value">{project.funding_search}</span>
+                            <span className="meta-value">${project.funding_search}</span>
                         </div>
                     </li>
                 </ul>
