@@ -93,24 +93,17 @@ export default function HeaderProfileView({ formData, setForm, props }) {
         setCurrentFile(e);
         FileUploadService.upload(formData, (e) => {
 
-            toastId.current = toast('Upload in Progress', {
-                progress: Math.round((100 * e.loaded) / e.total)
-            });
+            toastId.current = toast('Upload in Progress',Math.round((100 * e.loaded) / e.total));
 
         })
             .then((res) => {
                 formData.type === 'avatar' ? setNewAvatar(res.data.profile.avatar) : setNewCover(res.data.profile.cover)
                 // dispatch({type:'LOAD_PROFILE_SUCCESS'}, res);
-                console.log('ressssssssssssssssssssssss', res.data.profile)
                 let data = {
                     'url': 'user'
                 }
                 dispatch(loadUserAction(data, history));
                 setSelectedFiles(undefined);
-                toast.done(toastId.current);
-            })
-            .then((files) => {
-                //setFileAvatar(files.data);
             })
             .catch(() => {
                 // setProgress(0);

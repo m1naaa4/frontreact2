@@ -135,19 +135,12 @@ export default function({newavatar, handleClose}) {
 
     const handleUpload = async e => {
         FileUploadService.upload(formData, (e) => {
-            toastId.current = toast('Upload in Progress', {
-                progress: Math.round((100 * e.loaded) / e.total)
-            });
+            toastId.current = toast('Upload in Progress', Math.round((100 * e.loaded) / e.total));
         })
         .then((response) => {
             setMedialink(response.data.url)
             setType(response.data.type)
             setSelectedFiles(undefined);
-            toast.done(toastId.current);
-        })
-        .then((files) => {
-            //setFileAvatar(files.data);
-            toast.done(toastId.current);
         })
         .catch(() => {
         });        
