@@ -8,6 +8,9 @@ import ReplyComment from './ReplyComment';
 import { Modal } from 'react-bootstrap';
 import ReportModal from '../../../Admin/Report/ReportModal';
 import axios from 'axios';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogContentText } from '@material-ui/core';
+import Button from '@mui/material/Button';
 
 
 export default function ShowComment({ post }) {
@@ -23,6 +26,8 @@ export default function ShowComment({ post }) {
   const refAvatar = useRef(null);
   const [display,setDisplay] = useState(false);
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [updateText,setUpdateText] = useState('');
 
   const dataget = {
     action: 'get',
@@ -76,10 +81,35 @@ export default function ShowComment({ post }) {
         .catch(err=> console.log(err));
   }
 
+  const editComment = async (id) =>{
+    console.log("edit");
+    setOpen(true);
+}
+
   const reportComment =(id) =>{
     setShow(true);
   }
   const handleClose = () => setShow(false);
+
+  const HandleCloseDialog =()=>{
+    setOpen(false);
+  }
+
+  const dataEdit = {
+    provider_id: currentCommentid,
+    body: updateText,
+   
+  }
+
+  const HandleEdit = async ()=>{
+    
+    await axios.post(`${process.env.REACT_APP_API_URL}/comment/update`,dataEdit)
+    .then(res => console.log("data changed successfuly"))
+    .catch(err=>console.log(err));
+
+
+    setOpen(false);
+  }
 
   return (
 
@@ -113,10 +143,38 @@ export default function ShowComment({ post }) {
                           {      
                               (options_List && currentCommentid === comment.id) && (
                               <ul className="PostOptions-List PostOptions-ListShow"  >
-                                {user_id === comment.user_id &&
-                                  <li className="PostDelete">
-                                    <button onClick={e => supprimeComment(comment.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
-                                  </li>
+                                {user_id === comment.user_id && (
+                                <> 
+                                    <li className="PostDelete">
+                                      <button onClick={e => supprimeComment(comment.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                                    </li>
+                                    <li className="PostDelete">
+                                      <button onClick={e => editComment(comment.id)}><i className="uil uil-edit-alt"></i> Edit</button>
+                                    </li>
+                                    <Dialog
+                                            open={open}
+                                            onClose={HandleCloseDialog}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogContent>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
+                                                           <input type="text" name="body" placeholder="Edit Your Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F0EDED"}}/>
+                                                </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                <Button onClick={HandleCloseDialog} autoFocus>
+                                                    <span style={{fontWeight:"bold"}}>Cancel</span>
+                                                </Button>
+                                                <Button onClick={HandleEdit} autoFocus>
+                                                    <span style={{fontWeight:"bold"}}>Edit</span>
+                                                </Button>
+                                                </DialogActions>
+                                    </Dialog>
+                                </>
+                                 
+                                  )
                                 }
                                 {user_id !== comment.user_id &&
                                   <li className="PostFavorite">
