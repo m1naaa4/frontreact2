@@ -160,15 +160,15 @@ export default function ShowComment({ post }) {
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
                                                     {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
-                                                           <textarea type="text" name="body" placeholder="Edit Your Comment" value={comment.body} onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC"}}></textarea>
+                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
-                                                <Button onClick={HandleCloseDialog} autoFocus>
-                                                    <span style={{fontWeight:"bold"}}>Cancel</span>
+                                                <Button onClick={HandleCloseDialog} style={{backgroundColor:"#00CC66",borderRadius:"30px"}}  autoFocus>
+                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>Cancel</span>
                                                 </Button>
-                                                <Button onClick={HandleEdit} autoFocus>
-                                                    <span style={{fontWeight:"bold"}}>Edit</span>
+                                                <Button onClick={HandleEdit} style={{backgroundColor:"#00CC66",marginLeft:"15px",marginRight:"15px",borderRadius:"30px"}} autoFocus>
+                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>Edit</span>
                                                 </Button>
                                                 </DialogActions>
                                     </Dialog>
