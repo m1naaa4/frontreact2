@@ -15,7 +15,6 @@ import DialogWarning from '../../utils/DialogWarning';
 import {
     FacebookShareCount,
 } from "react-share";
-import DialogWarning from '../../utils/DialogWarning';
 
 
 const ProjectGridView = ({ project }) => {
