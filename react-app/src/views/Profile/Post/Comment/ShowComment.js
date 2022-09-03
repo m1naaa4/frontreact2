@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
+import $ from 'jquery';
 
 
 export default function ShowComment({ post }) {
@@ -28,6 +29,7 @@ export default function ShowComment({ post }) {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [updateText,setUpdateText] = useState('');
+  const [currentMessage,setCurrentMessage] = useState();
 
   const dataget = {
     action: 'get',
@@ -62,10 +64,11 @@ export default function ShowComment({ post }) {
     console.log(post.comments);
   }, [])
 
-  const showOptions = (id,user) =>{
+  const showOptions = (id,user,comment) =>{
     setCurrentcommentid(id);
     setcurentcommentuser(user);
     SetOptions_List(!options_List);
+    setCurrentMessage(comment);
 
   }
 
@@ -111,6 +114,10 @@ export default function ShowComment({ post }) {
     setOpen(false);
   }
 
+  const HidePreviousMessage = ()=>{
+    $('#textareaComment').val('');
+  }
+
   return (
 
     <>
@@ -137,7 +144,7 @@ export default function ShowComment({ post }) {
                       <div className="Comment-User-Name">
                         <Link className="Comment-User-Profile" to={"/profile/" + comment.profile_id}  >{comment.user_name}</Link>
                         <span className="Comment-Date">{comment.created_at} &nbsp; 
-                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id)}>
+                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id,comment.body)}>
                               <i className="uil uil-ellipsis-h"></i>
                           </button>
                           {      
@@ -160,7 +167,7 @@ export default function ShowComment({ post }) {
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
                                                     {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
-                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
+                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" id="textareaComment" onFocus={HidePreviousMessage} placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
