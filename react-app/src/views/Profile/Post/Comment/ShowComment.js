@@ -5,6 +5,9 @@ import useOutsideClick from '../../../../helpers/useOutsideClick';
 import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
+import { Modal } from 'react-bootstrap';
+import ReportModal from '../../../Admin/Report/ReportModal';
+import axios from 'axios';
 
 
 export default function ShowComment({ post }) {
@@ -19,6 +22,7 @@ export default function ShowComment({ post }) {
   const [user_id, setUserId] = useState();
   const refAvatar = useRef(null);
   const [display,setDisplay] = useState(false);
+  const [show, setShow] = useState(false);
 
   const dataget = {
     action: 'get',
@@ -66,13 +70,16 @@ export default function ShowComment({ post }) {
     user_id     : curentcommentuser,
 }
 
-  const supprimeComment =(id) =>{
-    console.log("delete comment");
+  const supprimeComment = async (id) =>{
+        await axios.post(`${process.env.REACT_APP_API_URL}/comment/delete`,dataComment)
+        .then(res => console.log(res))
+        .catch(err=> console.log(err));
   }
 
   const reportComment =(id) =>{
-    console.log("report comment");
+    setShow(true);
   }
+  const handleClose = () => setShow(false);
 
   return (
 
@@ -116,7 +123,9 @@ export default function ShowComment({ post }) {
                                     <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i> Report</button>
                                   </li>
                                 }
-
+                                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <ReportModal providerObject={comment} provider='comment' showReport={show} handleCloseReport={handleClose}/>
+                                </Modal>
                                 {/* <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <ReportModal providerObject={post} provider='comment' showReport={show} handleCloseReport={handleClose}/>
                                 </Modal>
