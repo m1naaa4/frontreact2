@@ -65,7 +65,7 @@ export default function ShowComment({ post }) {
   }
 
   const dataComment = {
-    post_id     : currentCommentid,
+    provider_id     : currentCommentid,
     provider    : "comment",
     user_id     : curentcommentuser,
 }
