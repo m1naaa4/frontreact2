@@ -7,14 +7,22 @@ import { toast, ToastContainer } from 'react-toastify';
 import { loadUserAction, ProfileAction } from '../../store/actions/Profile/UserActions';
 import { LoadUser } from '../../services/User/Profile/ProfileService';
 import HeaderProfileSkeleton from '../../skeleton/profile/HeaderProfileSkeleton';
+import { FriendsAction, MyFriendsAction, SendRequestFriendAction } from '../../store/actions/Friend/FriendsAction';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogContentText } from '@material-ui/core';
+import Button from '@mui/material/Button';
 
 
 export default function HeaderProfileView({ formData, setForm, props }) {
 
     const infoprofile = useSelector(state => state.infoProfile);
     const infouser = useSelector(state => state.userProfile);
+    const userProfile = useSelector(state => state.userProfile.userProfile);
+    const myfriends = useSelector(state => state.userProfile.myfriends);
+    const [show,setShow] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+    const [open,setOpen] = useState(false);
 
     const hiddenFileInput = useRef(null);
     const hiddenCoverInput = useRef(null);
@@ -117,7 +125,40 @@ export default function HeaderProfileView({ formData, setForm, props }) {
             setUserId(infouser.userProfile.profile_id);
             console.log(user_id)
         };
+
     });
+
+    const SendRequest = ()=>{
+        setOpen(true);
+        let data ={
+            'friend_id' : infoprofile?.infoprofile.user_id,
+            'url' : 'friend/sendRequest',
+        }
+        dispatch(SendRequestFriendAction(data));
+        setShow(false); 
+    }
+
+    useEffect(()=>{
+        let data = {
+          'url' : 'friend/getmyfriends',
+          }
+        dispatch(MyFriendsAction(data));
+      },[])
+
+    useEffect(()=>{
+        if(myfriends){
+                let find = myfriends.some( (data) => {return (data.profile_id === infoprofile.infoprofile.id) });
+                if(find){
+                    setShow(false);
+                }else{
+                    setShow(true);
+                }
+        }
+    });
+
+    const HandleClose = ()=>{
+        setOpen(false);
+    }
 
     return (
         <>
@@ -152,6 +193,24 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                 }
                                 <div className="Profile-Navigation" style={{top:"5px"}}>
                                     <ul className="Profie-Menu">
+                                        { (infoprofile?.infoprofile.user_id!==userProfile.id && show)  && (<li><div className="form-submit" style={{backgroundColor:"white",borderRadius:"32px"}} ><button onClick={SendRequest} style={{border:"0px",height:"40px",width:"50px"}}><i className="uil uil-user-plus" style={{fontSize:"20px",paddingLeft:"3px"}}></i></button></div></li>)}
+                                        <Dialog
+                                            open={open}
+                                            onClose={HandleClose}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogContent>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span>
+                                                </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                <Button onClick={HandleClose} autoFocus>
+                                                    Ok
+                                                </Button>
+                                                </DialogActions>
+                                        </Dialog>
                                         <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</NavLink></li>
                                         <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</NavLink></li>
                                         <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> Historique</NavLink></li>
