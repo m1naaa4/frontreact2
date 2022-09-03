@@ -29,7 +29,6 @@ export default function ShowComment({ post }) {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [updateText,setUpdateText] = useState('');
-  const [currentMessage,setCurrentMessage] = useState();
 
   const dataget = {
     action: 'get',
@@ -64,11 +63,10 @@ export default function ShowComment({ post }) {
     console.log(post.comments);
   }, [])
 
-  const showOptions = (id,user,comment) =>{
+  const showOptions = (id,user) =>{
     setCurrentcommentid(id);
     setcurentcommentuser(user);
     SetOptions_List(!options_List);
-    setCurrentMessage(comment);
 
   }
 
@@ -144,7 +142,7 @@ export default function ShowComment({ post }) {
                       <div className="Comment-User-Name">
                         <Link className="Comment-User-Profile" to={"/profile/" + comment.profile_id}  >{comment.user_name}</Link>
                         <span className="Comment-Date">{comment.created_at} &nbsp; 
-                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id,comment.body)}>
+                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id)}>
                               <i className="uil uil-ellipsis-h"></i>
                           </button>
                           {      
