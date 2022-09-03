@@ -160,7 +160,7 @@ export default function ShowComment({ post }) {
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
                                                     {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
-                                                           <input type="text" name="body" placeholder="Edit Your Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F0EDED"}}/>
+                                                           <textarea type="text" name="body" placeholder="Edit Your Comment" value={comment.body} onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC"}}></textarea>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
