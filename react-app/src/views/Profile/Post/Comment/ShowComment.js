@@ -165,7 +165,7 @@ export default function ShowComment({ post }) {
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
                                                     {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
-                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" id="textareaComment" onFocus={HidePreviousMessage} placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
+                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" id="textareaComment" placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
@@ -201,7 +201,10 @@ export default function ShowComment({ post }) {
                          
                       </div>
                       <div className="Comment-Text">
-                        <span>{comment.body} </span>
+
+                        {currentCommentid === comment.id && updateText ?  <span>{updateText}</span> : 
+                          <span>{comment.body}</span>
+                        }
                       </div>
                     </div>
                   </div>
