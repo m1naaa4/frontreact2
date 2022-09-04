@@ -10,8 +10,6 @@ import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
 import NotificationMenu from '../../views/Notification/NotificationMenu';
-import config from '../../Config'
-
 
 function HeaderProfile() {
     const history = useHistory();
@@ -130,7 +128,7 @@ function HeaderProfile() {
                         <div className="row">
                             <div className="col-2 col-md-2">
                                 <div className="left-nav">
-                                    <a href={config.urls.front}>
+                                    <a href={`${process.env.REACT_APP_FRONT_URL}`}>
                                         <img src="/assets/images/dadupa-brand-text.svg" alt="Dadupa Connect" className="Logo-Desktop" />
                                         <img src="/assets/images/dadupa-responsive.svg" alt="Dadupa Connect" className="Logo-Responsive" />
                                     </a>

@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { Player } from 'video-react';
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory, useParams } from "react-router-dom";
-import config from '../../Config'
 import slugify from 'react-slugify';
 import {countryName, financeLabel, sectorName, typeFunderName} from '../../helpers/Helpres'
 import { useTranslation } from 'react-i18next';
@@ -36,7 +35,7 @@ const ViewFunder = (props) => {
         if(!loading){
             setIsLike(project.is_liked)
             setLikeCount(project.likeCount);
-            setUrlToShare(slugify(project.name, { prefix: config.urls.front+'/funder/'+params.id }));
+            setUrlToShare(slugify(project.name, { prefix: `${process.env.REACT_APP_FRONT_URL}`+'/funder/'+params.id }));
         }
         setIsLoaded(true);
     }, [project])

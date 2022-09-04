@@ -1,7 +1,6 @@
 import React,{ useEffect, useState } from 'react'
 import UilLinkedin from '@iconscout/react-unicons/icons/uil-linkedin-alt'
 import HttpService from "../../../../../services/HttpService";
-import config from "../../../../../Config";
 import LinkedIn from './LinkedIn';
 
 export default function LinkedInButton(props) {
