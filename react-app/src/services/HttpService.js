@@ -1,7 +1,7 @@
 import axios from './interceptors.js';
 class HttpService {
 
-    postData = async (item, added_url, tokenId = "", logged = false) =>
+    postData = async (item, added_url, tokenId = "", logged = true) =>
     {
         if (logged) {
             item.profile_id = localStorage.getItem('profile_id');

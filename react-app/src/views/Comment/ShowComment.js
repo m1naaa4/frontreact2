@@ -78,7 +78,7 @@ export default function ShowComment(comment, props) {
     const submitReply = (e) => {
         e.preventDefault();
         refcomment.current.value = '';
-        dispatch(AddCommentAction(data, props, 'reply'));
+        dispatch(AddCommentAction(data, props, 'comment/reply'));
 
         // setTimeout(() => {
         //     //SetReplies(replies)

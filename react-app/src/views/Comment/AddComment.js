@@ -2,11 +2,10 @@ import React, {useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import ShowComment from "./ShowComment";
 import PusherService from '../../services/Pusher';
-import { AddCommentProjectAction } from '../../store/actions/Comment/CommentAction';
+import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import { GetCommentAction } from '../../store/actions/Comment/CommentAction';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-
 
 
 export default function AddComment({providerObject, providerType}) {
@@ -22,8 +21,6 @@ export default function AddComment({providerObject, providerType}) {
     // const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
-
-    
 
     const dataget = {
         action           : 'get',
@@ -42,12 +39,11 @@ export default function AddComment({providerObject, providerType}) {
     };
 
     useEffect(() => {
-        dispatch(GetCommentAction(dataget));
+        dispatch(GetCommentAction(dataget, 'comment/get'));
         // setCountcomment();
     }, [dispatch])
 
-    const handleSubmitValue =  async (value, key) => {
-        
+    const handleSubmitValue =  async (value, key) => { 
         if (key === 13 && value !== '') {
             const data = {
                 provider_id     : providerObject.projectid,
@@ -56,17 +52,13 @@ export default function AddComment({providerObject, providerType}) {
                 body            : value,
             }
             refcomment.current.value = ''
-        dispatch(AddCommentProjectAction(data, '', 'add'));
+        dispatch(AddCommentAction(data, '', 'comment/add'));
         }
     }
 
-   
-
     return (
-            <div id="Comments-Wrap" className="Comments-Wrap">
-        
+    <div id="Comments-Wrap" className="Comments-Wrap">
         <div className="Comments-Box">
-
             <div className="Comment-Writing" >
                 <div className="Comment-Col-2">
                     <div onClick={gotToProfile} className="Comment-User-Thumb">
@@ -90,9 +82,7 @@ export default function AddComment({providerObject, providerType}) {
                     <ShowComment comment={comment} key={comment.id}/>
                     )
                 }
-                
                 </div>
-
                </div>
         </div>
     </div>

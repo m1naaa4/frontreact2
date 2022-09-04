@@ -1,12 +1,80 @@
-import {AddComment, GetComment} from "../../../services/Comment/CommentService";
-
+import HttpService from "../../../services/HttpService";
+const http = new HttpService();
 export const AddCommentAction = (data, props, url) =>{
-
     return (dispatch)=>{
-
         // dispatch({type:'LOADING_ADD_COMMENT'});
+        http.postData(data, url).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'ADD_COMMENT_POST_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+}
 
-        AddComment(data, props, url).then((res) =>
+export const AddCommentProjectAction = (data, props, url) =>{
+    return (dispatch)=>{
+        // dispatch({type:'LOADING_ADD_COMMENT'});
+        http.postData(data, props, url).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'ADD_COMMENT_POST_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+}
+
+export const GetCommentAction = (data, url) =>{
+    return (dispatch)=>{
+        dispatch({type:'LOADING_GET_COMMENT'});
+        http.postData(data, url).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'GET_COMMENT_SUCCESS',res});
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'GET_COMMENT_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+}
+
+export const DeleteCommentAction = (data, props, url) =>{
+    return (dispatch)=>{
+        http.postData(data, props, url).then((res) =>
+            {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'ADD_COMMENT_POST_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
+}
+
+export const EditCommentAction = (data, props, url) =>{
+    return (dispatch)=>{
+        // dispatch({type:'LOADING_ADD_COMMENT'});
+        http.postData(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
@@ -21,52 +89,4 @@ export const AddCommentAction = (data, props, url) =>{
             }
         )
     }
-
-}
-
-
-export const AddCommentProjectAction = (data, props, url) =>{
-
-    return (dispatch)=>{
-
-        // dispatch({type:'LOADING_ADD_COMMENT'});
-
-        AddComment(data, props, url).then((res) =>
-            {
-                if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
-
-                }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'ADD_COMMENT_POST_ERROR',res})
-                }
-            },
-            error => {
-                dispatch({type:'CODE_ERROR',error});
-            }
-        )
-    }
-
-}
-
-export const GetCommentAction = (data) =>{
-
-    return (dispatch)=>{
-
-        dispatch({type:'LOADING_GET_COMMENT'});
-
-        GetComment(data).then((res) =>
-            {
-                if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'GET_COMMENT_SUCCESS',res});
-
-                }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'GET_COMMENT_ERROR',res})
-                }
-            },
-            error => {
-                dispatch({type:'CODE_ERROR',error});
-            }
-        )
-    }
-
 }
