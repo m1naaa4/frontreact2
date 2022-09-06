@@ -27,7 +27,10 @@ export default function ArticlesList() {
                                                     <div className="input-row input-multi-filter input-small">
                                                         <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
                                                     </div>
-                                                    <div className="input-row">
+                                                    <div style={{width:'125px'}} className="input-row">
+                                                        <ReactDatePicker className="wizard-required" selected={date} onChange={(date) => setDate(date)} />
+                                                    </div>
+                                                    <div style={{width:'125px'}} className="input-row">
                                                         <ReactDatePicker className="wizard-required" selected={date} onChange={(date) => setDate(date)} />
                                                     </div>
                                                     <div className="input-row ml-auto w-auto">
