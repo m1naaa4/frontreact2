@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import useOutsideClick from '../../../../helpers/useOutsideClick';
-import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
+import { DeleteCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
 import { Modal } from 'react-bootstrap';
@@ -28,7 +28,8 @@ export default function ShowComment({ post }) {
   const [display,setDisplay] = useState(false);
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
-  const [updateText,setUpdateText] = useState('');
+  const [updateText, setUpdateText] = useState('');
+  const [deleted_id, setDeleted] = useState();
 
   const dataget = {
     action: 'get',
@@ -76,11 +77,10 @@ export default function ShowComment({ post }) {
     user_id     : curentcommentuser,
 }
 
-  const supprimeComment = async (id) =>{
-        await axios.post(`${process.env.REACT_APP_API_URL}/comment/delete`,dataComment)
-        .then(res => console.log(res))
-        .catch(err=> console.log(err));
-  }
+const supprimeComment = (id, post_id) => {
+    // setDeleted(id)
+    dispatch(DeleteCommentAction(dataComment, 'comment/delete', {'comment_id':id, 'post_id':post_id}));
+}
 
   const editComment = async (id) =>{
     console.log("edit");
@@ -124,6 +124,9 @@ export default function ShowComment({ post }) {
           <div key={index}>
             {post.id === comment.commentable_id &&
               <div className="User-Comment" key={index} >
+                {deleted_id}   {comment.id}
+                {deleted_id !==  comment.id &&
+                <>
                 <div className="Comment-Col-2">
                   <Link ref={refAvatar} className="Comment-User-Thumb" to={"/profile/" + comment.profile_id}>
                     {comment.avatar ?
@@ -151,7 +154,7 @@ export default function ShowComment({ post }) {
                                 {user_id === comment.user_id && (
                                 <> 
                                     <li className="PostDelete">
-                                      <button onClick={e => supprimeComment(comment.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                                      <button onClick={e => supprimeComment(comment.id, post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
                                     </li>
                                     <li className="PostDelete">
                                       <button onClick={e => editComment(comment.id)}><i className="uil uil-edit-alt"></i> Edit</button>
@@ -226,50 +229,12 @@ export default function ShowComment({ post }) {
                   </div>
 
                 </div>
-                {/*               
-              {replies == comment.id && 
-              <div className="Comment-Replies">
-                { comment.replies.data &&  comment.replies.data.map((com, index) =>
-                <div className="Comment-Reply" key={index} >
-                  <div className="User-Comment">
-                    <div className="Comment-Col-2">
-                      <div className="Comment-User-Thumb">
-                        <img src={com.avatar} alt="avatar" />
-                      </div>
-                      <ul className="comment-reactions-list">
-                        <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
-                        <label className="count-reactions">12</label>
-                      </ul>
-                    </div>
-                    <div className="Comment-Col-10">
-                      <div className="Comment-User">
-                        <div className="Comment-Content">
-                          <div className="Comment-User-Name">
-                            <a className="Comment-User-Profile" href="#">{com.user_name}</a>
-                            <span className="Comment-Date">{com.created_at}</span>
-                          </div>
-                          <div className="Comment-Text">
-                            <span>{com.body} </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="comment-actions">
-                        <ul className="comment-actions-list">
-                          <li className="comment-action"><button className="like-action">Like</button></li>
-                          <li className="comment-action replay-action">Reply</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                )}
-              </div>
-              }
-              */}
+                
                 {replyBox === comment.id &&
                   <ReplyComment comment={comment} post={post} />
                 }
-
+                </>
+                }
               </div>
             }
           </div>

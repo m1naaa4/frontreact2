@@ -54,14 +54,14 @@ export const GetCommentAction = (data, url) =>{
     }
 }
 
-export const DeleteCommentAction = (data, props, url) =>{
+export const DeleteCommentAction = (data, url, item_ids) =>{
     return (dispatch)=>{
-        http.postData(data, props, url).then((res) =>
+        http.postData(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
+                    dispatch({type:'DELETE_COMMENT_POST', res, item_ids});
                 }else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'ADD_COMMENT_POST_ERROR',res})
+                    dispatch({type:'DELETE_COMMENT_ERROR',res})
                 }
             },
             error => {
