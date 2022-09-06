@@ -141,6 +141,7 @@ const fr = {
     'write_comment': 'Ecrivez un commentaire...',
 
      
+    articles: 'Articles',
     articles_suggestedArticle: 'Suggested Article',
     articles_topArticle: 'Top Article',
 };
