@@ -3,11 +3,20 @@ import 'react-quill/dist/quill.snow.css';
 import ReactDatePicker from 'react-datepicker';
 import sectors from '../../../data/sectors';
 import AllMultiSelectCheckboxSector from '../../../utils/Filters/AllMultiselectCheckboxSector';
+import ArticleListView from '../../../views/Articles/ArticleListView';
+import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 
 
 export default function ArticlesList() {
     const [selectedsector, setSelectedsector] = useState();
     const [date, setDate] = useState(new Date());
+    const article = {
+        id: 1,
+        title: "Article title",
+        thumbnail: "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg",
+        categories: ["Cat 1", "Cat 2"],
+        description: "test desc text ..."
+    }
 
     return (
         <>
@@ -27,10 +36,10 @@ export default function ArticlesList() {
                                                     <div className="input-row input-multi-filter input-small">
                                                         <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
                                                     </div>
-                                                    <div style={{width:'125px'}} className="input-row">
+                                                    <div style={{ width: '125px' }} className="input-row">
                                                         <ReactDatePicker className="wizard-required" selected={date} onChange={(date) => setDate(date)} />
                                                     </div>
-                                                    <div style={{width:'125px'}} className="input-row">
+                                                    <div style={{ width: '125px' }} className="input-row">
                                                         <ReactDatePicker className="wizard-required" selected={date} onChange={(date) => setDate(date)} />
                                                     </div>
                                                     <div className="input-row ml-auto w-auto">
@@ -46,40 +55,18 @@ export default function ArticlesList() {
                                 </div>
                                 <div className="row">
                                     {
-                                        Array(5).fill().map((project, index) =>
-                                            <div className="col-12" key={index + 1}>
-                                                <div className="article-box">
-                                                    <img className='article-thumb' src="https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg" alt='article logo' />
-                                                    <div>
-                                                        <span className='article-categories'>Sector 1, Sector 2</span>
-                                                        <h3 className='article-title'>Article title abcdefgh ijklmnopq</h3>
-                                                        <p className="article-desc">dazgd azgh azh zud huazhdouih zdoua zdouh uagzsu ...</p>
-                                                    </div>
-                                                </div>
-                                                <hr />
-                                            </div>
+                                        Array(5).fill().map((e, index) =>
+                                            <ArticleListView article={ article } key={index + 1} />
                                         )
                                     }
                                 </div>
                             </div>
                             <div className='col-12 col-lg-3 articles-list-sidebar'>
                                 <h4>Top article</h4>
-                                <div>
-                                    <h3 className='article-sidebar-title'>Article title abcdh ijklmnopq</h3>
-                                    <img className='article-thumb' src="https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg" alt='article logo' />
-                                    <hr />
-                                </div>
+                                <ArticleSidebarView article={ article } />
                                 <h4>Recent articles</h4>
-                                <div>
-                                    <h3 className='article-sidebar-title'>Article title abcdh ijklmnopq</h3>
-                                    <img className='article-thumb' src="https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg" alt='article logo' />
-                                    <hr />
-                                </div>
-                                <div>
-                                    <h3 className='article-sidebar-title'>Article title abcdh ijklmnopq</h3>
-                                    <img className='article-thumb' src="https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg" alt='article logo' />
-                                    <hr />
-                                </div>
+                                <ArticleSidebarView article={ article } />
+                                <ArticleSidebarView article={ article } />
                             </div>
                         </div>
                     </div>
