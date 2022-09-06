@@ -169,6 +169,7 @@ function HeaderProfile() {
                                             <div className=" Dadupa-Notifications-Item Dadupa-Alert-Popup">
                                                 <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
                                                     <span className={classe}></span><i className="uil uil-bell"></i>
+                                                    {usernotifications.notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
                                                 </button>
                                                {showNotifications && 
                                                     <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active" ref={ref}>

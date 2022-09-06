@@ -1,9 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import useOutsideClick from '../../../../helpers/useOutsideClick';
 import { GetCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
+import { Modal } from 'react-bootstrap';
+import ReportModal from '../../../Admin/Report/ReportModal';
+import axios from 'axios';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogContentText } from '@material-ui/core';
+import Button from '@mui/material/Button';
+import $ from 'jquery';
 
 
 export default function ShowComment({ post }) {
@@ -11,8 +19,16 @@ export default function ShowComment({ post }) {
   const dispatch = useDispatch();
   const comments = useSelector(state => state.getComments);
   const project = useSelector(state => state.getproject);
-
+  const user = useSelector(state => state.userProfile.userProfile);
+  let [currentCommentid,setCurrentcommentid] = useState();
+  let [curentcommentuser,setcurentcommentuser] = useState();
+  const [options_List, SetOptions_List] = useState(false);
+  const [user_id, setUserId] = useState();
   const refAvatar = useRef(null);
+  const [display,setDisplay] = useState(false);
+  const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [updateText,setUpdateText] = useState('');
 
   const dataget = {
     action: 'get',
@@ -36,11 +52,69 @@ export default function ShowComment({ post }) {
     SetReplyBox(value)
   }
 
+  useEffect(()=>{
+    setUserId(user?.id); 
+  },[])
+
   useEffect(() => {
     // if (post.commentCount > 0) {
     // dispatch(GetCommentAction(dataget));
     // }   
+    console.log(post.comments);
   }, [])
+
+  const showOptions = (id,user) =>{
+    setCurrentcommentid(id);
+    setcurentcommentuser(user);
+    SetOptions_List(!options_List);
+
+  }
+
+  const dataComment = {
+    provider_id     : currentCommentid,
+    provider    : "comment",
+    user_id     : curentcommentuser,
+}
+
+  const supprimeComment = async (id) =>{
+        await axios.post(`${process.env.REACT_APP_API_URL}/comment/delete`,dataComment)
+        .then(res => console.log(res))
+        .catch(err=> console.log(err));
+  }
+
+  const editComment = async (id) =>{
+    console.log("edit");
+    setOpen(true);
+}
+
+  const reportComment =(id) =>{
+    setShow(true);
+  }
+  const handleClose = () => setShow(false);
+
+  const HandleCloseDialog =()=>{
+    setOpen(false);
+  }
+
+  const dataEdit = {
+    provider_id: currentCommentid,
+    body: updateText,
+   
+  }
+
+  const HandleEdit = async ()=>{
+    
+    await axios.post(`${process.env.REACT_APP_API_URL}/comment/update`,dataEdit)
+    .then(res => console.log("data changed successfuly"))
+    .catch(err=>console.log(err));
+
+
+    setOpen(false);
+  }
+
+  const HidePreviousMessage = ()=>{
+    $('#textareaComment').val('');
+  }
 
   return (
 
@@ -55,7 +129,7 @@ export default function ShowComment({ post }) {
                     {comment.avatar ?
                       <img src={comment.avatar} alt="avatar" />
                       : <img src="/assets/images/avatar.png" alt="avatar" />}
-                    <AvatarTooltip data={comment} myRef={refAvatar} />
+                    <AvatarTooltip data={comment} myRef={refAvatar} styles={{marginTop:"67px",marginRight:"69px"}} />
                   </Link>
                   {/* <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
@@ -67,10 +141,70 @@ export default function ShowComment({ post }) {
                     <div className="Comment-Content">
                       <div className="Comment-User-Name">
                         <Link className="Comment-User-Profile" to={"/profile/" + comment.profile_id}  >{comment.user_name}</Link>
-                        <span className="Comment-Date">{comment.created_at}</span>
+                        <span className="Comment-Date">{comment.created_at} &nbsp; 
+                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id)}>
+                              <i className="uil uil-ellipsis-h"></i>
+                          </button>
+                          {      
+                              (options_List && currentCommentid === comment.id) && (
+                              <ul className="PostOptions-List PostOptions-ListShow"  >
+                                {user_id === comment.user_id && (
+                                <> 
+                                    <li className="PostDelete">
+                                      <button onClick={e => supprimeComment(comment.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                                    </li>
+                                    <li className="PostDelete">
+                                      <button onClick={e => editComment(comment.id)}><i className="uil uil-edit-alt"></i> Edit</button>
+                                    </li>
+                                    <Dialog
+                                            open={open}
+                                            onClose={HandleCloseDialog}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogContent>
+                                                <DialogContentText id="alert-dialog-description">
+                                                    {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
+                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" id="textareaComment" placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
+                                                </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                <Button onClick={HandleCloseDialog} style={{backgroundColor:"#00CC66",borderRadius:"30px"}}  autoFocus>
+                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>Cancel</span>
+                                                </Button>
+                                                <Button onClick={HandleEdit} style={{backgroundColor:"#00CC66",marginLeft:"15px",marginRight:"15px",borderRadius:"30px"}} autoFocus>
+                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>Edit</span>
+                                                </Button>
+                                                </DialogActions>
+                                    </Dialog>
+                                </>
+                                 
+                                  )
+                                }
+                                {user_id !== comment.user_id &&
+                                  <li className="PostFavorite">
+                                    <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i> Report</button>
+                                  </li>
+                                }
+                                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <ReportModal providerObject={comment} provider='comment' showReport={show} handleCloseReport={handleClose}/>
+                                </Modal>
+                                {/* <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <ReportModal providerObject={post} provider='comment' showReport={show} handleCloseReport={handleClose}/>
+                                </Modal>
+                                 */}
+                              </ul>
+                            )
+                          }
+                        </span>
+                       
+                         
                       </div>
                       <div className="Comment-Text">
-                        <span>{comment.body} </span>
+
+                        {currentCommentid === comment.id && updateText ?  <span>{updateText}</span> : 
+                          <span>{comment.body}</span>
+                        }
                       </div>
                     </div>
                   </div>
