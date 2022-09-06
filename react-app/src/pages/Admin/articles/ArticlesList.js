@@ -15,7 +15,15 @@ export default function ArticlesList() {
         title: "Article title",
         thumbnail: "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg",
         categories: ["Cat 1", "Cat 2"],
-        description: "test desc text ..."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur blandit magna aliquet egestas. Aliquam quis nisl nec nibh ullamcorper volutpat eu in elit. Proin odio ipsum, suscipit sed laoreet sodales, consequat sit amet tortor. Maecenas metus diam, faucibus vitae libero efficitur, dapibus ultrices felis. Duis sit amet consequat ex, quis mollis leo. Pellentesque est est, molestie at massa a, maximus dignissim nisl. Maecenas non lacus lacinia lorem interdum tempor vitae non ante. Donec vitae ultricies quam, id aliquam erat. Donec vel dolor est. Aliquam vel fringilla odio. Maecenas auctor magna sit amet arcu vestibulum, sit amet eleifend massa fringilla. Proin vitae elit convallis, elementum massa quis, bibendum elit. Praesent id dignissim velit, ut bibendum lorem. Ut eget vestibulum eros.",
+        date: "06/09/2022",
+        author: {
+            profile_id: 1,
+            fullName: "Full Name",
+            avatar: "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630bd14e169e6.png",
+        },
+        likesCounter: 10,
+        commentsCounter: 3,
     }
 
     return (
