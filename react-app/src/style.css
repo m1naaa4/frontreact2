@@ -8686,6 +8686,7 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 .article-title {
   font-weight: 700;
   color: #00b601;
+  font-size: 19px;
 }
 
 .article-desc {
@@ -8696,12 +8697,12 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 .articles-list-sidebar h4 {
   font-weight: 700;
   color: #37474F;
-  font-size: 1.7em;
+  font-size: 1.1em;
 }
 
 .article-sidebar-title {
   color: #00b601;
-  font-size: 1.7rem;
+  font-size: 1.1rem;
 }
 
 .article-filter-btn {
