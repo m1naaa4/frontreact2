@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getArticles } from '../../../store/actions/Articles/ArticlesActions';
 import 'react-quill/dist/quill.snow.css';
 import ReactDatePicker from 'react-datepicker';
 import sectors from '../../../data/sectors';
@@ -10,12 +12,12 @@ import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 export default function ArticlesList() {
     const [selectedsector, setSelectedsector] = useState();
     const [date, setDate] = useState(new Date());
-    const article = {
+    const articleExample = {
         id: 1,
         title: "Article title test text abcd",
         thumbnail: "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg",
         categories: ["Cat 1", "Cat 2"],
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur blandit magna aliquet egestas. Aliquam quis nisl nec nibh ullamcorper volutpat eu in elit. Proin odio ipsum, suscipit sed laoreet sodales, consequat sit amet tortor. Maecenas metus diam, faucibus vitae libero efficitur, dapibus ultrices felis. Duis sit amet consequat ex, quis mollis leo. Pellentesque est est, molestie at massa a, maximus dignissim nisl. Maecenas non lacus lacinia lorem interdum tempor vitae non ante. Donec vitae ultricies quam, id aliquam erat. Donec vel dolor est. Aliquam vel fringilla odio. Maecenas auctor magna sit amet arcu vestibulum, sit amet eleifend massa fringilla. Proin vitae elit convallis, elementum massa quis, bibendum elit. Praesent id dignissim velit, ut bibendum lorem. Ut eget vestibulum eros.",
+        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur blandit magna aliquet egestas. Aliquam quis nisl nec nibh ullamcorper volutpat eu in elit. Proin odio ipsum, suscipit sed laoreet sodales, consequat sit amet tortor. Maecenas metus diam, faucibus vitae libero efficitur, dapibus ultrices felis. Duis sit amet consequat ex, quis mollis leo. Pellentesque est est, molestie at massa a, maximus dignissim nisl. Maecenas non lacus lacinia lorem interdum tempor vitae non ante. Donec vitae ultricies quam, id aliquam erat. Donec vel dolor est. Aliquam vel fringilla odio. Maecenas auctor magna sit amet arcu vestibulum, sit amet eleifend massa fringilla. Proin vitae elit convallis, elementum massa quis, bibendum elit. Praesent id dignissim velit, ut bibendum lorem. Ut eget vestibulum eros.",
         date: "06/09/2022",
         author: {
             profile_id: 1,
@@ -25,6 +27,16 @@ export default function ArticlesList() {
         likesCounter: 10,
         commentsCounter: 3,
     }
+
+    const dispatch = useDispatch()
+    const articles = useSelector(state => state.articles.articles);
+    const loading = useSelector(state => state.articles.loading);
+
+    useEffect(() => {
+        dispatch(getArticles())
+        console.log(articles)
+    }, [dispatch])
+
 
     return (
         <>
@@ -63,18 +75,24 @@ export default function ArticlesList() {
                                 </div>
                                 <div className="row">
                                     {
-                                        Array(5).fill().map((e, index) =>
-                                            <ArticleListView article={ article } key={index + 1} />
-                                        )
+                                        // Array(5).fill().map((e, index) =>
+                                        //     <ArticleListView article={ articleExample } key={index + 1} />
+                                        // )
+                                        loading ?
+                                            <h1>Loading</h1>
+                                            :
+                                            articles.map((article, index) =>
+                                                <ArticleListView article={article} key={index + 1} />
+                                            )
                                     }
                                 </div>
                             </div>
                             <div className='col-12 col-lg-3 articles-list-sidebar'>
                                 <h4>Top article</h4>
-                                <ArticleSidebarView article={ article } />
+                                <ArticleSidebarView article={articleExample} />
                                 <h4>Recent articles</h4>
-                                <ArticleSidebarView article={ article } />
-                                <ArticleSidebarView article={ article } />
+                                <ArticleSidebarView article={articleExample} />
+                                <ArticleSidebarView article={articleExample} />
                             </div>
                         </div>
                     </div>

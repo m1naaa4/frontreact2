@@ -12,7 +12,7 @@ export default function ArticleSidebarView({ article }) {
 
 
         <div className='d-flex align-items-center justify-content-between mt-2'>
-            <Link class="article-list-author" to={`/profile/${article.author.profile_id}`}>
+            <Link className="article-list-author" to={`/profile/${article.author.profile_id}`}>
                 <img src={article.author.avatar} alt={article.author.fullName} />
                 <h4>{article.author.fullName}</h4>
             </Link>
