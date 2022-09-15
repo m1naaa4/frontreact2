@@ -18,9 +18,9 @@ export default function ArticlePrivateRoutes(props) {
                         <Redirect to={{ pathname: `${props.match.path}/` }} />
                     )} />
 
-                    <Route exact path={`${props.match.path}/view`} component={ArticleDetails} />
+                    <Route exact path={`${props.match.path}/article`} component={ArticleDetails} />
                     <Route exact path={props.match.path} render={props => (
-                        <Redirect to={{ pathname: `${props.match.path}/view` }} />
+                        <Redirect to={{ pathname: `${props.match.path}/article/:id` }} />
                     )} />
 
                     {/* <Route exact  path={`${props.match.path}/show/:id`}  component = {ShowProjectView} />

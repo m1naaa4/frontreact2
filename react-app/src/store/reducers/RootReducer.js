@@ -30,6 +30,7 @@ import ReportReducer from './Report/ReportReducer'
 import GeneraleVariableReducer from './Generale/GeneralVariableReducer'
 
 import ArticlesReducer from './Articles/ArticlesReducer'
+import ArticleReducer from './Articles/ArticleReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -66,6 +67,7 @@ const RootReducer = combineReducers({
   reportsData:ReportReducer,
 
   articles: ArticlesReducer,
+  article: ArticleReducer,
 })
 
 export default RootReducer

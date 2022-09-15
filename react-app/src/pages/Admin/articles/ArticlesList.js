@@ -7,6 +7,7 @@ import sectors from '../../../data/sectors';
 import AllMultiSelectCheckboxSector from '../../../utils/Filters/AllMultiselectCheckboxSector';
 import ArticleListView from '../../../views/Articles/ArticleListView';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
+import { Text } from '../../../containers/Language';
 
 
 export default function ArticlesList() {
@@ -88,9 +89,9 @@ export default function ArticlesList() {
                                 </div>
                             </div>
                             <div className='col-12 col-lg-3 articles-list-sidebar'>
-                                <h4>Top article</h4>
+                                <h4><Text tid="articles_suggestedArticle" /></h4>
                                 <ArticleSidebarView article={articleExample} />
-                                <h4>Recent articles</h4>
+                                <h4><Text tid="articles_topArticle" /></h4>
                                 <ArticleSidebarView article={articleExample} />
                                 <ArticleSidebarView article={articleExample} />
                             </div>

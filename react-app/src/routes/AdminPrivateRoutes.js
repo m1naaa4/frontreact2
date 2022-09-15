@@ -38,9 +38,9 @@ export default function AdminPrivateRoutes(props) {
                         <Redirect to={{ pathname: `${props.match.path}/articles/create` }} />
                     )} />
 
-                    <Route exact path={`${props.match.path}/articles/view`} component={ArticleDetails} />
+                    <Route exact path={`${props.match.path}/article/:id`} component={ArticleDetails} />
                     <Route exact path={props.match.path} render={props => (
-                        <Redirect to={{ pathname: `${props.match.path}/articles/view` }} />
+                        <Redirect to={{ pathname: `${props.match.path}/article/:id` }} />
                     )} />
 
                     {/* 
