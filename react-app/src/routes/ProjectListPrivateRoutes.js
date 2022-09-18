@@ -7,6 +7,7 @@ import ListProjectPage from '../pages/User/Project/ListProjectPage';
 import UpdateProjectPage from '../pages/User/Project/UpdateProjectPage';
 import Footer from "../layout/footer/footer";
 import NotFound from '../pages/404';
+import ProjectShowPrivateRoutes from './ProjectShowPrivateRoutes';
 
 
 export default function ProjectListPrivateRoutes(props) {
@@ -25,7 +26,7 @@ export default function ProjectListPrivateRoutes(props) {
                         <Redirect to={{pathname: `${props.match.path}/create` }} />
                     )} />
 
-                    <Route exact  path={`${props.match.path}/show/:id`}  component = {ShowProjectView} />
+                    <Route exact  path={`${props.match.path}/show/:id`}  component = {ProjectShowPrivateRoutes} />
                     <Route exact  path={props.match.path} render = { props => (
                         <Redirect to={{pathname: `${props.match.path}/show/:id` }} />
                     )} />
