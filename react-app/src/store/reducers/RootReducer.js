@@ -29,6 +29,9 @@ import AdminAuthReducer from './Admin/AuthReducer'
 import ReportReducer from './Report/ReportReducer'
 import GeneraleVariableReducer from './Generale/GeneralVariableReducer'
 
+import ArticlesReducer from './Articles/ArticlesReducer'
+import ArticleReducer from './Articles/ArticleReducer'
+
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
   userProfile: UserReducer,
@@ -62,6 +65,9 @@ const RootReducer = combineReducers({
 
   adminAuth:AdminAuthReducer,
   reportsData:ReportReducer,
+
+  articles: ArticlesReducer,
+  article: ArticleReducer,
 })
 
 export default RootReducer

@@ -8640,3 +8640,146 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   font-size: 11px;
   line-height: 30px;
 }
+
+/* ---------------------------------------- */
+/* --------- Create Article Page ---------- */
+/* ---------------------------------------- */
+.create-article .main-heading {
+  font-size: 20px;
+  color: #37474F;
+  font-weight: 700;
+}
+
+.create-article .input-row {
+  padding: 0px;
+}
+
+.create-article .title-input {
+  border: 1px solid #ccc !important;
+  border-radius: 1.5em !important;
+}
+
+.create-article .title-input:focus {
+  border-color: #00b601 !important;
+}
+
+.create-article .ql-toolbar {
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+}
+
+.create-article .ql-container {
+  background: #ffffff;
+  border-bottom-left-radius: 1.5em;
+  border-bottom-right-radius: 1.5em;
+  min-height: 50vh;
+}
+
+.create-article .sidebar {
+  background: #ffffff;
+  border-radius: 1.5em;
+  padding: 1em;
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 3%);
+  margin-left: 1.5em;
+}
+
+.create-article .sidebar .sidebar-title {
+  font-size: 16px;
+  color: #37474F;
+  font-weight: 700;
+}
+
+.create-article .sidebar .edit-btn {
+  border: none;
+  background: none;
+  color: #00b601;
+}
+
+.create-article .sidebar .action-btn {
+  border-radius: 1em;
+  border: 1px solid #00b601;
+  background: #00b601;
+  color: #ffffff;
+  padding: .4em;
+}
+
+.article-box {
+  display: flex;
+  margin-bottom: 2em;
+  align-items: center;
+}
+
+.article-thumb {
+  width: 225px;
+  height: calc(225px / 1.7);
+  margin-right: 1.5em;
+  object-fit: cover;
+}
+
+.article-thumb-sidebar {
+  width: 150px;
+  height: calc(150px / 1.7);
+  margin-right: 1.5em;
+  object-fit: cover;
+}
+
+.article-date {
+  font-size: 13px;
+}
+
+.article-categories {
+  font-size: 13px;
+}
+
+.article-title {
+  font-weight: 700;
+  color: #00b601;
+  font-size: 19px;
+  margin: 0;
+}
+
+.article-desc {
+  margin: 0;
+  font-size: 15px;
+  text-align: justify;
+}
+
+.articles-list-sidebar h4 {
+  font-weight: 700;
+  color: #37474F;
+  font-size: 1.1em;
+}
+
+.article-sidebar-title {
+  color: #00b601;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.article-filter-btn {
+  background: #00b601;
+  color: #fff;
+  border: none;
+  border-radius: 1em;
+  padding: 0 0.8em;
+  height: 100%;
+}
+
+.article-list-author {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.article-list-author img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 5px;
+}
+
+.article-list-author h4 {
+  font-size: 14px;
+  margin: 0;
+}

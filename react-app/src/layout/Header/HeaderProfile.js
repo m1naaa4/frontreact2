@@ -140,6 +140,7 @@ function HeaderProfile() {
                                     <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="projectHolder"/></NavLink></li>
                                     <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </NavLink></li>
                                     <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i> <Text tid="accompanyingPerson"/></a></li>
+                                    <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-books"></i> <Text tid="articles"/></NavLink></li>
                                     </ul>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ import UserLogin from "./pages/User/Auth/Login";
 import UserRegister from "./pages/User/Auth/Register";
 import {Gaurd} from './Gaurd'
 import ProjectListPrivateRoutes from "./routes/ProjectListPrivateRoutes";
+import ArticlePrivateRoutes from "./routes/ArticlePrivateRoutes";
 import ProfilePrivateRoute from "./routes/ProfilePrivateRoutes";
 import MessengerPrivateRoutes from './routes/MessengerPrivateRoutes';
 import FundersPrivateRoutes from './routes/FundersPrivateRoutes';
@@ -44,11 +45,13 @@ const Routes = (props) => {
                         <Gaurd  path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
                         <Gaurd  path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
                         <Gaurd  path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
-                
+                        <Gaurd  path="/articles" token='user-token' routeRedirect='/login' component={ArticlePrivateRoutes} />
+
 
                         <Route  path="/admin/login" component={AdminLogin} />
                         <Gaurd  path="/admin" token='admin-token' routeRedirect='/admin/login' component={AdminPrivateRoutes} />
                         <Gaurd  path="/reports" token='admin-token' routeRedirect='/admin/login' component={ReportPrivateRoutes} />
+
 
                         <Gaurd path="/noauthorization/:id" token='user-token' routeRedirect='/login'  component={NoAuthorization} />
                         <Gaurd path="/notfound/:id" token='user-token' routeRedirect='/login'  component={NotFound} />

@@ -304,7 +304,6 @@ const en = {
     monthsingle : 'month ago',
     monthplural : 'months ago',
     sponsored:'Sponsored',
-
 };
 
 export default en;
