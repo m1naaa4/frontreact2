@@ -37,10 +37,30 @@ const PhotoItem = ({ image, thumb, group }) => (
   </div>
 );
 
-const settings = `{"source": [{"src" : "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4", "type":"video/mp4"}], 
-        "attributes": {"preload": false, "playsinline": true, "controls": true}}
-        `
-    ;
+const VideoItem = ({ thumbnail, video }) => {
+  const settings = `{
+    "source": [{"src": "${video}", "type":"video/mp4"}], 
+    "attributes": {"preload": false, "playsinline": true, "controls": true}
+  }`;
+
+  return <LightGallery
+    appendSubHtmlTo='.lg-item'
+    addClass='.fb-comments'
+    mode='lg-fade'
+    loop='true'
+    plugins={[lgThumbnail, lgZoom, lgVideo]}
+    download={false}
+    enableDrag={false}
+    enableSwipe={false}
+  >
+    <a data-video={settings}>
+      <img
+        style={{ maxWidth: "250px", width: "200px", padding: "5px" }}
+        src={thumbnail}
+        alt="Video Title" />
+    </a>
+  </LightGallery>
+}
 
 export default function ShowProjectMedia() {
   return (
@@ -57,32 +77,10 @@ export default function ShowProjectMedia() {
           </div>
 
           <h1>Videos</h1>
-          {/* <LightgalleryItem group="vids" src="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4">
-            <a href="#">
-              <img src="https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80" />
-              <h4>test vid</h4>
-            </a>
-          </LightgalleryItem> */}
-
-          <LightGallery
-              appendSubHtmlTo= '.lg-item'
-              addClass= 'fb-comments'
-              mode= 'lg-fade'
-              loop= 'true'
-              plugins={[lgThumbnail, lgZoom, lgVideo]}
-              download = {false}
-              enableDrag = {false}
-              enableSwipe = {false}
-          >vxcvcvcvxcvxcv
-                <a  data-video={settings}
-            
-        >
-            <img width="100%" height="300" src='https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80' alt="Video"/>
-        </a>
-                
-                
-          
-        </LightGallery>
+          <VideoItem
+            thumbnail="https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+            video="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4"
+          />
 
         </LightgalleryProvider>
       </div>
