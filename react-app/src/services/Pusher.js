@@ -1,13 +1,12 @@
 import Pusher from 'pusher-js';
-import config from '../Config';
 import Echo from 'laravel-echo'
 
  console.log(window.location.hostname)
 class PusherService {
     echo = new Echo({
         broadcaster: 'pusher',
-        key: 'local',
-        cluster: 'eu',//`${process.env.CLUSTER}`,
+        key: `${process.env.REACT_APP_WEB_SOCKET_API_KEY}`,
+        cluster: `${process.env.REACT_APP_WEB_SOCKET_CLUSTER}`,
         encrypted: true,
         wsHost: `${process.env.REACT_APP_WS_HOST}`,
         wsPort: 6001,

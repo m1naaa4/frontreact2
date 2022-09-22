@@ -52,7 +52,7 @@ console.log(body)
     const submitReply = (e) => {
         e.preventDefault();
         refcomment.current.value = '';
-        dispatch(AddCommentAction(data, '', 'reply'));
+        dispatch(AddCommentAction(data, '', 'comment/reply'));
     }
 
     return (

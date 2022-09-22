@@ -11,8 +11,6 @@ import {Redirect} from 'react-router-dom';
 
 
 export default function ListPostsView() {
-
-
     const dispatch = useDispatch();
     const params = useParams();
     const observer = useRef();

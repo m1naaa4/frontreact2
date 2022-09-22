@@ -1,32 +1,12 @@
-import axios from "axios";
-import config from '../Config'
+import axios from './interceptors.js';
 class HttpService {
-    url = config.urls.api;
 
-    postDataa = async (item, added_url, tokenId = "") =>
+    postData = async (item, added_url, tokenId = "", logged = true) =>
     {
-        item.profile_id = localStorage.getItem('profile_id');
-        const token = await localStorage.getItem(tokenId);
-
-        const requestOptions = this.postRequestOptions(token, item);
-
-        return fetch(this.url + "/" + added_url, requestOptions).then(
-            response => response.json());
-    }
-
-    postData = async (item, added_url, tokenId = "") =>
-    {
-        item.profile_id = localStorage.getItem('profile_id');
-        item.user_id = localStorage.getItem('user_id');
-
-        return await axios({
-            method: 'POST',
-            url: "/" + added_url,
-            data: item
-        }).then(response => response.data)
-    }
-
-    resetPasswordData = async (item, added_url) => {
+        if (logged) {
+            item.profile_id = localStorage.getItem('profile_id');
+            item.user_id = localStorage.getItem('user_id');
+        }
         return await axios({
             method: 'POST',
             url: "/" + added_url,
@@ -105,8 +85,7 @@ class HttpService {
         })
         return () => cancel()
     }
-
-
+    
     getRequest = async (item, url, tokenId = "") =>
     {
         item.user_id = localStorage.getItem('user_id');
@@ -116,8 +95,6 @@ class HttpService {
             params: item
         }).then(response => response.data)
     }
-
-
 }
 
 

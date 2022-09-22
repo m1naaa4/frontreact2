@@ -1,7 +1,6 @@
 import axios from "axios";
-import config from '../Config'
 class HttpServiceAdmin {
-    url   =  config.urls.api;
+    url   =  `${process.env.REACT_APP_API_URL}`;
     token =  localStorage.getItem('admin-token');
 
     postDataa = async (item, added_url, tokenId = "") =>

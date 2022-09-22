@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import UilLinkedin from "@iconscout/react-unicons/icons/uil-linkedin-alt";
-import config from "../../../../../Config";
 
 class LinkedIn extends Component {
     componentDidMount() {
         this.restart();
     }
     getURL = (clientId, state, scope) => {
-        var url = config.urls.front;
+        var url = `${process.env.REACT_APP_FRONT_URL}`;
         const current = encodeURIComponent(url+'/login');
         const base =
             "https://www.linkedin.com/oauth/v2/authorization?response_type=code&";
