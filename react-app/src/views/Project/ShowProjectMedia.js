@@ -5,7 +5,6 @@ import {
   LightgalleryItem,
 } from "react-lightgallery";
 
-
 const imgs = [
   "https://images.unsplash.com/photo-1594818898109-44704fb548f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
   "https://images.unsplash.com/photo-1594818896795-35ad7bcf3c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
@@ -17,6 +16,10 @@ const imgs = [
   "https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80",
   "https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80",
 ];
+
+const vids = [
+  "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4",
+]
 
 const PhotoItem = ({ image, thumb, group }) => (
   <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
@@ -30,28 +33,38 @@ export default function ShowProjectMedia() {
   return (
     <div className="content">
       <div>
-      <LightgalleryProvider
-            // onBeforeOpen={() => console.info("onBeforeOpen")}
-            // onAfterOpen={() => console.info("onAfterOpen")}
-            // onSlideItemLoad={() => console.info("onSlideItemLoad")}
-            // onBeforeSlide={() => console.info("onBeforeSlide")}
-            // onAfterSlide={() => console.info("onAfterSlide")}
-            // onBeforePrevSlide={() => console.info("onBeforePrevSlide")}
-            // onBeforeNextSlide={() => console.info("onBeforeNextSlide")}
-            // onDragstart={() => console.info("onDragstart")}
-            // onDragmove={() => console.info("onDragmove")}
-            // onDragend={() => console.info("onDragend")}
-            // onSlideClick={() => console.info("onSlideClick")}
-            // onBeforeClose={() => console.info("onBeforeClose")}
-            // onCloseAfter={() => console.info("onCloseAfter")}
-          >
-            <h1>Media</h1>
-            <div className="d-flex align-items-center flex-wrap">
-              {imgs.map((p, idx) => (
-                <PhotoItem key={idx} image={p} group="imgs" />
-              ))}
-            </div>
-          </LightgalleryProvider>
+        <LightgalleryProvider
+        // onBeforeOpen={() => console.info("onBeforeOpen")}
+        // onAfterOpen={() => console.info("onAfterOpen")}
+        // onSlideItemLoad={() => console.info("onSlideItemLoad")}
+        // onBeforeSlide={() => console.info("onBeforeSlide")}
+        // onAfterSlide={() => console.info("onAfterSlide")}
+        // onBeforePrevSlide={() => console.info("onBeforePrevSlide")}
+        // onBeforeNextSlide={() => console.info("onBeforeNextSlide")}
+        // onDragstart={() => console.info("onDragstart")}
+        // onDragmove={() => console.info("onDragmove")}
+        // onDragend={() => console.info("onDragend")}
+        // onSlideClick={() => console.info("onSlideClick")}
+        // onBeforeClose={() => console.info("onBeforeClose")}
+        // onCloseAfter={() => console.info("onCloseAfter")}
+        >
+          <h1>Media</h1>
+
+          <div className="d-flex align-items-center flex-wrap">
+            {imgs.map((p, idx) => (
+              <PhotoItem key={idx} image={p} group="imgs" />
+            ))}
+          </div>
+
+          <h1>Videos</h1>
+          <LightgalleryItem group="vids" src="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4">
+            <a href="#">
+              <img src="https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80" />
+              <h4>test vid</h4>
+            </a>
+          </LightgalleryItem>
+
+        </LightgalleryProvider>
       </div>
     </div>
   );
