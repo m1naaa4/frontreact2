@@ -1,4 +1,15 @@
 import React from "react";
+import LightGallery from 'lightgallery/react';
+// import styles
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+import 'lightgallery/css/lg-video.css';
+
+// import plugins if you need
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
+import lgVideo from 'lightgallery/plugins/video';
 import PT from "prop-types";
 import {
   LightgalleryProvider,
@@ -17,9 +28,6 @@ const imgs = [
   "https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80",
 ];
 
-const vids = [
-  "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4",
-]
 
 const PhotoItem = ({ image, thumb, group }) => (
   <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
@@ -29,24 +37,16 @@ const PhotoItem = ({ image, thumb, group }) => (
   </div>
 );
 
+const settings = `{"source": [{"src" : "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4", "type":"video/mp4"}], 
+        "attributes": {"preload": false, "playsinline": true, "controls": true}}
+        `
+    ;
+
 export default function ShowProjectMedia() {
   return (
     <div className="content">
       <div>
         <LightgalleryProvider
-        // onBeforeOpen={() => console.info("onBeforeOpen")}
-        // onAfterOpen={() => console.info("onAfterOpen")}
-        // onSlideItemLoad={() => console.info("onSlideItemLoad")}
-        // onBeforeSlide={() => console.info("onBeforeSlide")}
-        // onAfterSlide={() => console.info("onAfterSlide")}
-        // onBeforePrevSlide={() => console.info("onBeforePrevSlide")}
-        // onBeforeNextSlide={() => console.info("onBeforeNextSlide")}
-        // onDragstart={() => console.info("onDragstart")}
-        // onDragmove={() => console.info("onDragmove")}
-        // onDragend={() => console.info("onDragend")}
-        // onSlideClick={() => console.info("onSlideClick")}
-        // onBeforeClose={() => console.info("onBeforeClose")}
-        // onCloseAfter={() => console.info("onCloseAfter")}
         >
           <h1>Media</h1>
 
@@ -57,12 +57,32 @@ export default function ShowProjectMedia() {
           </div>
 
           <h1>Videos</h1>
-          <LightgalleryItem group="vids" src="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4">
+          {/* <LightgalleryItem group="vids" src="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4">
             <a href="#">
               <img src="https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80" />
               <h4>test vid</h4>
             </a>
-          </LightgalleryItem>
+          </LightgalleryItem> */}
+
+          <LightGallery
+              appendSubHtmlTo= '.lg-item'
+              addClass= 'fb-comments'
+              mode= 'lg-fade'
+              loop= 'true'
+              plugins={[lgThumbnail, lgZoom, lgVideo]}
+              download = {false}
+              enableDrag = {false}
+              enableSwipe = {false}
+          >vxcvcvcvxcvxcv
+                <a  data-video={settings}
+            
+        >
+            <img width="100%" height="300" src='https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80' alt="Video"/>
+        </a>
+                
+                
+          
+        </LightGallery>
 
         </LightgalleryProvider>
       </div>

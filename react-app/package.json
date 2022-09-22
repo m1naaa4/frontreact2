@@ -37,6 +37,7 @@
     "react-hooks-helper": "^1.6.0",
     "react-i18next": "^11.8.13",
     "react-lightgallery": "^0.9.0",
+    "lightgallery": "2.2.1",
     "react-moment": "^1.1.1",
     "react-multiselect-checkboxes": "^0.1.1",
     "react-player": "^2.10.1",
