@@ -68,7 +68,7 @@ export default function ShowProjectMedia() {
       <div>
         <LightgalleryProvider
         >
-          <h1>Media</h1>
+          <h3>Photos</h3>
 
           <div className="d-flex align-items-center flex-wrap">
             {imgs.map((p, idx) => (
@@ -76,16 +76,19 @@ export default function ShowProjectMedia() {
             ))}
           </div>
 
-          <h1>Videos</h1>
-          {
-            Array(7).fill().map((e, indx) => (
-              <VideoItem
-                key={indx + 1}
-                thumbnail="https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-                video="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4"
-              />
-            ))
-          }
+          <h3>Videos</h3>
+          <div className="d-flex flex-wrap">
+            {
+              Array(7).fill().map((e, indx) => (
+                <VideoItem
+                  key={indx + 1}
+                  thumbnail="https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+                  video="https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630dfa102d5ed.mp4"
+                />
+              ))
+            }
+          </div>
+
 
         </LightgalleryProvider>
       </div>

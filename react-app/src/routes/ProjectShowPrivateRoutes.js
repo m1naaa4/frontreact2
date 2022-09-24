@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Redirect, useParams, Switch, NavLink, useLocation } from 'react-router-dom';
+import { Route, Redirect, useParams, Switch, NavLink, useLocation, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import ShowProjectDocs from '../views/Project/ShowProjectDocs';
 import ShowProjectMedia from '../views/Project/ShowProjectMedia';
 import ShowProjectView from '../views/Project/ShowProjectView';
+import { GetProjectAction } from "../store/actions/User/Project/ProjectAction";
+
 
 export default function ProjectShowPrivateRoutes(props) {
     const params = useParams()
@@ -21,6 +24,24 @@ export default function ProjectShowPrivateRoutes(props) {
     })
 
 
+    const fullproject = useSelector(state => state.getproject);
+    const project = fullproject?.getproject.project;
+
+    const history = useHistory();
+    const data = {
+        provider_id: params.id,
+        action: "getProject",
+        permission: "consult project",
+        provider: "project",
+        provider_name: localStorage.getItem('provider_name'),
+    }
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(GetProjectAction(data, props, history, params.id));
+    }, [dispatch])
+
+
     return (
         <div className="Single-Wrapper">
             <div className="container">
@@ -28,11 +49,20 @@ export default function ProjectShowPrivateRoutes(props) {
                     <div className='col-12'>
                         <div className="Profile-Navigation mb-3" style={{ maxWidth: "100%", top: 0 }}>
                             <ul className="Profie-Menu">
-                                <li><NavLink className={currentPage === 'details' ? 'active-profile-link' : ''} to={`/project/show/${params.id}`}><i className="uil uil-apps"></i> Details</NavLink></li>
-                                <li><NavLink className={currentPage === 'media' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/media`}><i className="uil uil-user-square"></i> Media</NavLink></li>
+                                <li><NavLink className={currentPage === 'details' ? 'active-profile-link' : ''} to={`/project/show/${params.id}`}><i className="uil uil-user-square"></i> Details</NavLink></li>
+                                <li><NavLink className={currentPage === 'media' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/media`}><i className="uil uil-apps"></i> Media</NavLink></li>
                                 <li><NavLink className={currentPage === 'docs' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/docs`}><i className="uil uil-layer-group"></i> Documents</NavLink></li>
                             </ul>
                         </div>
+                    </div>
+                    <div className='col-12'>
+                        {
+                            currentPage != "details" && project != undefined &&
+                            <h1 className='text-uppercase'>
+                                {/* <i className="uil uil-apps"></i>  */}
+                                {currentPage + ': ' + project.name}
+                            </h1>
+                        }
                     </div>
                 </div>
                 <Switch>
