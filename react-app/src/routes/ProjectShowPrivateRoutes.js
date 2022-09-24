@@ -26,7 +26,7 @@ export default function ProjectShowPrivateRoutes(props) {
             <div className="container">
                 <div className="row">
                     <div className='col-12'>
-                        <div className="Profile-Navigation mb-0" style={{ maxWidth: "100%", top: 0 }}>
+                        <div className="Profile-Navigation mb-3" style={{ maxWidth: "100%", top: 0 }}>
                             <ul className="Profie-Menu">
                                 <li><NavLink className={currentPage === 'details' ? 'active-profile-link' : ''} to={`/project/show/${params.id}`}><i className="uil uil-apps"></i> Details</NavLink></li>
                                 <li><NavLink className={currentPage === 'media' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/media`}><i className="uil uil-user-square"></i> Media</NavLink></li>
