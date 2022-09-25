@@ -55,9 +55,9 @@ export default function ShowProjectView(props) {
     const [options_List, SetOptions_List] = useState(false);
     const [showReport, setShowReport] = useState(false);
     const [optionSelected, setOptionSelected] = useState();
-    const [open,setOpen] = useState(false);
-    const [titleDialog,setTitleDialog] = useState("Confirm To add to Favorite");
-    const [ContentDialog,setContentDialog] = useState("are you sure you want to add this post to favorite?");
+    const [open, setOpen] = useState(false);
+    const [titleDialog, setTitleDialog] = useState("Confirm To add to Favorite");
+    const [ContentDialog, setContentDialog] = useState("are you sure you want to add this post to favorite?");
 
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
@@ -346,19 +346,19 @@ export default function ShowProjectView(props) {
         SetOptions_List(false)
     });
 
-    const HandleClose = ()=>{
+    const HandleClose = () => {
         setOpen(false);
-      }
-      
-    const HandleClickOpen = () =>{
+    }
+
+    const HandleClickOpen = () => {
         setOpen(true);
     }
-    
+
     useEffect(() => {
-        if(classe){
+        if (classe) {
             setTitleDialog("Confirm To Remove From Favorite");
             setContentDialog("are you sure you want to remove this post from favorite?");
-        }else{
+        } else {
             setTitleDialog("Confirm To add to Favorite");
             setContentDialog("are you sure you want to add this post to favorite?");
         }
@@ -377,75 +377,72 @@ export default function ShowProjectView(props) {
     };
 
     return (
-        <div className="Single-Wrapper">
-            <div className="container">
-
-                {/* <!-- SINGLE -->*/}
-                {
-                    project.success === 'loading' || project === 'loading' ? (
-                        <div></div>
-                        // <ProjectSkeletonGrid/>
-                    ) : project.success === true ? (
+        <>
+            {/* <!-- SINGLE -->*/}
+            {
+                project.success === 'loading' || project === 'loading' ? (
+                    <div></div>
+                    // <ProjectSkeletonGrid/>
+                ) : project.success === true ? (
 
 
-                        <div className="Single-Content">
-                            <div className="row">
-                                <div className="col-md-8">
+                    <div className="row">
+                        <div className="col-md-8">
 
-                                    {/*!--PAGE HEADER --*/}
-                                    <div className="single-header" style={{marginBottom: "15px",marginTop:"15px"}}>
-                                        <div className="signle-offer-type">Project Business</div>
-                                        <div className="single-offer-header">
-                                        <div className="Company-Left">
-                                            <div className="d-flex">
-                                                <div className="single-offer-logo">
-                                                    <img src={project.project.logo_link} title="Nom du projet" alt="" />
-                                                </div>
-                                                <div>
-                                                    <h3 className="single-offer-name">{project.project.name}</h3>
-                                                </div>
-                                                <div style={{paddingTop:"15px",paddingLeft:"10px"}}>
-                                                    <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                                                    {/* <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label> */}
-                                                    <DialogWarning 
-                                                        title={titleDialog} 
-                                                        ContentText={ContentDialog} 
-                                                        open={open} 
-                                                        HandleConfirmation={e => addTofavorite(project.project.id)}
-                                                        HandleClose={HandleClose}
-                                                    />
-                                                </div>
-                                                <div style={{paddingTop:"15px",paddingLeft:"4px"}}>
-                                                     {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
-                                                </div>
+                            {/*!--PAGE HEADER --*/}
+                            <div className="single-header" style={{ marginBottom: "15px", marginTop: "15px" }}>
+                                <div className="signle-offer-type">Project Business</div>
+                                <div className="single-offer-header">
+                                    <div className="Company-Left">
+                                        <div className="d-flex">
+                                            <div className="single-offer-logo">
+                                                <img src={project.project.logo_link} title="Nom du projet" alt="" />
                                             </div>
-                                        </div>
-                                          {user.id !== project.project.user_id && (<div className="Company-Right">
-                                                <div className="Company-Phone">
-                                                    <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
-                                                    {
-                                                        options_List && (
-                                                            <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-                                                                
-                                                                    <li className="PostDelete">
-                                                                        <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
-                                                                    </li>
-                                                                
-                                                            </ul>
-                                                        )
-                                                    }
-
-                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
-                                                </Modal>
+                                            <div>
+                                                <h3 className="single-offer-name">{project.project.name}</h3>
                                             </div>
-                                            <br />
-                                        </div>
-                                            )}
+                                            <div style={{ paddingTop: "15px", paddingLeft: "10px" }}>
+                                                <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                                                {/* <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label> */}
+                                                <DialogWarning
+                                                    title={titleDialog}
+                                                    ContentText={ContentDialog}
+                                                    open={open}
+                                                    HandleConfirmation={e => addTofavorite(project.project.id)}
+                                                    HandleClose={HandleClose}
+                                                />
+                                            </div>
+                                            <div style={{ paddingTop: "15px", paddingLeft: "4px" }}>
+                                                {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
+                                            </div>
                                         </div>
                                     </div>
+                                    {user.id !== project.project.user_id && (<div className="Company-Right">
+                                        <div className="Company-Phone">
+                                            <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                            {
+                                                options_List && (
+                                                    <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
 
-                                    {/* <div className="Company-Infos">
+                                                        <li className="PostDelete">
+                                                            <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                        </li>
+
+                                                    </ul>
+                                                )
+                                            }
+
+                                            <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
+                                            </Modal>
+                                        </div>
+                                        <br />
+                                    </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* <div className="Company-Infos">
                                         <div className="Company-Left">
                                             <div className="single-offer-logo">
                                                 <img src={project.project.logo_link} title="Nom du projet" alt="" />
@@ -477,133 +474,133 @@ export default function ShowProjectView(props) {
                                         </div>
                                     </div> */}
 
-                                    <div className="Content-Wrap">
-                                        <div className="Signle-Offer-Media">
-                                            {(function () {
-                                                if (project.project.media_type == 'youtube') {
-                                                    return <YouTube videoId={project.project.media_link} />;
+                            <div className="Content-Wrap">
+                                <div className="Signle-Offer-Media">
+                                    {(function () {
+                                        if (project.project.media_type == 'youtube') {
+                                            return <YouTube videoId={project.project.media_link} />;
+                                        } else {
+                                            if (project.project.media_type == 'vimeo') {
+                                                return <Vimeo width={640} height={380} video={project.project.media_link} />
+                                            } else {
+                                                if (project.project.is_video) {
+                                                    return <VideoJS options={videoJsOptions} />
                                                 } else {
-                                                    if (project.project.media_type == 'vimeo') {
-                                                        return <Vimeo width={640} height={380} video={project.project.media_link} />
-                                                    } else {
-                                                        if (project.project.is_video) {
-                                                            return <VideoJS options={videoJsOptions} />
-                                                        } else {
-                                                            return <img width="100%" height="300" src={project.project.media_link} alt="Project" />
-                                                        }
-                                                    }
+                                                    return <img width="100%" height="300" src={project.project.media_link} alt="Project" />
                                                 }
-                                            })()}
-                                        </div>
+                                            }
+                                        }
+                                    })()}
+                                </div>
 
-                                        <div className="Signle-Offer-Content">
-                                            <div className="reactions-wrap">
-                                                <div className="reactions-box">
-                                                    <div className="row">
-                                                        <div className="col-6 col-md-4 col-lg-6">
-                                                            <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{likeCount}</span></div>
-                                                            <div className="reaction views"><i className="uil uil-eye"></i>
-                                                                <span>{project.project.visit}</span></div>
-                                                        </div>
-                                                        <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                            <div className="reaction comments"><span>{countcomment} Comments</span></div>
-                                                            <div className="reaction shares"><span>Shares</span></div>
-                                                        </div>
-                                                    </div>
+                                <div className="Signle-Offer-Content">
+                                    <div className="reactions-wrap">
+                                        <div className="reactions-box">
+                                            <div className="row">
+                                                <div className="col-6 col-md-4 col-lg-6">
+                                                    <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{likeCount}</span></div>
+                                                    <div className="reaction views"><i className="uil uil-eye"></i>
+                                                        <span>{project.project.visit}</span></div>
+                                                </div>
+                                                <div className="col-6 col-md-8 col-lg-6 text-right">
+                                                    <div className="reaction comments"><span>{countcomment} Comments</span></div>
+                                                    <div className="reaction shares"><span>Shares</span></div>
                                                 </div>
                                             </div>
-                                            <div className="reactions-buttons">
-                                                <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
-                                                    onClick={likeAAction} toggle="#password-field" type="button" name="button">
-                                                    <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
-                                                    {like ? "Dislike" : "Like"}
-                                                </button>
-
-                                                <a className="reaction-button reaction-comment" href="#Comments-Wrap">
-                                                    <img src="/assets/images/icons/dadupa-comment.svg" alt="" />
-                                                    Commenter
-                                                </a>
-                                                <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
-                                                    <img src="/assets/images/icons/dadupa-share.svg" alt="" />
-                                                    Partager
-                                                </button>
-                                                <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
-                                            </div>
-                                            <div className="Signle-Offer-Text">
-                                                {project.project.description ? parse(project.project.description) : project.project.description}
-                                            </div>
-
                                         </div>
                                     </div>
+                                    <div className="reactions-buttons">
+                                        <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
+                                            onClick={likeAAction} toggle="#password-field" type="button" name="button">
+                                            <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
+                                            {like ? "Dislike" : "Like"}
+                                        </button>
 
-                                    <AddComment providerObject={project} providerType='project' />
+                                        <a className="reaction-button reaction-comment" href="#Comments-Wrap">
+                                            <img src="/assets/images/icons/dadupa-comment.svg" alt="" />
+                                            Commenter
+                                        </a>
+                                        <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
+                                            <img src="/assets/images/icons/dadupa-share.svg" alt="" />
+                                            Partager
+                                        </button>
+                                        <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
+                                    </div>
+                                    <div className="Signle-Offer-Text">
+                                        {project.project.description ? parse(project.project.description) : project.project.description}
+                                    </div>
+
                                 </div>
-                                <div className="col-md-4">
-                                    <div className="Post-Actions">
-                                        {user.id == project.project.user_id && <div className="Update-Post">
-                                            <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
-                                                title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
-                                            </button>
-                                        </div>}
+                            </div>
 
-                                        {/* <div className="Send-Message">
+                            <AddComment providerObject={project} providerType='project' />
+                        </div>
+                        <div className="col-md-4">
+                            <div className="Post-Actions">
+                                {user.id == project.project.user_id && <div className="Update-Post">
+                                    <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
+                                        title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
+                                    </button>
+                                </div>}
+
+                                {/* <div className="Send-Message">
                                     <button className="Button-Send" type="button" name="button" data-toggle="tooltip"
                                             data-placement="bottom" title="Send a message">
                                         <span>Envoyer un message</span> <i className="uil uil-message"></i></button>
                                 </div> */}
 
-                                        {user.id == project.project.user_id && <div className="Send-Message input-row input-select">
-                                            {/* <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
+                                {user.id == project.project.user_id && <div className="Send-Message input-row input-select">
+                                    {/* <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
                                         <option disabled selected>Project status</option>
                                         <option value="public">Public</option>
                                         <option value="shared">Shared</option>
                                         <option value="team">Team</option>
                                         <option value="private">Private</option>
                                     </select> */}
-                                            <Select
-                                                options={alloptions}
-                                                value={optionSelected}
-                                                placeholder={project.project.visibility}
-                                                onChange={handleChange}
-                                                styles={SelectStyleWithScrollbar}
-                                                className="Select"
-                                            />
-                                        </div>}
-                                        {is_loading === true && <Spinner
-                                            as="span"
-                                            animation="border"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                        />}
+                                    <Select
+                                        options={alloptions}
+                                        value={optionSelected}
+                                        placeholder={project.project.visibility}
+                                        onChange={handleChange}
+                                        styles={SelectStyleWithScrollbar}
+                                        className="Select"
+                                    />
+                                </div>}
+                                {is_loading === true && <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />}
 
-                                    </div>
-                                    <div className="Single-Offer-Details">
-                                        <ul className="Offer-Details-List">
-                                            <li className="Offer-Item">
-                                                <label className='mb-3'>Owners</label>
-                                                <div class="d-flex align-items-start">
-                                                <span>
-                                                    {project.project.owner && project.project.owner.map((value) => {
-                                                        return <div className="Contact">
-                                                            <div class="d-flex align-items-start">
+                            </div>
+                            <div className="Single-Offer-Details">
+                                <ul className="Offer-Details-List">
+                                    <li className="Offer-Item">
+                                        <label className='mb-3'>Owners</label>
+                                        <div className="d-flex align-items-start">
+                                            <span>
+                                                {project.project.owner && project.project.owner.map((value, index) => {
+                                                    return <div key={index+1} className="Contact">
+                                                        <div className="d-flex align-items-start">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                                                             <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link></div>
                                                             <div className="Contact-Infos">
                                                                 <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
                                                             </div>
-                                                            </div>
                                                         </div>
-                                                    }
-                                                    )}
-                                                </span>
+                                                    </div>
+                                                }
+                                                )}
+                                            </span>
 
-                                            
+
                                             {project.project.visibility !== 'public' && user.id == project.project.user_id &&
-                                               <>
+                                                <>
                                                     <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
-                                                        <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{width: "13px",height:"13px"}} alt="" id="image_share" />
-               
+                                                        <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{ width: "13px", height: "13px" }} alt="" id="image_share" />
+
                                                     </button>
                                                     {/* <span> */}
 
@@ -613,51 +610,45 @@ export default function ShowProjectView(props) {
                                                         <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
                                                     </Modal>
 
-                                               </>
+                                                </>
                                             }
-                                            </div>
-                                            </li>
-                                            <li className="Offer-Item">
-                                                <label>Publié le</label>
-                                                <span>{project.project.date}</span>
-                                            </li>
-                                            <li className="Offer-Item">
-                                                <label>Etat du projet</label>
-                                                <span>{t(`${status}`)}</span>
-                                            </li>
-                                            <li className="Offer-Item">
-                                                <label>Secteurs d’activité</label>
-                                                <span>{t(`${sector}`)}</span>
-                                            </li>
-                                            <li className="Offer-Item">
-                                                <label>Zones ciblées</label>
-                                                <span>{country}</span>
-                                            </li>
-                                            <li className="Offer-Item">
-                                                <label>Financement recherché</label>
-                                                <span>{t(`${finance}`)}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="Single-Offer-Tags">
-                                        <h3>Tags</h3>
-                                        {tags}
-                                    </div>
-                                </div>
+                                        </div>
+                                    </li>
+                                    <li className="Offer-Item">
+                                        <label>Publié le</label>
+                                        <span>{project.project.date}</span>
+                                    </li>
+                                    <li className="Offer-Item">
+                                        <label>Etat du projet</label>
+                                        <span>{t(`${status}`)}</span>
+                                    </li>
+                                    <li className="Offer-Item">
+                                        <label>Secteurs d’activité</label>
+                                        <span>{t(`${sector}`)}</span>
+                                    </li>
+                                    <li className="Offer-Item">
+                                        <label>Zones ciblées</label>
+                                        <span>{country}</span>
+                                    </li>
+                                    <li className="Offer-Item">
+                                        <label>Financement recherché</label>
+                                        <span>{t(`${finance}`)}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="Single-Offer-Tags">
+                                <h3>Tags</h3>
+                                {tags}
                             </div>
                         </div>
+                    </div>
 
 
-                    ) : (
-                        // console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
-                        <div data-testid="error-message">ERROR</div>
-                    )
-                }
-
-
-
-
-            </div>
-        </div>
+                ) : (
+                    // console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
+                    <div data-testid="error-message">ERROR</div>
+                )
+            }
+        </>
     )
 }

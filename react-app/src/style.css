@@ -7679,8 +7679,8 @@ label.error {
 }
 
 .Doc-Wrap .Doc-Icon {
+  aspect-ratio: 1/1;
   width: 100%;
-  height: 400px;
   background: #00b601;
   display: flex;
   justify-content: center;

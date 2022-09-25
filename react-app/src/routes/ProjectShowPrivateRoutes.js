@@ -1,0 +1,89 @@
+import React, { useState, useEffect } from 'react'
+import { Route, Redirect, useParams, Switch, NavLink, useLocation, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import ShowProjectDocs from '../views/Project/ShowProjectDocs';
+import ShowProjectMedia from '../views/Project/ShowProjectMedia';
+import ShowProjectView from '../views/Project/ShowProjectView';
+import { GetProjectAction } from "../store/actions/User/Project/ProjectAction";
+
+
+export default function ProjectShowPrivateRoutes(props) {
+    const params = useParams()
+    const location = useLocation();
+    const currentLocation = location.pathname.split('/')[location.pathname.split('/').length - 1]
+    const [currentPage, setCurrentPage] = useState('details')
+
+    useEffect(() => {
+        if (currentLocation === 'media') {
+            setCurrentPage('media')
+        } else if (currentLocation === 'docs') {
+            setCurrentPage('docs')
+        } else {
+            setCurrentPage('details')
+        }
+    })
+
+
+    const fullproject = useSelector(state => state.getproject);
+    const project = fullproject?.getproject.project;
+
+    const history = useHistory();
+    const data = {
+        provider_id: params.id,
+        action: "getProject",
+        permission: "consult project",
+        provider: "project",
+        provider_name: localStorage.getItem('provider_name'),
+    }
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(GetProjectAction(data, props, history, params.id));
+    }, [dispatch])
+
+
+    return (
+        <div className="Single-Wrapper">
+            <div className="container">
+                <div className="row">
+                    <div className='col-12'>
+                        <div className="Profile-Navigation mb-3" style={{ maxWidth: "100%", top: 0 }}>
+                            <ul className="Profie-Menu">
+                                <li><NavLink className={currentPage === 'details' ? 'active-profile-link' : ''} to={`/project/show/${params.id}`}><i className="uil uil-user-square"></i> Details</NavLink></li>
+                                <li><NavLink className={currentPage === 'media' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/media`}><i className="uil uil-apps"></i> Media</NavLink></li>
+                                <li><NavLink className={currentPage === 'docs' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/docs`}><i className="uil uil-layer-group"></i> Documents</NavLink></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className='col-12'>
+                        {
+                            currentPage != "details" && project != undefined &&
+                            <h1 className='text-uppercase'>
+                                {/* <i className="uil uil-apps"></i>  */}
+                                {currentPage + ': ' + project.name}
+                            </h1>
+                        }
+                    </div>
+                </div>
+                <Switch>
+                    <Route exact path={`${props.match.path}`} component={ShowProjectView} />
+                    <Route exact path={props.match.path} render={props => (
+                        <Redirect to={{ pathname: `${props.match.path}` }} />
+                    )} />
+
+
+                    <Route exact path={`${props.match.path}/media`} component={ShowProjectMedia} />
+                    <Route exact path={props.match.path} render={props => (
+                        <Redirect to={{ pathname: `${props.match.path}/media` }} />
+                    )} />
+
+                    <Route exact path={`${props.match.path}/docs`} component={ShowProjectDocs} />
+                    <Route exact path={props.match.path} render={props => (
+                        <Redirect to={{ pathname: `${props.match.path}/docs` }} />
+                    )} />
+
+                </Switch>
+            </div>
+        </div>
+    )
+}
