@@ -7,9 +7,15 @@ export const getArticles = () => {
         dispatch({ type: 'LOADING_LOAD_ARTICLES' });
 
         const http = new HttpService();
-        http.getData("getArticles").then((res) => {
+        const tempFilter = {
+            by: "",
+            search: "",
+            categories: [],
+            popular: {}
+        }
+        http.postData(tempFilter,"article/all").then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
-
+                console.log("get  res", res)
                 dispatch({ type: 'LOAD_ARTICLES_SUCCESS', res });
 
             } else if (res.hasOwnProperty('success') && res.success === false) {
@@ -28,7 +34,7 @@ export const getArticle = (id) => {
         dispatch({ type: 'LOADING_LOAD_ARTICLE' });
 
         const http = new HttpService();
-        http.getData(`getArticle/${id}`).then((res) => {
+        http.getData(`article/get/${id}`).then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
 
                 dispatch({ type: 'LOAD_ARTICLE_SUCCESS', res });

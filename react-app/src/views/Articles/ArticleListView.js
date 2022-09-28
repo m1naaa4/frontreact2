@@ -22,10 +22,12 @@ export default function ArticleListView({ article }) {
                 <p className="article-desc">{article.body.substring(0, 130).replace(/<[^>]+>/g, ' ')} ...</p>
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex align-items-center mt-2' style={{ width: 'fit-content' }}>
-                        <Link className="article-list-author" to={`/profile/${article.creator.id}`}>
-                            <img src={article.creator.avatar} alt={article.creator.name} />
-                            <h4>{article.creator.name}</h4>
-                        </Link>
+                        {
+                            article.creator && <Link className="article-list-author" to={`/profile/${article.creator.id}`}>
+                                <img src={article.creator.avatar} alt={article.creator.name} />
+                                <h4>{article.creator.name}</h4>
+                            </Link>
+                        }
                         <span className='article-date'>, {article.created_at.for_humans}</span>
                     </div>
                     <div style={{ fontSize: "13px" }}>

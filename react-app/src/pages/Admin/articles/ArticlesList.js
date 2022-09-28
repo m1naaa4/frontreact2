@@ -35,7 +35,7 @@ export default function ArticlesList() {
 
     useEffect(() => {
         dispatch(getArticles())
-        console.log(articles)
+        console.log(loading)
     }, [dispatch])
 
 
