@@ -10,6 +10,10 @@ import { ErrorBoundary } from './Errors/ErrorBoundary';
 import "lightgallery.js/dist/css/lightgallery.css";
 
 import { LightgalleryProvider } from "react-lightgallery";
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = "G-Z18XKVBMNK";
+ReactGA.initialize(TRACKING_ID);
  
 
 function App() {
