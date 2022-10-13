@@ -41,8 +41,7 @@ export default function AddComment({post}) {
     const handleSubmitValue = (e) => {
         e.preventDefault();
         refcomment.current.value = '';
-        dispatch(AddCommentAction(data, '', 'add')); 
-        
+        dispatch(AddCommentAction(data, '', 'comment/add')); 
     }
 
     useEffect(()=>{

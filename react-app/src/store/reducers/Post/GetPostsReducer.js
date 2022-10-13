@@ -38,7 +38,6 @@ const GetPostsReducer = (state = initState || undefined, action) => {
             }
 
         case 'ADD_POST_SUCCESS':
-
             state.posts = [action.res.post, ...state.posts];
             return {
                 posts: state.posts,
@@ -46,17 +45,26 @@ const GetPostsReducer = (state = initState || undefined, action) => {
             }
 
         case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':
-            console.log('hereeeeeeeeeeeeeee', action.res.comments)
-            const allposts = state.posts;
-            allposts.forEach(function (post) {
+            state.posts.forEach(function (post) {
                 if (action.res.comments?.commentable_id === post.id) {
                     post.comments.unshift(action.res.comments);
                 }
             });
             return {
                 ...state,
-                posts: allposts,
-                commentCount: action.res?.commentcount,
+                posts: state.posts,
+                loading: false
+            }
+        
+        case 'DELETE_COMMENT_POST':
+            state.posts.forEach(function (post) {
+                if (action.item_ids.post_id === post.id) {
+                    post.comments.filter(item => item.id !== action.item_ids.comment_id);
+                }
+            });
+            return {
+                ...state,
+                posts: state.posts,
                 // likeCount    :  likeCount,
                 // comments :  [action.res.comments.data, ...state.comments],
                 // hasMore  :  action.res.comment.meta,

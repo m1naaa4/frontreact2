@@ -5,7 +5,6 @@ import { Player } from 'video-react';
 import VideoPlayer from 'simple-react-video-thumbnail'
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory } from "react-router-dom";
-import config from '../../Config'
 import slugify from 'react-slugify';
 import {countryName, financeLabel, sectorName} from '../../helpers/Helpres'
 import { useTranslation } from 'react-i18next';
@@ -16,7 +15,7 @@ const ListingItemFunder = ({ project }) => {
     let history = useHistory();
     const { t, i18n } = useTranslation();
 
-    let url_to_share = slugify(project.name, { prefix: config.urls.front+'/funder/'+project.id });
+    let url_to_share = slugify(project.name, { prefix: `${process.env.REACT_APP_FRONT_URL}`+'/funder/'+project.id });
 
     const showPage = (id) => {
          history.push('/funder/'+ id)

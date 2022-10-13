@@ -20,7 +20,6 @@ import { GeneraleAction } from '../../store/actions/Generale/GeneraleAction';
 import ReportModal from '../Admin/Report/ReportModal';
 import useOutsideClick from '../../helpers/useOutsideClick';
 import $ from "jquery";
-import config from '../../Config'
 import slugify from 'react-slugify';
 import SharePopUp from '../../utils/SharePopUp'
 import VideoJS from '../../helpers/VideoJS';
@@ -277,7 +276,7 @@ export default function ShowProjectView(props) {
 
     let tags;
     if (project.project) {
-        url_to_share = slugify(project.project.name, { prefix: config.urls.front + '/project/show/' + params.id });
+        url_to_share = slugify(project.project.name, { prefix: `${process.env.REACT_APP_FRONT_URL}` + '/project/show/' + params.id });
 
         tags = <ul className="Tags-List">
             {project.project.tags.map((name, index) => (

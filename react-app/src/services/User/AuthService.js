@@ -1,7 +1,4 @@
 import HttpService from '../HttpService';
-import { useDispatch } from 'react-redux';
-
-
 
 export const SignUpService = (credentials) =>
 {
@@ -12,7 +9,7 @@ export const SignUpService = (credentials) =>
         return data;
     }).catch((error)=> {
         return error;
-         });
+    });
 }
 
 export const LoginUser = (credentials) =>
@@ -31,9 +28,7 @@ export const ResetpasswordUser = (credentials,dispatch) =>
 {
     const http = new HttpService();
     let resetUrl = "password/create";
-    return http.resetPasswordData(credentials,resetUrl).then(data=>{
-        // console.log(JSON.stringify(data));
-        console.log("email sent successfully");
+    return http.postData(credentials, resetUrl, '', true).then(data=>{
         dispatch({type:'RESET_SUCCESS', data})
         return data;
     }).catch((error)=> {

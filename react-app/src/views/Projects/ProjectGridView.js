@@ -5,7 +5,6 @@ import { Player } from 'video-react';
 import VideoPlayer from 'simple-react-video-thumbnail'
 import SharePopUp from '../../utils/SharePopUp'
 import { countryName } from '../../helpers/Helpres'
-import config from '../../Config'
 import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';

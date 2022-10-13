@@ -40,7 +40,7 @@ export default function Comments(props) {
             provider_id      : props.provider_id,
         }
 
-        dispatch(GetCommentAction(dataget));
+        dispatch(GetCommentAction(dataget, 'comment/get'));
         // const pusher = new PusherService();        
         // var channel = pusher.config.subscribe('project_comment_' + project.getproject.projectid);        
         // channel.bind('NewComment', function(res) {    
@@ -62,7 +62,7 @@ export default function Comments(props) {
                 body            : value,
             }
             refcomment.current.value = ''
-        dispatch(AddCommentAction(data, props, 'add'));
+        dispatch(AddCommentAction(data, props, 'comment/add'));
         
         }
     }

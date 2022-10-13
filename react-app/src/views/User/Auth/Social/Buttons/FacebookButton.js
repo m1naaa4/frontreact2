@@ -1,7 +1,6 @@
 import React,{ useEffect } from 'react'
 import UilFacebook from "@iconscout/react-unicons/icons/uil-facebook-f";
 import HttpService from "../../../../../services/HttpService";
-import config from "../../../../../Config";
 
 export default function FacebookButton(props) {
     useEffect(() => {
