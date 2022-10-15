@@ -112,8 +112,8 @@ export default function ShowComment(comment, props) {
                 <>                                            
                     <div className="Comment-Col-2">
                         <div className="Comment-User-Thumb">
-                            {comment.comment.avatar ? 
-                                <img onClick={gotToProfile} src={comment.comment.avatar} alt="avatar" />    
+                            {comment.comment.creator.avatar ? 
+                                <img onClick={gotToProfile} src={comment.comment.creator.avatar} alt="avatar" />    
                             : <img onClick={gotToProfile} src="/assets/images/avatar.png" alt="avatar" />}
                         </div>
                         <ul className="comment-reactions-list">
@@ -126,8 +126,8 @@ export default function ShowComment(comment, props) {
                         <div className="Comment-User">
                             <div className="Comment-Content">
                                 <div className="Comment-User-Name">
-                                    <a className="Comment-User-Profile" onClick={gotToProfile} href="#">{comment.comment.user_name}</a>
-                                    <span className="Comment-Date">{comment.comment.created_at_human} </span>
+                                    <a className="Comment-User-Profile" onClick={gotToProfile} href="#">{comment.comment.creator.name}</a>
+                                    <span className="Comment-Date">{comment.comment.created_at.for_humans} </span>
                                 </div>
                                 <div className="Comment-Text">
                                         {/* <span dangerouslySetInnerHTML={{__html: comment.comment.body}}/> */}
@@ -161,7 +161,7 @@ export default function ShowComment(comment, props) {
                                                 {like?"Dislikee":"Like"}
                                             </button>
                                 </li>
-                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.comment.user_name, e.keyCode)}>Reply</li>
+                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.comment.creator.name, e.keyCode)}>Reply</li>
                             </ul>
                         </div>
                     </div>
