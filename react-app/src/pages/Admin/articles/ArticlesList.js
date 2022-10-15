@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles } from '../../../store/actions/Articles/ArticlesActions';
+import { getArticles, getCategories, getCategoryArticles } from '../../../store/actions/Articles/ArticlesActions';
 import 'react-quill/dist/quill.snow.css';
 import ReactDatePicker from 'react-datepicker';
 import sectors from '../../../data/sectors';
-import AllMultiSelectCheckboxSector from '../../../utils/Filters/AllMultiselectCheckboxSector';
+import AllMultiSelectCheckboxCategory from '../../../utils/Filters/AllMultiselectCheckboxCategory';
 import ArticleListView from '../../../views/Articles/ArticleListView';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { Text } from '../../../containers/Language';
 
 
 export default function ArticlesList() {
-    const [selectedsector, setSelectedsector] = useState();
+    const [selectedCat, setSelectedCat] = useState();
     const [date, setDate] = useState(new Date());
     const articleExample = {
         id: 1,
@@ -33,11 +33,15 @@ export default function ArticlesList() {
     const articles = useSelector(state => state.articles.articles);
     const loading = useSelector(state => state.articles.loading);
 
+    const categories = useSelector(state => state.articles.categories);
+
     useEffect(() => {
         dispatch(getArticles())
-        console.log(loading)
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [dispatch])
 
     return (
         <>
@@ -55,7 +59,7 @@ export default function ArticlesList() {
                                                         <input type="text" name="title" placeholder="title" className="wizard-required" />
                                                     </div>
                                                     <div className="input-row input-multi-filter input-small">
-                                                        <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
+                                                        <AllMultiSelectCheckboxCategory {...{ setSelectedCat }} datas={categories} />
                                                     </div>
                                                     <div style={{ width: '125px' }} className="input-row">
                                                         <ReactDatePicker className="wizard-required" selected={date} onChange={(date) => setDate(date)} />
@@ -70,6 +74,20 @@ export default function ArticlesList() {
                                                     </div>
                                                 </div>
                                             </div>
+                                            {/* <div className="col-12">
+                                                <h4>Categories</h4>
+                                            </div>
+                                            <div className="col-sm-11 col-md-12 col-lg-12">
+                                                <div className="display-flex flex-wrap align-items-stetch">
+                                                    {
+                                                        !loading && categories.map(cat => (
+                                                            <button key={cat.id} className="article-filter-btn mr-2 p-2">
+                                                                {cat.name}
+                                                            </button>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div> */}
 
                                         </div>
                                     </div>
