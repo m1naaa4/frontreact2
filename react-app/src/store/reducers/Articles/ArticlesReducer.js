@@ -17,7 +17,7 @@ const ArticlesReducer = (state = initState, action) => {
         case 'LOAD_ARTICLES_SUCCESS':
             return {
                 ...state,
-                articles: action.res.articles,
+                articles: action.res.result.articles,
                 loading: false
             }
 
