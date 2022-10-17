@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AddComment from '../../../views/Comment/AddComment';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { Text } from '../../../containers/Language';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { useParams } from 'react-router'
 import { getArticle } from "../../../store/actions/Articles/ArticlesActions";
+import SharePopUp from '../../../utils/SharePopUp'
 
 export default function ArticleDetails(props) {
     const articleExample = {
@@ -25,11 +26,15 @@ export default function ArticleDetails(props) {
         commentsCounter: 3,
     }
 
+
     const dispatch = useDispatch()
     const params = useParams()
     const article = useSelector(state => state.article.article);
     const loading = useSelector(state => state.article.loading);
     const articleId = params.id
+
+    const [shareUrl, setShareUrl] = useState(false);
+    let url_to_share = [article.title, `${process.env.REACT_APP_FRONT_URL}` + '/articles/' + article.id];
 
     console.log(articleId)
     console.log(article)
@@ -101,11 +106,12 @@ export default function ArticleDetails(props) {
                                                 <a className="reaction-button reaction-comment" href="#Comments-Wrap">
                                                     <img src="/assets/images/icons/dadupa-comment.svg" alt="" /> Commenter
                                                 </a>
-                                                <button className="reaction-button" type="button" name="button">
+                                                <button className="reaction-button" type="button" name="button" onClick={() => { setShareUrl(true) }}>
                                                     <img src="/assets/images/icons/dadupa-share.svg" alt="" /> Partager
                                                 </button>
                                             </div>
                                         </div>
+                                        <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
 
                                     <AddComment providerObject={{}} providerType='project' />

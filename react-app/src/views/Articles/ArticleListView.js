@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
+import SharePopUp from '../../utils/SharePopUp';
 
 
 export default function ArticleListView({ article }) {
+    const [shareUrl, setShareUrl] = useState(false);
+    let url_to_share = [article.title, `${process.env.REACT_APP_FRONT_URL}` + '/articles/' + article.id];
+
 
     return <div className="col-12">
         <div className="article-box">
@@ -12,7 +16,7 @@ export default function ArticleListView({ article }) {
             <div className="w-100">
                 <div className='d-flex align-items-center justify-content-between'>
                     <span className='article-categories'>{article.categories != undefined && article.categories.map(c => c.name).join(', ')}</span>
-                    <button className="reaction-button" id="shareButton" type="button">
+                    <button className="reaction-button" id="shareButton" type="button" onClick={()=>{setShareUrl(true)}}>
                         <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{ width: "13px", height: "13px" }} alt="" id="image_share" />
                     </button>
                 </div>
@@ -39,5 +43,6 @@ export default function ArticleListView({ article }) {
             </div>
         </div>
         <hr />
+        <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
     </div>
 }
