@@ -31,8 +31,9 @@ export default function ArticleListView({ article }) {
                         <span className='article-date'>, {article.created_at.for_humans}</span>
                     </div>
                     <div style={{ fontSize: "13px" }}>
-                        10 <i className="dadupa-icon icon-clap"></i>
-                        0 <i className="uil uil-comment-dots"></i>
+                        {article.visits} <i className="uil uil-eye"></i>
+                        {article.likeCount} <i className="dadupa-icon icon-clap"></i>
+                        {article.commentCount} <i className="uil uil-comment-dots"></i>
                     </div>
                 </div>
             </div>
