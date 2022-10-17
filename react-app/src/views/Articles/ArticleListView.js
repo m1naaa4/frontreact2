@@ -11,7 +11,7 @@ export default function ArticleListView({ article }) {
     return <div className="col-12">
         <div className="article-box">
             <Link to={`articles/${article.id}`}>
-                <img className='article-thumb' src={article.thumbnail ? article.thumbnail : "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg"} alt='article logo' />
+                <img className='article-thumb' src={article.media ? article.media[0] : "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg"} alt='article logo' />
             </Link>
             <div className="w-100">
                 <div className='d-flex align-items-center justify-content-between'>
