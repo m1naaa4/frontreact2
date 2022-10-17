@@ -142,7 +142,7 @@ const ProjectGridView = ({ project }) => {
                     <li className="reaction likes"><i className="dadupa-icon icon-clap"></i>
                         <span>{project.likeCount}</span></li>
                     <li className="reaction views"><i className="uil uil-eye"></i>
-                        <span>1500</span></li>
+                        <span>{project.visit}</span></li>
                     <li className="reaction comments"><i
                         className="uil uil-comment-dots"></i> <span>{project.commentCount}</span>
                     </li>
@@ -151,7 +151,7 @@ const ProjectGridView = ({ project }) => {
                         <FacebookShareCount url={shareUrl}>
                             {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
                         </FacebookShareCount>
-                        <span>380 Shares</span>
+                        <span>{project.shared}</span>
                     </li>
                 </ul>
             </div>
