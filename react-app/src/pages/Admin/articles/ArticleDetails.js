@@ -103,13 +103,13 @@ export default function ArticleDetails(props) {
                                                 <div className="reactions-box">
                                                     <div className="row">
                                                         <div className="col-6 col-md-4 col-lg-6">
-                                                            <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>99</span></div>
+                                                            <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{article.likeCount}</span></div>
                                                             <div className="reaction views"><i className="uil uil-eye"></i>
-                                                                <span>99</span></div>
+                                                                <span>{article.visitCount}</span></div>
                                                         </div>
                                                         <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                            <div className="reaction comments"><span>99 Comments</span></div>
-                                                            <div className="reaction shares"><span>Shares</span></div>
+                                                            <div className="reaction comments"><span>{article.commentCount} Comments</span></div>
+                                                            <div className="reaction shares"><span>{article.shared} Shares</span></div>
                                                         </div>
                                                     </div>
                                                 </div>
