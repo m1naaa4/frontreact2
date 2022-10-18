@@ -9,9 +9,6 @@ import { useParams } from 'react-router'
 import { getArticle } from "../../../store/actions/Articles/ArticlesActions";
 import SharePopUp from '../../../utils/SharePopUp'
 
-import LightGallery from 'lightgallery/react';
-import lgZoom from 'lightgallery/plugins/zoom';
-
 
 export default function ArticleDetails(props) {
     const articleExample = {
@@ -49,27 +46,14 @@ export default function ArticleDetails(props) {
         }
     }, [dispatch]);
 
-    // const addItems = useCallback(() => {
-    //     lightGallery.current.refresh(items);
-    //     lightGallery.current.openGallery();
-    // }, [items]);
-
-    const galRef = useRef();
-
-    const onInit = useCallback((detail) => {
-        if (detail) {
-            galRef.current = detail.instance;
-            console.log(galRef)
+    const [currentImg, setCurrentImg] = useState(0)
+    const handleSlider = () => {
+        if (currentImg < article.media.length - 1) {
+            setCurrentImg(currentImg + 1)
+        } else {
+            setCurrentImg(0)
         }
-    }, []);
-
-    useEffect(() => {
-        if (galRef != undefined) {
-            // galRef.current.refresh(article.media);
-            // galRef.current.openGallery();
-        }
-    }, [])
-
+    }
 
     return (
         <div className="Single-Wrapper">
@@ -84,7 +68,7 @@ export default function ArticleDetails(props) {
                                             <h3 className="single-offer-name pt-0 text-capitalize" style={{ color: "#00b601" }}>{article.title}</h3>
                                             <div className='d-flex justify-content-between align-items-center mt-3'>
                                                 <div className="Contact mb-0">
-                                                    <div class="d-flex align-items-start">
+                                                    <div className="d-flex align-items-start">
                                                         <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                                                         <div className="Contact-Thumb"> <Link to={`/profile/1`}><img src={article.creator.avatar} alt={article.creator.name} /></Link></div>
                                                         <div className="Contact-Infos">
@@ -99,21 +83,17 @@ export default function ArticleDetails(props) {
                                     </div>
 
                                     <div className="Content-Wrap">
-                                        {/* <div className="Signle-Offer-Media">
-                                            <img width="100%" src={article.media ? article.media[0] : "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg"} alt="Project" />
-                                        </div> */}
                                         <div className="Signle-Offer-Media">
-                                            <LightGallery
-                                                ref={galRef}
-                                                plugins={[lgZoom]}
-                                                elementClassNames="custom-classname"
-                                                dynamic={true}
-                                                closable={true}
-                                                showMaximizeIcon
-                                                onInit={onInit}
+                                            <img
+                                                width="100%"
+                                                src={
+                                                    article.media ?
+                                                        article.media[currentImg]
+                                                        : "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg"}
+                                                alt="Project"
+                                                onClick={handleSlider}
                                             />
                                         </div>
-
                                         <div className="Signle-Offer-Content">
                                             <div className="Signle-Offer-Text">
                                                 {parse(
