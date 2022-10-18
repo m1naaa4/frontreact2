@@ -13,8 +13,9 @@ export const getArticles = () => {
             categories: [],
             popular: {}
         }
-        http.postData(tempFilter, "article/all").then((res) => {
+        http.postData(tempFilter,"article/all").then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
+                console.log("get  res", res)
                 dispatch({ type: 'LOAD_ARTICLES_SUCCESS', res });
             } else if (res.hasOwnProperty('success') && res.success === false) {
                 dispatch({ type: 'LOAD_ARTICLES_ERROR', res })
