@@ -69,7 +69,6 @@ export default function ArticleDetails(props) {
                                             <div className='d-flex justify-content-between align-items-center mt-3'>
                                                 <div className="Contact mb-0">
                                                     <div className="d-flex align-items-start">
-                                                        <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                                                         <div className="Contact-Thumb"> <Link to={`/profile/1`}><img src={article.creator.avatar} alt={article.creator.name} /></Link></div>
                                                         <div className="Contact-Infos">
                                                             <Link to={`/profile/${article.creator.id}`}><h4>{article.creator.name}</h4></Link>
