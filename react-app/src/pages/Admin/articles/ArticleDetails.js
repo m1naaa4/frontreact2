@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AddComment from '../../../views/Comment/AddComment';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,10 @@ import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { useParams } from 'react-router'
 import { getArticle } from "../../../store/actions/Articles/ArticlesActions";
 import SharePopUp from '../../../utils/SharePopUp'
+
+import LightGallery from 'lightgallery/react';
+import lgZoom from 'lightgallery/plugins/zoom';
+
 
 export default function ArticleDetails(props) {
     const articleExample = {
@@ -25,7 +29,6 @@ export default function ArticleDetails(props) {
         likesCounter: 10,
         commentsCounter: 3,
     }
-
 
     const dispatch = useDispatch()
     const params = useParams()
@@ -45,6 +48,29 @@ export default function ArticleDetails(props) {
             dispatch(getArticle(articleId));
         }
     }, [dispatch]);
+
+    // const addItems = useCallback(() => {
+    //     lightGallery.current.refresh(items);
+    //     lightGallery.current.openGallery();
+    // }, [items]);
+
+    const galRef = useRef();
+
+    const onInit = useCallback((detail) => {
+        if (detail) {
+            galRef.current = detail.instance;
+            console.log(galRef)
+        }
+    }, []);
+
+    useEffect(() => {
+        if (galRef != undefined) {
+            // galRef.current.refresh(article.media);
+            // galRef.current.openGallery();
+        }
+    }, [])
+
+
     return (
         <div className="Single-Wrapper">
             <div className="container">
@@ -73,8 +99,19 @@ export default function ArticleDetails(props) {
                                     </div>
 
                                     <div className="Content-Wrap">
+                                        {/* <div className="Signle-Offer-Media">
+                                            <img width="100%" src={article.media ? article.media[0] : "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg"} alt="Project" />
+                                        </div> */}
                                         <div className="Signle-Offer-Media">
-                                            <img width="100%" src={article.thumbnail ? article.thumbnail : "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg"} alt="Project" />
+                                            <LightGallery
+                                                ref={galRef}
+                                                plugins={[lgZoom]}
+                                                elementClassNames="custom-classname"
+                                                dynamic={true}
+                                                closable={true}
+                                                showMaximizeIcon
+                                                onInit={onInit}
+                                            />
                                         </div>
 
                                         <div className="Signle-Offer-Content">
@@ -128,7 +165,7 @@ export default function ArticleDetails(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
