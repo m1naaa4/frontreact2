@@ -43,10 +43,24 @@ const ArticlesReducer = (state = initState, action) => {
                 loading: false
             }
 
+        case 'LOADING_LOAD_AUTHOR_ARTICLES':
+            return {
+                ...state,
+                author: {},
+                loadingAuthor: true
+            }
+
+        case 'LOAD_AUTHOR_ARTICLES_SUCCESS':
+            return {
+                ...state,
+                author: action.res.author,
+                loadingAuthor: false
+            }
+
         default:
             return state
 
-            }
     }
+}
 
-    export default ArticlesReducer;
+export default ArticlesReducer;

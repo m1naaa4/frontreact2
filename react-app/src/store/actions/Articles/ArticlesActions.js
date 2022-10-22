@@ -72,6 +72,26 @@ export const getArticle = (id) => {
     }
 }
 
+export const getAuthorArticles = (id) => {
+    return (dispatch) => {
+        dispatch({ type: 'LOADING_LOAD_AUTHOR_ARTICLES' });
+
+        const http = new HttpService();
+        http.getData(`article/author/${id}`).then((res) => {
+            if (res.hasOwnProperty('success') && res.success === true) {
+                dispatch({ type: 'LOAD_AUTHOR_ARTICLES_SUCCESS', res });
+
+            } else if (res.hasOwnProperty('success') && res.success === false) {
+                dispatch({ type: 'LOAD_ARTICLES_ERROR', res })
+            }
+        },
+            error => {
+                dispatch({ type: 'CODE_ERROR', error });
+            }
+        )
+    }
+}
+
 export const getCategories = () => {
     return (dispatch) => {
 

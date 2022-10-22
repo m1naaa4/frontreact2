@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles, getCategories, getCategoryArticles } from '../../../store/actions/Articles/ArticlesActions';
+import { getAuthorArticles, getCategories, getCategoryArticles } from '../../../store/actions/Articles/ArticlesActions';
 import 'react-quill/dist/quill.snow.css';
 import ReactDatePicker from 'react-datepicker';
 import sectors from '../../../data/sectors';
@@ -8,36 +8,31 @@ import AllMultiSelectCheckboxCategory from '../../../utils/Filters/AllMultiselec
 import ArticleListView from '../../../views/Articles/ArticleListView';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { Text } from '../../../containers/Language';
+import { useParams } from 'react-router'
 
 
-export default function ArticlesList() {
+export default function ArticleAuthor() {
     const [selectedCat, setSelectedCat] = useState();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const articleExample = {
-        id: 1,
-        title: "Article title test text abcd",
-        thumbnail: "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg",
-        categories: ["Cat 1", "Cat 2"],
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur blandit magna aliquet egestas. Aliquam quis nisl nec nibh ullamcorper volutpat eu in elit. Proin odio ipsum, suscipit sed laoreet sodales, consequat sit amet tortor. Maecenas metus diam, faucibus vitae libero efficitur, dapibus ultrices felis. Duis sit amet consequat ex, quis mollis leo. Pellentesque est est, molestie at massa a, maximus dignissim nisl. Maecenas non lacus lacinia lorem interdum tempor vitae non ante. Donec vitae ultricies quam, id aliquam erat. Donec vel dolor est. Aliquam vel fringilla odio. Maecenas auctor magna sit amet arcu vestibulum, sit amet eleifend massa fringilla. Proin vitae elit convallis, elementum massa quis, bibendum elit. Praesent id dignissim velit, ut bibendum lorem. Ut eget vestibulum eros.",
-        date: "06/09/2022",
-        author: {
-            profile_id: 1,
-            fullName: "Full Name",
-            avatar: "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630bd14e169e6.png",
-        },
-        likesCounter: 10,
-        commentsCounter: 3,
-    }
+
 
     const dispatch = useDispatch()
-    const articles = useSelector(state => state.articles.articles);
-    const loading = useSelector(state => state.articles.loading);
-
     const categories = useSelector(state => state.articles.categories);
+    const author = useSelector(state => state.articles.author);
+    const loading = useSelector(state => state.articles.loading);
+    const loadingAuthor = useSelector(state => state.articles.loadingAuthor);
+    console.log(loadingAuthor)
+
+    if (!loadingAuthor) {
+        console.log(author)
+    }
+
+    const params = useParams()
+    const authorId = params.id
 
     useEffect(() => {
-        dispatch(getArticles())
+        dispatch(getAuthorArticles(authorId))
     }, [dispatch])
 
     useEffect(() => {
@@ -75,44 +70,19 @@ export default function ArticlesList() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* <div className="col-12">
-                                                <h4>Categories</h4>
-                                            </div>
-                                            <div className="col-sm-11 col-md-12 col-lg-12">
-                                                <div className="display-flex flex-wrap align-items-stetch">
-                                                    {
-                                                        !loading && categories.map(cat => (
-                                                            <button key={cat.id} className="article-filter-btn mr-2 p-2">
-                                                                {cat.name}
-                                                            </button>
-                                                        ))
-                                                    }
-                                                </div>
-                                            </div> */}
-
                                         </div>
                                     </div>
                                 </div>
                                 <div className="row">
                                     {
-                                        // Array(5).fill().map((e, index) =>
-                                        //     <ArticleListView article={ articleExample } key={index + 1} />
-                                        // )
-                                        loading ?
+                                        loadingAuthor === undefined || loadingAuthor ?
                                             <h1>Loading</h1>
                                             :
-                                            articles.map((article, index) =>
+                                            author.articles.map((article, index) =>
                                                 <ArticleListView article={article} key={index + 1} />
                                             )
                                     }
                                 </div>
-                            </div>
-                            <div className='col-12 col-lg-3 articles-list-sidebar'>
-                                <h4><Text tid="articles_suggestedArticle" /></h4>
-                                <ArticleSidebarView article={articleExample} />
-                                <h4><Text tid="articles_topArticle" /></h4>
-                                <ArticleSidebarView article={articleExample} />
-                                <ArticleSidebarView article={articleExample} />
                             </div>
                         </div>
                     </div>

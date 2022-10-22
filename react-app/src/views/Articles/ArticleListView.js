@@ -27,7 +27,7 @@ export default function ArticleListView({ article }) {
                 <div className='d-flex align-items-center justify-content-between'>
                     <div className='d-flex align-items-center mt-2' style={{ width: 'fit-content' }}>
                         {
-                            article.creator && <Link className="article-list-author" to={`/profile/${article.creator.id}`}>
+                            article.creator && <Link className="article-list-author" to={`/articles/author/${article.creator.id}`}>
                                 <img src={article.creator.avatar} alt={article.creator.name} />
                                 <h4>{article.creator.name}</h4>
                             </Link>
