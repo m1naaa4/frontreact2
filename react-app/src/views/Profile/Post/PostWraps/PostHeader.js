@@ -35,22 +35,21 @@ export default function PostHeader({ post }) {
   },[infoprofile.avatar, infoprofile.user_id, user.id])
 
   const data = {
-      post_id     : post.id,
+      id     : post.id,
       provider    : "post",
       user_id     : user_profile_id,
   }
 
   const supprimePost =(id) =>{
-    dispatch(DeletePostAction(data, '', 'delete'));
-    dispatch({type:'DELETE_POST_SUCCESS', id});
-    SetOptions_List(!options_List)
+    dispatch(DeletePostAction(data,  '/delete'));
+    SetOptions_List(!options_List);
   }
 
   useEffect(()=>{
     if (user?.id === post?.user_id) {
-      setAvatar(user?.profile.avatar_link)
+      setAvatar(user?.profile.avatar_link);
     }else{
-      setAvatar(post.avatar)
+      setAvatar(post.avatar);
     }
   },[user]);
 
@@ -61,7 +60,7 @@ export default function PostHeader({ post }) {
         'provider_id' : id,
         'provider' : 'post',
     }
-    dispatch(AddFavoriteAction(data))
+    dispatch(AddFavoriteAction(data));
   }
 
   return (

@@ -1,29 +1,33 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux';
 import '../../taginput.css'
 
 
 
 
-const InputTags = props => {
+export default function InputTags({selectedTags, tagss}) {
     const dispatch = useDispatch();
-    const [tags, setTags] = useState(props.tags);
+    const [tags, setTags] = useState(tagss);
+
+    useEffect(() => {
+        setTags(tagss ?? []);
+    }, [tagss]);
 
     const removeTags = indexToRemove => {
         setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-        dispatch({type:'TAG', res : [...tags.filter((_, index) => index !== indexToRemove)]});
+        selectedTags([...tags.filter((_, index) => index !== indexToRemove)]);
     };
     const addTags = event => {
         if (event.target.value !== "") {
             setTags([...tags, event.target.value]);
-            props.selectedTags([...tags, event.target.value]);
+            selectedTags([...tags, event.target.value]);
             event.target.value = "";
         }
     };
     return (
         <div className="tags-input">
             <ul id="tags">
-                {tags.map((tag, index) => (
+                {tags && tags.map((tag, index) => (
                     <li key={index} className="tag">
                         <span className='tag-title'>{tag}</span>
                         <span className='tag-close-icon'
@@ -41,5 +45,3 @@ const InputTags = props => {
         </div>
     );
 };
-
-export default InputTags;

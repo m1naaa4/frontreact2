@@ -18,7 +18,7 @@ axios.interceptors.response.use(
       }
       if(error.response.status === 401)
       {
-        axios.get('/logout');
+        axios.post('/logout');
         // history.push('/project/lists')
       }
   

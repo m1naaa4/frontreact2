@@ -1,47 +1,56 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import InputTags from "../../../utils/tags/TagsInput";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';
+// import { AddProjectsAction } from '../../../store/actions/User/Project/ProjectAction';
+import { useLocation, useHistory } from "react-router-dom";
+import { getProjectAction, UpdateProjectsAction } from "../../../store/actions/Project/ProjectAction";
 
 
-export default function Step3View({formData, setForm, navigation, props}) {
-    const {previous, next} = navigation;
-
-    const { tags, description } = formData;
+export default function Step3View({formData, setForm, navigation}) {
+    const { next, go } = navigation;
+    const location = useLocation();
+    const history = useHistory();
+    const project = useSelector(state => state.getproject);
 
     const dispatch = useDispatch();
-    const [descriptions, setDescription] = useState(description);
-    const [tag, setTags] = useState(tags);
+    const [tags, setTags] = useState([]);
+    const projectId = location.pathname.split('/')[location.pathname.split('/').length - 2];
 
+    const [value, setValue] = useState('');
 
     const selectedTags = tags => {
         setTags(tags)
     };
 
-    const project = useSelector(state => state.addproject);
+    function previous() {
+        history.push('/project/create/' + projectId + '/' + 'step2');
+        go('step2');
+    }
 
-    const handleSubmit = async e => {
+    useEffect(() => {
+        dispatch(getProjectAction(projectId, '/get'));
+    }, [dispatch])
+
+    useEffect(() => {  
+        setValue(project?.getproject?.project?.description?? '');
+        setTags(project?.getproject?.project?.tags ?? []);
+    }, [project])
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
+        let data = {
+            'description': value,
+            'tags': tags,
+            'project_id': projectId
+        }
 
-        formData.tags           = tag;
-        formData.descriptions   = descriptions;
-        // const formData = new FormData();
-        // formData.append('description', description);
-        // formData.append('tags', tags);
-        formData.project_id = project.projectid;
-        formData.action     = 'create';
-        dispatch(AddProjectsAction (formData, props, '/create', navigation));
-
-        next()
+        dispatch(UpdateProjectsAction(data, '/update'));
+        history.push('/project/create/' + projectId + '/' + 'final');
     };
-
-    //console.log("project3", projectt)
-
+        
     return (
-
-
         <div className="Page-Wrapper">
             <div className="container">
                 <div className="offer-wizard-wrapper">
@@ -82,23 +91,23 @@ export default function Step3View({formData, setForm, navigation, props}) {
                                     </div>
                                     <div className="form-inputs">
                                         <div className="col-md-12 input-row">
-                                            {/*<div id="editor">This is some sample content.</div>*/}
-                                            <ReactQuill id="editor" theme="snow" name="description" defaultValue={description} onChange={setDescription}/>
+                                        <ReactQuill
+                                            theme="snow"
+                                            value={value}
+                                            onChange={setValue}
+                                        />
                                         </div>
                                         <div className="col-md-12 input-tags">
-                                            {/*<input type="text" data-role="tagsinput" value="" placeholder="Ajouter Tag"/>*/}
-                                            <InputTags  selectedTags={selectedTags}  tags={tags}/>
+                                            <InputTags  selectedTags={selectedTags}  tagss={tags}/>
                                         </div>
                                     </div>
                                     <button onClick={previous} type="button" name="previous" className="previous action-button"><i
                                         className="uil uil-arrow-left  "></i> Previous
                                     </button>
-                                    <button onClick={(event) => {handleSubmit(event);  next()}} type="button" name="next" className="next action-button">Continue <i
+                                    <button onClick={(event) => {handleSubmit(event); next()}} type="button" name="next" className="next action-button">Continue <i
                                         className="uil uil-arrow-right"></i></button>
                                 </fieldset>
-
                             </form>
-
                         </div>
                     </div>
                 </div>

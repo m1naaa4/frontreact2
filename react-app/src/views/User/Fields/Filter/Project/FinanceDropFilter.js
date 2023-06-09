@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import finances from "../../../../../data/financesCreate";
 import Select from 'react-select';
@@ -6,14 +6,22 @@ import Select from 'react-select';
 
 
 function FinanceDropFilter ({formData}) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
+    const [finance, setFinance] = useState();
 
     const HandleChange = (selected)=>{
-        setOptionSelected(selected);
-        console.log(formData);
-        formData.funding_search=selected.value;
+      setOptionSelected(selected);
+      formData.funding_search = selected.value;
     }
+
+    useEffect(() => {
+      finances.map((key) => {
+        if ( key[0] === formData.funding_search) {
+          setFinance(key[1])
+        }
+      });
+    })
     
 
     const SelectStyleWithScrollbar = {
@@ -25,12 +33,12 @@ function FinanceDropFilter ({formData}) {
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            disable:true,
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
+        //   '&:nth-child(1) ': {
+        //     disable:true,
+        //     marginTop: '0px',
+        //     borderTopLeftRadius: '30px',
+        //     borderTopRightRadius: '20px',
+        // },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',
@@ -75,28 +83,20 @@ function FinanceDropFilter ({formData}) {
             boxShadow: "none",
           },
         }),
-      }
-      
-      const alloptions = finances.map(([value, name]) => (
-        {value: value,label: t(name)}
+    }
+
+    const alloptions = finances.map(([value, name]) => (
+      {value: value,label: t(name)}
     ))
 
 
     return (
-        // <select className="user-type" name="funding_search"  {...others}  required={others.required && "required"}>
-        //     {finances.map(([value, name]) => (
-        //         <option key={name} value={value}>{t(name)}</option>
-        //     ))}
-        // </select>
-       /*  <div className="input-row input-select">
-           
-        </div> */
         <Select
             options={alloptions}
             onChange={HandleChange}
             value={optionSelected}
             styles={SelectStyleWithScrollbar}
-            placeholder={(formData?.funding_search==='') ? t("Financement Recherché") : formData?.funding_search}
+            placeholder={(formData?.funding_search === '') ? t("Financement Recherché") : t(finance)}
             required={true}
             className="Select"
         />

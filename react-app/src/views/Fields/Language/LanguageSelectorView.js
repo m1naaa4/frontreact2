@@ -12,7 +12,7 @@ function LanguageSelectorView() {
     };
 
     const languageContext = useContext(LanguageContext);
-    const languageStoredInLocalStorage = localStorage.getItem("language");
+    const languageStoredInLocalStorage = localStorage.getItem("language") ? localStorage.getItem("language") : 'en';
 
     const handleLanguageChange = (event) => {
         const selectedLanguage = languageOptions.find(item => item.id === event.target.value);

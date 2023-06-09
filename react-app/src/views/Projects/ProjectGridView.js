@@ -1,19 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Text } from "../../containers/Language";
-import { Player } from 'video-react';
-import VideoPlayer from 'simple-react-video-thumbnail'
 import SharePopUp from '../../utils/SharePopUp'
 import { countryName } from '../../helpers/Helpres'
-import slugify from 'react-slugify';
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 import DialogWarning from '../../utils/DialogWarning';
+import $ from 'jquery'
 import {
     FacebookShareCount,
 } from "react-share";
+import ReactPlayer from 'react-player';
+import VideoJS from '../../helpers/VideoJS';
+import YouTube from 'react-youtube';
 
 
 const ProjectGridView = ({ project }) => {
@@ -61,9 +62,29 @@ const ProjectGridView = ({ project }) => {
         setOpen(false);
       }
       
-      const HandleClickOpen = () =>{
-        setOpen(true);
-      }  
+    const HandleClickOpen = () =>{
+    setOpen(true);
+    }
+
+    const getExtension = (file) => {
+        if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file))
+        { 
+            return 'youtube';
+        }
+        else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file))
+        {
+            return 'vimeo';
+        }
+        else
+        {
+            return file.split('.').pop().toLowerCase();
+        }
+    };
+
+    const opts = {
+        height: '300',
+        width: '100%'
+    };
 
     return (
 
@@ -77,8 +98,8 @@ const ProjectGridView = ({ project }) => {
                         {project.name.substring(0, 10)}</span></h3>
                     <div className='footer-title'>
                         <span className='mr-5'>{project.sector && (project.sector.charAt(0).toUpperCase() + project.sector.slice(1))}, </span>
-                        {project.owner && project.owner.map((value) => {
-                            return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
+                        {project.owner && project.owner.map((value, index) => {
+                            return <Link key={index} ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
                                 {value.username.substring(0, 6)}
                                 {(user?.profile_id != project.owner[0].profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                             </Link>
@@ -104,16 +125,36 @@ const ProjectGridView = ({ project }) => {
                 </div>
             </div>
             <div className="offer-media">
-                {
-                    project.is_video ? (
-                        <>
-                            <span className='thumb-play-btn'>
-                                <i className="uil uil-play"></i>
-                            </span>
-                            <img src={project.media_link} alt="Project" />
-                        </>
-                    ) : project.media_link === "https://dadupadisque.ams3.digitaloceanspaces.com/album/dadupadisque/project.png" ? <img style={{ width: "340px", height: "268px" }} src="/assets/images/offer-thumbnail.svg" alt="Project" /> : <img style={{ width: "350px", height: "268px" }} src={project.media_link} alt="Project" />
-                }
+               
+                {(function() {
+                    let link = $.isArray(project.media_link) ? project.media_link[0] : project.media_link;
+                    if(getExtension(project.media_link) == 'youtube'){
+                        return <ReactPlayer width='340' url={link} controls={true} />
+                        // return <YouTube videoId={link} opts={opts} />
+                    }else{
+                        if(getExtension(project.media_link) == 'vimeo'){
+                            return <ReactPlayer url={link} controls={true} />
+                        }else{
+                            if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
+                            getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
+                                return <VideoJS options={
+                                {
+                                    autoplay: false,
+                                    controls: true,
+                                    responsive: true,
+                                    fluid: true,
+                                    sources: [{
+                                        src: link,
+                                        type: 'video/mp4'
+                                    }]
+                                }
+                                }/>
+                            }else{
+                                return <img width="100%" height="300" src={link} alt="Project"/>
+                            }
+                        }
+                    }
+                })()}
             </div>
             <div className="offer-meta">
                 <ul className="meta-items">

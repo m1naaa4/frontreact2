@@ -7,10 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import PusherService from "./services/Pusher";
 import { ErrorBoundary } from './Errors/ErrorBoundary';
 
-import "lightgallery.js/dist/css/lightgallery.css";
 
-import { LightgalleryProvider } from "react-lightgallery";
 import ReactGA from 'react-ga';
+import PusherConsole from './services/PusherConsole';
 
 const TRACKING_ID = "G-Z18XKVBMNK";
 ReactGA.initialize(TRACKING_ID);
@@ -29,17 +28,19 @@ function App() {
           })
     
     }, 3000);
+
+    // Pusher.logToConsole = true;
     
 
     const dispatch = useDispatch ();
     pusher.echo.private("project_comment").listen(".NewComment", data => {
-        
+        console.log(data);
         if (data.type === "project") {
             dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res : data});
         }
-        if (data.type === "post") {
-            dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res : data});
-        }
+        // if (data.type === "post") {
+        //     dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res : data});
+        // }
         dispatch({type:'COMMENTED_SUCCESS', res : data});
     }).listenForWhisper('typing', (e) => {
         console.log('typing ... ',e)
@@ -65,6 +66,19 @@ function App() {
         dispatch({type:'ADD_TO_COLLECTION_POST_SUCCESS', res : data});
     })
 
+    //console pusher
+    const pusherConsole = new PusherConsole();
+
+    pusherConsole.pusher.subscribe(`new-post`).bind('post', function(data) {
+        dispatch({type:'ADD_POST_SUCCESS', res : data});
+    });
+
+    pusherConsole.pusher.subscribe(`delete-post`).bind('post', function(data) {
+        dispatch({type:'DELETE_POST_SUCCESS', res : data});
+    });
+      
+    // end pusher console
+
 //     pusher.echo.private("Message.User." + user_id).listen(".NewMessage", data => {
 //         audio.play();
 //         dispatch({type:'SEND_MESSAGE_SUCCESS_PUSHER', res : data});
@@ -86,19 +100,10 @@ function App() {
     
     return (
         // <ErrorBoundary>
-        <LightgalleryProvider
-                lightgallerySettings={
-                    {
-                        plugins: ["lg-fullscreen.js", "lg-thumbnail.js", "lg-video.js", "lg-zoom.js"]
-                        // settings: https://sachinchoolur.github.io/lightgallery.js/docs/api.html
-                    }
-                }
-                galleryClassName="dadupa_gallery"
-            >
+       
                 <BrowserRouter>
                     <Routes/>
                 </BrowserRouter>
-            </LightgalleryProvider>
            
         // </ErrorBoundary>
         

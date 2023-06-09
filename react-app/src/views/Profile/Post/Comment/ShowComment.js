@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import useOutsideClick from '../../../../helpers/useOutsideClick';
 import { DeleteCommentAction } from '../../../../store/actions/Comment/CommentAction';
 import AvatarTooltip from '../../../../utils/AvatarTooltip';
 import ReplyComment from './ReplyComment';
@@ -12,80 +11,75 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import $ from 'jquery';
-
+import PusherConsole from '../../../../services/PusherConsole';
 
 export default function ShowComment({ post }) {
 
   const dispatch = useDispatch();
-  const comments = useSelector(state => state.getComments);
-  const project = useSelector(state => state.getproject);
   const user = useSelector(state => state.userProfile.userProfile);
   let [currentCommentid,setCurrentcommentid] = useState();
   let [curentcommentuser,setcurentcommentuser] = useState();
   const [options_List, SetOptions_List] = useState(false);
   const [user_id, setUserId] = useState();
   const refAvatar = useRef(null);
-  const [display,setDisplay] = useState(false);
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [updateText, setUpdateText] = useState('');
   const [deleted_id, setDeleted] = useState();
-
-  const dataget = {
-    action: 'get',
-    provider: 'post',
-    provider_id: post.id,
-  }
+  const [comments, setComments] = useState(post.comments);
 
   const [replies, SetReplies] = useState(false);
   const [replyBox, SetReplyBox] = useState(false);
 
   const showReplies = e => {
-
     console.log('replies', e)
     SetReplies(e)
     SetReplyBox(!replyBox)
-  }
-
-  // console.log('commentsssssssssssssssssssssssssssssssssssss', post.comments)
+  };
 
   const showReplyBox = (value) => {
     SetReplyBox(value)
-  }
+  };
 
   useEffect(()=>{
-    setUserId(user?.id); 
-  },[])
+    setUserId(user?.id);
+  },[]);
 
   useEffect(() => {
     // if (post.commentCount > 0) {
     // dispatch(GetCommentAction(dataget));
-    // }   
-    console.log(post.comments);
-  }, [])
+    // }
+      const pusher = new PusherConsole();
+    
+      const channel = pusher.pusher.subscribe(`post-comment`);
+      channel.bind('new-comment', function(data) {
+        if (post.id === data.commentable_id) {
+          setComments(comments.unshift(data));
+        }
+      });
+  }, [post.id]);
 
   const showOptions = (id,user) =>{
     setCurrentcommentid(id);
     setcurentcommentuser(user);
     SetOptions_List(!options_List);
-
   }
 
   const dataComment = {
     provider_id     : currentCommentid,
     provider    : "comment",
     user_id     : curentcommentuser,
-}
+  }
 
-const supprimeComment = (id, post_id) => {
-    // setDeleted(id)
-    dispatch(DeleteCommentAction(dataComment, 'comment/delete', {'comment_id':id, 'post_id':post_id}));
-}
+  const supprimeComment = (id, post_id) => {
+      // setDeleted(id)
+      dispatch(DeleteCommentAction(dataComment, 'comment/delete', {'comment_id':id, 'post_id':post_id}));
+  }
 
   const editComment = async (id) =>{
     console.log("edit");
     setOpen(true);
-}
+  }
 
   const reportComment =(id) =>{
     setShow(true);
@@ -120,19 +114,18 @@ const supprimeComment = (id, post_id) => {
 
     <>
       <div className="User-Comments"  >
-        {post.comments && post.comments.map((comment, index) =>
+        {post.comments && post.comments?.map((comment, index) =>
           <div key={index}>
             {post.id === comment.commentable_id &&
               <div className="User-Comment" key={index} >
-                {deleted_id}   {comment.id}
                 {deleted_id !==  comment.id &&
                 <>
                 <div className="Comment-Col-2">
-                  <Link ref={refAvatar} className="Comment-User-Thumb" to={"/profile/" + comment.profile_id}>
-                    {comment.avatar ?
-                      <img src={comment.avatar} alt="avatar" />
+                  <Link ref={refAvatar} className="Comment-User-Thumb" to={"/profile/" + comment.creator.profile_id}>
+                    {comment.creator.avatar ?
+                      <img src={comment.creator.avatar} alt="avatar" />
                       : <img src="/assets/images/avatar.png" alt="avatar" />}
-                    <AvatarTooltip data={comment} myRef={refAvatar} styles={{marginTop:"67px",marginRight:"69px"}} />
+                    <AvatarTooltip data={comment} myRef={refAvatar} styles={{marginTop:"67px", marginRight:"69px"}} />
                   </Link>
                   {/* <ul className="comment-reactions-list">
                   <li className="comment-reaction"><i className="dadupa-icon icon-clap"></i></li>
@@ -143,9 +136,9 @@ const supprimeComment = (id, post_id) => {
                   <div className="Comment-User">
                     <div className="Comment-Content">
                       <div className="Comment-User-Name">
-                        <Link className="Comment-User-Profile" to={"/profile/" + comment.profile_id}  >{comment.user_name}</Link>
-                        <span className="Comment-Date">{comment.created_at} &nbsp; 
-                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id,comment.user_id)}>
+                        <Link className="Comment-User-Profile" to={"/profile/" + comment.creator.profile_id}  >{comment.creator.username}</Link>
+                        <span className="Comment-Date"> &nbsp; 
+                         <button style={{background:"transparent",border:"none"}} onClick={()=>showOptions(comment.id, comment.user_id)}>
                               <i className="uil uil-ellipsis-h"></i>
                           </button>
                           {      
@@ -181,9 +174,7 @@ const supprimeComment = (id, post_id) => {
                                                 </DialogActions>
                                     </Dialog>
                                 </>
-                                 
-                                  )
-                                }
+                                )}
                                 {user_id !== comment.user_id &&
                                   <li className="PostFavorite">
                                     <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i> Report</button>
@@ -199,9 +190,7 @@ const supprimeComment = (id, post_id) => {
                               </ul>
                             )
                           }
-                        </span>
-                       
-                         
+                        </span> 
                       </div>
                       <div className="Comment-Text">
 
@@ -227,7 +216,6 @@ const supprimeComment = (id, post_id) => {
                       <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>Reply</li>
                     </ul>
                   </div>
-
                 </div>
                 
                 {replyBox === comment.id &&
@@ -238,10 +226,7 @@ const supprimeComment = (id, post_id) => {
               </div>
             }
           </div>
-        )
-
-        }
-
+        )}
       </div>
     </>
 

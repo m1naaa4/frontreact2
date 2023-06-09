@@ -14,7 +14,7 @@ class PusherService {
         forceTLS: true,
         disableStats: false,
         enabledTransports: ['ws', 'wss'],
-        authEndpoint: `${process.env.REACT_APP_API_URL}` + '/broadcasting/auth',
+        authEndpoint: 'https://' + `${process.env.REACT_APP_WS_HOST}` + '/src/public/broadcasting/auth',
         auth:{
             headers:{
             //   'Content-Type':'application/json',

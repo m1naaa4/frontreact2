@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 
@@ -40,7 +41,7 @@ export const VideoJS = (props) => {
 
   return (
     <div data-vjs-player>
-      <video ref={videoRef} className='video-js vjs-big-play-centered' />
+      <ReactPlayer src={videoRef} className='video-js vjs-big-play-centered' />
     </div>
   );
 }

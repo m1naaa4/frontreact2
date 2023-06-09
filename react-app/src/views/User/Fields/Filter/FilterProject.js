@@ -3,7 +3,6 @@ import ZoneDropFilter from "./Project/ZoneDropFilter";
 import SectorDropFilter from "./Project/SectorDropFilter";
 import FinanceDropFilter from "./Project/FinanceDropFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProjectAction } from "../../../../store/actions/User/Project/ProjectActions";
 import { useTranslation } from 'react-i18next';
 import MultiselectCheckbox from '../../../../utils/MultiselectCheckbox';
 import sectors from "../../../../data/sectors"
@@ -19,6 +18,7 @@ import AllMultiSelectCheckboxZone from '../../../../utils/Filters/AllMultiselect
 import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultiselectCheckboxFinance';
 import { Collapse } from 'react-bootstrap';
 import InputTags from '../../../../utils/tags/TagsInput';
+import { loadProjectAction } from '../../../../store/actions/Project/ProjectAction';
 
 
 

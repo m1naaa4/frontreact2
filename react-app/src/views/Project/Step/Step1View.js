@@ -1,86 +1,104 @@
-import React, { useEffect, useState} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState, useMemo } from 'react';
+import { useDispatch, useSelector} from "react-redux";
 import EtatDropFilter from "../../User/Fields/Filter/Project/EtatDropFilter";
 import SectorDropFilter from "../../User/Fields/Filter/Project/SectorDropFilter";
 import ZoneDropFilter from "../../User/Fields/Filter/Project/ZoneDropFilter";
 import FinanceDropFilter from "../../User/Fields/Filter/Project/FinanceDropFilter";
-import {AddProjectsAction, ClearProjectsAction} from "../../../store/actions/User/Project/ProjectAction";
+import { AddProjectsAction, getProjectAction } from "../../../store/actions/Project/ProjectAction";
 import { displayErrorMessages } from '../../../helpers/displayErr';
 import { useTranslation } from 'react-i18next';
 import $ from "jquery";
 import 'jquery-validation'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner'
-export default function Step1View({formData, setForm,navigation, props}) {
+export default function Step1View({formData, setForm, navigation, props}) {
 
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const { project_status, project_area, funding_search, look_angel, name,  sector_id, url, logolink, website_url } = formData;
+    const {
+        project_status,
+        project_area,
+        funding_search,
+        look_angel,
+        project_name,
+        sector_id,
+        url,
+        logolink,
+        website_url,
+    } = formData;
     const project = useSelector(state => state.addproject.addproject);
     const [picture, setPicture] = useState(null);
+    const [logo, setLogo] = useState();
+    const history = useHistory();
+    const location = useLocation();
+
+    const projectId = useMemo(
+        () => location.pathname.split('/')[location.pathname.split('/').length - 1],
+        [location.pathname]
+    );
+
     const onChange = e => {
-        getBase64(e.target.files[0]);
+        setLogo(e.target.files[0]);
         setPicture(URL.createObjectURL(e.target.files[0]) );
     };
 
     const [is_loading, setIsLoading] = useState(false);
     const [changed, setChanged] = useState(false);
-
-    const location = useLocation();
+    const getproject = useSelector(state => state.getproject.getproject);
+    
     useEffect(()=>{
         setChanged(true)
     },[location])
 
-
-    if (props.location.state){
-        formData.project_id = props.location.state.id
-    }
-    // useEffect(() => {
-    //     dispatch(AddProjectsAction(formData, props, '/create'));
-    // }, [dispatch])
     useEffect(()=>{
-        console.log(props.location);
-    })
+        const { go } = navigation;
+        const steps = ['step2', 'step3', 'final'];
+        if (steps.includes(projectId)) {
+            go(projectId)
+        }
+        else{
+            go('step1')
+        }
+    },[]);
 
-    const onLoad = fileString => {
-        formData.logo   = fileString;
-        formData.action = 'create';
-        formData.type   = 'image';
-    };
-    
-    const getBase64 = file => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            onLoad(reader.result);
-        };
-    };
+    useEffect(() => {
+        if (projectId !== "create" && projectId !== "step2" && projectId !== "step3" && projectId !== "final") {
+            dispatch(getProjectAction(projectId, '/get'));
+        }
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (projectId === "create" || getproject === "loading" || !getproject.project) {
+          return;
+        }
+        setPicture(getproject.project.logo_link);
+        setLogo('');
+        formData.project_name = getproject.project.name;
+        formData.project_status = getproject.project.project_status;
+        formData.sector_id = getproject.project.sector;
+        formData.project_area = getproject.project.project_area;
+        formData.website_url = getproject.project.website_url ? getproject.project.website_url : '';
+        formData.funding_search = getproject.project.funding_search;
+        formData.look_mentor = getproject.project.look_angel;
+        
+    }, [projectId, getproject]);
+
     const handleSubmitValue = (e) => {
-
         e.preventDefault();
         clearAuthErrDiv();
         if($("#form-wizard").valid()){
-            // if (changed) {
-            //     if (location.pathname !== '/project/create') {
-            //         console.log(project.projectid, 'entreddddd');
-            //         formData.project_id = null;
-            //     }else{
-            //         formData.project_id =  project.projectid;
-            //     }
-                
-            // }else{
-                
-            // }
             setIsLoading(true)
-            formData.project_id = project !== "loading" ? project?.projectid: '';
+            if (projectId !== "create") {
+                formData.project_id = projectId;
+            }
             formData.action = 'create';
-            dispatch(AddProjectsAction(formData, props, '/create', navigation));
+            dispatch(AddProjectsAction(formData, props, '/create', navigation, logo, history, 'step2'));
         }  
     }
 
     const clearAuthErrDiv = () => {
-    let authErr = document.querySelector("#authErr");
-    authErr.innerHTML = "";
+        let authErr = document.querySelector("#authErr");
+        authErr.innerHTML = "";
     }
 
     const checkparameters = () => {
@@ -89,7 +107,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
         }else if(project?.success === false){
             displayErrorMessages(project.errors, document.getElementById('authErr'))
         }        
-      }
+    }
 
     return (
 
@@ -142,30 +160,25 @@ export default function Step1View({formData, setForm,navigation, props}) {
                                     <div className="form-inputs">
                                         <div className="form-row">
                                             <div className="col-md-12 input-row">
-                                                <input type="text" name="name" onChange={setForm} value={name}
+                                                <input type="text" name="project_name" onChange={setForm} value={project_name}
                                                        placeholder={t('form.prject_name')} className="wizard-required" required/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                {/* <EtatDropFilter value={project_status} required={true} onChange={setForm}/> */}
                                                 <EtatDropFilter formData={formData}/>
-
                                             </div>
 
                                             <div className="col-md-6 input-row input-select">
-                                                {/* <SectorDropFilter value={sector_id} required={true} onChange={setForm} /> */}
                                                 <SectorDropFilter formData={formData} />
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                {/* <ZoneDropFilter field='project_area' value={project_area} required={true}  onChange={setForm}/> */}
                                                 <ZoneDropFilter formData={formData}/>
                                             </div>
                                             <div className="col-md-12 input-row input-select">
-                                                {/* <FinanceDropFilter value={funding_search} required={true}  onChange={setForm}/> */}
                                                 <FinanceDropFilter formData={formData}/>
                                             </div>
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
-                                                    <input type="file" value={logolink} name="logolink" onChange={onChange}
+                                                    <input type="file"  name="logolink" onChange={onChange}
                                                     className="custom-file-input" id="customFile"/>
                                                     <label className="custom-file-label" htmlFor="customFile">{!picture ?( t('form.add_logo')): ''}<img 
                                                     style={{width:"50px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>

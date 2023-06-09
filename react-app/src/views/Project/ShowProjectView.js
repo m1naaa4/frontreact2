@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { AddProjectsAction, GetProjectAction } from "../../store/actions/User/Project/ProjectAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Player } from 'video-react';
 import AddComment from '../Comment/AddComment';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import parse from 'html-react-parser';
 
 import { useTranslation } from 'react-i18next';
-import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 import sectors from '../../data/sectorsCreate';
 import etats from '../../data/etatsCreate';
 import countries from '../../data/countries';
@@ -23,11 +20,10 @@ import $ from "jquery";
 import slugify from 'react-slugify';
 import SharePopUp from '../../utils/SharePopUp'
 import VideoJS from '../../helpers/VideoJS';
-
-import Vimeo from '@u-wave/react-vimeo';
-import YouTube from 'react-youtube';
+import ReactPlayer from 'react-player';
 import Select from 'react-select';
 import DialogWarning from '../../utils/DialogWarning';
+import { getProjectAction } from '../../store/actions/Project/ProjectAction';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -72,13 +68,6 @@ export default function ShowProjectView(props) {
     const datas = [{ value: 'public', label: 'Public' }, { value: 'shared', label: 'Shared' }, { value: 'team', label: 'Team' }, { value: 'private', label: 'Private' }];
 
     var url_to_share = false;
-    const data = {
-        provider_id: params.id,
-        action: "getProject",
-        permission: "consult project",
-        provider: "project",
-        provider_name: localStorage.getItem('provider_name'),
-    }
 
     const datatype = {
         'provider_name': localStorage.getItem('provider_name'),
@@ -86,10 +75,9 @@ export default function ShowProjectView(props) {
         'content_id': params.id,
     }
 
-
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(GetProjectAction(data, props, history, params.id));
+        dispatch(getProjectAction(params.id, '/get'));
     }, [dispatch])
 
     useEffect(() => {
@@ -112,11 +100,11 @@ export default function ShowProjectView(props) {
             "&:hover": {
                 backgroundColor: "#e8fbf1",
             },
-            '&:nth-child(1) ': {
-                marginTop: '0px',
-                borderTopLeftRadius: '30px',
-                borderTopRightRadius: '20px',
-            },
+            // '&:nth-child(1) ': {
+            //     marginTop: '0px',
+            //     borderTopLeftRadius: '30px',
+            //     borderTopRightRadius: '20px',
+            // },
             '&:last-child ': {
                 borderBottomLeftRadius: '30px',
                 borderBottomRightRadius: '20px',
@@ -364,16 +352,16 @@ export default function ShowProjectView(props) {
         }
     })
 
-
-    const videoJsOptions = {
-        autoplay: false,
-        controls: true,
-        responsive: true,
-        fluid: true,
-        sources: [{
-            src: project?.project?.media_link,
-            type: 'video/mp4'
-        }]
+    const getExtension = (file) => {
+        if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file)){ 
+            return 'youtube';
+        }
+        else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file)){
+            return 'vimeo';
+        }
+        else{
+            return file.split('.').pop().toLowerCase();
+        }
     };
 
     return (
@@ -476,21 +464,39 @@ export default function ShowProjectView(props) {
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-                                    {(function () {
-                                        if (project.project.media_type == 'youtube') {
-                                            return <YouTube videoId={project.project.media_link} />;
-                                        } else {
-                                            if (project.project.media_type == 'vimeo') {
-                                                return <Vimeo width={640} height={380} video={project.project.media_link} />
-                                            } else {
-                                                if (project.project.is_video) {
-                                                    return <VideoJS options={videoJsOptions} />
-                                                } else {
-                                                    return <img width="100%" height="300" src={project.project.media_link} alt="Project" />
-                                                }
-                                            }
-                                        }
-                                    })()}
+                                {project.project.media_link.map(item => (
+                                                <div key={item} style={{ flex: `1 0 ${100/project.project.media_link.length}%` }}>
+                                                    <div className="col-md-12 input-row">
+                                                    {(function() {
+                                                        if(getExtension(item) == 'youtube'){
+                                                            return <ReactPlayer url={item} controls={true} />
+                                                        }else{
+                                                            if(getExtension(item) == 'vimeo'){
+                                                                return <ReactPlayer url={item} controls={true} />
+                                                            }else{
+                                                                if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
+                                                                getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
+                                                                   return <VideoJS options={
+                                                                    {
+                                                                        autoplay: false,
+                                                                        controls: true,
+                                                                        responsive: true,
+                                                                        fluid: true,
+                                                                        sources: [{
+                                                                          src: item,
+                                                                          type: 'video/mp4'
+                                                                        }]
+                                                                    }
+                                                                   }/>
+                                                                }else{
+                                                                   return <img width="100%" height="300" src={item} alt="Project"/>
+                                                                }
+                                                            }
+                                                        }
+                                                    })()}
+                                                    </div>
+                                                </div>
+                                                ))}
                                 </div>
 
                                 <div className="Signle-Offer-Content">
@@ -542,21 +548,7 @@ export default function ShowProjectView(props) {
                                         title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
                                     </button>
                                 </div>}
-
-                                {/* <div className="Send-Message">
-                                    <button className="Button-Send" type="button" name="button" data-toggle="tooltip"
-                                            data-placement="bottom" title="Send a message">
-                                        <span>Envoyer un message</span> <i className="uil uil-message"></i></button>
-                                </div> */}
-
                                 {user.id == project.project.user_id && <div className="Send-Message input-row input-select">
-                                    {/* <select className="post-status" name="visibility" onChange={(e) => handleSubmit(e)}  defaultValue={project.project.visibility}>
-                                        <option disabled selected>Project status</option>
-                                        <option value="public">Public</option>
-                                        <option value="shared">Shared</option>
-                                        <option value="team">Team</option>
-                                        <option value="private">Private</option>
-                                    </select> */}
                                     <Select
                                         options={alloptions}
                                         value={optionSelected}

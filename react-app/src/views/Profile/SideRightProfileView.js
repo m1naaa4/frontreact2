@@ -53,7 +53,7 @@ export default function SideRightProfileView() {
               {suggestions && suggestions !== 'loading' ? suggestions.slice(0, 3).map((suggestion, index) =>
                 <SuggestionList suggestion={suggestion} key={suggestion.id} />
               ) : Array(3).fill().map((item, index) => (
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center" key={index}>
                   <Skeleton width={40} height={40} style={{ borderRadius: "100%" }} /> &nbsp; <Skeleton width={100} height={24} /> &nbsp; <Skeleton width={40} height={40} style={{ borderRadius: "100%" }} />
                 </div>
               ))

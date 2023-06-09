@@ -1,9 +1,9 @@
-import HttpService from "../../../services/HttpService";
-const http = new HttpService();
-export const AddCommentAction = (data, props, url) =>{
+import { PostService, GetService, UpdateService, DeleteService } from "../../../services/Comment/CommentServices";
+
+export const AddCommentAction = (data, url) =>{
     return (dispatch)=>{
         // dispatch({type:'LOADING_ADD_COMMENT'});
-        http.postData(data, url).then((res) =>
+        PostService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
@@ -21,7 +21,7 @@ export const AddCommentAction = (data, props, url) =>{
 export const AddCommentProjectAction = (data, props, url) =>{
     return (dispatch)=>{
         // dispatch({type:'LOADING_ADD_COMMENT'});
-        http.postData(data, props, url).then((res) =>
+        PostService(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
@@ -39,7 +39,7 @@ export const AddCommentProjectAction = (data, props, url) =>{
 export const GetCommentAction = (data, url) =>{
     return (dispatch)=>{
         dispatch({type:'LOADING_GET_COMMENT'});
-        http.postData(data, url).then((res) =>
+        GetService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'GET_COMMENT_SUCCESS',res});
@@ -56,7 +56,7 @@ export const GetCommentAction = (data, url) =>{
 
 export const DeleteCommentAction = (data, url, item_ids) =>{
     return (dispatch)=>{
-        http.postData(data, url).then((res) =>
+        DeleteService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'DELETE_COMMENT_POST', res, item_ids});
@@ -74,7 +74,7 @@ export const DeleteCommentAction = (data, url, item_ids) =>{
 export const EditCommentAction = (data, props, url) =>{
     return (dispatch)=>{
         // dispatch({type:'LOADING_ADD_COMMENT'});
-        http.postData(data, props, url).then((res) =>
+        UpdateService(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});

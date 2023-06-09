@@ -25,6 +25,7 @@ export default function ListPostsView() {
     const data = {
         action: 'getPosts',
         user_profile_id: params.id,
+        Sort: 'desc',
     };
 
     const lastProjectElementRef = useCallback(node => {
@@ -33,7 +34,7 @@ export default function ListPostsView() {
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
-                dispatch(GetPostsAction(data, '', current + 1));
+                dispatch(GetPostsAction(data, '', current + 1, '/get'));
                 setIsLoading(true)
             }
         })
@@ -42,7 +43,7 @@ export default function ListPostsView() {
 
     useEffect(() => {
         if (!isLoading) {
-            dispatch(GetPostsAction(data, '', 1));
+            dispatch(GetPostsAction(data, '', current + 1, '/get'));
             dispatch({ type: 'CLEAR_POSTS_LIST' });
         }
     }, [params.id]);
@@ -62,12 +63,11 @@ export default function ListPostsView() {
                                     posts.map((post, index) => {
                                         if (posts.length === index + 1) {
                                             return (
-                                                <>
+                                                <div key={index}>
                                                     <div className="PostWrap" key={post.id} ref={lastProjectElementRef}>
                                                         <PostHeader post={post} />
                                                         <PostBody post={post} />
                                                         <PostFooter post={post} />
-
                                                     </div>
                                                     <div className="PostWrap" key={post.id + 1}>
                                                         {/* <PostHeader post={post}/> */}
@@ -78,17 +78,16 @@ export default function ListPostsView() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </>
+                                                </div>
                                             )
 
                                         } else {
                                             return (
-                                                <div className="PostWrap" key={post.id}>
+                                                <div className="PostWrap" key={index}>
                                                     <PostHeader post={post} />
                                                     <PostBody post={post} />
                                                     <PostFooter post={post} />
                                                 </div>
-
                                             )
                                         }
                                     })

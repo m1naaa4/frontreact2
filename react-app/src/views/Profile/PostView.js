@@ -35,7 +35,7 @@ export default function PostView(props) {
 
               <div className="Posts-List">
                 
-             <ListPostsView {...props} />
+                <ListPostsView {...props} />
 
               </div>
             </div>

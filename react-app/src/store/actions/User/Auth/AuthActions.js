@@ -68,10 +68,9 @@ export const UserLoginAction = (credentials,props) =>
     }
 }
 
-    export const ResetpasswordAction = (credentials,props) =>
+export const ResetpasswordAction = (credentials,props) =>
 {
-    return (dispatch)=>{
-       
+    return (dispatch)=>{ 
         ResetpasswordUser(credentials,dispatch).then((res)=>{
            
         },
@@ -83,30 +82,22 @@ export const UserLoginAction = (credentials,props) =>
 
 export const UserLogOutAction = (history) =>
 {
-    
-
- return (dispatch)=>{
-
-
-    dispatch({type:'RESTART_AUTH_RESPONSE'});
-     LogoutUser().then((res)=>{
-        if(res.success===true){
-            dispatch({type:'LOGOUT_SUCCESS',res});
-
-             localStorage.removeItem('user-token');
-            history.push("/login")
-
-        }else if(res.success===false){
-            dispatch({type:'LOGOUT_ERROR',res})
-
-        }
-    },
-    error=>{
-        dispatch({type:'CODE_ERROR',error});
-    }
-    
-     )
- }   
+    return (dispatch)=>{
+        dispatch({type:'RESTART_AUTH_RESPONSE'});
+        LogoutUser().then((res) => {
+            if(res.success === true){
+                localStorage.removeItem('user-token');
+                history.push("/login")
+                dispatch({type:'LOGOUT_SUCCESS',res});
+            }
+            else if(res.success===false){
+                dispatch({type:'LOGOUT_ERROR',res})
+            }
+        },
+        error => {
+            dispatch({type:'CODE_ERROR',error});
+        })
+    }   
 }
 
 

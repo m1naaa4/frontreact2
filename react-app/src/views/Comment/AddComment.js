@@ -16,6 +16,7 @@ export default function AddComment({providerObject, providerType}) {
     const history  = useHistory();
     const pusher = new PusherService();
     const dispatch = useDispatch();
+    console.log(providerObject);
 
     // const comment = useSelector(state => state.addComment);
     // const project = useSelector(state => state.getproject);
@@ -39,20 +40,22 @@ export default function AddComment({providerObject, providerType}) {
     };
 
     useEffect(() => {
-        dispatch(GetCommentAction(dataget, 'comment/get'));
-        // setCountcomment();
+        let data = {
+            'project_id': providerObject.projectid,
+            'provider': 'project',
+        }
+        dispatch(GetCommentAction(data, '/get'));
     }, [dispatch])
 
-    const handleSubmitValue =  async (value, key) => { 
+    const handleSubmitValue =  async (value, key) => {
         if (key === 13 && value !== '') {
             const data = {
                 provider_id     : providerObject.projectid,
-                action          : "add",
                 provider        : providerType,
                 body            : value,
             }
             refcomment.current.value = ''
-        dispatch(AddCommentAction(data, '', 'comment/add'));
+        dispatch(AddCommentAction(data, '/create'));
         }
     }
 

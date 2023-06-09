@@ -5,7 +5,7 @@ import ShowProjectDocs from '../views/Project/ShowProjectDocs';
 import ShowProjectImgs from '../views/Project/ShowProjectImgs';
 import ShowProjectVids from '../views/Project/ShowProjectVids';
 import ShowProjectView from '../views/Project/ShowProjectView';
-import { GetProjectAction } from "../store/actions/User/Project/ProjectAction";
+import { getProjectAction } from '../store/actions/Project/ProjectAction';
 
 
 export default function ProjectShowPrivateRoutes(props) {
@@ -26,22 +26,12 @@ export default function ProjectShowPrivateRoutes(props) {
         }
     })
 
-
     const fullproject = useSelector(state => state.getproject);
-    const project = fullproject?.getproject.project;
-
-    const history = useHistory();
-    const data = {
-        provider_id: params.id,
-        action: "getProject",
-        permission: "consult project",
-        provider: "project",
-        provider_name: localStorage.getItem('provider_name'),
-    }
+    const project = fullproject?.getproject.project?.project;    
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(GetProjectAction(data, props, history, params.id));
+        dispatch(getProjectAction(params.id, '/get'));
     }, [dispatch])
 
 

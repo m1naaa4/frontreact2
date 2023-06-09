@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import etats from "../../../../../data/etatsCreate";
 import Select from 'react-select';
@@ -7,22 +7,15 @@ import Select from 'react-select';
 
 function EtatDropFilter({formData}) {
     
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
-    // fecth data on mounted
-    // useEffect(() => {
-    //     dispatch(loadProjectAction(filterInput,props));
-    // }, [dispatch])
     const [optionSelected, setOptionSelected] = useState();
+    const [etat, setEtatlabel] = useState();
 
     const HandleChange = (selected)=>{
-        setOptionSelected(selected);
-        formData.project_status=selected.value;
+      setOptionSelected(selected);
+      formData.project_status = selected.value;
     }
-
-    useEffect(()=>{
-        console.log(formData);
-    });
 
     const SelectStyleWithScrollbar = {
         option: (provided, state) => ({
@@ -33,11 +26,11 @@ function EtatDropFilter({formData}) {
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
+        //   '&:nth-child(1) ': {
+        //     marginTop: '0px',
+        //     borderTopLeftRadius: '30px',
+        //     borderTopRightRadius: '20px',
+        // },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',
@@ -82,34 +75,33 @@ function EtatDropFilter({formData}) {
             boxShadow: "none",
           },
         }),
-      }
+    }
 
-      const alloptions = etats.map(([value, name]) => (
-        {value: value,label: t(name)}
+    const alloptions = etats.map(([value, name]) => (
+      {value: value,label: t(name)}
     ))
+
+    useEffect(() => {
+      etats.map((key) => {
+        if ( key[0] === formData.project_status) {
+          setEtatlabel(key[1])
+        }
+      });
+    })
 
     return (
         <>
-        {/* <select className="user-type" name="project_status" {...props} required={props.required && "required"} >
-            {etats.map(([value, name]) => (
-                <option key={name} value={value}>{t(name)}</option>
-            ))}
-        </select> */}
-        
         <Select
                 options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={ (formData?.project_status==='')? 'Venture Status': t(formData?.project_status)}
+                placeholder={ (formData?.project_status === '')? 'Venture Status': t(etat)}
                 required={true}
                 className="Select"
         />
 
         </>
-        // <div className="input-row input-select">
-            
-        // </div>
     )
 }
 

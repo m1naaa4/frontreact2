@@ -42,9 +42,7 @@ export const LogoutUser = () =>
 {
     const http = new HttpService();
     let logoutUrl = "logout";
-    const tokenId = "user-token";
-    return http.getData(logoutUrl,tokenId).then(data=>{
-        // console.log(JSON.stringify(data));
+    return http.postLogout(logoutUrl).then(data=>{
         return data;
     }).catch((error)=> {
         return error;

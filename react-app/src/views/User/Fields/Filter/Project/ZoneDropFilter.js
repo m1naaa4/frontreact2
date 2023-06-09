@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from "react";
 import countries from '../../../../../data/countries'
 import Select from 'react-select'
 
 
 function ZoneDropFilter ({formData}) {
-    const { t, i18n } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
+    const [country, setCountry] = useState();
 
     const HandleChange = (selected)=>{
-        setOptionSelected(selected);
-        formData.project_area=selected.value;
+      setOptionSelected(selected);
+      formData.project_area = selected.value;
     }
-    
+
+    useEffect(() => {
+      countries.map((key) => {
+        if (key.value === formData.project_area) {
+            setCountry(key.label)
+        }
+      });
+    });
 
     const SelectStyleWithScrollbar = {
         option: (provided, state) => ({
@@ -23,12 +29,12 @@ function ZoneDropFilter ({formData}) {
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            disable:true,
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
+        //   '&:nth-child(1) ': {
+        //     disable:true,
+        //     marginTop: '0px',
+        //     borderTopLeftRadius: '30px',
+        //     borderTopRightRadius: '20px',
+        // },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',
@@ -73,32 +79,18 @@ function ZoneDropFilter ({formData}) {
             boxShadow: "none",
           },
         }),
-      }
+    }
 
     return (
-        // <select className="user-type" name={field} {...others} required={others.required && "required"}>
-        //     {countries.map((item) => (
-        //         <option key={item.value} value={item.value} >{item.label}</option>
-        //     ))}
-        // </select>
-        //  <Select className="user-type" options={countries} name={field} {...others} required={others.required && "required"}/>
-    //     <Select 
-    //     className="user-type"
-    //     name={field}
-    //     inputId="aria-example-input"
-    //     onMenuOpen={onMenuOpen}
-    //     onMenuClose={onMenuClose}
-    //     options={countries}
-    //   />
-    <Select
-    options={countries}
-    onChange={HandleChange}
-    value={optionSelected}
-    styles={SelectStyleWithScrollbar}
-    placeholder={ (formData?.project_area==='')? "Zone Ciblée":formData?.project_area}
-    required={true}
-    className="Select"
-/>
+      <Select
+        options={countries}
+        onChange={HandleChange}
+        value={optionSelected}
+        styles={SelectStyleWithScrollbar}
+        placeholder={ (formData?.project_area === '')? "Zone Ciblée": country}
+        required={true}
+        className="Select"
+      />
     )
 }
 

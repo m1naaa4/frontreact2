@@ -1,6 +1,7 @@
 const initState = {
-    posts: []
+    posts: [],
 }
+const id = window.location.href.split("/").pop()
 
 
 const GetPostsReducer = (state = initState || undefined, action) => {
@@ -38,20 +39,10 @@ const GetPostsReducer = (state = initState || undefined, action) => {
             }
 
         case 'ADD_POST_SUCCESS':
-            state.posts = [action.res.post, ...state.posts];
-            return {
-                posts: state.posts,
-                loading: false
+            if (action.res.profile_id === id) {
+                state.posts = [action.res, ...state.posts];
             }
-
-        case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':
-            state.posts.forEach(function (post) {
-                if (action.res.comments?.commentable_id === post.id) {
-                    post.comments.unshift(action.res.comments);
-                }
-            });
             return {
-                ...state,
                 posts: state.posts,
                 loading: false
             }
@@ -87,8 +78,7 @@ const GetPostsReducer = (state = initState || undefined, action) => {
 
         case 'DELETE_POST_SUCCESS':
             return {
-                ...state,
-                posts: [...state.posts].filter(item => item.id !== action.id),
+                posts: [...state.posts].filter(item => item.id !== action.res.id),
             }
 
         case 'GET_POSTS_ERROR':

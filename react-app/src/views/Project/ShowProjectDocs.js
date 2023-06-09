@@ -1,49 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Modal from '@mui/material/Modal';
+import { useSelector } from "react-redux";
 
 
 export default function ShowProjectDocs() {
-  const [selectedDoc, setSelectedDoc] = useState("")
-  const [open, setOpen] = useState(false)
+  const [selectedDoc, setSelectedDoc] = useState("");
+  const [open, setOpen] = useState(false);
   const handleOpen = (doc) => {
-    setSelectedDoc(doc.uri)
+    setSelectedDoc(doc.uri);
     setOpen(true)
   }
   const handleClose = () => setOpen(false);
 
-  const files = [
-    {
-      type: "PDF",
-      uri: require("./pdf.pdf"),
-      name: "file_name.pdf"
-    },
-    {
-      type: "TXT",
-      uri: require("./txt.txt"),
-      name: "file_name.txt"
-    },
-    {
-      type: "PDF",
-      uri: require("./pdf.pdf"),
-      name: "file_name.pdf"
-    },
-    {
-      type: "TXT",
-      uri: require("./txt.txt"),
-      name: "file_name.txt"
-    },
-    {
-      type: "PDF",
-      uri: require("./pdf.pdf"),
-      name: "file_name.pdf"
-    },
-    {
-      type: "TXT",
-      uri: require("./txt.txt"),
-      name: "file_name.txt"
-    },
-  ]
+  const project = useSelector(state => state.getproject.getproject?.project);
+
+  const [files, setFiles] =  useState([]);
+
+  useEffect (() => {
+    if (project) { 
+      const links = project?.media_link.map((item) => { 
+        if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)) {
+          console.log(getFileExtension(item), `${'"'+item+'"'}`);
+          
+            let data = {
+              type: getFileExtension(item),
+              uri: item,
+              name: getFileName(item)
+            }
+            return data;
+          
+        }
+        return null;
+      }).filter(item => item !== null);
+
+      setFiles(links);
+      
+    }
+  }, [project]);
+
+  function getFileExtension(filename) {
+    var extension = filename.split('.').pop();
+    return extension.toUpperCase();
+  }
+
+  function getFileName(filepath) {
+    var startIndex = filepath.lastIndexOf("/") + 1;
+    var endIndex = filepath.lastIndexOf(".");
+    return filepath.substring(startIndex, endIndex);
+  }
 
   return (
     <div className="row">
@@ -67,12 +72,14 @@ export default function ShowProjectDocs() {
         aria-describedby="modal-modal-description"
         style={{ width: "80%", margin: "auto", padding: "2em 0" }}
       >
-        <DocViewer
-          className="col-12"
-          pluginRenderers={DocViewerRenderers}
-          documents={[{ uri: selectedDoc }]}
-          style={{height: "100%"}}
-        />
+        <div>
+          <DocViewer
+            className="col-12"
+            pluginRenderers={DocViewerRenderers}
+            documents={[{ uri: selectedDoc }]}
+            style={{height: "100%"}}
+          />
+        </div>
       </Modal>
     </div>
   );

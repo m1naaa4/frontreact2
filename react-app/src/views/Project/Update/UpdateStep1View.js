@@ -20,6 +20,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
     
     const nameForm = useRef(null)
     const [is_loading, setIsLoading] = useState(false);
+    const [logo, setLogo] = useState();
 
     
     const data = {
@@ -33,28 +34,11 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         dispatch(getProjectAction(data, props));
         setPicture(getproject?.project?.logo_link)
     }, [dispatch])
-    
-    useEffect(() => {
-        
-    })
 
     const onChange = e => {
-        getBase64(e.target.files[0]);
+        setLogo(e.target.files[0]);
+        // getBase64(e.target.files[0]);
         setPicture(URL.createObjectURL(e.target.files[0]) );
-    };
-
-
-    const onLoad = fileString => {
-        formData.logo = fileString;
-        formData.type = 'logo';
-    };
-    
-    const getBase64 = file => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            onLoad(reader.result);
-        };
     };
 
     const handleSubmitValue = (e) => {
@@ -62,7 +46,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         const form = nameForm.current
 
         formData.project_id = getproject.project !== "loading" ? getproject.projectid: '';
-        formData.name = getproject.project.name;
+        formData.project_name = getproject.project.name;
         formData.project_area   = getproject.project.project_area;
         formData.project_status = getproject.project.project_status;
         formData.funding_search = getproject.project.funding_search;
@@ -75,7 +59,7 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         formData.tags = getproject.project.tags;
         formData.action = 'create';
         setIsLoading(true)
-        dispatch(AddProjectsAction(formData, props, '/create', navigation));
+        dispatch(AddProjectsAction(formData, props, '/create', navigation, logo));
     }
 
     const {next} = navigation;

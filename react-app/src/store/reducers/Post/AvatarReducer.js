@@ -11,6 +11,11 @@ const AvatarReducer = (state = initState, action) => {
                 ...state,
                 avatar: action.newAvatar,
             }
+        case 'UPDATE_COVER_SUCCESS':
+            return {
+                ...state,
+                cover: action.cover,
+            }
 
         default:
             return state

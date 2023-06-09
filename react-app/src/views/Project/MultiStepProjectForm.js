@@ -15,8 +15,8 @@ const steps = [
 ];
 
 const defaultData = {
-    name: '',
-    logolink: '',
+    project_name: '',
+    // logolink: '',
     logo: new FormData(),
     video: new FormData(),
     medialink: '',

@@ -40,7 +40,7 @@ export default function ReplyComment({comment, post}) {
         // });
     
     }, [dispatch])
-console.log(body)
+
     const data = {
         provider_id     : post.id,
         action          : 'reply',

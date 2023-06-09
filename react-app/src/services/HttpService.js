@@ -3,13 +3,14 @@ class HttpService {
 
     postData = async (item, added_url, tokenId = "", logged = true) =>
     {
+        axios.defaults.withCredentials = false;
         if (logged) {
             item.profile_id = localStorage.getItem('profile_id');
             item.user_id = localStorage.getItem('user_id');
         }
         return await axios({
             method: 'POST',
-            url: "/" + added_url,
+            url: process.env.REACT_APP_API_URL + "/" + added_url,
             data: item
         }).then(response => response.data)
     }
@@ -29,7 +30,17 @@ class HttpService {
 
     getData = async (added_url) =>
     {
-        return await axios("/" + added_url).then( response => response.data);
+        axios.defaults.withCredentials = false;
+        return await axios(process.env.REACT_APP_API_URL + "/" + added_url).then( response => response.data);
+    }
+
+    postLogout = async (added_url) =>
+    {
+        axios.defaults.withCredentials = false;
+        return await axios({
+            method: 'POST',
+            url: process.env.REACT_APP_API_URL + "/" + added_url,
+        }).then(response => response.data)
     }
 
     getRequestOptions = (token) =>

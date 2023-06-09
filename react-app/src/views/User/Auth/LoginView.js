@@ -17,7 +17,7 @@ import Spinner from 'react-bootstrap/Spinner'
 export default function LoginView(props) {
 
     const [place, sePlace] = useState();
-    const [t, i18n] = useTranslation();
+    const [t] = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
 
 

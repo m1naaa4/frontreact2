@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import ProgressBar from "../../../skeleton/ProgressBar";
-import { Player } from "video-react";
 import ReactPlayer from "react-player";
-import UploadService from "../../../helpers/FileUploadService";
-import { getProjectAction } from "../../../store/actions/User/Project/GetProjectActions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import VideoJS from "../../../helpers/VideoJS";
+import { UpdateService } from "../../../services/Project/ProjectServices";
+import { getProjectAction } from "../../../store/actions/Project/ProjectAction";
 
 export default function Step2View({ formData, setForm, navigation, props }) {
   const dispatch = useDispatch();
@@ -20,154 +19,187 @@ export default function Step2View({ formData, setForm, navigation, props }) {
   const [isLink, setLink] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
 
-  const [currentFile, setCurrentFile] = useState(undefined);
-  const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const [project_id, setProject_id] = useState();
   const hiddenFileInput = useRef(null);
 
-  const projectadd = useSelector((state) => state.addproject);
-  const getproject = useSelector((state) => state.getproject);
+  const getproject = useSelector((state) => state.getproject.getproject);
 
   const [changed, setChanged] = useState(false);
   const [disable, setDisabled] = useState(true);
   const toastId = useRef(null);
 
-  const videoJsOptions = {
-    autoplay: false,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    sources: [
-      {
-        src: file,
-        type: "video/mp4",
-      },
-    ],
-  };
-
+  //files 
+  const [files, setFiles] = useState([]);
+  // const [progress, setUploadProgress] = useState(0);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const location = useLocation();
+  const history = useHistory();
+  const projectId = useMemo(
+    () => location.pathname.split('/')[location.pathname.split('/').length - 2],
+    [location.pathname]
+  );
+
   useEffect(() => {
     setChanged(true);
   }, [location]);
 
   useEffect(() => {
-    if (projectadd.addproject) {
-      if (getproject !== undefined && getproject.getproject !== "") {
-        if (getproject.getproject !== "loading") {
-          const data = {
-            provider_id: projectadd.addproject.projectid,
-            action: "getProject",
-          };
+    if (projectId === "create" || getproject === "loading" || !getproject.project) {
+      return;
+    }
+    setFile(getproject.project.media_link);
 
-          setProject_id(projectadd.addproject.projectid);
+    setMedia(getproject.project.is_video);
+    formData.medialink = getproject.project.media_link;
+    formData.logolink = getproject.project.logolink;
+    formData.mediatype = getproject.project.is_video;
+  }, [projectId, getproject]);
 
-          dispatch(getProjectAction(data, props));
-          if (
-            projectadd.addproject.projectid === getproject.getproject.projectid
-          ) {
-            setFile(getproject.getproject.project.media_link);
-            setMedia(getproject.getproject.project.is_video);
-          }
+  useEffect(() => {
+    if (projectId !== "create" && projectId !== "step2" && projectId !== "step3" && projectId !== "final") {
+        dispatch(getProjectAction(projectId, '/get'));
+    }  
+}, [dispatch]);
 
-          setMedia(getproject.getproject.project.is_video);
-          formData.medialink = getproject.getproject.project.media_link;
-          formData.logolink = getproject.getproject.project.logolink;
-          formData.mediatype = getproject.getproject.project.is_video;
-          setProject_id(getproject.getproject.projectid);
+  const { go } = navigation;
+
+  function previous() {
+    history.push('/project/create/' + projectId);
+    go('step1');
+  }
+
+  function handleUpload (e) {
+    const newFiles = Array.from(e.target.files);
+    setFiles(newFiles);
+
+    const formDataa = new FormData();
+    newFiles.forEach((file) => {
+      formDataa.append('attachments[]', file);
+      formDataa.append("media_section", "project");
+      formDataa.append("media_type", checkFileType(file));
+      formDataa.append("provider", "project");
+      formDataa.append("visibility", 'public');
+      formDataa.append("provider_id", projectId);
+    });
+
+    let url = `${process.env.REACT_APP_MEDIA_UPLOAD}` + '/upload';
+    axios.defaults.withCredentials = false;
+
+    axios.post(url, formDataa, {
+      onUploadProgress: progressEvent => {
+        if (progressEvent.loaded > 0) {
+          const progress = (progressEvent.loaded / progressEvent.total) * 100;
+          setUploadProgress(progress.toFixed(2));
+            toastId.current = toast.loading("Uploading Please wait...");
         }
+      },
+    })
+    .then((response) => {
+      const urls = response.data.urls;
+      toast.update(toastId.current, { 
+          render: 'Upload successful!', 
+          type: toast.TYPE.SUCCESS, 
+          isLoading: false,
+          autoClose: 3000,
+      });
+      setFiles([]);
+      setFile(urls);
+      setEditVideo(false);
+      let data = {
+          'media_link' : urls,
+          'project_id' : projectId,
+      }
+      UpdateService(data, '/update-media');
+
+    });
+  };
+
+  const  checkFileType = (file) => {
+    if (file) {
+      var fileName = file.name; // Or file.url if available
+  
+      // Get the file extension
+      var fileExtension = fileName.split('.').pop().toLowerCase();
+    
+      // List of supported image extensions
+      var imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+    
+      // List of supported document extensions
+      var documentExtensions = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'csv', 'pdf'];
+    
+      // List of supported video extensions
+      var videoExtensions = ['mp4', 'm4v', 'mov', 'avi', 'flv', 'wmv', 'mkv', 'webm'];
+    
+      if (imageExtensions.indexOf(fileExtension) !== -1) {
+        return 'image';
+      } else if (documentExtensions.indexOf(fileExtension) !== -1) {
+        return 'document';
+      } else if (videoExtensions.indexOf(fileExtension) !== -1) {
+        return 'video';
+      } else {
+        return 'image';
       }
     }
-  }, [dispatch]);
+  }  
 
-  const handleClick = (e) => {
-    hiddenFileInput.current.click();
-  };
-
-  const { previous, next } = navigation;
-
-  const selectFile = (e) => {
-    setSelectedFiles(e.target.files[0]);
-    getBase64(e.target.files[0]);
-  };
-
-  const onLoad = (fileString) => {
-    formData.file = fileString;
-    formData.action = "upload";
-    formData.url = "video/upload";
-    formData.type = "video";
-    formData.provider = "project";
-    formData.provider_id = projectadd.addproject.projectid
-      ? projectadd.addproject.projectid
-      : project_id;
-  };
-
-  const getBase64 = (file) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      onLoad(reader.result);
-      handleUpload(file);
-    };
-  };
-
-  const handleUpload = async (e) => {
-    setCurrentFile(e);
-    UploadService.upload(formData, (e) => {
-      const progress = e.loaded / e.total;
-      if (toastId.current === null) {
-        toastId.current = toast("Upload in Progress", { progress });
-      } else {
-        toast.update(toastId.current, { progress });
-      }
-    })
-      .then((response) => {
-        //console.log(response.data.url);
-        setFile(response.data.url);
-        formData.medialink = response.data.url;
-        formData.mediatype = response.data.is_video
-          ? "video"
-          : response.data.type;
-        setSelectedFiles(undefined);
-        dispatch({ type: "File_UPLOADED_SUCCESS", response });
-        toast.done(toastId.current);
-        setMedia(response.data.is_video);
-        setEditVideo(false);
-      })
-      .then((files) => {
-        //     setFile(files.data);
-      })
-      .catch(() => {
-        setMessage("Could not upload the file!");
-        setCurrentFile(undefined);
-      });
-  };
+  function next() {
+    history.push('/project/create/' + projectId + '/' + 'step3');
+    go('step3');
+  }
 
   const HandlePreview = (e) => {
     e.preventDefault();
     if (linkUrl.includes("youtube.com")) {
       setFile(linkUrl);
-      formData.medialink = linkUrl;
-      formData.mediatype = "youtube";
       setSelectedFiles(undefined);
       dispatch({ type: "GET_YOUTUBE_SUCCESS", linkUrl });
       setMedia("youtube");
       setEditVideo(false);
       setLink(true);
       setShow(false);
+
+      let data = {
+        'media_link' : [linkUrl],
+        'project_id' : projectId,
+      }
+      UpdateService(data, '/update-media');
+
     }else if(linkUrl.includes("vimeo.com")){
       setFile(linkUrl);
-      formData.medialink = linkUrl;
-      formData.mediatype = "vimeo";
       setSelectedFiles(undefined);
       setMedia("vimeo");
       setEditVideo(false);
       setLink(true);
       setShow(false);
+
+      let data = {
+        'media_link' : [linkUrl],
+        'project_id' : projectId,
+      }
+      UpdateService(data, '/update-media');
+
     }else{
       setShow(true);
     }
   };
+
+  const getExtension = (file) => {
+    if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file))
+    { 
+        return 'youtube';
+    }
+    else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file))
+    {
+        return 'vimeo';
+    }
+    else
+    {
+        return file.split('.').pop().toLowerCase();
+    }
+    
+  };
+
+  
 
   return (
     <div className="Page-Wrapper">
@@ -238,17 +270,54 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                         <i className="uil uil-pen"></i>
                       </button>
 
-                      <div className="col-md-12 input-row">
-                        {media ? (
-                          <VideoJS options={videoJsOptions} />
-                        ) : (
-                          <img
-                            width="100%"
-                            height="300"
-                            src={file}
-                            alt="Project"
-                          />
-                        )}
+                      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {file.map(item => (
+                          <div key={item} style={{ flex: `1 0 ${100/file.length}%` }}>
+                            <div className="col-md-12 input-row">
+                            {(function() {
+                                  if(getExtension(item) == 'youtube'){
+                                      return <ReactPlayer url={item} controls={true} />
+                                  }else{
+                                      if(getExtension(item) == 'vimeo'){
+                                          return <ReactPlayer url={item} controls={true} />
+                                      }else{
+                                          if(getExtension(item) == 'mp4' || getExtension(item) == 'ogg'
+                                          || getExtension(item) == 'webm'|| getExtension(item) == 'x-msvideo'
+                                          || getExtension(item) == 'quicktime'
+                                          ){
+                                              return <ReactPlayer url = {item} controls = {true} />
+                                              // return <VideoJS options={
+                                              // {
+                                              //     autoplay: false,
+                                              //     controls: true,
+                                              //     responsive: true,
+                                              //     fluid: true,
+                                              //     sources: [{
+                                              //       src: item,
+                                              //       type: 'video/mp4'
+                                              //     }]
+                                              // }
+                                              // }/>
+                                          }else if (getExtension(item) == 'doc' || getExtension(item) == 'docx'
+                                          || getExtension(item) == 'xls'|| getExtension(item) == 'xlsx'
+                                          || getExtension(item) == 'ppt' || getExtension(item) == 'pptx'
+                                          || getExtension(item) == 'csv' || getExtension(item) == 'pdf'
+                                          ){
+                                            return <div className="Doc-Wrap">
+                                                                <a href="#!">
+                                                                  <div className="Doc-Icon"><span className="Doc-Type"></span><i className="uil uil-file-alt"></i></div>
+                                                                  <div className="Doc-Name"><i className="uil uil-paperclip"></i> </div>
+                                                                </a>
+                                                              </div>
+                                          } else {
+                                            return <img width="100%" height="300" src={item} alt="Project"/>
+                                          }
+                                      }
+                                  }
+                              })()}
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
@@ -286,16 +355,17 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                             <i className="uil-upload-alt"></i>
                             <h3>Select video files to upload</h3>
                             <span>or drag &amp; drop video files</span>
-                            <form>
+                            <form encType='multipart/form-data'>
                               <label
                                 htmlFor="file-upload"
                                 className="custom-file-upload"
                               >
-                                Upload Video
+                                Upload Media
                               </label>
                               <input
                                 ref={hiddenFileInput}
-                                onChange={selectFile}
+                                onChange={handleUpload}
+                                multiple
                                 id="file-upload"
                                 type="file"
                               />
@@ -335,7 +405,6 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                     <i className="uil uil-arrow-left  "></i> Previous
                   </button>
                   <button
-                    // disabled={fileurl.url.url === undefined ? true:false}
                     onClick={next}
                     disabled={!file}
                     name="next"

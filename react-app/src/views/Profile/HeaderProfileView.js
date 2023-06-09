@@ -11,6 +11,7 @@ import { FriendsAction, MyFriendsAction, SendRequestFriendAction } from '../../s
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
+import { UploadLogoAction } from '../../store/actions/Media/MediaAction';
 
 
 export default function HeaderProfileView({ formData, setForm, props }) {
@@ -28,8 +29,6 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     const hiddenCoverInput = useRef(null);
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [currentFile, setCurrentFile] = useState(undefined);
-    // const [progress, setProgress] = useState(0);
-    // const [message, setMessage] = useState("");
     const [fileAvatar, setFileAvatar] = useState();
     const [fileCover, setFileCover] = useState();
     const [newAvatar, setNewAvatar] = useState()
@@ -43,89 +42,59 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     const currentLocation = location.pathname.split('/')[location.pathname.split('/').length - 1]
     const [currentPage, setCurrentPage] = useState('historique')
 
+    const selectFile = (e) => {
+        dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'avatar'));
+    };
+
+    const selectFileCover = (e) => {
+        dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'cover'));
+    };
+
+    useEffect(() => {
+        let link = userProfile?.profile?.avatar_link;
+        let link_cover = userProfile?.profile?.cover_link;
+        setNewAvatar(link)
+        setNewCover(link_cover)
+    },[userProfile]);
+
     useEffect(() => {
         if (newAvatar && infoprofile.infoprofile.avatar !== newAvatar) {
-            setFileAvatar(newAvatar)
+            setFileAvatar(newAvatar);
             dispatch({ type: 'UPDATE_AVATAR_SUCCESS', newAvatar });
         } else {
-            setFileAvatar(infoprofile.infoprofile.avatar)
+            setFileAvatar(infoprofile.infoprofile.avatar);
             let newAvatar = infoprofile.infoprofile.avatar;
             dispatch({ type: 'UPDATE_AVATAR_SUCCESS', newAvatar });
         }
 
         if (newCover && infoprofile.infoprofile.cover !== newCover) {
-            setFileCover(newCover)
+            setFileCover(newCover);
         } else {
-            setFileCover(infoprofile.infoprofile.cover)
+            setFileCover(infoprofile.infoprofile.cover);
         }
 
         if (currentLocation === 'cvtheque') {
-            setCurrentPage('bio')
+            setCurrentPage('bio');
         } else if (currentLocation === 'meoffre') {
-            setCurrentPage('offres')
+            setCurrentPage('offres');
         } else if (currentLocation === 'friends') {
-            setCurrentPage('friends')
+            setCurrentPage('friends');
         } else {
-            setCurrentPage('historique')
+            setCurrentPage('historique');
         }
-    })
 
-    const selectFile = (e) => {
-        setSelectedFiles(e.target.files[0])
-        getBase64(e.target.files[0], 'avatar');
-    };
-
-    const selectFileCover = (e) => {
-        setSelectedFiles(e.target.files[0])
-        getBase64(e.target.files[0], 'cover');
-    };
-
-    const onLoad = (fileString, type) => {
-        formData.file = fileString;
-        formData.action = 'upload';
-        formData.type = type;
-        formData.url = 'profile/upload';
-    };
-
-    const getBase64 = (file, type) => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            onLoad(reader.result, type);
-            handleUpload(file)
-        };
-    };
-
-    const handleUpload = async e => {
-        // setProgress(0);
-        setCurrentFile(e);
-        FileUploadService.upload(formData, (e) => {
-
-            toastId.current = toast('Upload in Progress',Math.round((100 * e.loaded) / e.total));
-
-        })
-            .then((res) => {
-                formData.type === 'avatar' ? setNewAvatar(res.data.profile.avatar) : setNewCover(res.data.profile.cover)
-                // dispatch({type:'LOAD_PROFILE_SUCCESS'}, res);
-                let data = {
-                    'url': 'user'
-                }
-                dispatch(loadUserAction(data, history));
-                setSelectedFiles(undefined);
-            })
-            .catch(() => {
-                // setProgress(0);
-                // setMessage("Could not upload the file!");
-                setCurrentFile(undefined);
-            });
-    }
-
-    useEffect(() => {
         if (infouser.userProfile && infouser.userProfile !== 'loading') {
             setUserId(infouser.userProfile.profile_id);
-            console.log(user_id)
         };
 
+        if(myfriends){
+            let find = myfriends.some( (data) => {return (data.profile_id === infoprofile.infoprofile.id) });
+            if(find){
+                setShow(false);
+            }else{
+                setShow(true);
+            }
+        }
     });
 
     const SendRequest = ()=>{
@@ -143,18 +112,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
           'url' : 'friend/getmyfriends',
           }
         dispatch(MyFriendsAction(data));
-      },[])
-
-    useEffect(()=>{
-        if(myfriends){
-                let find = myfriends.some( (data) => {return (data.profile_id === infoprofile.infoprofile.id) });
-                if(find){
-                    setShow(false);
-                }else{
-                    setShow(true);
-                }
-        }
-    });
+      },[]);
 
     const HandleClose = ()=>{
         setOpen(false);
@@ -172,7 +130,10 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                         <div className="container">
                             <div className="Profile-Wrap">
                                 <div className="Profile-Infos" style={{top:"5px"}}>
-                                    {user_id === params.id && <> <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
+                                    <br/><br/>
+                                    {window?.globalLoggedUser?.profile_id} ===
+                                    {params.id}
+                                    {window?.globalLoggedUser?.profile_id === params.id && <> <input type="file" id="imageUpload" name="avatar" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
                                         <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
                                             <i className="uil uil-camera" />
                                         </label></>
@@ -186,7 +147,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                         <span style={{color:"white",fontSize:"20px"}}>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
                                     </div>
                                 </div>
-                                {user_id === params.id && <>
+                                {window?.globalLoggedUser?.profile_id === params.id && <>
                                     <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
                                     <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
                                 </>

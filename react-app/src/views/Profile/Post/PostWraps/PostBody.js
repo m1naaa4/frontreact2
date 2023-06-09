@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import $ from "jquery";
 import YouTube from 'react-youtube';
-import { LightgalleryItem } from "react-lightgallery";
 import VideoJS from '../../../../helpers/VideoJS';
+import ReactPlayer from 'react-player';
 
 
 export default function PostBody({ post }) {    
@@ -31,8 +31,8 @@ export default function PostBody({ post }) {
     });
   };
 
-  useEffect(() => {
-    var fixLeft = $('.Left-Side').offset()?.top + $('.Left-Side').outerHeight() - window.innerHeight;       // get initial position of the element
+    useEffect(() => {
+      var fixLeft = $('.Left-Side').offset()?.top + $('.Left-Side').outerHeight() - window.innerHeight;       // get initial position of the element
         $(window).scroll(function() {                  // assign scroll event listener
             var currentScroll = $(window).scrollTop(); // get current position
             if (currentScroll >= fixLeft) {           // apply position: fixed if you
@@ -56,34 +56,93 @@ export default function PostBody({ post }) {
               });
             }
         });
-      });
-      const opts = {
+    });
+    const opts = {
         height: '300',
         width: '100%',
         // playerVars: {
         //   // https://developers.google.com/youtube/player_parameters
         //   autoplay: 1,
         // },
-      };
+    };
 
-    const PhotoItem = ({ image,group }) => (
-        <div>
-            <LightgalleryItem group={group} src={image}>
-              <img src={image} width="100%" />
-            </LightgalleryItem>
-        </div>
-    );
+    const imgLarger = {
+      width: '100%',
+    };
+
+    const styles = {
+      // width: '100%',
+      // height: '10px',
+      width: `${100/post?.media_link?.length}%`,
+      height: "calc(100.25%)"
+    };
+
+    // const PhotoItem = ({ image, group }) => (
+    //     <div>
+    //         <LightgalleryItem group={group} src={image}>
+    //           <img src={image} width="100%" />
+    //         </LightgalleryItem>
+    //     </div>
+    // );
+
+    const getExtension = (file) => {
+      if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file))
+      { 
+          return 'youtube';
+      }
+      else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file))
+      {
+          return 'vimeo';
+      }
+      else
+      {
+          return file.split('.').pop().toLowerCase();
+      }
+    };
+
     return (
         
       <div className="PostBody">
         <div className="PostBody-Text">
         
           {post.body}
-          {
-            post.media_link? (post.is_video ? (
-              <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-                ) : (post.type === 'youtube' ?
-                (<YouTube videoId={post.media_link} opts={opts} />):(<PhotoItem image={post.media_link} group={post.id}></PhotoItem>))):''
+          {post && Array.isArray(post?.media_link) &&
+          <>
+          {post?.media_link.map((item, index) => (
+                <div key = {index} >
+                    <div className=" input-row">
+                    {(function() {
+                      var imgClass = (index === 0) ? imgLarger : styles;
+                            if(getExtension(post.type) == 'youtube'){
+                                return <YouTube videoId={item} opts={opts} />
+                            }else{
+                                if(getExtension(post.type) == 'vimeo'){
+                                    return <ReactPlayer style={imgClass} url={item} controls = {true} />
+                                }else{
+                                    if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
+                                    getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
+                                        return <VideoJS style={imgClass}  options = {
+                                        {
+                                            autoplay: false,
+                                            controls: true,
+                                            responsive: true,
+                                            fluid: true,
+                                            sources: [{
+                                                src: item,
+                                                type: 'video/mp4'
+                                            }]
+                                        }
+                                        }/>
+                                    }else{
+                                        return <img style={imgClass} src={item} alt="post"/>
+                                    }
+                                }
+                            }
+                    })()}
+                    </div>
+                </div>
+            ))}
+          </>
           }
         </div>
     </div>        

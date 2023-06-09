@@ -3,7 +3,8 @@ import FilterProject from "../User/Fields/Filter/FilterProject";
 import ProjectView from "./ProjectGridView";
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";
 import {useDispatch, useSelector} from "react-redux";
-import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User/Project/ProjectActions";
+// import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User/Project/ProjectActions";
+import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/Project/ProjectAction"
 import {Redirect} from 'react-router-dom';
 
 

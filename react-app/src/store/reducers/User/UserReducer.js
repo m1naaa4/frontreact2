@@ -13,6 +13,7 @@ const UserReducer = (state = initState, action) => {
             }
 
         case 'LOAD_USER_SUCCESS':
+            window.globalLoggedUser = action.res.user;
             return {
                 ...state,
                 userProfile: action.res.user,

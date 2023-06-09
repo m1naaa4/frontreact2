@@ -13,6 +13,7 @@ const ProfileReducer = (state = initState, action) => {
             }
 
         case 'LOAD_PROFILE_SUCCESS':
+            window.globalLoggedProfile = action.res.profile;
             return {
                 ...state,
                 infoprofile: action.res.profile,
@@ -27,7 +28,7 @@ const ProfileReducer = (state = initState, action) => {
         case 'LOAD_PROFILE_ERROR':
             return {
                 ...state,
-                infoprofile: action.res,
+                infoprofile: "error loading profile",
             }
         
 

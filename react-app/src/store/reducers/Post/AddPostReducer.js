@@ -19,6 +19,12 @@ const initState = {
                   postid:action.res.post.id,
               }
 
+            case 'GET_MEDIA_POSTS_SUCCESS':
+                return {
+                  ...state,
+                  media_posts: action.res,
+              }
+
             case 'ADD_POST_ERROR':
 
                 return {

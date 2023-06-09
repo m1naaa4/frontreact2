@@ -1,21 +1,29 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import sectors from "../../../../../data/sectorsCreate";
 import Select from 'react-select';
 
 function SectorDropFilter ({formData}){
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
+    const [sector, setSector] = useState();
 
     const HandleChange = (selected)=>{
         setOptionSelected(selected);
         if(formData.sector){
-           formData.sector=selected.value;
+           formData.sector = selected.value;
         }else{
-          formData.sector_id=selected.value;
+          formData.sector_id = selected.value;
         }
-       
     }
+
+    useEffect(() => {
+      sectors.map((key) => {
+        if ( key[0] === formData.sector_id) {
+          setSector(key[1])
+        }
+      });
+    })
     
 
     const SelectStyleWithScrollbar = {
@@ -27,12 +35,12 @@ function SectorDropFilter ({formData}){
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            disable:true,
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
+        //   '&:nth-child(1) ': {
+        //     disable:true,
+        //     marginTop: '0px',
+        //     borderTopLeftRadius: '30px',
+        //     borderTopRightRadius: '20px',
+        // },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',
@@ -78,40 +86,20 @@ function SectorDropFilter ({formData}){
           },
         }),
       }
-      const alloptions = sectors.map(([value, name]) => (
-        {value: value,label: t(name)}
+    const alloptions = sectors.map(([value, name]) => (
+      {value: value,label: t(name)}
     ))
 
     return (
-        // <select className="user-type" name="sector_id"  {...others} required={others.required && "required"}>
-        //     {sectors.map(([value, name]) => (
-        //         <option key={name} value={value}>{t(name)}</option>
-        //     ))}
-        // </select>
-        // <Select
-        //         {...props}
-        //         options={alloptions} name="sector_id"
-        //         onChange={HandleChange}
-        //         value={optionSelected}
-        //         styles={SelectStyleWithScrollbar}
-        //         placeholder="Secteur d'activité"
-        //         required={props.required && "required"}
-        //         className="Select"
-        // />
-
         <Select
                 options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={ ( (formData?.sector || formData?.sector_id) === '') ? "Secteur d'activité" : t((formData?.sector || formData?.sector_id ) )}
+                placeholder={ ( (formData?.sector || formData?.sector_id) === '') ? "Secteur d'activité" : t((sector) )}
                 required={true}
                 className="Select"
         />
-
-/*         <div className="input-row input-select">
-            
-        </div> */
     )
 }
 
