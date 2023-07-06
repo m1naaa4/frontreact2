@@ -304,6 +304,9 @@ const en = {
     monthsingle : 'month ago',
     monthplural : 'months ago',
     sponsored:'Sponsored',
+    CP: 'Corporate',
+    FI: 'Fonds d\'investissement',
+    BA: 'Business Angel',
 };
 
 export default en;

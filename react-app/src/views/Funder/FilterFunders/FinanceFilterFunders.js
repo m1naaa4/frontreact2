@@ -1,29 +1,17 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
-
-const finances = [
-    ['', 'filter.secteur.finance'],
-    [ '2500',  'filter.secteur.2500'],
-    [ '10000',  'filter.secteur.10000'],
-    [ '25000',  'filter.secteur.25000'],
-    [ '40000',  'filter.secteur.40000'],
-    [ '55000',  'filter.secteur.55000'],
-    [ '70000',  'filter.secteur.70000'],
-    [ '85000',  'filter.secteur.85000'],
-    [ '100000',  'filter.secteur.100000']
-];
+import finances from "../../../data/financesCreate";
 
 function FinanceFilterFunders ({formData}) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
+    const [finance, setFinance] = useState();
 
     const HandleChange = (selected)=>{
-        setOptionSelected(selected);
-        formData.finances=selected.value;
-        console.log(formData);
+      setOptionSelected(selected);
+      formData.finance = selected.value;
     }
-    
 
     const SelectStyleWithScrollbar = {
         option: (provided, state) => ({
@@ -34,12 +22,6 @@ function FinanceFilterFunders ({formData}) {
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            disable:true,
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',
@@ -84,11 +66,19 @@ function FinanceFilterFunders ({formData}) {
             boxShadow: "none",
           },
         }),
-      }
+    }
 
-      const alloptions = finances.map(([value, name]) => (
-        {value: value,label: t(name)}
+    const alloptions = finances.map(([value, name]) => (
+      {value: value,label: t(name)}
     ))
+
+    useEffect(() => {
+      finances.map((key) => {
+        if (key[0] == formData.finance) {
+          setFinance(key[1])
+        }
+      });
+    }, [formData.finance])
 
 
     return (
@@ -97,7 +87,7 @@ function FinanceFilterFunders ({formData}) {
             onChange={HandleChange}
             value={optionSelected}
             styles={SelectStyleWithScrollbar}
-            placeholder={ (formData?.finances==='') ? "Funding Capacity": formData?.finances}
+            placeholder={ (formData.finance === '') ? "Funding Capacity": t((finance) )}
             required={true}
             className="Select"
         />

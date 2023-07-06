@@ -31,6 +31,7 @@ import GeneraleVariableReducer from './Generale/GeneralVariableReducer'
 
 import ArticlesReducer from './Articles/ArticlesReducer'
 import ArticleReducer from './Articles/ArticleReducer'
+import MentorsReducer from './Mentor/MentorsReducer'
 
 const RootReducer = combineReducers({
   userAuth:UserAuthReducer,
@@ -62,6 +63,7 @@ const RootReducer = combineReducers({
 
   createFunder:CreateFunderReducer,
   funders: FundersReducer, 
+  mentors: MentorsReducer,
 
   adminAuth:AdminAuthReducer,
   reportsData:ReportReducer,

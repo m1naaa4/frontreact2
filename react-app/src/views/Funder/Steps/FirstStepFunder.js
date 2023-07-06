@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { useLocation } from 'react-router-dom';
-import { displayErrorMessages } from '../../../helpers/displayErr';
 import { useTranslation } from 'react-i18next';
 import $ from "jquery";
 import 'jquery-validation'
@@ -9,43 +8,74 @@ import Spinner from 'react-bootstrap/Spinner'
 import ZoneFilterFunders from '../FilterFunders/ZoneFilterFunders';
 import SectorFilterFunders from '../FilterFunders/SectorFilterFunders';
 import DatePicker from "react-datepicker";
-import { CreateFunderAction } from '../../../store/actions/Funder/FunderActions'
+import { CreateFunderAction, GetFunder } from '../../../store/actions/Funder/FunderActions'
 import FinanceFilterFunders from '../FilterFunders/FinanceFilterFunders';
 import TypeFilterFunder from '../FilterFunders/TypeFilterFunders';
+import { useMemo } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
+const FirstStepFunder = ( {formData, setForm, navigation} ) => {
     const dispatch = useDispatch();
-    const { type, zone, sector_id, phone, url, date, proposition, finances } = formData;
+    const { date } = formData;
     const [startDate, setStartDate] = useState(date);
     const { t } = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
-    const project = useSelector(state => state.addproject.addproject);
-    const [changed, setChanged] = useState(false);
+    const project = useSelector(state => state.funders.funder);
+    const [logo, setLogo] = useState();
+
+    const history = useHistory();
+    const location = useLocation();
 
     const changeDate = (state) => {
         setStartDate(state);
         formData.date = state;
-    }
+    };
 
-    const location = useLocation();
-    useEffect(()=>{
-        setChanged(true)
-    },[location])
+    const projectId = useMemo(
+        () => location.pathname.split('/')[location.pathname.split('/').length - 1],
+        [location.pathname]
+    );
 
-    useEffect(()=>{
-        console.log(formData);
-    });
+    useEffect(() => {
+        if (projectId === "create" || project === "loading" || !project) {
+            return;
+        }
+        setLogo('');
+        formData.type = project.type;
+        formData.sector_id = project.sector;
+        formData.zone   = project.zone;
+        formData.website = project.website ? project.website : '';
+        formData.finance = project.finance;
+        formData.look_mentor = project.look_mentor;
+        formData.url = project.website;
+        formData.phone = project.phone;
+        formData.date = project.date_limit;
+        formData.project_id = project.id
+    }, [projectId, project]);
+
+    useEffect(() => {
+        const {go} = navigation;
+        const steps = ['step2', 'step3', 'final'];
+        if (steps.includes(projectId)) {
+            go(projectId)
+        } else {
+            go('step1')
+        }
+    }, []);
+
+    useEffect(() => {
+        if (projectId !== "create" && projectId !== "step2" && projectId !== "step3" && projectId !== "final") {
+            dispatch(GetFunder('/' + projectId));
+        }
+    }, [dispatch]);
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
         if($("#form-wizard-funder").valid()){
             setIsLoading(true)
-            formData.project_id = project !== "loading" ? project?.projectid: '';
-            formData.action = 'create';
-              dispatch(CreateFunderAction(formData, props, '/create', navigation));
+              dispatch(CreateFunderAction(formData, '/create', navigation, history, 'step2'));
         }
-      
     }
     
     return (
@@ -55,11 +85,11 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
                     <div className="row">
                         <div className="col-md-4 col-lg-4 d-md-none d-lg-block">
                             <div className="page-header">
-                                <h3>{t('project.add.desc1')} </h3>
+                                <h3>{t('project.add.detail_offre')} </h3>
                                 <div id="authErr"></div>
                                 <div id="authResponse">
                                 </div>
-                                <img src="/assets/images/offer-thumbnail.svg"/>
+                                <img src="/assets/images/financement-thumb.svg"/>
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-8">
@@ -86,48 +116,29 @@ const FirstStepFunder = ( {formData, setForm, navigation, props} ) => {
                                     <div className="form-inputs">
                                         <div className="form-row">
                                             <div className="col-md-12 input-row input-select">
-                                                {/* <select className="bailleur-de-fonds" name="type" value={type} onChange={setForm}  required>
-                                                    <option key='0' value='' >{ t('funder.form.you_are')}</option>
-                                                    <option key='1' value="business_angle">{ t('funder.form.you_are.business_angle')}</option>
-                                                    <option key='2' value="fonds">{ t('funder.form.you_are.fonds')}</option>
-                                                    <option key='3' value="corporate">{ t('funder.form.you_are.corporate')}</option>
-                                                </select> */}
                                                 <TypeFilterFunder formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                {/* <SectorFilterFunders value={sector_id} required={true} onChange={setForm} /> */}
                                                 <SectorFilterFunders  formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                {/* <ZoneFilterFunders field='project_area' name="zone" value={zone} required={true}  onChange={setForm}/> */}
                                                 <ZoneFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row">
-                                                <input type="text" name="phone" onChange={setForm} value={phone} placeholder={t('phone')} className="wizard-required" required/>
+                                                <input type="text" name="phone" onChange={setForm} value={formData.phone} placeholder={t('phone')} className="wizard-required" required/>
                                             </div>
                                             <div className="col-md-6 input-row">
-                                                <input type="url" name="url" value={url} placeholder={t('url')} className="wizard-required" onChange={setForm} />
+                                                <input type="text" name="url" value={formData.url} placeholder={t('website')} className="wizard-required" onChange={setForm} />
                                             </div>
                                             <div className="col-md-6 input-row input-select">
-                                                {/* <select value={finances} onChange={setForm} name="finances"  required>
-                                                    <option key='0' >{ t('funder.form.financement') }</option>
-                                                    <option key="2500" value="2500">{ t('filter.secteur.2500') }</option>
-                                                    <option key="10000" value="10000">{ t('filter.secteur.10000') }</option>
-                                                    <option key="25000" value="25000">{ t('filter.secteur.25000') }</option>
-                                                    <option key="40000" value="40000">{ t('filter.secteur.40000') }</option>
-                                                    <option key="55000" value="55000">{ t('filter.secteur.55000') }</option>
-                                                    <option key="70000" value="70000">{ t('filter.secteur.70000') }</option>
-                                                    <option key="85000" value="85000">{ t('filter.secteur.85000') }</option>
-                                                    <option key="100000" value="100000">{ t('filter.secteur.100000') }</option>
-                                                </select> */}
                                                 <FinanceFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row"> 
-                                                <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={startDate} />
+                                                <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={formData.date} />
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
-                                                    <input type="checkbox" value={proposition} name="proposition" onChange={setForm} className="custom-control-input" id="switch1" />
+                                                    <input type="checkbox" defaultChecked={formData.look_mentor} name="proposition" onChange={setForm} className="custom-control-input" id="switch1" />
                                                     <label className="custom-control-label" htmlFor="switch1"><span>{ t('funder.form.proposition')}</span></label>
                                                 </div>
                                             </div>

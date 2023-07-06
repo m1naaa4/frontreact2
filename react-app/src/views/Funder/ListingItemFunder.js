@@ -1,24 +1,33 @@
-import React, { useEffect, useState} from 'react'
-import { NavLink } from 'react-router-dom';
-import {Text} from "../../containers/Language";
+import React, { useState} from 'react'
 import { Player } from 'video-react';
-import VideoPlayer from 'simple-react-video-thumbnail'
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory } from "react-router-dom";
 import slugify from 'react-slugify';
 import {countryName, financeLabel, sectorName} from '../../helpers/Helpres'
 import { useTranslation } from 'react-i18next';
+import ReactPlayer from 'react-player';
+import $ from 'jquery'
 
 
 const ListingItemFunder = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     let history = useHistory();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     let url_to_share = slugify(project.name, { prefix: `${process.env.REACT_APP_FRONT_URL}`+'/funder/'+project.id });
 
     const showPage = (id) => {
-         history.push('/funder/'+ id)
+         history.push('/funder/show/'+ id)
+    };
+
+    const getExtension = (file) => {
+        if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file)) {
+            return 'youtube';
+        } else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file)) {
+            return 'vimeo';
+        } else {
+            return file.split('.').pop().toLowerCase();
+        }
     };
 
     return (
@@ -37,16 +46,30 @@ const ListingItemFunder = ({ project }) => {
                         </div>
                     </div>
                     <div className="offer-media">
-                        {
-                            project.is_video ? (
-                                // <VideoPlayer videoUrl={project.media_link} snapshotAt={10} />
-                                <Player width="100%" height="100%"
-                                    playsInline
-                                    poster="/assets/poster.png"
-                                    src={project.medi}
-                                />
-                                ) : (<img width="100%" height="300" src={project.media} alt="Project"/>)
-                        } 
+                        {(function() {
+                            let link = $.isArray(project.media) ? project.media[0] : project.media;
+                            if(getExtension(link) == 'youtube'){
+                                return <ReactPlayer width='340' url={link} controls={true} />
+                            }else{
+                                if(getExtension(link) == 'vimeo'){
+                                    return <ReactPlayer url={link} controls={true} />
+                                }else{
+                                    if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
+                                        getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
+                                        return <ReactPlayer url={link} controls={true} />
+                                    } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
+                                        return <div className="Doc-Wrap">
+                                            <a href="#!">
+                                                <div className="Doc-Icon" height='300'><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
+                                            </a>
+                                        </div>
+                                    }
+                                    else{
+                                        return <img width="100%" height="300" src={link} alt="Project"/>
+                                    }
+                                }
+                            }
+                        })()}
                     </div>
                     <div className="offer-meta">
                         <ul className="meta-items">

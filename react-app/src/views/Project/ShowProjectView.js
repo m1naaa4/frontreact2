@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import AddComment from '../Comment/AddComment';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { LikeAction } from '../../store/actions/Like/LikeAction';
 import parse from 'html-react-parser';
 
 import { useTranslation } from 'react-i18next';
@@ -19,25 +18,20 @@ import useOutsideClick from '../../helpers/useOutsideClick';
 import $ from "jquery";
 import slugify from 'react-slugify';
 import SharePopUp from '../../utils/SharePopUp'
-import VideoJS from '../../helpers/VideoJS';
 import ReactPlayer from 'react-player';
 import Select from 'react-select';
 import DialogWarning from '../../utils/DialogWarning';
-import { getProjectAction } from '../../store/actions/Project/ProjectAction';
+import { LikeAction } from '../../store/actions/Like/LikeAction';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
-    const fullproject = useSelector(state => state.getproject);
+    const project = useSelector(state => state.getproject.getproject);
     const visibility = useSelector(state => state.generale.visibility);
     const user = useSelector(state => state.userProfile.userProfile);
-    const counter = useSelector(state => state.addednotification);
-    const comments = useSelector(state => state.getComments);
-    const project = fullproject?.getproject;
 
     const ref = useRef();
     const params = useParams();
     const history = useHistory();
-    const [initial, setInitial] = useState(true);
     const [initialFavorite, setInitialFavorite] = useState(true);
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
@@ -54,7 +48,9 @@ export default function ShowProjectView(props) {
     const [open, setOpen] = useState(false);
     const [titleDialog, setTitleDialog] = useState("Confirm To add to Favorite");
     const [ContentDialog, setContentDialog] = useState("are you sure you want to add this post to favorite?");
+    const usernotifications = useSelector(state => state.getnotifications);
 
+    const dispatch = useDispatch();
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
 
@@ -75,17 +71,11 @@ export default function ShowProjectView(props) {
         'content_id': params.id,
     }
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getProjectAction(params.id, '/get'));
-    }, [dispatch])
-
     useEffect(() => {
         if (visibility === false) {
             setIsLoading(visibility)
         }
-    }, [visibility])
-
+    }, [visibility]);
 
     let alloptions = datas.map((name, index) => (
         { value: name.value, label: name.label }
@@ -172,25 +162,16 @@ export default function ShowProjectView(props) {
             marginTop: '7px',
         }),
     }
-    ///////////comment counter/////////
+    
+    /////////// counters//////////
     useEffect(() => {
-        setCountcomment(fullproject?.countcomment);
-    }, [fullproject?.countcomment])
-
-    useEffect(() => {
-        setCountcomment(counter?.countercomment);
-    }, [counter?.countercomment])
-    //////////finish /////////////////
-
-    ///////////like counter//////////
-    useEffect(() => {
-        setLikeCount(fullproject?.countlike);
-    }, [fullproject?.countlike])
-
-    useEffect(() => {
-        setLikeCount(counter.counterlike)
-    }, [counter?.counterlike]);
-    //////////finish /////////
+        if (project != 'loading' && project.project) {
+            setLikeCount(project.project.likeCount);
+            setLike(project.project.is_liked);
+            setCountcomment(project.project.commentCount);
+        }
+    }, [project.project]);
+    
     useEffect(() => {
         $('.reaction-comment').click(function () {
             $(this).toggleClass('comments-clicked');
@@ -205,22 +186,13 @@ export default function ShowProjectView(props) {
             }
         });
 
-        if (initial) {
-            setLike(project?.project?.is_liked);
-            // setLikeCount(fullproject?.countlike);
-        }
+        
 
         if (initialFavorite) {
             setClasse(project?.project?.favorite)
         }
 
-        if (counter?.countercomment) {
-            console.log(counter?.notification)
-            // setCountcomment(counter?.countercomment)
-        }
-
         sectors.map((key) =>
-        // console.log(key[0], project?.project?.sector)
         {
             if (key[0] === project?.project?.sector) {
                 setSector(t(key[1]))
@@ -229,7 +201,6 @@ export default function ShowProjectView(props) {
         );
 
         etats.map((key) =>
-        // console.log(key[0], sector_id)
         {
             if (key[0] === project?.project?.project_status) {
                 setStatus(t(key[1]))
@@ -251,10 +222,6 @@ export default function ShowProjectView(props) {
         }
         );
     })
-
-    useEffect(() => {
-        setCountcomment(comments.count)
-    }, [comments.count])
 
     const goToSearch = (data) => {
         history.push('/project/lists');
@@ -278,24 +245,43 @@ export default function ShowProjectView(props) {
     }
 
     const goToEditproject = () => {
-        history.push('/project/update/' + params.id);
+        history.push('/project/create/' + params.id );
     };
 
-    const likeAAction = () => {
-        setLike(!like);
-        setInitial(false)
-        const dataa = {
-            action: "like",
-            provider_id: params.id,
-            provider: "project",
-            type: like ? 'dislike' : 'like',
-        }
-        like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
-        // setClasse('Dislike');
+    const goToDocuments = () => {
+        history.push('/project/show/' + params.id + '/docs');
+    };
 
-        console.log(like)
-        dispatch(LikeAction(dataa, 'like/like', props));
+    const likeAction = () => {
+        setLike(!like);
+        const data = {
+            provider_id: params.id,
+            provider: 'project',
+            type: like ? 'dislike' : 'like',
+        };
+        dispatch(LikeAction(data, '/like'));
     }
+
+    useEffect(() => {
+        window.pusher.pusher.subscribe(`new-like`).bind('like', function (data) {
+            if (params.id == data.provider_id) {
+                if (data.value == 1) {
+                    setLikeCount((prevCount) => prevCount + 1);
+                } else if (data.value == 0) {
+                    setLikeCount((prevCount) => prevCount > 0 ? prevCount -1 : 0);
+                    
+                }
+            }
+        });
+    }, [params.id])
+
+    useEffect(() => {
+        window.pusher.pusher.subscribe(`project-comment`).bind('new-comment', function (data) {
+            if (params.id == data.commentable_id) {
+                setCountcomment((prevCount) => prevCount + 1);
+            }
+        });
+    }, [params.id]);
 
     const addTofavorite = (id) => {
         setClasse(!classe)
@@ -430,41 +416,10 @@ export default function ShowProjectView(props) {
                                 </div>
                             </div>
 
-                            {/* <div className="Company-Infos">
-                                        <div className="Company-Left">
-                                            <div className="single-offer-logo">
-                                                <img src={project.project.logo_link} title="Nom du projet" alt="" />
-                                                <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(project.project.id)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uis-bookmark"></i></button>
-                                                <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
-                                            </div>
-                                            {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
-                                        </div>
-                                        <div className="Company-Right">
-                                            <div className="Company-Phone">
-                                                <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
-                                                {
-                                                    options_List && (
-                                                        <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-                                                            {user.id !== project.project.user_id &&
-                                                                <li className="PostDelete">
-                                                                    <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    )
-                                                }
-
-                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
-                                                </Modal>
-                                            </div>
-                                            <br />
-                                        </div>
-                                    </div> */}
-
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-                                {project.project.media_link.map(item => (
+                                {
+                                    project.project.media_link && project.project.media_link.map(item => (
                                                 <div key={item} style={{ flex: `1 0 ${100/project.project.media_link.length}%` }}>
                                                     <div className="col-md-12 input-row">
                                                     {(function() {
@@ -473,21 +428,17 @@ export default function ShowProjectView(props) {
                                                         }else{
                                                             if(getExtension(item) == 'vimeo'){
                                                                 return <ReactPlayer url={item} controls={true} />
-                                                            }else{
+                                                            }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
+                                                                return <div className="Doc-Wrap">
+                                                                    <a href="#!">
+                                                                        <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> Document</div>
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            else{
                                                                 if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
                                                                 getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
-                                                                   return <VideoJS options={
-                                                                    {
-                                                                        autoplay: false,
-                                                                        controls: true,
-                                                                        responsive: true,
-                                                                        fluid: true,
-                                                                        sources: [{
-                                                                          src: item,
-                                                                          type: 'video/mp4'
-                                                                        }]
-                                                                    }
-                                                                   }/>
+                                                                   return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
                                                                 }else{
                                                                    return <img width="100%" height="300" src={item} alt="Project"/>
                                                                 }
@@ -517,7 +468,7 @@ export default function ShowProjectView(props) {
                                     </div>
                                     <div className="reactions-buttons">
                                         <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
-                                            onClick={likeAAction} toggle="#password-field" type="button" name="button">
+                                            onClick={likeAction} toggle="#password-field" type="button" name="button">
                                             <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
                                             {like ? "Dislike" : "Like"}
                                         </button>
@@ -539,7 +490,7 @@ export default function ShowProjectView(props) {
                                 </div>
                             </div>
 
-                            <AddComment providerObject={project} providerType='project' />
+                            <AddComment providerObject={project.project.id} providerType='project' />
                         </div>
                         <div className="col-md-4">
                             <div className="Post-Actions">
@@ -592,16 +543,10 @@ export default function ShowProjectView(props) {
                                                 <>
                                                     <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
                                                         <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{ width: "13px", height: "13px" }} alt="" id="image_share" />
-
                                                     </button>
-                                                    {/* <span> */}
-
-                                                    {/* </span> */}
-
                                                     <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
                                                     </Modal>
-
                                                 </>
                                             }
                                         </div>
@@ -637,8 +582,7 @@ export default function ShowProjectView(props) {
 
 
                 ) : (
-                    // console.log("dfsfdsffsdfdsfdsfdsffsdfds", project)
-                    <div data-testid="error-message">ERROR</div>
+                    <div data-testid="error-message">Loading ...</div>
                 )
             }
         </>

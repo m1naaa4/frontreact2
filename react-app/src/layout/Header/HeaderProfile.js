@@ -15,11 +15,16 @@ import { useTranslation } from 'react-i18next';
 function HeaderProfile() {
     const history = useHistory();
     const dispatch = useDispatch();
+
     const usernotifications = useSelector(state => state.getnotifications);
+    console.log(usernotifications);
+    const newavatar = useSelector(state => state.updateavatar);
     const userProfile = useSelector(state => state.userProfile.userProfile);
+
     const [showNotifications, setShowNotifications] = useState(false);
     const [showMessages, setShowMessages] = useState(false);
     const [display, setDisplay] = useState(false);
+    const [avatar, setAvatar] = useState(false);
     const ref = useRef();
 
     const { t } = useTranslation();
@@ -62,7 +67,7 @@ function HeaderProfile() {
                 'url'     :   'user',
             }
             dispatch(loadUserAction(data, history));
-            dispatch( LoadNotificationAction()); 
+            dispatch( LoadNotificationAction('/get')); 
         }
         userProfile?.new_notification ? setClasse('new-notif') : setClasse('')
     }, [dispatch])
@@ -98,7 +103,7 @@ function HeaderProfile() {
         let data = {
             user_id : localStorage.getItem('user_id'),
         }
-        dispatch( MarkSeenAction(data));
+        dispatch( MarkSeenAction(data, '/markseen'));
 
         localStorage.setItem('notification', 0);
         setClasse('')
@@ -115,7 +120,11 @@ function HeaderProfile() {
 
     const clearProject = () => {
         dispatch(ClearProjectsAction());
-    }
+    };
+
+    useEffect(() => {
+        setAvatar(newavatar.avatar.avatar_link);
+    }, [newavatar])
 
     return (
         <div>
@@ -140,8 +149,8 @@ function HeaderProfile() {
                             <div className="center-nav">
                                 <ul className="Dadupa-Nav">
                                 <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i>{t('projectHolder')}</NavLink></li>
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funders`} className="Nav-Link"><i className="uil uil-moneybag"></i> Funders </NavLink></li>
-                                <li className="Nav-Item"><a href="accompagnateur"className="Nav-Link"><i className="uil uil-users-alt"></i>{t('accompanyingPerson')}</a></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i> {t('funders')} </NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/mentor`} className="Nav-Link"><i className="uil uil-users-alt"></i> {t('mentors')} </NavLink></li>
                                 <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-books"></i>{t('articles')}</NavLink></li>
                                 </ul>
                             </div>
@@ -153,8 +162,8 @@ function HeaderProfile() {
                                     {display && <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active" ref={ref}>
                                         <ul className="Mini-Profile-Items">
                                         <li className="Mini-Profile-Item"><Link to={`/project/create`} onClick={clearProject}><i className="uil uil-rocket"></i> {t('header.menu.project')}</Link></li>
-                                        <li className="Mini-Profile-Item"><Link to={`/funder/create`} onClick={clearProject}><i className="uil uil-briefcase-alt"></i> Funder</Link></li>
-                                        <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i> {t('header.menu.mentoring')}</a></li>
+                                        <li className="Mini-Profile-Item"><Link to={`/funder/create`} onClick={clearProject}><i className="uil uil-briefcase-alt"></i> {t('funder')}</Link></li>
+                                        <li className="Mini-Profile-Item"><Link to={`/mentor/create`} onClick={clearProject}><i className="uil uil-comment-alt-notes"></i> {t('mentor')}</Link></li>
                                         </ul>
                                     </div>}
                                 </div>
@@ -169,7 +178,7 @@ function HeaderProfile() {
                                         <div className=" Dadupa-Notifications-Item Dadupa-Alert-Popup">
                                             <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
                                                 <span className={classe}></span><i className="uil uil-bell"></i>
-                                                {usernotifications.notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
+                                                {usernotifications.notifications && usernotifications.notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
                                             </button>
                                             {showNotifications && 
                                                 <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active" ref={ref}>

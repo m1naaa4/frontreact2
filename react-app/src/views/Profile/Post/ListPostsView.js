@@ -24,7 +24,7 @@ export default function ListPostsView() {
 
     const data = {
         action: 'getPosts',
-        user_profile_id: params.id,
+        profile: params.id,
         Sort: 'desc',
     };
 
@@ -34,7 +34,7 @@ export default function ListPostsView() {
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
-                dispatch(GetPostsAction(data, '', current + 1, '/get'));
+                dispatch(GetPostsAction(data, '/get'));
                 setIsLoading(true)
             }
         })
@@ -43,7 +43,7 @@ export default function ListPostsView() {
 
     useEffect(() => {
         if (!isLoading) {
-            dispatch(GetPostsAction(data, '', current + 1, '/get'));
+            dispatch(GetPostsAction(data, '/get'));
             dispatch({ type: 'CLEAR_POSTS_LIST' });
         }
     }, [params.id]);

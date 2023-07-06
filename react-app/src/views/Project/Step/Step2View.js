@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 import { useLocation, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import VideoJS from "../../../helpers/VideoJS";
 import { UpdateService } from "../../../services/Project/ProjectServices";
 import { getProjectAction } from "../../../store/actions/Project/ProjectAction";
 
@@ -286,18 +285,6 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                                           || getExtension(item) == 'quicktime'
                                           ){
                                               return <ReactPlayer url = {item} controls = {true} />
-                                              // return <VideoJS options={
-                                              // {
-                                              //     autoplay: false,
-                                              //     controls: true,
-                                              //     responsive: true,
-                                              //     fluid: true,
-                                              //     sources: [{
-                                              //       src: item,
-                                              //       type: 'video/mp4'
-                                              //     }]
-                                              // }
-                                              // }/>
                                           }else if (getExtension(item) == 'doc' || getExtension(item) == 'docx'
                                           || getExtension(item) == 'xls'|| getExtension(item) == 'xlsx'
                                           || getExtension(item) == 'ppt' || getExtension(item) == 'pptx'

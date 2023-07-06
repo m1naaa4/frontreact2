@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from '../layout/Header/HeaderProfile';
 import NotFound from '../pages/404';
@@ -9,10 +9,19 @@ import MainCvthequeView from '../views/Profile/Cvtheque/MainCvthequeView';
 import ProfileHeaderForm from '../views/Profile/ProfileFormData';
 import SideLeftProfileView from '../views/Profile/SideLeftProfileView';
 import SideRightProfileView from '../views/Profile/SideRightProfileView';
+import { ProfileAction } from '../store/actions/Profile/UserActions';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useDispatch } from 'react-redux';
 
 
 export default function ProfilePrivateRoutes(props) {
+    const params = useParams();
+    const id = params.id;
+    const dispatch = useDispatch();
     
+    useEffect(() => {
+        dispatch( ProfileAction(params.id));
+    },[id]);
     return (
         <div>
             <HeaderProfile props={props}/>

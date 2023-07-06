@@ -144,6 +144,10 @@ const fr = {
     articles: 'Articles',
     articles_suggestedArticle: 'Suggested Article',
     articles_topArticle: 'Top Article',
+
+    CP: 'Corperation',
+    FI: 'Fonds d\'investissement',
+    BA: 'Investisseur',
 };
 
 export default fr;

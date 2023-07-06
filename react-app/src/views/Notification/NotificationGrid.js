@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DeleteNotificationAction, MarkSeenAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
+import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
+import $ from 'jquery'
+import { useTranslation } from 'react-i18next';
 
 function NotificationGrid({notification}) {
     
@@ -14,7 +16,24 @@ function NotificationGrid({notification}) {
     const [display, setDisplay] = useState(false);
     const ref = useRef();
 
+    const { t } = useTranslation();
+
     const [classe, setClasse] = useState();
+
+    const [profileId, setProfileId] = useState();
+    const [idFrom, setIdFrom] = useState();
+    const [username, setUsername] = useState();
+    const [avatar, setAvatar] = useState();
+
+    useEffect(() => {
+        let notified_from = $.parseJSON(notification.notified_from);
+        setAvatar(notified_from.avatar);
+        setUsername(notified_from.name);
+        setProfileId(notified_from.profile_id);
+        setIdFrom(notified_from.id);
+    }, [notification]);
+
+
 
     useEffect(() => {
         let nottif = localStorage.getItem('notification');
@@ -33,10 +52,6 @@ function NotificationGrid({notification}) {
             : setStylo()
     },[seen]);
 
-    
-
-    console.log(notification.seen)
-
     useOutsideClick(ref, () => {
         setDisplay(false)
     });
@@ -51,7 +66,7 @@ function NotificationGrid({notification}) {
             notification_id : nofifid,
             user_id_notifier : id
         }
-        dispatch( SeenNotificationAction(data)); 
+        dispatch(SeenNotificationAction(data, '/see'));
         setDisplay(false);   
     };
 
@@ -60,30 +75,23 @@ function NotificationGrid({notification}) {
             notification_id : nofifid,
             user_id_notifier : id
         }
-        dispatch( DeleteNotificationAction(data)); 
+        dispatch( DeleteNotificationAction(data, '/delete')); 
     };
 
-    const openNotifications = () => {
-        setShowNotifications(!showNotifications )
-
-        let data = {
-            user_id : localStorage.getItem('user_id'),
-        }
-        dispatch( MarkSeenAction(data));
-
-        localStorage.setItem('notification', 0);
-        setClasse('')
-    };
+    
     return (
         
             <div className="grid">
                 <div className="list-group" style={stylo}>
-                    <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
+                    <div className="list-group-item list-group-item-action flex-column align-items-start">
+                        <div className="d-flex w-100 justify-content-between">
                             {notification && <div className="Notifs-List" >
                                 <div className="Notif-Item">
                                     <Link to={notification.link} className="Notif-Image"  >
-                                        <img src={notification.notified_from_avatar} alt="avatar" style={{width:'50px', height:'50px'}}/></Link>
+                                       {avatar ?
+                                            <img src={avatar} alt="avatar" style={{width:'50px', height:'50px'}}/>
+                                            : <img src="/assets/images/avatar.png" alt="avatar" style={{width:'50px', height:'50px'}}/>}
+                                       </Link>
                                         <div className="Notif-Text">{notification.description} </div>
                                     
                                         <div className="Notif-Options show">
@@ -97,8 +105,8 @@ function NotificationGrid({notification}) {
                                             </button>
                                         {notification_id ===  notification.id && display && 
                                             <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                                <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} ><i class="uis uis-check"></i>Mark as read</div>
-                                                <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} ><i class="uil uil-trash-alt"></i> Delete</div>
+                                                <div className="dropdown-item" onClick={ e => markAsRead(idFrom, notification.id)} ><i className="uis uis-check"></i>{t('mark-as-read')}</div>
+                                                <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
                                             </div> 
                                         }   
                                         </div>                        
@@ -107,7 +115,7 @@ function NotificationGrid({notification}) {
                                 </div>
                             }
                         </div>
-                    </a>    
+                    </div>    
                 </div>
                 <div className="grid-sizer col-1"></div>
             </div>                   

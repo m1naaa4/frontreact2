@@ -12,11 +12,11 @@ const initState = {
                         funder:'loading'
                     }
 
-          case 'CREATE_FUNDER_SUCCESS':
+          case 'CREATE_dFUNDER_SUCCESS':
               return {
                   ...state,
                   funder:action.res,
-                  funderId:action.res.project.id,
+                  funderId:action.res.projectid,
                   success:action.res.success,
               }
               case 'CLEAR_STATE_PROJECT_SUCCESS':
@@ -27,7 +27,7 @@ const initState = {
                     funderId:null,
                 }
 
-              case 'CREATE_FUNDER_ERROR':
+              case 'CREATEs_FUNDER_ERROR':
                     return {
                         ...state,
                         funder:action.res,

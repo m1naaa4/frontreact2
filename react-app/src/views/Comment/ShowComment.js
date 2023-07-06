@@ -1,110 +1,80 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { useHistory} from 'react-router-dom';
-// import PusherService from '../../services/Pusher';
 import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
-import {GetCommentAction} from "../../store/actions/Comment/CommentAction";
 import parse from 'html-react-parser';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import { useTranslation } from 'react-i18next';
 
-export default function ShowComment(comment, props) {
+export default function ShowComment({comment, providerType}) {
 
-    const [t, i18n] = useTranslation();
+    const [t] = useTranslation();
     const dispatch = useDispatch();
-    const project = useSelector(state => state.getproject);
     const [replies, SetReplies] = useState(false);
     const [replyBox, SetReplyBox] = useState(false);
     const [body, setBody] = useState();
     const [to, setTo] = useState();
+    const [profileId, setProfileId] = useState();
     const refcomment = useRef(null);
     const history  = useHistory();
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
-    const [initial, setInitial] = useState(true);
 
-    const userProfile = useSelector(state => state.userProfile.userProfile); 
-    //console.log("getcomments", comment.comment.replies.data)
-
-    const dataget = {
-        action           : 'get',
-        provider         : 'project',
-        provider_id      : project.getproject.projectid,
-    }
-
-    const showReplies = e =>  {
-        SetReplies(!replies)
-        SetReplyBox(!replyBox)
-        
-    }
-
+    const userProfile = useSelector(state => state.userProfile.userProfile);
 
     const gotToProfile = () => {
-        history.push('/profile/'+ comment.comment.profile_id);
-      };
+        console.log(comment)
+        history.push('/profile/'+ comment.profile_id);
+    };
 
-      useEffect(() => {
-        if (initial) {
-            setLike(comment.comment?.is_liked);
-            setLikeCount(comment.comment.likeCount);
-            // console.log(like)
-            // setCountcomment(fullproject?.countcomment);
+    useEffect(() => {
+        if (comment != 'loading' && comment) {
+            setLikeCount(comment.likeCount);
+            setLike(comment.is_liked);
         }
-
-        // if(counter.notification){
-        //     console.log(counter?.notification)
-        //     setLikeCount(counter?.notification)
-        // }
-        
-        // if(counter?.countercomment){
-        //     console.log(counter?.notification)
-        //     setCountcomment(counter?.countercomment)
-        // }
-
-
-    })
-
-    const data = {
-        provider_id     : project.getproject.projectid,
-        action          : 'reply',
-        provider        : 'project',
-        body            : body,
-        to              : to,
-        idprofile       : comment.comment.profile_id,
-        commentable_id  : comment.comment.id,
-    }
-   
-        
-    const submitReply = (e) => {
-        e.preventDefault();
-        refcomment.current.value = '';
-        dispatch(AddCommentAction(data, props, 'comment/reply'));
-
-        // setTimeout(() => {
-        //     //SetReplies(replies)
-        //     SetReplyBox(!replyBox)
-        //     dispatch( GetCommentAction(dataget));
-        //   }, 2000)
+    }, [comment.likeCount]);
+    
+    const submitReply =  async (value, key) => {
+        if (key === 13 && value !== '') {
+            const data = {
+                provider_id     : window.location.href.split("/").pop(),
+                provider        : providerType,
+                body            : '<a href='+`${process.env.REACT_APP_FRONT_URL}`+ "/profile/" + profileId + ' target="_blank">' + to + '</a>' + ' ' + body,
+            }
+            console.log(data);
+            refcomment.current.value = ''
+            dispatch(AddCommentAction(data, '/create'));
+        }
     }
 
-    const likeAAction = () => {
+    const likeAction = () => {
         setLike(!like);
-        setInitial(false)
         const dataa = {
             action: "like",
-            provider_id: comment.comment.id,
+            provider_id: comment.id,
             provider: "comment",
-            type    : like?'dislike':'like',
+            type    : like ? 'dislike' : 'like',
         }
-        // like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
-        
-        console.log(like)
-        dispatch(LikeAction(dataa, 'like/like', props));        
+
+        dispatch(LikeAction(dataa, '/like'));        
     }
+
+    useEffect(() => {
+        window.pusher.pusher.subscribe(`new-like`).bind('like', function (data) {
+            if (comment.id == data.provider_id) {
+                if (data.value == 1) {
+                    setLikeCount((prevCount) => prevCount + 1);
+                } else if (data.value == 0) {
+                    setLikeCount((prevCount) => prevCount > 0 ? prevCount -1 : 0);  
+                }
+            }
+        });
+    }, [comment.id]);
 
     const showReplyBox =  async (value, e) => {
         SetReplyBox(!replyBox);
-        setTo('@'+value +' ');
+        setTo('@'+value.username +' ');
+        setProfileId(value.profile_id);
         
     }
     return (
@@ -112,27 +82,26 @@ export default function ShowComment(comment, props) {
                 <>                                            
                     <div className="Comment-Col-2">
                         <div className="Comment-User-Thumb">
-                            {comment.comment.creator.avatar ? 
-                                <img onClick={gotToProfile} src={comment.comment.creator.avatar} alt="avatar" />    
+                            {comment.creator.avatar ? 
+                                <img onClick={gotToProfile} src={comment.creator.avatar} alt="avatar" />    
                             : <img onClick={gotToProfile} src="/assets/images/avatar.png" alt="avatar" />}
                         </div>
                         <ul className="comment-reactions-list">
                             <li className="comment-reaction"><img
-                                src="assets/images/icons/dadupa-like.svg" alt=""/></li>
-                            {/* <label className="count-reactions">{likeCount}</label> */}
+                                src="/assets/images/icons/dadupa-like.svg" alt=""/></li>
+                            <label className="count-reactions">{likeCount}</label>
                         </ul>
                     </div>
                     <div className="Comment-Col-10">
                         <div className="Comment-User">
                             <div className="Comment-Content">
                                 <div className="Comment-User-Name">
-                                    <a className="Comment-User-Profile" onClick={gotToProfile} href="#">{comment.comment.creator.name}</a>
-                                    <span className="Comment-Date">{comment.comment.created_at.for_humans} </span>
+                                    <a className="Comment-User-Profile" onClick={gotToProfile} href="#">{comment.creator.username}</a>
+                                    <span className="Comment-Date">{comment.created_at.for_humans} </span>
                                 </div>
                                 <div className="Comment-Text">
-                                        {/* <span dangerouslySetInnerHTML={{__html: comment.comment.body}}/> */}
                                         <span>
-                                            {parse(comment.comment.body)}
+                                            {parse(comment.body)}
                                         </span>
                                         
                                        
@@ -142,32 +111,23 @@ export default function ShowComment(comment, props) {
                         <div className="comment-actions">
                             
                             <div className="comment-actions multi-options">
-                            {/* { comment.comment.replies.data.length > 0 && ( 
-                                     <div className="comment-replies-count" onClick={showReplies}>
-                                         <button className="comment-replies-button" type="button" name="button">
-                                        <i className="uil uil-comment-notes"></i> 
-                                        <span>{comment.comment.replies.data.length}</span>
-                                        <span> Replies</span>
-                                        </button>
-                                    </div>
-                                )} */}
                                     
                             </div>
 
                             <ul className="comment-actions-list">
                                 <li className="comment-action">
                                     <button className={like ? 'like-action post-liked' : 'like-action'} 
-                                            onClick={likeAAction} toggle="#password-field" type="button" name="button">
-                                                {like?"Dislikee":"Like"}
-                                            </button>
+                                        onClick={likeAction} toggle="#password-field" type="button" name="button">
+                                            {like ? "Dislikee" : "Like"}
+                                    </button>
                                 </li>
-                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.comment.creator.name, e.keyCode)}>Reply</li>
+                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.creator, e.keyCode)}>Reply</li>
                             </ul>
                         </div>
                     </div>
 
                     {replies && <div className="Comment-Replies Toggle-Replies" style={{width: "100%"}}>
-                        { comment.comment.replies.data &&  comment.comment.replies.data.map((com, index) =>
+                        { comment.replies.data &&  comment.replies.data.map((com, index) =>
                             <div className="Comment-Reply" key={com.id}>
                                 <div className="User-Comment">
                                     <div className="Comment-Col-2">
@@ -189,8 +149,6 @@ export default function ShowComment(comment, props) {
                                         </div>
                                         <div className="comment-actions">
                                         <ul className="comment-actions-list">
-                                            {/* <li className="comment-action"><button className="like-action">Like</button></li> */}
-                                            {/* <li className="comment-action replay-action">Reply</li> */}
                                         </ul>
                                         </div>
                                     </div>
@@ -199,7 +157,7 @@ export default function ShowComment(comment, props) {
                     )}
                 </div>}
 
-                {replyBox && <form style={{width: "100%"}} onSubmit={submitReply}>
+                {replyBox && <div style={{width: "100%"}}>
                     <div className="Comment-Reply Writing-Box">
                             <div className="Comment-Writing">
                             <div className="Comment-Col-2">
@@ -213,12 +171,14 @@ export default function ShowComment(comment, props) {
                                         <span onClick={gotToProfile} style={{color: 'blue', textDecoration: 'underline'}}>{to}</span>
                                         <input type="text" name="body" defaultValue={body}
                                             onChange={e => setBody(e.target.value)} ref={refcomment}
-                                            placeholder={t('write_comment')}/>
+                                            placeholder={t('write_comment')}
+                                            onKeyDown={(e) => submitReply(e.target.value, e.keyCode) }
+                                            />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                 </div></form>
+                 </div></div>
                  }
                 </>
                                     

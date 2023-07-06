@@ -14,10 +14,6 @@ export default function FriendPage(props) {
     const [filterInput, setFilterInput] = useForm(defaultData);
 
     const data = { filterInput, setFilterInput, props}
-
-    $(window).on('load', function(){
-        dispatch( ProfileAction(params.id));
-    });
     
     return (   
         <FriendsList {...data}/>              

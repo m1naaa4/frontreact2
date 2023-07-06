@@ -10,8 +10,6 @@ export default function ReplyComment({comment, post}) {
     const [body, setBody] = useState();
     const refcomment = useRef(null)
 
-    const project = useSelector(state => state.getproject);
-
     const [avatar, setAvatar] = useState();
     const [profile_id, setProfileId] = useState();
     const [user_visiter_avatar, setUserVisiterAvatar] = useState();

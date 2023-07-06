@@ -5,20 +5,21 @@ import { Link } from 'react-router-dom';
 export default function ArticleSidebarView({ article }) {
 
     return <div>
-        <h3 className='article-sidebar-title'>{article.title}</h3>
-        <p className='article-date'>{article.date}</p>
+        <Link to={`articles/${article.id}`}>
+            <h3 className='article-sidebar-title'>{article.title}</h3>
+        </Link>
+        <p className='article-date'>{article.created_at.date}</p>
 
-        <img className='article-thumb-sidebar' src={article.thumbnail} alt='article logo' />
-
+        <img className='article-thumb-sidebar' src={article.thumbnail ? article.thumbnail : "/assets/images/logoArticle.jpeg"} alt='article logo' />
 
         <div className='d-flex align-items-center justify-content-between mt-2'>
-            <Link className="article-list-author" to={`/profile/${article.author.profile_id}`}>
-                <img src={article.author.avatar} alt={article.author.fullName} />
-                <h4>{article.author.fullName}</h4>
-            </Link>
+            <div className="article-list-author">
+                <img src={article.author.avatar ?? '/assets/images/avatar.png'} alt={article.author.name} />
+                <h4>{article.author.name}</h4>
+            </div>
             <div className='text-center' style={{ fontSize: "13px" }}>
-                {article.likesCounter} <i className="dadupa-icon icon-clap"></i>
-                {article.commentsCounter} <i className="uil uil-comment-dots"></i>
+                {article.likeCount} <i className="dadupa-icon icon-clap"></i>
+                {article.commentCount} <i className="uil uil-comment-dots"></i>
             </div>
         </div>
 

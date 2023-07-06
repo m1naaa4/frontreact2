@@ -35,18 +35,11 @@ export default function ProjectListPrivateRoutes(props) {
                     )} />
 
                     <Route path={`${props.match.path}/show/:id`} component={ProjectShowPrivateRoutes} />
-                    {/* <Route path={props.match.path} render={props => (
-                        <Redirect to={{ pathname: `${props.match.path}/show/:id` }} />
-                    )} /> */}
 
-                    {/* <Route render={props => (
-                        <Component {...props} />
-                    )} /> */}
-
-                    <Route exact path={`${props.match.path}/update/:id`} component={AddProjectPage} />
+                    {/* <Route exact path={`${props.match.path}/update/:id`} component={AddProjectPage} />
                     <Route exact path={props.match.path} render={props => (
                         <Redirect to={{ pathname: `${props.match.path}/update/:id` }} />
-                    )} />
+                    )} /> */}
 
                     <Route component={NotFound} header="false" />
                 </Switch>

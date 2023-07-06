@@ -9,7 +9,7 @@ const AvatarReducer = (state = initState, action) => {
         case 'UPDATE_AVATAR_SUCCESS':
             return {
                 ...state,
-                avatar: action.newAvatar,
+                avatar: action.res.user.profile,
             }
         case 'UPDATE_COVER_SUCCESS':
             return {

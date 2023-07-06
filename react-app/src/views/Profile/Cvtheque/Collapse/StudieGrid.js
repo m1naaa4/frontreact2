@@ -17,17 +17,6 @@ const StudieGrid = ({ study }) => {
   const [datefin, setDatefin] = useState(new Date(study.datefin));
   const titleDialog = "Confirm to delete study";
   const ContentDialog = "are you sure you want to delete this study content?";
-  const dataCategory = [
-    ['', 'filter.secteur'],
-    ['agroalimentaire', 'filter.secteur.agroalimentaire'],
-    ['architecture', 'filter.secteur.architecture'],
-    ['art', 'filter.secteur.art'],
-    ['big_data', 'filter.secteur.big_data'],
-    ['bio', 'filter.secteur.bio'],
-    ['btp', 'filter.secteur.btp']
-  ]
-
-  console.log("study", study)
 
   const dispatch = useDispatch();
   const [formData, setForm] = useForm({ present: study.present, etablissement: study.etablissement, sector: study.sector, lieu: study.lieu, diplome: study.diplome, description: study.description });

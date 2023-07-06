@@ -1,23 +1,18 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
+import typeusersCreate from "../../../data/typeusersCreate";
 
-const typeusersCreate = [
-  [  "PP",  "Porteur de projet" ],
-  [  "BF",  "Investisseur" ],
-  [  "ACMPT",  "Mentor" ],
-  [  "visitor",  "Visiteur" ],
-];
 
 function TypeFilterFunders({formData}) {
     
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
+    const [type, setType] = useState();
 
     const HandleChange = (selected)=>{
-        setOptionSelected(selected);
-        formData.type=selected.value;
-        console.log(formData);
+      setOptionSelected(selected);
+      formData.type = selected.value;
     }
 
     const SelectStyleWithScrollbar = {
@@ -78,24 +73,27 @@ function TypeFilterFunders({formData}) {
             boxShadow: "none",
           },
         }),
-      }
+    }
 
-      const alloptions = typeusersCreate.map(([value, name]) => (
-        {value: value,label: t(name)}
+    const alloptions = typeusersCreate.map(([value, name]) => (
+      {value: value,label: t(name)}
     ))
 
+    useEffect(() => {
+      typeusersCreate.map((key) => {
+        if (key[0] == formData.type) {
+          setType(key[1])
+        }
+      });
+    }, [formData.type])
+
     return (
-        // <select className="project-state" name="type" defaultValue={filter.type}  {...others} >
-        //     {etats.map(([value, name]) => (
-        //         <option key={name} value={value}>{t(name)}</option>
-        //     ))}
-        // </select>
         <Select
                 options={alloptions}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder= { (formData?.type === '') ? 'You Are:' : formData?.type}
+                placeholder= { (formData.type === '') ? 'You Are:' : t((type) )}
                 required={true}
                 className="Select"
         />

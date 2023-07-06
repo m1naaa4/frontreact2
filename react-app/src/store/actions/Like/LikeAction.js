@@ -1,13 +1,13 @@
-import { Post } from "../../../services/Generale/GeneraleService";
+import { PostService } from "../../../services/Like/LikeServices";
 
 
-export const LikeAction = (data, props, current) =>{
+export const LikeAction = (data, url) =>{
 
     return (dispatch)=>{
 
         dispatch({type:'LOADING_LIKE'});
 
-        Post(data, props, current).then((res) =>
+        PostService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     // console.log('conversationnnnnnnnnnnnnnns', res)                    

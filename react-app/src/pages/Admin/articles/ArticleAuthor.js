@@ -4,7 +4,7 @@ import { getAuthorArticles, getCategories, getCategoryArticles } from '../../../
 import 'react-quill/dist/quill.snow.css';
 import ReactDatePicker from 'react-datepicker';
 import sectors from '../../../data/sectors';
-import AllMultiSelectCheckboxCategory from '../../../utils/Filters/AllMultiselectCheckboxCategory';
+import AllMultiSelectCheckboxCategory from '../../../utils/Filters/AllMultiselectCheckboxCategories';
 import ArticleListView from '../../../views/Articles/ArticleListView';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { Text } from '../../../containers/Language';

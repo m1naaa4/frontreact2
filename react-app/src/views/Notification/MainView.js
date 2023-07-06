@@ -9,8 +9,8 @@ export default function MainView(props) {
 
     return (
         <>  
-            <div class="Page-Wrapper Profile">
-                <div class="container">
+            <div className="Page-Wrapper Profile">
+                <div className="container">
                         <Notifications />
                 </div>
             </div>

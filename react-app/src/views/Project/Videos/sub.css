@@ -1,0 +1,26 @@
+.lg-sub-html {
+    color: #262323;
+    height: 100%;
+    overflow-y: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 420px;
+    z-index: 99999;
+    background: #fff url(/img/loading.gif) no-repeat scroll center center;
+}
+
+.lg-item .lg-sub-html {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 781px  !important;
+}
+
+.lg-object .lg-image {
+    padding-right: 400px !important;
+}
+
+.lg-img-wrap {
+    padding-right: 400px !important;
+}

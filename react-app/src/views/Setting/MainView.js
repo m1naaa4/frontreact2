@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import SideRightSettingView from './SideLeftSettingView';
-import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
-import TeamMain from './Team/TeamMain';
-import ManagementPermission from './Access/ManagementPermission';
+import { Nav } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContentsAction, InvitationsAccessAction, PermissionsAction, TeamMembersAction, TeamsAction } from '../../store/actions/Setting/SettingActions';
-import ContentMain from './Content/ContentMain';
+import { ContentsAction, InvitationsAccessAction, PermissionsAction, TeamMembersAction } from '../../store/actions/Setting/SettingActions';
 import ManagementInvitationToAccess from './Access/ManagementInvitationToAccess';
 import { useHistory, useParams } from 'react-router';
 
-import { Link,NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export default function MainView() { 

@@ -17,14 +17,14 @@ const ArticlesReducer = (state = initState, action) => {
         case 'LOAD_ARTICLE_SUCCESS':
             return {
                 ...state,
-                article: action.res.result.article,
+                article: action.res.article,
                 loading: false
             }
 
         case 'EDIT_ARTICLE_SUCCESS':
             return {
                 ...state,
-                article: action.res.result.article,
+                article: action.res.article,
             }
 
         default:

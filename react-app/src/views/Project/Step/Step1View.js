@@ -16,14 +16,8 @@ export default function Step1View({formData, setForm, navigation, props}) {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const {
-        project_status,
-        project_area,
-        funding_search,
         look_angel,
         project_name,
-        sector_id,
-        url,
-        logolink,
         website_url,
     } = formData;
     const project = useSelector(state => state.addproject.addproject);

@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { NavLink, useLocation } from 'react-router-dom';
-import FileUploadService from '../../helpers/FileUploadService';
-import { toast, ToastContainer } from 'react-toastify';
-import { loadUserAction, ProfileAction } from '../../store/actions/Profile/UserActions';
-import { LoadUser } from '../../services/User/Profile/ProfileService';
+import { ToastContainer } from 'react-toastify';
 import HeaderProfileSkeleton from '../../skeleton/profile/HeaderProfileSkeleton';
-import { FriendsAction, MyFriendsAction, SendRequestFriendAction } from '../../store/actions/Friend/FriendsAction';
+import {  MyFriendsAction, SendRequestFriendAction } from '../../store/actions/Friend/FriendsAction';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
@@ -20,58 +17,36 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     const infouser = useSelector(state => state.userProfile);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const myfriends = useSelector(state => state.userProfile.myfriends);
+    const newavatar = useSelector(state => state.updateavatar);
     const [show,setShow] = useState(false);
     const dispatch = useDispatch();
-    const history = useHistory();
     const [open,setOpen] = useState(false);
 
     const hiddenFileInput = useRef(null);
     const hiddenCoverInput = useRef(null);
-    const [selectedFiles, setSelectedFiles] = useState(undefined);
-    const [currentFile, setCurrentFile] = useState(undefined);
     const [fileAvatar, setFileAvatar] = useState();
     const [fileCover, setFileCover] = useState();
-    const [newAvatar, setNewAvatar] = useState()
-    const [newCover, setNewCover] = useState()
     const [user_id, setUserId] = useState()
     const params = useParams();
 
-    const toastId = useRef(null);
-
     const location = useLocation();
     const currentLocation = location.pathname.split('/')[location.pathname.split('/').length - 1]
-    const [currentPage, setCurrentPage] = useState('historique')
+    const [currentPage, setCurrentPage] = useState('historique');
 
     const selectFile = (e) => {
-        dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'avatar'));
+        dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'avatar', '/upload'));
     };
 
     const selectFileCover = (e) => {
-        dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'cover'));
+        dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'cover', '/upload'));
     };
 
     useEffect(() => {
-        let link = userProfile?.profile?.avatar_link;
-        let link_cover = userProfile?.profile?.cover_link;
-        setNewAvatar(link)
-        setNewCover(link_cover)
-    },[userProfile]);
+        setFileCover(infoprofile.infoprofile.cover);
+        setFileAvatar(infoprofile.infoprofile.avatar);
+    }, [infoprofile.infoprofile.avatar])
 
     useEffect(() => {
-        if (newAvatar && infoprofile.infoprofile.avatar !== newAvatar) {
-            setFileAvatar(newAvatar);
-            dispatch({ type: 'UPDATE_AVATAR_SUCCESS', newAvatar });
-        } else {
-            setFileAvatar(infoprofile.infoprofile.avatar);
-            let newAvatar = infoprofile.infoprofile.avatar;
-            dispatch({ type: 'UPDATE_AVATAR_SUCCESS', newAvatar });
-        }
-
-        if (newCover && infoprofile.infoprofile.cover !== newCover) {
-            setFileCover(newCover);
-        } else {
-            setFileCover(infoprofile.infoprofile.cover);
-        }
 
         if (currentLocation === 'cvtheque') {
             setCurrentPage('bio');
@@ -95,7 +70,12 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                 setShow(true);
             }
         }
-    });
+    }, [infoprofile.infoprofile]);
+    
+    useEffect(() => {
+        setFileAvatar(newavatar.avatar.avatar_link);
+        setFileCover(newavatar.avatar.cover_link);
+    }, [newavatar]);
 
     const SendRequest = ()=>{
         setOpen(true);
@@ -131,9 +111,18 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                             <div className="Profile-Wrap">
                                 <div className="Profile-Infos" style={{top:"5px"}}>
                                     <br/><br/>
-                                    {window?.globalLoggedUser?.profile_id} ===
-                                    {params.id}
-                                    {window?.globalLoggedUser?.profile_id === params.id && <> <input type="file" id="imageUpload" name="avatar" accept=".png, .jpg, .jpeg" ref={hiddenFileInput} onChange={selectFile} />
+                                    {
+                                        localStorage.getItem('profile_id') === params.id && < > < input type = "file"
+                                        id = "imageUpload"
+                                        name = "avatar"
+                                        accept = ".png, .jpg, .jpeg"
+                                        ref = {
+                                            hiddenFileInput
+                                        }
+                                        onChange = {
+                                            selectFile
+                                        }
+                                        />
                                         <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
                                             <i className="uil uil-camera" />
                                         </label></>
@@ -147,7 +136,8 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                         <span style={{color:"white",fontSize:"20px"}}>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
                                     </div>
                                 </div>
-                                {window?.globalLoggedUser?.profile_id === params.id && <>
+                                {
+                                    localStorage.getItem('profile_id') === params.id && < >
                                     <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
                                     <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
                                 </>

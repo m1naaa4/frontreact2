@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AddComment from '../../../views/Comment/AddComment';
 import { Link } from 'react-router-dom';
@@ -7,44 +7,40 @@ import { Text } from '../../../containers/Language';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { useParams } from 'react-router'
 import { getArticle } from "../../../store/actions/Articles/ArticlesActions";
-import SharePopUp from '../../../utils/SharePopUp'
+import SharePopUp from '../../../utils/SharePopUp';
+import { LikeAction } from '../../../store/actions/Like/LikeAction';
 
 
 export default function ArticleDetails(props) {
-    const articleExample = {
-        id: 1,
-        title: "Article title test text abcd",
-        thumbnail: "https://cdn.arbtop.net/img-600-0/czo2MzoiaHR0cHM6Ly93d3cuZWxmYWdyLm9yZy91cGxvYWQvcGhvdG8vbmV3cy80MjgvOS8yMDB4MTUwby8zMjAuanBnIjs=.jpeg",
-        categories: ["Cat 1", "Cat 2"],
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur blandit magna aliquet egestas. Aliquam quis nisl nec nibh ullamcorper volutpat eu in elit. Proin odio ipsum, suscipit sed laoreet sodales, consequat sit amet tortor. Maecenas metus diam, faucibus vitae libero efficitur, dapibus ultrices felis. Duis sit amet consequat ex, quis mollis leo. Pellentesque est est, molestie at massa a, maximus dignissim nisl. Maecenas non lacus lacinia lorem interdum tempor vitae non ante. Donec vitae ultricies quam, id aliquam erat. Donec vel dolor est. Aliquam vel fringilla odio. Maecenas auctor magna sit amet arcu vestibulum, sit amet eleifend massa fringilla. Proin vitae elit convallis, elementum massa quis, bibendum elit. Praesent id dignissim velit, ut bibendum lorem. Ut eget vestibulum eros.",
-        date: "06/09/2022",
-        author: {
-            profile_id: 1,
-            fullName: "Full Name",
-            avatar: "https://disquestockage.fra1.digitaloceanspaces.com/album/disquestockage/1630bd14e169e6.png",
-        },
-        likesCounter: 10,
-        commentsCounter: 3,
-    }
 
-    const dispatch = useDispatch()
-    const params = useParams()
+    const dispatch = useDispatch();
+    const params = useParams();
     const article = useSelector(state => state.article.article);
     const loading = useSelector(state => state.article.loading);
-    const articleId = params.id
+    const articleId = params.id;
+    const [like, setLike] = useState(false);
+    const [likeCount, setLikeCount] = useState();
+    const [countcomment, setCountcomment] = useState();
+
+    const populares = useSelector(state => state.articles.populareArticles);
+    const suggrestions = useSelector(state => state.articles.suggrestionArticles);
 
     const [shareUrl, setShareUrl] = useState(false);
     let url_to_share = [article.title, `${process.env.REACT_APP_FRONT_URL}` + '/articles/' + article.id];
-
-    console.log(articleId)
-    console.log(article)
-    console.log(loading)
 
     useEffect(() => {
         if (articleId) {
             dispatch(getArticle(articleId));
         }
     }, [dispatch]);
+
+    useEffect(() => {
+        if (article != 'loading' && article) {
+            setLikeCount(article.likeCount);
+            setLike(article.is_liked);
+            setCountcomment(article.commentCount);
+        }
+    }, [article]);
 
     const [currentImg, setCurrentImg] = useState(0)
     const handleSlider = () => {
@@ -54,6 +50,38 @@ export default function ArticleDetails(props) {
             setCurrentImg(0)
         }
     }
+
+    const likeAction = () => {
+        setLike(!like);
+        const dataa = {
+            provider_id: params.id,
+            provider: "article",
+            type: like ? 'dislike' : 'like',
+        }
+
+        dispatch(LikeAction(dataa, '/like'));
+    }
+
+    useEffect(() => {
+        window.pusher.pusher.subscribe(`new-like`).bind('like', function (data) {
+            if (articleId == data.provider_id) {
+                if (data.value == 1) {
+                    setLikeCount((prevCount) => prevCount + 1);
+                } else if (data.value == 0) {
+                    setLikeCount((prevCount) => prevCount > 0 ? prevCount -1 : 0);
+                    
+                }
+            }
+        });
+    }, [articleId]);
+
+    useEffect(() => {
+        window.pusher.pusher.subscribe(`article-comment`).bind('new-comment', function (data) {
+            if (articleId == data.commentable_id) {
+                setCountcomment((prevCount) => prevCount + 1);
+            }
+        });
+    }, [articleId]);
 
     return (
         <div className="Single-Wrapper">
@@ -69,9 +97,9 @@ export default function ArticleDetails(props) {
                                             <div className='d-flex justify-content-between align-items-center mt-3'>
                                                 <div className="Contact mb-0">
                                                     <div className="d-flex align-items-start">
-                                                        <div className="Contact-Thumb"> <Link to={`/profile/1`}><img src={article.creator.avatar} alt={article.creator.name} /></Link></div>
+                                                        <div className="Contact-Thumb"> <Link to={`/profile/1`}><img src={article.author.avatar} alt={article.author.name} /></Link></div>
                                                         <div className="Contact-Infos">
-                                                            <Link to={`/profile/${article.creator.id}`}><h4>{article.creator.name}</h4></Link>
+                                                            <Link to={`/profile/${article.author.id}`}><h4>{article.author.name}</h4></Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -103,21 +131,23 @@ export default function ArticleDetails(props) {
                                                 <div className="reactions-box">
                                                     <div className="row">
                                                         <div className="col-6 col-md-4 col-lg-6">
-                                                            <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{article.likeCount}</span></div>
+                                                            <div className="reaction likes"><i className="dadupa-icon icon-clap"></i><span>{likeCount}</span></div>
                                                             <div className="reaction views"><i className="uil uil-eye"></i>
                                                                 <span>{article.visitCount}</span></div>
                                                         </div>
                                                         <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                            <div className="reaction comments"><span>{article.commentCount} Comments</span></div>
+                                                            <div className="reaction comments"><span>{countcomment} Comments</span></div>
                                                             <div className="reaction shares"><span>{article.shared} Shares</span></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="reactions-buttons">
-                                                <button className='reaction-button reaction-like' toggle="#password-field" type="button" name="button">
-                                                    <img src="/assets/images/icons/dadupa-clap.svg" alt="" /> Like
-                                                </button>
+                                            <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
+                                                onClick={likeAction} toggle="#password-field" type="button" name="button">
+                                                <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
+                                                {like ? "Dislike" : "Like"}
+                                            </button>
 
                                                 <a className="reaction-button reaction-comment" href="#Comments-Wrap">
                                                     <img src="/assets/images/icons/dadupa-comment.svg" alt="" /> Commenter
@@ -130,17 +160,30 @@ export default function ArticleDetails(props) {
                                         <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
 
-                                    <AddComment providerObject={{}} providerType='project' />
+                                    <AddComment providerObject={article.id} providerType='article' />
                                 </div>
                             ) : <h1>Loading ...</h1>
                         }
 
                         <div className="col-md-3 articles-list-sidebar pl-5 pr-0">
                             <h4><Text tid="articles_suggestedArticle" /></h4>
-                            <ArticleSidebarView article={articleExample} />
+                            {
+                                loading ?
+                                    <h1>Loading</h1>
+                                    :
+                                    suggrestions && suggrestions.map((article, index) =>
+                                        <ArticleSidebarView article={article} key={index} />
+                                    )
+                            }
                             <h4><Text tid="articles_topArticle" /></h4>
-                            <ArticleSidebarView article={articleExample} />
-                            <ArticleSidebarView article={articleExample} />
+                            {
+                                loading ?
+                                    <h1>Loading</h1>
+                                    :
+                                    populares.map((article, index) =>
+                                        <ArticleSidebarView article={article} key={index} />
+                                    )
+                            }
                         </div>
                     </div>
                 </div>

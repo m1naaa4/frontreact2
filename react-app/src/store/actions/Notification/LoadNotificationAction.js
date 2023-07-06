@@ -1,12 +1,13 @@
-import { deleteNotification, LoadNotification , MarkSeen, SeenNotification} from "../../../services/Generale/GeneraleService";
+import { deleteNotification} from "../../../services/Generale/GeneraleService";
+import { DeleteService, GetService, PostService } from "../../../services/Notification/NotificationServices";
 
-export const LoadNotificationAction = (data, props, current) =>{
+export const LoadNotificationAction = (data) =>{
 
     return (dispatch)=>{
 
         dispatch({type:'LOADING_GET_NOTIFICATIONS'});
 
-        LoadNotification(data, props, current).then((res) =>
+        GetService(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'GET_NOTIFICATIONS_SUCCESS', res});
@@ -23,12 +24,12 @@ export const LoadNotificationAction = (data, props, current) =>{
 
 }
 
-export const SeenNotificationAction = (data) =>{
+export const SeenNotificationAction = (data, url) =>{
 
     return (dispatch)=>{
 
 
-        SeenNotification(data).then((res) =>
+        PostService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'SEEN_NOTIFICATION_SUCCESS', data});
@@ -45,12 +46,12 @@ export const SeenNotificationAction = (data) =>{
 
 }
 
-export const MarkSeenAction = (data) =>{
+export const MarkSeenAction = (data, url) =>{
 
     return (dispatch)=>{
 
 
-        MarkSeen(data).then((res) =>
+        PostService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
 
@@ -66,13 +67,13 @@ export const MarkSeenAction = (data) =>{
 
 }
 
-export const DeleteNotificationAction = (data) =>{
+export const DeleteNotificationAction = (data, url) =>{
 
     return (dispatch)=>{
 
         dispatch({type:'DELETE_NOTIFICATIONS_SUCCESS', data});
 
-        deleteNotification(data).then((res) =>
+        DeleteService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     // dispatch({type:'DELETE_NOTIFICATIONS_SUCCESS', res});

@@ -25,7 +25,15 @@ export const UploadLogoAction = (providerId, file, provider, type, url) =>
                     }
                     UpdateServiceUser(data, '/profile/update-media').then((res) =>
                     {
-                        dispatch({type:'LOAD_USER_SUCCESS', res});
+                        dispatch({
+                            type: 'UPDATE_AVATAR_SUCCESS',
+                            res
+                        });
+
+                        dispatch({
+                            type: 'LOAD_USER_SUCCESS',
+                            res
+                        });
                     });
                 }
 
@@ -42,7 +50,6 @@ export const UploadLogoAction = (providerId, file, provider, type, url) =>
 export const UploadMediaAction = (data, url) =>{
     return (dispatch) =>
     {
-        console.log('data', data.get("media_section"));
         UploadMediaService(data, url).then((res) => {
             if(res.hasOwnProperty('success') && res.success === true)
             {

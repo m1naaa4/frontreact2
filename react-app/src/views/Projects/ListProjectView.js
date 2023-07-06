@@ -52,11 +52,7 @@ export default function ListProjectView({ props}) {
         if(!isLoading){
             dispatch(loadProjectOnceAction( filterInput, props, 1));
         }
-    }, [dispatch]);  
-
-    const goToShowproject = (id) => {
-  //      props.history.push('/project/show/'+ id)
-    };
+    }, [dispatch]);
 
     return (
         <>
@@ -79,7 +75,7 @@ export default function ListProjectView({ props}) {
                                 ) : (
                                     () => {
                                         
-                                        if  (projects.success !== false && projects!==undefined && projects!=="loading" && projects.length>0) {
+                                        if  (projects.success !== false && projects!== undefined && projects !== "loading" && projects.length > 0) {
 
                                             return (
                                                 projects.map((project, index) => {
@@ -116,7 +112,6 @@ export default function ListProjectView({ props}) {
                             }
                         </div>
                     </div>
-                    {/*<input type="button" value="click" onClick={handleFilterProjects}/>*/}
                 </div>
             </div>
         </>

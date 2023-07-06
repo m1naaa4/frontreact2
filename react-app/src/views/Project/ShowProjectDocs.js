@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Modal from '@mui/material/Modal';
 import { useSelector } from "react-redux";
+import NoContent from "../../utils/NoContent";
 
 
-export default function ShowProjectDocs() {
+export default function ShowFunderDocs() {
   const [selectedDoc, setSelectedDoc] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = (doc) => {
@@ -52,7 +53,8 @@ export default function ShowProjectDocs() {
 
   return (
     <div className="row">
-      {
+      <h3>Document</h3>
+      {files.length ?
         files.map((e, index) => (
           <div className="col-sm-6 col-md-3 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
             <div className="Doc-Wrap">
@@ -62,7 +64,7 @@ export default function ShowProjectDocs() {
               </a>
             </div>
           </div>
-        ))
+        )): <NoContent/>
       }
 
       <Modal

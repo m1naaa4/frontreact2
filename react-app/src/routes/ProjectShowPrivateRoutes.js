@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Redirect, useParams, Switch, NavLink, useLocation, useHistory } from 'react-router-dom';
+import { Route, Redirect, useParams, Switch, NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import ShowProjectDocs from '../views/Project/ShowProjectDocs';
 import ShowProjectImgs from '../views/Project/ShowProjectImgs';
@@ -32,8 +32,7 @@ export default function ProjectShowPrivateRoutes(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProjectAction(params.id, '/get'));
-    }, [dispatch])
-
+    }, [dispatch]);
 
     return (
         <div className="Single-Wrapper">
@@ -43,8 +42,8 @@ export default function ProjectShowPrivateRoutes(props) {
                         <div className="Profile-Navigation mb-3" style={{ maxWidth: "100%", top: 0 }}>
                             <ul className="Profie-Menu">
                                 <li><NavLink className={currentPage === 'details' ? 'active-profile-link' : ''} to={`/project/show/${params.id}`}><i className="uil uil-user-square"></i> Details</NavLink></li>
-                                <li><NavLink className={currentPage === 'media' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/images`}><i className="uil uil-apps"></i> Images</NavLink></li>
-                                <li><NavLink className={currentPage === 'media' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/videos`}><i className="uil uil-apps"></i> Videos</NavLink></li>
+                                <li><NavLink className={currentPage === 'images' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/images`}><i className="uil uil-apps"></i> Images</NavLink></li>
+                                <li><NavLink className={currentPage === 'videos' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/videos`}><i className="uil uil-apps"></i> Videos</NavLink></li>
                                 <li><NavLink className={currentPage === 'docs' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/docs`}><i className="uil uil-layer-group"></i> Documents</NavLink></li>
                             </ul>
                         </div>
@@ -53,7 +52,6 @@ export default function ProjectShowPrivateRoutes(props) {
                         {
                             currentPage != "details" && project != undefined &&
                             <h1 className='text-uppercase'>
-                                {/* <i className="uil uil-apps"></i>  */}
                                 {currentPage + ': ' + project.name}
                             </h1>
                         }

@@ -3,15 +3,26 @@ import { useDispatch } from 'react-redux';
 import { Link} from 'react-router-dom';
 import { DeleteNotificationAction, SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
+import { useTranslation } from 'react-i18next';
 
 export default function NotificationMenu({notification}) {
     const dispatch = useDispatch();
     const ref = useRef();
+    const { t } = useTranslation();
 
     const [notification_id, setNotification_id] = useState();
     const [seen, setSeen] = useState(false);
     const [display, setDisplay] = useState(false);
     const [stylo, setStylo] = useState();
+    const [avatar, setAvatar] = useState();
+    const [idFrom, setIdFrom] = useState();
+
+    
+    useEffect(() => {
+        let notified_from = JSON.parse(notification.notified_from);
+        setAvatar(notified_from.avatar);
+        setIdFrom(notified_from.id);
+    }, [notification]);
     
     useEffect(() => {
         setSeen(notification.seen);
@@ -22,8 +33,6 @@ export default function NotificationMenu({notification}) {
             backgroundColor:"rgb(238 238 238 / 55%)"})
             : setStylo()
     },[seen]);
-
-    console.log(notification.id)
     
     const show = (e) => {
         setDisplay(true); 
@@ -35,7 +44,7 @@ export default function NotificationMenu({notification}) {
             notification_id : nofifid,
             user_id_notifier : id
         }
-        dispatch( SeenNotificationAction(data)); 
+        dispatch( SeenNotificationAction(data, '/see')); 
         setDisplay(false);   
     };
 
@@ -49,7 +58,6 @@ export default function NotificationMenu({notification}) {
 
     useOutsideClick(ref, () => {
         setDisplay(false)
-        console.log("clicked outside");
     });
 
     return (
@@ -57,7 +65,7 @@ export default function NotificationMenu({notification}) {
                 <div className="Notifs-List notification-list-menu" style={stylo} >
                     <div className="Notif-Item">
                         <Link to={notification.link} className="Notif-Image">
-                            <img src={notification.notified_from_avatar} alt="avatar" /></Link>
+                            <img src={avatar ? avatar : '/assets/images/avatar.png'} alt="avatar" /></Link>
 
                             <div className="Notif-Options show">
                                 <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -65,8 +73,8 @@ export default function NotificationMenu({notification}) {
                                 </button>
                                 {notification_id ===  notification.id && display && 
                                     <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                        <div className="dropdown-item" onClick={ e => markAsRead(notification.notified_from.id, notification.id)} ><i class="uis uis-check"></i> Mark as read</div>
-                                        <div className="dropdown-item" onClick={ e => DeleteNotif(notification.notified_from.id, notification.id)} ><i class="uil uil-trash-alt"></i> Delete</div>
+                                        <div className="dropdown-item" onClick={ e => markAsRead(idFrom, notification.id)} ><i className="uis uis-check"></i> {t('mark-as-read')}</div>
+                                        <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
                                     </div> 
                                 }   
                             </div>                        

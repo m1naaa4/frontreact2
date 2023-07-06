@@ -1,13 +1,13 @@
 import { DeletePost, GetYoutube } from "../../../services/User/Profile/ProfileService";
 import { DeleteService, GetsService, PostService } from "../../../services/Post/PostService";
 
-export const GetPostsAction = (data, props, current, url) => {
+export const GetPostsAction = (data, url) => {
 
     return (dispatch) => {
 
         dispatch({ type: 'LOADING_GET_POSTS' });
 
-        GetsService(data, props, current, url).then((res) => {
+        PostService(data, url).then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
                 dispatch({ type: 'GET_POSTS_SUCCESS', res });
             } else if (res.hasOwnProperty('success') && res.success === false) {

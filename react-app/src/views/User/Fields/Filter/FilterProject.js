@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ZoneDropFilter from "./Project/ZoneDropFilter";
-import SectorDropFilter from "./Project/SectorDropFilter";
-import FinanceDropFilter from "./Project/FinanceDropFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
-import MultiselectCheckbox from '../../../../utils/MultiselectCheckbox';
 import sectors from "../../../../data/sectors"
 //import etats from "../../../../data/etats"
 
@@ -54,7 +50,6 @@ function FilterProject({ filterInput }) {
     const handleSubmitValue = (e) => {
         e.preventDefault();
 
-
         filterInput.filters = true;
 
         let dstatus = selectedstatus?.map((name, index) => (
@@ -95,20 +90,15 @@ function FilterProject({ filterInput }) {
                         <div className="display-flex">
                             <div className="input-row input-multi-filter input-small">
                                 <AllMultiSelectCheckboxStatus {...{ setSelectedstatus }} datas={etats} />
-                                {/* <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
                             </div>
                             <div className="input-row input-multi-filter input-small">
-                                {/* <SectorDropFilter value={sector} onChange={setFilterInput} /> */}
                                 <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
                             </div>
                             <div className="input-row input-multi-filter input-small">
                                 <AllMultiSelectCheckboxFinance {...{ setSelectedfinance }} datas={finances} />
-                                {/* <ZoneDropFilter field='project_area' value={zone} onChange={setFilterInput} /> */}
                             </div>
                             <div className="input-row input-multi-filter input-small">
-                                {/* <FinanceDropFilter value={financement} onChange={setFilterInput} /> */}
-                                {/* <AllMultiSelectCheckboxZone {...{ setSelectedzone }} datas={countries} onChange={setFilterInput}/> */}
-                                {/* <MultiselectCheckbox {...{ setSelectedzone }} datas={countries} /> */}
+                                
                                 <AllMultiSelectCheckboxZone {...{ setSelectedcountry }} datas={countries} />
                             </div>
                             <div className='input-row'>
@@ -121,33 +111,15 @@ function FilterProject({ filterInput }) {
                                     <i className="uil uil-setting"></i>
                                 </button>
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn">
-                                        <i className="uil uil-search"></i> Search
-                                    </button>
+                                    <i className="uil uil-search"></i> Search
+                                </button>
                             </div>
                             
                         </div>
                     </div>
                     <div className="col-sm-1 col-md-12 col-lg-1">
-                        {/* <button className="DadupaModal-BTNSubmit"
-                                onClick={display}
-                                aria-controls="example-collapse-text"
-                                aria-expanded={open}
-                            >
-                                Advanced Search
-                            </button> */}
-                        {/* <div className="input-row form-button">
-                                <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button"><i
-                                    className="uil uil-search"></i> <span>Filter</span></button>
-                            </div> */}
+                        
                     </div>
-
-                    {/* <button className="DadupaModal-BTNSubmit"
-                            onClick={display}
-                            aria-controls="example-collapse-text"
-                            aria-expanded={open}
-                        >
-                            Advanced Search
-                        </button> */}
                     <Collapse in={open} className="mt-10">
                         <div className="col-sm-11 col-md-12 col-lg-12">
                             <div className="display-flex">

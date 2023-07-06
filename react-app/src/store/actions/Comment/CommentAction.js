@@ -6,7 +6,7 @@ export const AddCommentAction = (data, url) =>{
         PostService(data, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
+                    // dispatch({type:'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS', res});
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'ADD_COMMENT_POST_ERROR',res})
                 }
@@ -24,7 +24,7 @@ export const AddCommentProjectAction = (data, props, url) =>{
         PostService(data, props, url).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
-                    dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
+                    // dispatch({type:'ADD_TO_COLLECTION_COMMENT_SUCCESS', res});
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'ADD_COMMENT_POST_ERROR',res})
                 }

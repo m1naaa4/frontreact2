@@ -23,6 +23,7 @@ import Resetpassword from './pages/User/Auth/Resetpassword';
 import Resetpass from './pages/User/Auth/Resetpass';
 
 import ReactGA from 'react-ga';
+import MentorPrivateRoutes from './routes/MentorPrivateRoutes';
 
 const Routes = (props) => {
     useEffect(() => {
@@ -41,14 +42,20 @@ const Routes = (props) => {
                     <Route path="/register/:token" component={UserRegister} />
                     <Route path="/resetPassword" component={Resetpassword} />
                     <Route path="/password/:token" component={Resetpass} />
+                    
                     <Gaurd path="/project" token='user-token' routeRedirect='/login' component={ProjectListPrivateRoutes} />
+                    <Gaurd path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
+                    <Gaurd path="/mentor" token='user-token' routeRedirect='/login' component={MentorPrivateRoutes} />
+
                     <Gaurd path="/profile/:id" token='user-token' routeRedirect='/login' component={ProfilePrivateRoute} />
                     <Gaurd path="/user/:id" token='user-token' routeRedirect='/login' component={SettingPrivateRoutes} />
                     <Gaurd path="/favorite" token='user-token' routeRedirect='/login' component={FavoritePrivateRoutes} />
                     <Gaurd path="/notifications" token='user-token' routeRedirect='/login' component={NotificationsPrivateRoutes} />
                     <Gaurd path="/messages" token='user-token' routeRedirect='/login' component={MessengerPrivateRoutes} />
-                    <Gaurd path="/funder" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
-                    <Gaurd path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} />
+                    
+                    {/* <Gaurd path="/funders" token='user-token' routeRedirect='/login' component={FundersPrivateRoutes} /> */}
+                    
+                    {/* <Gaurd path="/mentors" token='user-token' routeRedirect='/login' component={MentorPrivateRoutes} /> */}
                     <Gaurd path="/articles" token='user-token' routeRedirect='/login' component={ArticlePrivateRoutes} />
 
 

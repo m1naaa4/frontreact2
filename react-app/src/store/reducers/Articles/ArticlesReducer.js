@@ -1,6 +1,8 @@
 const initState = {
     articles: [],
-    categories: []
+    categories: [],
+    populareArticles: [],
+    suggrestionArticles: []
 }
 
 
@@ -18,7 +20,23 @@ const ArticlesReducer = (state = initState, action) => {
         case 'LOAD_ARTICLES_SUCCESS':
             return {
                 ...state,
-                articles: action.res.result.articles,
+                articles: action.res.articles,
+                hasMore:  action.res.hasMore,
+                current:  action.res.current,
+                loading: false
+            }
+
+        case 'LOAD_POPULARE_ARTICLES_SUCCESS':
+            return {
+                ...state,
+                populareArticles: action.res.popularArticles,
+                loading: false
+            }
+
+        case 'LOAD_SUGGESTION_ARTICLES_SUCCESS':
+            return {
+                ...state,
+                suggrestionArticles: action.res.suggrestionArticles,
                 loading: false
             }
 

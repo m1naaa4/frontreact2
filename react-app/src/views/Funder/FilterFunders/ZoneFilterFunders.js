@@ -1,17 +1,23 @@
 import React, { useEffect,useState } from "react";
-import { useTranslation } from 'react-i18next';
 import countries from "../../../data/countries";
 import Select from 'react-select';
 
 function ZoneFilterFunders ({formData}) {
-    const { t, i18n } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
+    const [country, setCountry] = useState();
 
     const HandleChange = (selected)=>{
         setOptionSelected(selected);
         formData.zone=selected.value;
-        console.log(formData);
     }
+
+    useEffect(() => {
+      countries.map((key) => {
+        if (key.value === formData.zone) {
+          setCountry(key.label)
+        }
+      });
+    });
 
     const SelectStyleWithScrollbar = {
         option: (provided, state) => ({
@@ -22,12 +28,6 @@ function ZoneFilterFunders ({formData}) {
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            disable:true,
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',
@@ -72,22 +72,15 @@ function ZoneFilterFunders ({formData}) {
             boxShadow: "none",
           },
         }),
-      }
-
+    }
 
     return (
-        // <select className="user-type" name="zone" {...others} defaultValue={zone}>
-        //     <option key="all" value="all" >{t('localite')}</option>
-        //     {countries.map((item) => (
-        //         <option key={item.value} value={item.value} >{item.label}</option>
-        //     ))}
-        // </select>
         <Select
                 options={countries}
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={(formData?.zone==='')?"Select Country": formData?.zone}
+                placeholder={(formData?.zone==='')?"Select Country": country}
                 required={true}
                 className="Select"
         />

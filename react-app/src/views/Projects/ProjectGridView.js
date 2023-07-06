@@ -13,8 +13,6 @@ import {
     FacebookShareCount,
 } from "react-share";
 import ReactPlayer from 'react-player';
-import VideoJS from '../../helpers/VideoJS';
-import YouTube from 'react-youtube';
 
 
 const ProjectGridView = ({ project }) => {
@@ -81,11 +79,6 @@ const ProjectGridView = ({ project }) => {
         }
     };
 
-    const opts = {
-        height: '300',
-        width: '100%'
-    };
-
     return (
 
         <div className="offer-box">
@@ -111,8 +104,6 @@ const ProjectGridView = ({ project }) => {
 
                 <div className="offer-logo">
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
-                        {console.log(classe)}
-                        {/* <i className={classe ? 'uis uis-bookmark' : 'uil uil-bookmark'} ></i> */}
                         <i className="uil uil-bookmark"></i>
                     </button>
                     <DialogWarning 
@@ -128,28 +119,23 @@ const ProjectGridView = ({ project }) => {
                
                 {(function() {
                     let link = $.isArray(project.media_link) ? project.media_link[0] : project.media_link;
-                    if(getExtension(project.media_link) == 'youtube'){
+                    if(getExtension(link) == 'youtube'){
                         return <ReactPlayer width='340' url={link} controls={true} />
-                        // return <YouTube videoId={link} opts={opts} />
                     }else{
-                        if(getExtension(project.media_link) == 'vimeo'){
+                        if(getExtension(link) == 'vimeo'){
                             return <ReactPlayer url={link} controls={true} />
                         }else{
                             if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                             getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
-                                return <VideoJS options={
-                                {
-                                    autoplay: false,
-                                    controls: true,
-                                    responsive: true,
-                                    fluid: true,
-                                    sources: [{
-                                        src: link,
-                                        type: 'video/mp4'
-                                    }]
-                                }
-                                }/>
-                            }else{
+                                return <ReactPlayer url={link}  controls={true} />
+                            } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
+                                return <div className="Doc-Wrap">
+                                    <a href="#!">
+                                        <div className="Doc-Icon" height='300'><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
+                                    </a>
+                                </div>
+                            }
+                            else{
                                 return <img width="100%" height="300" src={link} alt="Project"/>
                             }
                         }

@@ -12,7 +12,6 @@ export default function AddPostView(props) {
     // const [avatar, setAvatar] = useState();
     const infoprofile = useSelector(state => state.infoProfile);
     const newavatar = useSelector(state => state.updateavatar);
-    const user = useSelector(state => state.userProfile.userProfile);
 
     const [user_visiter_avatar, setUserVisiterAvatar] = useState();
 
@@ -23,21 +22,21 @@ export default function AddPostView(props) {
     
     
     useEffect(() => {      
-    if (infoprofile.infoprofile.avatar !== undefined &&  newavatar.avatar !== undefined) {  
-        if (newavatar.avatar !== infoprofile.infoprofile.avatar) {
-            setUserVisiterAvatar(newavatar.avatar);
-        }else{
-            if(user.profile){
-                setUserVisiterAvatar(user.profile.avatar_link);
+        if (infoprofile.infoprofile.avatar !== undefined) {  
+            if ( infoprofile.infoprofile.avatar) {
+                setUserVisiterAvatar(infoprofile.infoprofile.avatar);
             }
-        }
-    }     
-    },[infoprofile.infoprofile.avatar, newavatar.avatar, user.profile, user_visiter_avatar])
+        }     
+    },[infoprofile.infoprofile.avatar])
+
+    useEffect(() => {
+        setUserVisiterAvatar(newavatar.avatar.avatar_link);
+    }, [newavatar]);
 
     return (
         <>
         {
-            infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' && infoprofile.infoprofile.id === user.profile_id?
+            infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' && infoprofile.infoprofile.id == localStorage.getItem('profile_id')?
                 <div className="WritePost">
                     <div className="WritePost-Area">
                         <Link className="WritePost-UserThumb" to={"/profile/"+ infoprofile.infoprofile.id} >

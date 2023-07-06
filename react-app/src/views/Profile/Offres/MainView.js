@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import OffreGrid from './OffreGrid';
-import ProfileHeaderForm from '../ProfileFormData';
-import { ProfileAction } from '../../../store/actions/Profile/UserActions';
 import { useLocation, useParams } from 'react-router';
-import $ from 'jquery';
 import { getMyContentsAction } from '../../../store/actions/Offres/MyContentAction';
 import OffresSkeleton from '../../../skeleton/profile/OffresSkeleton';
 
@@ -14,9 +11,6 @@ export default function MainView(props) {
     const loading = useSelector(state => state.offres.loading);
     const params = useParams();
     const location = useLocation();
-    $(window).on('load', function () {
-        dispatch(ProfileAction(params.id));
-    });
 
     useEffect(() => {
         let data = {
@@ -24,7 +18,6 @@ export default function MainView(props) {
             user_profile_id: params.id
         }
         dispatch(getMyContentsAction(data, '', ''));
-        //dispatch( ProfileAction(params.id));
     }, [dispatch, location])
 
     if (loading) {

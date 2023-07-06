@@ -37,14 +37,12 @@ const initState = {
 
             case 'ADD_TO_COLLECTION_COMMENT_SUCCESS':
                 let id = window.location.href.split("/").pop();
-                if (action.res.comments?.commentable_id === id) {
-                    state.comments = [action?.res?.comments, ...state?.comments];
+                if (action.res.commentable_id === id) {
+                    state.comments = [action?.res, ...state?.comments];
                 }                            
                 return {
                     ...state,
                     comments :  state.comments,
-                    // hasMore  :  action.res.comment.meta,
-                    // current  :  action.res.comment.meta,
                     loading  :  false
                 }
             // case 'ADD_TO_COLLECTION_COMMENT_POST_SUCCESS':

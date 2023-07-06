@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AddCommentAction } from '../../../../store/actions/Comment/CommentAction';
 // import {PusherAction} from "../../../../store/actions/Generale/PusherAction";
 
@@ -13,6 +13,7 @@ export default function AddComment({post}) {
     // const params = useParams();
 
     const comment = useSelector(state => state.getComments);
+    const newavatar = useSelector(state => state.updateavatar);
 
     const [avatar, setAvatar] = useState();
     // const [user_profile_id, setUserProfileId] = useState();
@@ -48,8 +49,11 @@ export default function AddComment({post}) {
         if (user?.id === infoprofile.infoprofile.user_id) {
             setUserVisiterAvatar(user?.profile?.avatar_link)
         }
-    },[user])
+    },[user]);
 
+    useEffect(() => {
+        setUserVisiterAvatar(newavatar.avatar.avatar_link);
+    }, [newavatar]);
 
     return (
             <>

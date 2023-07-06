@@ -5,10 +5,16 @@ import ArticlesList from '../pages/Admin/articles/ArticlesList';
 import ArticleDetails from '../pages/Admin/articles/ArticleDetails';
 import ArticleAuthor from '../pages/Admin/articles/ArticleAuthor';
 import Footer from "../layout/footer/footer";
-import NotFound from '../pages/404';
+import { useDispatch } from 'react-redux';
+import { getPopulareArticles, getSuggrestionArticles } from '../store/actions/Articles/ArticlesActions';
 
 
 export default function ArticlePrivateRoutes(props) {
+
+    const dispatch = useDispatch();
+    dispatch(getPopulareArticles());
+    dispatch(getSuggrestionArticles());
+
     return (
         <div>
             <HeaderProfile props={props} />

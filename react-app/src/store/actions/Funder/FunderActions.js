@@ -1,17 +1,25 @@
-import {GetMyProject, GetProject, FunderServices, Listing, GetView} from "../../../services/Funder/FunderServices";
+// import {GetMyProject, GetProject, FunderServices, Listing, GetView} from "../../../services/Funder/FunderServices";
+
+import { GetMyProject, GetProject, GetService, GetView, Listing, PostService, UpdateService } from "../../../services/Funder/FunderServices";
 
 
-export const CreateFunderAction = (data, props, url, navigation) =>{
+export const CreateFunderAction = (data, url, navigation, history, step) => {
     return (dispatch)=>{
-
         dispatch({type:'LOADING_CREATE_FUNDER'});
 
-        FunderServices(data, props, url, navigation).then((res) =>
+        PostService(data, url, navigation, history, step).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'CREATE_FUNDER_SUCCESS',res});
-                    const { next } = navigation;
-                        next()
+                    if (navigation) {
+                        if (step != 'step3') {
+                            const {
+                                next
+                            } = navigation;
+                            next();
+                            history.push('/funder/create/' + res.funderid + '/' + step);
+                        }
+                    }
                 }else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'CREATE_FUNDER_ERROR',res})
                 }
@@ -30,7 +38,7 @@ export const SaveDescriptionFunderAction = (data, props, url, navigation) =>{
 
         dispatch({type:'LOADING_CREATE_FUNDER'});
 
-        FunderServices(data, props, url, navigation).then((res) =>
+        PostService(data, props, url, navigation).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'CREATE_FUNDER_SUCCESS',res});
@@ -48,6 +56,27 @@ export const SaveDescriptionFunderAction = (data, props, url, navigation) =>{
     }
 }
 
+export const UpdateFunderAction = (data, url) =>
+{
+    return (dispatch)=>
+    {
+        dispatch({type:'LOADING_ADD_FUNDER'});
+
+        UpdateService( data, url ).then((res) =>
+        {
+                if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch({type:'ADD_FUNDER_SUCCESS',res});
+                      
+                }else if(res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({type:'ADD_FUNDER_ERROR',res})
+                }
+        },
+        error => {
+            dispatch({type:'CODE_ERROR',error});
+        }
+    )}
+}
+
 
 export const ClearProjectsAction = () =>{
 
@@ -58,18 +87,20 @@ export const ClearProjectsAction = () =>{
 
 }
 
-export const GetFunders = (data, props, current) =>{
-
+export const GetFunders = (data, current) =>{
     return (dispatch) =>
     {
         dispatch({type:'LOADING_ALL_FUNDERS'});
-        Listing(data,props, current).then((res)=>{
+        Listing(data, current).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
-                dispatch({type:'LOAD_FUNDER_ONCE_SUCCESS', res});
-                /* if (res.filters == true) {
-                    dispatch({type:'LOAD_FUNDER_FILTERS_SUCCESS', res});
-                } */
+                // dispatch({type:'LOAD_FUNDERS_SUCCESS', res});
+                if (res.filters == true) {
+                    dispatch({
+                        type: 'LOAD_FUNDERS_ONCE_SUCCESS',
+                        res
+                    });
+                }
                 
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
@@ -83,12 +114,43 @@ export const GetFunders = (data, props, current) =>{
     }
 }
 
-export const GetFunder = (data, props, current) =>{
+export const loadFunderOnceAction = (data, current) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'LOADING_ALL_FUNDERS'
+        });
+        Listing(data, current).then((res) => {
+
+                if (res.hasOwnProperty('success') && res.success === true) {
+                    dispatch({
+                        type: 'LOAD_FUNDERS_ONCE_SUCCESS',
+                        res
+                    });
+
+                } else if (res.hasOwnProperty('success') && res.success === false) {
+                    dispatch({
+                        type: 'LOAD_FUNDER_ERROR',
+                        res
+                    })
+                }
+            },
+            error => {
+                dispatch({
+                    type: 'CODE_ERROR',
+                    error
+                });
+            }
+        )
+    }
+
+}
+
+export const GetFunder = (current) =>{
 
     return (dispatch) =>
     {
         dispatch({type:'LOADING_GET_FUNDER'});
-        GetView(data,props, current).then((res)=>{
+        GetService(current).then((res) => {
 
             if(res.hasOwnProperty('success') && res.success === true){
                 dispatch({type:'GET_FUNDER_SUCCESS', res});

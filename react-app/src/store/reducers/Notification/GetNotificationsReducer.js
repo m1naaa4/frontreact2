@@ -50,9 +50,19 @@ const initState = {
             
 
             case 'ADD_TO_COLLECTION_NOTIFICATION_SUCCESS':
+                let user_id = localStorage.getItem("user_id");
+                let notified = JSON.parse(action.res.notified_from);
+
+                if (notified.id == user_id) {
+                    return {
+                        notifications: state.notifications,
+                        loading: false
+                    }
+                }
                 return {
                     notifications :  [action.res, ...state.notifications],
-                    loading       :  false
+                    loading       :  false,
+                    updateLike    :  action.res.notified_from
                 }
 
             case 'GET_NOTIFICATIONS_ERROR':

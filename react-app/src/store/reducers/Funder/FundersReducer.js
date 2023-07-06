@@ -1,5 +1,6 @@
 const initState = {
-    data: '',
+    funders: [],
+    funder: '',
     loading: true
 }
 
@@ -12,27 +13,47 @@ const FundersReducer = (state = initState ||undefined, action) => {
                 ...state,
                 loading: true,
             }
-        case 'LOAD_FUNDER_ONCE_SUCCESS':
+
+        case 'LOAD_FUNDERS_ONCE_SUCCESS':
+            state.funders = [];
+            console.log(state.funders);
             return {
                 ...state,
-                data: action.res,
+                funders: action.res.funders,
+                hasMore: action.res.hasMore,
+                current: action.res.current,
+                loading: false
+            }
+        case 'LOAD_FUNDERS_SUCCESS':
+            return {
+                ...state,
+                funders: [...state.funders, ...action.res.funders],
+                hasMore: action.res.hasMore,
+                current: action.res.current,
                 loading: false,
-                countlike: action.res?.project?.likeCount,
-                countcomment: action.res?.project?.commentCount,
             }
 
         case 'LOADING_GET_FUNDER':
             return {
-                 ...state,
+                ...state,
                 loading: true,
-        }
+            }
 
         case 'GET_FUNDER_SUCCESS':
             return {
-                 ...state,
-                data: action.res,
+                ...state,
+                funder: action.res.funder,
+                funderId: action.res.fundertid,
                 loading: false,
-        }
+            }
+        
+        case 'CREATE_MENTOR_SUCCESS':
+            return {
+                ...state,
+                funder: action.res.funder,
+                funderId: action.res.fundertid,
+                loading: false,
+            }
         
         case 'LOAD_FUNDER_ERROR':
 

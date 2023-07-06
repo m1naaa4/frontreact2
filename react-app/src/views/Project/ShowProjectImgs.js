@@ -5,6 +5,7 @@ import {
   LightgalleryProvider,
   LightgalleryItem,
 } from "react-lightgallery";
+import NoContent from "../../utils/NoContent";
 
 
 const PhotoItem = ({ image, thumb, group }) => (
@@ -40,9 +41,10 @@ export default function ShowProjectImgs() {
         <h3>Photos</h3>
 
         <div className="d-flex align-items-center flex-wrap">
-          {imgs.map((p, idx) => (
+          {imgs.length ? imgs.map((p, idx) => (
             <PhotoItem key={idx} image={p} group="imgs" />
-          ))}
+          )): <NoContent/>
+          }
         </div>
       </LightgalleryProvider>
     </div>

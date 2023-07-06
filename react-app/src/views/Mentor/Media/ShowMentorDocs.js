@@ -2,32 +2,35 @@ import React, { useEffect, useState } from "react";
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Modal from '@mui/material/Modal';
 import { useSelector } from "react-redux";
+import NoContent from "../../../utils/NoContent";
 
 
-export default function ShowProjectDocs() {
-  const [selectedDoc, setSelectedDoc] = useState("")
-  const [open, setOpen] = useState(false)
+export default function ShowMentorDocs() {
+  const [selectedDoc, setSelectedDoc] = useState("");
+  const [open, setOpen] = useState(false);
   const handleOpen = (doc) => {
-    setSelectedDoc(doc.uri)
+    setSelectedDoc(doc.uri);
     setOpen(true)
   }
   const handleClose = () => setOpen(false);
 
-  const project = useSelector(state => state.getproject.getproject?.project);
+  const project = useSelector(state => state.mentors.mentor);
 
   const [files, setFiles] =  useState([]);
 
   useEffect (() => {
     if (project) { 
-      const links = project?.media_link.map((item) => { 
+      const links = project?.media.map((item) => { 
         if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)) {
-          return [
-            {
+          console.log(getFileExtension(item), `${'"'+item+'"'}`);
+          
+            let data = {
               type: getFileExtension(item),
-              uri: `${'"'+item+'"'}`,
+              uri: item,
               name: getFileName(item)
             }
-          ]
+            return data;
+          
         }
         return null;
       }).filter(item => item !== null);
@@ -50,8 +53,8 @@ export default function ShowProjectDocs() {
 
   return (
     <div className="row">
-      {
-        files.map((e, index) => (
+      <h3>Document</h3>
+      {files.length > 0 ? files.map((e, index) => (
           <div className="col-sm-6 col-md-3 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
             <div className="Doc-Wrap">
               <a href="#!">
@@ -60,7 +63,7 @@ export default function ShowProjectDocs() {
               </a>
             </div>
           </div>
-        ))
+        )) : <NoContent/>
       }
 
       <Modal
@@ -71,12 +74,12 @@ export default function ShowProjectDocs() {
         style={{ width: "80%", margin: "auto", padding: "2em 0" }}
       >
         <div>
-        <DocViewer
-          className="col-12"
-          pluginRenderers={DocViewerRenderers}
-          documents={[{ uri: selectedDoc }]}
-          style={{height: "100%"}}
-        />
+          <DocViewer
+            className="col-12"
+            pluginRenderers={DocViewerRenderers}
+            documents={[{ uri: selectedDoc }]}
+            style={{height: "100%"}}
+          />
         </div>
       </Modal>
     </div>

@@ -4,13 +4,7 @@ import { LikeAction } from '../../../../store/actions/Like/LikeAction';
 import AddComment from '../Comment/AddComment';
 import ShowComment from '../Comment/ShowComment';
 
-
-
-
 export default function PostFooter({ post }) {
-
-    //const refcomment = useRef()
-
     const [comments, SetComments] = useState(false);
     const [commentBox, SetCommentBox] = useState(false);
     const [initial, setInitial] = useState(true);
@@ -20,26 +14,16 @@ export default function PostFooter({ post }) {
 
     const commentss = useSelector(state => state.getComments);
     const counter = useSelector(state => state.addednotification); // c'est ca qui declanche l'ajout de comment socket a ne pas supprimer
-    
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    like ? setClasse('Dislike') : setClasse('Like');
-    if (initial) {
+    useEffect(() => {
+      like ? setClasse('Dislike') : setClasse('Like');
+      if (initial) {
         setLike(post.is_liked);
-    }
-    setLikeCount(post.likeCount)
-
-  //   if(counter?.counter !== undefined){
-  //     setLikeCount(counter?.counter)
-  // }
-})
-
-  // useEffect(() => {
-  //       setLikeCount(counter?.counterlike)
-  //       console.log(counter?.counterlike,'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
-  // },[counter?.counterlike])
-
-const dispatch = useDispatch();
+      }
+      setLikeCount(post.likeCount);
+    })
+    
     const likeAAction = () => {
       setLike(!like);
       setInitial(false)
@@ -50,35 +34,23 @@ const dispatch = useDispatch();
           type    : like?'dislike':'like',
       }
       setClasse('Dislike');
-      
-      // console.log(like)
-      dispatch(LikeAction(dataa, 'like/like', ''));        
-  }
+      dispatch(LikeAction(dataa, '/like', ''));        
+    }
 
     const showComments = e =>  {
-      console.log(e)
-      console.log(refcomment)
       SetComments(e)
-      console.log(comments)
-      // SetCommentBox(!commentBox)      
-  }
+    }
 
-  // const dataget = {
-  //   action           : 'get',
-  //   provider         : 'post',
-  //   provider_id      : post.id,
-  // }
-
-  const showCommentBox = e => {
+    const showCommentBox = e => {
       SetCommentBox(!commentBox)
       SetComments(!comments)
-  }
+    }
 
-  const observer = useRef()
-  const refcomment = useCallback( node =>{
-    SetCommentBox(!commentBox)
-    SetComments(!comments)
-}, [observer])
+    const observer = useRef()
+    const refcomment = useCallback( node =>{
+      SetCommentBox(!commentBox)
+      SetComments(!comments)
+    }, [observer])
 
   return (
         
@@ -128,12 +100,9 @@ const dispatch = useDispatch();
           {comments  &&
               <ShowComment  post = {post} />                 
           }
-          
-          
         </div>
       </div>
        
     </div>
-
     )
 }

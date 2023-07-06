@@ -22,7 +22,7 @@ export const GetService = (data, url ) =>
     });
 }
 
-export const GetsService = (data, props, current, url ) =>
+export const GetsService = (data, url ) =>
 {
     const http = new Service();
     return http.GetsData(data, url).then(data=>{

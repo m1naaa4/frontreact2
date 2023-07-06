@@ -32,7 +32,6 @@ export default function ShowComment({ post }) {
   const [replyBox, SetReplyBox] = useState(false);
 
   const showReplies = e => {
-    console.log('replies', e)
     SetReplies(e)
     SetReplyBox(!replyBox)
   };
@@ -49,9 +48,8 @@ export default function ShowComment({ post }) {
     // if (post.commentCount > 0) {
     // dispatch(GetCommentAction(dataget));
     // }
-      const pusher = new PusherConsole();
-    
-      const channel = pusher.pusher.subscribe(`post-comment`);
+        
+      const channel = window.pusher.pusher.subscribe(`post-comment`);
       channel.bind('new-comment', function(data) {
         if (post.id === data.commentable_id) {
           setComments(comments.unshift(data));
