@@ -5,11 +5,11 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 
 
-const ProjectSkeleton  = () =>{
+const ProjectSkeletonGrid  = () =>{
 
     return(
         
-        <div className="col-md-4" >
+        <div className="col-md-8" >
                     <div className="offer-box">
                         <div className="offer-header">
                             <div className="offer-title">
@@ -18,25 +18,15 @@ const ProjectSkeleton  = () =>{
                             </div>
                             <div className="offer-logo">
                                 <Skeleton variant="rect" height={45} width={45} />
-                                {/*<img src="/assets/images/porject-logo.png" title="Nom du projet" alt=""/>*/}
                             </div>
                         </div>
                         <div className="offer-media">
                             <div className="player" >
-                                <Skeleton width={350} height={234}  />
+                                <Skeleton width={700} height={400}  />
                             </div>
                         </div>
                         <div className="offer-meta">
                             <ul className="meta-items">
-                                <li className="meta-item">
-                                    <div className="meta-icon">
-                                        <Skeleton variant="circle" height={40} width={40} />
-                                    </div>
-                                    <div className="meta-details">
-                                        <span className="meta-title"><Skeleton height={20} width={80} /></span>
-                                        <span className="meta-value"><Skeleton height={30} width={80} /></span>
-                                    </div>
-                                </li>
                                 <li className="meta-item">
                                     <div className="meta-icon">
                                         <Skeleton variant="circle" height={40} width={40} />
@@ -67,4 +57,4 @@ const ProjectSkeleton  = () =>{
             
     )
 }
-export default ProjectSkeleton
+export default ProjectSkeletonGrid

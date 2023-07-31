@@ -7,7 +7,7 @@ export const AddProjectsAction = (data, props, url, navigation, file, history, s
     {
         dispatch({type:'LOADING_ADD_PROJECT'});
 
-        PostService(data, props, url, navigation, file, history, step).then((res) =>
+        PostService(data, url, navigation, file, history, step).then((res) =>
         {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_PROJECT_SUCCESS', res});
@@ -158,13 +158,13 @@ export const displayProjectAction = (data, props, history, id) =>{
     }
 }
 
-export const getMyOffresAction = (data, props, current) =>{
+export const getMyOffresAction = (data, url) =>{
     return (dispatch) =>
     {
-        GetMyProject(data,props, current).then((res)=>{
+        PostService(data, url).then((res) => {
 
             if(res.hasOwnProperty('success') && res.success === true){
-                dispatch({type:'GET_MY_PROJECT_SUCCESS', res});
+                dispatch({type:'GET_MY_CONTENTS_SUCCESS', res});
             }
             else if(res.hasOwnProperty('success') && res.success === false) {
                 dispatch({type:'GET_MY_PROJECT_ERROR',res})

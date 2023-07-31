@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { Player } from 'video-react';
 import useOutsideClick from '../../../helpers/useOutsideClick';
 import { DeleteAction } from '../../../store/actions/Offres/MyContentAction';
+import ReactPlayer from 'react-player';
+import $ from "jquery";
+import sectors from '../../../data/sectorsCreate';
+import { useTranslation } from 'react-i18next';
 
 export default function OffreGrid({ offre }) {
 
@@ -11,9 +14,12 @@ export default function OffreGrid({ offre }) {
     const history = useHistory();
     const ref = useRef();
     const user = useSelector(state => state.userProfile.userProfile);
+    const [sector, setSector] = useState();
 
     const [options_List, SetOptions_List] = useState(false);
     const [user_id, setUserId] = useState();
+
+    const [t] = useTranslation();
 
 
     useEffect(() => {
@@ -45,6 +51,27 @@ export default function OffreGrid({ offre }) {
         dispatch({ type: 'DELETE_MY_CONTENT_SUCCESS', data });
         SetOptions_List(!options_List)
     }
+    const getExtension = (file) => {
+      if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file)) {
+        return 'youtube';
+      } else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file)) {
+        return 'vimeo';
+      } else {
+        return file.split('.').pop().toLowerCase();
+      }
+    };
+
+    useEffect(() => {
+        sectors.map((key) =>
+        {
+            if (key[0] === offre.sector) {
+                setSector(t(key[1]))
+            }
+        }
+        );
+    },[])
+    
+
     return (
         <>
             <div className="offer-box">
@@ -57,7 +84,7 @@ export default function OffreGrid({ offre }) {
                         }
 
                         <h3><Link to={`/project/show/${offre.id}`}>{offre.name}</Link></h3>
-                        <span>{offre.sector} {offre.visibility === 'public' && <i class="uil uil-globe"></i>}</span>
+                        <span>{t(`${sector}`)} {offre.visibility === 'public' && <i class="uil uil-globe"></i>}</span>
                     </div>
                     <div className="offer-logo">
                         <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
@@ -92,16 +119,32 @@ export default function OffreGrid({ offre }) {
 
                 </div>
                 <div className="offer-media">
-                    {
-                        offre.is_video ? (
-                            // <VideoPlayer videoUrl={project.media_link} snapshotAt={10} />
-                            <Player width="100%" height="100%"
-                                playsInline
-                                poster="/assets/poster.png"
-                                src={offre.media_link}
-                            />
-                        ) : (<img width="100%" height="300" src={offre.media_link} alt="Project" />)
+                    {(function() {
+                    let link = $.type(offre.media_link) !== "string" ? $.parseJSON(offre.media_link) : offre.media_link;
+                    console.log(link);
+                    link = $.isArray(link) ? link[0] : link;
+                    if (getExtension(link) == 'youtube') {
+                        return <ReactPlayer width='340' url = {link} controls={true} />
+                    }else{
+                        if (getExtension(link) == 'vimeo') {
+                            return <ReactPlayer url={link} controls={true} />
+                        }else{
+                            if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
+                            getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
+                                return <ReactPlayer width={340} url={link} controls={true} />
+                            } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
+                                return <div className="Doc-Wrap">
+                                    <a href="#!">
+                                        <div className="Doc-Icon" height='300'><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
+                                    </a>
+                                </div>
+                            }
+                            else{
+                                return <img width="100%" height="300" src={link} alt="Project"/>
+                            }
+                        }
                     }
+                })()}
                 </div>
                 <div className="offer-meta">
                     <ul className="meta-items">

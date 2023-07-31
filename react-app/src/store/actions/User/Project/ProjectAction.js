@@ -92,11 +92,11 @@ export const GetProjectAction = (data, props, history, id) =>{
     
 }
 
-export const getMyOffresAction = (data, props, current) =>{
+export const getMyOffresAction = (data, props, url) =>{
 
     return (dispatch) =>
     {
-        GetMyProject(data,props, current).then((res)=>{
+        GetMyProject(data,props, url).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
                 dispatch({type:'GET_MY_PROJECT_SUCCESS', res});

@@ -73,7 +73,7 @@ export default function ReportView() {
     const handleBlock = () => {
         console.log(providerId, provider)
         let data = {
-            'url'    : 'admin/report/block',
+            'url'    : 'report/block',
             'report_id'     : reportId,
             'provider_id'   : providerId,
             'provider'      : provider,

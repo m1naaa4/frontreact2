@@ -25,8 +25,6 @@ const ProjectSkeletonGridOne = () => {
         history.push('/project/lists')
     }
 
-    console.log(owner)
-
     const ref = useRef();
 
     const handleSend = () => {
@@ -50,14 +48,14 @@ const ProjectSkeletonGridOne = () => {
                                 <span style={{ fontSize: "14px !important", marginBottom: "30px" }} className="text-danger">You are not authorize to access this content contact the owner to get access</span>
                             </div>
                             <div className="Update-Post">
-                                {/* <button type="button" onClick={handleShow} name="button" data-toggle="tooltip" data-placement="bottom"
+                                <button type="button" onClick={handleShow} name="button" data-toggle="tooltip" data-placement="bottom"
                                     title="Edit Post" className="edit-button"><i className="uil-envelope-share"></i>
-                                </button> */}
+                                </button>
                                 {/* <NavLink 
                                         title="Edit Post"  className="edit-button" to={`update/${data.project_id}`}><i className="uil uil-pen"></i></NavLink> */}
                             </div>
                         </div>
-                        <div class="d-flex justify-content-start flex-column align-items-center">
+                        <div className="d-flex justify-content-start flex-column align-items-center">
                             <img style={{ height: '40vh', width: '60vh' }} src="/assets/images/no-permission.svg" alt="Auth needed to view project" />
                             <p style={{ padding: '10px' }}>
                                 Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure.
@@ -84,10 +82,10 @@ const ProjectSkeletonGridOne = () => {
                                         <h2>{providername}</h2>
                                         <div className="Contact mb-4">
                                             <div class="d-flex align-items-center">
-                                                {/* <div className="Contact-Thumb" ref={ref}> <Link to={`/profile/${owner.profile_id}`}><img src={owner.avatar} alt={owner.username} /></Link></div> */}
+                                                <div className="Contact-Thumb" ref={ref}> <Link to={`/profile/${owner.profile_id}`}><img src={owner.avatar} alt={owner.username} /></Link></div>
                                                 <div className="Contact-Infos pt-0">
-                                                    {/* <Link to={`/profile/${owner.profile_id}`}><h4>{owner.username}</h4></Link>
-                                                    {(user?.profile_id != owner.profile_id) && <AvatarTooltip myRef={ref} data={owner} styles={{ marginTop: "10px", marginRight: "0" }} />} */}
+                                                    <Link to={`/profile/${owner.profile_id}`}><h4>{owner.username}</h4></Link>
+                                                    {(user?.profile_id != owner.profile_id) && <AvatarTooltip myRef={ref} data={owner} styles={{ marginTop: "10px", marginRight: "0" }} />}
                                                 </div>
                                             </div>
                                         </div>

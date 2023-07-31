@@ -25,6 +25,8 @@ const getProjectReducer = (state = initState ||undefined, action) => {
             return {
                 ...state,
                 success: false,
+                getproject: true,
+                code: action.res.code,
             }
 
         case 'CODE_ERROR':

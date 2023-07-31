@@ -52,7 +52,7 @@ const ProjectGridView = ({ project }) => {
     const goToShowproject = (id) => {
         localStorage.setItem('provider', 'project')
         localStorage.setItem('provider_name', project.name)
-        localStorage.setItem('owner_of_provider', JSON.stringify(project.owner[0]))
+        localStorage.setItem('owner_of_provider', JSON.stringify(project.owner))
         history.push('/project/show/' + id)
     };
 
@@ -91,13 +91,12 @@ const ProjectGridView = ({ project }) => {
                         {project.name.substring(0, 10)}</span></h3>
                     <div className='footer-title'>
                         <span className='mr-5'>{project.sector && (project.sector.charAt(0).toUpperCase() + project.sector.slice(1))}, </span>
-                        {project.owner && project.owner.map((value, index) => {
-                            return <Link key={index} ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.username}>
-                                {value.username.substring(0, 6)}
-                                {(user?.profile_id != project.owner[0].profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
+                        {project.owner && 
+                            <Link  ref={ref} to={`/profile/${project.owner.profile_id}`} data-toggle="tooltip" data-placement="top" title={project.owner.username}>
+                                {project.owner.username.substring(0, 6)}
+                                {(user?.profile_id != project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.owner} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                             </Link>
                         }
-                        )}
                         <span>{project.visibility == 'public' ? <i className="uil uil-globe"></i> : ''}</span>
                     </div>
                 </div>

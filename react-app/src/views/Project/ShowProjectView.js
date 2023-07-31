@@ -22,6 +22,8 @@ import ReactPlayer from 'react-player';
 import Select from 'react-select';
 import DialogWarning from '../../utils/DialogWarning';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
+import ProjectSkeletonGridOne from '../../skeleton/ProjectSkeletonOne';
+import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -61,7 +63,7 @@ export default function ShowProjectView(props) {
     const [is_loading, setIsLoading] = useState(false);
 
 
-    const datas = [{ value: 'public', label: 'Public' }, { value: 'shared', label: 'Shared' }, { value: 'team', label: 'Team' }, { value: 'private', label: 'Private' }];
+    const datas = [{ value: 'public', label: 'Public' }, { value: 'shared', label: 'Shared' }, /*{ value: 'team', label: 'Team' },*/ { value: 'private', label: 'Private' }];
 
     var url_to_share = false;
 
@@ -355,8 +357,7 @@ export default function ShowProjectView(props) {
             {/* <!-- SINGLE -->*/}
             {
                 project.success === 'loading' || project === 'loading' ? (
-                    <div></div>
-                    // <ProjectSkeletonGrid/>
+                    < ProjectSkeletonGrid/>
                 ) : project.success === true ? (
 
 
@@ -524,18 +525,17 @@ export default function ShowProjectView(props) {
                                         <label className='mb-3'>Owners</label>
                                         <div className="d-flex align-items-start">
                                             <span>
-                                                {project.project.owner && project.project.owner.map((value, index) => {
-                                                    return <div key={index+1} className="Contact">
+                                                {project.project.owner && 
+                                                    <div className="Contact">
                                                         <div className="d-flex align-items-start">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                                            <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link></div>
+                                                            <div className="Contact-Thumb"> <Link to={`/profile/${project.project.owner.profile_id}`}><img src={project.project.owner.avatar} alt={project.project.owner.username} /></Link></div>
                                                             <div className="Contact-Infos">
-                                                                <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
+                                                                <Link to={`/profile/${project.project.profile_id}`}><h4>{project.project.owner.username}</h4></Link>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 }
-                                                )}
                                             </span>
 
 
@@ -582,7 +582,7 @@ export default function ShowProjectView(props) {
 
 
                 ) : (
-                    <div data-testid="error-message">Loading ...</div>
+                    <ProjectSkeletonGridOne/>
                 )
             }
         </>

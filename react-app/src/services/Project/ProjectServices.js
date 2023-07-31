@@ -1,7 +1,7 @@
 import Service from './Service';
 
 
-export const PostService = (data, props, url) =>
+export const PostService = (data, url) =>
 {
     const http = new Service();
     return http.postData(data, url).then(data=>{

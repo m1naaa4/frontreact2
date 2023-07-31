@@ -9,6 +9,8 @@ import AvatarTooltip from '../../utils/AvatarTooltip';
 import DialogWarning from '../../utils/DialogWarning';
 import $ from "jquery";
 import ReactPlayer from 'react-player';
+import sectors from '../../data/sectorsCreate';
+import { useTranslation } from 'react-i18next';
 
 
 export default function FavoriteGrid({favorite}) { 
@@ -19,7 +21,9 @@ export default function FavoriteGrid({favorite}) {
     const titleDialog = "Confirm To Remove From Favorite";
     const ContentDialog = "are you sure you want to remove this post from favorite?";
     const user = useSelector(state => state.userProfile.userProfile);
+    const [sector, setSector] = useState();
     const ref = useRef();
+    const [t] = useTranslation();
 
     const HandleConfirmation = (id, provider) => {
       setClasse(!classe)
@@ -54,6 +58,14 @@ export default function FavoriteGrid({favorite}) {
       }
     };
 
+    useEffect(() => {
+      sectors.map((key) => {
+        if (key[0] === favorite.sector) {
+          setSector(t(key[1]))
+        }
+      });
+    }, [])
+
     return (
           <div className="grid-item offres" style={{width:'370px'}}>
               <div className="offer-box">
@@ -63,7 +75,7 @@ export default function FavoriteGrid({favorite}) {
                         <img src='/assets/images/porject-logo.png' title="Nom du projet" alt=""/>}
                     <h3><span style={{fontSize:"12px"}}> {favorite.provider && <NavLink to={`/project/show/${favorite.id}`}>{favorite.name}</NavLink>}</span></h3>
                     <div className='footer-title'>
-              <span className='mr-5'>{favorite.sector && (favorite.sector.charAt(0).toUpperCase() + favorite.sector.slice(1))} </span>
+              <span className='mr-5'>{t(`${sector}`)} </span>
               {favorite.owner && favorite.owner.map((value) => {
                 return <Link ref={ref} to={`/profile/${value.profile_id}`} data-toggle="tooltip" data-placement="top" title={value.profile.username}>
                   {value.profile.username.substring(0, 6)}
@@ -93,7 +105,7 @@ export default function FavoriteGrid({favorite}) {
                 }
                 <div className="offer-media">
                   {(function() {
-                    let link = $.parseJSON(favorite.media_link);
+                    let link = $.type(favorite.media_link) !== "string" ? $.parseJSON(favorite.media_link) : favorite.media_link;
                     link = $.isArray(link) ? link[0] : link;
                     if (getExtension(link) == 'youtube') {
                         return <ReactPlayer width='340' url={link} controls={true} />
