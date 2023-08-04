@@ -58,7 +58,7 @@ export const GetView = (id) =>{
 
 export const Listing = (data, current) => {
     const http = new Service();
-    let getProjectUrl = "/?page=" + current;
+    let getProjectUrl = "/get?page=" + current;
     const tokenId = "user-token";
     return http.postData(data, getProjectUrl, tokenId, '').then(data => {
         return data
