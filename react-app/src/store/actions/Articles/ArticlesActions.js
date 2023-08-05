@@ -8,7 +8,7 @@ export const getArticles = (data) => {
 
         const http = new HttpArticle();
 
-        http.postData(data, "/").then((res) => {
+        http.postData(data, "/get").then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
                 dispatch({ type: 'LOAD_ARTICLES_SUCCESS', res });
             } else if (res.hasOwnProperty('success') && res.success === false) {
