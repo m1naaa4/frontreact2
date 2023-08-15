@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 import { Text } from "../../containers/Language";
 import SharePopUp from '../../utils/SharePopUp'
-import { countryName } from '../../helpers/Helpres'
+import { countryName, financeLabel } from '../../helpers/Helpres'
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 import DialogWarning from '../../utils/DialogWarning';
+import finances from '../../data/financesCreate';
 import sectors from '../../data/sectorsCreate';
 import { useTranslation } from 'react-i18next';
 import $ from 'jquery'
@@ -21,6 +22,7 @@ const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     const [classe, setClasse] = useState(project?.favorite);
     const [sector, setSector] = useState();
+    const [finance, setFinance] = useState();
     const [open, setOpen] = useState(false);
     const [titleDialog, setTitleDialog] = useState("Confirm To add to Favorite");
     const [ContentDialog, setContentDialog] = useState("are you sure you want to add this post to favorite?");
@@ -56,6 +58,12 @@ const ProjectGridView = ({ project }) => {
         {
             if (key[0] === project?.sector) {
                 setSector(t(key[1]))
+            }
+        });
+
+        finances.map((key) => {
+            if (key[0] == project?.funding_search) {
+                setFinance(t(key[1]))
             }
         });
     })
@@ -104,7 +112,7 @@ const ProjectGridView = ({ project }) => {
                         <span className='mr-5'>{t(sector)} </span>
                         {project.owner && 
                             <Link  ref={ref} to={`/profile/${project.owner.profile_id}`} data-toggle="tooltip" data-placement="top" title={project.owner.username}>
-                                {project.owner.username.substring(0, 6)}
+                                {project.owner?.username?.substring(0, 6)}
                                 {(user?.profile_id != project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.owner} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                             </Link>
                         }
@@ -169,7 +177,7 @@ const ProjectGridView = ({ project }) => {
                         </div>
                         <div className="meta-details">
                             <span className="meta-title"><Text tid="funding" /></span>
-                            <span className="meta-value">${project.funding_search}</span>
+                            <span className="meta-value">{ finance }</span>
                         </div>
                     </li>
                 </ul>

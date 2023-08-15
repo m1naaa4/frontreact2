@@ -4,6 +4,9 @@ import OffreGrid from './OffreGrid';
 import { useLocation, useParams } from 'react-router';
 import { getMyContentsAction } from '../../../store/actions/Offres/MyContentAction';
 import OffresSkeleton from '../../../skeleton/profile/OffresSkeleton';
+import ProjectGridView from '../../Projects/ProjectGridView';
+import ListingItemFunder from '../../Funder/ListingItemFunder';
+import ListingItemMentor from '../../Mentor/ListingItemMentor';
 
 export default function MainView(props) {
     const dispatch = useDispatch();
@@ -32,8 +35,20 @@ export default function MainView(props) {
                             {offres &&
                                 offres.map((offre, index) => (
                                     <div className="col-md-6" key={index}>
-                                        <OffreGrid offre={offre} />
-                                    </div>
+                                        {(function() {
+                                            
+                                            switch (offre.provider) {
+                                                case "project":
+                                                    return <ProjectGridView project={offre}/>;
+                                                case "funder":
+                                                    return <ListingItemFunder project={offre}/>;
+                                                case "mentor":
+                                                    return <ListingItemMentor project={offre}/>;
+                                                default:
+                                                    return null;
+                                            }
+                                        })()}
+                                </div>
                                 ))
                             }
                             {!offres?.length === 0 &&

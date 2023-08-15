@@ -110,7 +110,7 @@ const ListingItemFunder = ({ project }) => {
                                 HandleConfirmation={e => addTofavorite(project.id)}
                                 HandleClose={HandleClose}
                             />
-                            {project.date_limit ? (<label class="existe-deadline" data-toggle="tooltip" data-placement="bottom" title={`${t('has_deadline') + ' ' + project.date_limit}`}><i class="uil uil-bell"></i></label>) :
+                            {project.date_limit ? (<label className="existe-deadline" data-toggle="tooltip" data-placement="bottom" title={`${t('has_deadline') + ' ' + project.date_limit}`}><i className="uil uil-bell"></i></label>) :
                             <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('no_deadline')}><i className="uil uil-bell"></i></label>}
 
                             <img src={project.logo} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
