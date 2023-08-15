@@ -8,6 +8,8 @@ import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction'
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 import DialogWarning from '../../utils/DialogWarning';
+import sectors from '../../data/sectorsCreate';
+import { useTranslation } from 'react-i18next';
 import $ from 'jquery'
 import {
     FacebookShareCount,
@@ -18,11 +20,13 @@ import ReactPlayer from 'react-player';
 const ProjectGridView = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     const [classe, setClasse] = useState(project?.favorite);
-    const [open,setOpen] = useState(false);
-    const [titleDialog,setTitleDialog] = useState("Confirm To add to Favorite");
-    const [ContentDialog,setContentDialog] = useState("are you sure you want to add this post to favorite?");
+    const [sector, setSector] = useState();
+    const [open, setOpen] = useState(false);
+    const [titleDialog, setTitleDialog] = useState("Confirm To add to Favorite");
+    const [ContentDialog, setContentDialog] = useState("are you sure you want to add this post to favorite?");
     const dispatch = useDispatch();
     let history = useHistory();
+    const { t } = useTranslation();
     const user = useSelector(state => state.userProfile.userProfile);
     const ref = useRef();
 
@@ -47,6 +51,13 @@ const ProjectGridView = ({ project }) => {
             setTitleDialog("Confirm To add to Favorite");
             setContentDialog("are you sure you want to add this post to favorite?");
         }
+
+        sectors.map((key) =>
+        {
+            if (key[0] === project?.sector) {
+                setSector(t(key[1]))
+            }
+        });
     })
 
     const goToShowproject = (id) => {
@@ -58,10 +69,10 @@ const ProjectGridView = ({ project }) => {
 
     const HandleClose = ()=>{
         setOpen(false);
-      }
+    }
       
     const HandleClickOpen = () =>{
-    setOpen(true);
+        setOpen(true);
     }
 
     const getExtension = (file) => {
@@ -90,7 +101,7 @@ const ProjectGridView = ({ project }) => {
                     <h3><span onClick={() => goToShowproject(project.id)} data-toggle="tooltip" data-placement="top" title={project.name}>
                         {project.name?.substring(0, 10)}</span></h3>
                     <div className='footer-title'>
-                        <span className='mr-5'>{project.sector && (project.sector.charAt(0).toUpperCase() + project.sector.slice(1))}, </span>
+                        <span className='mr-5'>{t(sector)} </span>
                         {project.owner && 
                             <Link  ref={ref} to={`/profile/${project.owner.profile_id}`} data-toggle="tooltip" data-placement="top" title={project.owner.username}>
                                 {project.owner.username.substring(0, 6)}

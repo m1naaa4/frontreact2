@@ -52,13 +52,15 @@ export default function OffreGrid({ offre }) {
         SetOptions_List(!options_List)
     }
     const getExtension = (file) => {
-      if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file)) {
-        return 'youtube';
-      } else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file)) {
-        return 'vimeo';
-      } else {
-        return file.split('.').pop().toLowerCase();
-      }
+        if (file) {
+            if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file)) {
+                return 'youtube';
+              } else if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file)) {
+                return 'vimeo';
+              } else {
+                return file.split('.').pop().toLowerCase();
+              }
+        }
     };
 
     useEffect(() => {
@@ -84,7 +86,7 @@ export default function OffreGrid({ offre }) {
                         }
 
                         <h3><Link to={`/project/show/${offre.id}`}>{offre.name}</Link></h3>
-                        <span>{t(`${sector}`)} {offre.visibility === 'public' && <i class="uil uil-globe"></i>}</span>
+                        <span>{t(`${sector}`)} {offre.visibility === 'public' && <i className="uil uil-globe"></i>}</span>
                     </div>
                     <div className="offer-logo">
                         <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>

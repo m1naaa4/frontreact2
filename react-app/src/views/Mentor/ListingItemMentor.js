@@ -1,17 +1,27 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory } from "react-router-dom";
 import slugify from 'react-slugify';
 import {countryName, financeLabel, sectorName} from '../../helpers/Helpres'
 import { useTranslation } from 'react-i18next';
 import ReactPlayer from 'react-player';
-import $ from 'jquery'
+import $ from 'jquery';
+import { useDispatch } from 'react-redux';
+import DialogWarning from '../../utils/DialogWarning';
+import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
+import sectors from '../../data/sectorsCreate';
 
 
 const ListingItemMentor = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
     let history = useHistory();
     const { t } = useTranslation();
+    const [sector, setSector] = useState();
+    const [classe, setClasse] = useState(project?.favorite);
+    const [titleDialog,setTitleDialog] = useState("Confirm To add to Favorite");
+    const [ContentDialog,setContentDialog] = useState("are you sure you want to add this post to favorite?");
+    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch();
 
     let url_to_share = slugify(project.name, { prefix: `${process.env.REACT_APP_FRONT_URL}` + '/mentor/' + project.id });
 
@@ -34,16 +44,61 @@ const ListingItemMentor = ({ project }) => {
         }
     };
 
+    const addTofavorite = (id) => {
+        setClasse(!classe)
+        let data = {
+            'url': 'favorite/addToFavorite',
+            'provider_id': id,
+            'provider': 'mentor',
+        }
+        dispatch(AddFavoriteAction(data));
+        setOpen(false);
+    }
+
+    useEffect(() => {
+        if(classe){
+            setTitleDialog("Confirm To Remove From Favorite");
+            setContentDialog("are you sure you want to remove this post from favorite?");
+        }else{
+            setTitleDialog("Confirm To add to Favorite");
+            setContentDialog("are you sure you want to add this post to favorite?");
+        }
+
+        sectors.map((key) =>
+        {
+            if (key[0] === project?.sector) {
+                setSector(t(key[1]))
+            }
+        });
+    });
+
+    const HandleClose = ()=>{
+        setOpen(false);
+    }
+      
+    const HandleClickOpen = () =>{
+        setOpen(true);
+    }
+
     return (
 
              <div className="offer-box">
                     <div className="offer-header">
                         <div className="offer-title" onClick={() => showPage(project.id) } >
                             <h3>{project.name}</h3>
-                            <span>{t(sectorName(project.sector_id))}</span>
+                            <span>{t(sectorName(sector))}</span>
                         </div>
                         <div className="offer-logo">
-                            {/* <button className="offer-bookmark" type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
+                            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
+                                <i className="uil uil-bookmark"></i>
+                            </button>
+                            <DialogWarning 
+                                title={titleDialog} 
+                                ContentText={ContentDialog} 
+                                open={open} 
+                                HandleConfirmation={e => addTofavorite(project.id)}
+                                HandleClose={HandleClose}
+                            />
                             {!project.date_limit && <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('has_deadline')}><i className="uil uil-bell"></i></label>}
 
                             <img src={project.logo} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
@@ -56,20 +111,20 @@ const ListingItemMentor = ({ project }) => {
                                 return <ReactPlayer width='340' url={link} controls={true} />
                             }else{
                                 if(getExtension(link) == 'vimeo'){
-                                    return <ReactPlayer url={link} controls={true} />
+                                    return <ReactPlayer width='340' url={link} controls={true} />
                                 }else{
                                     if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                                         getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
-                                        return <ReactPlayer url={link} controls={true} />
+                                        return <ReactPlayer style={{width:'350px', height: '275px'}} url={link} controls={true} />
                                     } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
                                         return <div className="Doc-Wrap">
                                             <a href="#!">
-                                                <div className="Doc-Icon" height='300'><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
+                                                <div className="Doc-Icon" style={{width:'350px', height: '234px'}}><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
                                             </a>
                                         </div>
                                     }
                                     else{
-                                        return <img width="100%" height="300" src={link} alt="Project"/>
+                                        return <img   style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
                                     }
                                 }
                             }
@@ -85,14 +140,14 @@ const ListingItemMentor = ({ project }) => {
                                     <span className="meta-value">{countryName(project.zone)}</span>
                                 </div>
                             </li>
-                            <li className="meta-item">
+                            {/* <li className="meta-item">
                                 <div className="meta-icon">
                                     <img src="/assets/images/icons/value.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
                                     <span className="meta-value">{ t(financeLabel(project.finances)) }</span>
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="offer-reactions">
