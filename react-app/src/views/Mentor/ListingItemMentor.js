@@ -80,9 +80,22 @@ const ListingItemMentor = ({ project }) => {
         setOpen(true);
     }
 
+    let tags;
+    if (project) {
+        tags = <ul className="Tags-List">
+            {project.tags.map((name, index) => (
+                <li className="Tag-Item" key={index}>
+                    {name}
+                </li>
+            ))}
+        </ul>;
+    } else {
+        tags = [];
+    }
+
     return (
 
-             <div className="offer-box">
+             <div className="offer-box bailleur">
                     <div className="offer-header">
                         <div className="offer-title" onClick={() => showPage(project.id) } >
                             <h3>{project.name}</h3>
@@ -140,15 +153,8 @@ const ListingItemMentor = ({ project }) => {
                                     <span className="meta-value">{countryName(project.zone)}</span>
                                 </div>
                             </li>
-                            {/* <li className="meta-item">
-                                <div className="meta-icon">
-                                    <img src="/assets/images/icons/value.svg" alt=""/>
-                                </div>
-                                <div className="meta-details">
-                                    <span className="meta-value">{ t(financeLabel(project.finances)) }</span>
-                                </div>
-                            </li> */}
                         </ul>
+                        {tags}
                     </div>
                     <div className="offer-reactions">
                         <ul className="reactions-box">

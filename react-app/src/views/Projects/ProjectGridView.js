@@ -149,12 +149,12 @@ const ProjectGridView = ({ project }) => {
                             } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
                                 return <div className="Doc-Wrap">
                                     <a href="#!">
-                                        <div className="Doc-Icon" height='300'><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
+                                        <div className="Doc-Icon" style={{width:'350px', height: '234px'}}><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
                                     </a>
                                 </div>
                             }
                             else{
-                                return <img width="100%" height="300" src={link} alt="Project"/>
+                                return <img style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
                             }
                         }
                     }
