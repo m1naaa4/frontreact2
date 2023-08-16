@@ -128,7 +128,7 @@ const ListingItemMentor = ({ project }) => {
                                 }else{
                                     if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                                         getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
-                                        return <ReactPlayer style={{width:'350px', height: '275px'}} url={link} controls={true} />
+                                        return <ReactPlayer width='350' height='234px' url={link} controls={true} />
                                     } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
                                         return <div className="Doc-Wrap">
                                             <a href="#!">
@@ -137,7 +137,7 @@ const ListingItemMentor = ({ project }) => {
                                         </div>
                                     }
                                     else{
-                                        return <img   style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
+                                        return <img   width='350' style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
                                     }
                                 }
                             }
