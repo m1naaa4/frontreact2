@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { UserInfoAction } from '../../../store/actions/Profile/UserActions';
-import ZoneDropFilter from '../../User/Fields/Filter/Project/ZoneDropFilter';
+import ZoneDropProfileFilter from '../../User/Fields/Filter/ZoneDropProfileFilter';
 
 
 
@@ -31,6 +31,10 @@ const UpdateUserInfo = ({ showInfo, handleCloseInfo, user }) => {
     }
     const updateInfo = (id) => {
         dispatch(UserInfoAction(data, '', ''));
+    }
+
+    const updateFormData = (updatedData) => {
+        formData.country = updatedData;
     }
 
     return (
@@ -65,7 +69,7 @@ const UpdateUserInfo = ({ showInfo, handleCloseInfo, user }) => {
                                         </div>
                                     </div>
                                     <div className="col-md-12 input-row">
-                                        <ZoneDropFilter field='country' placeholder="Pays" defaultValue={formData.country} onChange={setForm} required />
+                                        <ZoneDropProfileFilter formData={formData} updateFormData={updateFormData} required />
                                     </div>
 
                                     <div className="col-md-12 input-row">
