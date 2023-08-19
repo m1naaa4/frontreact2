@@ -400,35 +400,36 @@ export default function ViewMentor(props) {
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-                                {project?.media.map(item => (
-                                                <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
-                                                    <div className="col-md-12 input-row">
-                                                    {(function() {
-                                                        if(getExtension(item) == 'youtube'){
-                                                            return <ReactPlayer url={item} controls={true} />
-                                                        }else{
-                                                            if(getExtension(item) == 'vimeo'){
-                                                                return <ReactPlayer url={item} controls={true} />
-                                                            }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
-                                                                return <div className="Doc-Wrap">
-                                                                    <a href="#!">
-                                                                        {/* <div className="Doc-Icon"><span className="Doc-Type">Document</span><i className="uil uil-file-alt"></i></div> */}
-                                                                        <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> Document</div>
-                                                                    </a>
-                                                                </div>
-                                                            }
-                                                            else{
-                                                                if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
-                                                                getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
-                                                                   return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
-                                                                }else{
-                                                                   return <img width="100%" height="300" src={item} alt="Project"/>
-                                                                }
-                                                            }
-                                                        }
-                                                    })()}
+                                {
+                                (Array.isArray(project.media) ? project.media : [project.media]).map(item => (
+                                    <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
+                                        <div className="col-md-12 input-row">
+                                        {(function() {
+                                            if(getExtension(item) == 'youtube'){
+                                                return <ReactPlayer url={item} controls={true} />
+                                            }else{
+                                                if(getExtension(item) == 'vimeo'){
+                                                    return <ReactPlayer url={item} controls={true} />
+                                                }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
+                                                    return <div className="Doc-Wrap">
+                                                        <a href="#!">
+                                                            {/* <div className="Doc-Icon"><span className="Doc-Type">Document</span><i className="uil uil-file-alt"></i></div> */}
+                                                            <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> Document</div>
+                                                        </a>
                                                     </div>
-                                                </div>
+                                                }
+                                                else{
+                                                    if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
+                                                    getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
+                                                        return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
+                                                    }else{
+                                                        return <img width="100%" height="300" src={item} alt="Project"/>
+                                                    }
+                                                }
+                                            }
+                                        })()}
+                                        </div>
+                                    </div>
                                                 ))}
                                 </div>
 

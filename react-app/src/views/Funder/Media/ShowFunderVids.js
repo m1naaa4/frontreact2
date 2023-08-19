@@ -22,7 +22,7 @@ const ShowFunderVids = () => {
 
   useEffect (() => {
     if (project) { 
-      const links = project?.media.map((item) => { 
+      const links = (Array.isArray(project.media)? project.media : [project?.media]).map((item) => { 
         if (/\.(mp4|ogg|webm|x-msvideo|quicktime)$/i.test(item)) {
           return item;
         }

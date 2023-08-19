@@ -25,7 +25,7 @@ export default function ShowFunderImgs() {
 
   useEffect (() => {
     if (project) { 
-      const links = project?.media.map((item) => { 
+      const links = (Array.isArray(project.media)? project.media : [project?.media]).map((item) => { 
         if (/\.(jpeg|jpg|gif|png)$/i.test(item)) {
           return item;
         }

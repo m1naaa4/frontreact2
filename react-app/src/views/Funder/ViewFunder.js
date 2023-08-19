@@ -398,7 +398,7 @@ export default function ViewFunder(props) {
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
-                                {project?.media?.map(item => (
+                                {(Array.isArray(project.media)? project.media : [project?.media]).map(item => (
                                                 <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
                                                     <div className="col-md-12 input-row">
                                                     {(function() {

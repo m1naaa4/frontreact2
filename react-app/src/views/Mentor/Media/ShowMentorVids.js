@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import LightGallery from 'lightgallery/react';
 // import styles
 // import 'lightgallery/css/lg-fb-comment-box.css';
@@ -22,7 +22,7 @@ const ShowMentorVids = () => {
 
   useEffect (() => {
     if (project) { 
-      const links = project?.media.map((item) => { 
+      const links = (Array.isArray(project.media)? project.media : [project?.media]).map((item) => { 
         if (/\.(mp4|ogg|webm|x-msvideo|quicktime)$/i.test(item)) {
           return item;
         }
