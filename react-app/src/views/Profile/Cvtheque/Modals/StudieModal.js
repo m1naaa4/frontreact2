@@ -57,12 +57,12 @@ const [optionSelected, setOptionSelected] = useState();
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
-          '&:nth-child(1) ': {
-            disable:true,
-            marginTop: '0px',
-            borderTopLeftRadius: '30px',
-            borderTopRightRadius: '20px',
-        },
+        //   '&:nth-child(1) ': {
+        //     disable:true,
+        //     marginTop: '0px',
+        //     borderTopLeftRadius: '30px',
+        //     borderTopRightRadius: '20px',
+        // },
         '&:last-child ': {
           borderBottomLeftRadius: '30px',
           borderBottomRightRadius: '20px',

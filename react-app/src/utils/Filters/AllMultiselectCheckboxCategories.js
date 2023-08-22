@@ -34,7 +34,6 @@ const AllMultiselectCheckboxCategories = ({datas, setSelectedCat}) => {
       setSelectedCat([])
       setSelectedOptions([]);
     } else if (event.action === "deselect-option") {
-      console.log(1);
       setSelectedCat(value.filter((o) => o.value !== "*"))
       setSelectedOptions(value.filter((o) => o.value !== "*"));
     } else if (value.length === this.options.length) {

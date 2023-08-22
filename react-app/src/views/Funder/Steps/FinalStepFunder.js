@@ -153,7 +153,6 @@ export default function FinalStepFunder({formData, setFormData, navigation, prop
 
         datas.map((key) => 
             {if (key.value === optionSelected) {
-                console.log(optionSelected, key.label);
                 setOptionSelected(key.label)
             }}
         );

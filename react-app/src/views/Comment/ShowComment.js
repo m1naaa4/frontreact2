@@ -23,7 +23,6 @@ export default function ShowComment({comment, providerType}) {
     const userProfile = useSelector(state => state.userProfile.userProfile);
 
     const gotToProfile = () => {
-        console.log(comment)
         history.push('/profile/'+ comment.profile_id);
     };
 
@@ -41,7 +40,6 @@ export default function ShowComment({comment, providerType}) {
                 provider        : providerType,
                 body            : '<a href='+`${process.env.REACT_APP_FRONT_URL}`+ "/profile/" + profileId + ' target="_blank">' + to + '</a>' + ' ' + body,
             }
-            console.log(data);
             refcomment.current.value = ''
             dispatch(AddCommentAction(data, '/create'));
         }

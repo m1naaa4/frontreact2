@@ -48,8 +48,8 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
         formData.website = project.website ? project.website : '';
         formData.finance = project.finance;
         formData.look_mentor = project.look_mentor;
-        formData.url = project.website;
-        formData.phone = project.phone;
+        formData.url = project.website ? project.website : '';
+        formData.phone = project.phone ? project.phone: '';
         formData.date = project.date_limit;
         formData.project_id = project.id
     }, [projectId, project]);
@@ -137,8 +137,9 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                                 <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={formData.date} />
                                             </div>
                                             <div className="col-md-6 input-row">
+                                            {formData.look_mentor}
                                                 <div className="custom-control custom-switch">
-                                                    <input type="checkbox" defaultChecked={formData.look_mentor} name="proposition" onChange={setForm} className="custom-control-input" id="switch1" />
+                                                    <input type="checkbox" defaultChecked={formData.look_mentor} name="look_mentor" onChange={setForm} className="custom-control-input" id="switch1" />
                                                     <label className="custom-control-label" htmlFor="switch1"><span>{ t('funder.form.proposition')}</span></label>
                                                 </div>
                                             </div>

@@ -12,7 +12,6 @@ export const LoadAdmin = (data, history) =>{
         return data;
     }).catch((error)=> {
         if(error.hasOwnProperty('success') === false){
-            console.log(error.success)
             localStorage.removeItem('admin-token');
             history.push("/admin/login")
         }

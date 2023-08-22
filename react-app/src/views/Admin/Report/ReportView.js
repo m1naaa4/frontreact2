@@ -71,7 +71,6 @@ export default function ReportView() {
     })
 
     const handleBlock = () => {
-        console.log(providerId, provider)
         let data = {
             'url'    : 'report/block',
             'report_id'     : reportId,
@@ -83,7 +82,6 @@ export default function ReportView() {
     };
 
     const handleDelete = () => {
-        console.log(providerId, provider)
         let data = {
             'url'    : 'admin/report/delete',
             'report_id'     : reportId,

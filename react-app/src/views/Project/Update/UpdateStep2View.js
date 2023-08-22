@@ -209,7 +209,6 @@ export default function UpdateStep2View({formData, setForm, navigation, props}) 
                                                 {(function() {
                                                     if(videoEmbed != '') {
                                                         if(media == 'youtube'){
-                                                            console.log(videoEmbed)
                                                             return <YouTube videoId={videoEmbed} />;
                                                         }else{
                                                             if(media == 'vimeo'){

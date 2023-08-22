@@ -89,7 +89,6 @@ class HttpService {
             return resp.json();
             // setHasMore(resp.data.result.next_page_url)
             // setLoading(false)
-            console.log(resp.result)
         }).catch(err => {
             if(axios.isCancel(err)) return
             // setError(true)

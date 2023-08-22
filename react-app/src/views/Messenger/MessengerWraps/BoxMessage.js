@@ -88,7 +88,6 @@ export default function BoxMessage() {
   useOutsideClick(ref, () => {
     SetEmojiPicker(false);
     refmessage.current.focus();
-    console.log(refmessage)
   });
   return (
     <div >

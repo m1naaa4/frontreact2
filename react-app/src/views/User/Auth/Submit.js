@@ -46,7 +46,6 @@ const Submit = ({setForm, formData, navigation, props}) => {
 
         countries.map((key) => 
         {if (key.value === country) {
-          console.log(key.label)
           setSelectedcountry(key.label)
         }}
       );

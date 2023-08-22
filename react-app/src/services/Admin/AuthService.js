@@ -17,7 +17,6 @@ export const LogoutAdmin = () =>
     let logoutUrl = "admin/logout";
     const tokenId = "admin-token";
     return http.getData(logoutUrl, tokenId).then(data=>{
-        // console.log(JSON.stringify(data));
         return data;
     }).catch((error)=> {
         return error;

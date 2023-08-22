@@ -17,7 +17,6 @@ class HttpMedia {
     {
         axios.defaults.baseURL = process.env.REACT_APP_MEDIA_UPLOAD;
         axios.defaults.withCredentials = false;
-        console.log(url);
         return await axios({
             method: 'GET',
             url: process.env.REACT_APP_MEDIA_UPLOAD + url + '/' + id,

@@ -14,7 +14,6 @@ function Header() {
     const ref = useRef();
 
     const admin = useSelector(state => state.adminAuth.admin);
-    console.log("admin", admin)
     const [showNotifications, setShowNotifications] = useState(false);
     const [display, setDisplay] = useState(false);
 

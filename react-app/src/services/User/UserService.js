@@ -17,7 +17,6 @@ export const GetService = (data, url ) =>
     return http.GetData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -28,7 +27,6 @@ export const UpdateServiceUser = (data, url ) =>
     return http.UpdateData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -39,7 +37,6 @@ export const DeleteService = (data, url ) =>
     return http.DeleteData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -52,7 +49,6 @@ export const GetMyProject = (data, props, current) =>
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -65,7 +61,6 @@ export const LoadProject = (data, props, current) =>
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -78,7 +73,6 @@ export const GetProject = (data ) =>
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

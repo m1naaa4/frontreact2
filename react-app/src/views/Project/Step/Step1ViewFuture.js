@@ -99,10 +99,7 @@ export default function Step1View({formData, setForm,navigation, props}) {
         }        
       }
 
-    const  onDataChange =(value, action) => {
-       console.log( {[action.name]: value})
-       console.log( action, value)
-       
+    const  onDataChange =(value, action) => {       
        if (action.name === 'project_status') {
             formData.project_status = value.value
        } else if(action.name === 'project_area'){

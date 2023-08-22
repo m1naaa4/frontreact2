@@ -68,7 +68,6 @@ export default function ContentMain() {
       }
 
       function handleSubmit() {
-        console.log(selectData);
         setselectData(INITIAL_DATA);
       }
       

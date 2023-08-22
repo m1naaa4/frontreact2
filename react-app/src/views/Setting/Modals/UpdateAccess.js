@@ -21,7 +21,6 @@ const UpdateAccess = ({ show, handleClose }) => {
     const [formData, setForm] = useForm({ email: '', password: '', newpassword: '' });
 
     const updateAccess = (id) => {
-        console.log(formData)
         dispatch(AccessUserAction(formData, '', ''));
     }
 

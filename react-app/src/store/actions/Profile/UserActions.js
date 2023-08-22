@@ -59,7 +59,7 @@ export const EditProfileAction = (id) =>{
                 dispatch({type:'LOAD_PROFILE_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+                // dispatch({type:'UPDATE_PROFILE_ERROR',res})
             }
         },
         error=>{
@@ -170,7 +170,7 @@ export const AccessUserAction = (data) =>{
                 dispatch({type:'LOAD_PROFILE_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+                // dispatch({type:'UPDATE_PROFILE_ERROR',res})
             }
         },
         error=>{
@@ -193,7 +193,7 @@ export const UserInfoAction = (data) =>{
                 dispatch({type:'LOAD_USER_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+                // dispatch({type:'UPDATE_PROFILE_ERROR',res});
             }
         },
         error=>{
@@ -216,7 +216,7 @@ export const LanguageAction = (data) =>{
                 dispatch({type:'LOAD_PROFILE_SUCCESS',res});
                 
             }else if(res.hasOwnProperty('success') && res.success===false) {
-                dispatch({type:'UPDATE_PROFILE_ERROR',res})
+                // dispatch({type:'UPDATE_PROFILE_ERROR',res})
             }
         },
         error=>{

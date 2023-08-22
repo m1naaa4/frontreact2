@@ -20,7 +20,6 @@ export default function LinkedInButton(props) {
                 }, 10);
             }
         }).catch((error)=> {
-            console.log(error);
             return error;
         });
     };

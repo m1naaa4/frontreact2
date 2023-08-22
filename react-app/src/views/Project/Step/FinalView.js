@@ -117,7 +117,6 @@ export default function FinalView({formData, setFormData, navigation, props}) {
         setFinance(project.project.funding_search);
     //     formData.look_mentor = getproject.project.look_angel;
         setLoadedProject(project.project);
-        console.log(project.project.visibility);
     }, [projectId, project]);
 
     useEffect(() => {
@@ -147,7 +146,6 @@ export default function FinalView({formData, setFormData, navigation, props}) {
 
         datas.map((key) => 
             {if (key.value === optionSelected) {
-                console.log(optionSelected, key.label);
                 setOptionSelected(key.label)
             }}
         );

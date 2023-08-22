@@ -114,7 +114,6 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
             value: value,
             label: value
         }))
-        console.log(teams);
         setselectData(
             teams
         );
@@ -176,7 +175,6 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
 
     const handleSubmitValue = (e) => {
         e.preventDefault();
-        console.log(formData.project_id);
         if($("#form-wizard-funder").valid()){
             setIsLoading(true)
             dispatch(CreateMentorAction(formData, '/create', navigation, history, 'step2'));

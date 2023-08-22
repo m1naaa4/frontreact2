@@ -73,7 +73,6 @@ export const getCategoryArticles = (id) => {
         
         http.GetData({}, "article/byCategory/"+id).then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
-                console.log("get  res", res)
                 dispatch({ type: 'LOAD_CATEGORIES_ARTICLES_SUCCESS', res });
 
             } else if (res.hasOwnProperty('success') && res.success === false) {

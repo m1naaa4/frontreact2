@@ -9,7 +9,6 @@ export const GetFileService = (data, props, current) =>{
     return http.postData(data,getMediaUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

@@ -160,7 +160,6 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                             )}
                             - {
                              sectors.map((key) => 
-                             // console.log(key[0], project?.project?.sector)
                                {if ( friend.sector.includes(key[0])) {
                                  return <Text tid={key[1]}/>
                                }}

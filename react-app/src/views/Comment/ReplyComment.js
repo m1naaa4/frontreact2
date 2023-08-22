@@ -10,7 +10,6 @@ export default function ReplyComment(comment) {
     const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile);
 
-    console.log("commenhhhhhhhhhhhhhhhhhhhhhhhhhhhhht", comment)
     //
     // const data = {
     //     idproject   : comment.project.project.id,

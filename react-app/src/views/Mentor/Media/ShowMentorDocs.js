@@ -22,7 +22,6 @@ export default function ShowMentorDocs() {
     if (project) { 
       const links = (Array.isArray(project.media)? project.media : [project?.media]).map((item) => { 
         if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)) {
-          console.log(getFileExtension(item), `${'"'+item+'"'}`);
           
             let data = {
               type: getFileExtension(item),

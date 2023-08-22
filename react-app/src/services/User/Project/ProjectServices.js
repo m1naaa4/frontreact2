@@ -3,13 +3,10 @@ import HttpService from '../../HttpService';
 
 export const ProjectServices = (query, props, url) =>
 {
-    // console.log('query')
-    // console.log(query)
     const http = new HttpService();
     let searchProject = "project"+url;
    
     return http.postData(query,searchProject).then(data=>{
-        // console.log(data)
         return data;
     }).catch((error)=> {
         return error.response.data;
@@ -35,7 +32,6 @@ export const LoadProject = (data, props, current) =>{
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -47,7 +43,6 @@ export const GetProject = (data ) =>{
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -60,7 +55,6 @@ export const GetMyProject = (data, props, current) =>{
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

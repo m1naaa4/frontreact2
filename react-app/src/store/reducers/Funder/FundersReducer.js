@@ -16,7 +16,6 @@ const FundersReducer = (state = initState ||undefined, action) => {
 
         case 'LOAD_FUNDERS_ONCE_SUCCESS':
             state.funders = [];
-            console.log(state.funders);
             return {
                 ...state,
                 funders: action.res.funders,

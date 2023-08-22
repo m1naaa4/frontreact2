@@ -4,9 +4,6 @@ import React  from 'react'
 
 export default function SideRightBar({messages}) {
 
-  console.log(messages)
-
-
   return (
     <>
       {messages  &&

@@ -14,7 +14,6 @@ export default function Body({messages, props}) {
   const observer = useRef()
   const dispatch = useDispatch();
   const params = useParams();
-  console.log('OLD_SEND_MESSAGE_SUCCESSconversation', messages)
   // console.log('OLD_SEND_MESSAGE_SUCCESSconversatiousern', conversation.user)
 
   const messagesEndRef = useRef(null);
@@ -29,7 +28,6 @@ export default function Body({messages, props}) {
 
   useEffect(() => {
     const list = document.getElementsByClassName('messagerie__body');
-    console.log(list)
     if(props?.scrollable) {   
       // list has fixed height
       list.addEventListener('scroll', (e) => {

@@ -37,7 +37,6 @@ export default function Receives() {
 
     useOutsideClick(ref, () => {
         setOpen(false)
-        console.log(refmessage)
     });
 
 

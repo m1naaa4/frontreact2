@@ -12,7 +12,6 @@ export const LoadUser = (url, history) =>{
         return data;
     }).catch((error)=> {
         if(error.hasOwnProperty('success') === false){
-            console.log(error.success)
             localStorage.removeItem('user-token');
             history.push("/login")
         }
@@ -117,7 +116,6 @@ export const AddPost = (data, props, current) =>{
     return http.postData(data, addpost, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -130,7 +128,6 @@ export const DeletePost = (data, props, current) =>{
     return http.postData(data, addpost, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -143,7 +140,6 @@ export const GetYoutube = (data, props, current) =>{
     return http.postData(data, addpost, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -156,7 +152,6 @@ export const GetPosts = (data, props, current) =>{
     return http.postData(data, getposts, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -169,7 +164,6 @@ export const GetPost = (data, props) =>{
     return http.postData(data, getposts, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

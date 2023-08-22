@@ -47,7 +47,6 @@ const initState = {
                     authResponse:'there seems to be a problem please refresh your browser',
                 }
             case 'LOGIN_SUCCESS':
-                console.log('login success profile loaded',action.res);
                 // window.globalLoggedProfile = action.res.profile;
                 return {
                     ...state,

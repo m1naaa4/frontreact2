@@ -22,10 +22,8 @@ export default function ArticleAuthor() {
     const author = useSelector(state => state.articles.author);
     const loading = useSelector(state => state.articles.loading);
     const loadingAuthor = useSelector(state => state.articles.loadingAuthor);
-    console.log(loadingAuthor)
 
     if (!loadingAuthor) {
-        console.log(author)
     }
 
     const params = useParams()

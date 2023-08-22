@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
-import { useForm } from "react-hooks-helper";
-import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CreateTeamsAction } from '../../../store/actions/Setting/SettingActions';
 
 
 
 const  Member = ({ team, roles}) => {
   const handledisplay = () => setOpen(!open);
-  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-console.log('memberrrrrrrrrrrrrrrrrrrs', roles)
-console.log('memberrrrrrrrrrrrrrrrrrrs', team)
 
     return (  
       <>

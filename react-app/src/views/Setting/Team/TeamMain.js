@@ -69,7 +69,6 @@ export default function TeamMain() {
       }
 
       function handleSubmit() {
-        console.log(selectData);
         setselectData(INITIAL_DATA);
       }
       

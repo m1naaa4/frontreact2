@@ -17,7 +17,6 @@ export const GetService = (data, url ) =>
     return http.GetData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -28,7 +27,6 @@ export const GetsService = (data, url ) =>
     return http.GetsData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -39,7 +37,6 @@ export const DeleteService = (data, url ) =>
     return http.DeleteData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

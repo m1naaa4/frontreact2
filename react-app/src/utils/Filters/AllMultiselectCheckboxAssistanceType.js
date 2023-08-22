@@ -33,7 +33,6 @@ const AllMultiselectCheckboxAssistanceType = ({datas, setSelectedTypeAssistance}
       setSelectedTypeAssistance([])
       setSelectedOptions([]);
     } else if (event.action === "deselect-option") {
-      console.log(1);
       setSelectedTypeAssistance(value.filter((o) => o.value !== "*"))
       setSelectedOptions(value.filter((o) => o.value !== "*"));
     } else if (value.length === this.options.length) {

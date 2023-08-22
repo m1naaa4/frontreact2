@@ -40,7 +40,6 @@ export const PostService = (data, url ) =>
     return http.postData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -51,7 +50,6 @@ export const GetService = (data, url ) =>
     return http.GetData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -62,7 +60,6 @@ export const UpdateService = (data, url ) =>
     return http.UpdateData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -73,7 +70,6 @@ export const DeleteService = (data, url ) =>
     return http.DeleteData(data, url).then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

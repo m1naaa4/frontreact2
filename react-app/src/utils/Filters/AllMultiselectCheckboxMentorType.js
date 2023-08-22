@@ -6,8 +6,6 @@ import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 const AllMultiselectCheckboxMentorType = ({datas, setSelectedTypeMentor}) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const { t } = useTranslation();
-  console.log(datas);
-
   let options = datas.map((name, index) => (
     {value : name[0], label: t(name[1])}
   ))
@@ -34,7 +32,6 @@ const AllMultiselectCheckboxMentorType = ({datas, setSelectedTypeMentor}) => {
       setSelectedTypeMentor([])
       setSelectedOptions([]);
     } else if (event.action === "deselect-option") {
-      console.log(1);
       setSelectedTypeMentor(value.filter((o) => o.value !== "*"))
       setSelectedOptions(value.filter((o) => o.value !== "*"));
     } else if (value.length === this.options.length) {

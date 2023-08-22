@@ -54,7 +54,6 @@ export const UploadMediaAction = (data, url) =>{
             if(res.hasOwnProperty('success') && res.success === true)
             {
                 if (data.get("media_section") === 'post') {
-                    console.log(res.urls);
                     dispatch({type:'GET_MEDIA_POSTS_SUCCESS', res});
                 }
             }

@@ -9,7 +9,6 @@ export const LoadProject = (data, props, current) =>{
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -21,7 +20,6 @@ export const GetProject = (data, props, current) =>{
     return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

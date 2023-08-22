@@ -38,9 +38,7 @@ const  ReportModal = ({providerObject, provider, showReport, handleCloseReport})
       dispatch(SendReportAction(data));
       notify()
     }
-    console.log('reportssssssssssssss', report)
     useEffect(() => {
-      console.log('salam i m here')
       toast.dismiss(toastId.current);
     },[report])
     

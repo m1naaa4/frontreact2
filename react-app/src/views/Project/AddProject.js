@@ -19,7 +19,6 @@ export default function AddProject({filterInput, setFilterInput, props}) {
 
     const project = useSelector(state => state.aadproject);
 
-    console.log("wwwwwwwwww",project)
     ///  if success go to 2 step  ( condiition on project after request    dont forget)
 
 

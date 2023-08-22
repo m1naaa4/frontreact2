@@ -25,7 +25,6 @@ const loadOptions = async (search, page) => {
     'search' : search,
     'page'  :page
   }
-  console.log(options, search, page)
   await sleep(1000);
 
   let filteredOptions;
@@ -54,9 +53,6 @@ const loadOptions = async (search, page) => {
 axios.post(`/getusers`, dd).then(resp => {
   const optionss = resp.data.users;
   const hasMoree  = optionss.next_page_url;
-  
-  console.log( resp.data)
-
 })
 
 export default loadOptions;

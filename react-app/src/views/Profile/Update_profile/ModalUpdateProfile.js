@@ -37,7 +37,6 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
        
       bio:infoprofile.infoprofile.about});
     const EditProfile =(id) =>{
-      console.log(country, sector, typeuser)
       formData.country = country?.value ? country?.value : formData.country;
       formData.sector_id = sector?.value ? sector?.value : formData.sector_id;
       formData.type = typeuser?.value ? typeuser?.value : formData.type;
@@ -53,11 +52,11 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
         "&:hover":{
           backgroundColor: "#e8fbf1",
         },
-        '&:nth-child(1) ': {
-          marginTop: '0px',
-          borderTopLeftRadius: '30px',
-          borderTopRightRadius: '20px',
-      },
+      //   '&:nth-child(1) ': {
+      //     marginTop: '0px',
+      //     borderTopLeftRadius: '30px',
+      //     borderTopRightRadius: '20px',
+      // },
       '&:last-child ': {
         borderBottomLeftRadius: '30px',
         borderBottomRightRadius: '20px',

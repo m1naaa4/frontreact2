@@ -29,7 +29,6 @@ export default function ViewFunder(props) {
     const loading = useSelector(state => state.funders.loading);
     const visibility = useSelector(state => state.generale.visibility);
     const user = useSelector(state => state.userProfile.userProfile);
-    console.log(project);
 
     const ref = useRef();
     const params = useParams();

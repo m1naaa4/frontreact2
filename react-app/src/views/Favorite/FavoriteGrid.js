@@ -36,10 +36,6 @@ export default function FavoriteGrid({favorite}) {
       setOpen(false);
     }
 
-    useEffect(()=>{
-      console.log(favorite);
-    });
-
     const HandleClose = ()=>{
       setOpen(false);
     };

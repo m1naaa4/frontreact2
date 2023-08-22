@@ -18,7 +18,6 @@ const initState = {
                 action.res['messages'].forEach(function (conversation) {
                     conversations[conversation.receiver_id] = conversation;
                 })
-                console.log('messages', conversations)
                 return {
                     ...state,
                     messages: action.res.messages,
@@ -27,15 +26,10 @@ const initState = {
                 }
             
             case 'SEND_MESSAGE_SUCCESS':
-                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', action.res.message.receiver_id)
-                console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzdddddddddddddddddzzzzzz', state.messages)
 
                 // state.messages.forEach(function (conversation) {
 
                 //     if(conversation['receiver_id'] == action.res.message.receiver_id){
-                //         console.log('conversationnnaaaaaannnns', conversation['sender_id'] == action.res.message.sender_id, conversation['sender_id'], action.res.message.sender_id)
-                //     //     console.log('conversationnnnaaaaaaaaaaaaaaaaaaaannnnnnnnnnns', conversation['id'])
-                //     // console.log('conversationnnnaaaaqqqqqqqzzzzzzzzzzzzzzznnnnnnns', action.res.message.id)
                 //         return {
                 //             ...state,
                 //             messages: [...state.messages, action.res.message],
@@ -48,8 +42,6 @@ const initState = {
 
                 // let receiver_id = action.res.message.receiver_id;
                 // let feed = {[receiver_id]:state.messages};
-                // console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed)
-                // console.log('qqqqqqqqqqqqqqqqqqqqqqqq', feed[receiver_id])
                 return {
                     ...state,
                     messages:  state.messages,

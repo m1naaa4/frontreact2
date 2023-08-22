@@ -16,7 +16,6 @@ export default function MainMessengerView() {
     const [messages, setMessages] = useState();
     const conversation = useSelector(state => state.conversations);
     const showContent = () =>{
-        console.log('salam')
         //setShow(conversation)
     }
     const [show, setShow] = useState(conversation);

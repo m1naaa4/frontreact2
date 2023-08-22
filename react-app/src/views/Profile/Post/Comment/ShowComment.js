@@ -75,7 +75,6 @@ export default function ShowComment({ post }) {
   }
 
   const editComment = async (id) =>{
-    console.log("edit");
     setOpen(true);
   }
 

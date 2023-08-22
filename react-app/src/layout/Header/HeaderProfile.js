@@ -17,7 +17,6 @@ function HeaderProfile() {
     const dispatch = useDispatch();
 
     const usernotifications = useSelector(state => state.getnotifications);
-    console.log(usernotifications);
     const newavatar = useSelector(state => state.updateavatar);
     const userProfile = useSelector(state => state.userProfile.userProfile);
 

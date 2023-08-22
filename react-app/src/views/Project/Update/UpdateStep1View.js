@@ -30,7 +30,6 @@ export default function UpdateStep1View({formData, setForm, navigation, props}) 
         action      : "getProject",
     }
     useEffect(() => {
-        console.log("here update", getproject)
         dispatch(getProjectAction(data, props));
         setPicture(getproject?.project?.logo_link)
     }, [dispatch])

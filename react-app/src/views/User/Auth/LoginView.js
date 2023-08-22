@@ -42,8 +42,6 @@ export default function LoginView(props) {
     useEffect(() => {
             dispatch(clearUserAuthState())
             sePlace(<Text tid="welcomeDescription"/>)
-
-            console.log(place)
         },
     [])
 

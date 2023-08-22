@@ -7,10 +7,8 @@ export const LoadNotification = () =>{
     const tokenId = "user-token";
 
     return  http.getData(profileUpUrl, tokenId).then( data => {
-        // console.log(data)
         return data;
     }).catch((error)=> {
-        // console.log(error)
         return error;
          });
 }
@@ -54,7 +52,6 @@ export const SeenNotification = (data) =>{
     return http.postData(data, profileUpUrl, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -67,7 +64,6 @@ export const MarkSeen = (data) =>{
     return http.postData(data, profileUpUrl, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }
@@ -80,7 +76,6 @@ export const deleteNotification = (data) =>{
     return http.postData(data, profileUpUrl, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
-        console.log(error)
         return error;
     });
 }

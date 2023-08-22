@@ -33,9 +33,8 @@ export default function ThirdStepFunder({ navigation}) {
     }, [dispatch])
 
     useEffect(() => {  
-        console.log(project?.data);
-        setValue(project?.data?.content?? '');
-        setTags(project?.data?.tags ?? []);
+        setValue(project?.content?? '');
+        setTags(project?.tags ?? []);
     }, [project]);
 
     useEffect(() => {

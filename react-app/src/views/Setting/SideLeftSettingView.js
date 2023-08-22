@@ -43,7 +43,6 @@ export default function SideRightSettingView(props) {
     useEffect(() => {
       countries.map((key) => 
         {if (key.value === infoprofile?.profile?.country) {
-          console.log(key.label)
           setCountry(key.label)
         }}
       );

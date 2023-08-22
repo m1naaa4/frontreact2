@@ -30,7 +30,6 @@ const ShowMentorVids = () => {
       }).filter(item => item !== null);
 
       setVideos(links);
-      console.log(links);
     }
   }, [project]);
 
