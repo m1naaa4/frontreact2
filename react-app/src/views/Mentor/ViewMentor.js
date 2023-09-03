@@ -22,6 +22,7 @@ import DialogWarning from '../../utils/DialogWarning';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import assistanceMentorCreate from '../../data/assistanceMentorCreate';
 import typeMentorCreate from '../../data/typeMentorCreate';
+import AvatarTooltip from '../../utils/AvatarTooltip';
 
 export default function ViewMentor(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -509,13 +510,16 @@ export default function ViewMentor(props) {
                                             <span>
                                                 {project.owner && project.owner.map((value, index) => {
                                                     return <div key={index+1} className="Contact">
+                                                        <Link to={`/profile/${value.profile_id}`} ref={ref} data-toggle="tooltip" data-placement="top">
                                                         <div className="d-flex align-items-start">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                                            <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`}><img src={value.avatar} alt={value.username} /></Link></div>
+                                                            <div className="Contact-Thumb"> <img src={value.avatar} alt={value.username} /></div>
                                                             <div className="Contact-Infos">
-                                                                <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
+                                                                <h4>{value.username}</h4>
                                                             </div>
+                                                            {(user?.profile_id != value.profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                                                         </div>
+                                                        </Link>
                                                     </div>
                                                 }
                                                 )}

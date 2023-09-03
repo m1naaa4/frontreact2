@@ -24,6 +24,7 @@ import DialogWarning from '../../utils/DialogWarning';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import ProjectSkeletonGridOne from '../../skeleton/ProjectSkeletonOne';
 import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
+import AvatarTooltip from '../../utils/AvatarTooltip';
 
 export default function ShowProjectView(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -526,14 +527,15 @@ export default function ShowProjectView(props) {
                                         <div className="d-flex align-items-start">
                                             <span>
                                                 {project.project.owner && 
-                                                    <div className="Contact">
+                                                    <div className="Contact"><Link ref={ref} to={`/profile/${project.project.owner.profile_id}`} data-toggle="tooltip" data-placement="top">
                                                         <div className="d-flex align-items-start">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                                            <div className="Contact-Thumb"> <Link to={`/profile/${project.project.owner.profile_id}`}><img src={project.project.owner.avatar} alt={project.project.owner.username} /></Link></div>
+                                                            <div className="Contact-Thumb"> <img src={project.project.owner.avatar} alt={project.project.owner.username} /></div>
                                                             <div className="Contact-Infos">
-                                                                <Link to={`/profile/${project.project.profile_id}`}><h4>{project.project.owner.username}</h4></Link>
+                                                                <h4>{project.project.owner.username}</h4>
                                                             </div>
-                                                        </div>
+                                                            {(user?.profile_id != project.project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.project.owner} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
+                                                        </div></Link>
                                                     </div>
                                                 }
                                             </span>

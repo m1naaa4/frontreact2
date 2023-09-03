@@ -19,7 +19,7 @@ import { CreateMentorAction, GetMentor } from '../../../store/actions/Mentor/Men
 const FirstStepMentor = ( {formData, setForm, navigation} ) => {
     const dispatch = useDispatch();
     const { date } = formData;
-    const [startDate, setStartDate] = useState(date);
+    const [startDate, setStartDate] = useState();
     const { t } = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
     const project = useSelector(state => state.mentors.mentor);

@@ -57,6 +57,9 @@ export default function HeaderProfileView({ formData, setForm, props }) {
         } else {
             setCurrentPage('historique');
         }
+    });
+
+    useEffect(() => {
 
         if (infouser.userProfile && infouser.userProfile !== 'loading') {
             setUserId(infouser.userProfile.profile_id);

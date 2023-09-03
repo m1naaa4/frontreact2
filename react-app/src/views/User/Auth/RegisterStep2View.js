@@ -47,14 +47,14 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
 
                     <div className="input-row">
                         <ItemForm type="text" name="username" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) }  value={username} onChange={setForm}
-                                placeholder="username" required/>
+                                placeholder="username"/>
                     </div>
 
                     <TypeDrop  name="type" value={type} onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } onChange={setForm}/>
 
                     <div className="input-row">
                         <ItemForm type="tel" name="phone" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={phone} onChange={setForm}
-                                placeholder="Numéro de téléphone" required/>
+                                placeholder="Numéro de téléphone"/>
                     </div>
 
                     <div className="input-row">

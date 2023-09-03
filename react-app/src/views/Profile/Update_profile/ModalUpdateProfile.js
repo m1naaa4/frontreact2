@@ -3,8 +3,6 @@ import { useForm } from "react-hooks-helper";
 import { useDispatch, useSelector } from 'react-redux';
 import { EditProfileAction } from '../../../store/actions/Profile/UserActions';
 import SelectSector from '../../../utils/SelectSector';
-import SectorDropFilter from '../../User/Fields/Filter/Project/SectorDropFilter'
-import TypeDrop from '../../User/Fields/Signup/TypeDrop'
 import countries from '../../../data/countries';
 import typeusers from '../../../data/typeusers';
 import sectors from '../../../data/sectors';

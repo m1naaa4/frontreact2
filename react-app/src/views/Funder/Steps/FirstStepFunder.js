@@ -18,7 +18,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 const FirstStepFunder = ( {formData, setForm, navigation} ) => {
     const dispatch = useDispatch();
     const { date } = formData;
-    const [startDate, setStartDate] = useState(date);
+    const [startDate, setStartDate] = useState();
     const { t } = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
     const project = useSelector(state => state.funders.funder);
@@ -125,7 +125,7 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                                 <ZoneFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row">
-                                                <input type="text" name="phone" onChange={setForm} value={formData.phone} placeholder={t('phone')} className="wizard-required" required/>
+                                                <input type="text" name="phone" onChange={setForm} value={formData.phone} placeholder={t('phone')} className="wizard-required"/>
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="url" value={formData.url} placeholder={t('website')} className="wizard-required" onChange={setForm} />
@@ -137,9 +137,9 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                                 <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={formData.date} />
                                             </div>
                                             <div className="col-md-6 input-row">
-                                            {formData.look_mentor}
                                                 <div className="custom-control custom-switch">
-                                                    <input type="checkbox" defaultChecked={formData.look_mentor} name="look_mentor" onChange={setForm} className="custom-control-input" id="switch1" />
+                        <input type="checkbox" defaultChecked={formData.look_mentor}  onChange={setForm} k={formData.look_mentor}   className="custom-control-input" id="switch1"
+                                name="look_mentor"/>
                                                     <label className="custom-control-label" htmlFor="switch1"><span>{ t('funder.form.proposition')}</span></label>
                                                 </div>
                                             </div>

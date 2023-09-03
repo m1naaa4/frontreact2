@@ -42,6 +42,7 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
   }, [location]);
 
   useEffect(() => {
+    console.log(project);
     if (projectId === "create" || project === "loading" || !project) {
       return;
     }
