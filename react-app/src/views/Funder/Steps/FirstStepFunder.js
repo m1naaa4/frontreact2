@@ -17,8 +17,9 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const FirstStepFunder = ( {formData, setForm, navigation} ) => {
     const dispatch = useDispatch();
-    const { date } = formData;
+   
     const [startDate, setStartDate] = useState();
+    const [date, setDate] = useState();
     const { t } = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
     const project = useSelector(state => state.funders.funder);
@@ -29,7 +30,8 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
 
     const changeDate = (state) => {
         setStartDate(state);
-        formData.date = state;
+        formData.date = state.toLocaleDateString();
+        setDate(state);
     };
 
     const projectId = useMemo(
@@ -51,6 +53,7 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
         formData.url = project.website ? project.website : '';
         formData.phone = project.phone ? project.phone: '';
         formData.date = project.date_limit;
+        setDate(project.date_limit);
         formData.project_id = project.id
     }, [projectId, project]);
 
@@ -116,7 +119,7 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                     <div className="form-inputs">
                                         <div className="form-row">
                                             <div className="col-md-12 input-row input-select">
-                                                <TypeFilterFunder formData={formData}/>
+                                                <TypeFilterFunder formData={formData} required/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
                                                 <SectorFilterFunders  formData={formData}/>
@@ -134,13 +137,15 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                                 <FinanceFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row"> 
-                                                <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={formData.date} />
+                                                <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} 
+                                                dateFormat="MM/dd/yyyy" minDate={new Date()} selected={startDate} onChange={(date) => changeDate(date)}  value={date}
+                                                />
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
-                        <input type="checkbox" defaultChecked={formData.look_mentor}  onChange={setForm} k={formData.look_mentor}   className="custom-control-input" id="switch1"
-                                name="look_mentor"/>
-                                                    <label className="custom-control-label" htmlFor="switch1"><span>{ t('funder.form.proposition')}</span></label>
+                                                    <input type="checkbox" checked={formData.look_mentor}  onChange={setForm}   className="custom-control-input" id="switch"
+                                                            name="look_mentor"/>
+                                                    <label className="custom-control-label" htmlFor="switch"><span>{ t('funder.form.proposition')}</span></label>
                                                 </div>
                                             </div>
                                         </div>

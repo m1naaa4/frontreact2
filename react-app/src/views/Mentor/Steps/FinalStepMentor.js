@@ -263,7 +263,7 @@ export default function FinalStepMentor({ navigation}) {
                                             </div>
                                             <div className="review-content" dangerouslySetInnerHTML={{ __html: loadedProject.content }}>
                                             </div>
-                                            <div className="form-row">
+                                            {/* <div className="form-row">
                                                 <div className="col-md-6 input-row">
                                                     <div className="custom-control custom-switch">
                                                         <input type="checkbox" defaultChecked={loadedProject.look_mentor} className="custom-control-input" id="switch1"
@@ -271,7 +271,7 @@ export default function FinalStepMentor({ navigation}) {
                                                         <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_mentors')}</span></label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="review-tags">
                                                 <h3>Tags</h3>
                                                 <ul>

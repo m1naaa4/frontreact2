@@ -10,7 +10,7 @@ export default function ArticleSidebarView({ article }) {
         </Link>
         <p className='article-date'>{article.created_at.date}</p>
 
-        <img className='article-thumb-sidebar' src={article.thumbnail ? article.thumbnail : "/assets/images/logoArticle.jpeg"} alt='article logo' />
+        <img className='article-thumb-sidebar' src={article.media ? article.media[0] : "/assets/images/logoArticle.jpeg"} alt='article logo' />
 
         <div className='d-flex align-items-center justify-content-between mt-2'>
             <div className="article-list-author">

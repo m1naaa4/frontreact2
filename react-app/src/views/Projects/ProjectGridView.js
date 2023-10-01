@@ -104,7 +104,7 @@ const ProjectGridView = ({ project }) => {
             <div className="offer-header" >
                 <div className="offer-title">
                     {(project.logo_link === '/assets/images/porject-logo.png') ? <img src={project.logo_link} title="Nom du projet" alt="" /> :
-                        <img src={project.logo_link} title="Nom du projet" alt="" />}
+                        <img src={project.logo_link ? project.logo_link: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />}
 
                     <h3><span onClick={() => goToShowproject(project.id)} data-toggle="tooltip" data-placement="top" title={project.name}>
                         {project.name?.substring(0, 10)}</span></h3>

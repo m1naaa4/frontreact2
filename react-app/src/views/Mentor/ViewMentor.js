@@ -357,7 +357,7 @@ export default function ViewMentor(props) {
                             <div className="Company-Infos">
                                 <div className="Company-Left">
                                     <div className="single-offer-logo">
-                                        <img src={project.logo} title="Nom du projet" alt="" />
+                                        <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />
                                         <button className="offer-bookmark" type="button" name="button"><i className="uil uil-bookmark"></i>
                                             <DialogWarning
                                                     title={titleDialog}

@@ -196,6 +196,8 @@ const StudieGrid = ({ study }) => {
           </div>
         </div>
         <span className='text-uppercase'>{study?.sector} - {study.etablissement} - {study.lieu}</span>
+        <br/>
+        <span>{study.description}</span>
 
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
           <form className="" action="index.html" method="post">

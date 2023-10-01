@@ -113,8 +113,12 @@ const ListingItemMentor = ({ project }) => {
                                 HandleClose={HandleClose}
                             />
                             {!project.date_limit && <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('has_deadline')}><i className="uil uil-bell"></i></label>}
-
-                            <img src={project.logo} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
+                            
+                            {project.owner ? (<a href={`/profile/${project.owner[0].profile_id}`}>
+                                <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
+                            </a>) : <a href={`/profile/${project.profile_id}`}>
+                                <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
+                            </a>}
                         </div>
                     </div>
                     <div className="offer-media">

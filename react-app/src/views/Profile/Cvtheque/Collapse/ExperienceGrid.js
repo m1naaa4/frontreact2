@@ -181,6 +181,8 @@ const ExperienceGrid = ({ experience }) => {
           }
         </div>
         <span>{experience.post} {experience.entreprise}- {experience.lieu}</span>
+        <br/>
+        <span>{experience.description}</span>
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
           <form className="" action="index.html" method="post">
             <div className="form-inputs">

@@ -46,6 +46,14 @@ const FundersReducer = (state = initState ||undefined, action) => {
                 loading: false,
             }
         
+        case 'CREATE_FUNDER_SUCCESS':
+            return {
+                ...state,
+                funder: action.res.funder,
+                funderId: action.res.fundertid,
+                loading: false,
+            }
+        
         case 'CREATE_MENTOR_SUCCESS':
             return {
                 ...state,

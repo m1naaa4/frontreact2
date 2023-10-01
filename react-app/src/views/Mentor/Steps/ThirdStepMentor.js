@@ -33,8 +33,8 @@ export default function ThirdStepMentor({navigation}) {
     }, [dispatch])
 
     useEffect(() => {  
-        setValue(project?.data?.content?? '');
-        setTags(project?.data?.tags ?? []);
+        setValue(project?.content?? '');
+        setTags(project?.tags ?? []);
     }, [project])
     
     const handleSubmit = (e) => {

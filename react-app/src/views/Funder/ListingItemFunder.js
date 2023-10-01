@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState, useRef} from 'react'
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory } from "react-router-dom";
 import slugify from 'react-slugify';
@@ -10,9 +10,10 @@ import sectors from '../../data/sectorsCreate';
 import countries from '../../data/countries';
 import finances from '../../data/financesCreate';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DialogWarning from '../../utils/DialogWarning';
-
+import AvatarTooltip from '../../utils/AvatarTooltip';
+import { Link } from 'react-router-dom';
 
 const ListingItemFunder = ({ project }) => {
     const [shareUrl, setShareUrl] = useState(false);
@@ -26,7 +27,8 @@ const ListingItemFunder = ({ project }) => {
     const [ContentDialog,setContentDialog] = useState("are you sure you want to add this post to favorite?");
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
-
+    const ref = useRef();
+    const user = useSelector(state => state.userProfile.userProfile);
     let url_to_share = slugify(project.name, { prefix: `${process.env.REACT_APP_FRONT_URL}`+'/funder/'+project.id });
 
     const addTofavorite = (id) => {
@@ -112,8 +114,11 @@ const ListingItemFunder = ({ project }) => {
                             />
                             {project.date_limit ? (<label className="existe-deadline" data-toggle="tooltip" data-placement="bottom" title={`${t('has_deadline') + ' ' + project.date_limit}`}><i className="uil uil-bell"></i></label>) :
                             <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('no_deadline')}><i className="uil uil-bell"></i></label>}
-
-                            <img src={project.logo} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
+                            {project.owner ? (<a href={`/profile/${project.owner[0].profile_id}`}>
+                                <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
+                            </a>) : <a href={`/profile/${project.profile_id}`}>
+                                <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
+                            </a>}
                         </div>
                     </div>
                     <div className="offer-media">

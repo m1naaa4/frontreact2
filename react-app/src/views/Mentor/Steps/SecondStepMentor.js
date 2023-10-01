@@ -21,7 +21,7 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
   const [message, setMessage] = useState("");
   const hiddenFileInput = useRef(null);
 
-  const project = useSelector(state => state.funders.data);
+  const project = useSelector(state => state.mentors.mentor);
 
   const [changed, setChanged] = useState(false);
   const [disable, setDisabled] = useState(true);
@@ -46,7 +46,7 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
     if (projectId === "create" || project === "loading" || !project) {
       return;
     }
-    setFile(project.media);
+    setFile(project.media);console.log(project);
 
     setMedia(project.is_video);
     formData.media_link = project.media;
