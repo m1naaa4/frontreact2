@@ -31,7 +31,7 @@ export default function AddProject({filterInput, setFilterInput, props}) {
                         <div className="col-md-4 col-lg-4 d-md-none d-lg-block">
 
                             <div className="page-header">
-                                <h3>Détails de l'offre</h3>
+                                <h3>{t('project.add.detail_offre')}</h3>
                                 <p>Enter details about the project <br/>to preceed further</p>
                                 <img src="/assets/images/offer-thumbnail.svg"/>
                             </div>
@@ -41,7 +41,7 @@ export default function AddProject({filterInput, setFilterInput, props}) {
                                 <ul id="wizardbar">
                                     <li className="active">
                                         <div className="Step-Number"><span>1</span><i className="uil uil-check"></i></div>
-                                        <div className="Step-Title">Détails de l'offre</div>
+                                        <div className="Step-Title">{t('project.add.detail_offre')}</div>
                                     </li>
                                     <li>
                                         <div className="Step-Number"><span>2</span><i className="uil uil-check"></i></div>

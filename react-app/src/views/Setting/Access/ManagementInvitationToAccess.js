@@ -14,7 +14,7 @@ export default function ManagementInvitationToAccess(props) {
 
     return (
         <>  
-        <div class="accessTables-container">
+        <div className="accessTables-container">
             {props.section =='' && <Invitations/>}
             {props.section == '#invitations' && <Invitations/>}
             {props.section == '#received' && <Receives/>}

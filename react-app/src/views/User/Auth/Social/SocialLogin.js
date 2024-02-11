@@ -3,13 +3,14 @@ import React from 'react'
 import UilGoogle from '@iconscout/react-unicons/icons/uil-google'
 import FacebookButton from "./Buttons/FacebookButton";
 import LinkedInButton from "./Buttons/LinkedInButton";
-import {Text} from "./../../../../containers/Language";
+import { useTranslation } from 'react-i18next';
 const SocialLogin = ({props}) => {
+    const [t] = useTranslation();
     return (
 
         <div>
             <div className="social-login ">
-                <label className="social-login-label"><Text tid="signUpWith" /></label>
+                <label className="social-login-label">{t('signUpWith')}</label>
                 <div className="social-login-options">
                     <div className="social-option gmail">
                         <a href="#!" data-toggle="tooltip" data-placement="bottom" title="Sign up with Gmail"><UilGoogle/>

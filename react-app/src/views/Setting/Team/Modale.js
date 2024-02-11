@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from "react-hooks-helper";
 import { useDispatch} from 'react-redux';
 import { CreateTeamsAction } from '../../../store/actions/Setting/SettingActions';
+import { useTranslation } from 'react-i18next';
 
 
 
 const  Modale = ({ showmodal, handleClose}) => {
 
   const dispatch = useDispatch();
+  const {t} = useTranslation();
  
 
 
@@ -32,12 +34,12 @@ const  Modale = ({ showmodal, handleClose}) => {
               <div className="form-inputs">
                 <div className="form-row">
                   <div className="col-md-6 input-row">
-                    <input type="text" name="teamname" defaultValue="" placeholder="Team name" className="wizard-required" onChange={setForm} required/>
+                    <input type="text" name="teamname" defaultValue="" placeholder={t('team_name')} className="wizard-required" onChange={setForm} required/>
                   </div>
                   <div className="col-md-6 input-row input-select input-select-multi">
                   </div>
                   <div className="col-md-12 input-row">
-                    <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
+                    <textarea name="description" placeholder={t('description')} onChange={setForm}></textarea>
                   </div>
                 </div>
               </div>
@@ -45,7 +47,7 @@ const  Modale = ({ showmodal, handleClose}) => {
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft">
                 </div>
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {Add(); handleClose()}}>Save</button>
+                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {Add(); handleClose()}}>{t('save')}</button>
                 </div>
               </div>
             </div>

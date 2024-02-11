@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { AskforAccessAction } from '../store/actions/Setting/SettingActions';
 import { Link } from 'react-router-dom';
 import AvatarTooltip from '../utils/AvatarTooltip';
+import { useTranslation } from 'react-i18next';
 
 
 const ProjectSkeletonGridOne = () => {
@@ -19,6 +20,7 @@ const ProjectSkeletonGridOne = () => {
     const handleShow = () => setShowmodal(true);
     const handleClose = () => setShowmodal(false);
     const user = useSelector(state => state.userProfile.userProfile);
+    const {t} = useTranslation();
 
 
     const goback = () => {
@@ -45,7 +47,7 @@ const ProjectSkeletonGridOne = () => {
                         <div className="single-offer-header">
                             <div className="offer-title" >
                                 <h4 style={{ fontSize: "16px !important" }} className="single-offer-name">{providername}</h4>
-                                <span style={{ fontSize: "14px !important", marginBottom: "30px" }} className="text-danger">You are not authorize to access this content contact the owner to get access</span>
+                                <span style={{ fontSize: "18px !important", marginBottom: "30px" , fontWeight: 900}} className="text-danger">{t('no_access_to_content_alert')} </span>
                             </div>
                             <div className="Update-Post">
                                 <button type="button" onClick={handleShow} name="button" data-toggle="tooltip" data-placement="bottom"
@@ -58,18 +60,18 @@ const ProjectSkeletonGridOne = () => {
                         <div className="d-flex justify-content-start flex-column align-items-center">
                             <img style={{ height: '40vh', width: '60vh' }} src="/assets/images/no-permission.svg" alt="Auth needed to view project" />
                             <p style={{ padding: '10px' }}>
-                                Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure.
+                                {/* Ea rerum placeat sit dolores odio ad nostrum eligendi in veniam facere ex quia nulla sit neque iure. */}
                             </p>
 
                         </div>
 
                         <div>
                             <button onClick={goback} style={{ width: '200px' }} name="previous" className="previous action-button">
-                                <i className="uil uil-arrow-left  "></i> Previous
+                                <i className="uil uil-arrow-left  "></i> {t('previous')}
                             </button>
                             <button onClick={handleShow} style={{ width: '200px', marginLeft: '20px' }} name="button" data-toggle="tooltip" data-placement="bottom"
                                 title="Edit Post" className="previous action-button">
-                                <i className="uil-envelope-share"></i> share
+                                <i className="uil-envelope-share"></i> {t('share')}
                             </button>
                         </div>
                     </div>
@@ -89,7 +91,7 @@ const ProjectSkeletonGridOne = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <h5>Contact the owner to get get access to this content</h5>
+                                        <h5>{t('no_access_to_content_popup')}</h5>
                                         <button type="button" onClick={handleSend} name="button" data-toggle="tooltip" data-placement="bottom"
                                             title="Edit Post" className="edit-button permission-button mt-auto"><i className="uil-fast-mail"></i>
                                         </button>

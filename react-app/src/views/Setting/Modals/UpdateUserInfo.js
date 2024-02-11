@@ -4,11 +4,13 @@ import { useForm } from "react-hooks-helper";
 import { useDispatch } from 'react-redux';
 import { UserInfoAction } from '../../../store/actions/Profile/UserActions';
 import ZoneDropProfileFilter from '../../User/Fields/Filter/ZoneDropProfileFilter';
+import { useTranslation } from 'react-i18next';
 
 
 
 const UpdateUserInfo = ({ showInfo, handleCloseInfo, user }) => {
     const dispatch = useDispatch();
+    const {t} = useTranslation();
 
     const [birthday, setBirthday] = useState(new Date());
 
@@ -45,21 +47,21 @@ const UpdateUserInfo = ({ showInfo, handleCloseInfo, user }) => {
                         <div className="modal-body">
                             <div className="form-inputs">
                                 <div className="User-Settings-Header">
-                                    <h3 className="Profile-Section-Title"><i className="uil uil-chat-bubble-user"></i> Updating Mon compte</h3>
+                                    <h3 className="Profile-Section-Title"><i className="uil uil-chat-bubble-user"></i> {t('accountUpdate')}</h3>
                                 </div>
                                 <div className="form-row">
                                     <div className="col-md-6 input-row">
-                                        <input type="text" name="first_name" defaultValue={formData.first_name} onChange={setForm} placeholder="Nom" className="wizard-required" required />
+                                        <input type="text" name="first_name" defaultValue={formData.first_name} onChange={setForm} placeholder={t('lastname')} className="wizard-required" required />
                                     </div>
                                     <div className="col-md-6 input-row">
-                                        <input type="text" name="last_name" defaultValue={formData.last_name} onChange={setForm} placeholder="Prénom" className="wizard-required" required />
+                                        <input type="text" name="last_name" defaultValue={formData.last_name} onChange={setForm} placeholder={t('firstname')} className="wizard-required" required />
                                     </div>
                                     <div className="col-md-12 input-row">
-                                        <input type="text" name="identifiant" defaultValue={formData.identifiant} onChange={setForm} placeholder="Identifiant unique" className="wizard-required" required />
+                                        <input type="text" name="identifiant" defaultValue={formData.identifiant} onChange={setForm} placeholder={t('username')} className="wizard-required" required />
                                     </div>
 
                                     <div className="col-md-12 input-row">
-                                        <input type="text" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder="Phone" className="wizard-required" required />
+                                        <input type="text" name="phone" defaultValue={formData.phone} onChange={setForm} placeholder={t('phone')} className="wizard-required" required />
                                     </div>
 
                                     <div className="col-md-12 input-row">
@@ -73,11 +75,11 @@ const UpdateUserInfo = ({ showInfo, handleCloseInfo, user }) => {
                                     </div>
 
                                     <div className="col-md-12 input-row">
-                                        <input type="text" name="city" defaultValue={formData.city} onChange={setForm} placeholder="City" className="wizard-required" required />
+                                        <input type="text" name="city" defaultValue={formData.city} onChange={setForm} placeholder={t('city')} className="wizard-required" required />
                                     </div>
 
                                     <div className="DadupaModal-Footer w-100">
-                                        <button type="submit" className="DadupaModal-BTNSubmit" name="submit" onClick={() => { updateInfo(); handleCloseInfo() }}>Update</button>
+                                        <button type="submit" className="DadupaModal-BTNSubmit" name="submit" onClick={() => { updateInfo(); handleCloseInfo() }}>{t('update')}</button>
                                     </div>
                                 </div>
                             </div>

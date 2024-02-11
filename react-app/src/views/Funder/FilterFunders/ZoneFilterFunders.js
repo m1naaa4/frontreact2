@@ -1,8 +1,10 @@
 import React, { useEffect,useState } from "react";
 import countries from "../../../data/countries";
 import Select from 'react-select';
+import { useTranslation } from "react-i18next";
 
 function ZoneFilterFunders ({formData}) {
+  const { t } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
     const [country, setCountry] = useState();
 
@@ -80,7 +82,7 @@ function ZoneFilterFunders ({formData}) {
                 onChange={HandleChange}
                 value={optionSelected}
                 styles={SelectStyleWithScrollbar}
-                placeholder={(formData?.zone==='')?"Select Country": country}
+                placeholder={(formData?.zone==='') ? t('select_country'): country}
                 required={true}
                 className="Select"
         />

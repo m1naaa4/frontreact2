@@ -1,44 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FriendGrid from "./Grid/FriendGrid";
 import { Tab, Tabs } from "react-bootstrap";
-import { FriendsAction, MyFriendsAction } from "../../../store/actions/Friend/FriendsAction";
+import {  MyFriendsAction } from "../../../store/actions/Friend/FriendsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import InvitationGrid from "./Grid/InvitationGrid";
 import SuggestionGrid from "./Grid/SuggestionGrid";
+import { useForm } from "react-hooks-helper";
 
 
-export default function({filterInput, setFilterInput, props}){
+export default function FriendsList({props}){
 
+    const firstUpdate = useRef(true);
     const dispatch = useDispatch();
     const params = useParams();
     const history = useHistory();
     const [key, setKey] = useState();
-    const friends = useSelector(state => state.userProfile.friends);
+    const myfriends = useSelector(state => state.userProfile.myfriends);
     const invitations = useSelector(state => state.userProfile.invitations);
     const suggestions = useSelector(state => state.userProfile.suggestions);
     const user = useSelector(state => state.userProfile.userProfile);
-    const count_freinds = 12;
-    const count_invitations = 3;
+    const count_freinds = myfriends?.length ? myfriends?.length : 0;
+    const count_invitations = invitations?.length ? invitations?.length : 0;
+
+    const defaultData = {search  : '', type    : null, orderName : 'Desc'};
+    const [filterInput, setFilterInput] = useForm(defaultData);
 
     const data = { filterInput, setFilterInput, props };
-    useEffect(()=>{
-        let data = {
-          'url' : 'friend/getmyfriends',
-          }
-        dispatch(MyFriendsAction(data));
-      },[])
+    console.log(filterInput);
 
     useEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        }
         let data = {
-            'url'   : 'friend/getFriends',
+            'url'   : 'friend/getmyfriends',
             'user_profile_id' : params.id,
             'search'  : filterInput.search,
             'type'  : filterInput.type,
             'sort' : filterInput.orderName,
         }
-        const timeoutId = setTimeout(() => dispatch(FriendsAction(data)), 1000);
-        return () => clearTimeout(timeoutId);
+        dispatch(MyFriendsAction(data));
     },[filterInput]);
 
     useEffect(() => {
@@ -63,7 +66,7 @@ export default function({filterInput, setFilterInput, props}){
 
                         <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => tabs(k)} className="mb-3">
                             <Tab eventKey="friends" title={'Friends ('+count_freinds+')'}>
-                                <FriendGrid friends={friends} {...data}/>
+                                <FriendGrid friends={myfriends} {...data}/>
                             </Tab>
                             {params.id === user?.profile?.id &&
                             <Tab eventKey="invitations" title={'Invitations ('+count_invitations+')'} >

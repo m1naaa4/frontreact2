@@ -17,11 +17,11 @@ const AllMultiSelectCheckboxStatus = ({datas, setSelectedstatus}) => {
 
   function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
     if (value && value.some((o) => o.value === "*")) {
-      return `${placeholderButtonLabel}: All`;
+      return `${placeholderButtonLabel}: ${t('all')}`;
     } else if(value.some((o) => o.value === '')) {
-      return `${placeholderButtonLabel}: ${value.length-1} selected`;
+      return `${placeholderButtonLabel}: ${value.length-1} ${t('selected')}`;
     }else{
-      return `${placeholderButtonLabel}: ${value.length} selected`;
+      return `${placeholderButtonLabel}: ${value.length} ${t('selected')}`;
     }
   }
 
@@ -46,7 +46,7 @@ const AllMultiSelectCheckboxStatus = ({datas, setSelectedstatus}) => {
 
   return (
     <ReactMultiSelectCheckboxes name='project_area'
-      options={[{ label: "All", value: "*" }, ...options]}
+      options={[{ label: `${t('all')}`, value: "*" }, ...options]}
       placeholderButtonLabel="Status"
       getDropdownButtonLabel={getDropdownButtonLabel}
       value={selectedOptions}

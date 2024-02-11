@@ -2576,24 +2576,21 @@ label.error {
   font-weight: 700;
 }
 
-.offer-meta .Tags-List {
+.Tags-List {
   padding: 0 15px;
   margin-bottom: 15px;
   text-align: center;
 }
 
-.offer-meta .Tags-List .Tag-Item {
-  display: inline-block;
-  background: #EEFAF3;
-  font-size: 11px;
-  border-radius: 15px;
-  padding: 8px 10px;
-  margin-bottom: 0px;
-  margin: 0px 2px;
-}
+
 
 .offer-box.bailleur .meta-details .meta-value {
   margin-top: 5px;
+}
+
+.MuiDialog-paper{
+  border-radius: 15px !important;
+  background-color: rgb(251 255 253);
 }
 
 .reactions-box {
@@ -4245,24 +4242,24 @@ label.error {
 
 .Tag-Item {
   display: inline-block;
-  background: #EEFAF3;
+  /* background: #EEFAF3; */
   font-size: 12px;
-  border-radius: 15px;
-  padding: 12px 15px;
+  border-radius: 5px;
+  padding: 2px 5px;
   margin-bottom: 15px;
-  margin-right: 10px;
-  box-shadow: 1px 1px 1px 1px #76aa8b;
+  margin-right: 5px;
+  /* box-shadow: 1px 1px 1px 1px #76aa8b; */
 }
 
 .Tag-Item:hover {
   display: inline-block;
   background: #EEFAF3;
   font-size: 12px;
-  border-radius: 15px;
-  padding: 12px 15px;
+  border-radius: 5px;
+  padding: 2px 5px;
   margin-bottom: 15px;
-  margin-right: 10px;
-  box-shadow: 1.5px 1.5px 1.5px 1.5px #20cb67;
+  margin-right: 5px;
+  /* box-shadow: 1.5px 1.5px 1.5px 1.5px #20cb67; */
   cursor: pointer;
 }
 
@@ -4364,12 +4361,12 @@ label.error {
     padding: 20px 20px 15px;
   }
 
-  .Tag-Item {
+  /* .Tag-Item {
     font-size: 12px;
     padding: 10px 15px;
     margin-bottom: 8px;
     margin-right: 2px;
-  }
+  } */
 
   .Co-Porteurs {
     padding: 20px;
@@ -4610,6 +4607,7 @@ label.error {
 */
 
 .Profile-Cover {
+  height: 192px;
   background-position: center;
   background-size: cover;
   position: relative;
@@ -4629,7 +4627,7 @@ label.error {
 }
 
 .Profile-Wrapper {
-  margin-top: 30px;
+  margin-top: 70px;
 }
 
 .Profile-Header {

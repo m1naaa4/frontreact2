@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import NotificationGrid from './NotificationGrid';
 import SideRightProfileView from '../Profile/SideRightProfileView'
+import NoContent from '../../utils/NoContent';
 
 function Notifications() {
     const usernotifications = useSelector(state => state.getnotifications);
@@ -13,9 +14,10 @@ function Notifications() {
                 <div className="row">
                     <div className="col-md-9">
                         <div className='dadupa-box'>
-                            {  usernotifications.notifications.map((notification, index) => 
+                            {usernotifications.notifications.length ?  
+                            usernotifications.notifications.map((notification, index) => 
                                 <NotificationGrid notification={notification} key={index} />
-                             )}
+                             ): <NoContent/>}
                          </div>
                     </div>
                     <SideRightProfileView></SideRightProfileView>

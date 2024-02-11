@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react'
-// import { Link, NavLink } from 'react-router-dom';
+import React, { useState} from 'react'
 import LanguageSelector from "../../views/Fields/Language/LanguageSelectorView";
 
 import Propos from './pdfs/Propos.pdf';
@@ -12,7 +11,7 @@ import Services from './pdfs/Services.pdf';
 import RseauxSociaux from './pdfs/RseauxSociaux.pdf';
 import { useTranslation } from 'react-i18next';
 
-function Footer(props) {
+function Footer() {
 
     let languageStoredInLocalStorage = localStorage.getItem("language");
     let [language] = useState(
@@ -38,7 +37,7 @@ function Footer(props) {
                                     <li className="Dadupa-Link"><a href={ConditionsGeneralesUtilisation} target="_blanc">{t('footer.menu.user_agreement')}</a></li>
                                     <li className="Dadupa-Link"><a href={PolitiqueUtilisationDonnes} target="_blanc">{t('footer.menu.privacy')}</a></li>
                                     <li className="Dadupa-Link"><a href={AideFAQ} target="_blanc">{t('footer.menu.cookie')}</a></li>
-                                    <li className="Dadupa-Link"><a href={PresseMedias} target="_blanc">{t('footer.menu.copyright')}</a></li>
+                                    {/* <li className="Dadupa-Link"><a href={PresseMedias} target="_blanc">{t('footer.menu.copyright')}</a></li> */}
                                     <li className="Dadupa-Link"><a href={StagesCarrieres} target="_blanc">{t('footer.menu.brand')}</a></li>
                                     <li className="Dadupa-Link"><a href={Services} target="_blanc">{t('footer.menu.guest')}</a></li>
                                     <li className="Dadupa-Link"><a href={RseauxSociaux} target="_blanc">{t('footer.menu.community')}</a></li>

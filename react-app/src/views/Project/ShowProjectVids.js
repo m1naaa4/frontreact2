@@ -15,10 +15,12 @@ import SubVideo from "./SubVideo";
 import { useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 import NoContent from "../../utils/NoContent";
+import { useTranslation } from "react-i18next";
  
 const ShowProjectVids = () => {
   const [videos, setVideos] = useState([]);
   const project = useSelector(state => state.getproject.getproject?.project);
+  const {t} = useTranslation();
 
   useEffect (() => {
     if (project) { 
@@ -35,7 +37,7 @@ const ShowProjectVids = () => {
 
   return (
     <div className="content">
-      <h3>Videos</h3>
+      <h3>{t('videos')}</h3>
       <div className="d-flex flex-wrap">
         {videos.length > 0 ? videos.map((videoUrl, index) => (
           <ReactPlayer width='250' height='200' controls={true} key={index} url={videoUrl}/>

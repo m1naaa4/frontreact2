@@ -5,7 +5,7 @@ import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {  Link, NavLink, useHistory  } from 'react-router-dom';
 import { LoadNotificationAction, MarkSeenAction } from '../../store/actions/Notification/LoadNotificationAction';
 import $ from "jquery";
-import Messages from './Messages';
+// import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
 import NotificationMenu from '../../views/Notification/NotificationMenu';
@@ -148,8 +148,8 @@ function HeaderProfile() {
                             <div className="center-nav">
                                 <ul className="Dadupa-Nav">
                                 <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i>{t('projectHolder')}</NavLink></li>
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i> {t('funders')} </NavLink></li>
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/mentor`} className="Nav-Link"><i className="uil uil-users-alt"></i> {t('mentors')} </NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i> {t('donor')} </NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/mentor`} className="Nav-Link"><i className="uil uil-users-alt"></i> {t('accompanyingPerson')} </NavLink></li>
                                 <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-books"></i>{t('articles')}</NavLink></li>
                                 </ul>
                             </div>
@@ -160,9 +160,9 @@ function HeaderProfile() {
                                     <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
                                     {display && <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active" ref={ref}>
                                         <ul className="Mini-Profile-Items">
-                                        <li className="Mini-Profile-Item"><Link to={`/project/create`} onClick={clearProject}><i className="uil uil-rocket"></i> {t('header.menu.project')}</Link></li>
-                                        <li className="Mini-Profile-Item"><Link to={`/funder/create`} onClick={clearProject}><i className="uil uil-briefcase-alt"></i> {t('funder')}</Link></li>
-                                        <li className="Mini-Profile-Item"><Link to={`/mentor/create`} onClick={clearProject}><i className="uil uil-comment-alt-notes"></i> {t('mentor')}</Link></li>
+                                        <li className="Mini-Profile-Item"><Link to={`/project/create`} onClick={clearProject}><i className="uil uil-rocket"></i> {t('projectHolder')}</Link></li>
+                                        <li className="Mini-Profile-Item"><Link to={`/funder/create`} onClick={clearProject}><i className="uil uil-briefcase-alt"></i> {t('donor')}</Link></li>
+                                        <li className="Mini-Profile-Item"><Link to={`/mentor/create`} onClick={clearProject}><i className="uil uil-comment-alt-notes"></i> {t('accompanyingPerson')}</Link></li>
                                         </ul>
                                     </div>}
                                 </div>
@@ -187,7 +187,7 @@ function HeaderProfile() {
                                                             <NotificationMenu notification={notification} key={index} />
                                                         )}
                                                         <div className="All-Messages-Row">
-                                                            <Link to={`/notifications`} className="all-messages-button">See All Notifications</Link>
+                                                            <Link to={`/notifications`} className="all-messages-button"> {t('seeAll')} {t('notifications')} </Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -207,8 +207,8 @@ function HeaderProfile() {
                                 <>
                                     <ul className="Dadupa-User-Infos">
                                         <li className="profile-image">
-                                            {userProfile.profile.avatar_link ? 
-                                                <img src={userProfile.profile.avatar_link} alt="avatar" />    
+                                            {userProfile.profile?.avatar_link ? 
+                                                <img src={userProfile.profile?.avatar_link} alt="avatar" />    
                                             : <img src="/assets/images/avatar.png" alt="avatar" />}
                                         
                                         </li>

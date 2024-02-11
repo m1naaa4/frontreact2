@@ -1,17 +1,17 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux';
-import {displayErrorMessages} from '../../../helpers/displayErr'
+import {useSelector} from 'react-redux';
 import ItemForm from "./ItemForm";
-import {Text} from "../../../containers/Language";
 import TypeDrop from "../Fields/Signup/TypeDrop";
 import $ from "jquery";
 import 'jquery-validation'
 import Zonedropfilter from '../Fields/Signup/Zonedropfilter';
+import { useTranslation } from 'react-i18next';
 
 
 const RegisterStep2View = ({setForm, formData, navigation}) => {
     const {firstName, lastName, type, phone, country, city, username} = formData;
     const {previous, next} = navigation;
+    const {t} = useTranslation();
 
     const validateForm = (value, key) => {
         if($("#form").valid()){
@@ -22,7 +22,6 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
             }
         }
     }
-
 
     const authResponse = useSelector(state => state.userAuth.authResponse);
 
@@ -38,41 +37,42 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
                 <div className="form-inputs">
                     <div className="input-row">
                         <ItemForm type="text" name="firstName" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={firstName} onChange={setForm}
-                                placeholder="Nom" required/>
+                                placeholder={t('lastName')} required/>
                     </div>
                     <div className="input-row">
                         <ItemForm type="text" name="lastName" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={lastName} onChange={setForm}
-                                placeholder="Prenom" required/>
+                                placeholder={t('firstName')} required/>
                     </div>
 
                     <div className="input-row">
                         <ItemForm type="text" name="username" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) }  value={username} onChange={setForm}
-                                placeholder="username"/>
+                                placeholder={t('username')}/>
                     </div>
 
-                    <TypeDrop  name="type" value={type} onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } onChange={setForm}/>
+                    {/* <TypeDrop  name="type" value={type} onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } onChange={setForm}/> */}
+                    <div className="input-row">
+                        <TypeDrop   formData={formData}/>
+                    </div>
 
                     <div className="input-row">
                         <ItemForm type="tel" name="phone" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={phone} onChange={setForm}
-                                placeholder="Numéro de téléphone"/>
+                                placeholder={t('phone')}/>
                     </div>
 
                     <div className="input-row">
-                        {/* <ZoneDropFilter field='country' name="country" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } placeholder="Pays" value={country} onChange={setForm}
-                            required/> */}
                            <Zonedropfilter formData={formData}/>
                     </div>
 
                     <div className="input-row">
                         <ItemForm type="text" name="city" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={city} onChange={setForm}
-                                placeholder="Ville" required/>
+                                placeholder={t('city')} required/>
                     </div>
 
                     <button type="button" name="previous" onClick={previous}
                             className="flex-prev-btn previous action-button"
-                    ><Text tid="previous" /></button>
+                    >{t('previous')}</button>
                     <button type="button" name="next" onClick={(e) => validateForm('next')}
-                            className="flex-next-btn next action-button"><Text tid="next" /></button>
+                            className="flex-next-btn next action-button">{t('next')}</button>
                 </div>
             </form>
         </fieldset>

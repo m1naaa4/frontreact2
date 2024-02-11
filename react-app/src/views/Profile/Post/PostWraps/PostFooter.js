@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LikeAction } from '../../../../store/actions/Like/LikeAction';
 import AddComment from '../Comment/AddComment';
 import ShowComment from '../Comment/ShowComment';
+import { useTranslation } from 'react-i18next';
 
 export default function PostFooter({ post }) {
     const [comments, SetComments] = useState(false);
@@ -11,6 +12,7 @@ export default function PostFooter({ post }) {
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
     const [classe, setClasse] = useState();
+    const {t} = useTranslation();
 
     const commentss = useSelector(state => state.getComments);
     const counter = useSelector(state => state.addednotification); // c'est ca qui declanche l'ajout de comment socket a ne pas supprimer
@@ -64,8 +66,8 @@ export default function PostFooter({ post }) {
               <div className="reaction views"><i className="uil uil-eye"></i> <span>1500</span></div>
             </div>
             <div className="col-6 col-md-8 col-lg-6 text-right">
-              <div className="reaction comments" ref={refcomment} onClick={e => showComments(post.id)} ><span>{post.commentCount} Comments</span></div>
-              <div className="reaction shares"><span>380 Shares</span></div>
+              <div className="reaction comments" ref={refcomment} onClick={e => showComments(post.id)} ><span>{post.commentCount} {t('comments')}</span></div>
+              {/* <div className="reaction shares"><span>380 Shares</span></div> */}
             </div>
           </div>
         </div>
@@ -79,16 +81,16 @@ export default function PostFooter({ post }) {
         <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'} 
         onClick={likeAAction} toggle="#password-field" type="button" name="button">
             <img src={like?"/assets/images/icons/dadupa-clap-green.svg":"/assets/images/icons/dadupa-clap.svg"} alt=""/>
-            {like?"Dislike":"Like"}
+            {like ? t('unclap') : t('clap')}
         </button>
 
         <button className="reaction-button reaction-comment" onClick={showCommentBox} type="button" name="button">
           <img src="/assets/images/icons/dadupa-comment.svg" alt="comment"/>
-          Commenter
+          {t(`comment`)}
         </button>
         <button className="reaction-button" type="button" name="button" data-toggle="modal" data-target="#SharingModal">
           <img src="/assets/images/icons/dadupa-share.svg" alt="share"/>
-          Partager
+          {t(`partagez`)}
         </button>
       </div>
       <div id="Comments-Wrap" className="Comments-Wrap">

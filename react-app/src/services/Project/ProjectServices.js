@@ -58,7 +58,7 @@ export const LoadProject = (data, props, current) =>
     const http = new Service();
     let getProjectUrl = "/get?page="+current;
     const tokenId = "user-token";
-    return http.postData(data,getProjectUrl,tokenId,'').then(data=>{
+    return http.postData(data, getProjectUrl, tokenId, '').then(data=>{
         return data
     }).catch((error)=> {
         return error;

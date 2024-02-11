@@ -9,6 +9,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import { UploadLogoAction } from '../../store/actions/Media/MediaAction';
+import { useTranslation } from 'react-i18next';
 
 
 export default function HeaderProfileView({ formData, setForm, props }) {
@@ -18,9 +19,11 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const myfriends = useSelector(state => state.userProfile.myfriends);
     const newavatar = useSelector(state => state.updateavatar);
-    const [show,setShow] = useState(false);
+    const [show, setShow] = useState(false);
     const dispatch = useDispatch();
-    const [open,setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [type, setType] = useState();
+    const { t } = useTranslation();
 
     const hiddenFileInput = useRef(null);
     const hiddenCoverInput = useRef(null);
@@ -44,6 +47,16 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     useEffect(() => {
         setFileCover(infoprofile.infoprofile.cover);
         setFileAvatar(infoprofile.infoprofile.avatar);
+
+        if (infoprofile.infoprofile.type == 'PP') {
+            setType('uil uil-lightbulb-alt');
+        } else if(infoprofile.infoprofile.type == 'BF') {
+            setType('uil uil-moneybag');
+        } else if(infoprofile.infoprofile.type == 'ACMPT') {
+            setType('uil uil-users-alt');
+        } else {
+            setType('');
+        }
     }, [infoprofile.infoprofile.avatar])
 
     useEffect(() => {
@@ -60,11 +73,9 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     });
 
     useEffect(() => {
-
         if (infouser.userProfile && infouser.userProfile !== 'loading') {
             setUserId(infouser.userProfile.profile_id);
         };
-
         if(myfriends){
             let find = myfriends.some( (data) => {return (data.profile_id === infoprofile.infoprofile.id) });
             if(find){
@@ -135,14 +146,14 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                     }
 
                                     <div className="Profile-Name">
-                                        <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                        <span style={{color:"white",fontSize:"20px"}}>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
+                                        <span className="Profile-Icon"><i className={`${type}`}></i></span>
+                                        <span style={{fontSize:"15px"}}>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
                                     </div>
                                 </div>
                                 {
                                     localStorage.getItem('profile_id') === params.id && < >
                                     <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
-                                    <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> Edit cover photo</label>
+                                    <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> {t('coverEdit')} </label>
                                 </>
                                 }
                                 <div className="Profile-Navigation" style={{top:"5px"}}>
@@ -156,7 +167,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                             >
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
-                                                    <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span>
+                                                    <span style={{fontWeight:"bold",top:"50px"}}> {t('request_sent_accept')}</span>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
@@ -165,10 +176,10 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                                 </Button>
                                                 </DialogActions>
                                         </Dialog>
-                                        <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i> Bio</NavLink></li>
-                                        <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i> Offres</NavLink></li>
-                                        <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> Historique</NavLink></li>
-                                        <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" /> Réseaux</NavLink></li>
+                                        <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i>{t('bio')}</NavLink></li>
+                                        <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i>{t('offerings')}</NavLink></li>
+                                        <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> {t('history')}</NavLink></li>
+                                        <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" />{t('réseaux')} </NavLink></li>
                                         {/*<li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li> */}
                                     </ul>
                                 </div>

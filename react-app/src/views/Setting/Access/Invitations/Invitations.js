@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Nav, Row, Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { cancelInvitationAction, reSendAction } from '../../../../store/actions/Setting/SettingActions';
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material';
 import useOutsideClick from '../../../../helpers/useOutsideClick';
+import { useTranslation } from 'react-i18next';
 
 
 export default function Invitations() {
@@ -13,6 +12,7 @@ export default function Invitations() {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const ref = useRef();
+    const {t} = useTranslation();
 
     const [options_List, SetOptions_List] = useState(false);
     const showOptions = () => {
@@ -68,11 +68,11 @@ export default function Invitations() {
                     <TableHead>
                         <TableRow>
                             <TableCell>To</TableCell>
-                            <TableCell align="center">Categorie</TableCell>
-                            <TableCell align="center">Link</TableCell>
-                            <TableCell align="center">Role</TableCell>
-                            <TableCell align="center">date</TableCell>
-                            <TableCell align="center">Action</TableCell>
+                            <TableCell align="center">{t('categorie')}</TableCell>
+                            <TableCell align="center">{t('link')}</TableCell>
+                            <TableCell align="center">{t('role')}</TableCell>
+                            <TableCell align="center">{t('date')}</TableCell>
+                            <TableCell align="center">{t('action')}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -93,8 +93,8 @@ export default function Invitations() {
                                         <button onClick={showOptions} className="Add-New" data-toggle="tooltip" data-placement="bottom"><i className="uil uil-ellipsis-h"></i></button>
                                         {options_List && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
                                             <ul className="Mini-Profile-Items">
-                                                <li className="Mini-Profile-Item"><a href="#" onClick={() => accept(row.token, row.route)} > Accept</a></li>
-                                                <li className="Mini-Profile-Item"><a href="#" onClick={() => reject(row.deny_token)} > Reject</a></li>
+                                                <li className="Mini-Profile-Item"><a href="#" onClick={() => accept(row.token, row.route)} > {t('request_ligne3_right')}</a></li>
+                                                <li className="Mini-Profile-Item"><a href="#" onClick={() => reject(row.deny_token)} > {t('reject')}</a></li>
                                             </ul>
                                         </div>}
                                     </div>

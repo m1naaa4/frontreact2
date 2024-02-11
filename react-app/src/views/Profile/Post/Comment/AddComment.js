@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
 import { AddCommentAction } from '../../../../store/actions/Comment/CommentAction';
+import { useTranslation } from 'react-i18next';
 // import {PusherAction} from "../../../../store/actions/Generale/PusherAction";
 
 
@@ -11,6 +12,7 @@ export default function AddComment({post}) {
     const [body, setBody] = useState();
     const refcomment = useRef(null);
     // const params = useParams();
+    const {t} = useTranslation();
 
     const comment = useSelector(state => state.getComments);
     const newavatar = useSelector(state => state.updateavatar);
@@ -69,7 +71,7 @@ export default function AddComment({post}) {
                 <div className="Comment-Col-10">
                     <div className="Comment-Area">
                         <div className="Comment-Input">
-                        <input type="text" name="body" onChange={e => setBody(e.target.value)} ref={refcomment} placeholder="Write your comment"/>
+                        <input type="text" name="body" onChange={e => setBody(e.target.value)} ref={refcomment} placeholder={t('write_comment')}/>
                         </div>
                     </div>
                 </div>

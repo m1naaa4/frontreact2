@@ -108,7 +108,7 @@ export default function ListingMentors(props) {
                                                 <div className="col-md-12">
                                                 <div className="offer-box">
                                                     <div className="offer-box">
-                                                        no result found
+                                                    {t('noresultfound')}
                                                     </div>
                                                 </div>
                                             </div>

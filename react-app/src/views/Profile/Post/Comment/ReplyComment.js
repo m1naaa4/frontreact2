@@ -1,14 +1,15 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
-// import PusherService from '../../../../services/Pusher';
 import { AddCommentAction } from '../../../../store/actions/Comment/CommentAction';
+import { useTranslation } from 'react-i18next';
 
 
 export default function ReplyComment({comment, post}) {
 
     const [body, setBody] = useState();
-    const refcomment = useRef(null)
+    const refcomment = useRef(null);
+    const {t} = useTranslation();
 
     const [avatar, setAvatar] = useState();
     const [profile_id, setProfileId] = useState();
@@ -70,7 +71,7 @@ export default function ReplyComment({comment, post}) {
                         <div className="Comment-Input">
                         <input type="text" name="body" 
                         onChange={e => setBody(e.target.value)} ref={refcomment}
-                            placeholder="Write your comment"/>
+                            placeholder={t('write_comment')}/>
                         </div>
                     </div>
                 </div>

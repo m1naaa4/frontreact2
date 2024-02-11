@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddComment from '../../../views/Comment/AddComment';
 import { Link } from 'react-router-dom';
 import parse from 'html-react-parser';
-import { Text } from '../../../containers/Language';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
 import { useParams } from 'react-router'
 import { getArticle } from "../../../store/actions/Articles/ArticlesActions";
 import SharePopUp from '../../../utils/SharePopUp';
 import { LikeAction } from '../../../store/actions/Like/LikeAction';
+import { useTranslation } from 'react-i18next';
+import ProjectSkeletonGrid from '../../../skeleton/ProjectSkeletonGrid';
+import ListArticlesSideSkeleton from '../../../skeleton/profile/ListArticlesSideSkeleton';
 
 
 export default function ArticleDetails(props) {
@@ -21,6 +23,7 @@ export default function ArticleDetails(props) {
     const [like, setLike] = useState(false);
     const [likeCount, setLikeCount] = useState();
     const [countcomment, setCountcomment] = useState();
+    const [t] = useTranslation();
 
     const populares = useSelector(state => state.articles.populareArticles);
     const suggrestions = useSelector(state => state.articles.suggrestionArticles);
@@ -136,8 +139,8 @@ export default function ArticleDetails(props) {
                                                                 <span>{article.visitCount}</span></div>
                                                         </div>
                                                         <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                            <div className="reaction comments"><span>{countcomment} Comments</span></div>
-                                                            <div className="reaction shares"><span>{article.shared} Shares</span></div>
+                                                            <div className="reaction comments"><span>{countcomment} {t('commentplural')}</span></div>
+                                                            <div className="reaction shares"><span>{article.shared} {t(`shareplural`)}</span></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,14 +149,14 @@ export default function ArticleDetails(props) {
                                             <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
                                                 onClick={likeAction} toggle="#password-field" type="button" name="button">
                                                 <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
-                                                {like ? "Dislike" : "Like"}
+                                                {like ? t('unclap') : t('clap')}
                                             </button>
 
                                                 <a className="reaction-button reaction-comment" href="#Comments-Wrap">
-                                                    <img src="/assets/images/icons/dadupa-comment.svg" alt="" /> Commenter
+                                                    <img src="/assets/images/icons/dadupa-comment.svg" alt="" /> {t(`comment`)}
                                                 </a>
                                                 <button className="reaction-button" type="button" name="button" onClick={() => { setShareUrl(true) }}>
-                                                    <img src="/assets/images/icons/dadupa-share.svg" alt="" /> Partager
+                                                    <img src="/assets/images/icons/dadupa-share.svg" alt="" /> {t(`partagez`)}
                                                 </button>
                                             </div>
                                         </div>
@@ -162,23 +165,22 @@ export default function ArticleDetails(props) {
 
                                     <AddComment providerObject={article.id} providerType='article' />
                                 </div>
-                            ) : <h1>Loading ...</h1>
+                            ) : <h1><ProjectSkeletonGrid/></h1>
                         }
 
                         <div className="col-md-3 articles-list-sidebar pl-5 pr-0">
-                            <h4><Text tid="articles_suggestedArticle" /></h4>
                             {
                                 loading ?
-                                    <h1>Loading</h1>
+                                    <h1><ListArticlesSideSkeleton/></h1>
                                     :
                                     suggrestions && suggrestions.map((article, index) =>
                                         <ArticleSidebarView article={article} key={index} />
                                     )
                             }
-                            <h4><Text tid="articles_topArticle" /></h4>
+                            
                             {
                                 loading ?
-                                    <h1>Loading</h1>
+                                    <h1><ListArticlesSideSkeleton/></h1>
                                     :
                                     populares.map((article, index) =>
                                         <ArticleSidebarView article={article} key={index} />

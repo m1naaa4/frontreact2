@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import { languageOptions } from '../../../languages';
 import { LanguageContext } from '../../../containers/Language';
 import { useTranslation } from 'react-i18next';

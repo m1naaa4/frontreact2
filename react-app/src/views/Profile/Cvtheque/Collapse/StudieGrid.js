@@ -213,17 +213,17 @@ const StudieGrid = ({ study }) => {
                   <label className="container-checkbox">
                     <input type="checkbox" defaultChecked={formData.present} />
                     <span className="checkmark"></span>
-                    <span>Présent</span>
+                    <span>{t('ongoing')}</span>
                   </label>
                 </div>
                 <div className="col-md-12 input-row">
-                  <input type="text" name="project-areas" defaultValue={formData.etablissement} placeholder="Établissement" onChange={setForm} className="wizard-required" required />
+                  <input type="text" name="project-areas" defaultValue={formData.etablissement} placeholder={t('school')} onChange={setForm} className="wizard-required" required />
                 </div>
                 <div className="col-md-12 input-row">
-                  <input type="text" name="lieu" defaultValue={formData.lieu} placeholder="Lieu" className="wizard-required" onChange={setForm} required />
+                  <input type="text" name="lieu" defaultValue={formData.lieu} placeholder={t('address')} className="wizard-required" onChange={setForm} required />
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="text" name="diplome" defaultValue={formData.diplome} placeholder="Diplôme obtenu" className="wizard-required" onChange={setForm} required />
+                  <input type="text" name="diplome" defaultValue={formData.diplome} placeholder={t('trainingDiploma')} className="wizard-required" onChange={setForm} required />
                 </div>
                 <div className="col-md-6 input-row input-select input-select-multi">
                   <Select
@@ -237,7 +237,7 @@ const StudieGrid = ({ study }) => {
                   />
                 </div>
                 <div className="col-md-12 input-row">
-                  <textarea name="description" placeholder="Description " defaultValue={formData.description} onChange={setForm}></textarea>
+                  <textarea name="description" placeholder={t('description')} defaultValue={formData.description} onChange={setForm}></textarea>
                 </div>
               </div>
             </div>
@@ -246,7 +246,7 @@ const StudieGrid = ({ study }) => {
 
               </div>
               <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                <button type="button" className="DadupaModal-BTNSubmit" onClick={UpdateStudies}>Update</button>
+                <button type="button" className="DadupaModal-BTNSubmit" onClick={UpdateStudies}>{t('update')}</button>
               </div>
             </div>
           </form>

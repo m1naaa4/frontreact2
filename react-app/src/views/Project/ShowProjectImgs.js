@@ -6,6 +6,7 @@ import {
   LightgalleryItem,
 } from "react-lightgallery";
 import NoContent from "../../utils/NoContent";
+import { useTranslation } from "react-i18next";
 
 
 const PhotoItem = ({ image, thumb, group }) => (
@@ -20,6 +21,7 @@ const PhotoItem = ({ image, thumb, group }) => (
 export default function ShowProjectImgs() {
 
   const project = useSelector(state => state.getproject.getproject?.project);
+  const {t} = useTranslation();
 
   const [imgs, setImgs] =  useState([]);
 
@@ -38,7 +40,7 @@ export default function ShowProjectImgs() {
   return (
     <div className="content">
       <LightgalleryProvider>
-        <h3>Photos</h3>
+        <h3>{t('pictures')}</h3>
 
         <div className="d-flex align-items-center flex-wrap">
           {imgs.length ? imgs.map((p, idx) => (

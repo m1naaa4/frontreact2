@@ -7,12 +7,14 @@ import UpdateUserInfo from './Modals/UpdateUserInfo';
 import LanguageSelectorView from '../Fields/Language/LanguageSelectorView';
 import { ConfirmationAction, LanguageAction } from '../../store/actions/Profile/UserActions';
 import countries from '../../data/countries';
+import { useTranslation } from 'react-i18next';
 
 
 
-export default function SideRightSettingView(props) { 
+export default function SideRightSettingView() { 
     const infoprofile = useSelector(state => state.userProfile.userProfile);
     const dispatch = useDispatch();
+    const {t} = useTranslation();
 
     const [show, setShow] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
@@ -59,7 +61,7 @@ export default function SideRightSettingView(props) {
                     <div className="form-inputs">
 
                       <div className="User-Settings-Header">
-                        <h3>Mon compte</h3>
+                        <h3>{t('account')}</h3>
                         <button type="button" className="UpdateInfos-BTN" onClick={handleShowInfo} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
                       </div>
                         <Modal show={showInfo} onHide={handleCloseInfo} className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -67,20 +69,20 @@ export default function SideRightSettingView(props) {
                         </Modal>
                       <div className="form-row">
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.firstname} placeholder="first name" className="wizard-required" readOnly />
+                          <input type="text" name="firstName" value={infoprofile.firstname} placeholder={t('firstName')} className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.lastname} placeholder="last name" className="wizard-required" readOnly />
+                          <input type="text" name="lastName" value={infoprofile.lastname} placeholder={t('lastName')} className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-name" value={infoprofile.profile.username} placeholder="pseudo" className="wizard-required" readOnly />
+                          <input type="text" name="username" value={infoprofile.profile.username} placeholder={t('username')} className="wizard-required" readOnly />
                         </div>
 
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder="Birthday" className="wizard-required" readOnly />
+                          <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder={t('firstName')} className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-areas" defaultValue={country} placeholder="Country" className="wizard-required" readOnly/>
+                          <input type="text" name="country" defaultValue={country} placeholder={t('country')} className="wizard-required" readOnly/>
                         </div>
 
                       </div>
@@ -92,7 +94,7 @@ export default function SideRightSettingView(props) {
                     <div className="form-inputs">
 
                       <div className="User-Settings-Header">
-                        <h3>Mes Accès</h3>
+                        <h3>{t('access')}</h3>
                         <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
                       </div>
 
@@ -102,17 +104,17 @@ export default function SideRightSettingView(props) {
 
                       <div className="form-row">
                         <div className="col-md-12 input-row">
-                          <input type="text" name="project-name" value={infoprofile.email} placeholder="your email" className="wizard-required" readOnly />
+                          <input type="text" name="email" value={infoprofile.email} placeholder={t('email')} className="wizard-required" readOnly />
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="password" name="project-name" value="" placeholder="Mon mot de passe" value="Mon mot de passe" className="wizard-required" readOnly />
+                          <input type="password" name="password" value="" placeholder={t('password')}  className="wizard-required" readOnly />
                         </div>
                         {!infoprofile.email_verified_at  && <div className="col-md-12 confirmation-message">
                             <div className="confirmation-message-text">
-                              <p>{infoprofile.email_verification_sent ? 'Votre email n’est pas confirmé' : "Renvoyer l'email de confirmation " }</p>
+                              <p>{infoprofile.email_verification_sent ? t('email_not_confirmed') : t('emailConfirmation') }</p>
                             </div>
                             <div className="confirmation-message-action">
-                              <button type="button" onClick={sendconfirm} name="button">Confirmer</button>
+                              <button type="button" onClick={sendconfirm} name="button">{t('settingconfirm')}</button>
                             </div>
                           </div>
                         }
@@ -127,8 +129,8 @@ export default function SideRightSettingView(props) {
                 <div className="form-inputs">
 
                   <div className="User-Settings-Header">
-                    <h3>Interface</h3>
-                    <button type="button" className="UpdateInfos-BTN UpdateInfos-BTNText" onClick={updateInfo}>Update</button>
+                    <h3>{t('interface')}</h3>
+                    <button type="button" className="UpdateInfos-BTN UpdateInfos-BTNText" onClick={updateInfo}>{t('update')}</button>
                   </div>
                   <div className="form-row">
                     <div className="col-md-12 input-row input-select">

@@ -45,7 +45,7 @@ const  Member = ({ team, roles}) => {
                       <div className="DadupaModal-Footer">
                           <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft"></div>
                         <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                            <button type="button" className="DadupaModal-BTNSubmit">Update</button>
+                            <button type="button" className="DadupaModal-BTNSubmit">{t('update')}</button>
                         </div>
                       </div>
                   </form>

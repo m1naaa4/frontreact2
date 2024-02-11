@@ -1,22 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {UserLoginAction, clearUserAuthState} from '../../store/actions/User/Auth/AuthActions'
 import ItemForm from '../User/Auth/ItemForm';
-import {useFormFields} from '../../helpers/hooksFormInput'
+import {useFormFields} from '../../helpers/hooksFormInput';
 import HeaderLogo from "../../layout/Header/HeaderLogo";
 import Footer from "../../layout/footer/footer";
-import {Text} from "../../containers/Language";
 import $ from "jquery";
 import 'jquery-validation';
 import { useTranslation } from 'react-i18next';
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
 import { AdminLoginAction } from '../../store/actions/Admin/AuthActions';
 
 
 export default function LoginView(props) {
 
-    const [place, sePlace] = useState();
-    const [t] = useTranslation();
+    const { t } = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
 
 
@@ -37,20 +34,10 @@ export default function LoginView(props) {
 
     const authResponse = useSelector(state => state.adminAuth.user);
 
-
-    // useEffect(() => {
-    //         dispatch(clearUserAuthState())
-    //         sePlace(<Text tid="welcomeDescription"/>)
-
-    //         console.log(place)
-    //     },
-    // [])
-
     const handleLogin = (e) => {
         if($("#form-login").valid()){
-            setIsLoading(true)
-
-            dispatch(AdminLoginAction(fields, props.props))
+            setIsLoading(true);
+            dispatch(AdminLoginAction(fields, props.props));
         }          
     }
 
@@ -68,14 +55,11 @@ export default function LoginView(props) {
                         </div>
                         <div className="col-md-12 col-lg-4">
                             <div className="form-wrapper">
-                                
-                               
                                 { authResponse?.success === false &&
-                                     <div id="authErr" className="alert alert-danger"><Text tid={authResponse.error} /></div>
+                                     <div id="authErr" className="alert alert-danger">{t('authResponse.error')}</div>
                                 }
-
-                                <form id="form-login" onSubmit={e => {e.preventDefault();handleLogin(e)}} className="form-login">
-                                    <h3 className="form-title"><Text tid="welcomeDescriptionadmin" />!</h3>
+                                <form id="form-login" onSubmit={e => {e.preventDefault(); handleLogin(e)}} className="form-login">
+                                    <h3 className="form-title">{t('welcomeDescriptionadmin')}!</h3>
                                     <div className="form-inputs">
                                         <div className="input-row">
                                             <ItemForm type="email" name="email" value={fields.email}
@@ -106,7 +90,7 @@ export default function LoginView(props) {
                                                     <span> {t('remember_me')}</span>
                                             </label>
                                         </div>
-                                        <div className="forgot-password"><a href="#!"><Text tid="forget_password" /></a></div>
+                                        <div className="forgot-password"><a href="#!">{t('forget_password')}</a></div>
                                     </div>
                                     <div className="form-submit">
                                         <button type="submit"  name="submit"> 
@@ -119,7 +103,6 @@ export default function LoginView(props) {
                                         aria-hidden="true"
                                         /> }
                                         </button>
-
                                     </div>
                                 </form>
                             </div>

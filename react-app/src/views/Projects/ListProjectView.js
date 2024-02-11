@@ -6,11 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 // import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User/Project/ProjectActions";
 import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/Project/ProjectAction"
 import {Redirect} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 export default function ListProjectView({ props}) {
     const tag_state = useSelector(state => state.generaleVariable.tag);
     const tags = tag_state ? tag_state : [];
+    const {t} = useTranslation();
     
     const [filterInput, setFilterInput ]  = useState({
         'filters' : true,
@@ -101,7 +103,7 @@ export default function ListProjectView({ props}) {
                                             <div className="col-md-12">
                                                 <div className="offer-box">
                                                     <div className="offer-box">
-                                                        no result found
+                                                    {t('noresultfound')}
                                                     </div>
                                                 </div>
                                             </div>)

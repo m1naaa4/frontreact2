@@ -5,9 +5,9 @@ import RegisterStep1View from "./RegisterStep1View";
 import RegisterStep2View from "./RegisterStep2View";
 import Submit from "./Submit";
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
-import {Text} from "../../../containers/Language";
 import Footer from "../../../layout/footer/footer";
 import SocialLogin from "./Social/SocialLogin";
+import { useTranslation } from "react-i18next";
 
 
 const steps = [
@@ -30,7 +30,7 @@ const defaultData = {
 
 const MultiStepForm = ({ props }) => {
     const [formData, setForm] = useForm(defaultData);
-
+    const [t] = useTranslation();
 
     const { step, navigation } = useStep({ initialStep: 0, steps });
 
@@ -61,7 +61,7 @@ const MultiStepForm = ({ props }) => {
                         <div className="col-md-12 col-lg-4">
                             <div className="form-wrapper">
                                 <div id="form-signup" className="form-signup">
-                                    <h2 className="signup-title"><Text tid="signup.message1" /> <br/><Text tid="signup.message2" /></h2>
+                                    <h2 className="signup-title">{t('signup.message1')} <br/>{t('signup.message2')}</h2>
                                     <ul id="progressbar">
                                         <li className={step.id == "registerstep1" ? 'active' : ''}>
                                             <span>1</span>
@@ -84,7 +84,7 @@ const MultiStepForm = ({ props }) => {
                                 {step.id == "registerstep1" ? (
                                     <div>
                                         <SocialLogin props={props} />
-                                        <div className="login-link"><span><Text tid="signup.form.alreadyMember" /></span><Link to="/login"><Text tid="signin" /></Link></div>
+                                        <div className="login-link"><span>{t('signup.form.alreadyMember')}</span><Link to="/login">{t('signin')}</Link></div>
                                     </div>
                                 ) : ''}
                                 

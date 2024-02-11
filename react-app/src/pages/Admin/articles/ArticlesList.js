@@ -4,8 +4,10 @@ import { getArticles, getCategories } from '../../../store/actions/Articles/Arti
 import 'react-quill/dist/quill.snow.css';
 import ArticleListView from '../../../views/Articles/ArticleListView';
 import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
-import { Text } from '../../../containers/Language';
 import FilterArticle from '../../../views/User/Fields/Filter/FilterArticle';
+import { useTranslation } from 'react-i18next';
+import ListArticlesSkeleton from '../../../skeleton/profile/ListArticlesSkeleton';
+import ListArticlesSideSkeleton from '../../../skeleton/profile/ListArticlesSideSkeleton';
 
 
 export default function ArticlesList() {
@@ -15,6 +17,7 @@ export default function ArticlesList() {
     const populares = useSelector(state => state.articles.populareArticles);
     const suggrestions = useSelector(state => state.articles.suggrestionArticles);
     const loading = useSelector(state => state.articles.loading);
+    const [t] = useTranslation();
 
     const [filterInput, setFilterInput ]  = useState({
         'filters' : true,
@@ -43,7 +46,7 @@ export default function ArticlesList() {
                                 <div className="row">
                                     {
                                         loading ?
-                                            <h1>Loading</h1>
+                                            <h1><ListArticlesSkeleton/></h1>
                                             :
                                             (articles.length > 0 ? 
                                                 articles.map((article, index) =>
@@ -62,19 +65,17 @@ export default function ArticlesList() {
                                 </div>
                             </div>
                             <div className='col-12 col-lg-3 articles-list-sidebar'>
-                                <h4><Text tid="articles_suggestedArticle" /></h4>
                                 {
                                     loading ?
-                                        <h1>Loading</h1>
+                                        <h1><ListArticlesSideSkeleton/></h1>
                                         :
                                         suggrestions && suggrestions.map((article, index) =>                                            
                                             <ArticleSidebarView article={article} key={index} />
                                         )
                                 }
-                                <h4><Text tid="articles_topArticle" /></h4>
                                 {
                                     loading ?
-                                        <h1>Loading</h1>
+                                        <h1><ListArticlesSideSkeleton/></h1>
                                         :
                                         populares.map((article, index) =>
                                             <ArticleSidebarView article={article} key={index} />

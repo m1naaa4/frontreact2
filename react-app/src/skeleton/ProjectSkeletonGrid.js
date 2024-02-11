@@ -10,7 +10,7 @@ const ProjectSkeletonGrid  = () =>{
     return(
         
         <div className="col-md-8" >
-                    <div className="offer-box">
+                    <div >
                         <div className="offer-header">
                             <div className="offer-title">
                                 <h3><a href="#!" ><Skeleton height={30} width={200} /></a></h3>
@@ -20,10 +20,10 @@ const ProjectSkeletonGrid  = () =>{
                                 <Skeleton variant="rect" height={45} width={45} />
                             </div>
                         </div>
-                        <div className="offer-media">
-                            <div className="player" >
+                        <div className="">
+                            {/* <div className="player" > */}
                                 <Skeleton width={700} height={400}  />
-                            </div>
+                            {/* </div> */}
                         </div>
                         <div className="offer-meta">
                             <ul className="meta-items">

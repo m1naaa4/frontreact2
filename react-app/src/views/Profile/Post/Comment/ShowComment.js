@@ -10,8 +10,7 @@ import axios from 'axios';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
-import $ from 'jquery';
-import PusherConsole from '../../../../services/PusherConsole';
+import { useTranslation } from 'react-i18next';
 
 export default function ShowComment({ post }) {
 
@@ -28,13 +27,9 @@ export default function ShowComment({ post }) {
   const [deleted_id, setDeleted] = useState();
   const [comments, setComments] = useState(post.comments);
 
-  const [replies, SetReplies] = useState(false);
   const [replyBox, SetReplyBox] = useState(false);
 
-  const showReplies = e => {
-    SetReplies(e)
-    SetReplyBox(!replyBox)
-  };
+  const {t} = useTranslation();
 
   const showReplyBox = (value) => {
     SetReplyBox(value)
@@ -45,16 +40,12 @@ export default function ShowComment({ post }) {
   },[]);
 
   useEffect(() => {
-    // if (post.commentCount > 0) {
-    // dispatch(GetCommentAction(dataget));
-    // }
-        
-      const channel = window.pusher.pusher.subscribe(`post-comment`);
-      channel.bind('new-comment', function(data) {
-        if (post.id === data.commentable_id) {
-          setComments(comments.unshift(data));
-        }
-      });
+    const channel = window.pusher.pusher.subscribe(`post-comment`);
+    channel.bind('new-comment', function(data) {
+      if (post.id === data.commentable_id) {
+        setComments(comments.unshift(data));
+      }
+    });
   }, [post.id]);
 
   const showOptions = (id,user) =>{
@@ -98,13 +89,7 @@ export default function ShowComment({ post }) {
     await axios.post(`${process.env.REACT_APP_API_URL}/comment/update`,dataEdit)
     .then(res => console.log("data changed successfuly"))
     .catch(err=>console.log(err));
-
-
     setOpen(false);
-  }
-
-  const HidePreviousMessage = ()=>{
-    $('#textareaComment').val('');
   }
 
   return (
@@ -144,10 +129,10 @@ export default function ShowComment({ post }) {
                                 {user_id === comment.user_id && (
                                 <> 
                                     <li className="PostDelete">
-                                      <button onClick={e => supprimeComment(comment.id, post.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                                      <button onClick={e => supprimeComment(comment.id, post.id)}><i className="uil uil-trash-alt"></i>{t('delete')}</button>
                                     </li>
                                     <li className="PostDelete">
-                                      <button onClick={e => editComment(comment.id)}><i className="uil uil-edit-alt"></i> Edit</button>
+                                      <button onClick={e => editComment(comment.id)}><i className="uil uil-edit-alt"></i>{t('edit')} </button>
                                     </li>
                                     <Dialog
                                             open={open}
@@ -157,16 +142,15 @@ export default function ShowComment({ post }) {
                                             >
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
-                                                    {/* <span style={{fontWeight:"bold",top:"50px"}}>Request Sent...Other person needs to accept your invite!</span> */}
                                                            <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" id="textareaComment" placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
                                                 <Button onClick={HandleCloseDialog} style={{backgroundColor:"#00CC66",borderRadius:"30px"}}  autoFocus>
-                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>Cancel</span>
+                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>{t('cancel')}</span>
                                                 </Button>
                                                 <Button onClick={HandleEdit} style={{backgroundColor:"#00CC66",marginLeft:"15px",marginRight:"15px",borderRadius:"30px"}} autoFocus>
-                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>Edit</span>
+                                                    <span style={{fontWeight:"bold",color:"White",fontSize:"14px"}}>{t('edit')}</span>
                                                 </Button>
                                                 </DialogActions>
                                     </Dialog>
@@ -174,16 +158,12 @@ export default function ShowComment({ post }) {
                                 )}
                                 {user_id !== comment.user_id &&
                                   <li className="PostFavorite">
-                                    <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i> Report</button>
+                                    <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i>{t('report')} </button>
                                   </li>
                                 }
                                 <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <ReportModal providerObject={comment} provider='comment' showReport={show} handleCloseReport={handleClose}/>
                                 </Modal>
-                                {/* <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <ReportModal providerObject={post} provider='comment' showReport={show} handleCloseReport={handleClose}/>
-                                </Modal>
-                                 */}
                               </ul>
                             )
                           }
@@ -210,7 +190,7 @@ export default function ShowComment({ post }) {
                     </div>
                     <ul className="comment-actions-list">
                       {/* <li className="comment-action"><button className="like-action">Like</button></li> */}
-                      <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>Reply</li>
+                      <li className="comment-action replay-action" onClick={e => showReplyBox(comment.id)}>{t('reply')}</li>
                     </ul>
                   </div>
                 </div>

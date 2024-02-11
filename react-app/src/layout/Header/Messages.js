@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import { SeenNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
-import {Text} from "../../containers/Language";
 import $ from "jquery";
+import { useTranslation } from 'react-i18next';
 
 export default function Messages() {
     // const usernotifications = useSelector(state => state.getnotifications);
@@ -13,14 +13,12 @@ export default function Messages() {
     // const [notification_id, setNotification_id] = useState(false);
     // const [notifed_user_id, setNotifed_user_id] = useState();
     // const [from_user_id, setFrom_user_id] = useState();
-    const dispatch = useDispatch();
-    const params = useParams();
     
     useEffect(() => {
         $('.Dadupa-Notifs-Box').removeClass('Notifs-Box-Active');
         $('.Dadupa-Mini-Profile').removeClass('Mini-Profile-Active');
     });
-
+    const [t] = useTranslation();
 
 /*     useEffect(() => {
         if(userProfile){           
@@ -50,7 +48,7 @@ export default function Messages() {
     return (
     <>
         <div className="Dadupa-Msgs-Box Msgs-Box-Active">
-            <h3><Text tid="messages"/></h3>
+            <h3>{t('messages')}</h3>
             <span className="User-Connected"></span>
             <div className="Msgs-List">
             <div  id="sidebar-user-box" className="101 Msgs-Item New-Msg">
@@ -137,7 +135,7 @@ export default function Messages() {
             </div>
             </div>
             <div className="All-Messages-Row">
-                <Link to={`/messages/${userProfile.id}`} className="all-messages-button">See All Messages</Link>
+                <Link to={`/messages/${userProfile.id}`} className="all-messages-button">{t('seeallmsgs')} </Link>
             </div>
         </div>
                                             

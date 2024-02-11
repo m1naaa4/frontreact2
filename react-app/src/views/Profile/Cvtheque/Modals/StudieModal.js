@@ -119,23 +119,23 @@ const [optionSelected, setOptionSelected] = useState();
             <div className="form-inputs">
               <div className="form-row">
                 <div className='col-12'>
-                  <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i> Etudes</h3>
+                  <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i>{t('etudes')}</h3>
                 </div>
                 <div className="col-md-5 input-row">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Date de début</span>
+                    <span className='mb-2'>{t('start')}</span>
                     <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
                   </label>
                 </div>
                 <div className="col-md-5 input-row mb-4">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Date de fin</span>
+                    <span className='mb-2'>{t('end')}</span>
                     <ReactDatePicker className="wizard-required" selected={datefin} onChange={(date) => setDatefin(date)} />
                   </label>
                 </div>
                 <div className="col-md-2 input-row mb-4">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Présent</span>
+                    <span className='mb-2'>{t('ongoing')}</span>
                     <div className="custom-control custom-switch switch-present">
                         <input type="checkbox" onChange={setForm} className="custom-control-input" id="switch-present"
                           name="present" />
@@ -149,31 +149,31 @@ const [optionSelected, setOptionSelected] = useState();
                 </div>
                 <div className="col-md-6 input-row mb-3">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Etablissement</span>
-                    <input type="text" name="etablissement" defaultValue="" placeholder="Établissement" className="wizard-required" onChange={setForm} required />
+                    <span className='mb-2'>{t('school')}</span>
+                    <input type="text" name="etablissement" defaultValue="" placeholder={t('school')} className="wizard-required" onChange={setForm} required />
                   </label>
                 </div>
                 <div className="col-md-6 input-row mb-3">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Lieu</span>
-                    <input type="text" name="lieu" defaultValue="" placeholder="Lieu" className="wizard-required" onChange={setForm} required />
+                    <span className='mb-2'>{t('address')}</span>
+                    <input type="text" name="lieu" defaultValue="" placeholder={t('address')} className="wizard-required" onChange={setForm} required />
                   </label>
                 </div>
                 <div className="col-md-6 input-row mb-3">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Diplôme</span>
-                    <input type="text" name="diplome" defaultValue="" placeholder="Diplôme obtenu" className="wizard-required" onChange={setForm} required />
+                    <span className='mb-2'>{t('trainingDiploma')}</span>
+                    <input type="text" name="diplome" defaultValue="" placeholder={t('trainingDiploma')} className="wizard-required" onChange={setForm} required />
                   </label>
                 </div>
                 <div className="col-md-6 input-row mb-3 input-select input-select-multi">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Secteur</span>
+                    <span className='mb-2'>{t('industry')}</span>
                     <Select
                               options={alloptions}
                               onChange={HandleChange}
                               value={optionSelected}
                               styles={SelectStyleWithScrollbar}
-                              placeholder="Secteur d'activité"
+                              placeholder={t('industry')}
                               required={true}
                               className="Select"
                       />
@@ -181,15 +181,15 @@ const [optionSelected, setOptionSelected] = useState();
                 </div>
                 <div className="col-md-12 input-row  mb-2">
                   <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>Description</span>
-                    <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
+                    <span className='mb-2'>{t('description')}</span>
+                    <textarea name="description" placeholder={t('description')} onChange={setForm}></textarea>
                   </label>
                 </div>
               </div>
             </div>
             <div className="DadupaModal-Footer">
               <div className="w-100">
-                <button type="button" className="DadupaModal-BTNSubmit w-100" onClick={() => { AddStudies(); handleCloseStudies() }}>ADD NEW</button>
+                <button type="button" className="DadupaModal-BTNSubmit w-100" onClick={() => { AddStudies(); handleCloseStudies() }}>{t('add')}</button>
               </div>
             </div>
           </div>

@@ -7,7 +7,6 @@ export default function ReplyComment(comment) {
 
     const [body, setBody] = useState();
 
-    const project = useSelector(state => state.getproject);
     const userProfile = useSelector(state => state.userProfile.userProfile);
 
     //
@@ -39,7 +38,7 @@ export default function ReplyComment(comment) {
                         <div className="Comment-Input">
                             <input type="text" name="body"
                                 onChange={e => setBody(e.target.value)}
-                                placeholder="Write your comment"/>
+                                placeholder={t('write_comment')}/>
                         </div>
                     </div>
                 </div>

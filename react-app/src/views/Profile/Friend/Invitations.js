@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router'
 import { AcceptFriendAction, RejectFriendAction } from '../../../store/actions/Friend/FriendsAction';
+import { useEffect } from 'react';
 
 
 
@@ -10,6 +11,7 @@ const  Invitations = ({invitation}) => {
     // const infoprofile = useSelector(state => state.infoProfile);
     // const user = useSelector(state => state.userProfile.userProfile);
     const [show, setShow] = useState(true);
+    const [type, setType] = useState();
 
     const dispatch = useDispatch();
     const params   = useParams();
@@ -29,11 +31,23 @@ const  Invitations = ({invitation}) => {
         dispatch(RejectFriendAction(data)); 
     }
 
+    useEffect(() => {
+        if (invitation.type == 'PP') {
+        setType('uil uil-lightbulb-alt');
+        } else if(invitation.type == 'BF') {
+            setType('uil uil-moneybag');
+        } else if(invitation.type == 'ACMPT') {
+            setType('uil uil-users-alt');
+        } else {
+            setType('');
+        }
+    }, [invitation])
+
     return (
         <>
         {show &&
             <div className="Contact">
-                <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
+                <span className="Profile-Icon"><i className={`${type}`}></i></span>
                 <div className="Contact-Thumb"><Link to={`/profile/${invitation.profile.id}`}><img src={invitation.profile.avatar_link} alt="" /></Link></div>
                 <div className="Contact-Infos">
                     <Link to={`/profile/${params.id}`}><h4>{invitation.profile.username}</h4></Link>

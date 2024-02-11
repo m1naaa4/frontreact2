@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthorArticles, getCategories, getCategoryArticles } from '../../../store/actions/Articles/ArticlesActions';
+import { getAuthorArticles, getCategories } from '../../../store/actions/Articles/ArticlesActions';
 import 'react-quill/dist/quill.snow.css';
 import ReactDatePicker from 'react-datepicker';
-import sectors from '../../../data/sectors';
 import AllMultiSelectCheckboxCategory from '../../../utils/Filters/AllMultiselectCheckboxCategories';
 import ArticleListView from '../../../views/Articles/ArticleListView';
-import ArticleSidebarView from '../../../views/Articles/ArticleSidebarView';
-import { Text } from '../../../containers/Language';
 import { useParams } from 'react-router'
+import { useTranslation } from 'react-i18next';
+import ProjectSkeletonGridOne from '../../../skeleton/ProjectSkeletonOne';
 
 
 export default function ArticleAuthor() {
@@ -16,11 +15,12 @@ export default function ArticleAuthor() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
+    const {t} = useTranslation
+
 
     const dispatch = useDispatch()
     const categories = useSelector(state => state.articles.categories);
     const author = useSelector(state => state.articles.author);
-    const loading = useSelector(state => state.articles.loading);
     const loadingAuthor = useSelector(state => state.articles.loadingAuthor);
 
     if (!loadingAuthor) {
@@ -50,7 +50,7 @@ export default function ArticleAuthor() {
                                             <div className="col-sm-11 col-md-12 col-lg-12">
                                                 <div className="display-flex">
                                                     <div className="input-row">
-                                                        <input type="text" name="title" placeholder="title" className="wizard-required" />
+                                                        <input type="text" name="title" placeholder={t('form.menu.articles.title')} className="wizard-required" />bvnvbnvbn
                                                     </div>
                                                     <div className="input-row input-multi-filter input-small">
                                                         <AllMultiSelectCheckboxCategory {...{ setSelectedCat }} datas={categories} />
@@ -63,7 +63,7 @@ export default function ArticleAuthor() {
                                                     </div>
                                                     <div className="input-row ml-auto w-auto">
                                                         <button type="submit" name="submit" className="article-filter-btn">
-                                                            <i className="uil uil-search"></i> Search
+                                                            <i className="uil uil-search"></i> {t('search')}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -74,7 +74,7 @@ export default function ArticleAuthor() {
                                 <div className="row">
                                     {
                                         loadingAuthor === undefined || loadingAuthor ?
-                                            <h1>Loading</h1>
+                                            <h1><ProjectSkeletonGridOne/></h1>
                                             :
                                             author.articles.map((article, index) =>
                                                 <ArticleListView article={article} key={index + 1} />

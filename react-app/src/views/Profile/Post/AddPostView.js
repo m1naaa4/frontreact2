@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import ModalAddPost from './ModalAddPost';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -10,6 +11,7 @@ import ModalAddPost from './ModalAddPost';
 export default function AddPostView(props) {
 
     // const [avatar, setAvatar] = useState();
+    const {t} = useTranslation();
     const infoprofile = useSelector(state => state.infoProfile);
     const newavatar = useSelector(state => state.updateavatar);
 
@@ -47,7 +49,7 @@ export default function AddPostView(props) {
                         </Link>
                         {/* <!-- <button type="button" className="UpdateInfos-BTN" ><i className="uil uil-pen"></i></button> --> */}
                         <textarea className="WritePost-TextArea js-elasticArea" onClick={handleShow} 
-                            data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder="Write something">
+                            data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder={t('writesmthng')}>
                         </textarea>
                     </div>
                     <div className="WritePost-Options">

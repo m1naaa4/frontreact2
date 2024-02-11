@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
 import typeusers from "../../../../data/typeusersCreate"
 import sectors from '../../../../data/sectors';
-import { Text } from '../../../../containers/Language';
+import { useTranslation } from 'react-i18next';
 
 export default function InvitationGrid({invitations, filterInput, setFilterInput }) {
     const dispatch = useDispatch();
@@ -15,8 +15,8 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
 
     const { search, type, orderName } = filterInput;
     const [order, setOrder] =   useState(true);
+    const [t] = useTranslation();
 
-    const count = useSelector(state => state.userProfile.countinvitations);
 
     const show = (e) => {
       setGridId(e);
@@ -100,7 +100,7 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
                              sectors.map((key) => 
                              // console.log(key[0], project?.project?.sector)
                                {if ( invitation.sector.includes(key[0])) {
-                                 return <Text tid={key[1]}/>
+                                 return t(`${key[1]}`)
                                }}
                              )
                            }

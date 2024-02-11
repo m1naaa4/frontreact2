@@ -108,7 +108,7 @@ export default function CvView(props) {
                 <ul>
                   {cvtheque?.skills &&
                     cvtheque.skills.map((skill, index) => (
-                      <li key={index}><span>{skill.name}</span>
+                      <li key={index} style={{ padding: '2px' }}><span>{skill.name} </span>
                         {action && <button className="delete-skill" onClick={e => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button>}
                       </li>
                     ))

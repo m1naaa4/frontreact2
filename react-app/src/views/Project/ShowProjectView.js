@@ -239,7 +239,7 @@ export default function ShowProjectView(props) {
         tags = <ul className="Tags-List">
             {project.project.tags.map((name, index) => (
                 <li className="Tag-Item" key={index}>
-                    <span onClick={(e) => goToSearch(e.target)}>{name}</span>
+                    <span onClick={(e) => goToSearch(e.target)}># {name}</span>
                 </li>
             ))}
         </ul>;
@@ -367,7 +367,7 @@ export default function ShowProjectView(props) {
 
                             {/*!--PAGE HEADER --*/}
                             <div className="single-header" style={{ marginBottom: "15px", marginTop: "15px" }}>
-                                <div className="signle-offer-type">Project Business</div>
+                                <div className="signle-offer-type"> {t(`Project_Business`)}</div>
                                 <div className="single-offer-header">
                                     <div className="Company-Left">
                                         <div className="d-flex">
@@ -389,7 +389,7 @@ export default function ShowProjectView(props) {
                                                 />
                                             </div>
                                             <div style={{ paddingTop: "15px", paddingLeft: "4px" }}>
-                                                {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
+                                                {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>{t(`form.add_url`)}</a></div>}
                                             </div>
                                         </div>
                                     </div>
@@ -401,7 +401,7 @@ export default function ShowProjectView(props) {
                                                     <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
 
                                                         <li className="PostDelete">
-                                                            <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                            <button onClick={handleShowReport}><i className="uil uil-ban"></i> {t(`Report`)}</button>
                                                         </li>
 
                                                     </ul>
@@ -433,7 +433,7 @@ export default function ShowProjectView(props) {
                                                             }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
                                                                 return <div className="Doc-Wrap">
                                                                     <a href="#!">
-                                                                        <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> Document</div>
+                                                                        <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> {t(`documents`)} </div>
                                                                     </a>
                                                                 </div>
                                                             }
@@ -462,8 +462,8 @@ export default function ShowProjectView(props) {
                                                         <span>{project.project.visit}</span></div>
                                                 </div>
                                                 <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                    <div className="reaction comments"><span>{countcomment} Comments</span></div>
-                                                    <div className="reaction shares"><span>Shares</span></div>
+                                                    <div className="reaction comments"><span>{countcomment} {t(`commentplural`)}</span></div>
+                                                    <div className="reaction shares"><span> {t(`shareplural`)}</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -472,16 +472,16 @@ export default function ShowProjectView(props) {
                                         <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
                                             onClick={likeAction} toggle="#password-field" type="button" name="button">
                                             <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
-                                            {like ? "Dislike" : "Like"}
+                                            {like ? t('unclap') : t('clap')}
                                         </button>
 
                                         <a className="reaction-button reaction-comment" href="#Comments-Wrap">
                                             <img src="/assets/images/icons/dadupa-comment.svg" alt="" />
-                                            Commenter
+                                            {t(`comment`)}
                                         </a>
                                         <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
                                             <img src="/assets/images/icons/dadupa-share.svg" alt="" />
-                                            Partager
+                                            {t(`partagez`)}
                                         </button>
                                         <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
@@ -523,7 +523,7 @@ export default function ShowProjectView(props) {
                             <div className="Single-Offer-Details">
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">
-                                        <label className='mb-3'>Owners</label>
+                                        <label className='mb-3'>{t(`Owners`)}</label>
                                         <div className="d-flex align-items-start">
                                             <span>
                                                 {project.project.owner && 
@@ -554,29 +554,29 @@ export default function ShowProjectView(props) {
                                         </div>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Publié le</label>
+                                        <label>{t(`published_at`)}</label>
                                         <span>{project.project.date}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Etat du projet</label>
+                                        <label>{t(`projectState`)}</label>
                                         <span>{t(`${status}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Secteurs d’activité</label>
+                                        <label>{t(`industry`)}</label>
                                         <span>{t(`${sector}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Zones ciblées</label>
+                                        <label>{t(`Zones_ciblees`)}</label>
                                         <span>{country}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Financement recherché</label>
+                                        <label>{t(`fundingSearch`)}</label>
                                         <span>{t(`${finance}`)}</span>
                                     </li>
                                 </ul>
                             </div>
                             <div className="Single-Offer-Tags">
-                                <h3>Tags</h3>
+                                <h3>{t(`tags`)}</h3>
                                 {tags}
                             </div>
                         </div>

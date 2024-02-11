@@ -42,20 +42,20 @@ function FilterArticle({ filterInput }) {
                     <div className="col-sm-11 col-md-12 col-lg-12">
                         <div className="display-flex">
                             <div className="input-row">
-                                <input type="text" name="title" onChange={(e) => setSearch(e.target.value)} placeholder="title" className="wizard-required" />
+                                <input type="text" name="title" onChange={(e) => setSearch(e.target.value)} placeholder={t('form.menu.articles.title')} className="wizard-required" />
                             </div>
                             <div className="input-row input-multi-filter input-small">
                                 <AllMultiselectCheckboxCategories {...{ setSelectedCat }} datas={categories} />
                             </div>
                             <div style={{ width: '125px' }} className="input-row">
-                                <ReactDatePicker className="wizard-required" placeholderText='start date' selected={startDate} onChange={(date) => setStartDate(date)} />
+                                <ReactDatePicker className="wizard-required" placeholderText={t('start')} selected={startDate} onChange={(date) => setStartDate(date)} />
                             </div>
                             <div style={{ width: '125px' }} className="input-row">
-                                <ReactDatePicker className="wizard-required" placeholderText='end date' selected={endDate} onChange={(date) => setEndDate(date)} />
+                                <ReactDatePicker className="wizard-required" placeholderText={t('end')} selected={endDate} onChange={(date) => setEndDate(date)} />
                             </div>
                             <div className="input-row ml-auto w-auto">
                                 <button type="submit" name="submit"  onClick={handleSubmitValue} className="article-filter-btn">
-                                    <i className="uil uil-search"></i> Search
+                                    <i className="uil uil-search"></i> {t('search')}
                                 </button>
                             </div>
                         </div>

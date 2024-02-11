@@ -32,7 +32,7 @@ export default function ArticleListView({ article }) {
                                 <h4>{article.creator.name}</h4>
                             </Link>
                         }
-                        <span className='article-date'>, {article.created_at.for_humans}</span>
+                        <span className='article-date'> {article.created_at.for_humans}</span>
                     </div>
                     <div style={{ fontSize: "13px" }}>
                         {article.visits} <i className="uil uil-eye"></i>

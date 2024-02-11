@@ -19,6 +19,10 @@ function FilterMentor({ filterInput }) {
     const { t } = useTranslation();
     const tag_state = useSelector(state => state.generaleVariable.tag);
     const tags = tag_state ? tag_state : [];
+    const newTags = tags.map((name, index) => (
+        name.replace(/^#\s*/, '')
+    ));
+
     const [open, setOpen] = useState(false);
 
     const [selectedzone, setSelectedcountry] = useState();
@@ -28,7 +32,7 @@ function FilterMentor({ filterInput }) {
     const [selectedTypeMentor, setSelectedTypeMentor] = useState();
 
     const [search, setSearch] = useState();
-    const [tag, setTag] = useState(tags);
+    const [tag, setTag] = useState(newTags);
 
     useEffect(() => {
         if (tag_state) {
@@ -37,7 +41,7 @@ function FilterMentor({ filterInput }) {
     }, []);
 
     useEffect(() => {
-        setTag(tag_state);
+        setTag(newTags);
     }, [tag_state])
 
     const selectedTags = tags => {
@@ -72,7 +76,7 @@ function FilterMentor({ filterInput }) {
         filterInput.project_area = dzone;
         filterInput.sector = dsector;
         filterInput.search = search;
-        filterInput.tags = tag
+        filterInput.tag = tag
 
         dispatch(GetMentors(filterInput));
     }
@@ -107,10 +111,10 @@ function FilterMentor({ filterInput }) {
                                     aria-expanded={open}
                                     data-toggle="tooltip" data-placement="bottom" title="Advanced Search"
                                 >
-                                    <i className="uil uil-setting"></i>
+                                    <i className="uil-search-plus"></i>
                                 </button>
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn">
-                                    <i className="uil uil-search"></i>
+                                    <i className="uil uil-search"></i> {t('search')}
                                 </button>
                             </div>
                             
@@ -127,7 +131,7 @@ function FilterMentor({ filterInput }) {
                                         onChange={(e) => setSearch(e.target.value)} placeholder={t('filter.search')} />
                                 </div>
                                 <div className="input-row input-tags">
-                                    <InputTags onChange={selectedTags} selectedTags={selectedTags} tags={tags} />
+                                    <InputTags onChange={selectedTags} selectedTags={selectedTags} tagss={tags} />
                                 </div>
                             </div>
                         </div>

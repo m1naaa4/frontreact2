@@ -8,6 +8,6 @@ export const dictionaryList = {
 };
 
 export const languageOptions = [
-    { id: 'fr', text: 'Francais' },
-    { id: 'en', text: 'English'}
+    { id: 'fr', text: 'frensh' },
+    { id: 'en', text: 'english'}
 ];

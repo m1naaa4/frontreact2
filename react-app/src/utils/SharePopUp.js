@@ -63,7 +63,7 @@ function SharePopUp (props){
                     <div className="ModalShare-CopyLink">
                         <h5>{t('or_copy_link')}</h5>
                         <form data-copy='true'>
-                            <input type="text" value={sharedUrl+'link'}/>
+                            <input type="text" defaultValue={sharedUrl+'link'}/>
                             <button onClick={copy} name="button"><i className="uil uil-copy"></i></button>
                         </form>
                     </div>

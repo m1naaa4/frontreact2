@@ -8,6 +8,7 @@ import PostBody from './PostWraps/PostBody';
 import PostFooter from './PostWraps/PostFooter';
 import PostHeader from './PostWraps/PostHeader';
 import {Redirect} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 export default function ListPostsView() {
@@ -21,6 +22,7 @@ export default function ListPostsView() {
     const hasMore = useSelector(state => state.posts.hasMore);
     const current = useSelector(state => state.posts.current);
     const loading = useSelector(state => state.posts.loading);
+    const {t} = useTranslation();
 
     const data = {
         action: 'getPosts',
@@ -34,7 +36,8 @@ export default function ListPostsView() {
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore) {
-                dispatch(GetPostsAction(data, '/get'));
+                const p = current+1;
+                dispatch(GetPostsAction(data, '/get?page=' + p));
                 setIsLoading(true)
             }
         })
@@ -43,7 +46,7 @@ export default function ListPostsView() {
 
     useEffect(() => {
         if (!isLoading) {
-            dispatch(GetPostsAction(data, '/get'));
+            dispatch(GetPostsAction(data, '/get?page=1'));
             dispatch({ type: 'CLEAR_POSTS_LIST' });
         }
     }, [params.id]);
@@ -63,18 +66,17 @@ export default function ListPostsView() {
                                     posts.map((post, index) => {
                                         if (posts.length === index + 1) {
                                             return (
-                                                <div key={index}>
-                                                    <div className="PostWrap" key={post.id} ref={lastProjectElementRef}>
+                                                <div key={index +1}>
+                                                    <div className="PostWrap" key={index +1} ref={lastProjectElementRef}>
                                                         <PostHeader post={post} />
                                                         <PostBody post={post} />
                                                         <PostFooter post={post} />
                                                     </div>
                                                     <div className="PostWrap" key={post.id + 1}>
-                                                        {/* <PostHeader post={post}/> */}
                                                         <div className="PostBody subscribedAt">
                                                             <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect" />
                                                             <div className="mt-2">
-                                                                <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
+                                                                <h5> {t('subscriptionKickoff')} {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -83,7 +85,7 @@ export default function ListPostsView() {
 
                                         } else {
                                             return (
-                                                <div className="PostWrap" key={index}>
+                                                <div className="PostWrap" key={index +1}>
                                                     <PostHeader post={post} />
                                                     <PostBody post={post} />
                                                     <PostFooter post={post} />
@@ -102,7 +104,7 @@ export default function ListPostsView() {
                                                     <div className="PostBody subscribedAt">
                                                         <img src="/assets/images/dadupa-brand.svg" alt="Dadupa Connect" />
                                                         <div className="mt-2">
-                                                            <h5>JOINED DADUPA : {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
+                                                            <h5>{t('subscriptionKickoff')} {user.created_at?.for_humans}  ({user.created_at?.date})</h5>
                                                         </div>
                                                     </div>
                                                 </div>

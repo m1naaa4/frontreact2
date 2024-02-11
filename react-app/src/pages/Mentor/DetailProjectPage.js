@@ -8,7 +8,7 @@ export default function DetailProjectPage(props) {
         name: "project test",
         logo: "",
         sector: "2",
-        zone: "Goulmima",
+        zone: "",
         financement: "1000000$a1000000000000$",
         etat: "50",
         action: "createProject",

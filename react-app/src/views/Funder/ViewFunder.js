@@ -23,6 +23,7 @@ import Select from 'react-select';
 import DialogWarning from '../../utils/DialogWarning';
 import { LikeAction } from '../../store/actions/Like/LikeAction';
 import AvatarTooltip from '../../utils/AvatarTooltip';
+import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 
 export default function ViewFunder(props) {
     const [shareUrl, setShareUrl] = useState(false);
@@ -217,7 +218,7 @@ export default function ViewFunder(props) {
     })
 
     const goToSearch = (data) => {
-        history.push('/funders/lists');
+        history.push('/funder/lists');
         let tagss = [];
         dispatch({ type: 'TAG', res: [...tagss, data.innerText] });
     }
@@ -347,8 +348,7 @@ export default function ViewFunder(props) {
             {/* <!-- SINGLE -->*/}
             {
                 loading  ? (
-                    <div></div>
-                    // <ProjectSkeletonGrid/>
+                    <ProjectSkeletonGrid/>
                 ): !loading && project != '' ? (
                     <div className="row">
                         <div className="col-md-8">
@@ -372,11 +372,12 @@ export default function ViewFunder(props) {
                                     <div className="Company-Email">{project.email}</div>
                                     <div className="Company-Addresse">{project.address}</div>
                                 </div>
-                                {user.id !== project.user_id && (<div className="Company-Right">
+                                <div className="Company-Right">
                                         <div className="Company-Phone">
                                             <a href={`tel:`+project.phone}>
-                                            <i className="uil uil-phone-alt"></i> {project.phone}
-                                        </a>
+                                                <i className="uil uil-phone-alt"></i> {project.phone}
+                                            </a>
+                                        {user.id !== project.user_id && (<>
                                             <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
                                             {
                                                 options_List && (
@@ -387,46 +388,53 @@ export default function ViewFunder(props) {
                                                     </ul>
                                                 )
                                             }
+                                            </>)
+                                        }
                                             <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <ReportModal providerObject={project} provider='funder' showReport={showReport} handleCloseReport={handleCloseReport} />
                                             </Modal>
                                         </div>
+                                        <div className="Company-Website">
+                                            <a href={project.website}>
+                                                <i className="uil uil-globe"></i> {t('visit_website')}
+                                            </a>
+                                        </div>
                                         <br />
                                     </div>
-                                )}
+                                
                             </div>
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
                                 {(Array.isArray(project.media)? project.media : [project?.media]).map(item => (
-                                                <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
-                                                    <div className="col-md-12 input-row">
-                                                    {(function() {
-                                                        if(getExtension(item) == 'youtube'){
-                                                            return <ReactPlayer url={item} controls={true} />
-                                                        }else{
-                                                            if(getExtension(item) == 'vimeo'){
-                                                                return <ReactPlayer url={item} controls={true} />
-                                                            }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
-                                                                return <div className="Doc-Wrap">
-                                                                    <a href="#!">
-                                                                        <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> Document</div>
-                                                                    </a>
-                                                                </div>
-                                                            }
-                                                            else{
-                                                                if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
-                                                                getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
-                                                                   return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
-                                                                }else{
-                                                                   return <img width="100%" height="300" src={item} alt="Project"/>
-                                                                }
-                                                            }
-                                                        }
-                                                    })()}
+                                    <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
+                                        <div className="col-md-12 input-row">
+                                        {(function() {
+                                            if(getExtension(item) == 'youtube'){
+                                                return <ReactPlayer url={item} controls={true} />
+                                            }else{
+                                                if(getExtension(item) == 'vimeo'){
+                                                    return <ReactPlayer url={item} controls={true} />
+                                                }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
+                                                    return <div className="Doc-Wrap">
+                                                        <a href="#!">
+                                                            <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> Document</div>
+                                                        </a>
                                                     </div>
-                                                </div>
-                                                ))}
+                                                }
+                                                else{
+                                                    if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
+                                                    getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
+                                                        return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
+                                                    }else{
+                                                        return <img width="100%" height="300" src={item} alt="Project"/>
+                                                    }
+                                                }
+                                            }
+                                        })()}
+                                        </div>
+                                    </div>
+                                ))}
                                 </div>
 
                                 <div className="Signle-Offer-Content">
@@ -560,7 +568,7 @@ export default function ViewFunder(props) {
                                 <h3>{t(`tags`)}</h3>
                                 {tags}
                             </div>
-                            <div className="Co-Porteurs">
+                            {/* <div className="Co-Porteurs">
                                 <h3>{t(`co-financeurs`)}</h3>
                                 <ul className="Co-Porteurs-List">
                                     <li className="Co-Porteur">
@@ -572,7 +580,7 @@ export default function ViewFunder(props) {
                                     </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

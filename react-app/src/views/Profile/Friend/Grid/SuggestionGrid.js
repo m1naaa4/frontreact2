@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Link } from 'react-router-dom';
 import { SendRequestFriendAction } from '../../../../store/actions/Friend/FriendsAction';
 import { useDispatch } from 'react-redux';
 import typeusers from "../../../../data/typeusers"
 import sectors from '../../../../data/sectors';
-import { Text } from '../../../../containers/Language';
+import { useTranslation } from 'react-i18next';
 
 export default function SuggestionGrid({suggestions}) {
     const dispatch = useDispatch();
 
     const [gridId, setGridId] = useState();
+    const [t] = useTranslation();
 
     const show = (e) => {
       setGridId(e);
@@ -47,7 +48,7 @@ export default function SuggestionGrid({suggestions}) {
                              sectors.map((key) => 
                              // console.log(key[0], project?.project?.sector)
                                {if ( suggestion.sector.includes(key[0])) {
-                                 return <Text tid={key[1]}/>
+                                 return t(`${key[1]}`)
                                }}
                              )
                            }

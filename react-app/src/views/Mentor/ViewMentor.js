@@ -444,8 +444,8 @@ export default function ViewMentor(props) {
                                                         <span>{project.visit}</span></div>
                                                 </div>
                                                 <div className="col-6 col-md-8 col-lg-6 text-right">
-                                                    <div className="reaction comments"><span>{countcomment} Comments</span></div>
-                                                    <div className="reaction shares"><span>Shares</span></div>
+                                                    <div className="reaction comments"><span>{countcomment} {t('commentplural')}</span></div>
+                                                    <div className="reaction shares"><span>{t(`shareplural`)}</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -454,16 +454,16 @@ export default function ViewMentor(props) {
                                         <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
                                             onClick={likeAction} toggle="#password-field" type="button" name="button">
                                             <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
-                                            {like ? "Dislike" : "Like"}
+                                            {like ? t('unclap') : t('clap')}
                                         </button>
 
                                         <a className="reaction-button reaction-comment" href="#Comments-Wrap">
                                             <img src="/assets/images/icons/dadupa-comment.svg" alt="" />
-                                            Commenter
+                                            {t(`comment`)}
                                         </a>
                                         <button className="reaction-button" type="button" name="button" onClick={() => setShareUrl(true)}>
                                             <img src="/assets/images/icons/dadupa-share.svg" alt="" />
-                                            Partager
+                                            {t(`partagez`)}
                                         </button>
                                         <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
@@ -531,10 +531,6 @@ export default function ViewMentor(props) {
                                                     <button className="reaction-button" id="shareButton" type="button" onClick={handleShow}>
                                                         <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{ width: "13px", height: "13px" }} alt="" id="image_share" />
                                                     </button>
-                                                    {/* <span> */}
-
-                                                    {/* </span> */}
-
                                                     <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <Modale showmodal={showmodal} datatype={datatype} handleClose={handleClose} />
                                                     </Modal>
@@ -543,7 +539,7 @@ export default function ViewMentor(props) {
                                         </div>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Publié le</label>
+                                        <label>{t(`published_at`)}</label>
                                         <span>{project.created_at.date}</span>
                                     </li>
                                     <li className="Offer-Item">
@@ -551,11 +547,11 @@ export default function ViewMentor(props) {
                                         <span>{t(`${type}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Secteurs d’activité</label>
+                                        <label>{t(`industry`)}</label>
                                         <span>{t(`${sector}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>Zones ciblées</label>
+                                        <label>{t(`Zones_ciblees`)}</label>
                                         <span>{country}</span>
                                     </li>
                                     <li className="Offer-Item">
@@ -565,10 +561,10 @@ export default function ViewMentor(props) {
                                 </ul>
                             </div>
                             <div className="Single-Offer-Tags">
-                                <h3>Tags</h3>
+                                <h3>{t(`tags`)}</h3>
                                 {tags}
                             </div>
-                            <div className="Co-Porteurs">
+                            {/* <div className="Co-Porteurs">
                                 <h3>Co-financeurs</h3>
                                 <ul className="Co-Porteurs-List">
                                     <li className="Co-Porteur">
@@ -580,7 +576,7 @@ export default function ViewMentor(props) {
                                     </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

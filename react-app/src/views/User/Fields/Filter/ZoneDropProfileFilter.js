@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import countries from '../../../../data/countries'
 import Select from 'react-select'
+import { useTranslation } from "react-i18next";
 
 
 function ZoneDropProfileFilter ({formData, updateFormData}) {
     const [optionSelected, setOptionSelected] = useState();
     const [country, setCountry] = useState();
+
+    const {t} = useTranslation();
 
     const HandleChange = (selected)=>{
       setOptionSelected(selected);
@@ -88,7 +91,7 @@ function ZoneDropProfileFilter ({formData, updateFormData}) {
         onChange={HandleChange}
         value={optionSelected}
         styles={SelectStyleWithScrollbar}
-        placeholder={ (formData?.country === '')? "Zone Ciblée": country}
+        placeholder={ (formData?.country === '')? t('targetAreas'): country}
         required={true}
         className="Select"
       />

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { AcceptInvitationAction, cancelInvitationAction } from '../../../../store/actions/Setting/SettingActions';
 import useOutsideClick from '../../../../helpers/useOutsideClick';
 import { TableContainer, Table, TableHead, TableCell, TableRow, TableBody } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -12,7 +13,7 @@ export default function Receives() {
     
     const dispatch = useDispatch();
     const history = useHistory();
-    const refmessage = useRef(null);
+    const {t} = useTranslation();
     const ref = useRef();
     const [open, setOpen] = useState(false);
     const menu = (id) => {
@@ -46,11 +47,11 @@ export default function Receives() {
             <Table sx={{ minWidth: 650 }} aria-label="table">
                 <TableHead>
                 <TableRow>
-                    <TableCell>From</TableCell>
-                    <TableCell align="center">Categorie</TableCell>
-                    <TableCell align="center">Link</TableCell>
-                    <TableCell align="center">date</TableCell>
-                    <TableCell align="center">Action</TableCell>
+                    <TableCell>{t('from')}</TableCell>
+                    <TableCell align="center">{t('categorie')}</TableCell>
+                    <TableCell align="center">{t('link')}</TableCell>
+                    <TableCell align="center">{t('date')}</TableCell>
+                    <TableCell align="center">{t('action')}</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
@@ -71,8 +72,8 @@ export default function Receives() {
                             <button className="Add-New" data-toggle="tooltip" data-placement="bottom"><i className="uil uil-ellipsis-h"></i></button>
                             {open == row.id && <div ref={ref} className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active">
                             <ul className="Mini-Profile-Items">
-                               <li className="Mini-Profile-Item"><a href="#" onClick={()=>accept(row.token, row.route)} > Accept</a></li>
-                                <li className="Mini-Profile-Item"><a href="#" onClick={()=>reject(row.deny_token)} > Reject</a></li>
+                               <li className="Mini-Profile-Item"><a href="#" onClick={()=>accept(row.token, row.route)} > {t('request_ligne3_right')}</a></li>
+                                <li className="Mini-Profile-Item"><a href="#" onClick={()=>reject(row.deny_token)} > {t('reject')}</a></li>
                             </ul>
                             </div>}
                         </div>

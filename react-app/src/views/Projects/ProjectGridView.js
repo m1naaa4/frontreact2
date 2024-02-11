@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
-import { Text } from "../../containers/Language";
 import SharePopUp from '../../utils/SharePopUp'
-import { countryName, financeLabel } from '../../helpers/Helpres'
+import { countryName } from '../../helpers/Helpres'
 import { useHistory } from "react-router-dom";
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch, useSelector } from 'react-redux';
@@ -98,25 +97,30 @@ const ProjectGridView = ({ project }) => {
         }
     };
 
+    const handleImageError = (event) => {
+        event.target.src = '/assets/images/offer-thumbnail.svg';
+    };
+
     return (
 
         <div className="offer-box">
             <div className="offer-header" >
                 <div className="offer-title">
-                    {(project.logo_link === '/assets/images/porject-logo.png') ? <img src={project.logo_link} title="Nom du projet" alt="" /> :
-                        <img src={project.logo_link ? project.logo_link: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />}
+                    <div style={{display: "flex"}} onClick={() => goToShowproject(project.id)}>
+                            <span style={{color: "#00b601", fontWeight: 600}}  data-toggle="tooltip" data-placement="top" title={project.name}>
+                            {project.name?.substring(0, 10)}</span>
+                        <span style={{color: '#78909 !important', fontSize: '13px !important', paddingLeft: '5px'}}>{t(sector)} </span>
+                    </div>
 
-                    <h3><span onClick={() => goToShowproject(project.id)} data-toggle="tooltip" data-placement="top" title={project.name}>
-                        {project.name?.substring(0, 10)}</span></h3>
                     <div className='footer-title'>
-                        <span className='mr-5'>{t(sector)} </span>
                         {project.owner && 
                             <Link  ref={ref} to={`/profile/${project.owner.profile_id}`} data-toggle="tooltip" data-placement="top" title={project.owner.username}>
-                                {project.owner?.username?.substring(0, 6)}
+                                <span style={{color: '#78909C', marginRight: '5px'}}>{project.owner?.username?.substring(0, 12)} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 10a2 2 0 0 0-2 2a2 2 0 0 0 2 2c1.11 0 2-.89 2-2a2 2 0 0 0-2-2Z"/></svg> </span>
                                 {(user?.profile_id != project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.owner} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                             </Link>
                         }
-                        <span>{project.visibility == 'public' ? <i className="uil uil-globe"></i> : ''}</span>
+                        <span style={{paddingRight:"5px"}}>{project.created_at.for_humans}</span>
+                        <span data-toggle="tooltip" data-placement="top" title='Public'>{project.visibility == 'public' ? <svg xmlns="http://www.w3.org/2000/svg" width="15" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10S4.477 0 10 0Zm0 1.395a8.605 8.605 0 1 0 0 17.21a8.605 8.605 0 0 0 0-17.21Zm2.048 2.093a6.702 6.702 0 0 1 1.802 1.024c.125.096.245.198.363.307c.022.019.041.039.062.06c.328.303.626.644.89 1.01c.037.051.076.098.11.147c.064.094.124.192.184.29a6.024 6.024 0 0 1 .285.51c.053.1.1.209.149.315c.033.073.07.148.1.226c.073.182.138.365.197.552c.019.062.034.128.052.19a6.726 6.726 0 0 1 .215 1.087c.007.066.017.136.022.201c.02.215.033.432.033.65a7.186 7.186 0 0 1-.117 1.27c-.014.073-.026.147-.04.217c-.04.19-.086.376-.14.56c-.509-.233-1.107-.576-1.263-.953c-.284-.68-1.04-1.02-1.348-1.896c-.507-1.45.166-1.412.26-2.312c.044-.422-.26-.51-.661-.338c-.936.393-1.253.242-1.442-.463c-.189-.703 0-.899 0-.899c-.638.07-.662-.707-.331-.903c.23-.132.425-.537.618-.852ZM9.374 7.797c.59-.27 1.135-.367 1.063-.831c-.07-.459-.236-.801-1.158-.801c-.922 0-.52 1.265-1.276.51c-.756-.75.165-.556.543-.727c.379-.172.757-.877.095-.927c-.661-.047-.52.292-1.04.1c-.52-.196-.756.679-1.088.557c-.218-.082-.803-.532-1.191-.975a7 7 0 0 0-1.834 2.51c.113 1.307.804 1.993.804 1.993s.355.851 2.483 1.897c0 0 .4.024-.072-.461c-.472-.487-.993-1.095-.402-1.41c.59-.319.757-.292.899.293c.141.584.615.24.661-.319c.048-.557.922-1.14 1.513-1.41Zm-.45 2.94c1.018 0 .923.317 1.727 1.025c.803.704.378 1.409-.025 1.945c-.401.534-.756 1.14-.945 2.238c-.19 1.094-.686.314-.85.047c-.166-.269-.426-.511-.354-1.63c.07-1.118-.687-.46-.946-1.92c-.26-1.458.378-1.704 1.394-1.704Zm4.977.964c.271-.173.92.278.78.753c-.143.475-.591.207-.816 0c-.225-.206-.237-.583.036-.753Z"/></svg> : ''}</span>
                     </div>
                 </div>
 
@@ -124,6 +128,8 @@ const ProjectGridView = ({ project }) => {
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
                         <i className="uil uil-bookmark"></i>
                     </button>
+                    {(project.logo_link === '/assets/images/porject-logo.png') ? <img src={project.logo_link} title="Nom du projet" alt="" /> :
+                        <img src={project.logo_link ? project.logo_link: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />}
                     <DialogWarning 
                         title={titleDialog} 
                         ContentText={ContentDialog} 
@@ -138,10 +144,10 @@ const ProjectGridView = ({ project }) => {
                 {(function() {
                     let link = $.isArray(project.media_link) ? project.media_link[0] : project.media_link;
                     if(getExtension(link) == 'youtube'){
-                        return <ReactPlayer width='340' url={link} controls={true} />
+                        return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                     }else{
                         if(getExtension(link) == 'vimeo'){
-                            return <ReactPlayer url={link} controls={true} />
+                            return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                         }else{
                             if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                             getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
@@ -154,7 +160,7 @@ const ProjectGridView = ({ project }) => {
                                 </div>
                             }
                             else{
-                                return <img style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
+                                return <img onError={handleImageError} style={{width:'350px', height: '234px'}} src="image.gif" alt="Project"/>
                             }
                         }
                     }
@@ -167,7 +173,7 @@ const ProjectGridView = ({ project }) => {
                             <img src="/assets/images/icons/marker.svg" alt="" />
                         </div>
                         <div className="meta-details">
-                            <span className="meta-title" onClick={() => goToShowproject(project.id)}><Text tid="targetAreas" /></span>
+                            <span className="meta-title" onClick={() => goToShowproject(project.id)}>{t('targetAreas')}</span>
                             <span className="meta-value">{countryName(project.project_area)}</span>
                         </div>
                     </li>
@@ -176,7 +182,7 @@ const ProjectGridView = ({ project }) => {
                             <img src="/assets/images/icons/cost.svg" alt="" />
                         </div>
                         <div className="meta-details">
-                            <span className="meta-title"><Text tid="funding" /></span>
+                            <span className="meta-title">{t('funding')}</span>
                             <span className="meta-value">{ finance }</span>
                         </div>
                     </li>

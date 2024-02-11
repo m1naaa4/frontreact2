@@ -5,14 +5,15 @@ import { Nav } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { ContentsAction, InvitationsAccessAction, PermissionsAction, TeamMembersAction } from '../../store/actions/Setting/SettingActions';
 import ManagementInvitationToAccess from './Access/ManagementInvitationToAccess';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 export default function MainView() { 
     const dispatch = useDispatch();
-    const params = useParams();
+    const {t} = useTranslation();
     const [key, setKey] = useState();
     const history = useHistory();
     const user = useSelector(state => state.userProfile.userProfile);
@@ -55,18 +56,18 @@ export default function MainView() {
                             <div className="col-md-3">
                                 <div className="left-Side">
                                 <div className="Contact-Widget menu-settings">
-                                    <h3 className="Widget-Title"> <NavLink activeClassName="Active-Nav" to={`/user/`+user?.profile?.id+`/settings/generale`}>General</NavLink></h3>
+                                    <h3 className="Widget-Title"> <NavLink activeClassName="Active-Nav" to={`/user/`+user?.profile?.id+`/settings/generale`}>{t('general')}</NavLink></h3>
                                         <h3 className="Widget-Title">
-                                            <NavLink activeClassName="Active-Nav" to={`/user/`+user?.profile?.id+`/settings/accessmanagementinvitations`}>Invitations to content</NavLink>
+                                            <NavLink activeClassName="Active-Nav" to={`/user/`+user?.profile?.id+`/settings/accessmanagementinvitations`}>{t('sentInvitations')}</NavLink>
                                             <Nav variant="pills" className="flex-column sub-menu-settings">
                                                 <Nav.Item>
-                                                    <Nav.Link className={history.location.hash == '#invitations' ? 'active' : ''} href='#invitations'>Sent Invitations</Nav.Link>
+                                                    <Nav.Link className={history.location.hash == '#invitations' ? 'active' : ''} href='#invitations'>{t('sentInvitations')}</Nav.Link>
                                                 </Nav.Item>
                                                 <Nav.Item>
-                                                    <Nav.Link className={history.location.hash == '#received' ? 'active' : ''} href='#received'>Received invitations</Nav.Link>
+                                                    <Nav.Link className={history.location.hash == '#received' ? 'active' : ''} href='#received'>{t('receivedInvitations')}</Nav.Link>
                                                 </Nav.Item>
                                                 <Nav.Item>
-                                                    <Nav.Link className={history.location.hash == '#access' ? 'active' : ''} href='#access'>Ask Access</Nav.Link>
+                                                    <Nav.Link className={history.location.hash == '#access' ? 'active' : ''} href='#access'>{t('askAccess')}</Nav.Link>
                                                 </Nav.Item>
                                                 
                                             </Nav>

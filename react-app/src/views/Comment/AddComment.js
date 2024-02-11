@@ -4,6 +4,7 @@ import ShowComment from "./ShowComment";
 import { AddCommentAction } from '../../store/actions/Comment/CommentAction';
 import { GetCommentAction } from '../../store/actions/Comment/CommentAction';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 export default function AddComment({providerObject, providerType}) {
@@ -11,6 +12,7 @@ export default function AddComment({providerObject, providerType}) {
     const refcomment = useRef(null);
     const history  = useHistory();
     const dispatch = useDispatch();
+    const {t} = useTranslation();
 
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const comments = useSelector(state => state.getComments);
@@ -53,7 +55,7 @@ export default function AddComment({providerObject, providerType}) {
                         <div className="Comment-Input">
                             <input type="text" name="body" 
                             // onKeyUp={onTyping}
-                                onKeyDown={(e) => handleSubmitValue(e.target.value, e.keyCode) } ref={refcomment}  placeholder="Write your comment"/>
+                                onKeyDown={(e) => handleSubmitValue(e.target.value, e.keyCode) } ref={refcomment}  placeholder={t('write_comment')}/>
                         </div>
                     </div>
                 </div>

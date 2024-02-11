@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import DropType from '../../../../utils/DropType';
 import typeusers from "../../../../data/typeusersCreate"
 import sectors from '../../../../data/sectors';
-import { Text } from '../../../../containers/Language';
 import useOutsideClick from '../../../../helpers/useOutsideClick';
+import { useTranslation } from 'react-i18next';
 
 
 export default function FriendGrid({friends, filterInput, setFilterInput }) {
@@ -17,9 +17,9 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
     const ref = useRef();
     const [gridId, setGridId] = useState();
     const [typeuser, setTypeuser] = useState();
-
+    const [t] = useTranslation();
     const ordersList = {
-      'recent' : 'Recently added',
+      'recent' : 'DESC',
       'first_name' : 'First Name',
       'last_name' : 'Last Name',
     };
@@ -107,9 +107,9 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                     <div className="row">
                         <div className="col-sm-12 col-md-12 col-lg-12">
                         <div className="display-flex">
-                            <div className="input-row lh40">
+                            {/* <div className="input-row lh40">
                               <span style={{fontSize: "12px"}}>Sort by: </span> 
-                              <button onClick={e => setShowOrder(true)} className="btn-custom-order btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              <button onClick={e => setShowOrder(true)}  className="btn-custom-order btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                   {ordersList[orderValue]}
                               </button>
                               {showOrder && 
@@ -119,7 +119,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                                     ))}                 
                                </div>
                               } 
-                            </div>
+                            </div> */}
                             <div className="input-row input-select input-small">
                                 <DropType datas={typeusers} value={type} field='type' onChange={setFilterInput}/>
                             </div>
@@ -140,7 +140,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                   <>
                 {gridId !== friend.id  && 
                   <div className="FriendBox-Item" key={index}>
-                    <div className="FriendBox">
+                    <div className="FriendBox" style={{height: '186.7px'}}>
                       {params.id === user?.profile?.id ?
                         <button type="button" onClick={() => {removeFriend(friend.id); show(friend.id)}} className="FriendBox-Delete"><i className="uil uil-trash-alt"></i></button>
                         : params.id !== user?.profile?.id && !friendsIds.includes(friend.id) && user?.profile?.id !== friend.profile.id ?
@@ -153,6 +153,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                         <div className="FriendInfos">
                           <h3> {friend.profile.username}</h3>
                           <span>{friend.profile.job}</span>
+                          {friend.common_friends_count && <span> {friend.common_friends_count} in commons</span>}
                           <span>{ typeusers.map((key) => 
                                 {if (key[0] === friend.type) {
                                     return key[1]
@@ -161,7 +162,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                             - {
                              sectors.map((key) => 
                                {if ( friend.sector.includes(key[0])) {
-                                 return <Text tid={key[1]}/>
+                                 return t(`${key[1]}`)
                                }}
                              )
                            }

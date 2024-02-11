@@ -1,17 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {Text} from "../../containers/Language";
 import {  Link, NavLink, useHistory  } from 'react-router-dom';
 import { LoadNotificationAction } from '../../store/actions/Notification/LoadNotificationAction';
 import $ from "jquery";
 import useOutsideClick from '../../helpers/useOutsideClick';
 import { AdminLogOutAction } from '../../store/actions/Admin/AuthActions';
 import { AdminAction } from '../../store/actions/Admin/AdminActions';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
     const ref = useRef();
+
+    const [t] = useTranslation();
 
     const admin = useSelector(state => state.adminAuth.admin);
     const [showNotifications, setShowNotifications] = useState(false);
@@ -124,10 +126,10 @@ function Header() {
                             <div className="col-md-5 d-none d-lg-block">
                                 <div className="center-nav">
                                     <ul className="Dadupa-Nav">
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/dashboard`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i> <Text tid="dashboard"/></NavLink></li>
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/articles`} className="Nav-Link"><i className="uil uil-moneybag"></i> Articles </NavLink></li>
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/reclamations`} className="Nav-Link"><i className="uil uil-moneybag"></i> Reclamations </NavLink></li>
-                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/reports`} className="Nav-Link"><i className="uil uil-moneybag"></i> <Text tid="report"/> </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/dashboard`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i>{t('dashboard')} </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/articles`} className="Nav-Link"><i className="uil uil-moneybag"></i>{t('articles')}  </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/reclamations`} className="Nav-Link"><i className="uil uil-moneybag">{t('reclamations')}</i>  </NavLink></li>
+                                        <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/admin/reports`} className="Nav-Link"><i className="uil uil-moneybag"></i>{t('report')} </NavLink></li>
                                     </ul>
                                 </div>
                             </div>
@@ -137,9 +139,9 @@ function Header() {
                                         <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
                                         {display && <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active" ref={ref}>
                                             <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><Link to={`/project/create`} ><i className="uil uil-rocket"></i>  <Text tid="header.menu.project"/></Link></li>
-                                            <li className="Mini-Profile-Item"><Link to={`/funder/create`} ><i className="uil uil-briefcase-alt"></i> Funder</Link></li>
-                                            <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i> <Text tid="header.menu.mentoring"/></a></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/project/create`} ><i className="uil uil-rocket"></i>{t('header.menu.project')}</Link></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/funder/create`} ><i className="uil uil-briefcase-alt"></i> {t('funder')}</Link></li>
+                                            <li className="Mini-Profile-Item"><a href="new-accompagnateur-offer"><i className="uil uil-comment-alt-notes"></i>{t('header.menu.mentoring')}</a></li>
                                             </ul>
                                         </div>}
                                     </div>
@@ -157,13 +159,13 @@ function Header() {
                                                 </button>
                                                {showNotifications && 
                                                     <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active" ref={ref}>
-                                                        <h3><Text tid="notifications"/></h3>
+                                                        <h3>{t('notifications')}</h3>
                                                         <div className={' Msgs-List'} >
                                                             {/* { usernotifications.notifications.map((notification, index) =>
                                                                 <NotificationMenu notification={notification} key={index} />
                                                             )} */}
                                                             <div className="All-Messages-Row">
-                                                                <Link to={`/notifications`} className="all-messages-button">See All Notifications</Link>
+                                                                <Link to={`/notifications`} className="all-messages-button">{t('seeAll')} {t('notifications')}</Link>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,8 +194,8 @@ function Header() {
                                         <div className="Dadupa-Mini-Profile">
                                             <label className="Mini-Profile-Name">{admin.name}</label>
                                             <ul className="Mini-Profile-Items">
-                                                <li className="Mini-Profile-Item"><Link to={`/admin/settings`}><i className="uil uil-setting"></i> <Text tid="setting"/></Link></li>
-                                                <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i> <Text tid='logout' /></a></li>
+                                                <li className="Mini-Profile-Item"><Link to={`/admin/settings`}><i className="uil uil-setting"></i>{t('setting')} </Link></li>
+                                                <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i>{t('logout')} </a></li>
                                             </ul>
                                         </div>
                                     </>

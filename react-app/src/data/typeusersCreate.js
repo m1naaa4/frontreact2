@@ -1,8 +1,9 @@
 
 const typeusersCreate = [
-    ["BA", "Business Angel"],
-    ["FI", "Fonds d'investissement"],
-    ["CP", "Corporate"],
+    ["", 'Type'],
+    ["PP", "projectHolder"],
+    ["BF", "donor"],
+    ["ACMPT", "accompanyingPerson"],
 ];
 
 export default typeusersCreate;

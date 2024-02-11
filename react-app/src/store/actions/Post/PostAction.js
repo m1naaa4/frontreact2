@@ -1,5 +1,5 @@
-import { DeletePost, GetYoutube } from "../../../services/User/Profile/ProfileService";
-import { DeleteService, GetsService, PostService } from "../../../services/Post/PostService";
+import { GetYoutube } from "../../../services/User/Profile/ProfileService";
+import { DeleteService, LoadProject, PostService } from "../../../services/Post/PostService";
 
 export const GetPostsAction = (data, url) => {
 
@@ -7,7 +7,7 @@ export const GetPostsAction = (data, url) => {
 
         dispatch({ type: 'LOADING_GET_POSTS' });
 
-        PostService(data, url).then((res) => {
+        LoadProject(data, url).then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
                 dispatch({ type: 'GET_POSTS_SUCCESS', res });
             } else if (res.hasOwnProperty('success') && res.success === false) {

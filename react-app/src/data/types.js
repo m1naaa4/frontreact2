@@ -1,11 +1,9 @@
-
-
 const types = [
-    ["", "You are ?"],
-    ["PP", "Project's holder"],
-    ["BF", "Investor"],
-    ["ACMPT", "Mentor"],
-    ["visitor", "Visitor"],
+    ["", 'signup.form.profilType'],
+    ["PP", "projectHolder"],
+    ["BF", "donor"],
+    ["ACMPT", "accompanyingPerson"],
+    ["visitor", "visitor"],
 ];
 
 export default types;

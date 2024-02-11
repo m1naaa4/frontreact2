@@ -93,6 +93,10 @@ const ListingItemFunder = ({ project }) => {
         setOpen(true);
     }
 
+    const handleImageError = (event) => {
+        event.target.src = '/assets/images/offer-thumbnail.svg';
+    };
+
     return (
 
              <div className="offer-box">
@@ -125,10 +129,10 @@ const ListingItemFunder = ({ project }) => {
                         {(function() {
                             let link = $.isArray(project.media) ? project.media[0] : project.media;
                             if(getExtension(link) == 'youtube'){
-                                return <ReactPlayer width='340' url={link} controls={true} />
+                                return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                             }else{
                                 if(getExtension(link) == 'vimeo'){
-                                    return <ReactPlayer width='340' height='275' url={link} controls={true} />
+                                    return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                                 }else{
                                     if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                                         getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
@@ -141,7 +145,7 @@ const ListingItemFunder = ({ project }) => {
                                         </div>
                                     }
                                     else{
-                                        return <img style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
+                                        return <img onError={handleImageError} style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
                                     }
                                 }
                             }
@@ -154,6 +158,7 @@ const ListingItemFunder = ({ project }) => {
                                     <img src="/assets/images/icons/marker.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
+                                    <span className="meta-title">{t('targetAreas')}</span>
                                     <span className="meta-value">{countryName(country)}</span>
                                 </div>
                             </li>
@@ -162,6 +167,7 @@ const ListingItemFunder = ({ project }) => {
                                     <img src="/assets/images/icons/value.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
+                                    <span className="meta-title">{t('funding')}</span>
                                     <span className="meta-value">{ t(financeLabel(finance)) }</span>
                                 </div>
                             </li>

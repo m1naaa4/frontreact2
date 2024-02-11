@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
@@ -12,7 +12,7 @@ import { ResetpasswordAction } from '../../../store/actions/User/Auth/AuthAction
 import Spinner from 'react-bootstrap/Spinner';
 
 function ResetPasswordView(props) {
-  const [t, i18n] = useTranslation();
+  const [t] = useTranslation();
   const dispatch = useDispatch();
   const [clicked,setClicked] = useState(false)
   const authResponse = useSelector(state => state.userAuth.authResponse);

@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import ModalUpdateProfile from './Update_profile/ModalUpdateProfile';
 import sectors from '../../data/sectorsCreate';
 import countries from '../../data/countries';
-import { Text } from '../../containers/Language';
 import typeusers from '../../data/types';
 import ReadMoreReact from 'read-more-react';
 import SideLeftProfileSkeleton from '../../skeleton/profile/SideLeftProfileSkeleton';
+import { useTranslation } from 'react-i18next';
+import { Button, Popover, Tooltip, Typography } from '@mui/material';
+import { green } from '@material-ui/core/colors';
 
 export default function SideLeftProfileView() {
 
@@ -15,6 +17,7 @@ export default function SideLeftProfileView() {
   const user = useSelector(state => state.userProfile.userProfile);
   const [show, setShow] = useState(false);
   const [user_profile_id, setProfileId] = useState();
+  const [t] = useTranslation();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -50,19 +53,27 @@ export default function SideLeftProfileView() {
               <div className="Stats-Value"><span> </span><span className="counter">
                 {typeusers.map((key) => {
                   if (key[0] === infoprofile.infoprofile.type) {
-                    return key[1]
+                    return t(key[1])
                   }
                 }
                 )}
               </span></div>
               <div className="Widget-Stats">
                 <div className="Stats-Field Stats-Field-Col-4">
-                  {infoprofile.infoprofile.look_angel !== 0 && <h3 className="Widget-Title text-center">Searching Funder</h3>}
-                  {infoprofile.infoprofile.look_mentor !== 0 && <h3 className="Widget-Title text-center">Searching Mentor</h3>}
+                  {infoprofile.infoprofile.look_angel !== 0 && <h3 className="Widget-Title text-center">{t('searching_funder')}
+                  <Tooltip title={t('searching_funder_descrip')}>
+                    <i className="uil-question-circle text-success"></i>
+                  </Tooltip>
+                  </h3>}
+                  {infoprofile.infoprofile.look_mentor !== 0 && <h3 className="Widget-Title text-center">{t('searching_mentor')}
+                  <Tooltip title={t('searching_mentor_descrip')}>
+                    <i className="uil-question-circle text-success"></i>
+                  </Tooltip>
+                  </h3>}
                   <div className="Stats-Text">
                     {sectors.map((value, key) => {
                       if (value[0] === infoprofile.infoprofile.sector) {
-                        return <Text tid={value[1]} key={key}/>
+                        return t(`${value[1]}`)
                       }
                     }
                     )}
@@ -86,11 +97,11 @@ export default function SideLeftProfileView() {
                   <li><i className="uil uil-phone"></i> {infoprofile.infoprofile.phone}</li>
                   <li><i className="uil uil-envelope"></i> {infoprofile.infoprofile.email}</li>
 
-                  {infoprofile.infoprofile.networks?.facebook && <li><i className="uil uil-facebook-f"></i><a href={infoprofile.infoprofile.networks.facebook} target="_blank">@facebook</a> </li>}
-                  {infoprofile.infoprofile.networks?.twitter && <li><i className="uil uil-twitter-alt"></i><a href={infoprofile.infoprofile.networks.twitter} target="_blank">@twitter</a> </li>}
-                  {infoprofile.infoprofile.networks?.linkedin && <li><i className="uil uil-linkedin-alt"></i><a href={infoprofile.infoprofile.networks.linkedin} target="_blank">@linkedin</a> </li>}
-                  {infoprofile.infoprofile.networks?.instagram && <li><i className="uil uil-instagram-alt"></i><a href={infoprofile.infoprofile.networks.instagram} target="_blank">@instagram</a> </li>}
-                  {infoprofile.infoprofile.networks?.youtube && <li><i className="uil-youtube"></i><a href={infoprofile.infoprofile.networks.youtube} target="_blank">@youtube</a> </li>}
+                  {infoprofile.infoprofile.networks?.facebook && <li><i className="uil uil-facebook-f"></i><a href={infoprofile.infoprofile.networks.facebook} target="_blank" style={{color: green}}>@facebook</a> </li>}
+                  {infoprofile.infoprofile.networks?.twitter && <li><i className="uil uil-twitter-alt"></i><a href={infoprofile.infoprofile.networks.twitter} target="_blank" style={{color: green}}>@twitter</a> </li>}
+                  {infoprofile.infoprofile.networks?.linkedin && <li><i className="uil uil-linkedin-alt"></i><a href={infoprofile.infoprofile.networks.linkedin} target="_blank" style={{color: green}}>@linkedin</a> </li>}
+                  {infoprofile.infoprofile.networks?.instagram && <li><i className="uil uil-instagram-alt"></i><a href={infoprofile.infoprofile.networks.instagram} target="_blank" style={{color: green}}>@instagram</a> </li>}
+                  {infoprofile.infoprofile.networks?.youtube && <li><i className="uil-youtube"></i><a href={infoprofile.infoprofile.networks.youtube} target="_blank" style={{color: green}}>@youtube</a> </li>}
 
                 </ul>
               </div>
@@ -102,7 +113,7 @@ export default function SideLeftProfileView() {
                 <ModalUpdateProfile show={show} handleClose={handleClose} />
               </Modal>
               <div className="Profile-Info Profile-Bio">
-                <h3>Bio</h3>
+                <h3>{t('bio')}</h3>
                 {infoprofile.infoprofile.about &&
                   <ReadMoreReact text={infoprofile.infoprofile.about}
                     ideal={280}
@@ -111,18 +122,18 @@ export default function SideLeftProfileView() {
               </div>
 
               <div className="Profile-Info">
-                <h3>Secteur d’activité</h3>
+                <h3>{t('sector')}</h3>
                 {
                   sectors.map((value, key) => {
                     if (infoprofile.infoprofile.sector === value[0]) {
-                      return <span key={key}><Text tid={value[1]} key={key}/></span>
+                      return <span key={key}>{t(`${value[1]}`)}</span>
                     }
                   }
                   )
                 }
               </div>
               <div className="Profile-Info">
-                <h3>Lieu de résidence</h3>
+                <h3>{t('address')}</h3>
                 {
                   countries.map((value, key) => {
                     if (infoprofile.infoprofile.country === value.value) {

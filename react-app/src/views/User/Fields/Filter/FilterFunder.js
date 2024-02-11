@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import sectors from "../../../../data/sectors"
 import finances from "../../../../data/finances"
@@ -8,12 +8,19 @@ import AllMultiSelectCheckboxSector from '../../../../utils/Filters/AllMultisele
 import AllMultiSelectCheckboxZone from '../../../../utils/Filters/AllMultiselectCheckboxZone';
 import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultiselectCheckboxFinance';
 import { GetFunders } from '../../../../store/actions/Funder/FunderActions';
+import InputTags from '../../../../utils/tags/TagsInput';
+import { Collapse } from 'react-bootstrap';
 
 
 
 function FilterFunder({ filterInput }) {
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
+    const tag_state = useSelector(state => state.generaleVariable.tag);
+    const tags = tag_state ? tag_state : [];
+    const newTags = tags.map((name, index) => (
+        name.replace(/^#\s*/, '')
+    ));
 
     const [selectedzone, setSelectedcountry] = useState();
     const [selectedsector, setSelectedsector] = useState();
@@ -22,10 +29,24 @@ function FilterFunder({ filterInput }) {
 
     const dispatch = useDispatch();
 
+    const [tag, setTag] = useState(newTags);
+
+    useEffect(() => {
+        if (tag_state) {
+            setOpen(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        setTag(newTags);
+    }, [tag_state])
+
+    const selectedTags = tags => {
+        setTag(tags);
+    };
+
     const handleSubmitValue = (e) => {
         e.preventDefault();
-
-
         filterInput.filters = true;
 
         let dfinance = selectedfinance?.map((name, index) => (
@@ -44,6 +65,7 @@ function FilterFunder({ filterInput }) {
         filterInput.project_area = dzone
         filterInput.sector = dsector
         filterInput.search = search
+        filterInput.tag = tag
 
         dispatch(GetFunders(filterInput));
     }
@@ -79,15 +101,24 @@ function FilterFunder({ filterInput }) {
                                     aria-expanded={open}
                                     data-toggle="tooltip" data-placement="bottom" title="Advanced Search"
                                 >
-                                    <i className="uil uil-setting"></i>
+                                    <i className="uil uil-search-plus"></i>
                                 </button>
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn">
-                                        <i className="uil uil-search"></i> Search
+                                        <i className="uil uil-search"></i> {t('search')}
                                     </button>
                             </div>
                             
                         </div>
                     </div>
+                    <Collapse in={open} className="mt-10">
+                        <div className="col-sm-11 col-md-12 col-lg-12">
+                            <div className="display-flex">
+                                <div className="input-row input-tags">
+                                    <InputTags onChange={selectedTags} selectedTags={selectedTags} tagss={tags} />
+                                </div>
+                            </div>
+                        </div>
+                    </Collapse>
                 </div>
             </div>
         </div>

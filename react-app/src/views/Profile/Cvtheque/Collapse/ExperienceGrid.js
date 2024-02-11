@@ -19,15 +19,6 @@ const ExperienceGrid = ({ experience }) => {
   const [datefin, setDatefin] = useState(new Date(experience.datefin));
   const titleDialog = "Confirm to delete experience";
   const ContentDialog = "are you sure you want to delete this experience content?";
-  const dataCategory = [
-    ['', 'filter.secteur'],
-    ['agroalimentaire', 'filter.secteur.agroalimentaire'],
-    ['architecture', 'filter.secteur.architecture'],
-    ['art', 'filter.secteur.art'],
-    ['big_data', 'filter.secteur.big_data'],
-    ['bio', 'filter.secteur.bio'],
-    ['btp', 'filter.secteur.btp']
-  ]
 
   const dispatch = useDispatch();
   const [formData, setForm] = useForm({ present: experience.present, post: experience.post, sector: experience.sector, entreprise: experience.entreprise, lieu: experience.lieu, description: experience.description });
@@ -180,7 +171,7 @@ const ExperienceGrid = ({ experience }) => {
             </div>
           }
         </div>
-        <span>{experience.post} {experience.entreprise}- {experience.lieu}</span>
+        <span><span style={{fontSize: '12px', fontWeight: 900, color: '#1f1f1f'}}>{experience.post}</span><br/> {experience.entreprise}- {experience.lieu}</span>
         <br/>
         <span>{experience.description}</span>
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
@@ -197,17 +188,17 @@ const ExperienceGrid = ({ experience }) => {
                   <label className="container-checkbox">
                     <input type="checkbox" defaultChecked={formData.present} />
                     <span className="checkmark"></span>
-                    <span>Présent</span>
+                    <span>{t('ongoing')}</span>
                   </label>
                 </div>
                 <div className="col-md-12 input-row">
-                  <input type="text" name="entreprise" defaultValue={formData.entreprise} placeholder="entreprise" className="wizard-required" onChange={setForm} required />
+                  <input type="text" name="entreprise" defaultValue={formData.entreprise} placeholder={t('company')} className="wizard-required" onChange={setForm} required />
                 </div>
                 <div className="col-md-12 input-row">
-                  <input type="text" name="post" defaultValue={formData.post} placeholder="Poste" className="wizard-required" onChange={setForm} required />
+                  <input type="text" name="post" defaultValue={formData.post} placeholder={t('job')} className="wizard-required" onChange={setForm} required />
                 </div>
                 <div className="col-md-6 input-row">
-                  <input type="text" name="lieu" defaultValue={formData.lieu} placeholder="Lieu" className="wizard-required" onChange={setForm} required />
+                  <input type="text" name="lieu" defaultValue={formData.lieu} placeholder={t('address')} className="wizard-required" onChange={setForm} required />
                 </div>
                 <div className="col-md-6 input-row input-select input-select-multi">
                   <Select
@@ -215,13 +206,13 @@ const ExperienceGrid = ({ experience }) => {
                     onChange={HandleChange}
                     value={optionSelected}
                     styles={SelectStyleWithScrollbar}
-                    placeholder={(formData?.sector === '') ? "Secteur d'activité" : formData?.sector}
+                    placeholder={(formData?.sector === '') ? t('industry') : formData?.sector}
                     required={true}
                     className="Select"
                   />
                 </div>
                 <div className="col-md-12 input-row">
-                  <textarea name="description" placeholder="Description " defaultValue={formData.description} onChange={setForm}></textarea>
+                  <textarea name="description" placeholder={t('description')} defaultValue={formData.description} onChange={setForm}></textarea>
                 </div>
               </div>
             </div>
@@ -229,7 +220,7 @@ const ExperienceGrid = ({ experience }) => {
               <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft">
               </div>
               <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                <button type="button" className="DadupaModal-BTNSubmit" onClick={UpdateExperience}>Update</button>
+                <button type="button" className="DadupaModal-BTNSubmit" onClick={UpdateExperience}>{t('update')}</button>
               </div>
             </div>
           </form>

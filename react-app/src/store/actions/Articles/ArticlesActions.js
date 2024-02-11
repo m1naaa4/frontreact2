@@ -29,7 +29,7 @@ export const getPopulareArticles = () => {
 
         const http = new HttpArticle();
         
-        http.GetData("/get/populare").then((res) => {
+        http.GetData("/populare").then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
                 dispatch({ type: 'LOAD_POPULARE_ARTICLES_SUCCESS', res });
             } else if (res.hasOwnProperty('success') && res.success === false) {
@@ -50,7 +50,7 @@ export const getSuggrestionArticles = () => {
 
         const http = new HttpArticle();
         
-        http.GetData("/get/suggestion").then((res) => {
+        http.GetData("/suggestion").then((res) => {
             if (res.hasOwnProperty('success') && res.success === true) {
                 dispatch({ type: 'LOAD_SUGGESTION_ARTICLES_SUCCESS', res });
             } else if (res.hasOwnProperty('success') && res.success === false) {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 export default function AvatarTooltip({ myRef, data, styles }) {
     const [isVisible, setIsVisible] = useState(false);
-
+    const { t } = useTranslation();
 
     useEffect(() => {
         const showTooltip = () => {
@@ -35,7 +36,7 @@ export default function AvatarTooltip({ myRef, data, styles }) {
                         <Link to={`/profile/${data.profile_id}`}><span style={{fontWeight:"bold"}}>{data.type}</span></Link>
                     </div>
                 </div>
-                <button className="DadupaModal-BTNSubmit tooltip-add-btn"><i className="uil uil-plus"></i> Send Invite</button>
+                <button className="DadupaModal-BTNSubmit tooltip-add-btn"><i className="uil uil-plus"></i>{t('sentInvitations')} </button>
             </div>
         )
     } else {

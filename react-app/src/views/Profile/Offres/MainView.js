@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import OffreGrid from './OffreGrid';
 import { useLocation, useParams } from 'react-router';
 import { getMyContentsAction } from '../../../store/actions/Offres/MyContentAction';
 import OffresSkeleton from '../../../skeleton/profile/OffresSkeleton';
 import ProjectGridView from '../../Projects/ProjectGridView';
 import ListingItemFunder from '../../Funder/ListingItemFunder';
 import ListingItemMentor from '../../Mentor/ListingItemMentor';
+import { useTranslation } from 'react-i18next';
 
 export default function MainView(props) {
     const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export default function MainView(props) {
     const loading = useSelector(state => state.offres.loading);
     const params = useParams();
     const location = useLocation();
+    const {t} = useTranslation();
 
     useEffect(() => {
         let data = {
@@ -55,7 +56,7 @@ export default function MainView(props) {
                                 <div className="col-md-12">
                                     <div className="offer-box">
                                         <div className="offer-box">
-                                            no result found
+                                            {t('noresultfound')}
                                         </div>
                                     </div>
                                 </div>

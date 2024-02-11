@@ -14,8 +14,6 @@ export const LikeComponent = (provider, provider_id, like) => {
       };
 
       return dispatch(LikeAction(data, '/like'));
-
-    like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
 }
 
   
@@ -24,7 +22,7 @@ export const LikeComponent = (provider, provider_id, like) => {
     <button className={like ? 'reaction-button reaction-like post-liked' : 'reaction-button reaction-like'}
         onClick={likeAction} toggle="#password-field" type="button" name="button">
         <img src={like ? "/assets/images/icons/dadupa-clap-green.svg" : "/assets/images/icons/dadupa-clap.svg"} alt="" />
-        {like ? "Dislike" : "Like"}
+        {like ? t('unclap') : t('clap')}
     </button>
   );
 }

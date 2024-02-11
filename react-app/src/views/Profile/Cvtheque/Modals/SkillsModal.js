@@ -2,21 +2,13 @@ import React from 'react'
 import { useForm } from "react-hooks-helper";
 import { useDispatch } from 'react-redux';
 import { CvAction } from '../../../../store/actions/Profile/UserActions';
-import DropType from '../../../../utils/DropType';
+import { useTranslation } from 'react-i18next';
 
 
 
 const  SkillsModal = ({ show, handleClose}) => {
     const dispatch = useDispatch();
-    const dataCategory = [
-        ['','filter.secteur'],
-        ['agroalimentaire','filter.secteur.agroalimentaire'],
-        ['architecture','filter.secteur.architecture'],
-        ['art','filter.secteur.art'],
-        ['big_data','filter.secteur.big_data'],
-        ['bio','filter.secteur.bio'],
-        ['btp','filter.secteur.btp']
-    ]
+    const {t} = useTranslation();
     
     const dataLevel = [
         ['','filter.secteur'],
@@ -45,7 +37,7 @@ const  SkillsModal = ({ show, handleClose}) => {
               <div className="form-inputs">
                 <div className="form-row">
                   <div className="col-md-12 input-row">
-                    <input type="text" name="name" onChange={setForm} defaultValue="" placeholder="Nom du Skill" className="wizard-required" required/>
+                    <input type="text" name="name" onChange={setForm} defaultValue="" placeholder={t('skills.form.new')} className="wizard-required" required/>
                   </div>
                   {/* <div className="col-md-12 input-row input-select input-select-multi">
                     <DropType datas={dataCategory} field='category' defaultValue={formData.category} onChange={setForm}/>
@@ -57,7 +49,7 @@ const  SkillsModal = ({ show, handleClose}) => {
               </div>
               <div className="DadupaModal-Footer">
                 <div className="w-100">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {AddSkills(); handleClose()}}>ADD NEW SKILL</button>
+                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {AddSkills(); handleClose()}}>{t('add')} {t('skills.form.new')}</button>
                 </div>
               </div>
             </div>

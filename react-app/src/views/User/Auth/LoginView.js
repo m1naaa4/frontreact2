@@ -6,7 +6,6 @@ import ItemForm from "./ItemForm";
 import {useFormFields} from '../../../helpers/hooksFormInput'
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
 import Footer from "../../../layout/footer/footer";
-import {Text} from "../../../containers/Language";
 import SocialLogin from "./Social/SocialLogin";
 import $ from "jquery";
 import 'jquery-validation';
@@ -19,7 +18,6 @@ export default function LoginView(props) {
     const [place, sePlace] = useState();
     const [t] = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
-
 
     if (localStorage.getItem('user-token')) {
         props.props.history.push('/project/lists');
@@ -38,10 +36,9 @@ export default function LoginView(props) {
 
     const authResponse = useSelector(state => state.userAuth.authResponse);
 
-
     useEffect(() => {
             dispatch(clearUserAuthState())
-            sePlace(<Text tid="welcomeDescription"/>)
+            sePlace(t('welcomeDescription'))
         },
     [])
 
@@ -70,11 +67,11 @@ export default function LoginView(props) {
                                 
                                
                                 { authResponse.success === false &&
-                                     <div id="authErr" className="alert alert-danger"><Text tid={authResponse.error} /></div>
+                                     <div id="authErr" className="alert alert-danger">{t('authResponse.error')}</div>
                                 }
 
                                 <form id="form-login" onSubmit={e => {e.preventDefault();handleLogin(e)}} className="form-login">
-                                    <h3 className="form-title"><Text tid="welcomeDescription" />!</h3>
+                                    <h3 className="form-title">{t('welcomeDescription')}!</h3>
                                     <div className="form-inputs">
                                         <div className="input-row">
                                             <ItemForm type="email" name="email" value={fields.email}
@@ -105,7 +102,7 @@ export default function LoginView(props) {
                                                     <span> {t('remember_me')}</span>
                                             </label>
                                         </div>
-                                        <div className="forgot-password"><NavLink to="/resetPassword"><Text tid="forget_password" /></NavLink></div>
+                                        <div className="forgot-password"><NavLink to="/resetPassword">{t('forget_password')}</NavLink></div>
                                     </div>
                                     <div className="form-submit">
                                         <button type="submit"  name="submit"> 
@@ -124,11 +121,9 @@ export default function LoginView(props) {
 
                                 <SocialLogin props={props.props} />
                                 <div className="login-link">
-                                    <span><Text tid="q_register" /></span>
-                                    <NavLink to="/register"><Text tid="register" /></NavLink>
+                                    <span>{t('q_register')}</span>
+                                    <NavLink to="/register">{t('register')}</NavLink>
                                 </div>
-                                
-
                             </div>
                         </div>
                     </div>

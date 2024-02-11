@@ -47,7 +47,7 @@ export default function PostHeader({ post }) {
 
   useEffect(()=>{
     if (user?.id === post?.user_id) {
-      setAvatar(user?.profile.avatar_link);
+      setAvatar(user?.profile?.avatar_link);
     }else{
       setAvatar(post.avatar);
     }

@@ -5,7 +5,7 @@ import Select from 'react-select'
 
 
 function Zonedropfilter ({formData}) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [optionSelected, setOptionSelected] = useState();
 
     const HandleChange = (selected)=>{
@@ -84,7 +84,7 @@ function Zonedropfilter ({formData}) {
     onChange={HandleChange}
     value={optionSelected}
     styles={SelectStyleWithScrollbar}
-    placeholder={ (formData?.country === '') ? "select a country" : formData.country  }
+    placeholder={ (formData?.country === '') ? t('select_a_country') : formData.country  }
     required={true}
     className="Select"
 />

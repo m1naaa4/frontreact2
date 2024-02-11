@@ -3,11 +3,13 @@ import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 import Modal from '@mui/material/Modal';
 import { useSelector } from "react-redux";
 import NoContent from "../../utils/NoContent";
+import { useTranslation } from "react-i18next";
 
 
 export default function ShowFunderDocs() {
   const [selectedDoc, setSelectedDoc] = useState("");
   const [open, setOpen] = useState(false);
+  const {t} = useTranslation();
   const handleOpen = (doc) => {
     setSelectedDoc(doc.uri);
     setOpen(true)
@@ -52,37 +54,43 @@ export default function ShowFunderDocs() {
   }
 
   return (
-    <div className="row">
-      <h3>Document</h3>
-      {files.length ?
-        files.map((e, index) => (
-          <div className="col-sm-6 col-md-3 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
-            <div className="Doc-Wrap">
-              <a href="#!">
-                <div className="Doc-Icon"><span className="Doc-Type">{e.type}</span><i className="uil uil-file-alt"></i></div>
-                <div className="Doc-Name"><i className="uil uil-paperclip"></i> {e.name}</div>
-              </a>
-            </div>
-          </div>
-        )): <NoContent/>
-      }
+    <div className="Page-Wrapper" >
+      <div className="container">
+        <div className="offers-list">
+        <h3>{t('documents')}</h3>
+          <div className="row">
+            {files.length ?
+              files.map((e, index) => (
+                <div className="col-sm-6 col-md-4 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
+                  <div className="Doc-Wrap">
+                    <a href="#!">
+                      <div className="Doc-Icon"><span className="Doc-Type">{e.type}</span><i className="uil uil-file-alt"></i></div>
+                      {/* <div className="Doc-Name"><i className="uil uil-paperclip"></i> {e.name}</div> */}
+                    </a>
+                  </div>
+                </div>
+              )): <NoContent/>
+            }
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        style={{ width: "80%", margin: "auto", padding: "2em 0" }}
-      >
-        <div>
-          <DocViewer
-            className="col-12"
-            pluginRenderers={DocViewerRenderers}
-            documents={[{ uri: selectedDoc }]}
-            style={{height: "100%"}}
-          />
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+              style={{ width: "80%", margin: "auto", padding: "2em 0" }}
+            >
+              <div>
+                <DocViewer
+                  className="col-12"
+                  pluginRenderers={DocViewerRenderers}
+                  documents={[{ uri: selectedDoc }]}
+                  style={{height: "100%"}}
+                />
+              </div>
+            </Modal>
+          </div>
         </div>
-      </Modal>
+      </div>
     </div>
   );
 }

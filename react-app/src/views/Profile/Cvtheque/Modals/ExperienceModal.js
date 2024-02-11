@@ -3,7 +3,6 @@ import ReactDatePicker from 'react-datepicker';
 import { useForm } from "react-hooks-helper";
 import { useDispatch } from 'react-redux';
 import { CvAction } from '../../../../store/actions/Profile/UserActions';
-import DropType from '../../../../utils/DropType';
 import sectors from "../../../../data/sectors"
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
@@ -12,15 +11,7 @@ import Select from 'react-select';
 const  ExperienceModal = ({ showexperience, handleCloseExperience}) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const dataCategory = [
-      ['','filter.secteur'],
-      ['agroalimentaire','filter.secteur.agroalimentaire'],
-      ['architecture','filter.secteur.architecture'],
-      ['art','filter.secteur.art'],
-      ['big_data','filter.secteur.big_data'],
-      ['bio','filter.secteur.bio'],
-      ['btp','filter.secteur.btp']
-  ]
+  
 
   const [datedebut, setDatedebut] = useState(new Date());
   const [datefin, setDatefin] = useState(new Date());
@@ -125,23 +116,23 @@ const [optionSelected, setOptionSelected] = useState();
               <div className="form-inputs">
                 <div className="form-row">
                   <div className="col-12 input-row">
-                    <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Experiences</h3>
+                    <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> {t('experience')}</h3>
                   </div>
                   <div className="col-md-5 input-row">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Date de début</span>
+                      <span className='mb-2'>{t('start')}</span>
                       <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
                     </label>
                   </div>
                   <div className="col-md-5 input-row mb-4">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Date de fin</span>
+                      <span className='mb-2'>{t('end')}</span>
                       <ReactDatePicker className="wizard-required" selected={datefin} onChange={(date) => setDatefin(date)} />
                     </label>
                   </div>
                   <div className="col-md-2 input-row mb-4">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Présent</span>
+                      <span className='mb-2'>{t('ongoing')}</span>
                       <div className="custom-control custom-switch switch-present">
                           <input type="checkbox" onChange={setForm} className="custom-control-input" id="switch-present"
                             name="present" />
@@ -155,25 +146,25 @@ const [optionSelected, setOptionSelected] = useState();
                   </div>
                   <div className="col-md-6 input-row">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Entreprise</span>
-                      <input type="text" name="entreprise" defaultValue="" placeholder="Entreprise" className="wizard-required" onChange={setForm} required/>
+                      <span className='mb-2'>{t('company')}</span>
+                      <input type="text" name="entreprise" defaultValue="" placeholder={t('company')} className="wizard-required" onChange={setForm} required/>
                     </label>
                   </div>
                   <div className="col-md-6 input-row">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Poste</span>
-                      <input type="text" name="post" defaultValue="" placeholder="Poste" className="wizard-required" onChange={setForm} required/>
+                      <span className='mb-2'>{t('job')}</span>
+                      <input type="text" name="post" defaultValue="" placeholder={t('job')} className="wizard-required" onChange={setForm} required/>
                     </label>
                   </div>
                   <div className="col-md-6 input-row">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Lieu</span>
-                      <input type="text" name="lieu" defaultValue="" placeholder="Lieu" className="wizard-required" onChange={setForm} required/>
+                      <span className='mb-2'>{t('address')}</span>
+                      <input type="text" name="lieu" defaultValue="" placeholder={t('address')} className="wizard-required" onChange={setForm} required/>
                     </label>
                   </div>
                   <div className="col-md-6 input-row input-select input-select-multi">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Secteur</span>
+                      <span className='mb-2'>{t('industry')}</span>
                       {/* <select className="user-type" name='sector' defaultValue={formData.sector} onChange={setForm}>
                         {sectors.map((item, key) => (
                             <option key={key} value={item.value}>{t(item.label)}</option>
@@ -184,7 +175,7 @@ const [optionSelected, setOptionSelected] = useState();
                               onChange={HandleChange}
                               value={optionSelected}
                               styles={SelectStyleWithScrollbar}
-                              placeholder="Secteur d'activité"
+                              placeholder={t('industry')}
                               required={true}
                               className="Select"
                       />
@@ -192,15 +183,15 @@ const [optionSelected, setOptionSelected] = useState();
                   </div>
                   <div className="col-md-12 input-row">
                     <label className='d-flex flex-column mb-0'>
-                      <span className='mb-2'>Description</span>
-                      <textarea name="description" placeholder="Description" onChange={setForm}></textarea>
+                      <span className='mb-2'>{t('description')}</span>
+                      <textarea name="description" placeholder={t('description')} onChange={setForm}></textarea>
                     </label>
                   </div>
                 </div>
               </div>
               <div className="DadupaModal-Footer">
                 <div className="w-100">
-                  <button type="button" className="DadupaModal-BTNSubmit w-100" onClick={() => {AddEperience(); handleCloseExperience()}}>ADD NEW Experince</button>
+                  <button type="button" className="DadupaModal-BTNSubmit w-100" onClick={() => {AddEperience(); handleCloseExperience()}}>{t('add')}</button>
                 </div>
               </div>
             </div>

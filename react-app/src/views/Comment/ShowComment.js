@@ -116,10 +116,10 @@ export default function ShowComment({comment, providerType}) {
                                 <li className="comment-action">
                                     <button className={like ? 'like-action post-liked' : 'like-action'} 
                                         onClick={likeAction} toggle="#password-field" type="button" name="button">
-                                            {like ? "Dislikee" : "Like"}
+                                            {like ? t('unclap') : t('clap')}
                                     </button>
                                 </li>
-                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.creator, e.keyCode)}>Reply</li>
+                                <li className="comment-action replay-action" onClick={(e) => showReplyBox(comment.creator, e.keyCode)}>{t('reply')}</li>
                             </ul>
                         </div>
                     </div>
@@ -166,7 +166,7 @@ export default function ShowComment({comment, providerType}) {
                             <div className="Comment-Col-10">
                                 <div className="Comment-Area">
                                     <div className="Comment-Input">
-                                        <span onClick={gotToProfile} style={{color: 'blue', textDecoration: 'underline'}}>{to}</span>
+                                        {/* <span onClick={gotToProfile} style={{color: 'blue', textDecoration: 'underline'}}>{to}</span> */}
                                         <input type="text" name="body" defaultValue={body}
                                             onChange={e => setBody(e.target.value)} ref={refcomment}
                                             placeholder={t('write_comment')}

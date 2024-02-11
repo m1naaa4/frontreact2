@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import { Col, ListGroup, Modal, Nav, Row, Tab } from 'react-bootstrap';
+import { Col, Nav, Row, Tab } from 'react-bootstrap';
 import { useForm } from 'react-hooks-helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditTeamAction } from '../../../store/actions/Setting/SettingActions';
-import Modale from './Modale';
-import AsyncSelect from 'react-select/async';
-import Member from './Member';
-
 
 
 export default function TeamMain() { 
@@ -16,9 +12,6 @@ export default function TeamMain() {
     const [showmodal, setShowmodal] = useState(false);
     const [formData, setForm] = useForm({teamname:'', description:''});
 
-    const handledisplay = () => setOpen(!open);
-    const handleShow = () => setShowmodal(true);
-    const handleClose = () => setShowmodal(false);
     const teams = useSelector(state => state.setting.teams);
     const roles = useSelector(state => state.setting.permissions);
 

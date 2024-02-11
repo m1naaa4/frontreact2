@@ -18,11 +18,11 @@ const AllMultiSelectCheckboxZone = ({datas, setSelectedcountry}) => {
 
   function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
     if (value && value.some((o) => o.value === "*")) {
-      return `${placeholderButtonLabel}: All`;
+      return `${placeholderButtonLabel}: ${t('all')}`;
     } else if(value.some((o) => o.value === '')) {
-      return `${placeholderButtonLabel}: ${value.length-1} selected`;
+      return `${placeholderButtonLabel}: ${value.length-1} ${t('selected')}`;
     }else{
-      return `${placeholderButtonLabel}: ${value.length} selected`;
+      return `${placeholderButtonLabel}: ${value.length} ${t('selected')}`;
     }
   }
 
@@ -47,8 +47,8 @@ const AllMultiSelectCheckboxZone = ({datas, setSelectedcountry}) => {
 
   return (
     <ReactMultiSelectCheckboxes className="user-type"
-      options={[{ label: "All", value: "*" }, ...options]}
-      placeholderButtonLabel="Country"
+      options={[{ label: `${t('all')}`, value: "*" }, ...options]}
+      placeholderButtonLabel={t('country')}
       getDropdownButtonLabel={getDropdownButtonLabel}
       value={selectedOptions}
       onChange={onChange}

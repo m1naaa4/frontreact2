@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from 'react'
-import { useDispatch } from 'react-redux';
 import '../../taginput.css'
+import { useTranslation } from "react-i18next";
+
 
 
 
 
 export default function InputTags({selectedTags, tagss}) {
-    const dispatch = useDispatch();
     const [tags, setTags] = useState(tagss);
+    const { t } = useTranslation();
 
+    const newTags = tags.map((name, index) => (
+        name.replace(/^#\s*/, '')
+    ))
+    
     useEffect(() => {
-        setTags(tagss ?? []);
+        setTags(newTags ?? []);
     }, [tagss]);
 
     const removeTags = indexToRemove => {
@@ -40,7 +45,7 @@ export default function InputTags({selectedTags, tagss}) {
             <input
                 type="text"
                 onKeyDown={event => event.keyCode === 13 ? addTags(event) : null}
-                placeholder="Add Tags(Press enter to add)"
+                placeholder={t('addTags')}
             />
         </div>
     );

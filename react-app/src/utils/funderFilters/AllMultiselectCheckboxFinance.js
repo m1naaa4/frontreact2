@@ -17,7 +17,7 @@ const AllMultiSelectCheckboxFinance = ({datas, setSelectedfinance}) => {
 
   function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
     if (value && value.some((o) => o.value === "*")) {
-      return `${placeholderButtonLabel}: All`;
+      return `${placeholderButtonLabel}: ${t('all')}`;
     } else if(value.some((o) => o.value === '')) {
       return `${placeholderButtonLabel}: ${value.length-1} selected`;
     }else{
@@ -46,7 +46,7 @@ const AllMultiSelectCheckboxFinance = ({datas, setSelectedfinance}) => {
 
   return (
     <ReactMultiSelectCheckboxes
-      options={[{ label: "All", value: "*" }, ...options]}
+      options={[{ label: `${t('all')}`, value: "*" }, ...options]}
       placeholderButtonLabel="Finance"
       getDropdownButtonLabel={getDropdownButtonLabel}
       value={selectedOptions}

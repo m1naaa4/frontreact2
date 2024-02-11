@@ -72,7 +72,11 @@ export default function OffreGrid({ offre }) {
         }
         );
     },[])
-    
+
+    const handleImageError = (event) => {
+        console.log(event);
+        event.target.src = '/assets/images/offer-thumbnail.svg';
+    };
 
     return (
         <>
@@ -98,7 +102,7 @@ export default function OffreGrid({ offre }) {
                         options_List && (
                             <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
                                 <li className="PostFavorite">
-                                    <button onClick={e => addTofavorite(offre.id)}><i className="uil uil-favorite"></i> Favorite</button>
+                                    <button onClick={e => addTofavorite(offre.id)}><i className="uil uil-favorite"></i> {('favorite')}</button>
                                 </li>
                                 {/* <li className="PostKey">
                     <button><i className="uil uil-key-skeleton"></i> Historique clé</button>
@@ -106,10 +110,10 @@ export default function OffreGrid({ offre }) {
                                 {user_id === offre.owner[0].id &&
                                     <>
                                         <li className="PostDelete">
-                                            <button onClick={e => edit(offre.id)}><i className="uil uil-pen"></i> Edit</button>
+                                            <button onClick={e => edit(offre.id)}><i className="uil uil-pen"></i>{t('edit')} </button>
                                         </li>
                                         <li className="PostDelete">
-                                            <button onClick={e => deletecontent(offre.id)}><i className="uil uil-trash-alt"></i> Supprimer</button>
+                                            <button onClick={e => deletecontent(offre.id)}><i className="uil uil-trash-alt"></i>{t('delete')} </button>
                                         </li>
                                     </>
                                 }
@@ -126,10 +130,10 @@ export default function OffreGrid({ offre }) {
                     console.log(link);
                     link = $.isArray(link) ? link[0] : link;
                     if (getExtension(link) == 'youtube') {
-                        return <ReactPlayer width='340' url = {link} controls={true} />
+                        return <ReactPlayer width='340' height='234px' url = {link} controls={true} />
                     }else{
                         if (getExtension(link) == 'vimeo') {
-                            return <ReactPlayer url={link} controls={true} />
+                            return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                         }else{
                             if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                             getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
@@ -142,7 +146,7 @@ export default function OffreGrid({ offre }) {
                                 </div>
                             }
                             else{
-                                return <img width="100%" height="300" src={link} alt="Project"/>
+                                return <img width="100%" height="300px" onError={handleImageError} src={link} alt="Project"/>
                             }
                         }
                     }

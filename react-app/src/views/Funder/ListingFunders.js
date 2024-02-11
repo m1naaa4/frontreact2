@@ -9,7 +9,7 @@ import FilterFunder from '../User/Fields/Filter/FilterFunder';
 
 
 export default function ListingFunders(props) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [filterInput, setFilterInput] = useState({
         'filters': true,
         'project_area': '',
@@ -106,7 +106,7 @@ export default function ListingFunders(props) {
                                                 <div className="col-md-12">
                                                 <div className="offer-box">
                                                     <div className="offer-box">
-                                                        no result found
+                                                    {t('noresultfound')}
                                                     </div>
                                                 </div>
                                             </div>

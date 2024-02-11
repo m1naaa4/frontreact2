@@ -4,7 +4,6 @@ import { useHistory, NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { countryName } from '../../helpers/Helpres'
-import { Text } from "../../containers/Language";
 import AvatarTooltip from '../../utils/AvatarTooltip';
 import DialogWarning from '../../utils/DialogWarning';
 import $ from "jquery";
@@ -60,7 +59,7 @@ export default function FavoriteGrid({favorite}) {
           setSector(t(key[1]))
         }
       });
-    }, [])
+    }, []);
 
     return (
           <div className="grid-item offres" style={{width:'370px'}}>
@@ -86,7 +85,7 @@ export default function FavoriteGrid({favorite}) {
                   <div className="offer-logo">
                     {/* <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={e => addTofavorite(favorite.id, favorite.provider)} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button> */}
                     <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                    <DialogWarning 
+                    <DialogWarning
                         title={titleDialog} 
                         ContentText={ContentDialog} 
                         open={open} 
@@ -133,7 +132,7 @@ export default function FavoriteGrid({favorite}) {
                         <img src="assets/images/icons/marker.svg" alt=""/>
                       </div>
                       <div className="meta-details">
-                <span className="meta-title"><Text tid="targetAreas" /></span>
+                <span className="meta-title">{t('targetAreas')}</span>
                 <span className="meta-value">{countryName(favorite.project_area)}</span>
               </div>
                     </li>
@@ -142,7 +141,7 @@ export default function FavoriteGrid({favorite}) {
                 <img src="/assets/images/icons/cost.svg" alt="" />
               </div>
               <div className="meta-details">
-                <span className="meta-title"><Text tid="funding" /></span>
+                <span className="meta-title">{t('funding')}</span>
                 <span className="meta-value">${favorite.funding_search}</span>
               </div>
             </li>

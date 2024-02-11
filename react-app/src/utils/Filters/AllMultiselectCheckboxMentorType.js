@@ -16,11 +16,11 @@ const AllMultiselectCheckboxMentorType = ({datas, setSelectedTypeMentor}) => {
 
   function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
     if (value && value.some((o) => o.value === "*")) {
-      return `${placeholderButtonLabel}: All`;
+      return `${placeholderButtonLabel}: ${t('all')}`;
     } else if(value.some((o) => o.value === '')) {
-      return `${placeholderButtonLabel}: ${value.length-1} selected`;
+      return `${placeholderButtonLabel}: ${value.length-1} ${t('selected')}`;
     }else{
-      return `${placeholderButtonLabel}: ${value.length} selected`;
+      return `${placeholderButtonLabel}: ${value.length} ${t('selected')}`;
     }
   }
 
@@ -45,7 +45,7 @@ const AllMultiselectCheckboxMentorType = ({datas, setSelectedTypeMentor}) => {
 
   return (
     <ReactMultiSelectCheckboxes
-      options={[{ label: "All", value: "*" }, ...options]}
+      options={[{ label: `${t('all')}`, value: "*" }, ...options]}
       placeholderButtonLabel="Mentor type"
       getDropdownButtonLabel={getDropdownButtonLabel}
       value={selectedOptions}

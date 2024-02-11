@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { useSelector} from 'react-redux';
-import {displayErrorMessages} from '../../../helpers/displayErr'
 import ItemForm from "./ItemForm";
-import {Text} from "../../../containers/Language";
 import $ from "jquery";
 import 'jquery-validation'
+import { useTranslation } from 'react-i18next';
 
 const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
     const { email, password } = formData;
+    const [t] = useTranslation();
 
     useEffect(() => {
         $("#form").validate({
@@ -59,13 +59,13 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
             <form id="form">
                 <div className="form-inputs">
                     <div className="input-row">
-                        <ItemForm type="email" name="email" value={email} onChange={setForm}  placeholder="E-mail"
+                        <ItemForm type="email" name="email" value={email} onChange={setForm}  placeholder={t('email')}
                                     className="wizard-required" required/>
                     </div>
                     <div className="input-row">
                         <input onKeyDown={(e) => validateForm(e.target.value, e.keyCode) }  
                                 id="password-field" name="password"
-                                placeholder="Mot de passe (6 caractères minimum)" className="input-password"
+                                placeholder={t('password.6caracteresminimum')} className="input-password"
                                 type={passwordShown ? "text" : "password"}
                                 value={password}
                                 onChange={setForm}
@@ -76,9 +76,10 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
 
                 </div>
 
-                <button type="button" name="next" onClick={(e) => validateForm('next')} className="next action-button"><Text tid="next" /></button>
+                <button type="button" name="next" onClick={(e) => validateForm('next')} className="next action-button">{t('next')}</button>
                 <div className="form-notice">
-                    <Text tid="signup.message3" /> <br/><Text tid="signup.message4" />
+                    <center>{t('signup.message3')} <br/>{t('signup.message4')}</center>
+                    
                 </div>
             </form>
         </fieldset>

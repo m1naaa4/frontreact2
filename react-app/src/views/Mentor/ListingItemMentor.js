@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react'
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory } from "react-router-dom";
 import slugify from 'react-slugify';
-import {countryName, financeLabel, sectorName} from '../../helpers/Helpres'
+import {countryName, sectorName} from '../../helpers/Helpres'
 import { useTranslation } from 'react-i18next';
 import ReactPlayer from 'react-player';
 import $ from 'jquery';
@@ -80,18 +80,31 @@ const ListingItemMentor = ({ project }) => {
         setOpen(true);
     }
 
+    const goToSearch = (data) => {
+        history.push('/mentor/lists');
+        let tagss = [];
+        dispatch({ type: 'TAG', res: [...tagss, data.innerText] });
+    }
+
     let tags;
     if (project) {
         tags = <ul className="Tags-List">
-            {project.tags.map((name, index) => (
-                <li className="Tag-Item" key={index}>
-                    {name}
-                </li>
-            ))}
-        </ul>;
+        {project.tags.map((name, index) => (
+            <li className="Tag-Item" key={index}>
+                <span onClick={(e) => goToSearch(e.target)}># {name}</span>
+            </li>
+        ))}
+    </ul>;
     } else {
-        tags = [];
+        tags = <ul className="Tags-List">
+                    <li className="Tag-Item">
+                    </li>
+                </ul>;
     }
+
+    const handleImageError = (event) => {
+        event.target.src = '/assets/images/offer-thumbnail.svg';
+    };
 
     return (
 
@@ -125,10 +138,10 @@ const ListingItemMentor = ({ project }) => {
                         {(function() {
                             let link = $.isArray(project.media) ? project.media[0] : project.media;
                             if(getExtension(link) == 'youtube'){
-                                return <ReactPlayer width='340' url={link} controls={true} />
+                                return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                             }else{
                                 if(getExtension(link) == 'vimeo'){
-                                    return <ReactPlayer width='340' url={link} controls={true} />
+                                    return <ReactPlayer width='340' height='234px' url={link} controls={true} />
                                 }else{
                                     if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                                         getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
@@ -136,12 +149,12 @@ const ListingItemMentor = ({ project }) => {
                                     } else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(link)) {
                                         return <div className="Doc-Wrap">
                                             <a href="#!">
-                                                <div className="Doc-Icon" style={{width:'350px', height: '234px'}}><span className="Doc-Type">file</span><i className="uil uil-file-alt"></i></div>
+                                                <div className="Doc-Icon" style={{width:'350px', height: '234px'}}><span className="Doc-Type">{t('file')}</span><i className="uil uil-file-alt"></i></div>
                                             </a>
                                         </div>
                                     }
                                     else{
-                                        return <img   width='350' style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
+                                        return <img onError={handleImageError}   width='350' style={{width:'350px', height: '234px'}} src={link} alt="Project"/>
                                     }
                                 }
                             }
@@ -154,11 +167,13 @@ const ListingItemMentor = ({ project }) => {
                                     <img src="/assets/images/icons/marker.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
+                                    {/* <span className="meta-title">{t('targetAreas')}</span> */}
                                     <span className="meta-value">{countryName(project.zone)}</span>
                                 </div>
                             </li>
                         </ul>
                         {tags}
+                        
                     </div>
                     <div className="offer-reactions">
                         <ul className="reactions-box">
