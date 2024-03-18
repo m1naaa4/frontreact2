@@ -45,3 +45,13 @@ export const LogoutUser = () =>
         return error;
     });
 }
+
+export const LogUserSocialeService = (data, url ) =>
+{
+    const http = new HttpService();
+    return http.postData(data, url).then(data => {
+        return data
+    }).catch((error)=> {
+        return error;
+    });
+}

@@ -65,7 +65,7 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
                     <div className="input-row">
                         <input onKeyDown={(e) => validateForm(e.target.value, e.keyCode) }  
                                 id="password-field" name="password"
-                                placeholder={t('password.6caracteresminimum')} className="input-password"
+                                placeholder={t('password.8caracteresminimum')} className="input-password"
                                 type={passwordShown ? "text" : "password"}
                                 value={password}
                                 onChange={setForm}

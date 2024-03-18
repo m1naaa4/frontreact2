@@ -199,7 +199,7 @@ const ProjectGridView = ({ project }) => {
                     </li>
                     <li className="reaction shares" onClick={() => setShareUrl(true)}>
                         <i className="uil uil-share-alt"></i>
-                        <FacebookShareCount url={shareUrl}>
+                        <FacebookShareCount url={shareUrl  || undefined}>
                             {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
                         </FacebookShareCount>
                         <span>{project.shared}</span>

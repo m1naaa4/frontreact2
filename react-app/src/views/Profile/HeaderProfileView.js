@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import HeaderProfileSkeleton from '../../skeleton/profile/HeaderProfileSkeleton';
-import {  MyFriendsAction, SendRequestFriendAction } from '../../store/actions/Friend/FriendsAction';
+import {  InvitationsAction, MyFriendsAction, SendRequestFriendAction, SuggestionsAction } from '../../store/actions/Friend/FriendsAction';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
@@ -18,6 +18,9 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     const infouser = useSelector(state => state.userProfile);
     const userProfile = useSelector(state => state.userProfile.userProfile);
     const myfriends = useSelector(state => state.userProfile.myfriends);
+    const suggestions = useSelector(state => state.userProfile.suggestions);
+    const invitations = useSelector(state => state.userProfile.invitations);
+    
     const newavatar = useSelector(state => state.updateavatar);
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
@@ -43,6 +46,18 @@ export default function HeaderProfileView({ formData, setForm, props }) {
     const selectFileCover = (e) => {
         dispatch(UploadLogoAction(user_id, e.target.files[0], 'user', 'cover', '/upload'));
     };
+
+    useEffect(() => {
+        if (suggestions == undefined) {
+            dispatch(SuggestionsAction({'url': 'friend/getSuggestions'}));
+        }
+        if (myfriends == undefined) {
+            dispatch(MyFriendsAction({'url': 'friend/getmyfriends'}));
+        }
+        if (invitations == undefined) {
+            dispatch(InvitationsAction({'url': 'friend/getInvitations'}));
+        }
+    }, [])
 
     useEffect(() => {
         setFileCover(infoprofile.infoprofile.cover);

@@ -1,13 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as  Link } from 'react-router-dom';
 import { useForm, useStep } from "react-hooks-helper";
 import RegisterStep1View from "./RegisterStep1View";
 import RegisterStep2View from "./RegisterStep2View";
 import Submit from "./Submit";
 import HeaderLogo from "../../../layout/Header/HeaderLogo";
 import Footer from "../../../layout/footer/footer";
-import SocialLogin from "./Social/SocialLogin";
 import { useTranslation } from "react-i18next";
+import SocialAuth from "./Social/SocialAuth";
 
 
 const steps = [
@@ -83,8 +83,8 @@ const MultiStepForm = ({ props }) => {
                                 </div>
                                 {step.id == "registerstep1" ? (
                                     <div>
-                                        <SocialLogin props={props} />
-                                        <div className="login-link"><span>{t('signup.form.alreadyMember')}</span><Link to="/login">{t('signin')}</Link></div>
+                                        <SocialAuth props={props} />
+                                        <div className="login-link"><span>{t('signup.form.alreadyMember')} </span><Link to="/login">{t('signin')}</Link></div>
                                     </div>
                                 ) : ''}
                                 

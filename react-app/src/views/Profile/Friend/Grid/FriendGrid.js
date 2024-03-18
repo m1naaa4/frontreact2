@@ -44,7 +44,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
         'url'   : 'friend/getFriends',
         'user_profile_id' : params.id,
         'search'  : filterInput.search,
-        'type'  : filterInput.type,
+        'type'  : filterInput.type??'all',
         'sort' : filterInput.orderName,
       }
       const timeoutId = setTimeout(() => dispatch(FriendsAction(data)), 1000);
@@ -137,8 +137,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
             <div className="Networks">
             { friends &&
                 friends?.map((friend, index) => (
-                  <>
-                {gridId !== friend.id  && 
+                gridId !== friend.id  && 
                   <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox" style={{height: '186.7px'}}>
                       {params.id === user?.profile?.id ?
@@ -171,8 +170,7 @@ export default function FriendGrid({friends, filterInput, setFilterInput }) {
                       </Link>
                     </div>
                   </div>
-                }
-                  </>
+                
               ))
             }
             </div>        

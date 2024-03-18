@@ -74,7 +74,6 @@ export default function OffreGrid({ offre }) {
     },[])
 
     const handleImageError = (event) => {
-        console.log(event);
         event.target.src = '/assets/images/offer-thumbnail.svg';
     };
 
@@ -127,7 +126,6 @@ export default function OffreGrid({ offre }) {
                 <div className="offer-media">
                     {(function() {
                     let link = $.type(offre.media_link) !== "string" ? $.parseJSON(offre.media_link) : offre.media_link;
-                    console.log(link);
                     link = $.isArray(link) ? link[0] : link;
                     if (getExtension(link) == 'youtube') {
                         return <ReactPlayer width='340' height='234px' url = {link} controls={true} />

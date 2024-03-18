@@ -579,15 +579,20 @@ const en = {
     post_notif_ligne3: 'For more information, please visit the Help Center or contact us.',
     post_notif_ligne4: 'The DADUPA Team',
     email_not_confirmed: 'Your e-mail is not confirmed',
-    french: 'Francais',
-    english: 'Anglais',
+    french: 'French',
+    english: 'English',
     pictures: 'Pictures',
     visit_website: 'Visit the website',
     'footer.menu.cookie': "Help & FAQ",
     'footer.menu.copyright': '2022 All Rights Reserved. Dadupa Consulting SARL',
     'footer.menu.brand': "interships & Careers",
     'footer.menu.guest': "Dadupa Services",
-    'form.profilsearchby': 'Search by'
+    'form.profilsearchby': 'Search by',
+    select_a_country : 'Select a country',
+    auth_response_error : 'E-mail or Password incorrect !',
+    'password.8caracteresminimum' : 'Password: 8 characters minimum',
+    request_sent_accept : 'Connection request sent',
+    'form.want_funder' : 'I\'m looking for investors',
 };
 
 export default en;

@@ -28,8 +28,7 @@ export default function SuggestionGrid({suggestions}) {
             <div className="Networks">
             { suggestions &&
                 suggestions?.map((suggestion, index) => (
-                  <>
-                {gridId !== suggestion.id && <div className="FriendBox-Item" key={index}>
+                gridId !== suggestion.id && <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
                         <button type="button" onClick={() => {addFriend(suggestion.id); show(suggestion.id)}} className="FriendBox-Accept"><i className="uil uil-user-plus"></i></button>
                         
@@ -56,8 +55,7 @@ export default function SuggestionGrid({suggestions}) {
                         </div>
                       </Link>
                     </div>
-                </div>}
-                </>
+                </div>
               ))
               
             }

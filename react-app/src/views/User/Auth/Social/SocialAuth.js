@@ -1,12 +1,12 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
-import UilGoogle from '@iconscout/react-unicons/icons/uil-google'
-import UilFacebook from '@iconscout/react-unicons/icons/uil-facebook-f'
-import UilLinkedin from '@iconscout/react-unicons/icons/uil-linkedin-alt'
 import { useTranslation } from 'react-i18next';
+import LinkedInButton from './Buttons/LinkedInButton';
+import FacebookButton from './Buttons/FacebookButton';
+import GoogleButton from './Buttons/GoogleButton';
 
 
-const SocialAuth = () => {
+const SocialAuth = ({props}) => {
     const [t] = useTranslation();
     return (
 
@@ -15,16 +15,13 @@ const SocialAuth = () => {
                 <label className="social-login-label">{t('or_sign_up_with')}:</label>
                 <div className="social-login-options">
                     <div className="social-option gmail">
-                        <a href="#!" data-toggle="tooltip" data-placement="bottom" title="Sign up with Gmail"><UilGoogle/>
-                            </a>
+                        <GoogleButton tooltipe={t('register')} link="signup" />
                     </div>
                     <div className="social-option facebook">
-                        <a href="#!" data-toggle="tooltip" data-placement="bottom" title="Sign up with Facebook"><UilFacebook/>
-                            </a>
+                        <FacebookButton tooltipe={t('register')} link="signup"/>
                     </div>
                     <div className="social-option linkedin">
-                        <a href="#!" data-toggle="tooltip" data-placement="bottom" title="Sign up with Linkedin"><UilLinkedin/>
-                        </a>
+                        <LinkedInButton props={props} link="signup" tooltipe={t('register')} />
                     </div>
                 </div>
             </div>

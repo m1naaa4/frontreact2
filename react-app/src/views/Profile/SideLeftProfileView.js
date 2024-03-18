@@ -24,7 +24,7 @@ export default function SideLeftProfileView() {
 
   useEffect(() => {
     if (user) {
-      setProfileId(user.profile_id); console.log('user_profile_id', user_profile_id)
+      setProfileId(user.profile_id);
     }
   })
 

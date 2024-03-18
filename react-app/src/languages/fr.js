@@ -579,15 +579,20 @@ const fr = {
     post_notif_ligne3: 'Pour plus d\'informations, n\'hésitez pas à consulter le Centre d\'aide ou à nous contacter.',
     post_notif_ligne4: 'L\'équipe DADUPA',
     email_not_confirmed: 'Votre e-mail n\'est pas confirmé',
-    french: 'French',
-    english: 'English',
+    french: 'Français',
+    english: 'Anglais',
     pictures: 'Photos',
     visit_website: 'Visiter le site web',
     'footer.menu.cookie': "Aide & FAQ",
     'footer.menu.copyright': '2022 Tous droits réservés. Dadupa Connect',
     'footer.menu.brand': "Stages & Carrières",
     'footer.menu.guest': "Services dadupa",
-    'form.profilsearchby': 'Rechercher par'
+    'form.profilsearchby': 'Rechercher par',
+    select_a_country : 'Sélectionnez un pays',
+    auth_response_error : 'E-mail ou mot de passe incorrect !',
+    'password.8caracteresminimum' : 'Mot de passe : 8 caractères minimum',
+    request_sent_accept : 'Demande de connexion envoyée',
+    'form.want_funder' : 'Je cherche des investisseurs',
 };
 
 export default fr;

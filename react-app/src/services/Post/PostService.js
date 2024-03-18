@@ -14,7 +14,6 @@ export const PostService = (data, url) =>
 export const LoadProject = (data, url) =>
 {
     const http = new Service();
-    console.log('current', url);
     return http.postData(data, url).then(data=>{
         return data;
     }).catch((error)=> {

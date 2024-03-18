@@ -27,7 +27,6 @@ export default function FriendsList({props}){
     const [filterInput, setFilterInput] = useForm(defaultData);
 
     const data = { filterInput, setFilterInput, props };
-    console.log(filterInput);
 
     useEffect(() => {
         if (firstUpdate.current) {

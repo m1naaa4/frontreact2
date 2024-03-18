@@ -55,9 +55,9 @@ export const SendRequestFriendAction = (data) =>{
         generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch(SuggestionsAction({'url': 'friend/getSuggestions'}));
                     dispatch({type:'LOADING_SEND_SUGGESTION_SUCCESS', res});
-
-                }else if(res.hasOwnProperty('success') && res.success === false) {
+                } else if(res.hasOwnProperty('success') && res.success === false) {
                     dispatch({type:'LOADING_SUGGESTIONS_ERROR',res})
                 }
             },
@@ -78,6 +78,7 @@ export const AcceptFriendAction = (data) =>{
         generalePost(data).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
+                    dispatch(InvitationsAction({'url': 'friend/getInvitations'}));
                     dispatch({type:'LOADING_ACCEPT_REQUEST_ADD_SUCCESS', res});
 
                 }else if(res.hasOwnProperty('success') && res.success === false) {

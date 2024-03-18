@@ -518,6 +518,25 @@ label.error {
   color: #F3FFF8;
 }
 
+.social-login-options .social-option span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .02);
+  color: #00CC66;
+  font-size: 22px;
+  transition: all .30s linear
+}
+
+.social-login-options .social-option span:hover {
+  background-color: #00CC66;
+  color: #F3FFF8;
+}
+
 .social-login-options .social-option .uim-svg {
   height: auto;
 }

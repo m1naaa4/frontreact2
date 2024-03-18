@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {LoginUser,SignUpService,LogoutUser,ResetpasswordUser} from '../../../../services/User/AuthService'
+import {LoginUser, SignUpService, LogoutUser, ResetpasswordUser, LogUserSocialeService} from '../../../../services/User/AuthService'
 
 
-export const signUpAction = (credentials,props) =>
+export const signUpAction = (credentials, props) =>
 {
 
     return (dispatch)=>{
@@ -38,7 +38,7 @@ export const signUpAction = (credentials,props) =>
 }
 
 
-export const UserLoginAction = (credentials,props) =>
+export const UserLoginAction = (credentials, props) =>
 {
     return (dispatch)=>{
         dispatch({type:'RESTART_AUTH_RESPONSE'});
@@ -46,7 +46,7 @@ export const UserLoginAction = (credentials,props) =>
         dispatch({type:'LOADING_LOAD_USER'});
         LoginUser(credentials).then((res)=>{
             if(res.success===true && res.hasOwnProperty('token')){
-                localStorage.setItem('user-token','Bearer '+res.token);
+                localStorage.setItem('user-token','Bearer ' + res.token);
 
                 axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
 
@@ -86,7 +86,7 @@ export const UserLogOutAction = (history) =>
         dispatch({type:'RESTART_AUTH_RESPONSE'});
         LogoutUser().then((res) => {
             if(res.success === true){
-                localStorage.removeItem('user-token');
+                localStorage.clear();
                 history.push("/login")
                 dispatch({type:'LOGOUT_SUCCESS',res});
             }
@@ -108,6 +108,36 @@ export const clearUserAuthState = () =>
         dispatch({type:'RESTART_AUTH_RESPONSE'});
     }
   
+}
+
+export const SocialLoginAction = (data, url) => {
+    return (dispatch) => 
+    {
+        LogUserSocialeService(data, url).then((res) =>
+            {
+                if (res.hasOwnProperty('success') && res.success === true) 
+                {
+                    localStorage.setItem('user-token','Bearer '+ res.token);
+                    axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
+
+                    dispatch({type:'LOGIN_SUCCESS', res});
+                    dispatch({type:'LOAD_USER_SUCCESS', res});
+
+                    setTimeout(() => {
+                        dispatch({type:'RESTART_AUTH_RESPONSE'}); 
+                        window.location.href = '/project/lists';
+                    }, 100);
+
+                } else if(res.hasOwnProperty('success') && res.success === false) 
+                {
+                    dispatch({type:'LOGIN_ERROR',res})
+                }
+            },
+            error => {
+                dispatch({type:'CODE_ERROR',error});
+            }
+        )
+    }
 }
 
 
