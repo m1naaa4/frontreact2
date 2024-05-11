@@ -75,7 +75,7 @@ const ProjectSkeletonGridOne = () => {
                             </button>
                         </div>
                     </div>
-                    <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    {/* <Modal show={showmodal} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content" style={{ padding: "0 2em" }}>
                                 <div className='d-flex'>
@@ -84,7 +84,7 @@ const ProjectSkeletonGridOne = () => {
                                         <h2>{providername}</h2>
                                         <div className="Contact mb-4">
                                             <div class="d-flex align-items-center">
-                                                <div className="Contact-Thumb" ref={ref}> <Link to={`/profile/${owner.profile_id}`}><img src={owner.avatar} alt={owner.username} /></Link></div>
+                                                <div className="Contact-Thumb" ref={ref}> <Link to={`/profile/${owner?.profile_id}`}><img src={owner?.avatar} alt={owner?.username} /></Link></div>
                                                 <div className="Contact-Infos pt-0">
                                                     <Link to={`/profile/${owner.profile_id}`}><h4>{owner.username}</h4></Link>
                                                     {(user?.profile_id != owner.profile_id) && <AvatarTooltip myRef={ref} data={owner} styles={{ marginTop: "10px", marginRight: "0" }} />}
@@ -102,7 +102,7 @@ const ProjectSkeletonGridOne = () => {
                             </div>
 
                         </div>
-                    </Modal>
+                    </Modal> */}
                     {/* <div className="Company-Infos">
                             <div className="Company-Left">
                                 <div className="single-offer-logo">

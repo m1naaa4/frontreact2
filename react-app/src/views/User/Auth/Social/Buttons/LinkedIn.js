@@ -63,7 +63,7 @@ class LinkedIn extends Component {
             <a href="#!"
                data-toggle="tooltip"
                data-placement="bottom"
-               title="Sign up with Facebook"
+               title="Sign up with Linkedin"
                onClick={this.start}
             >
                 <UilLinkedin/>

@@ -69,20 +69,20 @@ export default function SideRightSettingView() {
                         </Modal>
                       <div className="form-row">
                         <div className="col-md-6 input-row">
-                          <input type="text" name="firstName" value={infoprofile.firstname} placeholder={t('firstName')} className="wizard-required" readOnly />
+                          <input type="text" name="firstName" value={infoprofile.firstname} placeholder={t('firstName')} className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}}/>
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="lastName" value={infoprofile.lastname} placeholder={t('lastName')} className="wizard-required" readOnly />
+                          <input type="text" name="lastName" value={infoprofile.lastname} placeholder={t('lastName')} className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}}/>
                         </div>
                         <div className="col-md-6 input-row">
-                          <input type="text" name="username" value={infoprofile.profile.username} placeholder={t('username')} className="wizard-required" readOnly />
+                          <input type="text" name="username" value={infoprofile.profile.username} placeholder={t('username')} className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}}/>
                         </div>
 
                         <div className="col-md-6 input-row">
-                          <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder={t('firstName')} className="wizard-required" readOnly />
+                          <input type="text" name="project-areas" value={infoprofile.profile.birthday} placeholder={t('firstName')} className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}}/>
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="text" name="country" defaultValue={country} placeholder={t('country')} className="wizard-required" readOnly/>
+                          <input type="text" name="country" defaultValue={country} placeholder={t('country')} className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}} />
                         </div>
 
                       </div>
@@ -104,10 +104,10 @@ export default function SideRightSettingView() {
 
                       <div className="form-row">
                         <div className="col-md-12 input-row">
-                          <input type="text" name="email" value={infoprofile.email} placeholder={t('email')} className="wizard-required" readOnly />
+                          <input type="text" name="email" value={infoprofile.email} placeholder={t('email')} className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}}/>
                         </div>
                         <div className="col-md-12 input-row">
-                          <input type="password" name="password" value="" placeholder={t('password')}  className="wizard-required" readOnly />
+                          <input type="password" name="password" value="" placeholder={t('password')}  className="wizard-required" readOnly disabled style={{border: 'none', background: 'transparent', color: 'black'}}/>
                         </div>
                         {!infoprofile.email_verified_at  && <div className="col-md-12 confirmation-message">
                             <div className="confirmation-message-text">

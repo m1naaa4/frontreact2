@@ -213,7 +213,7 @@ export default function ShowProjectView(props) {
 
         countries.map((key) => {
             if (key.value === project?.project?.project_area) {
-                setCountry(key.label)
+                setCountry(t(key.label))
             }
         }
         );

@@ -204,7 +204,7 @@ export default function ViewFunder(props) {
 
         countries.map((key) => {
             if (key.value === project?.zone) {
-                setCountry(key.label)
+                setCountry(t(key.label))
             }
         }
         );

@@ -12,8 +12,13 @@ function ZoneDropFilter ({formData}) {
       formData.project_area = selected.value;
     }
 
+    const translatedCountries = countries.map(country => ({
+      ...country,
+      label: t(country.label)
+    }));
+
     useEffect(() => {
-      countries.map((key) => {
+      translatedCountries.map((key) => {
         if (key.value === formData.project_area) {
             setCountry(key.label)
         }
@@ -83,7 +88,7 @@ function ZoneDropFilter ({formData}) {
 
     return (
       <Select
-        options={countries}
+        options={translatedCountries}
         onChange={HandleChange}
         value={optionSelected}
         styles={SelectStyleWithScrollbar}

@@ -13,7 +13,6 @@ import "slick-carousel/slick/slick-theme.css";
 import RealizationGrid from '../Realization/RealizationGrid';
 import { ClearProjectsAction, getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
 import { Link, useParams } from 'react-router-dom';
-import { Text } from '../../../containers/Language';
 import BioSkeleton from '../../../skeleton/profile/BioSkeleton';
 
 
