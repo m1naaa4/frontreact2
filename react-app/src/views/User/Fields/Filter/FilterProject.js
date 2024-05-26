@@ -50,6 +50,7 @@ function FilterProject({ filterInput }) {
 
     const dispatch = useDispatch();
 
+
     const handleSubmitValue = (e) => {
         e.preventDefault();
 
@@ -104,14 +105,14 @@ function FilterProject({ filterInput }) {
                                 
                                 <AllMultiSelectCheckboxZone {...{ setSelectedcountry }} datas={countries} />
                             </div>
-                            <div className='input-row'>
+                            <div className='input-row filter-actions'>
                                 <button className="DadupaModal-BTNSubmit advenced-btn-search"
                                     onClick={display}
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}
                                     data-toggle="tooltip" data-placement="bottom" title="Advanced Search"
                                 >
-                                    <i className="uil-search-plus"></i>
+                                    <i class="uil uil-filter"></i>
                                 </button>
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn">
                                     <i className="uil uil-search"></i> {t('search')}

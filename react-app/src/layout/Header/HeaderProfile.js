@@ -36,6 +36,7 @@ function HeaderProfile() {
             if(!$(event.target).closest(".Dadupa-Popup-DropDown").length){
                 //$('.Dadupa-Popup-DropDown').removeClass('Dadupa-Popup-DropDown_Active');
             }
+            
             if(!$(event.target).closest(".Dadupa-User").length){
                 $('.Dadupa-Mini-Profile').removeClass('Mini-Profile-Active');
             }
@@ -97,7 +98,9 @@ function HeaderProfile() {
     }
 
     const openNotifications = () => {
-        setShowNotifications(!showNotifications )
+        $('.Dadupa-Notifs-Box').toggleClass('Notifs-Box-Active');
+
+        // setShowNotifications(!showNotifications )
 
         let data = {
             user_id : localStorage.getItem('user_id'),
@@ -144,13 +147,13 @@ function HeaderProfile() {
                                 </a>
                             </div>
                         </div>
-                        <div className="col-md-5 d-none d-lg-block">
+                        <div className="dadupa-navigation col-md-5 d-lg-block">
                             <div className="center-nav">
                                 <ul className="Dadupa-Nav">
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i>{t('projectHolder')}</NavLink></li>
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i> {t('donor')} </NavLink></li>
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/mentor`} className="Nav-Link"><i className="uil uil-users-alt"></i> {t('accompanyingPerson')} </NavLink></li>
-                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-books"></i>{t('articles')}</NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i><span>{t('projectHolder')}</span></NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/funder`} className="Nav-Link"><i className="uil uil-moneybag"></i><span>{t('donor')}</span> </NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/mentor`} className="Nav-Link"><i className="uil uil-users-alt"></i><span>{t('accompanyingPerson')}</span> </NavLink></li>
+                                <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/articles`} className="Nav-Link"><i className="uil uil-books"></i><span>{t('articles')}</span></NavLink></li>
                                 </ul>
                             </div>
                         </div>
@@ -179,8 +182,8 @@ function HeaderProfile() {
                                                 <span className={classe}></span><i className="uil uil-bell"></i>
                                                 {usernotifications.notifications && usernotifications.notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
                                             </button>
-                                            {showNotifications && 
-                                                <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active Notifs-Box-Active" ref={ref}>
+                                            {/* {showNotifications &&  */}
+                                                <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active" ref={ref}>
                                                     <h3>{t('notifications')}</h3>
                                                     <div className={' Msgs-List'} >
                                                         { usernotifications.notifications.map((notification, index) =>
@@ -192,7 +195,7 @@ function HeaderProfile() {
                                                     </div>
                                                 </div>
                                                 
-                                            }
+                                            {/* } */}
                                         </div>
                                         {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
                                             <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>

@@ -102,22 +102,30 @@ const ListingItemFunder = ({ project }) => {
              <div className="offer-box">
                     <div className="offer-header">
                         <div className="offer-title" onClick={() => showPage(project.id) } >
-                            <h3><span data-toggle="tooltip" data-placement="top" title={project.name}>{project.name?.substring(0, 10)}</span></h3>
-                            <span>{t(sectorName(sector))}</span>
+
+                            <div className='offer-company-name'>
+                                <span  data-toggle="tooltip" data-placement="top" title={project.name}>{project.name?.substring(0, 10)}</span>
+                                {/* <span className='offer-sector-name'>{t(sectorName(sector))}</span> */}
+                            </div>
+                            <div className='footer-title'>
+                                <div className='footer-item footer-item-name'>
+                                    <span style={{color: '#78909C'}}>{t(sectorName(sector))}</span>
+                                </div>
+                                <div className='footer-item  footer-item-flex'>
+                                    {/* <span>{project.created_at.for_humans}</span> */}
+                                    {/* {project.visibility == 'public' ? <svg xmlns="http://www.w3.org/2000/svg" width="15" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10S4.477 0 10 0Zm0 1.395a8.605 8.605 0 1 0 0 17.21a8.605 8.605 0 0 0 0-17.21Zm2.048 2.093a6.702 6.702 0 0 1 1.802 1.024c.125.096.245.198.363.307c.022.019.041.039.062.06c.328.303.626.644.89 1.01c.037.051.076.098.11.147c.064.094.124.192.184.29a6.024 6.024 0 0 1 .285.51c.053.1.1.209.149.315c.033.073.07.148.1.226c.073.182.138.365.197.552c.019.062.034.128.052.19a6.726 6.726 0 0 1 .215 1.087c.007.066.017.136.022.201c.02.215.033.432.033.65a7.186 7.186 0 0 1-.117 1.27c-.014.073-.026.147-.04.217c-.04.19-.086.376-.14.56c-.509-.233-1.107-.576-1.263-.953c-.284-.68-1.04-1.02-1.348-1.896c-.507-1.45.166-1.412.26-2.312c.044-.422-.26-.51-.661-.338c-.936.393-1.253.242-1.442-.463c-.189-.703 0-.899 0-.899c-.638.07-.662-.707-.331-.903c.23-.132.425-.537.618-.852ZM9.374 7.797c.59-.27 1.135-.367 1.063-.831c-.07-.459-.236-.801-1.158-.801c-.922 0-.52 1.265-1.276.51c-.756-.75.165-.556.543-.727c.379-.172.757-.877.095-.927c-.661-.047-.52.292-1.04.1c-.52-.196-.756.679-1.088.557c-.218-.082-.803-.532-1.191-.975a7 7 0 0 0-1.834 2.51c.113 1.307.804 1.993.804 1.993s.355.851 2.483 1.897c0 0 .4.024-.072-.461c-.472-.487-.993-1.095-.402-1.41c.59-.319.757-.292.899.293c.141.584.615.24.661-.319c.048-.557.922-1.14 1.513-1.41Zm-.45 2.94c1.018 0 .923.317 1.727 1.025c.803.704.378 1.409-.025 1.945c-.401.534-.756 1.14-.945 2.238c-.19 1.094-.686.314-.85.047c-.166-.269-.426-.511-.354-1.63c.07-1.118-.687-.46-.946-1.92c-.26-1.458.378-1.704 1.394-1.704Zm4.977.964c.271-.173.92.278.78.753c-.143.475-.591.207-.816 0c-.225-.206-.237-.583.036-.753Z"/></svg> : ''} */}
+                                    {project.date_limit ? (
+                                    <label className="existe-deadline" data-toggle="tooltip" data-placement="bottom" title={`${t('has_deadline') + ' ' + project.date_limit}`}><i className="uil uil-bell"></i></label>) :
+                                    <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('no_deadline')}>
+                                        <i className="uil uil-bell"></i>
+                                    </label>}
+                                </div>
+                            </div>
+
+                            {/* <h3><span data-toggle="tooltip" data-placement="top" title={project.name}>{project.name?.substring(0, 10)}</span></h3>
+                            <span>{t(sectorName(sector))}</span> */}
                         </div>
                         <div className="offer-logo">
-                            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
-                                <i className="uil uil-bookmark"></i>
-                            </button>
-                            <DialogWarning 
-                                title={titleDialog} 
-                                ContentText={ContentDialog} 
-                                open={open} 
-                                HandleConfirmation={e => addTofavorite(project.id)}
-                                HandleClose={HandleClose}
-                            />
-                            {project.date_limit ? (<label className="existe-deadline" data-toggle="tooltip" data-placement="bottom" title={`${t('has_deadline') + ' ' + project.date_limit}`}><i className="uil uil-bell"></i></label>) :
-                            <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('no_deadline')}><i className="uil uil-bell"></i></label>}
                             {project.owner ? (<a href={`/profile/${project.owner[0].profile_id}`}>
                                 <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
                             </a>) : <a href={`/profile/${project.profile_id}`}>
@@ -153,7 +161,7 @@ const ListingItemFunder = ({ project }) => {
                     </div>
                     <div className="offer-meta">
                         <ul className="meta-items">
-                            <li className="meta-item">
+                            <li className="meta-item meta-col-1">
                                 <div className="meta-icon">
                                     <img src="/assets/images/icons/marker.svg" alt=""/>
                                 </div>
@@ -162,7 +170,7 @@ const ListingItemFunder = ({ project }) => {
                                     <span className="meta-value">{countryName(country)}</span>
                                 </div>
                             </li>
-                            <li className="meta-item">
+                            <li className="meta-item meta-col-2">
                                 <div className="meta-icon">
                                     <img src="/assets/images/icons/value.svg" alt=""/>
                                 </div>
@@ -180,6 +188,16 @@ const ListingItemFunder = ({ project }) => {
                             <li className="reaction comments"><i className="uil uil-comment-dots"></i> <span>{project.commentCount}</span></li>
                             <li className="reaction shares" onClick={() => setShareUrl(true)}><i className="uil uil-share-alt"></i><span>{project.shared} {t('share')}</span></li>
                         </ul>
+                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
+                            <i className="uil uil-bookmark"></i>
+                        </button>
+                        <DialogWarning 
+                            title={titleDialog} 
+                            ContentText={ContentDialog} 
+                            open={open} 
+                            HandleConfirmation={e => addTofavorite(project.id)}
+                            HandleClose={HandleClose}
+                        />
                     </div>
                     <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                 </div>

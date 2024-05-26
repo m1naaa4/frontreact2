@@ -65,7 +65,7 @@ const fr = {
     bio:'Bio',
     industry:'Secteur d\'activité',
     address:'Lieu',
-    writesmthng: 'Exprimez-vos idées',	
+    writesmthng: 'Exprimez-vos idées...',	
     image: 'Images',
     video: 'Vidéo',
     youtube: 'YouTube',

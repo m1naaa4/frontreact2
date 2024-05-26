@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import ListingItemMentor from './ListingItemMentor';
 import FilterMentor from '../User/Fields/Filter/FilterMentor';
 import { GetMentors, loadMentorOnceAction } from '../../store/actions/Mentor/MentorActions';
-
+import $ from "jquery";
 
 export default function ListingMentors(props) {
     const { t, i18n } = useTranslation();
@@ -58,15 +58,23 @@ export default function ListingMentors(props) {
         }
     }, [dispatch]);
 
+    const FilterMenu = () => {
+        $('.Filter-Row').slideToggle('active-filter-form');
+    }
+
     return (
             <div className="Page-Wrapper" >
                 <div className="container">
-                    <div className="Filter-Row">
+                    <div className='filter-mobile'>
+                        <h4>Filters</h4>
+                        <button onClick={FilterMenu}><i class="uil uil-filter"></i></button>
+                    </div>
+                    {/* <div className="Filter-Row"> */}
                         < FilterMentor {
                             ...data
                         }
                         />
-                    </div>
+                    {/* </div> */}
 
                      <div className="offers-list">
                         <div className="row" >
@@ -88,14 +96,14 @@ export default function ListingMentors(props) {
                                                 projects.mentors.map((mentor, index) => {
                                                     if (projects.mentors.length === index +1){
                                                         return (
-                                                            <div  className="col-md-4" key={mentor.id} ref={lastProjectElementRef}>
+                                                            <div  className="col-lg-4 col-md-6" key={mentor.id} ref={lastProjectElementRef}>
                                                                 <ListingItemMentor project={mentor} />
                                                             </div>
                                                         )
 
                                                     }else{
                                                         return(
-                                                            <div  className="col-md-4" key={mentor.id}>
+                                                            <div  className="col-lg-4 col-md-6" key={mentor.id}>
                                                                 <ListingItemMentor  project={mentor} />
                                                             </div>
 

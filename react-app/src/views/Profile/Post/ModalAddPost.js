@@ -233,7 +233,7 @@ export default function({newavatar, handleClose}) {
                         </div>
                         <div className="CreatePost-Footer">
                             <div className="CreatePost-FooterLeft">
-                            <div className="Send-Message input-row input-select">
+                            <div className="input-row input-select">
                                     <select className="CreatePost-AddTag" name="visibility" onChange={(e) => setVisibility(e.target.value)}>
                                         <option defaultValue="public"> Public </option>
                                         {/* <option value="shared">Shared</option> */}

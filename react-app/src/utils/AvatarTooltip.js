@@ -31,9 +31,9 @@ export default function AvatarTooltip({ myRef, data, styles }) {
             <div className="Dadupa-Popup-DropDown Dadupa-Popup-DropDown_Active popup_project_details" style={styles}>
                 <div className="project-popup-item d-flex">
                     <Link className='project-popup-item-avatar' to={`/profile/${data.profile_id}`}><img src={data.avatar} alt={data.username} /></Link>
-                    <div className="project-popup-item-username">
-                        <Link to={`/profile/${data.profile_id}`}><h5 style={{fontSize:"13px",fontWeight:"bold"}}>{data.username}</h5></Link>
-                        <Link to={`/profile/${data.profile_id}`}><span style={{fontWeight:"bold"}}>{data.type}</span></Link>
+                    <div className="project-popup-item-username-inner">
+                        <Link to={`/profile/${data.profile_id}`}><h5 className='project-popup-item-username'>{data.username}</h5></Link>
+                        <span className='project-popup-item-profile'>{data.type}</span>
                     </div>
                 </div>
                 <button className="DadupaModal-BTNSubmit tooltip-add-btn"><i className="uil uil-plus"></i>{t('sentInvitations')} </button>

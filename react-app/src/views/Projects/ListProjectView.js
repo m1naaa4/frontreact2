@@ -3,6 +3,7 @@ import FilterProject from "../User/Fields/Filter/FilterProject";
 import ProjectView from "./ProjectGridView";
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";
 import {useDispatch, useSelector} from "react-redux";
+import $ from "jquery";
 // import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/User/Project/ProjectActions";
 import {loadProjectAction, loadProjectOnceAction} from "../../store/actions/Project/ProjectAction"
 import {Redirect} from 'react-router-dom';
@@ -56,16 +57,25 @@ export default function ListProjectView({ props}) {
         }
     }, [dispatch]);
 
+
+    const FilterMenu = () => {
+        $('.Filter-Row').slideToggle('active-filter-form');
+    }
+
     return (
         <>
             <div className="Page-Wrapper" >
                 <div className="container">
                     <div>
-                        <div className="Filter-Row">
+                        <div className='filter-mobile'>
+                            <h4>Filters</h4>
+                            <button onClick={FilterMenu}><i class="uil uil-filter"></i></button>
+                        </div>
+                        {/* <div className="Filter-Row"> */}
                             <FilterProject
                                {...data}
                             />
-                        </div>
+                        {/* </div> */}
                     </div>
                     <div className="offers-list">
                         <div className="row" >
@@ -83,14 +93,14 @@ export default function ListProjectView({ props}) {
                                                 projects.map((project, index) => {
                                                     if (projects.length === index +1){
                                                         return (
-                                                            <div  className="col-md-4"   key={index +1} ref={lastProjectElementRef}>
+                                                            <div  className="col-lg-4 col-md-6"   key={index +1} ref={lastProjectElementRef}>
                                                                 <ProjectView   project={project} />
                                                             </div>
                                                         )
 
                                                     }else{
                                                         return(
-                                                            <div  className="col-md-4" key={index +1}>
+                                                            <div  className="col-lg-4 col-md-6" key={index +1}>
                                                                 <ProjectView   project={project} />
                                                             </div>
 

@@ -60,12 +60,12 @@ export default function SideLeftProfileView() {
               </span></div>
               <div className="Widget-Stats">
                 <div className="Stats-Field Stats-Field-Col-4">
-                  {infoprofile.infoprofile.look_angel !== 0 && <h3 className="Widget-Title text-center">{t('searching_funder')}
+                  {infoprofile.infoprofile.look_angel !== 0 && <h3 className="Widget-Title">{t('searching_funder')}
                   <Tooltip title={t('searching_funder_descrip')}>
                     <i className="uil-question-circle text-success"></i>
                   </Tooltip>
                   </h3>}
-                  {infoprofile.infoprofile.look_mentor !== 0 && <h3 className="Widget-Title text-center">{t('searching_mentor')}
+                  {infoprofile.infoprofile.look_mentor !== 0 && <h3 className="Widget-Title">{t('searching_mentor')}
                   <Tooltip title={t('searching_mentor_descrip')}>
                     <i className="uil-question-circle text-success"></i>
                   </Tooltip>
@@ -95,7 +95,7 @@ export default function SideLeftProfileView() {
                   {/* <li><i className="uil uil-user"></i> {infoprofile.infoprofile.age}</li> */}
                   <li><i className="uil uil-crosshair"></i> {infoprofile.infoprofile.job}</li>
                   <li><i className="uil uil-phone"></i> {infoprofile.infoprofile.phone}</li>
-                  <li><i className="uil uil-envelope"></i> {infoprofile.infoprofile.email}</li>
+                  <li><i className="uil uil-envelope"></i> <span>{infoprofile.infoprofile.email}</span></li>
 
                   {infoprofile.infoprofile.networks?.facebook && <li><i className="uil uil-facebook-f"></i><a href={infoprofile.infoprofile.networks.facebook} target="_blank" style={{color: green}}>@facebook</a> </li>}
                   {infoprofile.infoprofile.networks?.twitter && <li><i className="uil uil-twitter-alt"></i><a href={infoprofile.infoprofile.networks.twitter} target="_blank" style={{color: green}}>@twitter</a> </li>}

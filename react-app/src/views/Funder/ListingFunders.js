@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ListingItemFunder from './ListingItemFunder';
 import FilterFunder from '../User/Fields/Filter/FilterFunder';
-
+import $ from "jquery";
 
 export default function ListingFunders(props) {
     const { t } = useTranslation();
@@ -54,17 +54,23 @@ export default function ListingFunders(props) {
         }
     }, [dispatch]);
 
-
+    const FilterMenu = () => {
+        $('.Filter-Row').slideToggle('active-filter-form');
+    }
 
     return (
             <div className="Page-Wrapper" >
                 <div className="container">
-                    <div className="Filter-Row">
+                    <div className='filter-mobile'>
+                        <h4>Filters</h4>
+                        <button onClick={FilterMenu}><i class="uil uil-filter"></i></button>
+                    </div>
+                    {/* <div className="Filter-Row"> */}
                         < FilterFunder {
                             ...data
                         }
                         />
-                    </div>
+                    {/* </div> */}
 
                      <div className="offers-list">
                         <div className="row" >
@@ -86,14 +92,14 @@ export default function ListingFunders(props) {
                                                 projects.funders.map((project, index) => {
                                                     if (projects.funders.length === index +1){
                                                         return (
-                                                            <div  className="col-md-4" key={project.id} ref={lastProjectElementRef}>
+                                                            <div  className="col-lg-4 col-md-6" key={project.id} ref={lastProjectElementRef}>
                                                                 <ListingItemFunder project={project} />
                                                             </div>
                                                         )
 
                                                     }else{
                                                         return(
-                                                            <div  className="col-md-4" key={project.id}>
+                                                            <div  className="col-lg-4 col-md-6" key={project.id}>
                                                                 <ListingItemFunder  project={project} />
                                                             </div>
 

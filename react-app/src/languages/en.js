@@ -65,7 +65,7 @@ const en = {
     bio:'Bio',
     industry:'Industry',
     address:'Location',
-    writesmthng: 'Share something',	
+    writesmthng: 'Share something...',	
     image: 'Images',
     video: 'Video',
     youtube: 'YouTube',

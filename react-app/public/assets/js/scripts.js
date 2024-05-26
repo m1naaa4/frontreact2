@@ -163,6 +163,11 @@ jQuery(document).ready(function ($) {
   }
 
   if ( (width <= 768) ){
+
+    $('.filter-mobile button').click(function(){
+      $('.Filter-Form').toggle('active-filter-form');
+    });
+
     $('.Mobile-Filter .Dadupa-Filter button').click(function() {
       $('.Filter-Row').slideToggle('slow');
     });

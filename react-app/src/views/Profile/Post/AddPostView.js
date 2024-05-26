@@ -48,24 +48,30 @@ export default function AddPostView(props) {
                             : <img src="/assets/images/avatar.png" alt="avatar" />}
                         </Link>
                         {/* <!-- <button type="button" className="UpdateInfos-BTN" ><i className="uil uil-pen"></i></button> --> */}
-                        <textarea className="WritePost-TextArea js-elasticArea" onClick={handleShow} 
-                            data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder={t('writesmthng')}>
-                        </textarea>
+                        <div className='WritePost-TextArea-Wrap'>
+                            <textarea className="WritePost-TextArea js-elasticArea" onClick={handleShow} 
+                                data-toggle="modal" data-target="#CreatePost-Modal" name="name" placeholder={t('writesmthng')}>
+                            </textarea>
+                        </div>
                     </div>
                     <div className="WritePost-Options">
-                        <button type="button" onClick={handleShow} name="button"><i className="uil uil-camera"></i> Photo <i className="uil uil-video"></i> Video<i className="uil-youtube"></i> Youtube</button>
+                        <button className='Content-Options' type="button" onClick={handleShow} name="button">
+                            <span><i className="uil uil-camera"></i> Photo </span>
+                            <span><i className="uil uil-video"></i> Video</span>
+                            <span><i className="uil-youtube"></i> Youtube</span>
+                        </button>
                         {/* <button type="button" name="button"><i className="uil uil-tag-alt"></i> Tag Friends</button> */}
                     </div>
 
-                    <Modal show={show} onHide={handleClose}>
+                    <Modal show={show} onHide={handleClose} centered>
                         <div  id="SharingModal" tabIndex="-1" role="dialog" aria-labelledby="SharingModalTitle" >
-                                <div className="modal-content">
+                            <div className="modal-content">
                                     {/* <div className="DadupaModal-Header">
                                         <h4>Publier un historique</h4>
                                         <button type="button" className="close" data-dismiss="modal" onClick={handleClose} aria-label="Close"><i className="uil uil-times"></i></button>
                                     </div> */}
                                     <ModalAddPost  newavatar={user_visiter_avatar} handleClose={handleClose}/>
-                                </div>
+                                </div>                                
                         </div>
                     </Modal>
                     

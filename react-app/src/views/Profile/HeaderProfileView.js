@@ -131,75 +131,80 @@ export default function HeaderProfileView({ formData, setForm, props }) {
         <>
             {
                 infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
-                    <div className="Profile-Cover" id="photoCover" style={{ backgroundImage: `url(${fileCover})` }}>
+                    <div className="Profile-Cover" >
                         <ToastContainer
                             position="bottom-left"
                             hideProgressBar={false}
                         />
-                        <div className="container">
-                            <div className="Profile-Wrap">
-                                <div className="Profile-Infos" style={{top:"5px"}}>
-                                    <br/><br/>
-                                    {
-                                        localStorage.getItem('profile_id') === params.id && < > < input type = "file"
-                                        id = "imageUpload"
-                                        name = "avatar"
-                                        accept = ".png, .jpg, .jpeg"
-                                        ref = {
-                                            hiddenFileInput
+                        
+                            <div className="Profile-Wrap" id="photoCover" style={{ backgroundImage: `url(${fileCover})` }}>
+                                <div className="container">
+                                    <div className="Profile-Infos">
+                                        {/* <br/><br/> */}
+                                        {
+                                            localStorage.getItem('profile_id') === params.id && < > < input type = "file"
+                                            id = "imageUpload"
+                                            name = "avatar"
+                                            accept = ".png, .jpg, .jpeg"
+                                            ref = {
+                                                hiddenFileInput
+                                            }
+                                            onChange = {
+                                                selectFile
+                                            }
+                                            />
+                                            <label htmlFor="imageUpload">
+                                                <i className="uil uil-camera" />
+                                            </label></>
                                         }
-                                        onChange = {
-                                            selectFile
+                                        {fileAvatar ? <div className="Profile-Picture" id="imageProfile" style={{ backgroundImage: `url(${fileAvatar})` }} /> :
+                                            <div className="Profile-Picture" id="imageProfile" style={{ backgroundImage: `url('/assets/images/avatar.png')` }} />
                                         }
-                                        />
-                                        <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
-                                            <i className="uil uil-camera" />
-                                        </label></>
-                                    }
-                                    {fileAvatar ? <div className="Profile-Picture" id="imageProfile" style={{ backgroundImage: `url(${fileAvatar})` }} /> :
-                                        <div className="Profile-Picture" id="imageProfile" style={{ backgroundImage: `url('/assets/images/avatar.png')` }} />
-                                    }
 
-                                    <div className="Profile-Name">
-                                        <span className="Profile-Icon"><i className={`${type}`}></i></span>
-                                        <span style={{fontSize:"15px"}}>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
+                                        <div className="Profile-Name">
+                                            <span>{(infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)? (infoprofile.infoprofile.firstname+" "+infoprofile.infoprofile.lastname): infoprofile.infoprofile.username}</span>
+                                            <span className="Profile-Icon"><i className={`${type}`}></i></span>
+                                        </div>
                                     </div>
-                                </div>
-                                {
-                                    localStorage.getItem('profile_id') === params.id && < >
-                                    <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
-                                    <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> {t('coverEdit')} </label>
-                                </>
-                                }
-                                <div className="Profile-Navigation" style={{top:"5px"}}>
-                                    <ul className="Profie-Menu">
-                                        { (infoprofile?.infoprofile.user_id!==userProfile.id && show)  && (<li><div className="form-submit" style={{backgroundColor:"white",borderRadius:"32px"}} ><button onClick={SendRequest} style={{border:"0px",height:"40px",width:"50px"}}><i className="uil uil-user-plus" style={{fontSize:"20px",paddingLeft:"3px"}}></i></button></div></li>)}
-                                        <Dialog
-                                            open={open}
-                                            onClose={HandleClose}
-                                            aria-labelledby="alert-dialog-title"
-                                            aria-describedby="alert-dialog-description"
-                                            >
-                                                <DialogContent>
-                                                <DialogContentText id="alert-dialog-description">
-                                                    <span style={{fontWeight:"bold",top:"50px"}}> {t('request_sent_accept')}</span>
-                                                </DialogContentText>
-                                                </DialogContent>
-                                                <DialogActions>
-                                                <Button onClick={HandleClose} autoFocus>
-                                                    Ok
-                                                </Button>
-                                                </DialogActions>
-                                        </Dialog>
-                                        <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i>{t('bio')}</NavLink></li>
-                                        <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i>{t('offerings')}</NavLink></li>
-                                        <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> {t('history')}</NavLink></li>
-                                        <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" />{t('réseaux')} </NavLink></li>
-                                        {/*<li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li> */}
-                                    </ul>
+                                    {
+                                        localStorage.getItem('profile_id') === params.id && < >
+                                        <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
+                                        <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> <span>{t('coverEdit')}</span> </label>
+                                    </>
+                                    }
                                 </div>
                             </div>
-                        </div>
+
+                            <div className="container">
+                            <div className="Profile-Navigation">
+                                <ul className="Profie-Menu">
+                                    { (infoprofile?.infoprofile.user_id!==userProfile.id && show)  && (<li><div className="form-submit" style={{backgroundColor:"white",borderRadius:"32px"}} ><button onClick={SendRequest} style={{border:"0px",height:"40px",width:"50px"}}><i className="uil uil-user-plus" style={{fontSize:"20px",paddingLeft:"3px"}}></i></button></div></li>)}
+                                    <Dialog
+                                        open={open}
+                                        onClose={HandleClose}
+                                        aria-labelledby="alert-dialog-title"
+                                        aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogContent>
+                                            <DialogContentText id="alert-dialog-description">
+                                                <span style={{fontWeight:"bold",top:"50px"}}> {t('request_sent_accept')}</span>
+                                            </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions>
+                                            <Button onClick={HandleClose} autoFocus>
+                                                Ok
+                                            </Button>
+                                            </DialogActions>
+                                    </Dialog>
+                                    <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i>{t('bio')}</NavLink></li>
+                                    <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i>{t('offerings')}</NavLink></li>
+                                    <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> {t('history')}</NavLink></li>
+                                    <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" />{t('réseaux')} </NavLink></li>
+                                    {/*<li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li> */}
+                                </ul>
+                            </div>
+                            </div>
+                            
                     </div>
                     :
                     infoprofile.success === false ?
