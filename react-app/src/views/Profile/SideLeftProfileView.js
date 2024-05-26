@@ -93,8 +93,8 @@ export default function SideLeftProfileView() {
                 }
                 <ul>
                   {/* <li><i className="uil uil-user"></i> {infoprofile.infoprofile.age}</li> */}
-                  <li><i className="uil uil-crosshair"></i> {infoprofile.infoprofile.job}</li>
-                  <li><i className="uil uil-phone"></i> {infoprofile.infoprofile.phone}</li>
+                  <li><i className="uil uil-crosshair"></i> <span>{infoprofile.infoprofile.job}</span></li>
+                  <li><i className="uil uil-phone"></i> <span>{infoprofile.infoprofile.phone}</span></li>
                   <li><i className="uil uil-envelope"></i> <span>{infoprofile.infoprofile.email}</span></li>
 
                   {infoprofile.infoprofile.networks?.facebook && <li><i className="uil uil-facebook-f"></i><a href={infoprofile.infoprofile.networks.facebook} target="_blank" style={{color: green}}>@facebook</a> </li>}

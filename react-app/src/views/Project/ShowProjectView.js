@@ -422,11 +422,10 @@ export default function ShowProjectView(props) {
                                 <div className="Signle-Offer-Media">
                                 {
                                     project.project.media_link && project.project.media_link.map(item => (
-                                                <div key={item} style={{ flex: `1 0 ${100/project.project.media_link.length}%` }}>
-                                                    <div className="col-md-12 input-row">
+                                                    <div className="media-wrap">
                                                     {(function() {
                                                         if(getExtension(item) == 'youtube'){
-                                                            return <ReactPlayer url={item} controls={true} />
+                                                            return <ReactPlayer width="100%" url={item} controls={true} />
                                                         }else{
                                                             if(getExtension(item) == 'vimeo'){
                                                                 return <ReactPlayer url={item} controls={true} />
@@ -448,7 +447,6 @@ export default function ShowProjectView(props) {
                                                         }
                                                     })()}
                                                     </div>
-                                                </div>
                                                 ))}
                                 </div>
 

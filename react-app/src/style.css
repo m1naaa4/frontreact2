@@ -994,7 +994,7 @@ label.error {
 
 .Dadupa-Nav .Nav-Link {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: #2D363A;
   padding: 0 10px;
@@ -1691,6 +1691,7 @@ label.error {
   transform: none;
   -webkit-transform: none;
   z-index: 999;
+  visibility: visible;
 }
 
 .Dadupa-Popup-DropDown {
@@ -2136,10 +2137,6 @@ label.error {
 }
 
 @media(min-width: 992px) and (max-width: 1280px) {
-  .Dadupa-Nav .Nav-Link {
-    padding: 0 8px;
-    font-size: 12px;
-  }
 
   .Dadupa-Nav .Nav-Link .uil {
     display: none;
@@ -2184,7 +2181,7 @@ label.error {
   .filter-button span {
     display: block;
     margin-left: 6px;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 16px;
   }
 
@@ -2485,16 +2482,16 @@ label.error {
 }
 
 .single-offer-logo img {
-  width: 55px !important;
-  height: 45px !important;
-  border: 2px solid #F5F5F5;
+  width: 45px;
+  height: 45px;
   border-radius: 10px;
+  object-fit: contain;
 }
 
 .offer-title h3 {
   color: #00b601;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 2px;
 }
 
@@ -2517,7 +2514,7 @@ label.error {
 .offer-box .offer-title h3 span {
   color: #00b601;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 700;
   margin-top: 7px;
 }
 
@@ -3295,7 +3292,7 @@ label.error {
 
 .review-offer-title {
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 0px;
   margin-top: 0px;
   max-width: 90%;
@@ -3340,7 +3337,7 @@ label.error {
   display: block;
   font-size: 12px;
   color: #78909C;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .review-meta .review-meta-item span {
@@ -3356,7 +3353,7 @@ label.error {
 
 .review-tags h3 {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 15px;
 }
@@ -3484,7 +3481,7 @@ label.error {
     display: block;
     font-size: 20px;
     text-align: center;
-    font-weight: 900;
+    font-weight: 700;
     color: #00b601;
     margin-bottom: 5px;
   }
@@ -3645,7 +3642,7 @@ label.error {
 
 .single-offer-name {
   font-size: 22px;
-  font-weight: 900;
+  font-weight: 700;
   color: #2D363A;
   margin: 0;
   padding-top: 10px;
@@ -3941,7 +3938,7 @@ label.error {
 
 .Comments-Title h3 {
   font-size: 22px;
-  font-weight: 900;
+  font-weight: 700;
   color: #2D363A;
 }
 
@@ -3985,7 +3982,7 @@ label.error {
 .Comments-Box {
   background: #fff;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .03);
-  padding: 15px;
+  padding: 10px;
   border-radius: 15px;
   margin-top: 15px;
 }
@@ -4005,9 +4002,9 @@ label.error {
 }
 
 .Comment-Col-10 {
-  flex: 0 0 91.666667%;
-  max-width: 91.666667%;
-  padding-left: 5px;
+  flex: 0 0 calc(100% - 35px);
+  max-width: calc(100% - 35px);
+  padding-left: 10px;
   position: relative;
 }
 
@@ -4016,13 +4013,13 @@ label.error {
 }
 
 .Comment-Col-2 {
-  flex: 0 0 8.333333%;
-  max-width: 8.333333%;
+  flex: 0 0 35px;
+  max-width: 34px;
 }
 
 .Comment-User-Thumb {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 34px;
   overflow: hidden;
   display: block;
   border-radius: 50%;
@@ -4110,7 +4107,8 @@ label.error {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 7px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .comment-replies-count,
@@ -4120,7 +4118,7 @@ label.error {
 }
 
 .comment-replies-count {
-  height: 25px;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -4175,22 +4173,23 @@ label.error {
 }
 
 .comment-actions-list {
-  height: 25px;
+  height: auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin: 0;
   padding: 0;
-  padding-right: 0.8em;
+  padding-right: 0;
   width: 100%;
   padding-top: 0px;
+  line-height: 1;
 }
 
 .comment-actions-list .comment-action {
   display: inline-block;
   font-size: 10px;
   line-height: 10px;
-  font-weight: 900;
+  font-weight: 600;
   color: #78909C;
   transition: all .20s cubic-bezier(.65, .05, .36, 1);
 }
@@ -4198,7 +4197,7 @@ label.error {
 .comment-actions-list .comment-action .like-action {
   font-size: 10px;
   line-height: 10px;
-  font-weight: 900;
+  font-weight: 700;
   color: #78909C;
   background: none;
   border: none;
@@ -4271,7 +4270,7 @@ label.error {
   display: block;
   font-size: 16px;
   color: #2D363A;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .Offer-Details-List .Offer-Item:last-child {
@@ -4288,7 +4287,7 @@ label.error {
 
 .Single-Offer-Tags h3 {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 15px;
 }
 
@@ -4302,7 +4301,7 @@ label.error {
 
 .Co-Porteurs h3 {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 30px;
 }
 
@@ -4344,7 +4343,7 @@ label.error {
 
 .Co-Porteurs h3 {
   font-size: 20px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 30px;
 }
 
@@ -4589,7 +4588,7 @@ label.error {
 
 .Company-Name {
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 5px;
 }
 
@@ -4694,7 +4693,7 @@ label.error {
 } */
 
 .Profile-Wrapper {
-  /* margin-top: 70px; */
+  margin-top: 15px;
 }
 
 .Profile-Header {
@@ -4708,10 +4707,10 @@ label.error {
   flex-wrap: wrap;
   align-items: flex-end;
   height: 280px;
-  padding-bottom: 30px;
+  padding-bottom: 0;
   position: relative;
   z-index: 9;
-  background-color: #00b601;
+  background-color: #F2F4F5;
 
   /* height: 192px; */
   background-position: center;
@@ -4724,7 +4723,7 @@ label.error {
   flex: 0 0 30%;
   max-width: 30%;
   position: relative;
-  top: 85px;
+  top: 55px;
 }
 
 .Profile-Infos label {
@@ -4963,7 +4962,7 @@ label.error {
 .Profile-Info {
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, .03);
-  padding: 20px;
+  padding: 15px 15px 10px;
   position: relative;
   border-radius: 15px;
   margin-bottom: 15px;
@@ -4982,8 +4981,11 @@ label.error {
 }
 
 .Profile-Info span {
-  font-size: 13px;
-  font-weight: 15;
+  /* font-size: 12px; */
+  font-weight: 400;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .Left-Side,
@@ -6326,18 +6328,18 @@ label.error {
 
 .UpdateInfos-BTN {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 25px;
-  height: 25px;
+  top: 8px;
+  right: 8px;
+  /* width: 25px;
+  height: 25px; */
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
-  line-height: 18px;
+  line-height: 1;
   border: none;
   border-radius: 5px;
   color: #00b601;
-  background: #00b60117;
+  background: transparent;
   transition: all .20s linear;
 }
 
