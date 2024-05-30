@@ -42,11 +42,13 @@ export default function ShowProjectImgs() {
       <LightgalleryProvider>
         <h3>{t('pictures')}</h3>
 
-        <div className="d-flex align-items-center flex-wrap">
-          {imgs.length ? imgs.map((p, idx) => (
-            <PhotoItem key={idx} image={p} group="imgs" />
-          )): <NoContent/>
-          }
+        <div className='empty-state'>
+          <div className='empty-state-content'>
+            {imgs.length ? imgs.map((p, idx) => (
+              <PhotoItem key={idx} image={p} group="imgs" />
+            )): <NoContent/>
+            }
+          </div>
         </div>
       </LightgalleryProvider>
     </div>

@@ -3578,6 +3578,7 @@ label.error {
 .single-header .signle-offer-type {
   font-size: 12px;
   color: #78909C;
+  margin: 0;
 }
 
 .Post-Actions {
@@ -3636,6 +3637,7 @@ label.error {
 
 .single-offer-header {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
   align-items: center;
 }
@@ -3644,16 +3646,18 @@ label.error {
   font-size: 22px;
   font-weight: 700;
   color: #2D363A;
-  margin: 0;
-  padding-top: 10px;
+  margin: 0 0 5px;
+  /* padding-top: 10px; */
 }
-
+.single-offer-title{
+  display: flex;
+  align-items: center;
+}
 .single-offer-header .offer-bookmark {
   margin-left: 5px;
 }
 
 .single-offer-logo {
-  width: 60px;
   height: auto;
   margin-right: 15px;
 }
@@ -3915,8 +3919,8 @@ label.error {
 }
 
 .Signle-Offer-Text {
-  padding: 30px 0;
-  line-height: 30px;
+  padding: 30px 0 10px;
+  line-height: 22px;
   color: #474747;
 }
 
@@ -4227,21 +4231,56 @@ label.error {
 .Single-Offer-Details {
   background: #fff;
   border-radius: 15px;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .03);
 }
 
 .Offer-Details-List {
-  margin: 0;
+  margin: 0 -15px;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
+.Offer-Details-List .Offer-Item:first-child{
+  padding-bottom: 20px;
+  padding-top: 0;
+}
+.Offer-Details-List .Offer-Item:first-child,
+.Offer-Details-List .Offer-Item:last-child{
+  flex: 0 0 100%;
+  max-width: 100%;
+  border-right: 0;
+}
+.Offer-Details-List .Offer-Item:last-child{
+  padding-bottom: 0;
+  border-bottom: 0;
+  padding-top: 20px;
+}
+.Offer-Details-List .Offer-Item{
+  flex: 0 0 50%;
+  border-bottom: 1px dashed #F3F4F4;
+  border-right: 1px dashed #F3F4F4; 
+  padding: 10px 15px;
+}
+.Offer-Details-List .Offer-Item:nth-child(3),
+.Offer-Details-List .Offer-Item:nth-child(5){
+  border-right: 0;
+}
+
 
 .Offer-Details-List .Offer-Item {
   list-style-type: none;
   display: block;
-  margin-bottom: 20px;
+  /* padding: 10px 0; */
+  /* margin-bottom: 20px; */
 }
-
+.Offer-Details-List .Offer-Item .Contact{
+  width: 100%;
+}
+.Offer-Details-List .Offer-Item .Contact .Contact-Infos h4{
+  text-overflow: unset;
+  font-size: 16px;
+}
 .projectOwner {
   color: rgba(0, 206, 97, 1)
 }
@@ -4264,13 +4303,15 @@ label.error {
   color: #78909C;
   font-weight: 400;
   margin-bottom: 5px;
+  font-style: italic;
 }
 
 .Offer-Details-List .Offer-Item span {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   color: #2D363A;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .Offer-Details-List .Offer-Item:last-child {
@@ -4278,7 +4319,7 @@ label.error {
 }
 
 .Single-Offer-Tags {
-  padding: 25px 30px 15px;
+  padding: 20px 20px 15px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .03);
@@ -4288,7 +4329,8 @@ label.error {
 .Single-Offer-Tags h3 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  color: #2D363A;
 }
 
 .Co-Porteurs {
@@ -4308,29 +4350,34 @@ label.error {
 .Tags-List {
   margin: 0;
   padding: 0;
+  text-align: left;
+  /* display: flex;
+  gap: 5px; */
 }
 
 .Tag-Item {
   display: inline-block;
-  /* background: #EEFAF3; */
-  font-size: 12px;
+  background: #F3F4F4;
+  color: #78909C;
+  font-size: 11px;
+  font-weight: 500;
   border-radius: 5px;
-  padding: 2px 5px;
-  margin-bottom: 15px;
-  margin-right: 5px;
+  padding: 3px 6px;
+  margin-right: 6px;
+  margin-bottom: 6px;
   /* box-shadow: 1px 1px 1px 1px #76aa8b; */
 }
 
 .Tag-Item:hover {
-  display: inline-block;
+  /* display: inline-block; */
   background: #EEFAF3;
-  font-size: 12px;
+  /* font-size: 12px;
   border-radius: 5px;
   padding: 2px 5px;
   margin-bottom: 15px;
-  margin-right: 5px;
+  margin-right: 5px; */
   /* box-shadow: 1.5px 1.5px 1.5px 1.5px #20cb67; */
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .Co-Porteurs {
@@ -4456,11 +4503,13 @@ label.error {
   .single-header {
     margin-bottom: 20px;
   }
-
+  .single-offer-title{
+    margin-bottom: 5px;
+  }
   .single-offer-name {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 0;
-    line-height: 28px;
+    line-height: 1;
     margin-left: 0px;
   }
 
@@ -4487,7 +4536,10 @@ label.error {
   .Signle-Offer-Text {
     padding: 15px 0;
     font-size: 12px;
-    line-height: 26px;
+    line-height: 18px;
+  }
+  .Signle-Offer-Text p:last-child{
+    margin-bottom: 0;
   }
 
   .Comments-Box {
@@ -4572,6 +4624,9 @@ label.error {
   flex: 0 0 30%;
   max-width: 30%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .Company-Infos .single-offer-logo {
@@ -4585,11 +4640,21 @@ label.error {
   width: 55px !important;
   margin-right: 8px;
 }
-
-.Company-Name {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 5px;
+.Company-Name{
+  padding-right: 20px;
+}
+.Company-Name a{
+  font-size: 14px;
+  font-weight: 600;
+  /* margin-bottom: 5px; */
+  color: #00b601;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.Company-Name a i{
+  font-size: 18px;
 }
 
 .Company-Addresse {
@@ -4599,9 +4664,7 @@ label.error {
 }
 
 .Company-Phone {
-  position: absolute;
-  top: 0;
-  right: 0;
+  
 }
 
 .Company-Phone a {
@@ -4609,8 +4672,8 @@ label.error {
 }
 
 .Company-Phone i {
-  font-size: 18px;
-  color: #20CE68;
+  font-size: 22px;
+  color: #8399A4;
 }
 
 .Company-Website {
@@ -4633,19 +4696,22 @@ label.error {
 
 @media(max-width: 768px) {
 
+  .single-offer-header{
+    align-items: flex-end;
+    margin: 0;
+  }
   .Company-Infos {
     padding: 30px;
   }
 
   .Company-Left {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 66.66%;
+    max-width: 66.66%;
   }
 
   .Company-Right {
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding-top: 15px;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
   }
 
   .Company-Addresse {
@@ -4654,7 +4720,6 @@ label.error {
 
   .Company-Phone {
     position: relative;
-    margin-bottom: 15px;
   }
 
   .Company-Website {
@@ -5044,6 +5109,9 @@ label.error {
   line-height: 18px;
   margin-left: 0;
   font-size: 12px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .Contact div {
@@ -5447,10 +5515,10 @@ label.error {
 
 .PostOptions-BTN {
   width: 35px;
-  height: 35px;
+  /* height: 35px; */
   padding: 0;
   font-size: 26px;
-  line-height: 2px;
+  line-height: 1;
   background: transparent;
   border: none;
 }
@@ -5460,15 +5528,15 @@ label.error {
 }
 
 .PostOptions-List {
-  width: 150px;
+  width: 130px;
   position: absolute;
   top: 40px;
-  right: -5px;
+  right: 0px;
   z-index: 9;
   background-color: #fff;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, .1);
-  padding: 10px;
+  padding: 0 10px;
   visibility: hidden;
   opacity: 0;
   transition: all .20s linear;
@@ -5814,19 +5882,23 @@ label.error {
     margin-top: 15px;
 
   }
-
+  .Profie-Menu{
+    width: 100%;
+    padding: 5px;
+  }
   .Profie-Menu li {
-    margin: 0 5px;
+    margin: 0;
+    flex: 1 0 0;
   }
 
   .Profie-Menu li a {
     font-size: 12px;
     padding: 5px 10px 5px;
+    gap: 3px;
   }
 
   .Profie-Menu li a i {
-    font-size: 20px;
-    /* margin-right: 2px; */
+    font-size: 16px;
   }
 
   .Profie-Menu li.Profie-Menu-Active a {
@@ -6082,7 +6154,7 @@ label.error {
     display: flex;
     white-space: nowrap;
     scrollbar-width: none;
-    padding: 5px 0;
+    padding: 5px;
     /* Firefox */
   }
 
@@ -9106,10 +9178,40 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   .filter-mobile button .uil{
     font-size: 20px;
   }
+
+  /*  */
+  .Single-Wrapper{
+    padding-top: 25px;
+  }
+  .Single-Wrapper .Profile-Navigation{
+    margin-top: 0;
+  }
+
+  .media-wrap > div{
+    height: 260px !important;
+  }
 }
 
 @media(min-width: 768px) and (max-width: 1024px){
   .Filter-Form .input-row{
     width: 300px;
   }
+}
+
+.empty-state{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.empty-state .single-offer-name{
+  text-align: center;
+}
+.empty-state-content img{
+  width: auto;
+  height: 350px;
+}
+.empty-state .action-button{
+  width: auto;
+  display: block;
+  margin: 0 auto;
 }

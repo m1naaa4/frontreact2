@@ -367,33 +367,37 @@ export default function ShowProjectView(props) {
 
                             {/*!--PAGE HEADER --*/}
                             <div className="single-header" style={{ marginBottom: "15px", marginTop: "15px" }}>
-                                <div className="signle-offer-type"> {t(`Project_Business`)}</div>
                                 <div className="single-offer-header">
                                     <div className="Company-Left">
                                         <div className="d-flex">
                                             <div className="single-offer-logo">
                                                 <img src={project.project.logo_link} title="Nom du projet" alt="" />
                                             </div>
-                                            <div>
-                                                <h3 className="single-offer-name">{project.project.name}</h3>
+                                            <div className='single-offer-meta'>
+                                                <div className='single-offer-title'>
+                                                    <h3 className="single-offer-name">{project.project.name}</h3>
+                                                    <div>
+                                                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
+                                                        {/* <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label> */}
+                                                        <DialogWarning
+                                                            title={titleDialog}
+                                                            ContentText={ContentDialog}
+                                                            open={open}
+                                                            HandleConfirmation={e => addTofavorite(project.project.id)}
+                                                            HandleClose={HandleClose}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <p className="signle-offer-type"> {t(`Project_Business`)}</p>
                                             </div>
-                                            <div style={{ paddingTop: "15px", paddingLeft: "10px" }}>
-                                                <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer"><i className="uil uil-bookmark"></i></button>
-                                                {/* <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label> */}
-                                                <DialogWarning
-                                                    title={titleDialog}
-                                                    ContentText={ContentDialog}
-                                                    open={open}
-                                                    HandleConfirmation={e => addTofavorite(project.project.id)}
-                                                    HandleClose={HandleClose}
-                                                />
-                                            </div>
-                                            <div style={{ paddingTop: "15px", paddingLeft: "4px" }}>
-                                                {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>{t(`form.add_url`)}</a></div>}
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     {user.id !== project.project.user_id && (<div className="Company-Right">
+                                        
+                                        <div>
+                                            {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>{t(`form.add_url`)}</a></div>}
+                                        </div>
                                         <div className="Company-Phone">
                                             <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
                                             {
@@ -435,7 +439,7 @@ export default function ShowProjectView(props) {
                                                                         <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> {t(`documents`)} </div>
                                                                     </a>
                                                                 </div>
-                                                            }
+                                                            }   
                                                             else{
                                                                 if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
                                                                 getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
@@ -522,21 +526,21 @@ export default function ShowProjectView(props) {
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">
                                         <label className='mb-3'>{t(`Owners`)}</label>
-                                        <div className="d-flex align-items-start">
-                                            <span>
+                                        {/* <div className="d-flex align-items-start">
+                                            <span> */}
                                                 {project.project.owner && 
                                                     <div className="Contact"><Link ref={ref} to={`/profile/${project.project.owner.profile_id}`} data-toggle="tooltip" data-placement="top">
-                                                        <div className="d-flex align-items-start">
+                                                        <div className="d-flex">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                                                             <div className="Contact-Thumb"> <img src={project.project.owner.avatar} alt={project.project.owner.username} /></div>
                                                             <div className="Contact-Infos">
                                                                 <h4>{project.project.owner.username}</h4>
                                                             </div>
-                                                            {(user?.profile_id != project.project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.project.owner} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
+                                                            {(user?.profile_id != project.project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.project.owner} styles={{ marginTop: "20px", marginRight: "-8px" }} />) : ("")}
                                                         </div></Link>
                                                     </div>
                                                 }
-                                            </span>
+                                            {/* </span> */}
 
 
                                             {project.project.visibility !== 'public' && user.id == project.project.user_id &&
@@ -549,7 +553,7 @@ export default function ShowProjectView(props) {
                                                     </Modal>
                                                 </>
                                             }
-                                        </div>
+                                        {/* </div> */}
                                     </li>
                                     <li className="Offer-Item">
                                         <label>{t(`published_at`)}</label>
