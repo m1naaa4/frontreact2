@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import AddComment from '../Comment/AddComment';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams, NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
 
 import { useTranslation } from 'react-i18next';
@@ -389,43 +389,58 @@ export default function ShowProjectView(props) {
                                                     </div>
                                                 </div>
                                                 <p className="signle-offer-type"> {t(`Project_Business`)}</p>
+                                                {/* {(function() { */}
+                                                        {/* if(project.project.media_link.length > 1){ */}
+                                                        {/* } */}
+                                                    {/* } */}
+                                                {/* ) */}
+                                                {/* } */}
                                             </div>
                                             
                                         </div>
                                     </div>
-                                    {user.id !== project.project.user_id && (<div className="Company-Right">
+                                    <div className="Company-Right">
+                                    {project.project.media_link.length > 1 && 
+                                        <div className='more-images-tab'>
+                                            <NavLink to={`/project/show/${params.id}/images`}><i class="uil uil-images"></i> 6 Images</NavLink>
+                                        </div>
+                                    }
+
+                                    {user.id !== project.project.user_id && (
                                         
-                                        <div>
-                                            {project.project.website_url && <div className="Company-Name"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>{t(`form.add_url`)}</a></div>}
+                                        <div className='company-emta'>
+                                            <div>
+                                                {project.project.website_url && <div className="Company-Website"><a href={project.project.website_url} target="_blanc"><i className="uil uil-globe"></i>{t(`form.add_url`)}</a></div>}
+                                            </div>
+                                            <div className="Company-Phone">
+                                                <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                                {
+                                                    options_List && (
+                                                        <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+
+                                                            <li className="PostDelete">
+                                                                <button onClick={handleShowReport}><i className="uil uil-ban"></i> {t(`Report`)}</button>
+                                                            </li>
+
+                                                        </ul>
+                                                    )
+                                                }
+
+                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
+                                                </Modal>
+                                            </div>
                                         </div>
-                                        <div className="Company-Phone">
-                                            <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
-                                            {
-                                                options_List && (
-                                                    <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-
-                                                        <li className="PostDelete">
-                                                            <button onClick={handleShowReport}><i className="uil uil-ban"></i> {t(`Report`)}</button>
-                                                        </li>
-
-                                                    </ul>
-                                                )
-                                            }
-
-                                            <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
-                                            </Modal>
-                                        </div>
-                                        <br />
-                                    </div>
                                     )}
+                                    </div>
+
                                 </div>
                             </div>
 
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
                                 {
-                                    project.project.media_link && project.project.media_link.map(item => (
+                                    project.project.media_link && project.project.media_link.map((item, index )=> (
                                                     <div className="media-wrap">
                                                     {(function() {
                                                         if(getExtension(item) == 'youtube'){
@@ -445,7 +460,9 @@ export default function ShowProjectView(props) {
                                                                 getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
                                                                    return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
                                                                 }else{
-                                                                   return <img width="100%" height="300" src={item} alt="Project"/>
+                                                                    if(index == 0){
+                                                                        return <img width="100%" height="300" src={item} alt="Project"/>
+                                                                    }
                                                                 }
                                                             }
                                                         }

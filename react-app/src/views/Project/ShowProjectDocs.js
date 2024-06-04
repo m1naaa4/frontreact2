@@ -54,43 +54,42 @@ export default function ShowFunderDocs() {
   }
 
   return (
-    <div className="Page-Wrapper" >
-      <div className="container">
-        <div className="offers-list">
-        <h3>{t('documents')}</h3>
-          <div className="row">
-            {files.length ?
-              files.map((e, index) => (
-                <div className="col-sm-6 col-md-4 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
-                  <div className="Doc-Wrap">
-                    <a href="#!">
-                      <div className="Doc-Icon"><span className="Doc-Type">{e.type}</span><i className="uil uil-file-alt"></i></div>
-                      {/* <div className="Doc-Name"><i className="uil uil-paperclip"></i> {e.name}</div> */}
-                    </a>
-                  </div>
-                </div>
-              )): <NoContent/>
-            }
+    <div className="content">
+      <h3 className="tab-title">{t('Documents')}</h3>
+        <div>
+          {files.length ?
+            files.map((e, index) => (
+        <div className="row">
 
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-              style={{ width: "80%", margin: "auto", padding: "2em 0" }}
-            >
-              <div>
-                <DocViewer
-                  className="col-12"
-                  pluginRenderers={DocViewerRenderers}
-                  documents={[{ uri: selectedDoc }]}
-                  style={{height: "100%"}}
-                />
+              <div className="col-sm-6 col-md-4 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
+                <div className="Doc-Wrap">
+                  <a href="#!">
+                    <div className="Doc-Icon"><span className="Doc-Type">{e.type}</span><i className="uil uil-file-alt"></i></div>
+                    {/* <div className="Doc-Name"><i className="uil uil-paperclip"></i> {e.name}</div> */}
+                  </a>
+                </div>
               </div>
-            </Modal>
-          </div>
+              </div>
+            )): <NoContent/>
+          }
+
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            style={{ width: "80%", margin: "auto", padding: "2em 0" }}
+          >
+            <div>
+              <DocViewer
+                className="col-12"
+                pluginRenderers={DocViewerRenderers}
+                documents={[{ uri: selectedDoc }]}
+                style={{height: "100%"}}
+              />
+            </div>
+          </Modal>
         </div>
-      </div>
     </div>
   );
 }

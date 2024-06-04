@@ -206,18 +206,20 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                         {loadedProject && 
                                             <div className="review-fieldset">
                                             <div className="review-header">
-                                                <h2 className="review-offer-title">{`${loadedProject.name}`}</h2>
-                                                <h2 className="review-offer-title">
-                                                    {loadedProject.website_url && <div className="Company-Name"><a href={loadedProject.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
-                                                </h2>
-                                                <div className="reeview-offer-logo">
+                                                <div className='review-offer-meta'>
+                                                    <h2 className="review-offer-title">{`${loadedProject.name}`}</h2>
+                                                    <h2 className="review-offer-website">
+                                                        {loadedProject.website_url && <div className="Company-Name"><a href={loadedProject.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
+                                                    </h2>
+                                                </div>
+                                                <div className="review-offer-logo">
                                                     <img src={`${loadedProject.logo_link}`} alt=""/>
                                                 </div>
                                             </div>
                                             <div className="review-media">
                                                 {loadedProject.media_link.map(item => (
                                                 <div key={item} style={{ flex: `1 0 ${100/loadedProject.media_link.length}%` }}>
-                                                    <div className="col-md-12 input-row">
+                                                    <div className="input-row">
                                                     {(function() {
                                                         if(getExtension(item) == 'youtube'){
                                                             return <ReactPlayer url={item} controls={true} />

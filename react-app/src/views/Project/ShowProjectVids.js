@@ -37,13 +37,13 @@ const ShowProjectVids = () => {
 
   return (
     <div className="content">
-      <h3>{t('videos')}</h3>
-      <div className="d-flex flex-wrap">
+      <h3 className="tab-title">{t('Videos')}</h3>
+      {/* <div className="d-flex flex-wrap"> */}
         {videos.length > 0 ? videos.map((videoUrl, index) => (
           <ReactPlayer width='250' height='200' controls={true} key={index} url={videoUrl}/>
         )) : <NoContent/>
             }
-      </div>
+      {/* </div> */}
     </div>
   );
 };

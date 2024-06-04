@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 
 const PhotoItem = ({ image, thumb, group }) => (
-  <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
+  <div className="image-item">
     <LightgalleryItem group={group} src={image} thumb={thumb}>
       <img src={image} style={{ width: "100%" }} />
     </LightgalleryItem>
@@ -40,15 +40,18 @@ export default function ShowProjectImgs() {
   return (
     <div className="content">
       <LightgalleryProvider>
-        <h3>{t('pictures')}</h3>
+        <h3 className="tab-title">{t('pictures')}</h3>
+          <div className='images-wrap'>
+            <div className='row'>
 
-        <div className='empty-state'>
-          <div className='empty-state-content'>
-            {imgs.length ? imgs.map((p, idx) => (
-              <PhotoItem key={idx} image={p} group="imgs" />
-            )): <NoContent/>
-            }
-          </div>
+              {imgs.length ? imgs.map((p, idx) => (
+                <div className="col-md-3">
+                  <PhotoItem key={idx} image={p} group="imgs" />
+                </div>
+              )): 
+              <NoContent/>
+              }
+            </div>
         </div>
       </LightgalleryProvider>
     </div>

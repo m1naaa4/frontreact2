@@ -269,13 +269,15 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                         <i className="uil uil-pen"></i>
                       </button>
 
-                      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                      <div className="form-images-uploaded">
                         {file.map(item => (
-                          <div key={item} style={{ flex: `1 0 ${100/file.length}%` }}>
-                            <div className="col-md-12 input-row">
+                          <div  key={item} className={getExtension(item) == 'youtube' ? 'youtube-wrap' : 'form-doc-item'} >
+                            <div className="form-doc-item-inner">
                             {(function() {
                                   if(getExtension(item) == 'youtube'){
-                                      return <ReactPlayer url={item} controls={true} />
+                                      // <div className="item-player">
+                                        return <ReactPlayer url={item} controls={true} />
+                                      // </div>
                                   }else{
                                       if(getExtension(item) == 'vimeo'){
                                           return <ReactPlayer url={item} controls={true} />
@@ -291,11 +293,11 @@ export default function Step2View({ formData, setForm, navigation, props }) {
                                           || getExtension(item) == 'csv' || getExtension(item) == 'pdf'
                                           ){
                                             return <div className="Doc-Wrap">
-                                                                <a href="#!">
-                                                                  <div className="Doc-Icon"><span className="Doc-Type"></span><i className="uil uil-file-alt"></i></div>
-                                                                  <div className="Doc-Name"><i className="uil uil-paperclip"></i> </div>
-                                                                </a>
-                                                              </div>
+                                              <a href="#!">
+                                                <div className="Doc-Icon"><span className="Doc-Type"></span><i className="uil uil-file-alt"></i></div>
+                                                <div className="Doc-Name"><i className="uil uil-paperclip"></i> </div>
+                                              </a>
+                                            </div>
                                           } else {
                                             return <img width="100%" height="300" src={item} alt="Project"/>
                                           }

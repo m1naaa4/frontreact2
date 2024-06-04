@@ -90,14 +90,14 @@ export default function Step3View({formData, setForm, navigation}) {
                                         <p>Enter details about the project <br/>to preceed further</p>
                                     </div>
                                     <div className="form-inputs">
-                                        <div className="col-md-12 input-row">
+                                        <div className="">
                                         <ReactQuill
                                             theme="snow"
                                             value={value}
                                             onChange={setValue}
                                         />
                                         </div>
-                                        <div className="col-md-12 input-tags">
+                                        <div className="input-tags">
                                             <InputTags  selectedTags={selectedTags}  tagss={tags}/>
                                         </div>
                                     </div>

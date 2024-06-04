@@ -50,9 +50,10 @@ export default function ShowFunderDocs() {
   }
 
   return (
-    <div className="row">
+    <div>
       {
         files.length > 0 ? files.map((e, index) => (
+          <div className="row">
           <div className="col-sm-6 col-md-3 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
             <div className="Doc-Wrap">
               <a href="#!">
@@ -60,6 +61,7 @@ export default function ShowFunderDocs() {
                 <div className="Doc-Name"><i className="uil uil-paperclip"></i> {e.name}</div>
               </a>
             </div>
+          </div>
           </div>
         )) : <NoContent/>
       }

@@ -351,32 +351,80 @@ export default function ViewFunder(props) {
                     <ProjectSkeletonGrid/>
                 ): !loading && project != '' ? (
                     <div className="row">
+                        <div className='col-md-12'>
+                            <div className="Post-Actions">
+                                {user.id == project.user_id && <div className="Update-Post">
+                                    <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
+                                        title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
+                                    </button>
+                                </div>}
+                                {user.id == project.user_id && <div className="Send-Message input-row input-select">
+                                    <Select
+                                        options={alloptions}
+                                        value={optionSelected}
+                                        placeholder={project.visibility}
+                                        onChange={handleChange}
+                                        styles={SelectStyleWithScrollbar}
+                                        className="Select"
+                                    />
+                                </div>}
+                                {is_loading === true && <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />}
+
+                            </div>
+                        </div>
                         <div className="col-md-8">
                             {/*!--PAGE HEADER --*/}
-                            <div className="Company-Infos">
+                            <div className="Company-Infos funder">
                                 <div className="Company-Left">
                                     <div className="single-offer-logo">
                                         <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />
-                                        <button className="offer-bookmark" type="button" name="button"><i className="uil uil-bookmark"></i>
-                                            <DialogWarning
-                                                    title={titleDialog}
-                                                    ContentText={ContentDialog}
-                                                    open={open}
-                                                    HandleConfirmation={e => addTofavorite(project.id)}
-                                                    HandleClose={HandleClose}
-                                                />
-                                        </button>
-                                        <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
+                                        
                                     </div>
-                                    <div className="Company-Name">{project.name}</div>
-                                    <div className="Company-Email">{project.email}</div>
-                                    <div className="Company-Addresse">{project.address}</div>
+                                    <div className='funder-meta'>
+                                        <h3 className="single-offer-name">
+                                            {project.name}
+                                            <div>
+                                                <button className="offer-bookmark" type="button" name="button"><i className="uil uil-bookmark"></i>
+                                                    <DialogWarning
+                                                            title={titleDialog}
+                                                            ContentText={ContentDialog}
+                                                            open={open}
+                                                            HandleConfirmation={e => addTofavorite(project.id)}
+                                                            HandleClose={HandleClose}
+                                                        />
+                                                </button>
+                                                <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
+                                            </div>    
+                                        </h3>
+                                        <div className='funder-meta-list'>
+                                            <p className="Company-Email"><i class="uil uil-envelope-alt"></i> {project.email}</p>
+                                            <p className="Company-Addresse"><i class="uil uil-map-marker"></i> {project.address}</p>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    
+                                    
                                 </div>
                                 <div className="Company-Right">
+                                    <div className='company-emta'>
+                                        
                                         <div className="Company-Phone">
                                             <a href={`tel:`+project.phone}>
                                                 <i className="uil uil-phone-alt"></i> {project.phone}
+                                            </a>  
+                                        </div>
+                                        <div className="Company-Website">
+                                            <a href={project.website}>
+                                                <i className="uil uil-globe"></i> {t('visit_website')}
                                             </a>
+                                        </div>
                                         {user.id !== project.user_id && (<>
                                             <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
                                             {
@@ -390,15 +438,12 @@ export default function ViewFunder(props) {
                                             }
                                             </>)
                                         }
-                                            <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <ReportModal providerObject={project} provider='funder' showReport={showReport} handleCloseReport={handleCloseReport} />
-                                            </Modal>
-                                        </div>
-                                        <div className="Company-Website">
-                                            <a href={project.website}>
-                                                <i className="uil uil-globe"></i> {t('visit_website')}
-                                            </a>
-                                        </div>
+                                        <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <ReportModal providerObject={project} provider='funder' showReport={showReport} handleCloseReport={handleCloseReport} />
+                                        </Modal>
+                                    </div>
+                                        
+                                        
                                         <br />
                                     </div>
                                 
@@ -408,10 +453,10 @@ export default function ViewFunder(props) {
                                 <div className="Signle-Offer-Media">
                                 {(Array.isArray(project.media)? project.media : [project?.media]).map(item => (
                                     <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
-                                        <div className="col-md-12 input-row">
+                                        <div className="media-wrap">
                                         {(function() {
                                             if(getExtension(item) == 'youtube'){
-                                                return <ReactPlayer url={item} controls={true} />
+                                                return <ReactPlayer width="100%" url={item} controls={true} />
                                             }else{
                                                 if(getExtension(item) == 'vimeo'){
                                                     return <ReactPlayer url={item} controls={true} />
@@ -480,31 +525,7 @@ export default function ViewFunder(props) {
                             <AddComment providerObject={project.id} providerType='funder' />
                         </div>
                         <div className="col-md-4">
-                            <div className="Post-Actions">
-                                {user.id == project.user_id && <div className="Update-Post">
-                                    <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
-                                        title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
-                                    </button>
-                                </div>}
-                                {user.id == project.user_id && <div className="Send-Message input-row input-select">
-                                    <Select
-                                        options={alloptions}
-                                        value={optionSelected}
-                                        placeholder={project.visibility}
-                                        onChange={handleChange}
-                                        styles={SelectStyleWithScrollbar}
-                                        className="Select"
-                                    />
-                                </div>}
-                                {is_loading === true && <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                />}
-
-                            </div>
+                            
                             <div className="Single-Offer-Details">
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">
