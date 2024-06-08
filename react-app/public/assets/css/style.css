@@ -1783,10 +1783,6 @@ border-top: none;
     display: block;
     margin-bottom: 15px;
   }
-  .Filter-Form .input-row:last-child{
-    width: 100%;
-    display: block;
-  }
   .filter-button {
     width: 100%;
     height: 50px;

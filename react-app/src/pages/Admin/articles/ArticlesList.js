@@ -39,11 +39,11 @@ export default function ArticlesList() {
                 <div className="container">
                     <div className="offers-list">
                         <div className="row" >
-                            <div className="col-12 col-lg-9">
+                            <div className="col-12 col-lg-8">
                                 <FilterArticle
                                     {...data}
                                 />
-                                <div className="row">
+                                {/* <div className="row"> */}
                                     {
                                         loading ?
                                             <h1><ListArticlesSkeleton/></h1>
@@ -62,9 +62,10 @@ export default function ArticlesList() {
                                             </div>
                                             )    
                                     }
-                                </div>
+                                {/* </div> */}
                             </div>
-                            <div className='col-12 col-lg-3 articles-list-sidebar'>
+                            <div className='col-12 col-lg-4 articles-list-sidebar'>
+                                <h3 className='articles-list-title'>{t('suggestedArticles')}</h3>
                                 {
                                     loading ?
                                         <h1><ListArticlesSideSkeleton/></h1>

@@ -403,8 +403,10 @@ export default function ViewFunder(props) {
                                             </div>    
                                         </h3>
                                         <div className='funder-meta-list'>
-                                            <p className="Company-Email"><i class="uil uil-envelope-alt"></i> {project.email}</p>
-                                            <p className="Company-Addresse"><i class="uil uil-map-marker"></i> {project.address}</p>
+                                            <p className="Company-Email"><a href={`mailto:`+project.email}><i class="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
+                                            {project.address !== '' && (<>
+                                                <p className="Company-Addresse"><i class="uil uil-map-marker"></i> <span>{project.address}</span></p>
+                                            </>)}
                                         </div>
                                         
                                         
@@ -416,9 +418,14 @@ export default function ViewFunder(props) {
                                     <div className='company-emta'>
                                         
                                         <div className="Company-Phone">
+                                        {project.phone !== '' && (<>
+                                            
                                             <a href={`tel:`+project.phone}>
-                                                <i className="uil uil-phone-alt"></i> {project.phone}
+                                                <i className="uil uil-phone-alt"></i> 
+                                                    {/* {project.phone} */}
                                             </a>  
+                                            </>)}
+
                                         </div>
                                         <div className="Company-Website">
                                             <a href={project.website}>

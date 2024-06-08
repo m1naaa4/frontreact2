@@ -157,7 +157,7 @@ function HeaderProfile() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-10 col-md-10 col-lg-5">
+                        <div className="col-10 col-md-5 col-lg-5">
                             <div className="right-nav">
                                 <div className="New-Post" onClick={addMenu}>
                                     <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
