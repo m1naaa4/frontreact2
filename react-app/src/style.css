@@ -1660,7 +1660,7 @@ label.error {
   position: absolute;
   background: #fff;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
-  width: 200px;
+  width: 250px;
   border-radius: 15px;
   top: 65px;
   right: 0;
@@ -1670,6 +1670,7 @@ label.error {
   -webkit-transform: scale(0.1) translateY(-20%);
   z-index: -1;
   visibility: hidden;
+  padding-top: 10px;
 }
 
 .Dadupa-Mini-Profile::before {
@@ -1709,7 +1710,39 @@ label.error {
   -webkit-transform: scale(0.1) translateY(-20%);
   z-index: -1;
 }
-
+.Dadupa-Mini-Profile-Meta{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 10px 10px;
+  border-bottom: 2px solid #F8FBFC;
+}
+.Dadupa-Mini-Profile-Thumb{
+  flex: 0 0 45px;
+  max-width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.Dadupa-Mini-Profile-Thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Dadupa-Mini-Profile-Infos{
+  flex: 0 0 calc(100% - 45px);
+  max-width: calc(100% - 45px);
+  line-height: 1;
+  padding-left: 10px;
+}
+.Dadupa-Mini-Profile-Infos span{
+  font-size: 11px;
+  color: #78909C;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
 .Dadupa-Popup-DropDown::before {
   content: "";
   display: block;
@@ -1772,11 +1805,13 @@ label.error {
 
 .Mini-Profile-Name {
   color: #2D363A;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   display: block;
-  margin-bottom: 5px;
-  padding: 15px 15px 0;
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .Mini-Profile-Link {
@@ -1794,14 +1829,16 @@ label.error {
 }
 
 .Mini-Profile-Items {
-  padding: 0;
+  padding: 5px 0;
+  border-bottom: 2px solid #F8FBFC;
   margin: 0;
 }
-
+.Mini-Profile-Items:last-child{
+  border-bottom: 0;
+}
 .Mini-Profile-Items .Mini-Profile-Item {
   list-style-type: none;
   display: block;
-  border-top: 2px solid #F8FBFC;
 }
 
 .Mini-Profile-Items .Mini-Profile-Item:first-child {
@@ -1809,26 +1846,36 @@ label.error {
 }
 
 .Mini-Profile-Items .Mini-Profile-Item a {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 500;
   color: #2D363A;
-  padding: 14px 15px;
-  display: block;
+  padding: 10px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
   transition: all .20s linear;
 }
 
-.Mini-Profile-Items .Mini-Profile-Item a:hover {
-  color: #00b601;
+.Mini-Profile-Items .Mini-Profile-Item a.logoout-link .uil,
+.Mini-Profile-Items .Mini-Profile-Item a.logoout-link{
+  color: red;
   text-decoration: none;
 }
 
+.Mini-Profile-Items .Mini-Profile-Item a:not(.logoout-link):hover {
+  color: #00b601;
+  text-decoration: none;
+}
+.Mini-Profile-Items .Mini-Profile-Item a:not(.logoout-link):hover .uil{
+  color: #00b601;
+}
+
 .Mini-Profile-Items .Mini-Profile-Item .uil {
-  display: block;
-  float: left;
-  margin-right: 10px;
+  color: #78909C;
 }
 
 .Mini-Profile-Items .Mini-Profile-Item .uil::before {
-  font-size: 20px;
+  font-size: 18px;
   width: auto;
   height: auto;
   margin: 0;
@@ -1840,6 +1887,11 @@ label.error {
   border-radius: 15px;
   padding: 6px;
   margin-top: 45px;
+}
+
+.Filter-Form-Row{
+  display: flex;
+  justify-content: space-between;
 }
 
 .Filter-Form .input-row {
@@ -3989,6 +4041,20 @@ label.error {
   color: #474747;
 }
 
+.Signle-Offer-Text img{
+  width: 100%;
+}
+.Signle-Offer-Text h1,
+.Signle-Offer-Text h2,
+.Signle-Offer-Text h3{
+  margin-bottom: 20px;
+}
+.Signle-Offer-Text h2{
+  font-size: 26px;
+}
+.Signle-Offer-Text h3{
+  font-size: 22px;
+}
 .Comments-Wrap {
   margin-top: 20px;
 }

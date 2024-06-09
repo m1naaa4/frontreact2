@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import ListingItemMentor from './ListingItemMentor';
 import FilterMentor from '../User/Fields/Filter/FilterMentor';
 import { GetMentors, loadMentorOnceAction } from '../../store/actions/Mentor/MentorActions';
+import NoContent from '../../utils/NoContent';
+
 import $ from "jquery";
 
 export default function ListingMentors(props) {
@@ -114,11 +116,14 @@ export default function ListingMentors(props) {
                                         }else{
                                             return (
                                                 <div className="col-md-12">
-                                                <div className="offer-box">
+                                                    <NoContent/>
+
+                                                {/* <div className="offer-box">
+                                                    
                                                     <div className="offer-box">
                                                     {t('noresultfound')}
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                             )
                                         }

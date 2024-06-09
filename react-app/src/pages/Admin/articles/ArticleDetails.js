@@ -93,7 +93,7 @@ export default function ArticleDetails(props) {
                     <div className="row">
                         {
                             loading != undefined && !loading ? (
-                                <div className="col-md-9">
+                                <div className="col-md-8">
                                     <div className="single-header">
                                         <div className="mt-0">
                                             <h3 className="single-offer-name pt-0 text-capitalize" style={{ color: "#00b601" }}>{article.title}</h3>
@@ -168,7 +168,9 @@ export default function ArticleDetails(props) {
                             ) : <h1><ProjectSkeletonGrid/></h1>
                         }
 
-                        <div className="col-md-3 articles-list-sidebar pl-5 pr-0">
+                        <div className="col-md-4 articles-list-sidebar pl-5 pr-0">
+                        <h3 className='articles-list-title'>{t('suggestedArticles')}</h3>
+
                             {
                                 loading ?
                                     <h1><ListArticlesSideSkeleton/></h1>

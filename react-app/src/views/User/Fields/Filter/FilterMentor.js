@@ -90,19 +90,21 @@ function FilterMentor({ filterInput }) {
             <div className="Filter-Form"  >
                 <div className="row">
                     <div className="col-sm-11 col-md-12 col-lg-12">
-                        <div className="display-flex"> 
-                            <div className="input-row input-multi-filter input-small">
-                                <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
-                            </div>
-                            <div className="input-row input-multi-filter input-small">
-                                <AllMultiselectCheckboxAssistanceType {...{ setSelectedTypeAssistance }} datas={assistanceMentorCreate} />
-                            </div>
-                            <div className="input-row input-multi-filter input-small">
-                                <AllMultiselectCheckboxMentorType {...{ setSelectedTypeMentor }} datas={typeMentorCreate} />
-                            </div>
-                            <div className="input-row input-multi-filter input-small">
-                                
-                                <AllMultiSelectCheckboxZone {...{ setSelectedcountry }} datas={countries} />
+                        <div className="Filter-Form-Row"> 
+                            <div className='display-flex'>
+                                <div className="input-row input-multi-filter input-small">
+                                    <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
+                                </div>
+                                <div className="input-row input-multi-filter input-small">
+                                    <AllMultiselectCheckboxAssistanceType {...{ setSelectedTypeAssistance }} datas={assistanceMentorCreate} />
+                                </div>
+                                <div className="input-row input-multi-filter input-small">
+                                    <AllMultiselectCheckboxMentorType {...{ setSelectedTypeMentor }} datas={typeMentorCreate} />
+                                </div>
+                                <div className="input-row input-multi-filter input-small">
+                                    
+                                    <AllMultiSelectCheckboxZone {...{ setSelectedcountry }} datas={countries} />
+                                </div>
                             </div>
                             <div className='input-row filter-actions'>
                                 <button className="DadupaModal-BTNSubmit advenced-btn-search"

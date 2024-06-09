@@ -221,13 +221,29 @@ function HeaderProfile() {
                                         <li className="profile-arrow"><i className="uil uil-angle-down"></i></li>
                                     </ul> 
                                     <div className="Dadupa-Mini-Profile">
-                                        <label className="Mini-Profile-Name">{userProfile.name}</label>
-                                        <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link profil-link">{t('see_profile')}</Link>
+                                        <div className='Dadupa-Mini-Profile-Meta'>
+                                            <div className='Dadupa-Mini-Profile-Thumb'>
+                                                {userProfile.profile?.avatar_link ? 
+                                                    <img src={userProfile.profile?.avatar_link} alt="avatar" />    
+                                                : <img src="/assets/images/avatar.png" alt="avatar" />}
+                                            </div>
+                                            <div className='Dadupa-Mini-Profile-Infos'>
+                                                <p className="Mini-Profile-Name">{userProfile.name}</p>
+                                                <span>{userProfile.email}</span>
+                                            </div>
+
+                                        </div>
+                                        <ul className='Mini-Profile-Items'>
+                                            <li className='Mini-Profile-Item'><Link to={`/profile/`+userProfile.profile_id}><i class="uil uil-user"></i> {t('see_profile')}</Link></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/user/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i>{t('setting')}</Link></li>
+                                        </ul>
+                                        {/* <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link profil-link">{t('see_profile')}</Link> */}
                                         <ul className="Mini-Profile-Items">
-                                        <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i>{t('my_offre')} </Link></li>
-                                        <li className="Mini-Profile-Item"><Link to={`/favorite`}><i className="uil uil-favorite"></i> {t('my_favorite')}  </Link></li>
-                                        <li className="Mini-Profile-Item"><Link to={`/user/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i>{t('setting')}</Link></li>
-                                        <li className="Mini-Profile-Item"><a href="#" onClick={handlelogOut}><i className="uil uil-exit"></i>{t('logout')}</a></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i>{t('my_offre')} </Link></li>
+                                            <li className="Mini-Profile-Item"><Link to={`/favorite`}><i className="uil uil-favorite"></i> {t('my_favorite')}  </Link></li>
+                                        </ul>
+                                        <ul className='Mini-Profile-Items'>
+                                            <li className="Mini-Profile-Item"><a href="#" className="logoout-link" onClick={handlelogOut}><i className="uil uil-exit"></i>{t('logout')}</a></li>
                                         </ul>
                                     </div>
                                 </>

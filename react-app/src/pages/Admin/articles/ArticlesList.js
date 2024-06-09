@@ -8,6 +8,7 @@ import FilterArticle from '../../../views/User/Fields/Filter/FilterArticle';
 import { useTranslation } from 'react-i18next';
 import ListArticlesSkeleton from '../../../skeleton/profile/ListArticlesSkeleton';
 import ListArticlesSideSkeleton from '../../../skeleton/profile/ListArticlesSideSkeleton';
+import NoContent from '../../../utils/NoContent';
 
 
 export default function ArticlesList() {
@@ -54,11 +55,11 @@ export default function ArticlesList() {
                                                 )
                                             : 
                                             <div className="col-md-12">
-                                                <div className="offer-box">
-                                                    <div className="offer-box">
-                                                        no result found
-                                                    </div>
-                                                </div>
+                                                {/* <div className="offer-box"> */}
+                                                    {/* <div className="offer-box"> */}
+                                                        <NoContent/>
+                                                    {/* </div> */}
+                                                {/* </div> */}
                                             </div>
                                             )    
                                     }
