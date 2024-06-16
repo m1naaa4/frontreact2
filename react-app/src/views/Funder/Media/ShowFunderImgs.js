@@ -38,7 +38,7 @@ export default function ShowFunderImgs() {
   return (
     <div className="content">
       <LightgalleryProvider>
-        <h3>Photos</h3>
+        {/* <h3>Photos</h3> */}
 
         {/* <div className="d-flex align-items-center flex-wrap"> */}
           {imgs.length > 0 ? imgs.map((p, idx) => (

@@ -172,6 +172,10 @@ export default function ViewMentor(props) {
             $(this).toggleClass('comments-clicked');
         });
 
+        if (window.screen.width < 768) {
+            $('.Post-Actions').insertBefore('.single-header');
+        }
+
         $('.reaction-comment').click(function (e) {
             e.preventDefault();
             var target = $($(this).attr('href'));
@@ -352,51 +356,104 @@ export default function ViewMentor(props) {
                     // <ProjectSkeletonGrid/>
                 ): !loading && project != '' ? (
                     <div className="row">
+                        <div className='col-md-12'>
+                            <div className="Post-Actions">
+                                {user.id == project.user_id && <div className="Update-Post">
+                                    <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
+                                        title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
+                                    </button>
+                                </div>}
+                                {user.id == project.user_id && <div className="Send-Message input-row input-select">
+                                    <Select
+                                        options={alloptions}
+                                        value={optionSelected}
+                                        placeholder={project.visibility}
+                                        onChange={handleChange}
+                                        styles={SelectStyleWithScrollbar}
+                                        className="Select"
+                                    />
+                                </div>}
+                                {is_loading === true && <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />}
+
+                            </div>
+                        </div>
                         <div className="col-md-8">
                             {/*!--PAGE HEADER --*/}
-                            <div className="Company-Infos">
+                            <div className="Company-Infos mentor">
                                 <div className="Company-Left">
                                     <div className="single-offer-logo">
                                         <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />
-                                        <button className="offer-bookmark" type="button" name="button"><i className="uil uil-bookmark"></i>
-                                            <DialogWarning
-                                                    title={titleDialog}
-                                                    ContentText={ContentDialog}
-                                                    open={open}
-                                                    HandleConfirmation={e => addTofavorite(project.id)}
-                                                    HandleClose={HandleClose}
-                                                />
-                                        </button>
-                                        <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
                                     </div>
-                                    <div className="Company-Name">{project.name}</div>
-                                    <div className="Company-Email">{project.email}</div>
-                                    <div className="Company-Addresse">{project.address}</div>
-                                </div>
-                                {user.id !== project.user_id && (<div className="Company-Right">
-                                        <div className="Company-Phone">
-                                            <a href="tel:0657-794432">
-                                            <i className="uil uil-phone-alt"></i> {project.phone}
-                                        </a>
-                                            <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
-                                            {
-                                                options_List && (
-                                                    <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
-
-                                                        <li className="PostDelete">
-                                                            <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
-                                                        </li>
-
-                                                    </ul>
-                                                )
-                                            }
-                                            <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <ReportModal providerObject={project} provider='mentor' showReport={showReport} handleCloseReport={handleCloseReport} />
-                                            </Modal>
+                                    <div className='funder-meta'>
+                                    <   h3 className="single-offer-name">
+                                            {project.name}
+                                            <div>
+                                                <button className="offer-bookmark" type="button" name="button"><i className="uil uil-bookmark"></i>
+                                                    <DialogWarning
+                                                            title={titleDialog}
+                                                            ContentText={ContentDialog}
+                                                            open={open}
+                                                            HandleConfirmation={e => addTofavorite(project.id)}
+                                                            HandleClose={HandleClose}
+                                                        />
+                                                </button>
+                                                <label className="near-deadline" data-toggle="tooltip" data-placement="bottom" title="Deadline est proche"><i className="uil uil-bell"></i></label>
+                                            </div>    
+                                        </h3>
+                                        <div className='funder-meta-list'>
+                                            <p className="Company-Email"><a href={`mailto:`+project.email}><i class="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
+                                            {project.address && (<>
+                                                <p className="Company-Addresse"><i class="uil uil-map-marker"></i> <span>{project.address}</span></p>
+                                            </>)}
                                         </div>
-                                        <br />
                                     </div>
-                                )}
+                                    {/* <div className="Company-Name">{project.name}</div>
+                                    <div className="Company-Email">{project.email}</div>
+                                    <div className="Company-Addresse">{project.address}</div> */}
+                                </div>
+                                {/* {user.id !== project.user_id && ( */}
+                                <div className="Company-Right">
+                                    <div className='company-emta'>
+                                        {project.phone && (<>
+                                            <div className="Company-Phone">
+                                                <a href={`tel:`+project.phone} title='project.phone'>
+                                                    <i className="uil uil-phone-alt"></i> 
+                                                        {/* {project.phone} */}
+                                                </a>  
+                                            </div>
+                                        </>)}
+
+                                        <button type="button" className="PostOptions-BTN" onClick={showOptions}><i className="uil uil-ellipsis-h"></i></button>
+                                        {
+                                            options_List && (
+                                                <ul className="PostOptions-List PostOptions-ListShow" ref={ref} >
+
+                                                    <li className="PostDelete">
+                                                        <button onClick={handleShowReport}><i className="uil uil-ban"></i> Report</button>
+                                                    </li>
+
+                                                </ul>
+                                            )
+                                        }
+                                        <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <ReportModal providerObject={project} provider='mentor' showReport={showReport} handleCloseReport={handleCloseReport} />
+                                        </Modal>
+                                    </div>
+                                        {/* <div className="Company-Phone"> */}
+                                            {/* <a href="tel:0657-794432">
+                                                <i className="uil uil-phone-alt"></i> {project.phone}
+                                            </a> */}
+                                            
+                                        {/* </div> */}
+                                        {/* <br /> */}
+                                </div>
+                                {/* )} */}
                             </div>
 
                             <div className="Content-Wrap">
@@ -467,9 +524,12 @@ export default function ViewMentor(props) {
                                         </button>
                                         <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
-                                    <div className="Signle-Offer-Text">
-                                        {project.content ? parse(project.content) : project.content}
-                                    </div>
+                                    {project.content && (<>
+                                        <div className="Signle-Offer-Text">
+                                            {project.content ? parse(project.content) : project.content}
+                                        </div>
+                                    </>)}
+                                    
 
                                 </div>
                             </div>
@@ -477,31 +537,7 @@ export default function ViewMentor(props) {
                             <AddComment providerObject={project.id} providerType='mentor' />
                         </div>
                         <div className="col-md-4">
-                            <div className="Post-Actions">
-                                {user.id == project.user_id && <div className="Update-Post">
-                                    <button type="button" name="button" onClick={goToEditproject} data-toggle="tooltip" data-placement="bottom"
-                                        title="Edit Post" className="edit-button"><i className="uil uil-pen"></i>
-                                    </button>
-                                </div>}
-                                {user.id == project.user_id && <div className="Send-Message input-row input-select">
-                                    <Select
-                                        options={alloptions}
-                                        value={optionSelected}
-                                        placeholder={project.visibility}
-                                        onChange={handleChange}
-                                        styles={SelectStyleWithScrollbar}
-                                        className="Select"
-                                    />
-                                </div>}
-                                {is_loading === true && <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                />}
-
-                            </div>
+                            
                             <div className="Single-Offer-Details">
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">

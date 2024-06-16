@@ -42,7 +42,7 @@ export default function ShowProjectImgs() {
       <LightgalleryProvider>
         <h3 className="tab-title">{t('pictures')}</h3>
           <div className='images-wrap'>
-            <div className='row'>
+            {/* <div className='row'> */}
 
               {imgs.length ? imgs.map((p, idx) => (
                 <div className="col-md-3">
@@ -51,7 +51,7 @@ export default function ShowProjectImgs() {
               )): 
               <NoContent/>
               }
-            </div>
+            {/* </div> */}
         </div>
       </LightgalleryProvider>
     </div>

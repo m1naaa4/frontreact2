@@ -211,19 +211,25 @@ export default function FinalStepMentor({ navigation}) {
                                     <div className="form-inputs review-box">
                                         {loadedProject && 
                                             <div className="review-fieldset">
-                                            <div className="review-header">
-                                                <h2 className="review-offer-title">{`${loadedProject.name}`}</h2>
-                                                <h2 className="review-offer-title">
-                                                    {loadedProject.website && <div className="Company-Name"><a href={loadedProject.website} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
-                                                </h2>
-                                                <div className="reeview-offer-logo">
-                                                    <img src={`${loadedProject.logo}`} alt=""/>
+                                            <div className="mentor review-header">
+                                                <div className='review-header-left'>
+                                                    <div className="reeview-offer-logo">
+                                                        <img src={`${loadedProject.logo}`} alt=""/>
+                                                    </div>
+                                                    <div>
+                                                        <h2 className="review-offer-title">{`${loadedProject.name}`}</h2>
+                                                    </div>
                                                 </div>
+                                                <div className='review-header-right'>
+                                                    {loadedProject.website && <div className="Company-Name"><a href={loadedProject.website} target="_blanc"><i className="uil uil-globe"></i>Visit the website</a></div>}
+                                                </div>
+                                                
+                                                
                                             </div>
                                             <div className="review-media">
                                                 {loadedProject.media.map(item => (
                                                 <div key={item} style={{ flex: `1 0 ${100/loadedProject.media.length}%` }}>
-                                                    <div className="col-md-12 input-row">
+                                                    {/* <div className="col-md-12 input-row"> */}
                                                     {(function() {
                                                         if(getExtension(item) == 'youtube'){
                                                             return <ReactPlayer url={item} controls={true} />
@@ -239,7 +245,7 @@ export default function FinalStepMentor({ navigation}) {
                                                             }
                                                         }
                                                     })()}
-                                                    </div>
+                                                    {/* </div> */}
                                                 </div>
                                                 ))}
                                             </div>

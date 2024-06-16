@@ -38,14 +38,12 @@ export default function ShowMentorImgs() {
   return (
     <div className="content">
       <LightgalleryProvider>
-        <h3>Photos</h3>
+        {/* <h3 className="tab-title">Photos</h3> */}
 
-        <div className="d-flex align-items-center flex-wrap">
           {imgs.length > 0 ? imgs.map((p, idx) => (
             <PhotoItem key={idx} image={p} group="imgs" />
           )) : <NoContent/>
             }
-        </div>
       </LightgalleryProvider>
     </div>
   );

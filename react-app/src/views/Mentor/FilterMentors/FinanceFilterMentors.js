@@ -59,13 +59,19 @@ function FinanceFilterMentors ({formData}) {
         control: (base, state) => ({
           ...base,
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          borderRadius: '30px',
-          border: '1px solid #e7e7e7',
-          height: '50px',
+          borderRadius: '10px',
+          border: '1px solid #F5F5F5',
+          height: '40px',
+          fontSize: '12px',
           "&:hover":{
             boxShadow: "none",
           },
         }),
+        valueContainer:(base) => ({
+          ...base,
+          height: '50px',
+          padding: '2px 15px',
+        })
     }
 
     const alloptions = finances.map(([value, name]) => (

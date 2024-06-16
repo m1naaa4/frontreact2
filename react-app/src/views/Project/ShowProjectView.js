@@ -180,6 +180,10 @@ export default function ShowProjectView(props) {
             $(this).toggleClass('comments-clicked');
         });
 
+        if (window.screen.width < 768) {
+            $('.Post-Actions').insertBefore('.single-header');
+        }
+
         $('.reaction-comment').click(function (e) {
             e.preventDefault();
             var target = $($(this).attr('href'));
@@ -362,11 +366,12 @@ export default function ShowProjectView(props) {
                 ) : project.success === true ? (
 
 
+                    <div className="single-page">
                     <div className="row">
                         <div className="col-md-8">
 
                             {/*!--PAGE HEADER --*/}
-                            <div className="single-header" style={{ marginBottom: "15px", marginTop: "15px" }}>
+                            <div className="single-header">
                                 <div className="single-offer-header">
                                     <div className="Company-Left">
                                         <div className="d-flex">
@@ -504,9 +509,12 @@ export default function ShowProjectView(props) {
                                         </button>
                                         <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                                     </div>
-                                    <div className="Signle-Offer-Text">
-                                        {project.project.description ? parse(project.project.description) : project.project.description}
-                                    </div>
+                                    {project.project.description !== null &&
+                                        <div className="Signle-Offer-Text">
+                                            {project.project.description ? parse(project.project.description) : project.project.description}
+                                        </div>
+                                    }
+                                    
 
                                 </div>
                             </div>
@@ -599,6 +607,7 @@ export default function ShowProjectView(props) {
                                 {tags}
                             </div>
                         </div>
+                    </div>
                     </div>
 
 

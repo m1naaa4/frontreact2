@@ -51,9 +51,13 @@ export default function ProjectShowPrivateRoutes(props) {
                     <div className='col-12'>
                         {
                             currentPage != "details" && project != undefined &&
-                            <h1 className='text-uppercase'>
-                                {currentPage + ': ' + project.name}
-                            </h1>
+                            // <h1 className='text-uppercase'>
+                            //     {currentPage + ': ' + project.name}
+                            // </h1>
+                            <ul className='detail-page-breadcrumbs'>
+                                <li className='detail-breadcrumbs-item'>{project.name}</li>
+                                <li className='detail-breadcrumbs-item current-item'>{currentPage}</li>
+                            </ul>
                         }
                     </div>
                 </div>

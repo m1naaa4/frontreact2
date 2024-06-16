@@ -51,9 +51,11 @@ export default function ShowMentorDocs() {
   }
 
   return (
-    <div className="row">
-      <h3>Document</h3>
+    <div>
+      {/* <h3>Document</h3> */}
       {files.length > 0 ? files.map((e, index) => (
+    <div>
+
           <div className="col-sm-6 col-md-3 mb-2 flex-wrap" onClick={() => { handleOpen(e) }} key={index + 1}>
             <div className="Doc-Wrap">
               <a href="#!">
@@ -62,7 +64,9 @@ export default function ShowMentorDocs() {
               </a>
             </div>
           </div>
-        )) : <NoContent/>
+          </div>
+        )) : 
+        <NoContent/>
       }
 
       <Modal

@@ -23,13 +23,14 @@ function FinanceFilterFunders ({formData}) {
             backgroundColor: "#e8fbf1",
           },
         '&:last-child ': {
-          borderBottomLeftRadius: '30px',
-          borderBottomRightRadius: '20px',
+          borderBottomLeftRadius: '10px',
+          borderBottomRightRadius: '10px',
         }}),
         
         menu: (provided) => ({
           ...provided,
-          borderRadius: "35px",
+          borderRadius: "10px",
+          fontSize: '12px',
           overflow: 'hidden',
           border: '0.5px solid #00b602',
           zIndex: '999'
@@ -38,7 +39,7 @@ function FinanceFilterFunders ({formData}) {
         menuList: (provided, state) => ({
         ...provided,
         // border: '1px solid green',
-        borderRadius: "32px",
+        borderRadius: "10px",
         padding: '0',
         "&::-webkit-scrollbar": {
           width: "5px",
@@ -59,13 +60,19 @@ function FinanceFilterFunders ({formData}) {
         control: (base, state) => ({
           ...base,
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          borderRadius: '30px',
-          border: '1px solid #e7e7e7',
+          borderRadius: '10px',
+          border: '1px solid #F5F5F5',
           height: '50px',
+          fontSize: '12px',
           "&:hover":{
             boxShadow: "none",
           },
         }),
+        valueContainer:(base) => ({
+          ...base,
+          height: '50px',
+          padding: '2px 15px',
+        })
     }
 
     const alloptions = finances.map(([value, name]) => (

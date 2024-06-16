@@ -52,17 +52,18 @@ export default function FinalView({formData, setFormData, navigation, props}) {
         backgroundColor: state.isSelected ? "#e8fbf1" : "white",
         color: "black",
         textAlign: 'center',
+        fontSize: '12px',
         "&:hover":{
         backgroundColor: "#e8fbf1",
         },
         '&:last-child ': {
-            borderBottomLeftRadius: '30px',
-            borderBottomRightRadius: '20px',
+            borderBottomLeftRadius: '15px',
+            borderBottomRightRadius: '15px',
         }}),
     
         menu: (provided) => ({
             ...provided,
-            borderRadius: "35px",
+            borderRadius: "15px",
             overflow: 'hidden',
             border: '0.5px solid #00b602',
         }),
@@ -70,7 +71,7 @@ export default function FinalView({formData, setFormData, navigation, props}) {
         menuList: (provided, state) => ({
         ...provided,
         // border: '1px solid green',
-        borderRadius: "32px",
+        borderRadius: "15px",
         padding: '0',
         "&::-webkit-scrollbar": {
             width: "5px",
@@ -91,14 +92,20 @@ export default function FinalView({formData, setFormData, navigation, props}) {
         control: (base, state) => ({
             ...base,
             boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-            borderRadius: '30px',
-            border: '1px solid #e7e7e7',
-            width:'150px',
+            borderRadius: '15px',
+            border: '1px solid #F5F5F5',
             height: '50px',
+            minWidth: '150px',
+            fontSize: '12px',
             "&:hover":{
-            boxShadow: "none",
+              boxShadow: "none",
             },
-        }),
+          }),
+          valueContainer:(base) => ({
+            ...base,
+            height: '50px',
+            padding: '2px 15px',
+          })
     }
         
     const goToShowproject = () => {
@@ -205,12 +212,12 @@ export default function FinalView({formData, setFormData, navigation, props}) {
                                     <div className="form-inputs review-box">
                                         {loadedProject && 
                                             <div className="review-fieldset">
-                                            <div className="review-header">
+                                            <div className="project review-header">
                                                 <div className='review-offer-meta'>
                                                     <h2 className="review-offer-title">{`${loadedProject.name}`}</h2>
-                                                    <h2 className="review-offer-website">
+                                                    <p className="review-offer-website">
                                                         {loadedProject.website_url && <div className="Company-Name"><a href={loadedProject.website_url} target="_blanc"><i className="uil uil-globe"></i>website</a></div>}
-                                                    </h2>
+                                                    </p>
                                                 </div>
                                                 <div className="review-offer-logo">
                                                     <img src={`${loadedProject.logo_link}`} alt=""/>

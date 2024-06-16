@@ -234,7 +234,7 @@ function HeaderProfile() {
 
                                         </div>
                                         <ul className='Mini-Profile-Items'>
-                                            <li className='Mini-Profile-Item'><Link to={`/profile/`+userProfile.profile_id}><i class="uil uil-user"></i> {t('see_profile')}</Link></li>
+                                            <li className='Mini-Profile-Item'><Link to={`/profile/`+userProfile.profile_id}><i className="uil uil-user"></i> {t('see_profile')}</Link></li>
                                             <li className="Mini-Profile-Item"><Link to={`/user/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i>{t('setting')}</Link></li>
                                         </ul>
                                         {/* <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link profil-link">{t('see_profile')}</Link> */}

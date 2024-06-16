@@ -50,10 +50,10 @@ export default function FunderShowPrivateRoutes(props) {
                     <div className='col-12'>
                         {
                             currentPage != "details" && project != undefined &&
-                            <h1 className='text-uppercase'>
-                                {/* <i className="uil uil-apps"></i>  */}
-                                {currentPage + ': ' + project.name}
-                            </h1>
+                            <ul className='detail-page-breadcrumbs'>
+                                <li className='detail-breadcrumbs-item'>{project.name}</li>
+                                <li className='detail-breadcrumbs-item current-item'>{currentPage}</li>
+                            </ul>
                         }
                     </div>
                 </div>

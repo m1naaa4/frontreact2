@@ -35,7 +35,7 @@ const ShowMentorVids = () => {
 
   return (
     <div className="content">
-      <h3>Videos</h3>
+      {/* <h3>Videos</h3> */}
       {/* <div className="d-flex flex-wrap"> */}
         {videos.length > 0 ? videos.map((videoUrl, index) => (
           <ReactPlayer width='250' height='200' controls={true} key={index} url={videoUrl}/>

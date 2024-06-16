@@ -173,6 +173,10 @@ export default function ViewFunder(props) {
             $(this).toggleClass('comments-clicked');
         });
 
+        if (window.screen.width < 768) {
+            $('.Post-Actions').insertBefore('.single-header');
+        }
+        
         $('.reaction-comment').click(function (e) {
             e.preventDefault();
             var target = $($(this).attr('href'));
@@ -384,7 +388,6 @@ export default function ViewFunder(props) {
                                 <div className="Company-Left">
                                     <div className="single-offer-logo">
                                         <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} title="Nom du projet" alt="" />
-                                        
                                     </div>
                                     <div className='funder-meta'>
                                         <h3 className="single-offer-name">
@@ -404,7 +407,7 @@ export default function ViewFunder(props) {
                                         </h3>
                                         <div className='funder-meta-list'>
                                             <p className="Company-Email"><a href={`mailto:`+project.email}><i class="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
-                                            {project.address !== '' && (<>
+                                            {project.address && (<>
                                                 <p className="Company-Addresse"><i class="uil uil-map-marker"></i> <span>{project.address}</span></p>
                                             </>)}
                                         </div>
@@ -417,16 +420,15 @@ export default function ViewFunder(props) {
                                 <div className="Company-Right">
                                     <div className='company-emta'>
                                         
-                                        <div className="Company-Phone">
                                         {project.phone !== '' && (<>
-                                            
-                                            <a href={`tel:`+project.phone}>
-                                                <i className="uil uil-phone-alt"></i> 
-                                                    {/* {project.phone} */}
-                                            </a>  
-                                            </>)}
+                                            <div className="Company-Phone">
+                                                <a href={`tel:`+project.phone}>
+                                                    <i className="uil uil-phone-alt"></i> 
+                                                        {/* {project.phone} */}
+                                                </a>  
+                                            </div>
+                                        </>)}
 
-                                        </div>
                                         <div className="Company-Website">
                                             <a href={project.website}>
                                                 <i className="uil uil-globe"></i> {t('visit_website')}
@@ -449,9 +451,6 @@ export default function ViewFunder(props) {
                                             <ReportModal providerObject={project} provider='funder' showReport={showReport} handleCloseReport={handleCloseReport} />
                                         </Modal>
                                     </div>
-                                        
-                                        
-                                        <br />
                                     </div>
                                 
                             </div>
