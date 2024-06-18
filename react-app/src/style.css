@@ -2185,6 +2185,7 @@ label.error {
 
   .Filter-Form {
     margin-top: 15px;
+    padding: 15px 10px;
   }
 }
 
@@ -2196,9 +2197,14 @@ label.error {
 }
 
 @media(min-width: 769px) and (max-width: 992px) {
+  .Filter-Form-Row{
+    flex-direction: column;
+  }
   .Filter-Form .input-row.filter-actions{
     display: flex;
     justify-content: space-between;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   .Dadupa-Nav .Nav-Link {
     padding: 0 8px;
@@ -2214,25 +2220,25 @@ label.error {
   }
 
   .Filter-Form .input-row {
-    width: 50%;
-    display: block;
+    flex: 0 0 50%;
+    max-width: 50%;
     margin-bottom: 15px;
   }
 
   .Filter-Form .input-row:last-child {
     width: 100%;
-    display: flex;
+    /* display: flex; */
     margin: 0;
   }
 
   .filter-button {
     width: 100%;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
   }
 
   .custom-filter-btn{
@@ -2249,6 +2255,8 @@ label.error {
   .filter-button i {
     font-size: 18px;
     margin-right: 6px;
+    position: relative;
+    left: -6px;
   }
 }
 
@@ -2549,10 +2557,9 @@ label.error {
 }
 
 .single-offer-logo img {
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .offer-title h3 {
@@ -4766,6 +4773,9 @@ label.error {
     padding-top: 10px;
     padding-bottom: 10px;
   }
+  .Offer-Details-List .Offer-Item .Contact .Contact-Infos h4{
+    white-space: initial;
+  }
 }
 
 @media(max-width: 768px) {
@@ -4902,6 +4912,7 @@ label.error {
 .Company-Infos.mentor .Company-Left,
 .Company-Infos.funder .Company-Left{
   display: flex;
+  gap: 10px;
 }
 
 .funder-meta .single-offer-name{
@@ -4960,6 +4971,7 @@ label.error {
   display: flex;
   gap: 20px;
   align-items: center;
+  line-height: 1;
 }
 
 .more-images-tab a{
@@ -5001,12 +5013,16 @@ label.error {
 .Company-Infos .single-offer-logo {
   display: flex;
   align-items: flex-start;
+  margin-right: 8px;
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .Company-Infos .single-offer-logo img {
-  height: 45px !important;
-  width: 55px !important;
-  margin-right: 8px;
+  height: 100%;
+  width: 100%;
 }
 .project .review-offer-meta .review-offer-website{
   margin: 0;
@@ -5020,7 +5036,7 @@ label.error {
 .mentor.review-header .review-header-right .Company-Name a,
 .Company-Website a{
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #00b601;
   display: flex;
   align-items: center;
@@ -5043,13 +5059,72 @@ label.error {
 
 .Company-Phone a {
   color: #2D363A;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-
+.Company-Phone span{
+  font-size: 14px;
+  font-weight: 500;
+  color: #8399A4;
+}
 .Company-Phone i {
   font-size: 22px;
   color: #8399A4;
 }
 
+@media(min-width: 992px){
+  .Company-Phone span{
+    display: none;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 992px){
+  .Company-Phone i{
+    font-size: 16px;
+  }
+  .Company-Phone span{
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .Company-Infos{
+    position: relative;
+  }
+  .Company-Infos.mentor .Company-Left,
+  .Company-Infos.mentor .Company-Right,
+  .Company-Infos.funder .Company-Right,
+  .Company-Infos.funder .Company-Left{
+    flex: 0 0 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .Company-Infos.mentor .Company-Right,
+  .Company-Infos.funder .Company-Right{
+    padding-left: 52px;
+    margin-top: 30px;
+    position: initial;
+  }
+  .Company-Infos .single-offer-logo{
+    margin-right: 0;
+  }
+  .Company-Infos .funder-meta-list{
+    left: -4px;
+    position: relative;
+  }
+  .PostOptions-BTN{
+    position: absolute;
+    top: 6px;
+    right: 10px;
+  }
+  .Company-Website a i{
+    font-size: 16px;
+  }
+  .Company-Website a{
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
 
 @media(max-width: 768px) {
 
@@ -5909,6 +5984,7 @@ label.error {
   line-height: 1;
   background: transparent;
   border: none;
+  color: #8399A4;
 }
 
 .PostOptions-BTN i {
@@ -8665,8 +8741,8 @@ button .spinner-border {
 
 .input-multi-filter button {
   width: 100%;
-  height: 40px;
-  border-radius: 30px;
+  height: 50px;
+  border-radius: 10px;
   box-shadow: 0 0 10px 0 rgb(0 0 0 / 2%);
   border: 2px solid #F8FBFC;
   padding: 0 15px;
@@ -8681,7 +8757,7 @@ button .spinner-border {
 }
 
 .custom-filter-btn {
-  height: 40px;
+  /* height: 40px; */
 }
 
 .Filter-Form .form-button {
@@ -9732,8 +9808,53 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 
 @media(min-width: 768px) and (max-width: 1024px){
-  .Filter-Form .input-row{
-    /* width: 300px; */
+  .articles-list-sidebar .articles-list-title{
+    font-size: 18px;
+  }
+  .article-meta,
+  .article-thumbnail{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .article-thumbnail{
+    margin-bottom: 0;
+  }
+  .article-thumb{
+    width: 100%;
+    max-height: 300px;
+    border-radius: 0;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+  }
+  .article-meta{
+    padding: 20px;
+  }
+  .article-content-sidebar,
+  .article-thumb-sidebar{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .article-thumb-sidebar{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    max-height: 140px;
+  }
+  .article-content-sidebar{
+    padding: 15px 0 0;
+  }
+  .article-thumb-sidebar img{
+    margin: 0;
+    height: 100%;
+  }
+  .article-sidebar-title{
+    font-size: 14px;
+  }
+  .icon-clap::before{
+    width: 16px;
+    height: 16px;
+  }
+  .article-list-author{
+    margin-top: 15px;
   }
 }
 
@@ -9761,4 +9882,19 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 .empty-state .action-button i{
   font-size: 24px;
+}
+
+@media(min-width: 768px) and (max-width: 992px){
+  .order-middle{
+    order: 2;
+  }
+  .order-last{
+    order: 12;
+  }
+  .order-first{
+    order: 1;
+  }
+  .Right-Side{
+    margin-top: 20px;
+  }
 }

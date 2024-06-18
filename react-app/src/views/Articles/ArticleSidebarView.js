@@ -14,7 +14,7 @@ export default function ArticleSidebarView({ article }) {
         <div className='article-content-sidebar'>
             <div>
                 <div className='article-meta-sidebar'>
-                    <div className='article-thumb-sidebar'>
+                    <div className='article-date-wrap'>
                         <p className='article-date'>{article.created_at.date}</p>
                     </div>
                     <div className='article-reactions-sidebar'>

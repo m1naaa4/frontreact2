@@ -8,7 +8,7 @@ export default function PostView(props) {
 
     return (
         
-        <div className="col-md-6">
+        <div className="col-md-8 col-lg-6">
             <div className="Center-Side">
 
               {/* <div className="Filter-Row">

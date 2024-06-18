@@ -53,8 +53,8 @@ function FilterArticle({ filterInput }) {
                             <div style={{ width: '125px' }} className="input-row">
                                 <ReactDatePicker className="wizard-required" placeholderText={t('end')} selected={endDate} onChange={(date) => setEndDate(date)} />
                             </div>
-                            <div className="input-row ml-auto w-auto">
-                                <button type="submit" name="submit"  onClick={handleSubmitValue} className="article-filter-btn">
+                            <div className="input-row filter-actions">
+                                <button type="submit" name="submit"  onClick={handleSubmitValue} className="filter-button">
                                     <i className="uil uil-search"></i> {t('search')}
                                 </button>
                             </div>

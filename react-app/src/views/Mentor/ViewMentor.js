@@ -422,9 +422,9 @@ export default function ViewMentor(props) {
                                     <div className='company-emta'>
                                         {project.phone && (<>
                                             <div className="Company-Phone">
-                                                <a href={`tel:`+project.phone} title='project.phone'>
+                                                <a href={`tel:`+project.phone} title={project.phone}>
                                                     <i className="uil uil-phone-alt"></i> 
-                                                        {/* {project.phone} */}
+                                                        <span>{project.phone}</span>
                                                 </a>  
                                             </div>
                                         </>)}
