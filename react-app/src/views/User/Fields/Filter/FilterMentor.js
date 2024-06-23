@@ -113,7 +113,8 @@ function FilterMentor({ filterInput }) {
                                     aria-expanded={open}
                                     data-toggle="tooltip" data-placement="bottom" title="Advanced Search"
                                 >
-                                    <i className="uil-filter"></i>
+                                    <i className="uil uil-plus"></i>
+                                    <span>More Filters</span>
                                 </button>
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn">
                                     <i className="uil uil-search"></i> {t('search')}

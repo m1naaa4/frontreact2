@@ -180,8 +180,8 @@ select:focus {
 .input-row select {
   width: 100%;
   height: 50px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02);
+  border-radius: 15px;
+  /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02); */
   border: 2px solid #fff;
   padding: 0 15px;
   font-size: 12px;
@@ -929,9 +929,9 @@ label.error {
   }
 
   .Dadupa-Connect {
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     /* height: 100vh; */
   }
 
@@ -1637,7 +1637,7 @@ label.error {
 .Dadupa-User .profile-image {
   width: 40px;
   height: 40px;
-  border-radius: 100%;
+  border-radius: 15px;
   overflow: hidden;
 }
 
@@ -1885,17 +1885,23 @@ label.error {
   background-color: #fff;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .06);
   border-radius: 15px;
-  padding: 6px;
+  padding: 10px 6px;
   margin-top: 45px;
 }
 
 .Filter-Form-Row{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+.Filter-Form-Row .display-flex{
+  flex: 0 0 calc(100% - 250px);
+  max-width: calc(100% - 250px);
 }
 
 .Filter-Form .input-row {
-  width: 180px;
+  /* width: 180px; */
+  flex: 1 0 0;
   padding: 0 5px;
   margin: 0;
   display: inline-block;
@@ -1903,6 +1909,10 @@ label.error {
 .Filter-Form .input-row.filter-actions{
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 250px;
+  max-width: 250px;
+  gap: 15px;
 }
 
 .Filter-Form .date-row {
@@ -1914,7 +1924,7 @@ label.error {
 .Filter-Form .input-row input[type="password"],
 .Filter-Form .input-row input[type="tel"],
 .Filter-Form .input-row select {
-  border: 2px solid #F8FBFC;
+  border: 1px solid #F0F0F0;
 }
 
 .Filter-Form .input-row input[type="text"]:focus,
@@ -1948,12 +1958,21 @@ label.error {
 .filter-button {
   background-color: #00b601;
   border: 2px solid #00b601;
-  border-radius: 12px;
+  border-radius: 15px;
   color: #fff;
   transition: all .20s cubic-bezier(.65, .05, .36, 1);
-  padding: 0 .5em;
-  font-size: 15px;
+  padding: 0 20px;
+  font-size: 14px;
+  gap: 5px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
+.filter-button i{
+  font-size: 18px;
+  position: relative;
+  left: -5px;}
 
 .filter-button:hover {
   background-color: #03ac04;
@@ -2244,17 +2263,17 @@ label.error {
   .custom-filter-btn{
     width: auto;
     padding: 0 20px;
+    height: 45px;
   }
   .filter-button span {
     display: block;
     margin-left: 6px;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .filter-button i {
     font-size: 18px;
-    margin-right: 6px;
     position: relative;
     left: -6px;
   }
@@ -2284,9 +2303,9 @@ label.error {
     display: block;
   }
 
-  .New-Post {
+  /* .New-Post {
     display: none;
-  }
+  } */
 
   .Dadupa-Search {
     display: none !important;
@@ -2365,7 +2384,7 @@ label.error {
     height: 50px;
     border-radius: 30px;
     padding: 0 15px 0 45px;
-    border: 2px solid #F5F5F5;
+    border: 1px solid #F0F0F0;
     font-size: 13px;
     transition: all .20s linear;
   }
@@ -2670,22 +2689,22 @@ label.error {
   object-fit: contain;
 }
 
-.bailleur .meta-items {
+/* .bailleur .meta-items {
   justify-content: center;
-}
+} */
 
-.bailleur .meta-items .meta-item {
+/* .bailleur .meta-items .meta-item {
   display: block;
   text-align: center;
-}
+} */
 
 .bailleur .meta-item .meta-icon {
   margin: 0 auto;
 }
 
-.bailleur .meta-item .meta-details {
+/* .bailleur .meta-item .meta-details {
   padding: 0;
-}
+} */
 
 .meta-item .meta-details {
   padding-left: 8px;
@@ -2720,9 +2739,9 @@ label.error {
 
 
 
-.offer-box.bailleur .meta-details .meta-value {
+/* .offer-box.bailleur .meta-details .meta-value {
   margin-top: 5px;
-}
+} */
 
 .MuiDialog-paper{
   border-radius: 15px !important;
@@ -2965,7 +2984,7 @@ label.error {
 .wizard-fieldset .input-row input[type="password"],
 .wizard-fieldset .input-row input[type="tel"],
 .wizard-fieldset .input-row select {
-  border: 1px solid #F5F5F5;
+  border: 1px solid #F0F0F0;
   color: #2D363A;
 }
 
@@ -2976,7 +2995,7 @@ label.error {
 .User-Settings .input-row input[type="password"],
 .User-Settings .input-row input[type="tel"],
 .User-Settings .input-row select {
-  border: 2px solid #F5F5F5;
+  border: 1px solid #F0F0F0;
   color: #2D363A;
 }
 
@@ -3126,7 +3145,7 @@ label.error {
 }
 
 .custom-file .custom-file-label {
-  border: 2px solid #F5F5F5;
+  border: 1px solid #F0F0F0;
   width: 100%;
   height: 50px;
   border-radius: 10px;
@@ -3138,10 +3157,10 @@ label.error {
 }
 
 .custom-switch {
-  border: 2px solid #F5F5F5;
+  border: 1px solid #F0F0F0;
   width: 100%;
   height: 50px;
-  border-radius: 30px;
+  border-radius: 15px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02);
   padding: 0 15px;
   font-size: 12px;
@@ -3518,7 +3537,7 @@ label.error {
 }
 
 .bootstrap-tagsinput {
-  border: 2px solid #F5F5F5;
+  border: 1px solid #F0F0F0;
   width: 100%;
   height: 90px;
   border-radius: 30px;
@@ -3910,6 +3929,8 @@ label.error {
 .single-offer-logo {
   height: auto;
   margin-right: 15px;
+  width: 45px;
+  height: 45px;
 }
 
 
@@ -5413,7 +5434,7 @@ label.error {
   background-color: #fff;
   font-size: 13px;
   color: #2D363A;
-  border-radius: 10px;
+  border-radius: 15px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -6284,6 +6305,15 @@ label.error {
   border-bottom-left-radius: 4px;
 }
 
+@media(min-width: 768px) and (max-width: 992px){
+  .Profie-Menu li a{
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  .Profie-Menu li a i{
+    font-size: 16px;
+  }
+}
 @media(max-width:768px) {
 
   .Profile-Header {
@@ -8203,7 +8233,7 @@ label.error {
   height: 40px;
   border-radius: 30px;
   padding: 0 15px;
-  border: 2px solid #F5F5F5;
+  border: 1px solid #F0F0F0;
   font-size: 13px;
   transition: all .20s linear;
 }
@@ -8742,13 +8772,14 @@ button .spinner-border {
 .input-multi-filter button {
   width: 100%;
   height: 50px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgb(0 0 0 / 2%);
-  border: 2px solid #F8FBFC;
+  border-radius: 15px;
+  box-shadow: unset;
+  border: 1px solid #F0F0F0;
   padding: 0 15px;
   font-size: 12px;
   transition: all .30s linear;
   background-color: #fff;
+  box-shadow: unset;
 }
 
 .css-1jllj6i-control {
@@ -8800,7 +8831,7 @@ button .spinner-border {
 }
 
 .Filter-Form .input-row.w300 {
-  width: 300px;
+  width: 220px;
 }
 
 .tags-input input {
@@ -9098,21 +9129,31 @@ button .spinner-border {
 }
 
 .DadupaModal-BTNSubmit.advenced-btn-search {
-  font-size: 18px;
-  height: 40px;
-  width: 40px;
   padding: 0;
-  line-height: 15px;
-  margin-right: 10px;
-  margin-top: 0;
-  border: 1px solid #2D363A;
+  line-height: 1;
   background-color: transparent;
-  color: #2D363A;
-  border-radius: 12px;
+  color: #78909C;
+  border-radius: 0;
+  text-transform: initial;
+  border: 0;
+  height: auto;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  /* border-bottom: 1px solid #78909C; */
+  padding: 0;
 }
 .DadupaModal-BTNSubmit.advenced-btn-search:hover{
-  background-color: #2D363A;
-  color: #fff;
+  /* background-color: #2D363A; */
+  /* color: #fff; */
+}
+
+.DadupaModal-BTNSubmit.advenced-btn-search .uil{
+  font-size: 16px;
+  position: relative;
+  left: -6px;
 }
 .DadupaModal-BTNSubmit.advenced-btn-search .uil::before{
   line-height: 0;
@@ -9522,6 +9563,9 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   display: flex;
   align-items: center;
 }
+.article-meta-content a:hover{
+  text-decoration: none;
+}
 .article-meta-content a .article-title:hover{
   color: #00b601;
   text-decoration: none;
@@ -9598,7 +9642,7 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   margin: 0 0 15px;
   transition: all .20s linear;
   padding-right: 30px;
-  line-height: 28px;
+  line-height: 26px;
 }
 
 .article-desc {
@@ -9688,6 +9732,12 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 .Dadupa-Notifs-Box.Notifs-Box-Active{
   display: block;
+}
+
+@media(min-width: 768px) and (max-width: 992px){
+  .article-title{
+    padding: 0;
+  }
 }
 @media(max-width: 768px){
   .Post-Actions{

@@ -31,6 +31,7 @@ function SectorFilterFunders ({formData}){
           ...provided,
           backgroundColor: state.isSelected ? "#e8fbf1" : "white",
           color: "black",
+          fontSize: '12px',
           textAlign: 'center',
           "&:hover":{
             backgroundColor: "#e8fbf1",
@@ -42,13 +43,13 @@ function SectorFilterFunders ({formData}){
         //     borderTopRightRadius: '20px',
         // },
         '&:last-child ': {
-          borderBottomLeftRadius: '10px',
-          borderBottomRightRadius: '10px',
+          borderBottomLeftRadius: '15px',
+          borderBottomRightRadius: '15px',
         }}),
         
         menu: (provided) => ({
           ...provided,
-          borderRadius: "10px",
+          borderRadius: "15px",
           fontSize: '12px',
           overflow: 'hidden',
           border: '0.5px solid #00b602',
@@ -79,7 +80,7 @@ function SectorFilterFunders ({formData}){
         control: (base, state) => ({
           ...base,
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          borderRadius: '10px',
+          borderRadius: '15px',
           border: '1px solid #F5F5F5',
           height: '50px',
           fontSize: '12px',

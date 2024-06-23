@@ -27,11 +27,15 @@ function SectorFilterMentors ({formData}){
     }, [formData.sector_id])
 
     const SelectStyleWithScrollbar = {
+        indicatorSeparator: () => ({
+          display: 'none',
+        }),
         option: (provided, state) => ({
           ...provided,
           backgroundColor: state.isSelected ? "#e8fbf1" : "white",
           color: "black",
           textAlign: 'center',
+          fontSize: '12px',
           "&:hover":{
             backgroundColor: "#e8fbf1",
           },
@@ -42,13 +46,13 @@ function SectorFilterMentors ({formData}){
         //     borderTopRightRadius: '20px',
         // },
         '&:last-child ': {
-          borderBottomLeftRadius: '10px',
-          borderBottomRightRadius: '10px',
+          borderBottomLeftRadius: '15px',
+          borderBottomRightRadius: '15px',
         }}),
         
         menu: (provided) => ({
           ...provided,
-          borderRadius: "10px",
+          borderRadius: "15px",
           overflow: 'hidden',
           border: '0.5px solid #00b602',
           zIndex: '999',
@@ -58,7 +62,7 @@ function SectorFilterMentors ({formData}){
         menuList: (provided, state) => ({
         ...provided,
         // border: '1px solid green',
-        borderRadius: "10px",
+        borderRadius: "15px",
         padding: '0',
         "&::-webkit-scrollbar": {
           width: "5px",
@@ -79,7 +83,7 @@ function SectorFilterMentors ({formData}){
         control: (base, state) => ({
           ...base,
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          borderRadius: '10px',
+          borderRadius: '15px',
           border: '1px solid #F5F5F5',
           height: '50px',
           fontSize: '12px',

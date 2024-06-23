@@ -111,22 +111,16 @@ const ListingItemMentor = ({ project }) => {
              <div className="offer-box bailleur">
                     <div className="offer-header">
                         <div className="offer-title" onClick={() => showPage(project.id) } >
-                            <h3>{project.name}</h3>
-                            <span>{t(sectorName(sector))}</span>
+                            <div className='offer-company-name'>
+                                <span>{project.name}</span>
+                            </div>
+                            <div className='footer-title'>
+                                <div className='footer-item footer-item-name'><span>{t(sectorName(sector))}</span></div>
+                                {!project.date_limit && <div className='footer-item footer-item-name'><label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('has_deadline')}><i className="uil uil-bell"></i></label></div>}
+                            </div>
+                            
                         </div>
                         <div className="offer-logo">
-                            <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
-                                <i className="uil uil-bookmark"></i>
-                            </button>
-                            <DialogWarning 
-                                title={titleDialog} 
-                                ContentText={ContentDialog} 
-                                open={open} 
-                                HandleConfirmation={e => addTofavorite(project.id)}
-                                HandleClose={HandleClose}
-                            />
-                            {!project.date_limit && <label className="no-deadline" data-toggle="tooltip" data-placement="bottom" title={t('has_deadline')}><i className="uil uil-bell"></i></label>}
-                            
                             {project.owner ? (<a href={`/profile/${project.owner[0].profile_id}`}>
                                 <img src={project.logo ? project.logo: '/assets/images/porject-logo.png'} style={{ height: "45" , width: "45"}}  title="Nom du projet" alt=""/>
                             </a>) : <a href={`/profile/${project.profile_id}`}>
@@ -167,7 +161,7 @@ const ListingItemMentor = ({ project }) => {
                                     <img src="/assets/images/icons/marker.svg" alt=""/>
                                 </div>
                                 <div className="meta-details">
-                                    {/* <span className="meta-title">{t('targetAreas')}</span> */}
+                                    <span className="meta-title">{t('targetAreas')}</span>
                                     <span className="meta-value">{countryName(project.zone)}</span>
                                 </div>
                             </li>
@@ -182,6 +176,16 @@ const ListingItemMentor = ({ project }) => {
                             <li className="reaction comments"><i className="uil uil-comment-dots"></i> <span>{project.commentCount}</span></li>
                             <li className="reaction shares" onClick={() => setShareUrl(true)}><i className="uil uil-share-alt"></i><span>{project.shared} {t('share')}</span></li>
                         </ul>
+                        <button className={`${classe ? 'near-deadline' : ''} offer-bookmark`} onClick={HandleClickOpen} type="button" name="button" data-toggle="tooltip" data-placement="bottom" title="Enregistrer">
+                            <i className="uil uil-bookmark"></i>
+                        </button>
+                        <DialogWarning 
+                            title={titleDialog} 
+                            ContentText={ContentDialog} 
+                            open={open} 
+                            HandleConfirmation={e => addTofavorite(project.id)}
+                            HandleClose={HandleClose}
+                        />
                     </div>
                     <SharePopUp url={url_to_share} open={shareUrl} handleOpen={setShareUrl}></SharePopUp>
                 </div>

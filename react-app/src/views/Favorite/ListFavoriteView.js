@@ -36,7 +36,7 @@ export default function ListFavoriteView(props) {
       <div className="row">
         {favorites && favorites.length > 0 ? (
           favorites.map((favorite, index) => (
-            <div className="col-4" key={index + 1}>
+            <div className="col-12 col-md-6 col-lg-3" key={index + 1}>
               {/* <FavoriteGrid favorite={favorite} key={index} /> */}
               {(function() {
                                             
