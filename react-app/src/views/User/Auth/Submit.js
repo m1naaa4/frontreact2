@@ -104,15 +104,18 @@ const Submit = ({setForm, formData, navigation, props}) => {
                                 <div className="step-label">{t('phone')}</div>
                                 <div className="step-value">{` ${phone}`}</div>
                             </div>
-                            <div className="step-row">
-                                <div className="step-label">{t('city')}</div>
-                                <div className="step-value">{`${city}`}</div>
-                            </div>
 
                             <div className="step-row">
                                 <div className="step-label">{t('country')}</div>
                                 <div className="step-value">{`${selectedcountry}`}</div>
                             </div>
+
+                            <div className="step-row">
+                                <div className="step-label">{t('city')}</div>
+                                <div className="step-value">{`${city}`}</div>
+                            </div>
+
+                            
 
                         </div>
                     </div>

@@ -1,22 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import countries from '../../../../data/countries'
-import Select from 'react-select'
-
+import countries from '../../../../data/countries';
+import countryCityMapping from '../../../../data/cities';
+import Select from 'react-select';
 
 function Zonedropfilter ({formData}) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(['city', 'country', 'translation']);
   const [optionSelected, setOptionSelected] = useState();
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+
+  useEffect(() => {
+    if (i18n.language !== currentLanguage) {
+      setCurrentLanguage(i18n.language);
+      console.log(optionSelected.label);
+      if (optionSelected) {
+        setOptionSelected({
+          ...optionSelected,
+          label: t(`country:${optionSelected.label}`)
+        });
+      }
+    }
+  }, [i18n.language]);
 
   const HandleChange = (selected)=>{
     setOptionSelected(selected);
     formData.country=selected.value; 
+    setCities(countryCityMapping[selected.value] || []);
+    setSelectedCity(null);
   }
+
+  const handleCityChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
+    formData.city=selectedOption.value;
+  };
 
   const translatedCountries = countries.map(country => ({
     ...country,
-    label: t(country.label)
+    label: t(`country:${country.label}`)
   }));
+
+  const cityOptions = cities.map(city => ({ value: city, label: t(`city:${city}`)}));
 
   const SelectStyleWithScrollbar = {
       option: (provided, state) => ({
@@ -80,16 +105,26 @@ function Zonedropfilter ({formData}) {
   }
 
   return (
-      
-    <Select
+    <>
+      <Select
       options={translatedCountries}
       onChange={HandleChange}
       value={optionSelected}
       styles={SelectStyleWithScrollbar}
-      placeholder={ (formData?.country === '') ? t('select_a_country') : formData.country  }
+      placeholder={ (formData?.country === '') ? t(`translation:select_a_country`) : formData.country  }
       required={true}
       className="Select"
     />
+    <br/>
+    <Select
+          options={cityOptions}
+          onChange={handleCityChange}
+          styles={SelectStyleWithScrollbar}
+          className="Select"
+          value={selectedCity}
+        />
+    </>
+    
     )
 }
 
