@@ -16,10 +16,15 @@ function ZoneDropProfileFilter ({formData, updateFormData}) {
       updateFormData(selected.value);
     }
 
+    const translatedCountries = countries.map(country => ({
+      ...country,
+      label: t(country.label)
+    }));
+
     useEffect(() => {
-      countries.map((key) => {
+      translatedCountries.map((key) => {
         if (key.value === formData.country) {
-          setCountry(key.label);
+          setCountry(key.label)
         }
       });
     });
@@ -87,13 +92,13 @@ function ZoneDropProfileFilter ({formData, updateFormData}) {
 
     return (
       <Select
-        options={countries}
+        options={translatedCountries}
         onChange={HandleChange}
         value={optionSelected}
         styles={SelectStyleWithScrollbar}
-        placeholder={ (formData?.country === '')? t('targetAreas'): country}
+        placeholder={ (formData?.country === '')? t('Select'): country}
         required={true}
-        className="Select"
+        className= 'Select'
       />
     )
 }

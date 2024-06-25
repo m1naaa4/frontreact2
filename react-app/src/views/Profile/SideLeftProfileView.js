@@ -8,7 +8,7 @@ import typeusers from '../../data/types';
 import ReadMoreReact from 'read-more-react';
 import SideLeftProfileSkeleton from '../../skeleton/profile/SideLeftProfileSkeleton';
 import { useTranslation } from 'react-i18next';
-import { Button, Popover, Tooltip, Typography } from '@mui/material';
+import {  Tooltip } from '@mui/material';
 import { green } from '@material-ui/core/colors';
 
 export default function SideLeftProfileView() {

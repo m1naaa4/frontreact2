@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import countries from '../../../../../data/countries'
 import Select from 'react-select'
+import { useTranslation } from 'react-i18next';
 
 
 function ZoneDropFilter ({formData}) {
     const [optionSelected, setOptionSelected] = useState();
     const [country, setCountry] = useState();
+    const { t } = useTranslation();
 
     const HandleChange = (selected)=>{
       setOptionSelected(selected);
       formData.project_area = selected.value;
     }
 
+    const translatedCountries = countries.map(country => ({
+      ...country,
+      label: t(country.label)
+    }));
+
     useEffect(() => {
-      countries.map((key) => {
+      translatedCountries.map((key) => {
         if (key.value === formData.project_area) {
             setCountry(key.label)
         }
@@ -89,7 +96,7 @@ function ZoneDropFilter ({formData}) {
 
     return (
       <Select
-        options={countries}
+        options={translatedCountries}
         onChange={HandleChange}
         value={optionSelected}
         styles={SelectStyleWithScrollbar}

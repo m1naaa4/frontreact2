@@ -63,10 +63,10 @@ const RegisterStep2View = ({setForm, formData, navigation}) => {
                            <Zonedropfilter formData={formData}/>
                     </div>
 
-                    <div className="input-row">
+                    {/* <div className="input-row">
                         <ItemForm type="text" name="city" onKeyDown={(e) => validateForm(e.target.value, e.keyCode) } value={city} onChange={setForm}
                                 placeholder={t('city')} required/>
-                    </div>
+                    </div> */}
 
                     <button type="button" name="previous" onClick={previous}
                             className="flex-prev-btn previous action-button"
