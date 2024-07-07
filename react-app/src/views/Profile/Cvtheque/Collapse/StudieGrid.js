@@ -145,13 +145,15 @@ const StudieGrid = ({ study }) => {
   return (
     <>
       <li className="Section-Item">
-        <div className="d-flex justify-content-between">
+        <div className="section-header">
           <label>{moment(study.datefin).format('y')} - {study.diplome}</label>
-          <div>
+          <div className='section-actions'>
             {
               action &&
               <div className="Contact">
-                <div className="Add-Contact Invitation-Options">
+                <div className="Add-Contact">
+                  <div className='Invitation-Options'>
+
                   <button type="button" name="button" onClick={handleShow} className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
                   <button type="button" name="button" onClick={HandleClickOpen} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
                   {/* <Dialog
@@ -184,6 +186,7 @@ const StudieGrid = ({ study }) => {
                         HandleClose={HandleClose}
                     />
 
+                  </div>
                 </div>
                 {/* <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
                           <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button> */}
@@ -195,9 +198,9 @@ const StudieGrid = ({ study }) => {
                     </li> */}
           </div>
         </div>
-        <span className='text-uppercase'>{study?.sector} - {study.etablissement} - {study.lieu}</span>
-        <br/>
-        <span>{study.description}</span>
+        <span className='section-sector text-uppercase'>{study?.sector} - {study.etablissement} - {study.lieu}</span>
+        {/* <br/> */}
+        <span className='section-description'>{study.description}</span>
 
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
           <form className="" action="index.html" method="post">

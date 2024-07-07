@@ -150,30 +150,34 @@ const ExperienceGrid = ({ experience }) => {
   return (
     <>
       <li className="Section-Item">
-        <div className="d-flex justify-content-between">
+        <div className="section-header">
           <label>{moment(experience.datedebut).format('MMMM y')} - {experience.present ? 'Present' : moment(experience.datefin).format('MMMM y')}</label>
+          <div className='section-actions'>
           {
             action &&
             <div className="Contact">
-              <div className="Add-Contact Invitation-Options">
+              <div className="Add-Contact">
+                <div className='Invitation-Options'>
                 <button type="button" name="button" onClick={handleShow} className="Invitation-Option_Confirm"><i className="uil uil-pen"></i></button>
                 <button type="button" name="button" onClick={HandleClickOpen} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
-                    <DialogWarning 
-                        title={titleDialog} 
-                        ContentText={ContentDialog} 
-                        open={open} 
-                        HandleConfirmation={deleteExperience}
-                        HandleClose={HandleClose}
-                    />
+                  <DialogWarning 
+                    title={titleDialog} 
+                    ContentText={ContentDialog} 
+                    open={open} 
+                    HandleConfirmation={deleteExperience}
+                    HandleClose={HandleClose}
+                  />
+                </div>
               </div>
               {/* <button type="button" onClick={handleShow} className="UpdateInfos-BTN CollapseUpdate-BTN"><i className="uil uil-pen"></i></button>
                 <button type="button" style={{marginLeft:'10px'}} className=" Profile-Skills delete-skill" onClick={ deleteStudy}><i className="uil uil-trash"></i></button> */}
             </div>
           }
+          </div>
         </div>
-        <span><span style={{fontSize: '12px', fontWeight: 900, color: '#1f1f1f'}}>{experience.post}</span><br/> {experience.entreprise}- {experience.lieu}</span>
-        <br/>
-        <span>{experience.description}</span>
+        <span className='section-sector text-uppercase'>{experience.post}<br/> {experience.entreprise}- {experience.lieu}</span>
+        {/* <br/> */}
+        <span className='section-description'>{experience.description}</span>
         <div className="CollapsUpdate" style={{ display: show ? 'block' : 'none' }}>
           <form className="" action="index.html" method="post">
             <div className="form-inputs">

@@ -31,7 +31,7 @@ export default function SideLeftProfileView() {
 
 
   return (
-    <div className="col-md-4 col-lg-3">
+    <div className="col-md-4 col-lg-3 dadupa-order-last">
       {
         infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
           <div className="Left-Side">
@@ -106,7 +106,7 @@ export default function SideLeftProfileView() {
                 </ul>
               </div>
 
-              <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <Modal show={show} onHide={handleClose} centered className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 {/* <div className="DadupaModal-Header">
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close"><i className="uil uil-times"></i></button>
                       </div> */}

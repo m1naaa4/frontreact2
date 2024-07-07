@@ -107,7 +107,7 @@ export default function CvView(props) {
                 <ul>
                   {cvtheque?.skills &&
                     cvtheque.skills.map((skill, index) => (
-                      <li key={index} style={{ padding: '2px' }}><span>{skill.name} </span>
+                      <li key={index}><span>{skill.name} </span>
                         {action && <button className="delete-skill" onClick={e => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button>}
                       </li>
                     ))
@@ -129,9 +129,9 @@ export default function CvView(props) {
               <ul className="Section-Items">
                 {cvtheque?.etudes &&
                   cvtheque?.etudes.map((study, index) => (
-                    <div key={index}>
-                      <StudieGrid study={study} />
-                    </div>
+                    // <div key={index}>
+                      <StudieGrid study={study} key={index}/>
+                    // </div>
                   ))
                 }
 
@@ -151,9 +151,9 @@ export default function CvView(props) {
               <ul className="Section-Items">
                 {cvtheque?.experiences &&
                   cvtheque.experiences.map((experience, index) => (
-                    <div key={index}>
-                      <ExperienceGrid experience={experience} />
-                    </div>
+                    // <div >
+                      <ExperienceGrid key={index} experience={experience} />
+                    // </div>
                   ))
                 }
               </ul>
