@@ -45,17 +45,26 @@ const  Invitations = ({invitation}) => {
 
     return (
         <>
+        {/* new */}
+
+        {/* old */}
         {show &&
             <div className="Contact">
-                <span className="Profile-Icon"><i className={`${type}`}></i></span>
+                {/* <span className="Profile-Icon"><i className={`${type}`}></i></span> */}
                 <div className="Contact-Thumb"><Link to={`/profile/${invitation.profile.id}`}><img src={invitation.profile.avatar_link} alt="" /></Link></div>
                 <div className="Contact-Infos">
-                    <Link to={`/profile/${params.id}`}><h4>{invitation.profile.username}</h4></Link>
+                    <div className='Contact-Infos-Row'>
+                        <Link to={`/profile/${params.id}`}><h4>{invitation.profile.username}</h4></Link>
+                        <p><i className={`${type}`}></i> {invitation.type}</p>
+                    </div>
+                    <div className="Add-Contact ">
+                        <div className='Invitation-Options'>
+                            <button type="button" name="button" onClick={() => {acceptFriend(invitation.id); setShow(false)}} className="Invitation-Option_Confirm"><i className="uil uil-check"></i></button>
+                            <button type="button" name="button" onClick={() => {rejectFriend(invitation.id); setShow(false)}} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
+                        </div>
+                    </div>
                 </div>
-                <div className="Add-Contact Invitation-Options">
-                    <button type="button" name="button" onClick={() => {acceptFriend(invitation.id); setShow(false)}} className="Invitation-Option_Confirm"><i className="uil uil-check"></i></button>
-                    <button type="button" name="button" onClick={() => {rejectFriend(invitation.id); setShow(false)}} className="Invitation-Option_Delete"><i className="uil uil-times"></i></button>
-                </div>
+                
             </div>
         }
         </>

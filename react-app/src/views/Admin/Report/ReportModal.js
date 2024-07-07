@@ -60,9 +60,11 @@ const  ReportModal = ({providerObject, provider, showReport, handleCloseReport})
             <div className=""  method="post">
               <div className="form-inputs">
                 <div className="form-row">
-                <h3>Please select a problem</h3>
-                  <p>If someone is in immediate danger, get help before reporting to Dadupa connect. Don't wait</p>
-                  <br/>
+                  
+                  <div className='form-header'>
+                    <h3 className='form-modal-title'>Please select a problem</h3>
+                    <p>If someone is in immediate danger, get help before reporting to Dadupa connect. Don't wait</p>
+                  </div>
 {/* <div className="col-md-12 input-row">
                     <input type="text" name="etablissement" defaultValue="" placeholder="Établissement" className="wizard-required" onChange={setForm} required/>
                   </div> */}
@@ -97,7 +99,7 @@ const  ReportModal = ({providerObject, provider, showReport, handleCloseReport})
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColLeft">
                 </div>
                 <div className="DadupaModal-FooterCol DadupaModal-FooterColRight">
-                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {sendReport(); handleCloseReport()}}>SEND</button>
+                  <button type="button" className="DadupaModal-BTNSubmit" onClick={() => {sendReport(); handleCloseReport()}}>Send</button>
                 </div>
               </div>
             </div>

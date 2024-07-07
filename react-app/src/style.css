@@ -179,7 +179,7 @@ select:focus {
 .input-row input[type="tel"],
 .input-row select {
   width: 100%;
-  height: 50px;
+  height: 48px;
   border-radius: 15px;
   /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02); */
   border: 2px solid #fff;
@@ -228,7 +228,7 @@ select:focus {
 .input-row textarea {
   width: 100%;
   height: 120px;
-  border-radius: 30px;
+  border-radius: 15px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02);
   border: 2px solid #fff;
   padding: 15px;
@@ -5303,7 +5303,7 @@ label.error {
 }
 
 .Profile-Skills ul {
-  margin: 0;
+  margin: 15px 0 0;
   padding: 0;
 }
 
@@ -5314,10 +5314,11 @@ label.error {
 }
 
 .Profile-Skills ul li span {
-  padding: 8px 15px;
-  border-radius: 4px;
+  /* padding: 8px 15px; */
+  /* border-radius: 4px; */
   font-size: 12px;
-  background-color: #e8fbf1;
+  display: block;
+  /* background-color: #e8fbf1; */
 }
 
 .Profile-Skills .delete-skill {
@@ -5519,9 +5520,41 @@ label.error {
 
 .Profile-Info:last-child {
   margin-bottom: 0;
-  margin-top: 30px;
+  margin-top: 0;
 }
-
+.social-media-fields ul{
+  display: flex;
+  flex-wrap: wrap;
+}
+.social-media-fields ul li{
+  flex: 0 0 50%;
+  max-width: 50%;
+  margin-bottom: 10px;
+}
+.social-media-fields ul li:last-child{
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.social-media-fields ul li .form-row{
+  width: 100%;
+  padding: 0 5px;
+}
+.social-media-fields ul li .form-row .social-media-profile{
+  width: 100%;
+  position: relative;
+}
+.social-media-fields ul li .form-row .social-media-profile i{
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.social-media-fields ul li input{
+  width: 100%;
+  padding-left: 45px !important;
+}
 .Widget-Title,
 .Profile-Info h3 {
   font-size: 14px;
@@ -5684,7 +5717,17 @@ label.error {
   flex: 0 0 26px;
   max-width: 26px;
 }
-
+.Contact .Add-Contact .Invitation-Options{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-end;
+}
+.Contact .Add-Contact .Invitation-Options button{
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+}
 .Contact .Add-Contact button {
   font-size: 16px;
   color: #00b601;
@@ -5694,6 +5737,9 @@ label.error {
   width: 26px;
   height: 26px;
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Contact .Add-Contact.Invitation-Options button {
@@ -6149,26 +6195,59 @@ label.error {
 }
 
 .Profile-Section {
-  padding: 30px 0;
+  padding: 16px 0;
   border-bottom: 2px solid #fcfcfc;
   position: relative;
 }
 
 .Profile-Section .Section-Items {
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0;
 }
 
+.Profile-Section .Section-Items .Section-Item .section-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.Profile-Section .Section-Items .Section-Item .section-header .section-actions .Invitation-Options{
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+}
+.Profile-Section .Section-Items .Section-Item .section-header .section-actions .Invitation-Options button{
+  width: 25px;
+  height: 25px;
+}
+.Profile-Section .Section-Items .Section-Item .section-header .section-actions .Invitation-Options .Invitation-Option_Delete{
+  color: red;
+  border-color: #ffeded;
+  background-color: #ffeded;
+}
+.Profile-Section .Section-Items .Section-Item .section-header .section-actions .Invitation-Options .Invitation-Option_Confirm{
+  color: #00b601;
+  border-color: #eafeea;
+  background-color: #eafeea;
+}
+.Section-Item .section-header .Contact .Add-Contact{
+  flex: unset;
+  max-width: unset;
+}
 .Profile-Section .Section-Items .Section-Item {
   list-style-type: none;
   display: block;
   margin-bottom: 15px;
   position: relative;
 }
-
+.Profile-Section .Section-Items .Section-Item .section-sector{
+  font-weight: 500;
+}
 .Profile-Section .UpdateInfos-BTN {
   right: 0;
-  top: 35px;
+  top: 20px;
+  font-size: 18px;
+  color: #ABAFB1;
 }
 
 .Profile-Section .Section-Items .Section-Item .UpdateInfos-BTN {
@@ -6189,25 +6268,29 @@ label.error {
 }
 
 .Profile-Section .Section-Items .Section-Item label {
-  font-weight: 700;
+  font-weight: 600;
   display: block;
+  margin: 0;
 }
 
 .Profile-Section .Section-Items .Section-Item span {
   font-size: 12px;
   color: #859BA6;
+  line-height: 18px;
+  display: block;
 }
-
+.Profile-Section .Section-Items .Section-Item .section-sector{
+  margin-bottom: 8px;
+}
 .Profile-Section-Title {
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  color: #00b601;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: #2D363A;
 }
 
 .Profile-Section-Title .uil {
-  font-size: 26px;
+  font-size: 22px;
 }
 
 .Profile-Section-Title .uil::before {
@@ -6839,19 +6922,43 @@ label.error {
 /* MODAL */
 
 .DadupaModal .modal-content {
-  background-color: rgb(251 255 253);
+  /* background-color: rgb(251 255 253); */
   /* background-color: #f2fff8; */
   border: none;
-}
-
-.modal-content {
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .DadupaModal .modal-body {
-  padding: 20px 35px 35px;
+  padding: 30px;
 }
-
+.DadupaModal .modal-body .form-inputs .form-header{
+  margin-bottom: 20px;
+}
+.DadupaModal .modal-body .form-inputs .form-modal-title{
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.DadupaModal .modal-body .form-inputs .form-header p{
+  color: #78909C;
+}
+.DadupaModal .modal-body .form-inputs .form-header p:last-child{
+  margin-bottom: 0;
+}
+.DadupaModal .modal-body .form-inputs .form-row .input-row{
+  margin-bottom: 15px;
+}
+.DadupaModal .modal-body .form-inputs .form-row .input-row:last-child{
+  margin-bottom: 0;
+}
+.DadupaModal .modal-body .form-inputs .form-row .Send-Message{
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+.DadupaModal .modal-body .form-inputs .form-row .form-check{
+  margin-bottom: 5px;
+}
 .DadupaModal .modal-dialog {
   max-width: 600px;
 }
@@ -6930,6 +7037,11 @@ label.error {
   display: flex;
   flex-wrap: wrap;
   padding-top: 15px;
+}
+
+.DadupaModal-Footer > .w-100{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .DadupaModal-Footer .container-checkbox {
@@ -9192,7 +9304,11 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 .Send-Message.input-row.input-select::before {
   right: 10px;
-  top: 9px;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  font-size: 22px;
+  color: #d5d5d5;
 }
 
 .Signle-Offer-Media {
@@ -9394,7 +9510,12 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 }
 
 .DadupaModal-Footer .DadupaModal-BTNSubmit {
-  width: 100%;
+  /* width: 100%; */
+  height: 50px;
+  font-size: 14px;
+  text-transform: initial;
+  border-radius: 15px;
+  font-weight: 600;
 }
 
 .CreatePost-Body textarea {
@@ -9938,7 +10059,7 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   .order-middle{
     order: 2;
   }
-  .order-last{
+  .dadupa-order-last{
     order: 12;
   }
   .order-first{
@@ -9947,4 +10068,36 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   .Right-Side{
     margin-top: 20px;
   }
+}
+
+
+/* DADUPA TABS */
+.dadupa-tabs.nav-tabs{
+  margin-bottom: 30px;
+  border-color: #f4f4f4;
+  display: flex;
+  gap: 30px;
+}
+.dadupa-tabs.nav-tabs .nav-link{
+  padding: 15px 0;
+  border: none;
+  background-color: transparent;
+}
+.dadupa-tabs.nav-tabs .nav-link{
+  position: relative;
+  font-weight: 500;
+  color: #2D363A;
+}
+.dadupa-tabs.nav-tabs .nav-link.active{
+  color: #00b601;
+}
+.dadupa-tabs.nav-tabs .nav-link.active::before{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #00b601;
+  height: 2px;
+  width: 100%;
 }
