@@ -1142,34 +1142,70 @@ label.error {
 }
 
 .Dadupa-Notifs-Box .Notif-Item {
-  display: flex;
   align-items: flex-start;
-  padding: 15px 0;
+  padding: 8px;
   border-top: 1px solid #F8F9F9;
   position: relative;
+}
+.Dadupa-Notifs-Box .Notif-Item a{
+  text-decoration: none;
+}
+.Notif-Item-Inner{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  padding: 8px;
+  border-radius: 15px;
+}
+.Notif-Item:hover .Notif-Item-Inner{
+  background-color: #f8f8f8;
+}
+.Notif-Thumb{
+  flex: 0 0 55px;
+  max-width: 55px;
+}
+.Notif-Thumb{
+  border-radius: 15px;
+  overflow: hidden;
+}
+.Notif-Thumb img{
+  width: 100%;
+  height: 55px;
+  object-fit: cover;
+}
+.Notif-Content{
+  flex: 0 0 calc(100% - 55px);
+  max-width: calc(100% - 55px);
+  padding-left: 15px;
 }
 
 .Notif-Options {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 13px;
+  right: 13px;
 }
 
 .Notif-Options button {
-  background: transparent;
-  color: #000;
+  color: #ABAFB1 !important;
   padding: 0;
   border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px !important;
+  background-color: #fff !important;
+  visibility: hidden;
+  opacity: 0;
 }
 
-.Notif-Options button:hover {
-  background: transparent;
-  color: #00b601;
+.Notif-Item:hover .Notif-Options button {
+  opacity: 1;
+  visibility: visible;
 }
 
 .Notif-Options.show button {
-  background: transparent !important;
-  color: #00b601 !important;
+  /* background: transparent !important; */
+  /* color: #ABAFB1 !important; */
   font-size: 12px;
 }
 
@@ -1183,14 +1219,29 @@ label.error {
 }
 
 .Notif-Options .dropdown-item {
-  padding: 8px 12px;
-  font-size: 11px;
+  padding: 6px 14px 6px 10px;
+  font-size: 12px;
   transition: all .30s linear;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #78909C;
+}
+.Notif-Options .dropdown-item i{
+  font-size: 18px;
+  width: 19px;
+}
+.Notif-Options .dropdown-item i.uil.uil-trash-alt{
+  font-size: 16px;
+}
+.Notif-Options .dropdown-item i::before{
+  margin: 0;
 }
 
 .Notif-Options .dropdown-item:hover {
   background: transparent;
-  color: #00b601;
+  color: #2D363A;
 }
 
 .Notif-Options .dropdown-toggle::after {
@@ -1230,14 +1281,22 @@ label.error {
 
 .Dadupa-Notifs-Box .Notif-Text {
   color: #495057;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 500;
+  line-height: 19px;
   /* border-radius: 10px;
   overflow: hidden; */
 }
 
 .Dadupa-Notifs-Box .Notif-Time {
-  font-size: 10px;
+  font-size: 12px;
   color: #78909C;
-  margin-top: 5px;
+  margin-top: 2px;
+  font-weight: 500;
 }
 
 .new-message {
@@ -1277,9 +1336,11 @@ label.error {
   transform: scale(0.6) translateY(-20%);
   -webkit-transform: scale(0.1) translateY(-20%);
   z-index: -1;
-  padding: 20px 0px;
+  padding: 0 0px 20px;
 }
-
+.Dadupa-Notifs-Box-Header{
+  padding: 12px 0;
+}
 .Dadupa-Msgs-Box::before {
   content: "";
   display: block;
@@ -1313,10 +1374,10 @@ label.error {
 }
 
 .Dadupa-Msgs-Box.Msgs-Box-Active .Msgs-List {
-  margin-top: 20px;
   overflow-y: auto;
   scrollbar-width: thin;
   height: calc(100vh - 100px);
+  border-top: 2px solid #F8F9F9;
   padding-bottom: 50px;
 }
 
@@ -1360,6 +1421,7 @@ label.error {
   font-size: 18px;
   font-weight: 700;
   padding: 0 15px;
+  margin: 0;
 }
 
 .Messenger-List .Msgs-Item,
@@ -1367,9 +1429,10 @@ label.error {
   display: flex;
   align-items: center;
   padding: 12px 0;
-  border-top: 1px solid #F8F9F9;
   position: relative;
   width: 100%;
+  border-top: 1px solid #F8F9F9;
+
 }
 
 .Messenger-List .New-Msg {
@@ -1566,6 +1629,7 @@ label.error {
   padding: 14.5px;
   border-top: 1px solid #f0f0f0;
   font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
   color: #2D363A;
   text-align: center;
@@ -6287,6 +6351,9 @@ label.error {
   font-weight: 600;
   margin-bottom: 0;
   color: #2D363A;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .Profile-Section-Title .uil {
@@ -6929,7 +6996,36 @@ label.error {
 }
 
 .DadupaModal .modal-body {
-  padding: 30px;
+  padding: 20px;
+}
+.DadupaModal .modal-body .modal-header{
+  padding: 0 0 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.DadupaModal .modal-body .modal-header .input-row{
+  display: flex;
+  align-items: center;
+  margin: 0;
+  gap: 10px;
+}
+.DadupaModal .modal-body .modal-header .input-row span{
+
+}
+.DadupaModal .modal-body .modal-header .input-row input{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.DadupaModal .modal-body .modal-header .input-row .custom-switch .custom-control-label::before{
+  top: 0;
+}
+.DadupaModal .modal-body .modal-header .input-row .custom-switch .custom-control-label::after{
+top: 2px;
+}
+.DadupaModal .modal-body .modal-header .input-row .custom-control-label{
+  width: 40px;
 }
 .DadupaModal .modal-body .form-inputs .form-header{
   margin-bottom: 20px;
@@ -6947,6 +7043,10 @@ label.error {
 }
 .DadupaModal .modal-body .form-inputs .form-row .input-row{
   margin-bottom: 15px;
+}
+.DadupaModal .modal-body .form-inputs .form-row .input-row label span{
+  font-size: 12px;
+  font-weight: 500;
 }
 .DadupaModal .modal-body .form-inputs .form-row .input-row:last-child{
   margin-bottom: 0;
@@ -7557,7 +7657,31 @@ label.error {
 .Favoris-List .PostWrap {
   margin-top: 0;
 }
-
+.notifications-grid{
+  border: 1px solid #f8f8f8;
+  border-bottom: none;
+  overflow: hidden;
+}
+.notifications-grid:first-child{
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.notifications-grid:last-child{
+  border-bottom: 1px solid #f8f8f8;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.notifications-grid .list-group-item{
+  border: none;
+}
+.notifications-grid .Notifs-List{
+  width: 100%;
+}
+.Notif-Item a{
+  width: 100%;
+  margin: 0 !important;
+  text-decoration: none;
+}
 .grid-sizer,
 .grid-item {
   width: 50%;
@@ -9061,7 +9185,14 @@ button .spinner-border {
 }
 
 .list-group .Notif-Text {
-  float: left;
+  color: #495057;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 500;
+  line-height: 19px;
 }
 
 .list-group .Notif-Options {
@@ -9092,9 +9223,9 @@ button .spinner-border {
 
 .dadupa-box .Notif-Options .dropdown-menu.show,
 .notification-list-menu .Notif-Options .dropdown-menu.dropdown-menu-right {
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px rgb(0 0 0 / 5%);
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
   background: #fff;
-  border-radius: 0;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -9116,16 +9247,13 @@ button .spinner-border {
 }
 
 .Dadupa-Notifs-Box .Notifs-List {
-  padding: 0 15px;
-  border-top: 1px solid #eeeeee;
-}
-
-.notification-list-menu .Notif-Options {
-  right: 0;
+  padding: 0;
+  border-bottom: 1px solid #f8f8f8;
 }
 
 .notification-list-menu .Notif-Options button {
-  font-size: 15px;
+  font-size: 20px;
+  color: #ABAFB1;
 }
 
 .notification-list-menu .Notif-Options .dropdown-menu.dropdown-menu-right {

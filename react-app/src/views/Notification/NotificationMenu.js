@@ -28,11 +28,11 @@ export default function NotificationMenu({notification}) {
         setSeen(notification.seen);
     });
 
-    useEffect(() => {
-        !seen ?  setStylo( {
-            backgroundColor:"rgb(238 238 238 / 55%)"})
-            : setStylo()
-    },[seen]);
+    // useEffect(() => {
+    //     !seen ?  setStylo( {
+    //         backgroundColor:"rgb(238 238 238 / 55%)"})
+    //         : setStylo()
+    // },[seen]);
     
     const show = (e) => {
         setDisplay(true); 
@@ -65,8 +65,16 @@ export default function NotificationMenu({notification}) {
                 <div className="Notifs-List notification-list-menu" style={stylo} >
                     <div className="Notif-Item">
                         <Link to={notification.link} className="Notif-Image">
-                            <img src={avatar ? avatar : '/assets/images/avatar.png'} alt="avatar" /></Link>
-
+                            <div className='Notif-Item-Inner'>
+                                <div className='Notif-Thumb'>
+                                    <img src={avatar ? avatar : '/assets/images/avatar.png'} alt="avatar" />
+                                </div>
+                                <div className="Notif-Content">
+                                    <div className="Notif-Text">{notification.description} </div>
+                                    <div className="Notif-Time">{notification.created_at.for_humans} </div>
+                                </div> 
+                            </div>
+                            
                             <div className="Notif-Options show">
                                 <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <i className="uil uil-ellipsis-h"></i>
@@ -77,11 +85,8 @@ export default function NotificationMenu({notification}) {
                                         <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
                                     </div> 
                                 }   
-                            </div>                        
-                        <Link to={notification.link} className="Notif-Content">
-                            <div className="Notif-Text">{notification.description} </div>
-                            <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                        </Link>
+                            </div>   
+                        </Link>  
                     </div>
                 </div>
         
