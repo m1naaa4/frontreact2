@@ -122,7 +122,7 @@ export default function LoginView(props) {
                                 <SocialLogin />
                                 <div className="login-link">
                                     <span>{t('q_register')}   </span>
-                                    <NavLink to="/register">{t('register')}</NavLink>
+                                    <NavLink to="/register">{t('Register')}</NavLink>
                                 </div>
                             </div>
                         </div>

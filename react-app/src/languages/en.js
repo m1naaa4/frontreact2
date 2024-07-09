@@ -23,7 +23,7 @@ const en = {
     'signup.form.Member': 'Already subscribed? Sign in!',
     'signup.form.alreadyMember': 'Already a member ? Login',
     signin: 'Sign In',
-    q_register: "Don't have an account ? SignUp",
+    q_register: "Don't have an account ?",
     firstName: 'First name',
     lastName: 'Last name',
     username: 'Username',

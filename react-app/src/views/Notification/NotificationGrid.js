@@ -91,7 +91,7 @@ function NotificationGrid({notification}) {
                                         <div className='Notif-Item-Inner'>
                                             <div className='Notif-Thumb'>
                                             {avatar ?
-                                                <img src={avatar} alt="avatar" style={{width:'50px', height:'50px'}}/>
+                                                <img src={avatar} alt="avatar" />
                                                 : <img src="/assets/images/avatar.png" alt="avatar" style={{width:'50px', height:'50px'}}/>}
                                             </div>
                                             <div className="Notif-Content">

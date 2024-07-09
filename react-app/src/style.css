@@ -127,12 +127,24 @@ select:focus {
   margin-top: 35px;
   text-align: center;
   font-size: 12px;
-  color: #474747;
+  color: #78909C;
 }
 
 .login-link a {
   color: #00CC66;
-  font-weight: 900;
+  font-weight: 500;
+  text-decoration: none;
+
+}
+
+.retrun-login{
+  text-align: center;
+  margin-top: 35px;
+}
+.retrun-login a{
+  color: #00CC66;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 
@@ -305,7 +317,7 @@ select:focus {
   flex: 0 0 50%;
   max-width: 50%;
   font-size: 12px;
-  color: #9E9E9E;
+  color: #78909C;
 }
 
 .login-options .forgot-password {
@@ -313,7 +325,7 @@ select:focus {
 }
 
 .login-options .forgot-password a {
-  color: #9E9E9E;
+  color: #78909C;
 }
 
 .form-submit {
@@ -340,10 +352,10 @@ label.error {
   border-radius: 15px;
   border: 2px solid #00CC66;
   /* text-transform: uppercase; */
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   text-align: center;
-  color: #F3FFF8;
+  color: #fff;
   box-shadow: none;
   transition: all .20s cubic-bezier(.65, .05, .36, 1);
 }
@@ -377,6 +389,7 @@ label.error {
   -ms-user-select: none;
   user-select: none;
   text-align: left;
+  color: #78909C;
 }
 
 .container-checkbox input {
@@ -494,6 +507,7 @@ label.error {
   text-align: center;
   font-size: 12px;
   margin: 30px 0;
+  color: #78909C;
 }
 
 .social-login-options {
@@ -704,7 +718,7 @@ label.error {
 .form-notice {
   font-size: 10px;
   line-height: 18px;
-  color: #9E9E9E;
+  color: #78909C;
   margin-top: 15px;
 }
 
@@ -810,7 +824,7 @@ label.error {
 .Dadupa-Copyright,
 .Dadupa-Links .Dadupa-Link a {
   font-size: 10px;
-  color: #9E9E9E;
+  color: #78909C;
   transition: all .30s linear;
 }
 
@@ -1143,7 +1157,7 @@ label.error {
 
 .Dadupa-Notifs-Box .Notif-Item {
   align-items: flex-start;
-  padding: 8px;
+  /* padding: 8px; */
   border-top: 1px solid #F8F9F9;
   position: relative;
 }
@@ -1155,8 +1169,8 @@ label.error {
   flex-wrap: wrap;
   align-items: center;
   position: relative;
-  padding: 8px;
-  border-radius: 15px;
+  padding: 12px;
+  /* border-radius: 15px; */
 }
 .Notif-Item:hover .Notif-Item-Inner{
   background-color: #f8f8f8;
@@ -7677,6 +7691,9 @@ top: 2px;
 .notifications-grid .Notifs-List{
   width: 100%;
 }
+.list-group-item-action:hover{
+  background-color: #f8f8f8;
+}
 .Notif-Item a{
   width: 100%;
   margin: 0 !important;
@@ -9445,6 +9462,8 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 .Signle-Offer-Media img {
   max-height: 400px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .profil-link:hover {
