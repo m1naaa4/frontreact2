@@ -99,7 +99,7 @@ export default function CvView(props) {
               }
 
               <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <SkillsModal show={show} handleClose={handleClose} />
+                <SkillsModal show={show} handleClose={handleClose} centred />
               </Modal>
 
               <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Skills</h3>
@@ -121,8 +121,8 @@ export default function CvView(props) {
                 <button type="button" className="UpdateInfos-BTN" onClick={handleShowStudies} data-toggle="modal" data-target="#EtudeModal"><i className="uil uil-plus"></i></button>
               }
 
-              <Modal show={showstudies} onHide={handleCloseStudies} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <StudieModal showstudies={showstudies} handleCloseStudies={handleCloseStudies} />
+              <Modal show={showstudies} onHide={handleCloseStudies} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" centred aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <StudieModal showstudies={showstudies} handleCloseStudies={handleCloseStudies} centred/>
               </Modal>
 
               <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i> Etudes</h3>
@@ -130,7 +130,7 @@ export default function CvView(props) {
                 {cvtheque?.etudes &&
                   cvtheque?.etudes.map((study, index) => (
                     // <div key={index}>
-                      <StudieGrid study={study} key={index}/>
+                      <StudieGrid study={study} key={index} />
                     // </div>
                   ))
                 }
@@ -144,7 +144,7 @@ export default function CvView(props) {
               }
 
               <Modal show={showexperience} onHide={handleCloseExperience} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <ExperienceModal showexperience={showexperience} handleCloseExperience={handleCloseExperience} />
+                <ExperienceModal showexperience={showexperience} handleCloseExperience={handleCloseExperience} centred />
               </Modal>
 
               <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Experiences</h3>

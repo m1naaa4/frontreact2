@@ -168,7 +168,7 @@ const  ModalUpdateProfile = ({ show, handleClose}) => {
                 <div className="form-row">
 
                   <div className="col-md-12 input-row">
-                    <div className="Profile-Info Profile-Infos-Items social-media-fields">
+                    <div className="Profile-Infos-Items social-media-fields">
                       <ul>
                         <li>
                           <div className="form-row">

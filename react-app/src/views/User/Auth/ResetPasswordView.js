@@ -36,7 +36,7 @@ function ResetPasswordView(props) {
       <div className="Dadupa-Login">
         <div className="container">
           <div className="row">
-            <div className="col-md-6 col-lg-7 d-none d-sm-block d-md-none d-lg-block">
+            <div className="col-md-6 col-lg-8 d-none d-sm-block d-md-none d-lg-block">
               <div className="page-image">
                 <img
                   src="/assets/images/Forgotpassword_Illustration.svg"
@@ -44,7 +44,7 @@ function ResetPasswordView(props) {
                 />
               </div>
             </div>
-            <div className="col-md-6 col-lg-5">
+            <div className="col-md-6 col-lg-4">
               <div
                 className="form-wrapper"
                 style={{
@@ -65,7 +65,7 @@ function ResetPasswordView(props) {
                   }}
                   className="form-login"
                 >
-                  <div className="login-link" style={{ marginBottom: "20px" }}>
+                  {/* <div className="login-link" style={{ marginBottom: "20px" }}>
                     <span style={{ marginRight: "20px", fontSize: "15px" }}>
                       {t("Vous n'avez pas de compte?")}{" "}
                     </span>
@@ -84,21 +84,18 @@ function ResetPasswordView(props) {
                         {t("S'INSCRIRE")}
                       </span>
                     </NavLink>
-                  </div>
+                  </div> */}
 
                   { (authResponse !== 'true') && (<><h3
                     className="form-title"
-                    style={{ fontSize: "20px", paddingBottom: "30px" }}
+                    style={{ fontSize: "28px", lineHeight: "40px"}}
                   >
-                    Réinitialiser le mot de passe
+                    Réinitialiser 
+                    <br></br>
+                    le mot de passe
                   </h3>
                   <div
                     className="form-inputs"
-                    style={{
-                      paddingLeft: "10px",
-                      paddingRight: "10px",
-                      marginBottom: "35px",
-                    }}
                   >
                     <div className="input-row">
                       <ItemForm
@@ -117,24 +114,13 @@ function ResetPasswordView(props) {
                   </div>
                   <div
                     className="form-submit"
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
                   >
                     <button
                       type="submit"
                       name="submit"
                       onClick={HandleReset}
-                      style={{
-                        width: "50%",
-                        marginBottom: "50px",
-                        borderRadius: "30px"
-                      }}
                     >
-                      {t("RÉINITIALISER")}
+                      {t("Réinitialiser")}
                       {(clicked) &&  <Spinner
                                         as="span"
                                         animation="border"
@@ -152,7 +138,15 @@ function ResetPasswordView(props) {
                       </div>
                     )
                   }
-                  
+
+                  <div className="retrun-login">
+                    <NavLink to="/login">Return to login</NavLink>
+                  </div>
+                  <div className="login-link">
+                    <span>{t('q_register')}</span>
+                    <NavLink to="/register"> {t('Register')}</NavLink>
+                  </div>
+
                 </form>
               </div>
             </div>

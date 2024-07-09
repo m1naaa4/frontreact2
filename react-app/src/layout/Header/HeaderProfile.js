@@ -184,7 +184,9 @@ function HeaderProfile() {
                                             </button>
                                             {/* {showNotifications &&  */}
                                                 <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active" ref={ref}>
+                                                    <div className='Dadupa-Notifs-Box-Header'>
                                                     <h3>{t('notifications')}</h3>
+                                                    </div>
                                                     <div className={' Msgs-List'} >
                                                         { usernotifications.notifications.map((notification, index) =>
                                                             <NotificationMenu notification={notification} key={index} />

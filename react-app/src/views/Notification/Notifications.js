@@ -13,12 +13,12 @@ function Notifications() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-9">
-                        <div className='dadupa-box'>
+                        {/* <div className='dadupa-box'> */}
                             {usernotifications.notifications.length ?  
                             usernotifications.notifications.map((notification, index) => 
                                 <NotificationGrid notification={notification} key={index} />
                              ): <NoContent/>}
-                         </div>
+                         {/* </div> */}
                     </div>
                     <SideRightProfileView></SideRightProfileView>
                 </div>

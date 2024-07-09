@@ -45,12 +45,12 @@ function NotificationGrid({notification}) {
         setSeen(notification.seen);
     });
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        !seen ?  setStylo( {
-            backgroundColor:"rgb(238 238 238 / 55%)"})
-            : setStylo()
-    },[seen]);
+    //     !seen ?  setStylo( {
+    //         backgroundColor:"rgb(238 238 238 / 55%)"})
+    //         : setStylo()
+    // },[seen]);
 
     useOutsideClick(ref, () => {
         setDisplay(false)
@@ -81,13 +81,38 @@ function NotificationGrid({notification}) {
     
     return (
         
-            <div className="grid">
+            <div className="notifications-grid grid">
                 <div className="list-group" style={stylo}>
                     <div className="list-group-item list-group-item-action flex-column align-items-start">
                         <div className="d-flex w-100 justify-content-between">
                             {notification && <div className="Notifs-List" >
                                 <div className="Notif-Item">
                                     <Link to={notification.link} className="Notif-Image"  >
+                                        <div className='Notif-Item-Inner'>
+                                            <div className='Notif-Thumb'>
+                                            {avatar ?
+                                                <img src={avatar} alt="avatar" />
+                                                : <img src="/assets/images/avatar.png" alt="avatar" style={{width:'50px', height:'50px'}}/>}
+                                            </div>
+                                            <div className="Notif-Content">
+                                                <div className="Notif-Text">{notification.description} </div>
+                                                <div className="Notif-Time">{notification.created_at.for_humans} </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="Notif-Options show">
+                                            <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <i className="uil uil-ellipsis-h"></i>
+                                            </button>
+                                            {notification_id ===  notification.id && display && 
+                                                <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
+                                                    <div className="dropdown-item" onClick={ e => markAsRead(idFrom, notification.id)} ><i className="uis uis-check"></i>{t('mark-as-read')}</div>
+                                                    <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
+                                                </div> 
+                                            }   
+                                        </div>
+
+                                        {/* <Link to={notification.link} className="Notif-Image"  >
                                        {avatar ?
                                             <img src={avatar} alt="avatar" style={{width:'50px', height:'50px'}}/>
                                             : <img src="/assets/images/avatar.png" alt="avatar" style={{width:'50px', height:'50px'}}/>}
@@ -95,25 +120,16 @@ function NotificationGrid({notification}) {
                                         <div className="Notif-Text">{notification.description} </div>
                                     
                                         <div className="Notif-Options show">
-                                        <small>
-                                        <Link to={notification.link} className="Notif-Content">
-                                                <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                                            </Link>
-                                        </small>
-                                            <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i className="uil uil-ellipsis-h"></i>
-                                            </button>
-                                        {notification_id ===  notification.id && display && 
-                                            <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                                <div className="dropdown-item" onClick={ e => markAsRead(idFrom, notification.id)} ><i className="uis uis-check"></i>{t('mark-as-read')}</div>
-                                                <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
-                                            </div> 
-                                        }   
-                                        </div>                        
-                                    
-                                    </div>
+                                            <small>
+                                                <Link to={notification.link} className="Notif-Content">
+                                                    <div className="Notif-Time">{notification.created_at.for_humans} </div>
+                                                </Link>
+                                            </small>
+                                                
+                                        </div>   */}
+                                    </Link>  
                                 </div>
-                            }
+                            </div>}
                         </div>
                     </div>    
                 </div>

@@ -100,13 +100,19 @@ const [optionSelected, setOptionSelected] = useState();
         control: (base, state) => ({
           ...base,
           boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          borderRadius: '30px',
-          border: '1px solid #e7e7e7',
+          borderRadius: '15px',
+          border: '1px solid #F5F5F5',
           height: '50px',
+          fontSize: '12px',
           "&:hover":{
             boxShadow: "none",
           },
         }),
+        valueContainer:(base) => ({
+          ...base,
+          height: '50px',
+          padding: '2px 15px',
+        })
       }
 
   return (
@@ -116,37 +122,43 @@ const [optionSelected, setOptionSelected] = useState();
 
         <div className="modal-body">
           <div className="" method="post">
+            <div className='modal-header'>
+              <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i>{t('Etudes')}</h3>
+              <div className='input-row'>
+                <span>{t('ongoing')}</span>
+                <div className="custom-control custom-switch switch-present">
+                    <input type="checkbox" onChange={setForm} className="custom-control-input" id="switch-present"
+                      name="present" />
+                    <label className="custom-control-label" htmlFor="switch-present"></label>
+                  </div>
+              </div>
+            </div>
             <div className="form-inputs">
               <div className="form-row">
                 <div className='col-12'>
-                  <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i>{t('etudes')}</h3>
+                  
                 </div>
-                <div className="col-md-5 input-row">
+                <div className="col-md-6 input-row">
                   <label className='d-flex flex-column mb-0'>
                     <span className='mb-2'>{t('start')}</span>
                     <ReactDatePicker className="wizard-required" selected={datedebut} onChange={(date) => setDatedebut(date)} />
                   </label>
                 </div>
-                <div className="col-md-5 input-row mb-4">
+                <div className="col-md-6 input-row mb-4">
                   <label className='d-flex flex-column mb-0'>
                     <span className='mb-2'>{t('end')}</span>
                     <ReactDatePicker className="wizard-required" selected={datefin} onChange={(date) => setDatefin(date)} />
                   </label>
                 </div>
-                <div className="col-md-2 input-row mb-4">
-                  <label className='d-flex flex-column mb-0'>
-                    <span className='mb-2'>{t('ongoing')}</span>
-                    <div className="custom-control custom-switch switch-present">
-                        <input type="checkbox" onChange={setForm} className="custom-control-input" id="switch-present"
-                          name="present" />
-                        <label className="custom-control-label" htmlFor="switch-present"></label>
-                      </div>
+                {/* <div className="col-md-2 input-row mb-4">
+                  <label className='d-flex flex-column mb-0'> */}
+                    
                     {/* <div>
                       <input type="checkbox" name="present" onChange={setForm} />
                       <span className="checkmark"></span>
                     </div> */}
-                  </label>
-                </div>
+                  {/* </label>
+                </div> */}
                 <div className="col-md-6 input-row mb-3">
                   <label className='d-flex flex-column mb-0'>
                     <span className='mb-2'>{t('school')}</span>
