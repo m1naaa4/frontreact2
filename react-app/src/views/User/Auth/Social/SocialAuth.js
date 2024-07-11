@@ -26,7 +26,7 @@ const SocialAuth = ({props}) => {
                 </div>
             </div>
             {/*<div className="login-link"><span>Already a member ? </span><a href="login.html">Sign In</a></div>*/}
-            <NavLink className="login-link" to="/login"><span>{t('already_a_member')} ? </span>{t('login')}</NavLink>
+            {/* <NavLink className="login-link" to="/login"><span>{t('already_a_member')} ? </span>{t('login')}</NavLink> */}
         </div>
 
     )

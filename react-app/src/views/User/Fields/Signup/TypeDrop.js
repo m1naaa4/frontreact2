@@ -23,13 +23,13 @@ function TypeDrop ({formData}) {
             backgroundColor: "#e8fbf1",
           },
         '&:last-child ': {
-          borderBottomLeftRadius: '30px',
-          borderBottomRightRadius: '20px',
+          borderBottomLeftRadius: '15px',
+          borderBottomRightRadius: '15px',
         }}),
         
         menu: (provided) => ({
           ...provided,
-          borderRadius: "35px",
+          borderRadius: "15px",
           overflow: 'hidden',
           border: '0.5px solid #00b602',
           zIndex: '999'
@@ -38,7 +38,7 @@ function TypeDrop ({formData}) {
         menuList: (provided, state) => ({
         ...provided,
         // border: '1px solid green',
-        borderRadius: "32px",
+        borderRadius: "15px",
         padding: '0',
         "&::-webkit-scrollbar": {
           width: "5px",
@@ -58,14 +58,20 @@ function TypeDrop ({formData}) {
         }),
         control: (base, state) => ({
           ...base,
-          boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-          borderRadius: '30px',
-          border: '1px solid #e7e7e7',
+          // boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
+          borderRadius: '15px',
+          fontSize: '12px',
+          border: '1px solid #F5F5F5',
           height: '50px',
           "&:hover":{
             boxShadow: "none",
           },
         }),
+        valueContainer:(base) => ({
+          ...base,
+          height: '50px',
+          padding: '2px 15px',
+        })
     }
 
     const alloptions = types.map(([value, name]) => (

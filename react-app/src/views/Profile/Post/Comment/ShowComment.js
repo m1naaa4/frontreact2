@@ -161,7 +161,7 @@ export default function ShowComment({ post }) {
                                     <button onClick={e => reportComment(comment.id)}><i className="uil uil-ban"></i>{t('report')} </button>
                                   </li>
                                 }
-                                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <Modal centered show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <ReportModal providerObject={comment} provider='comment' showReport={show} handleCloseReport={handleClose}/>
                                 </Modal>
                               </ul>

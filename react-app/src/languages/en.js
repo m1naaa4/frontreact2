@@ -21,7 +21,7 @@ const en = {
     'signup.message4': 'as well as the DADUPA Data Policy.',
     signUpWith : 'Or signup with:',
     'signup.form.Member': 'Already subscribed? Sign in!',
-    'signup.form.alreadyMember': 'Already a member ? Login',
+    'signup.form.alreadyMember': 'Already a member ?',
     signin: 'Sign In',
     q_register: "Don't have an account ?",
     firstName: 'First name',

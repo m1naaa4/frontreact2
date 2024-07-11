@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter as  Link } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+
+// import { BrowserRouter as  Link } from 'react-router-dom';
 import { useForm, useStep } from "react-hooks-helper";
 import RegisterStep1View from "./RegisterStep1View";
 import RegisterStep2View from "./RegisterStep2View";
@@ -61,7 +63,10 @@ const MultiStepForm = ({ props }) => {
                         <div className="col-md-12 col-lg-4">
                             <div className="form-wrapper">
                                 <div id="form-signup" className="form-signup">
-                                    <h2 className="signup-title">{t('signup.message1')} <br/>{t('signup.message2')}</h2>
+                                    <div className="form-signup-header">
+                                        <h2 className="signup-title">{t('signup.message1')}</h2>
+                                        <p>{t('signup.message2')}</p>
+                                    </div>
                                     <ul id="progressbar">
                                         <li className={step.id == "registerstep1" ? 'active' : ''}>
                                             <span>1</span>
@@ -84,7 +89,10 @@ const MultiStepForm = ({ props }) => {
                                 {step.id == "registerstep1" ? (
                                     <div>
                                         <SocialAuth props={props} />
-                                        <div className="login-link"><span>{t('signup.form.alreadyMember')} </span><Link to="/login">{t('signin')}</Link></div>
+                                        <div className="login-link">
+                                            <span>{t('signup.form.alreadyMember')} </span>
+                                            <NavLink to="/login">{t('signin')}</NavLink>
+                                        </div>
                                     </div>
                                 ) : ''}
                                 
