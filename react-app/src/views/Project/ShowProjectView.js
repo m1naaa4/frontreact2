@@ -27,6 +27,8 @@ import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 
 export default function ShowProjectView(props) {
+    const [type, setType] = useState('');
+
     const [shareUrl, setShareUrl] = useState(false);
     const project = useSelector(state => state.getproject.getproject);
     const visibility = useSelector(state => state.generale.visibility);
@@ -84,6 +86,20 @@ export default function ShowProjectView(props) {
         { value: name.value, label: name.label }
     ));
 
+    useEffect(() => {
+        if (project && project.project && project.project.owner && project.project.owner.type) {
+            if (project.project.owner.type === 'PP') {
+                setType('uil uil-lightbulb-alt');
+            } else if (project.project.owner.type === 'BF') {
+                setType('uil uil-moneybag');
+            } else if (project.project.owner.type === 'ACMPT') {
+                setType('uil uil-users-alt');
+            } else {
+                setType('');
+            }
+        }
+    }, [project]);
+
     const SelectStyleWithScrollbar = {
         option: (provided, state) => ({
             ...provided,
@@ -99,14 +115,14 @@ export default function ShowProjectView(props) {
             //     borderTopRightRadius: '20px',
             // },
             '&:last-child ': {
-                borderBottomLeftRadius: '30px',
-                borderBottomRightRadius: '20px',
+                borderBottomLeftRadius: '15px',
+                borderBottomRightRadius: '15px',
             }
         }),
 
         menu: (provided) => ({
             ...provided,
-            borderRadius: "35px",
+            borderRadius: "15px",
             overflow: 'hidden',
             border: '0.5px solid #00b602',
         }),
@@ -114,7 +130,7 @@ export default function ShowProjectView(props) {
         menuList: (provided, state) => ({
             ...provided,
             // border: '1px solid green',
-            borderRadius: "32px",
+            borderRadius: "15px",
             padding: '0',
             "&::-webkit-scrollbar": {
                 width: "5px",
@@ -134,31 +150,43 @@ export default function ShowProjectView(props) {
         }),
         control: (base, state) => ({
             ...base,
-            boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 " : "0px 0px 20px 0px #e7e7e7",
-            borderRadius: '30px',
-            border: '1px solid #e7e7e7',
+            // boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
+            borderRadius: '15px',
+            fontSize: '12px',
+            border: '1px solid #F5F5F5',
             height: '30px',
-            width: '106px',
-            align: ' center',
-            "&:hover": {
+            width: '110px',
+            "&:hover":{
                 boxShadow: "none",
             },
+        }),
+        valueContainer:(base) => ({
+        ...base,
+        height: '30px',
+        padding: '2px 15px',
+        }),
+        IndicatorsContainer: (base, state) => ({
+            ...base,
+            height: '15px',
         }),
         indicatorSeparator: (base, state) => ({
             ...base,
             height: '20px',
+            display: 'none',
         }),
         placeholder: (base, state) => ({
             ...base,
         }),
         dropdownIndicator: (base, state) => ({
             ...base,
-            paddingBottom: '25px',
+            // position: 'relative',
+            // top: '-7px',
+            // paddingBottom: '25px',
         }),
         valueContainer: (base, state) => ({
             ...base,
             height: '30px',
-            marginBottom: '20px',
+            // marginBottom: '20px',
         }),
         singleValue: (base, state) => ({
             ...base,
@@ -431,7 +459,7 @@ export default function ShowProjectView(props) {
                                                     )
                                                 }
 
-                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" centered>
                                                     <ReportModal providerObject={project.project} provider='project' showReport={showReport} handleCloseReport={handleCloseReport} />
                                                 </Modal>
                                             </div>
@@ -551,22 +579,16 @@ export default function ShowProjectView(props) {
                                 <ul className="Offer-Details-List">
                                     <li className="Offer-Item">
                                         <label className='mb-3'>{t(`Owners`)}</label>
-                                        {/* <div className="d-flex align-items-start">
-                                            <span> */}
-                                                {project.project.owner && 
-                                                    <div className="Contact"><Link ref={ref} to={`/profile/${project.project.owner.profile_id}`} data-toggle="tooltip" data-placement="top">
-                                                        <div className="d-flex">
-                                                            <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-                                                            <div className="Contact-Thumb"> <img src={project.project.owner.avatar} alt={project.project.owner.username} /></div>
-                                                            <div className="Contact-Infos">
-                                                                <h4>{project.project.owner.username}</h4>
-                                                            </div>
-                                                            {(user?.profile_id != project.project.owner.profile_id) ? (<AvatarTooltip myRef={ref} data={project.project.owner} styles={{ marginTop: "20px", marginRight: "-8px" }} />) : ("")}
-                                                        </div></Link>
+                                            {project.project.owner && <div className="Contact">
+                                                    <div className="Contact-Thumb"> <Link to={`/profile/${project.project.owner.profile_id}`}><img src={project.project.owner.avatar}  alt=""/></Link></div>
+                                                    <div className="Contact-Infos">
+                                                        <div className='Contact-Infos-Row'>
+                                                            <Link to={`/profile/${project.project.owner.profile_id}`}><h4>{project.project.owner.username}</h4></Link>
+                                                            <p><i className={`${type}`}></i> {project.project.owner.type}</p>
+                                                        </div>
                                                     </div>
-                                                }
-                                            {/* </span> */}
-
+                                                </div>
+                                            }
 
                                             {project.project.visibility !== 'public' && user.id == project.project.user_id &&
                                                 <>

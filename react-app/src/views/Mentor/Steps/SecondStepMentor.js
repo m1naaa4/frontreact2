@@ -266,9 +266,9 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
                         <i className="uil uil-pen"></i>
                       </button>
 
-                      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                      <div className="wizard-fieldset-row">
                         {file.map(item => (
-                          <div key={item} style={{ flex: `1 0 ${100/file.length}%` }}>
+                          <div key={item} className="wizard-fieldset-item">
                             <div className="col-md-12 input-row">
                             {(function() {
                                   if(getExtension(item) == 'youtube'){

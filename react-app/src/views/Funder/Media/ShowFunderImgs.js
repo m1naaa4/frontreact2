@@ -9,7 +9,7 @@ import NoContent from "../../../utils/NoContent";
 
 
 const PhotoItem = ({ image, thumb, group }) => (
-  <div style={{ maxWidth: "250px", width: "200px", padding: "5px" }}>
+  <div className="gallery-item">
     <LightgalleryItem group={group} src={image} thumb={thumb}>
       <img src={image} style={{ width: "100%" }} />
     </LightgalleryItem>
@@ -40,12 +40,12 @@ export default function ShowFunderImgs() {
       <LightgalleryProvider>
         {/* <h3>Photos</h3> */}
 
-        {/* <div className="d-flex align-items-center flex-wrap"> */}
+        <div className="photo-items-wrap">
           {imgs.length > 0 ? imgs.map((p, idx) => (
             <PhotoItem key={idx} image={p} group="imgs" />
           )): <NoContent/>
             }
-        {/* </div> */}
+        </div>
       </LightgalleryProvider>
     </div>
   );

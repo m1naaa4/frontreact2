@@ -166,7 +166,7 @@ select:focus {
 }
 
 .input-row {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   position: relative;
 }
 
@@ -194,7 +194,7 @@ select:focus {
   height: 48px;
   border-radius: 15px;
   /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02); */
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   padding: 0 15px;
   font-size: 12px;
   transition: all .30s linear;
@@ -300,7 +300,7 @@ select:focus {
   top: 12px;
   right: 15px;
   font-size: 18px;
-  color: #00CC66;
+  color: #BEBEBE;
 }
 
 .toggle-password:hover {
@@ -334,21 +334,22 @@ select:focus {
 
 label.error {
   position: absolute;
-  top: 12px;
-  right: 15px;
+  top: 13px;
+  right: 10px;
   background-color: red;
-  padding: 5px 10px;
-  border-radius: 30px;
+  padding: 4px 8px;
+  border-radius: 8px;
   color: #fff;
   font-size: 9px;
   margin: 0;
+  z-index: 9;
 }
 
 .action-button,
 .form-submit button {
   background-color: #00CC66;
   width: 100%;
-  height: 50px;
+  height: 48px;
   border-radius: 15px;
   border: 2px solid #00CC66;
   /* text-transform: uppercase; */
@@ -371,6 +372,11 @@ label.error {
   display: block;
   width: 48%;
   float: left;
+}
+
+.flex-prev-btn.action-button{
+  background-color: #D8E0E4;
+  border-color: #D8E0E4;
 }
 
 .flex-next-btn.action-button {
@@ -506,7 +512,7 @@ label.error {
   display: block;
   text-align: center;
   font-size: 12px;
-  margin: 30px 0;
+  margin: 30px 0 20px;
   color: #78909C;
 }
 
@@ -574,10 +580,10 @@ label.error {
 ########
 */
 
-.form-signup {
+/* .form-signup {
   min-height: 420px;
   margin-top: 50px;
-}
+} */
 
 .form-signup.move-form {
   min-height: 520px;
@@ -587,12 +593,17 @@ label.error {
   position: relative;
 }
 
+.form-signup-header{
+  margin-bottom: 30px;
+}
 .signup-title {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
   color: #474747;
-  line-height: 32px;
-  margin-bottom: 20px;
+  line-height: 26px;
+}
+.form-signup-header p{
+
 }
 
 .form-signup fieldset {
@@ -717,7 +728,7 @@ label.error {
 
 .form-notice {
   font-size: 10px;
-  line-height: 18px;
+  line-height: 16px;
   color: #78909C;
   margin-top: 15px;
 }
@@ -737,8 +748,9 @@ label.error {
 
 .step-title {
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 600;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .step-edit {
@@ -766,22 +778,30 @@ label.error {
   padding: 10px 15px;
   background-color: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, .02);
-  border-radius: 30px;
-  margin-bottom: 5px;
-
+  /* border-radius: 30px; */
+  /* margin-bottom: 5px; */
+}
+.step-row:first-child{
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.step-row:last-child{
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .step-row .step-value {
   flex: 0 0 60%;
   max-width: 60%;
   text-align: right;
+  color: #2D363A;
 }
 
 .step-row .step-label {
   flex: 0 0 40%;
   max-width: 40%;
-  font-weight: 900;
-  color: #00CC66;
+  font-weight: 500;
+  color: #78909C;
 }
 
 @media(max-width: 768px) {
@@ -2005,6 +2025,7 @@ label.error {
   border: 1px solid #F0F0F0;
 }
 
+
 .Filter-Form .input-row input[type="text"]:focus,
 .Filter-Form .input-row input[type="email"]:focus,
 .Filter-Form .input-row input[type="password"]:focus,
@@ -2932,6 +2953,14 @@ label.error {
   width: 100%;
   position: absolute;
 }
+.form-wizard fieldset .input-row{
+  padding: 0 10px;
+}
+.form-wizard fieldset .input-row img{
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
 .form-wizard fieldset:not(:first-of-type) {
   display: none;
@@ -3055,6 +3084,36 @@ label.error {
   display: none;
 }
 
+.wizard-fieldset-row{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.wizard-fieldset-item{
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+}
+
+.photo-items-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 35px;
+}
+
+.gallery-item{
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+}
+
+.gallery-item img{
+  border-radius: 15px;
+}
+
+.gallery-item img:hover{
+  cursor: pointer;
+}
+
 .wizard-fieldset .input-row input[type="number"],
 .wizard-fieldset .input-row input[type="url"],
 .wizard-fieldset .input-row input[type="text"],
@@ -3064,6 +3123,11 @@ label.error {
 .wizard-fieldset .input-row select {
   border: 1px solid #F0F0F0;
   color: #2D363A;
+}
+
+.input-row input.error{
+  border-color: red;
+  color: red;
 }
 
 .User-Settings .input-row input[type="number"],
@@ -3887,7 +3951,7 @@ label.error {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
-  gap: 15px;
+  gap: 10px;
 }
 
 .Send-Message {
@@ -3917,7 +3981,7 @@ label.error {
   display: block;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 10px;
   text-align: center;
   line-height: 12px;
   margin-top: 5px;
@@ -4651,6 +4715,11 @@ label.error {
 .Offer-Details-List .Offer-Item .Contact .Contact-Infos h4{
   text-overflow: unset;
   font-size: 16px;
+  /* display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;   
+  overflow: hidden;
+  display: block; */
 }
 .projectOwner {
   color: rgba(0, 206, 97, 1)
@@ -5754,6 +5823,10 @@ label.error {
   flex: 0 0 calc(100% - 26px);
   max-width: calc(100% - 26px);
   padding-right: 10px;
+}
+.Single-Offer-Details .Contact .Contact-Infos .Contact-Infos-Row{
+  flex: unset;
+  max-width: 100%;
 }
 .Contact-Infos-Row p{
   margin: 0;
@@ -7010,7 +7083,7 @@ label.error {
 }
 
 .DadupaModal .modal-body {
-  padding: 20px;
+  padding: 25px;
 }
 .DadupaModal .modal-body .modal-header{
   padding: 0 0 15px;
@@ -7045,7 +7118,7 @@ top: 2px;
   margin-bottom: 20px;
 }
 .DadupaModal .modal-body .form-inputs .form-modal-title{
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 15px;
 }
@@ -9592,6 +9665,7 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
 
 .Select svg {
   fill: #00b602;
+  height: 16px;
 }
 
 /* profile page cvtheque modal styles */

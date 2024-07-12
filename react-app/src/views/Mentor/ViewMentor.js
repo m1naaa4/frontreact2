@@ -72,6 +72,20 @@ export default function ViewMentor(props) {
     }
 
     useEffect(() => {
+        if (user && user.type) {
+            if (user.type === 'PP') {
+                setType('uil uil-lightbulb-alt');
+            } else if (user.type === 'BF') {
+                setType('uil uil-moneybag');
+            } else if (user.type === 'ACMPT') {
+                setType('uil uil-users-alt');
+            } else {
+                setType('');
+            }
+        }
+    }, [user]);
+
+    useEffect(() => {
         if (visibility === false) {
             setIsLoading(visibility)
         }
@@ -91,14 +105,14 @@ export default function ViewMentor(props) {
                 backgroundColor: "#e8fbf1",
             },
             '&:last-child ': {
-                borderBottomLeftRadius: '30px',
-                borderBottomRightRadius: '20px',
+                borderBottomLeftRadius: '15px',
+                borderBottomRightRadius: '15px',
             }
         }),
 
         menu: (provided) => ({
             ...provided,
-            borderRadius: "35px",
+            borderRadius: "15px",
             overflow: 'hidden',
             border: '0.5px solid #00b602',
         }),
@@ -106,7 +120,7 @@ export default function ViewMentor(props) {
         menuList: (provided, state) => ({
             ...provided,
             // border: '1px solid green',
-            borderRadius: "32px",
+            borderRadius: "15px",
             padding: '0',
             "&::-webkit-scrollbar": {
                 width: "5px",
@@ -125,32 +139,44 @@ export default function ViewMentor(props) {
             }
         }),
         control: (base, state) => ({
+        ...base,
+        // boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
+        borderRadius: '15px',
+        fontSize: '12px',
+        border: '1px solid #F5F5F5',
+        height: '30px',
+        width: '110px',
+        "&:hover":{
+            boxShadow: "none",
+        },
+        }),
+        valueContainer:(base) => ({
+        ...base,
+        height: '30px',
+        padding: '2px 15px',
+        }),
+        IndicatorsContainer: (base, state) => ({
             ...base,
-            boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 " : "0px 0px 20px 0px #e7e7e7",
-            borderRadius: '30px',
-            border: '1px solid #e7e7e7',
-            height: '30px',
-            width: '106px',
-            align: ' center',
-            "&:hover": {
-                boxShadow: "none",
-            },
+            height: '15px',
         }),
         indicatorSeparator: (base, state) => ({
             ...base,
             height: '20px',
+            display: 'none',
         }),
         placeholder: (base, state) => ({
             ...base,
         }),
         dropdownIndicator: (base, state) => ({
             ...base,
-            paddingBottom: '25px',
+            // position: 'relative',
+            // top: '-7px',
+            // paddingBottom: '25px',
         }),
         valueContainer: (base, state) => ({
             ...base,
             height: '30px',
-            marginBottom: '20px',
+            // marginBottom: '20px',
         }),
         singleValue: (base, state) => ({
             ...base,
@@ -441,7 +467,7 @@ export default function ViewMentor(props) {
                                                 </ul>
                                             )
                                         }
-                                        <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <Modal show={showReport} onHide={handleCloseReport} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" centered>
                                             <ReportModal providerObject={project} provider='mentor' showReport={showReport} handleCloseReport={handleCloseReport} />
                                         </Modal>
                                     </div>
@@ -461,7 +487,7 @@ export default function ViewMentor(props) {
                                 {
                                 (Array.isArray(project.media) ? project.media : [project.media]).map(item => (
                                     <div key={item} style={{ flex: `1 0 ${100/project.media.length}%` }}>
-                                        <div className="col-md-12 input-row">
+                                        <div className="media-wrap">
                                         {(function() {
                                             if(getExtension(item) == 'youtube'){
                                                 return <ReactPlayer url={item} controls={true} />
@@ -546,7 +572,17 @@ export default function ViewMentor(props) {
                                             <span>
                                                 {project.owner && project.owner.map((value, index) => {
                                                     return <div key={index+1} className="Contact">
-                                                        <Link to={`/profile/${value.profile_id}`} ref={ref} data-toggle="tooltip" data-placement="top">
+                                                        
+                                                        <div className="Contact-Thumb"> <Link to={`/profile/${value.profile_id}`} ref={ref} data-toggle="tooltip" data-placement="top"><img src={value.avatar}  alt={value.username}/></Link></div>
+                                                        <div className="Contact-Infos">
+                                                            <div className='Contact-Infos-Row'>
+                                                                <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
+                                                                <p><i className="uil uil-lightbulb-alt"></i> PP</p>
+                                                                {(user?.profile_id != value.profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {/* <Link to={`/profile/${value.profile_id}`} ref={ref} data-toggle="tooltip" data-placement="top">
                                                         <div className="d-flex align-items-start">
                                                             <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
                                                             <div className="Contact-Thumb"> <img src={value.avatar} alt={value.username} /></div>
@@ -555,7 +591,7 @@ export default function ViewMentor(props) {
                                                             </div>
                                                             {(user?.profile_id != value.profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                                                         </div>
-                                                        </Link>
+                                                        </Link> */}
                                                     </div>
                                                 }
                                                 )}

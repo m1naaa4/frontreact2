@@ -13,7 +13,7 @@ $(".next").click(function(){
       current_fs = $(this).parent();
       next_fs = $(this).parent().next();
       previous_fs = $(this).parent().next();
-
+      console.log('dldld');
       $(".social-login").hide();
       $(".form-signup").addClass('move-form');
       $("#progressbar li").eq($("fieldset").index(current_fs)).addClass("done");

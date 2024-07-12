@@ -61,10 +61,12 @@ const  ReportModal = ({providerObject, provider, showReport, handleCloseReport})
               <div className="form-inputs">
                 <div className="form-row">
                   
+                <div className="col-md-12">
                   <div className='form-header'>
                     <h3 className='form-modal-title'>Please select a problem</h3>
                     <p>If someone is in immediate danger, get help before reporting to Dadupa connect. Don't wait</p>
                   </div>
+                </div>
 {/* <div className="col-md-12 input-row">
                     <input type="text" name="etablissement" defaultValue="" placeholder="Établissement" className="wizard-required" onChange={setForm} required/>
                   </div> */}
