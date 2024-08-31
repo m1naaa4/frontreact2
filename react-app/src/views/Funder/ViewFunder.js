@@ -418,7 +418,7 @@ export default function ViewFunder(props) {
                                             </div>    
                                         </h3>
                                         <div className='funder-meta-list'>
-                                            <p className="Company-Email"><a href={`mailto:`+project.email}><i class="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
+                                            <p className="Company-Email"><a href={`mailto:`+project.email}><i className="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
                                             {project.address && (<>
                                                 <p className="Company-Addresse"><i class="uil uil-map-marker"></i> <span>{project.address}</span></p>
                                             </>)}

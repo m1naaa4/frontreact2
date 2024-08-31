@@ -141,13 +141,13 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                                 dateFormat="MM/dd/yyyy" minDate={new Date()} selected={startDate} onChange={(date) => changeDate(date)}  value={date}
                                                 />
                                             </div>
-                                            <div className="col-md-6 input-row">
+                                            {/* <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
                                                     <input type="checkbox" checked={formData.look_mentor}  onChange={setForm}   className="custom-control-input" id="switch"
                                                             name="look_mentor"/>
                                                     <label className="custom-control-label" htmlFor="switch"><span>{ t('funder.form.proposition')}</span></label>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <button type="button" onClick={(event) => { handleSubmitValue(event);}} name="next" className="next action-button" disabled={is_loading ? "disbaled" : ""} >{t('next')}                                    
