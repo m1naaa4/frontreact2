@@ -1,6 +1,6 @@
 
 const etatsCreate = [
-    ["", "filter.etat_projet"],
+    // ["", "filter.etat_projet"],
     ["idee", "filter.etat_projet.idee"],
     ["prototype", "filter.etat_projet.prototype"],
     ["mvp", "filter.etat_projet.mvp"],

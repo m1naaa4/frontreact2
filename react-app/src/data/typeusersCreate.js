@@ -1,6 +1,6 @@
 
 const typeusersCreate = [
-    ["all", 'Type'],
+    // ["all", 'Type'],
     ["PP", "projectHolder"],
     ["BF", "donor"],
     ["ACMPT", "accompanyingPerson"],

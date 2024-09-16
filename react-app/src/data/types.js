@@ -1,5 +1,5 @@
 const types = [
-    ["", 'signup.form.profilType'],
+    // ["", 'signup.form.profilType'],
     ["PP", "projectHolder"],
     ["BF", "donor"],
     ["ACMPT", "accompanyingPerson"],

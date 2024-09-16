@@ -1,5 +1,5 @@
 const sectors = [
-    ['','filter.secteur'],
+    // ['','filter.secteur'],
     ['agroalimentaire',  'filter.secteur.agroalimentaire'],
     ['architecture',  'filter.secteur.architecture'],
     ['art',  'filter.secteur.art'],
