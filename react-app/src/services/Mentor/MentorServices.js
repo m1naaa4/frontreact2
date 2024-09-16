@@ -32,7 +32,7 @@ export const GetService = (url) => {
     });
 }
 
-export const UpdateService = (data, url) => {
+export const UpdateServiceMentor = (data, url) => {
     const http = new Service();
     return http.UpdateData(data, url).then(data => {
         return data

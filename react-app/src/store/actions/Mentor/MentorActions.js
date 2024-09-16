@@ -1,16 +1,20 @@
-import { GetMyProject, GetProject, GetService, Listing, PostService, UpdateService } from "../../../services/Mentor/MentorServices";
+import { GetMyProject, GetProject, GetService, Listing, PostService, UpdateServiceMentor } from "../../../services/Mentor/MentorServices";
+import { UploadLogoAction } from "../Media/MediaAction";
 
 
 
-export const CreateMentorAction = (data, url, navigation, history, step) => {
+export const CreateMentorAction = (data, url, navigation, history, step, file) => {
     return (dispatch)=>{
 
         dispatch({type:'LOADING_CREATE_MENTOR'});
 
-        PostService(data, url, navigation, history, step).then((res) =>
+        PostService(data, url, navigation, history, step, file).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'CREATE_MENTOR_SUCCESS',res});
+                    if (file && file != '') {                        
+                        dispatch(UploadLogoAction(res.mentorid, file, 'mentor', 'image', '/upload'));
+                    }
                     if (navigation) {
                         if (step != 'step3') {
                             const {
@@ -62,7 +66,7 @@ export const UpdateMentorAction = (data, url) =>
     {
         dispatch({type:'LOADING_ADD_MENTOR'});
 
-        UpdateService( data, url ).then((res) =>
+        UpdateServiceMentor( data, url ).then((res) =>
         {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_MENTOR_SUCCESS',res});

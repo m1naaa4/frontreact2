@@ -42,7 +42,9 @@ export default function ListingFunders(props) {
             if (entries[0].isIntersecting && hasMore) {
                 filterInput.filters = false;
                 dispatch(GetFunders(filterInput, current + 1));
-                setIsLoading(true)
+                setIsLoading(true)                
+            } else {
+                setIsLoading(false)
             }
         })
         if (node) observer.current.observe(node)
@@ -63,7 +65,7 @@ export default function ListingFunders(props) {
                 <div className="container">
                     <div className='filter-mobile'>
                         <h4>Filters</h4>
-                        <button onClick={FilterMenu}><i class="uil uil-filter"></i></button>
+                        <button onClick={FilterMenu}><i className="uil uil-filter"></i></button>
                     </div>
                     {/* <div className="Filter-Row"> */}
                         < FilterFunder {

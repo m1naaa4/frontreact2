@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { useLocation, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { GetMentor } from "../../../store/actions/Mentor/MentorActions";
-import { UpdateService } from "../../../services/Mentor/MentorServices";
+import { UpdateServiceMentor } from "../../../services/Mentor/MentorServices";
 
 export default function SecondStepMentor({ formData, setForm, navigation, props }) {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
           'media_link' : urls,
           'project_id' : projectId,
       }
-      UpdateService(data, '/update-media');
+      UpdateServiceMentor(data, '/update-media');
 
     });
   };
@@ -160,7 +160,7 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
         'media_link' : [linkUrl],
         'project_id' : projectId,
       }
-      UpdateService(data, '/update-media');
+      UpdateServiceMentor(data, '/update-media');
 
     }else if(linkUrl.includes("vimeo.com")){
       setFile(linkUrl);
@@ -174,7 +174,7 @@ export default function SecondStepMentor({ formData, setForm, navigation, props 
         'media_link' : [linkUrl],
         'project_id' : projectId,
       }
-      UpdateService(data, '/update-media');
+      UpdateServiceMentor(data, '/update-media');
 
     }else{
       setShow(true);

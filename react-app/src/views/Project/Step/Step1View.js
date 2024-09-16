@@ -175,7 +175,7 @@ export default function Step1View({formData, setForm, navigation, props}) {
                                                     <input type="file"  name="logolink" onChange={onChange}
                                                     className="custom-file-input" id="customFile"/>
                                                     <label className="custom-file-label" htmlFor="customFile">{!picture ?( t('form.add_logo')): ''}<img 
-                                                    style={{width:"50px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>
+                                                    style={{width:"50px", height:"46px", border: "0px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>
                                                 </div>
                                             </div>
 

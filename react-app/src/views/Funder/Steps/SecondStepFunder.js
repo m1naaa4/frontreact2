@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { useLocation, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { GetFunder } from "../../../store/actions/Funder/FunderActions";
-import { UpdateService } from "../../../services/Funder/FunderServices";
+import { UpdateServiceFunder } from "../../../services/Funder/FunderServices";
 
 export default function Step2View({ formData, setForm, navigation, props }) {
   const dispatch = useDispatch();
@@ -106,7 +106,7 @@ export default function Step2View({ formData, setForm, navigation, props }) {
           'media_link' : urls,
           'project_id' : projectId,
       }
-      UpdateService(data, '/update-media');
+      UpdateServiceFunder(data, '/update-media');
 
     });
   };
@@ -165,7 +165,7 @@ export default function Step2View({ formData, setForm, navigation, props }) {
         'media_link' : [linkUrl],
         'project_id' : projectId,
       }
-      UpdateService(data, '/update-media');
+      UpdateServiceFunder(data, '/update-media');
 
     }else if(linkUrl.includes("vimeo.com")){
       setFile(linkUrl);
@@ -179,7 +179,7 @@ export default function Step2View({ formData, setForm, navigation, props }) {
         'media_link' : [linkUrl],
         'project_id' : projectId,
       }
-      UpdateService(data, '/update-media');
+      UpdateServiceFunder(data, '/update-media');
 
     }else{
       setShow(true);

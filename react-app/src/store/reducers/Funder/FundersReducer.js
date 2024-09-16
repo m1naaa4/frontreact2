@@ -1,7 +1,5 @@
 const initState = {
     funders: [],
-    funder: '',
-    loading: true
 }
 
 
@@ -11,6 +9,7 @@ const FundersReducer = (state = initState ||undefined, action) => {
         case 'LOADING_ALL_FUNDERS':
             return {
                 ...state,
+                funders: state.funders,
                 loading: true,
             }
 
@@ -23,7 +22,7 @@ const FundersReducer = (state = initState ||undefined, action) => {
                 current: action.res.current,
                 loading: false
             }
-        case 'LOAD_FUNDERS_SUCCESS':
+        case 'LOAD_FUNDERS_SUCCESS':            
             return {
                 ...state,
                 funders: [...state.funders, ...action.res.funders],

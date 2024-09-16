@@ -15,8 +15,10 @@ const steps = [
 ];
 
 const defaultData = {
+    title: '',
     type: '',
     zone: '',
+    logo: new FormData(),
     sector_id: '',
     phone: '',
     url: '',

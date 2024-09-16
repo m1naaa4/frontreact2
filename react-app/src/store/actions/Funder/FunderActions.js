@@ -1,16 +1,20 @@
 // import {GetMyProject, GetProject, FunderServices, Listing, GetView} from "../../../services/Funder/FunderServices";
 
-import { GetMyProject, GetProject, GetService, GetView, Listing, PostService, UpdateService } from "../../../services/Funder/FunderServices";
+import { GetMyProject, GetProject, GetService, GetView, Listing, PostService , UpdateServiceFunder } from "../../../services/Funder/FunderServices";
+import { UploadLogoAction } from "../Media/MediaAction";
 
 
-export const CreateFunderAction = (data, url, navigation, history, step) => {
+export const CreateFunderAction = (data, url, navigation, history, step, file) => {
     return (dispatch)=>{
         dispatch({type:'LOADING_CREATE_FUNDER'});
 
-        PostService(data, url, navigation, history, step).then((res) =>
+        PostService(data, url, navigation, history, step, file).then((res) =>
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'CREATE_FUNDER_SUCCESS',res});
+                    if (file && file != '') {                        
+                        dispatch(UploadLogoAction(res.funderid, file, 'funder', 'image', '/upload'));
+                    }
                     if (navigation) {
                         if (step != 'step3') {
                             const {
@@ -62,7 +66,7 @@ export const UpdateFunderAction = (data, url) =>
     {
         dispatch({type:'LOADING_ADD_FUNDER'});
 
-        UpdateService( data, url ).then((res) =>
+        UpdateServiceFunder( data, url ).then((res) =>
         {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'ADD_FUNDER_SUCCESS',res});
@@ -94,10 +98,10 @@ export const GetFunders = (data, current) =>{
         Listing(data, current).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
-                // dispatch({type:'LOAD_FUNDERS_SUCCESS', res});
+                dispatch({type:'LOAD_FUNDERS_SUCCESS', res});
                 if (res.filters == true) {
                     dispatch({
-                        type: 'LOAD_FUNDERS_ONCE_SUCCESS',
+                        type: 'LOAD_FUNDERS_SUCCESS',
                         res
                     });
                 }
@@ -123,7 +127,7 @@ export const loadFunderOnceAction = (data, current) => {
 
                 if (res.hasOwnProperty('success') && res.success === true) {
                     dispatch({
-                        type: 'LOAD_FUNDERS_ONCE_SUCCESS',
+                        type: 'LOAD_FUNDERS_SUCCESS',
                         res
                     });
 

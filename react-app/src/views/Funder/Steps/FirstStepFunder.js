@@ -7,7 +7,7 @@ import 'jquery-validation'
 import Spinner from 'react-bootstrap/Spinner'
 import ZoneFilterFunders from '../FilterFunders/ZoneFilterFunders';
 import SectorFilterFunders from '../FilterFunders/SectorFilterFunders';
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import { CreateFunderAction, GetFunder } from '../../../store/actions/Funder/FunderActions'
 import FinanceFilterFunders from '../FilterFunders/FinanceFilterFunders';
 import TypeFilterFunder from '../FilterFunders/TypeFilterFunders';
@@ -24,6 +24,7 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
     const [is_loading, setIsLoading] = useState(false);
     const project = useSelector(state => state.funders.funder);
     const [logo, setLogo] = useState();
+    const [picture, setPicture] = useState(null);
 
     const history = useHistory();
     const location = useLocation();
@@ -32,6 +33,11 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
         setStartDate(state);
         formData.date = state.toLocaleDateString();
         setDate(state);
+    };
+
+    const onChange = e => {
+        setLogo(e.target.files[0]);
+        setPicture(URL.createObjectURL(e.target.files[0]) );
     };
 
     const projectId = useMemo(
@@ -44,6 +50,8 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
             return;
         }
         setLogo('');
+        setPicture(project.logo);
+        formData.title = project.name;
         formData.type = project.type;
         formData.sector_id = project.sector;
         formData.zone   = project.zone;
@@ -77,7 +85,7 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
         e.preventDefault();
         if($("#form-wizard-funder").valid()){
             setIsLoading(true)
-              dispatch(CreateFunderAction(formData, '/create', navigation, history, 'step2'));
+              dispatch(CreateFunderAction(formData, '/create', navigation, history, 'step2', logo));
         }
     }
     
@@ -118,8 +126,16 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                 <fieldset className="wizard-fieldset">
                                     <div className="form-inputs">
                                         <div className="form-row">
-                                            <div className="col-md-12 input-row input-select">
+                                            <div className="col-md-12 input-row">
+                                                <input type="text" name="title" onChange={setForm} value={formData.title}
+                                                        placeholder={t('title')} className="wizard-required" required/>
+                                            </div>
+                                            
+                                            <div className="col-md-6 input-row input-select">
                                                 <TypeFilterFunder formData={formData} required/>
+                                            </div>
+                                            <div className="col-md-6 input-row input-select">
+                                                <FinanceFilterFunders formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
                                                 <SectorFilterFunders  formData={formData}/>
@@ -133,14 +149,19 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="url" value={formData.url} placeholder={t('website')} className="wizard-required" onChange={setForm} />
                                             </div>
-                                            <div className="col-md-6 input-row input-select">
-                                                <FinanceFilterFunders formData={formData}/>
+                                            <div className="col-md-12 input-row">
+                                                <div className="custom-file">
+                                                    <input type="file"  name="logolink" onChange={onChange}
+                                                    className="custom-file-input" id="customFile"/>
+                                                    <label className="custom-file-label" htmlFor="customFile">{!picture ?( t('form.add_logo')): ''}<img 
+                                                    style={{width:"50px", height:"46px", border: "0px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>
+                                                </div>
                                             </div>
-                                            <div className="col-md-6 input-row"> 
+                                            {/* <div className="col-md-6 input-row"> 
                                                 <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} 
                                                 dateFormat="MM/dd/yyyy" minDate={new Date()} selected={startDate} onChange={(date) => changeDate(date)}  value={date}
                                                 />
-                                            </div>
+                                            </div> */}
                                             {/* <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
                                                     <input type="checkbox" checked={formData.look_mentor}  onChange={setForm}   className="custom-control-input" id="switch"

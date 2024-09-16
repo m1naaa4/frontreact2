@@ -1,5 +1,7 @@
 import {GetService, PostService, UploadLogoService, UploadMediaService} from "../../../services/Media/MediaService";
 import { UpdateService } from "../../../services/Project/ProjectServices";
+import { UpdateServiceFunder } from "../../../services/Funder/FunderServices";
+import { UpdateServiceMentor } from "../../../services/Mentor/MentorServices";
 import { UpdateServiceUser } from "../../../services/User/UserService";
 
 export const UploadLogoAction = (providerId, file, provider, type, url) =>
@@ -8,7 +10,7 @@ export const UploadLogoAction = (providerId, file, provider, type, url) =>
     {
         UploadLogoService(providerId, file, provider, type, url).then((res) =>
         {
-            if(res.hasOwnProperty('success') && res.success === true){
+            if(res.hasOwnProperty('success') && res.success === true){                
                 if (provider === 'project') {
                     let data = {
                         'logo_link' : res.urls[0],
@@ -16,6 +18,22 @@ export const UploadLogoAction = (providerId, file, provider, type, url) =>
                     }
     
                     UpdateService(data, '/update-media');
+                }
+                if (provider === 'funder') {
+                    let data = {
+                        'logo_link' : res.urls[0],
+                        'project_id' : providerId,
+                    }
+    
+                    UpdateServiceFunder(data, '/update-media');
+                }
+                if (provider === 'mentor') {
+                    let data = {
+                        'logo_link' : res.urls[0],
+                        'project_id' : providerId,
+                    }
+    
+                    UpdateServiceMentor(data, '/update-media');
                 }
                 if (provider === 'user') {
                     let data = {

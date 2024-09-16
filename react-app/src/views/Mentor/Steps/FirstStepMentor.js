@@ -25,6 +25,7 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
     const project = useSelector(state => state.mentors.mentor);
     const [logo, setLogo] = useState();
     const [selectData, setselectData] = useState();
+    const [picture, setPicture] = useState(null);
 
     const history = useHistory();
     const location = useLocation();
@@ -113,6 +114,11 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
         [location.pathname]
     );
 
+    const onChange = e => {
+        setLogo(e.target.files[0]);
+        setPicture(URL.createObjectURL(e.target.files[0]) );
+    };
+
     useEffect(() => {
         if (projectId === "create" || project === "loading" || !project) {
             return;
@@ -127,6 +133,8 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
             teams
         );
 
+        setPicture(project.logo);
+        formData.title = project.name;
         formData.type = project.type;
         formData.assistance = project.assistance;
         formData.sector_id = project.sector;
@@ -186,7 +194,7 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
         e.preventDefault();
         if($("#form-wizard-funder").valid()){
             setIsLoading(true)
-            dispatch(CreateMentorAction(formData, '/create', navigation, history, 'step2'));
+            dispatch(CreateMentorAction(formData, '/create', navigation, history, 'step2', logo));
         }
     }
     
@@ -227,7 +235,11 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
                                 <fieldset className="wizard-fieldset">
                                     <div className="form-inputs">
                                         <div className="form-row">
-                                            <div className="col-md-12 input-row input-select">
+                                            <div className="col-md-12 input-row">
+                                                <input type="text" name="title" onChange={setForm} value={formData.title}
+                                                        placeholder={t('title')} className="wizard-required" required/>
+                                            </div>
+                                            <div className="col-md-6 input-row input-select">
                                                 <AssistanceFilterMentors  formData={formData}/>
                                             </div>
                                             <div className="col-md-6 input-row input-select">
@@ -239,10 +251,10 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
                                             <div className="col-md-6 input-row input-select">
                                                 <ZoneFilterMentors formData={formData}/>
                                             </div>
-                                            <div className="col-md-6 input-row"> 
+                                            {/* <div className="col-md-6 input-row"> 
                                                 <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={formData.date} />
-                                            </div>
-                                            <div className="col-md-12 input-row">
+                                            </div> */}
+                                            <div className="col-md-6 input-row">
                                                 <AsyncCreatableSelect
                                                     isMulti
                                                     cacheOptions
@@ -257,6 +269,14 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="phone" onChange={setForm} value={formData.phone} placeholder={t('phone')} className="wizard-required"/>
+                                            </div>
+                                            <div className="col-md-6 input-row">
+                                                <div className="custom-file">
+                                                    <input type="file"  name="logolink" onChange={onChange}
+                                                    className="custom-file-input" id="customFile"/>
+                                                    <label className="custom-file-label" htmlFor="customFile">{!picture ?( t('form.add_logo')): ''}<img 
+                                                    style={{width:"50px", height:"46px", border: "0px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>
+                                                </div>
                                             </div>
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="url" defaultValue={formData.url} placeholder={t('website')} className="wizard-required" onChange={setForm} />

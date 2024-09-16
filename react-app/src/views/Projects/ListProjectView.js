@@ -46,6 +46,8 @@ export default function ListProjectView({ props}) {
                 filterInput.filters = false;              
                 dispatch(loadProjectAction( filterInput, props, current+1));
                 setIsLoading(true)
+            } else {
+                setIsLoading(false)
             }
         })
         if (node) observer.current.observe(node)
@@ -69,7 +71,7 @@ export default function ListProjectView({ props}) {
                     <div>
                         <div className='filter-mobile'>
                             <h4>Filters</h4>
-                            <button onClick={FilterMenu}><i class="uil uil-filter"></i></button>
+                            <button onClick={FilterMenu}><i className="uil uil-filter"></i></button>
                         </div>
                         {/* <div className="Filter-Row"> */}
                             <FilterProject
