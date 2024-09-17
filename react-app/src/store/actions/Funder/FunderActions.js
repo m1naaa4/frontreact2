@@ -1,6 +1,6 @@
 // import {GetMyProject, GetProject, FunderServices, Listing, GetView} from "../../../services/Funder/FunderServices";
 
-import { GetMyProject, GetProject, GetService, GetView, Listing, PostService , UpdateServiceFunder } from "../../../services/Funder/FunderServices";
+import { GetMyProject, GetProject, GetService, Listing, PostService , UpdateServiceFunder } from "../../../services/Funder/FunderServices";
 import { UploadLogoAction } from "../Media/MediaAction";
 
 
@@ -12,7 +12,7 @@ export const CreateFunderAction = (data, url, navigation, history, step, file) =
             {
                 if(res.hasOwnProperty('success') && res.success === true){
                     dispatch({type:'CREATE_FUNDER_SUCCESS',res});
-                    if (file && file != '') {                        
+                    if (file && file != '') {
                         dispatch(UploadLogoAction(res.funderid, file, 'funder', 'image', '/upload'));
                     }
                     if (navigation) {
@@ -101,7 +101,7 @@ export const GetFunders = (data, current) =>{
                 dispatch({type:'LOAD_FUNDERS_SUCCESS', res});
                 if (res.filters == true) {
                     dispatch({
-                        type: 'LOAD_FUNDERS_SUCCESS',
+                        type: 'LOAD_FUNDERS_ONCE_SUCCESS',
                         res
                     });
                 }
@@ -127,7 +127,7 @@ export const loadFunderOnceAction = (data, current) => {
 
                 if (res.hasOwnProperty('success') && res.success === true) {
                     dispatch({
-                        type: 'LOAD_FUNDERS_SUCCESS',
+                        type: 'LOAD_FUNDERS_ONCE_SUCCESS',
                         res
                     });
 
