@@ -14,7 +14,7 @@ const en = {
     previous: 'Previous',
     review: 'Review Details',
     targetAreas: 'Head (HQ)',
-    funding: 'Funded',
+    funding: 'Funding',
     'filter.secteur.finance': 'Funding',
     'filter.secteur.none': 'None',
     'filter.secteur': 'Sector',
