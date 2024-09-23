@@ -188,7 +188,7 @@ const ProjectGridView = ({ project }) => {
                             <img src="/assets/images/icons/cost.svg" alt="" />
                         </div>
                         <div className="meta-details">
-                            <span className="meta-title">{t('funding')}</span>
+                            <span className="meta-title">{t('funding.startup')}</span>
                             <span className="meta-value" title={ finance }>{ finance }</span>
                         </div>
                     </li>

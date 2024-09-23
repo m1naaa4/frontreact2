@@ -15,6 +15,7 @@ const fr = {
     review: 'Vérification',
     targetAreas: 'Head (HQ)',
     funding: 'Financé',
+    'funding.startup': 'Financé',
     'title': 'Titre',
     sector: 'Secteur d\'activité',
     status: 'Statut',
