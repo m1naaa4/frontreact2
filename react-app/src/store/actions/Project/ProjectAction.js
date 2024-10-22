@@ -73,12 +73,12 @@ export const getProjectAction = (data, url) =>{
     }
 }
 
-export const loadProjectAction = (data, props, current) =>{
+export const loadProjectAction = (data, current) =>{
 
     return (dispatch) =>
     {
         dispatch({type:'LOADING_ALL_PROJECTS'});
-        LoadProject(data,props, current).then((res)=>{
+        LoadProject(data, current).then((res)=>{
 
             if(res.hasOwnProperty('success') && res.success === true){
                 dispatch({type:'LOAD_PROJECT_SUCCESS', res});

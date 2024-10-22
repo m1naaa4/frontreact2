@@ -114,7 +114,7 @@ function FilterProject({ filterInput }) {
                                     aria-expanded={open}
                                     data-toggle="tooltip" data-placement="bottom" title="Advanced Search"
                                 >   
-                                    <i class="uil uil-plus"></i>
+                                    <i className="uil uil-plus"></i>
                                     <span>More Filters</span>
                                 </button>
                                 <button type="submit" name="submit" onClick={handleSubmitValue} className="filter-button custom-filter-btn">

@@ -53,8 +53,12 @@ export const GetMyProject = (data, props, current) =>
     });
 }
 
-export const LoadProject = (data, props, current) =>
+export const LoadProject = (data, current) =>
 {
+    if (typeof data === 'object' && data !== null) {
+        data.page = current;
+    }
+    
     const http = new Service();
     let getProjectUrl = "/get?page="+current;
     const tokenId = "user-token";

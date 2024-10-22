@@ -10,7 +10,7 @@ const projectReducer = (state = initState ||undefined, action) => {
         case 'LOADING_ALL_PROJECTS':
             return {
                 ...state,
-                projects: state.projects,
+                // projects: state.projects,
                 loading:true
             }
         case 'LOAD_PROJECT_ONCE_SUCCESS':

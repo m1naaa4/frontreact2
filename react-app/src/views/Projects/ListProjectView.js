@@ -30,13 +30,13 @@ export default function ListProjectView({ props}) {
     const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch();
-    const observer = useRef()
 
-    const projects =  useSelector(state => state.projects.projects);
-
+    const projects =  useSelector(state => state.projects);
     const hasMore = useSelector(state => state.projects.hasMore);
     const current = useSelector(state => state.projects.current);
     const loading = useSelector(state => state.projects.loading);
+
+    const observer = useRef()
     const lastProjectElementRef = useCallback( node =>{
         if (projects.loading) return
        
@@ -44,7 +44,7 @@ export default function ListProjectView({ props}) {
         observer.current = new IntersectionObserver( entries =>{
             if (entries[0].isIntersecting && hasMore  ){  
                 filterInput.filters = false;              
-                dispatch(loadProjectAction( filterInput, props, current+1));
+                dispatch(loadProjectAction( filterInput,current+1));
                 setIsLoading(true)
             } else {
                 setIsLoading(false)
@@ -55,7 +55,7 @@ export default function ListProjectView({ props}) {
 
     useEffect(() => {
         if(!isLoading){
-            dispatch(loadProjectOnceAction( filterInput, props, 1));
+            dispatch(loadProjectOnceAction( filterInput, 1));
         }
     }, [dispatch]);
 
@@ -89,20 +89,27 @@ export default function ListProjectView({ props}) {
                                 ) : (
                                     () => {
                                         
-                                        if  (projects.success !== false && projects!== undefined && projects !== "loading" && projects.length > 0) {
+                                        if  (
+                                            projects.success !== false && 
+                                            projects !== undefined && 
+                                            projects.projects !== undefined && 
+                                            projects !== "loading" && 
+                                            projects.projects.length > 0
+                                        ) {
 
                                             return (
-                                                projects.map((project, index) => {
-                                                    if (projects.length === index +1){
+                                                projects.projects.map((project, index) => {
+                                                    
+                                                    if (projects.projects.length === index +1){
                                                         return (
-                                                            <div  className="col-lg-4 col-md-6"   key={index +1} ref={lastProjectElementRef}>
+                                                            <div  className="col-lg-4 col-md-6"   key={project.id} ref={lastProjectElementRef}>
                                                                 <ProjectView   project={project} />
                                                             </div>
                                                         )
 
                                                     }else{
                                                         return(
-                                                            <div  className="col-lg-4 col-md-6" key={index +1}>
+                                                            <div  className="col-lg-4 col-md-6" key={project.id}>
                                                                 <ProjectView   project={project} />
                                                             </div>
 
