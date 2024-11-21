@@ -285,7 +285,7 @@ const en = {
     'filter.job.content': 'Web Editor',
     'filter.job.other': 'OTHER: (Please specify)',
     industry: 'Industry',
-    'filter.secteur.agroalimentaire': 'Agribusiness',
+    'filter.secteur.agroalimentaire': 'AgriTech / AgriBusiness',
     'filter.secteur.architecture': 'Architecture',
     'filter.secteur.art': 'Art',
     'filter.secteur.automobile': 'Automotive',
@@ -332,7 +332,7 @@ const en = {
     'filter.secteur.telecom': 'Telecommunications',
     'filter.secteur.textile': 'Clothing',
     'filter.secteur.tourism': 'Tourism, hotels and travel',
-    'filter.secteur.transport': 'Transport',
+    'filter.secteur.transport': 'Mobility & Transport',
     'filter.secteur.other': 'OTHER: (Please specify)',
     accomplishments: 'Achievements',
     offerings:'Offers',
@@ -481,7 +481,7 @@ const en = {
     'filter.fundtype.venturecap':'Venture Capital',
     'has_deadline': 'No deadline',
     'postuler': 'Apply',
-    'target_zone': 'Target zone',
+    'target_zone': 'African Origin',
     'target_sector': 'Targeted industry',
     'published_at': 'Published on',
     'write_comment': 'Write your comment',
@@ -840,6 +840,49 @@ const en = {
     yemen: 'Yemen',
     zambia: 'Zambia',
     zimbabwe: 'Zimbabwe',
+    project_area: 'African Origin',
+    'ai.blockchain.iot.robotics': 'AI, Blockchain, IoT, Robotics',
+
+    // abbass
+    'agri.business' : 'AgriTech / AgriBusiness',
+    'ai.blockchain.iot.robotics' : 'AI, Blockchain,, IoT, Robotics',
+    'business.softwares' : 'Business softwares',
+    'climate.environmental' : 'Climate & Environmental',
+    'communication.data' : 'Communication, Data',
+    'culture.creative' : 'Culture & Creative',
+    'ecommerce.retailtech' : 'E-commerce & RetailTech',
+    'edtech' : 'EdTech',
+    'energy.cleantech' : 'Energy & CleanTech',
+    'fintech' : 'FinTech',
+    'foodtech' : 'FoodTech',
+    'govtech' : 'GovTech',
+    'healthtech' : 'HealthTech',
+    'logistics.supply.chain' : 'Logistics & Supply Chain',
+    'mobility.transport' : 'Mobility & Transport',
+
+    //
+    'mvp' : 'MVP',
+    'pre.seed.seed' : 'Pre-seed / Seed',
+    'series.a.c' : 'Series A - C',
+    'series.d.more' : 'Series D & more',
+    'others' : 'Others',
+
+    'funding.venture' : 'Venture',
+
+    //
+    'vcorp' : 'VC (corp)',
+    'cpt.i' : 'Corporate investor',
+    'b.a' : 'Business Angel',
+    'p.p' : 'Public/private',
+    'ac' : 'Accelerator',
+
+    //
+    'incubator' : 'Incubator',
+    'fablab' : 'Fablab',
+    'p.p' : 'Public/private',
+    'acce' : 'Accelerator',
+    'assoc' : 'Association',
+
 };
 
 export default en;

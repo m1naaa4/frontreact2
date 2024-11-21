@@ -100,7 +100,7 @@ function ZoneDropFilter ({formData}) {
         onChange={HandleChange}
         value={optionSelected}
         styles={SelectStyleWithScrollbar}
-        placeholder={ (formData?.project_area === '')? "Zone Ciblée": country}
+        placeholder={ t('target_zone')}
         required={true}
         className="Select"
       />

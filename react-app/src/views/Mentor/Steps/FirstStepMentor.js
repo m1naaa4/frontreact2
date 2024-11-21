@@ -239,22 +239,22 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
                                                 <input type="text" name="title" onChange={setForm} value={formData.title}
                                                         placeholder={t('title')} className="wizard-required" required/>
                                             </div>
-                                            <div className="col-md-6 input-row input-select">
+                                            {/* <div className="col-md-6 input-row input-select">
                                                 <AssistanceFilterMentors  formData={formData}/>
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-6 input-row input-select">
                                                 <TypeFilterMentors formData={formData}/>
                                             </div>
-                                            <div className="col-md-6 input-row input-select">
+                                            {/* <div className="col-md-6 input-row input-select">
                                                 <SectorFilterMentors  formData={formData}/>
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-6 input-row input-select">
                                                 <ZoneFilterMentors formData={formData}/>
                                             </div>
                                             {/* <div className="col-md-6 input-row"> 
                                                 <DatePicker className="form-control" name="date" placeholderText={t('funder.form.date')} minDate={new Date()} selected={startDate} onChange={changeDate} value={formData.date} />
                                             </div> */}
-                                            <div className="col-md-6 input-row">
+                                            {/* <div className="col-md-6 input-row">
                                                 <AsyncCreatableSelect
                                                     isMulti
                                                     cacheOptions
@@ -266,7 +266,7 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
                                                     }}
                                                     value={selectData}
                                                 />
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-6 input-row">
                                                 <input type="text" name="phone" onChange={setForm} value={formData.phone} placeholder={t('phone')} className="wizard-required"/>
                                             </div>
@@ -278,7 +278,7 @@ const FirstStepMentor = ( {formData, setForm, navigation} ) => {
                                                     style={{width:"50px", height:"46px", border: "0px"}} alt={picture} className="playerProfilePic_home_tile"  src={picture && picture}></img></label>
                                                 </div>
                                             </div>
-                                            <div className="col-md-6 input-row">
+                                            <div className="col-md-12 input-row">
                                                 <input type="text" name="url" defaultValue={formData.url} placeholder={t('website')} className="wizard-required" onChange={setForm} />
                                             </div>
                                         </div>

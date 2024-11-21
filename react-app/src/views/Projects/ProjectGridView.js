@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AvatarTooltip from '../../utils/AvatarTooltip';
 import DialogWarning from '../../utils/DialogWarning';
 import finances from '../../data/financesCreate';
+import etats from '../../data/etatsCreate';
 import sectors from '../../data/sectorsCreate';
 import { useTranslation } from 'react-i18next';
 import $ from 'jquery'
@@ -22,6 +23,7 @@ const ProjectGridView = ({ project }) => {
     const [classe, setClasse] = useState(project?.favorite);
     const [sector, setSector] = useState();
     const [finance, setFinance] = useState();
+    const [project_status, setProject_status] = useState();
     const [open, setOpen] = useState(false);
     const [titleDialog, setTitleDialog] = useState("Confirm To add to Favorite");
     const [ContentDialog, setContentDialog] = useState("are you sure you want to add this post to favorite?");
@@ -60,9 +62,9 @@ const ProjectGridView = ({ project }) => {
             }
         });
 
-        finances.map((key) => {
-            if (key[0] == project?.funding_search) {
-                setFinance(t(key[1]))
+        etats.map((key) => {
+            if (key[0] == project?.project_status) {
+                setProject_status(t(key[1]))
             }
         });
     })
@@ -100,6 +102,12 @@ const ProjectGridView = ({ project }) => {
     const handleImageError = (event) => {
         event.target.src = '/assets/images/offer-thumbnail.svg';
     };
+
+    function getYouTubeVideoId(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    }
 
     return (
 
@@ -150,10 +158,12 @@ const ProjectGridView = ({ project }) => {
                 {(function() {
                     let link = $.isArray(project.media_link) ? project.media_link[0] : project.media_link;
                     if(getExtension(link) == 'youtube'){
-                        return <ReactPlayer width='340' height='234px' url={link} controls={true} />
+                        let videoId = getYouTubeVideoId(link);
+                        return <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt="Thumbnail Video" />
                     }else{
                         if(getExtension(link) == 'vimeo'){
-                            return <ReactPlayer width='340' height='234px' url={link} controls={true} />
+                            let videoId = link.split('/').pop();
+                            return <img src={`https://vumbnail.com/${videoId}_large.jpg`} alt="Thumbnail Video" />
                         }else{
                             if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                             getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){
@@ -188,8 +198,8 @@ const ProjectGridView = ({ project }) => {
                             <img src="/assets/images/icons/cost.svg" alt="" />
                         </div>
                         <div className="meta-details">
-                            <span className="meta-title">{t('funding.startup')}</span>
-                            <span className="meta-value" title={ finance }>{ finance }</span>
+                            <span className="meta-title">{t('funding.venture')}</span>
+                            <span className="meta-value" title={ project_status }>{ project_status }</span>
                         </div>
                     </li>
                 </ul>

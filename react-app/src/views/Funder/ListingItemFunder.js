@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef} from 'react'
 import SharePopUp from '../../utils/SharePopUp'
 import { useHistory } from "react-router-dom";
 import slugify from 'react-slugify';
-import {countryName, financeLabel, sectorName} from '../../helpers/Helpres'
+import {countryName, financeLabel, sectorName, typeName} from '../../helpers/Helpres'
 import { useTranslation } from 'react-i18next';
 import ReactPlayer from 'react-player';
 import $ from 'jquery';
 import sectors from '../../data/sectorsCreate';
 import countries from '../../data/countries';
 import finances from '../../data/financesCreate';
+import types from '../../data/typeusersCreate';
 import { AddFavoriteAction } from '../../store/actions/Favorite/FavoritesAction';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogWarning from '../../utils/DialogWarning';
@@ -20,6 +21,7 @@ const ListingItemFunder = ({ project }) => {
     let history = useHistory();
     const { t } = useTranslation();
     const [sector, setSector] = useState();
+    const [type, setType] = useState();
     const [country, setCountry] = useState();
     const [finance, setFinance] = useState();
     const [classe, setClasse] = useState(project?.favorite);
@@ -56,6 +58,12 @@ const ListingItemFunder = ({ project }) => {
         }
     };
 
+    function getYouTubeVideoId(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+    }
+
     useEffect(() => {
         if(classe){
             setTitleDialog("Confirm To Remove From Favorite");
@@ -69,6 +77,13 @@ const ListingItemFunder = ({ project }) => {
         {
             if (key[0] === project?.sector) {
                 setSector(t(key[1]))
+            }
+        });
+
+        types.map((key) => 
+        {
+            if (key[0] === project?.type) {
+                setType(t(key[1]))
             }
         });
 
@@ -109,7 +124,7 @@ const ListingItemFunder = ({ project }) => {
                             </div>
                             <div className='footer-title'>
                                 <div className='footer-item footer-item-name'>
-                                    <span style={{color: '#78909C'}}>{t(sectorName(sector))}</span>
+                                    <span style={{color: '#78909C'}}>{t(typeName(type))}</span>
                                 </div>
                                 <div className='footer-item  footer-item-flex'>
                                     {/* <span>{project.created_at.for_humans}</span> */}
@@ -136,11 +151,14 @@ const ListingItemFunder = ({ project }) => {
                     <div className="offer-media">
                         {(function() {
                             let link = $.isArray(project.media) ? project.media[0] : project.media;
+                            
                             if(getExtension(link) == 'youtube'){
-                                return <ReactPlayer width='340' height='234px' url={link} controls={true} />
+                                let videoId = getYouTubeVideoId(link);
+                                return <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt="Thumbnail Video" />
                             }else{
                                 if(getExtension(link) == 'vimeo'){
-                                    return <ReactPlayer width='340' height='234px' url={link} controls={true} />
+                                    let videoId = link.split('/').pop();
+                                    return <img src={`https://vumbnail.com/${videoId}_large.jpg`} alt="Thumbnail Video" />
                                 }else{
                                     if(getExtension(link) == 'mp4' || getExtension(link) == ('x-mpeg2') ||
                                         getExtension(link) == ('x-msvideo') || getExtension(link) == ('quicktime')){

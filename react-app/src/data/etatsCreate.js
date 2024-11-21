@@ -1,10 +1,12 @@
 
 const etatsCreate = [
     // ["", "filter.etat_projet"],
-    ["idee", "filter.etat_projet.idee"],
-    ["prototype", "filter.etat_projet.prototype"],
-    ["mvp", "filter.etat_projet.mvp"],
-    ["first_sale", "filter.etat_projet.first_sale"],
+    ['mvp', 'MVP'],
+    ['pre.seed.seed', 'Pre-seed / Seed'],
+    ['series.a.c', 'Series A - C'],
+    ['series.d.more', 'Series D & more'],
+    ['others', 'Others']
+
 ];
 
 

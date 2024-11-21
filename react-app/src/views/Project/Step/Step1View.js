@@ -167,9 +167,9 @@ export default function Step1View({formData, setForm, navigation, props}) {
                                             <div className="col-md-12 input-row input-select">
                                                 <ZoneDropFilter formData={formData}/>
                                             </div>
-                                            <div className="col-md-12 input-row input-select">
+                                            {/* <div className="col-md-12 input-row input-select">
                                                 <FinanceDropFilter formData={formData}/>
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-12 input-row">
                                                 <div className="custom-file">
                                                     <input type="file"  name="logolink" onChange={onChange}
@@ -179,14 +179,14 @@ export default function Step1View({formData, setForm, navigation, props}) {
                                                 </div>
                                             </div>
 
-                                            <div className="col-md-6 input-row">
+                                            {/* <div className="col-md-6 input-row">
                                                 <div className="custom-control custom-switch">
                                                     <input type="checkbox" defaultChecked={look_angel} onChange={setForm}   className="custom-control-input" id="switch1"
                                                            name="look_angel"/>
                                                     <label className="custom-control-label" htmlFor="switch1"><span>{t('form.want_mentors')}</span></label>
                                                 </div>
-                                            </div>
-                                            <div className="col-md-6 input-row">
+                                            </div> */}
+                                            <div className="col-md-12 input-row">
                                                 <input type="text" value={website_url} name="website_url" onChange={setForm}
                                                        placeholder={t('form.add_url')} className="wizard-required" />
                                             </div>

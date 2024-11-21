@@ -69,7 +69,7 @@ export default function ListingMentors(props) {
                 <div className="container">
                     <div className='filter-mobile'>
                         <h4>Filters</h4>
-                        <button onClick={FilterMenu}><i class="uil uil-filter"></i></button>
+                        <button onClick={FilterMenu}><i className="uil uil-filter"></i></button>
                     </div>
                     {/* <div className="Filter-Row"> */}
                         < FilterMentor {

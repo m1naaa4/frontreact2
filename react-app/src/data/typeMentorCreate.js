@@ -1,8 +1,10 @@
 
 const typeMentorCreate = [
-    ["individual", "mentor.form.individual"],
-    ["incubator", "mentor.form.incubator"],
-    ["accelerator", "mentor.form.accelerator"]
+    ['incubator', 'Incubator'],
+    ['fablab', 'Fablab'],
+    ['p.p', 'Public/private'],
+    ['accel', 'Accelerator'],
+    ['assoc', 'Association'],
 ];
 
 export default typeMentorCreate;

@@ -1,6 +1,7 @@
 import countries from "../data/countries"
 import finances from "../data/finances"
 import sectors from "../data/sectors"
+import types from "../data/typeusersCreate"
 
 export const countryName = (code) =>
 {
@@ -18,6 +19,12 @@ export const financeLabel = (code) =>
 export const sectorName = (code) =>
 {
     let obj = sectors.filter(item => item[0] == code).shift()
+    return (obj !== undefined) ? obj[1] : code
+}
+
+export const typeName = (code) =>
+{
+    let obj = types.filter(item => item[0] == code).shift()
     return (obj !== undefined) ? obj[1] : code
 }
 

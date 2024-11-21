@@ -134,12 +134,12 @@ const FirstStepFunder = ( {formData, setForm, navigation} ) => {
                                             <div className="col-md-6 input-row input-select">
                                                 <TypeFilterFunder formData={formData} required/>
                                             </div>
-                                            <div className="col-md-6 input-row input-select">
+                                            {/* <div className="col-md-6 input-row input-select">
                                                 <FinanceFilterFunders formData={formData}/>
-                                            </div>
-                                            <div className="col-md-6 input-row input-select">
+                                            </div> */}
+                                            {/* <div className="col-md-6 input-row input-select">
                                                 <SectorFilterFunders  formData={formData}/>
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-6 input-row input-select">
                                                 <ZoneFilterFunders formData={formData}/>
                                             </div>
