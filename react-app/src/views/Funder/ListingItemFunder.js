@@ -188,7 +188,7 @@ const ListingItemFunder = ({ project }) => {
                                     <span className="meta-value">{countryName(country)}</span>
                                 </div>
                             </li>
-                            <li className="meta-item meta-col-2">
+                            {/* <li className="meta-item meta-col-2">
                                 <div className="meta-icon">
                                     <img src="/assets/images/icons/value.svg" alt=""/>
                                 </div>
@@ -196,7 +196,7 @@ const ListingItemFunder = ({ project }) => {
                                     <span className="meta-title">{t('funding')}</span>
                                     <span className="meta-value">{ t(financeLabel(finance)) }</span>
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="offer-reactions">

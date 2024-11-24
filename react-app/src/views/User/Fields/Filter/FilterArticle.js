@@ -28,7 +28,7 @@ function FilterArticle({ filterInput }) {
             name.label
         ));
 
-        filterInput.categories = dcategory;
+        filterInput.category = dcategory;
         filterInput.search = search;
         filterInput.created = {'startDate': startDate, 'endDate': endDate};
 

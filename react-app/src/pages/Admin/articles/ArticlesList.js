@@ -22,7 +22,7 @@ export default function ArticlesList() {
 
     const [filterInput, setFilterInput ]  = useState({
         'filters' : true,
-        'categories' : '',
+        'category' : '',
         'search' : '',
         'created': {'startDate': '', 'endDate': ''}
     });
