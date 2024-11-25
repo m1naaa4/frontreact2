@@ -2,7 +2,6 @@ import React, {useRef, useCallback, useState, useEffect} from 'react'
 import ProjectSkeleton from "../../skeleton/ProjectSkeleton";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import ListingItemMentor from './ListingItemMentor';
 import FilterMentor from '../User/Fields/Filter/FilterMentor';
 import { GetMentors, loadMentorOnceAction } from '../../store/actions/Mentor/MentorActions';
@@ -11,7 +10,6 @@ import NoContent from '../../utils/NoContent';
 import $ from "jquery";
 
 export default function ListingMentors(props) {
-    const { t, i18n } = useTranslation();
     const tag_state = useSelector(state => state.generaleVariable.tag);
     const tags = tag_state ? tag_state : [];
 
@@ -38,6 +36,9 @@ export default function ListingMentors(props) {
     const hasMore = useSelector(state => state.mentors.hasMore);
     const current = useSelector(state => state.mentors.current);
     const loading = useSelector(state => state.mentors.loading);
+    const totalMentors =  useSelector(state => state.mentors.totalMentors);
+    const [total, setTotal] = useState(0);
+    const [currentLength, setCurrentLength] = useState(0)
 
     const observer = useRef()
     const lastProjectElementRef = useCallback( node =>{
@@ -51,6 +52,8 @@ export default function ListingMentors(props) {
                 setIsLoading(true)
             }
         })
+        setTotal(totalMentors);
+        setCurrentLength(projects.mentors.length);
         if (node) observer.current.observe(node)
     }, [loading, hasMore])
 
@@ -79,6 +82,9 @@ export default function ListingMentors(props) {
                     {/* </div> */}
 
                      <div className="offers-list">
+                        <div className='offer-title' style={{width: '100px', pointerEvents: 'none'}}>
+                            <span className='offer-sector-name'>{currentLength} of {totalMentors}</span><br/>
+                        </div>
                         <div className="row" >
                             {
                                 loading ? (

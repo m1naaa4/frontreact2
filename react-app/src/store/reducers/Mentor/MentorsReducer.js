@@ -41,6 +41,7 @@ const MentorsReducer = (state = initState || undefined, action) => {
             return {
                 ...state,
                 mentors: action.res.mentors,
+                totalMentors: action.res.total,
                 hasMore: action.res.hasMore,
                 current: action.res.current,
                 loading: false

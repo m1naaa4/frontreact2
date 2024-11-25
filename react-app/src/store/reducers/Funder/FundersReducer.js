@@ -19,6 +19,7 @@ const FundersReducer = (state = initState ||undefined, action) => {
             return {
                 ...state,
                 funders: action.res.funders,
+                totalFunders: action.res.total,
                 hasMore: action.res.hasMore,
                 current: action.res.current,
                 loading: false

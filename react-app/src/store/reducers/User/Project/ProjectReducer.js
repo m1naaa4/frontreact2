@@ -18,6 +18,7 @@ const projectReducer = (state = initState ||undefined, action) => {
             return {
                 ...state,
                 projects: action.res.projects,
+                totalProjects: action.res.total,
                 hasMore:  action.res.hasMore,
                 current:  action.res.current,
                 loading:false

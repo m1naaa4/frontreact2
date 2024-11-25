@@ -359,6 +359,18 @@ export default function ViewFunder(props) {
         }
     };
 
+    const UserIcon = (userTypo) => {
+        if (userTypo === 'PP') {
+            return 'uil uil-lightbulb-alt';
+        } else if (userTypo === 'BF') {
+            return 'uil uil-moneybag';
+        } else if (userTypo === 'ACMPT') {
+            return 'uil uil-users-alt';
+        } else {
+            return '';
+        }
+    }
+
     return (
         <>
             {/* <!-- SINGLE -->*/}
@@ -418,7 +430,7 @@ export default function ViewFunder(props) {
                                             </div>    
                                         </h3>
                                         <div className='funder-meta-list'>
-                                            <p className="Company-Email"><a href={`mailto:`+project.email}><i className="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
+                                            {/* <p className="Company-Email"><a href={`mailto:`+project.email}><i className="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p> */}
                                             {project.address && (<>
                                                 <p className="Company-Addresse"><i class="uil uil-map-marker"></i> <span>{project.address}</span></p>
                                             </>)}
@@ -557,7 +569,7 @@ export default function ViewFunder(props) {
                                                         <div className="Contact-Infos">
                                                             <div className='Contact-Infos-Row'>
                                                                 <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
-                                                                <p><i className="uil uil-lightbulb-alt"></i> PP</p>
+                                                                <p><i className={UserIcon(value.type)}></i>{t(`${value.type}`)}</p>
                                                                 {(user?.profile_id != value.profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                                                             </div>
                                                         </div>
@@ -599,18 +611,18 @@ export default function ViewFunder(props) {
                                         <label>{t(`you-are`)}</label>
                                         <span>{t(`${type}`)}</span>
                                     </li>
-                                    <li className="Offer-Item">
+                                    {/* <li className="Offer-Item">
                                         <label>{t(`Secteurs-activite`)}</label>
                                         <span>{t(`${sector}`)}</span>
-                                    </li>
+                                    </li> */}
                                     <li className="Offer-Item">
                                         <label>{t(`Zones-ciblees`)}</label>
                                         <span>{country}</span>
                                     </li>
-                                    <li className="Offer-Item">
+                                    {/* <li className="Offer-Item">
                                         <label>{t(`budge`)}</label>
                                         <span>{t(`${finance}`)}</span>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                             <div className="Single-Offer-Tags">

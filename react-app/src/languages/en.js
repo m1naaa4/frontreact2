@@ -882,6 +882,10 @@ const en = {
     'p.p' : 'Public/private',
     'acce' : 'Accelerator',
     'assoc' : 'Association',
+    'ACMPT': 'Mentor',
+    'BF': 'Investor',
+    'PP': 'Startuper',
+    'visitor': 'Visitor',
 
 };
 

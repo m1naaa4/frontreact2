@@ -6,12 +6,12 @@ import sectors from "../../../../data/sectors"
 
 import etats from '../../../../data/etats';
 
-import finances from "../../../../data/finances"
+// import finances from "../../../../data/finances"
 import countries from "../../../../data/countries"
 import AllMultiSelectCheckboxStatus from '../../../../utils/Filters/AllMultiselectCheckboxStatus';
 import AllMultiSelectCheckboxSector from '../../../../utils/Filters/AllMultiselectCheckboxSector';
 import AllMultiSelectCheckboxZone from '../../../../utils/Filters/AllMultiselectCheckboxZone';
-import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultiselectCheckboxFinance';
+// import AllMultiSelectCheckboxFinance from '../../../../utils/Filters/AllMultiselectCheckboxFinance';
 import { Collapse } from 'react-bootstrap';
 import InputTags from '../../../../utils/tags/TagsInput';
 import { loadProjectAction } from '../../../../store/actions/Project/ProjectAction';
@@ -99,9 +99,9 @@ function FilterProject({ filterInput }) {
                                 <div className="input-row input-multi-filter input-small">
                                     <AllMultiSelectCheckboxSector {...{ setSelectedsector }} datas={sectors} />
                                 </div>
-                                <div className="input-row input-multi-filter input-small">
+                                {/* <div className="input-row input-multi-filter input-small">
                                     <AllMultiSelectCheckboxFinance {...{ setSelectedfinance }} datas={finances} />
-                                </div>
+                                </div> */}
                                 <div className="input-row input-multi-filter input-small">
                                     
                                     <AllMultiSelectCheckboxZone {...{ setSelectedcountry }} datas={countries} />

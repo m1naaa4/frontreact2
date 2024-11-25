@@ -385,6 +385,18 @@ export default function ShowProjectView(props) {
         }
     };
 
+    const UserIcon = (userTypo) => {
+        if (userTypo === 'PP') {
+            return 'uil uil-lightbulb-alt';
+        } else if (userTypo === 'BF') {
+            return 'uil uil-moneybag';
+        } else if (userTypo === 'ACMPT') {
+            return 'uil uil-users-alt';
+        } else {
+            return '';
+        }
+    }
+
     return (
         <>
             {/* <!-- SINGLE -->*/}
@@ -474,7 +486,7 @@ export default function ShowProjectView(props) {
                                 <div className="Signle-Offer-Media">
                                 {
                                     project.project.media_link && project.project.media_link.map((item, index )=> (
-                                                    <div className="media-wrap">
+                                                    <div className="media-wrap" key={project.project.id}>
                                                     {(function() {
                                                         if(getExtension(item) == 'youtube'){
                                                             return <ReactPlayer width="100%" url={item} controls={true} />
@@ -584,7 +596,7 @@ export default function ShowProjectView(props) {
                                                     <div className="Contact-Infos">
                                                         <div className='Contact-Infos-Row'>
                                                             <Link to={`/profile/${project.project.owner.profile_id}`}><h4>{project.project.owner.username}</h4></Link>
-                                                            <p><i className={`${type}`}></i> {project.project.owner.type}</p>
+                                                            <p><i className={UserIcon(project.project.owner.type)}></i>{t(`${project.project.owner.type}`)}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -611,7 +623,7 @@ export default function ShowProjectView(props) {
                                         <span>{t(`${status}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>{t(`industry`)}</label>
+                                        <label>{t(`sector`)}</label>
                                         <span>{t(`${sector}`)}</span>
                                     </li>
                                     <li className="Offer-Item">
@@ -619,8 +631,8 @@ export default function ShowProjectView(props) {
                                         <span>{country}</span>
                                     </li>
                                     <li className="Offer-Item">
-                                        <label>{t(`fundingSearch`)}</label>
-                                        <span>{t(`${finance}`)}</span>
+                                        {/* <label>{t(`Venture`)}</label>
+                                        <span>{t(`${finance}`)}</span> */}
                                     </li>
                                 </ul>
                             </div>

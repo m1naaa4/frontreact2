@@ -42,9 +42,9 @@ export default function ProjectShowPrivateRoutes(props) {
                         <div className="Profile-Navigation mb-3" style={{ maxWidth: "100%", top: 0 }}>
                             <ul className="Profie-Menu">
                                 <li><NavLink className={currentPage === 'details' ? 'active-profile-link' : ''} to={`/project/show/${params.id}`}><i className="uil uil-user-square"></i> Details</NavLink></li>
-                                <li><NavLink className={currentPage === 'images' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/images`}><i class="uil uil-images"></i> Images</NavLink></li>
-                                <li><NavLink className={currentPage === 'videos' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/videos`}><i class="uil uil-video"></i> Videos</NavLink></li>
-                                <li><NavLink className={currentPage === 'docs' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/docs`}><i class="uil uil-file-alt"></i> Documents</NavLink></li>
+                                <li><NavLink className={currentPage === 'images' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/images`}><i className="uil uil-images"></i> Images</NavLink></li>
+                                <li><NavLink className={currentPage === 'videos' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/videos`}><i className="uil uil-video"></i> Videos</NavLink></li>
+                                <li><NavLink className={currentPage === 'docs' ? 'active-profile-link' : ''} to={`/project/show/${params.id}/docs`}><i className="uil uil-file-alt"></i> Documents</NavLink></li>
                             </ul>
                         </div>
                     </div>

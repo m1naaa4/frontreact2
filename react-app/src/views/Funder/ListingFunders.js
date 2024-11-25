@@ -32,6 +32,9 @@ export default function ListingFunders(props) {
     const hasMore = useSelector(state => state.funders.hasMore);
     const current = useSelector(state => state.funders.current);
     const loading = useSelector(state => state.funders.loading);
+    const totalFunders =  useSelector(state => state.funders.totalFunders);
+    const [total, setTotal] = useState(0);
+    const [currentLength, setCurrentLength] = useState(0);
 
     const observer = useRef()
     const lastProjectElementRef = useCallback( node =>{
@@ -47,6 +50,8 @@ export default function ListingFunders(props) {
                 setIsLoading(false)
             }
         })
+        setTotal(totalFunders);
+        setCurrentLength(projects.funders.length);
         if (node) observer.current.observe(node)
     }, [loading, hasMore])
 
@@ -75,6 +80,9 @@ export default function ListingFunders(props) {
                     {/* </div> */}
 
                      <div className="offers-list">
+                        <div className='offer-title' style={{width: '100px', pointerEvents: 'none'}}>
+                            <span className='offer-sector-name'>{currentLength} of {totalFunders}</span><br/>
+                        </div>
                         <div className="row" >
                             {
                                 loading ? (

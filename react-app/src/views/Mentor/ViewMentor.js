@@ -69,21 +69,7 @@ export default function ViewMentor(props) {
         'provider_name': localStorage.getItem('provider_name'),
         'provider': 'mentor',
         'content_id': params.id,
-    }
-
-    useEffect(() => {
-        if (user && user.type) {
-            if (user.type === 'PP') {
-                setType('uil uil-lightbulb-alt');
-            } else if (user.type === 'BF') {
-                setType('uil uil-moneybag');
-            } else if (user.type === 'ACMPT') {
-                setType('uil uil-users-alt');
-            } else {
-                setType('');
-            }
-        }
-    }, [user]);
+    };
 
     useEffect(() => {
         if (visibility === false) {
@@ -347,8 +333,16 @@ export default function ViewMentor(props) {
         setOpen(false);
     }
 
-    const HandleClickOpen = () => {
-        setOpen(true);
+    const UserIcon = (userTypo) => {
+        if (userTypo === 'PP') {
+            return 'uil uil-lightbulb-alt';
+        } else if (userTypo === 'BF') {
+            return 'uil uil-moneybag';
+        } else if (userTypo === 'ACMPT') {
+            return 'uil uil-users-alt';
+        } else {
+            return '';
+        }
     }
 
     useEffect(() => {
@@ -433,9 +427,9 @@ export default function ViewMentor(props) {
                                             </div>    
                                         </h3>
                                         <div className='funder-meta-list'>
-                                            <p className="Company-Email"><a href={`mailto:`+project.email}><i class="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p>
+                                            {/* <p className="Company-Email"><a href={`mailto:`+project.email}><i className="uil uil-envelope-alt"></i> <span>{project.email}</span></a></p> */}
                                             {project.address && (<>
-                                                <p className="Company-Addresse"><i class="uil uil-map-marker"></i> <span>{project.address}</span></p>
+                                                <p className="Company-Addresse"><i className="uil uil-map-marker"></i> <span>{project.address}</span></p>
                                             </>)}
                                         </div>
                                     </div>
@@ -577,7 +571,7 @@ export default function ViewMentor(props) {
                                                         <div className="Contact-Infos">
                                                             <div className='Contact-Infos-Row'>
                                                                 <Link to={`/profile/${value.profile_id}`}><h4>{value.username}</h4></Link>
-                                                                <p><i className="uil uil-lightbulb-alt"></i> PP</p>
+                                                                <p><i className={UserIcon(value.type)}></i>{t(`${value.type}`)}</p>
                                                                 {(user?.profile_id != value.profile_id) ? (<AvatarTooltip myRef={ref} data={value} styles={{ marginTop: "67px", marginRight: "69px" }} />) : ("")}
                                                             </div>
                                                         </div>

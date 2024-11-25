@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 
 export default function ListProjectView({ props}) {
     const tag_state = useSelector(state => state.generaleVariable.tag);
+    const [total, setTotal] = useState(0);
+    const [currentLength, setCurrentLength] = useState(0);
     const tags = tag_state ? tag_state : [];
     const {t} = useTranslation();
     
@@ -23,6 +25,8 @@ export default function ListProjectView({ props}) {
         'sector' : '',
         'search' : '',
         'tags'   : tags,
+        'total' : total,
+        'currentLength' : currentLength
     });
 
     const data = { filterInput, setFilterInput, props };
@@ -32,6 +36,7 @@ export default function ListProjectView({ props}) {
     const dispatch = useDispatch();
 
     const projects =  useSelector(state => state.projects);
+    const totalProjects =  useSelector(state => state.projects.totalProjects);
     const hasMore = useSelector(state => state.projects.hasMore);
     const current = useSelector(state => state.projects.current);
     const loading = useSelector(state => state.projects.loading);
@@ -50,6 +55,8 @@ export default function ListProjectView({ props}) {
                 setIsLoading(false)
             }
         })
+        setTotal(totalProjects);
+        setCurrentLength(projects.projects.length);
         if (node) observer.current.observe(node)
     }, [loading, hasMore])
 
@@ -80,6 +87,9 @@ export default function ListProjectView({ props}) {
                         {/* </div> */}
                     </div>
                     <div className="offers-list">
+                        <div className='offer-title' style={{width: '100px', pointerEvents: 'none'}}>
+                            <span className='offer-sector-name'>{currentLength} of {totalProjects}</span><br/>
+                        </div>
                         <div className="row" >
                             {
                                 loading === true ? (
