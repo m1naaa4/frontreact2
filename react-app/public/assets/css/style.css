@@ -6666,4 +6666,7 @@ border-top: none;
     height: 50vh;
   }
 
+  .daterangepicker .ranges li.active{
+    background: #0ecd68 !important;
+  }
 }

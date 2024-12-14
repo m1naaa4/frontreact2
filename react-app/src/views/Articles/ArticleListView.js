@@ -21,7 +21,7 @@ export default function ArticleListView({ article }) {
                         <span className='article-categories'>{article.categories != undefined && article.categories.map(c => c.name).join(', ')}</span>
                         <button className="reaction-button" id="shareButton" type="button" onClick={()=>{setShareUrl(true)}}>
                             {/* <img src="/assets/images/icons/dadupa-sharewhite.svg" style={{ width: "13px", height: "13px" }} alt="" id="image_share" /> */}
-                            <i class="uil uil-share-alt"></i>
+                            <i className="uil uil-share-alt"></i>
                         </button>
                     </div>
                     <Link to={`articles/${article.id}`}>

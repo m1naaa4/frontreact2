@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import customStyles from "../styleMultiselect";
 
 
 const AllMultiSelectCheckboxStatus = ({datas, setSelectedstatus}) => {
@@ -52,7 +53,8 @@ const AllMultiSelectCheckboxStatus = ({datas, setSelectedstatus}) => {
       value={selectedOptions}
       onChange={onChange}
       setState={setSelectedOptions}
-      hideSearch={true}
+      hideSearch={false}
+      styles={customStyles}
     />
   );
 };

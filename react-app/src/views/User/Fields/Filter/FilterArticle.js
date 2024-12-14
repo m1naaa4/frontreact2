@@ -3,8 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import { getArticles } from '../../../../store/actions/Articles/ArticlesActions';
 import AllMultiselectCheckboxCategories from '../../../../utils/Filters/AllMultiselectCheckboxCategories';
-import ReactDatePicker from 'react-datepicker';
+import 'jquery-ui/themes/base/all.css';
+import 'daterangepicker/daterangepicker.css';
 
+import RangeDatePicker from '../../../../utils/RangeDatePicker';
+
+import 'daterangepicker';
+import 'daterangepicker/daterangepicker.css';
 
 
 function FilterArticle({ filterInput }) {
@@ -14,8 +19,7 @@ function FilterArticle({ filterInput }) {
 
     const [selectedCategoris, setSelectedCat] = useState();
     const [search, setSearch] = useState();
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
+    const [dateRange, setDate] = useState();
     
 
     const dispatch = useDispatch();
@@ -30,7 +34,7 @@ function FilterArticle({ filterInput }) {
 
         filterInput.category = dcategory;
         filterInput.search = search;
-        filterInput.created = {'startDate': startDate, 'endDate': endDate};
+        filterInput.created = {'startDate': dateRange};
 
         dispatch(getArticles(filterInput));
     }
@@ -47,14 +51,11 @@ function FilterArticle({ filterInput }) {
                             <div className="input-row input-multi-filter input-small">
                                 <AllMultiselectCheckboxCategories {...{ setSelectedCat }} datas={categories} />
                             </div>
-                            <div style={{ width: '125px' }} className="input-row">
-                                <ReactDatePicker className="wizard-required" placeholderText={t('start')} selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <div className="input-row">
+                                <RangeDatePicker placeholderText={t('start')} selectedRangeDate={dateRange} {...{setDate}}/>
                             </div>
-                            <div style={{ width: '125px' }} className="input-row">
-                                <ReactDatePicker className="wizard-required" placeholderText={t('end')} selected={endDate} onChange={(date) => setEndDate(date)} />
-                            </div>
-                            <div className="input-row filter-actions">
-                                <button type="submit" name="submit"  onClick={handleSubmitValue} className="filter-button">
+                            <div className="input-row">
+                                <button type="submit" name="submit" style={{marginRight:"0px"}}  onClick={handleSubmitValue} className="filter-button">
                                     <i className="uil uil-search"></i> {t('search')}
                                 </button>
                             </div>
