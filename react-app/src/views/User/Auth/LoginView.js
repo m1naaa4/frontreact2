@@ -47,6 +47,7 @@ export default function LoginView(props) {
             setIsLoading(true)
 
             dispatch(UserLoginAction(fields, props.props))
+            setIsLoading(false)
         }          
     }
 
