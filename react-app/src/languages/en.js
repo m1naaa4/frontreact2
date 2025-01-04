@@ -590,10 +590,11 @@ const en = {
     'form.profilsearchby': 'Search by',
     select_a_country : 'Select a country',
     auth_response_error : 'E-mail or Password incorrect !',
-    'password.8caracteresminimum' : 'Password: 8 characters minimum',
+    'password.8caracteresminimum' : 'Password: 12 characters minimum',
     request_sent_accept : 'Connection request sent',
     'form.want_funder' : 'I\'m looking for investors',
     'Select': 'Select',
+    'authResponse.error': 'E-mail or Password incorrect  or the account is not active!',
 
     afghanistan:'Afghanistan',
     åland_Islands:'Åland Islands',

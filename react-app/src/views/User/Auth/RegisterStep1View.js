@@ -21,13 +21,44 @@ const RegisterStep1View = ({setForm, formData, navigation , props}) =>{
                 },
                 password: {
                     required: true,
-                    minlength: 6,
-                    normalizer: function(value) {
+                    minlength: 12,
+                    normalizer: function (value) {
                         return $.trim(value);
-                    }
+                    },
+                    validatePassword: true
+                }
+            },
+            messages: {
+                password: {
+                    required: "Password is required.",
+                    minlength: "Password must be at least 12 characters long.",
                 }
             }
         });
+
+        // Define custom validation rule
+        $.validator.addMethod("validatePassword", function (value, element) {
+            const errors = [];
+            if (!/[A-Z]/.test(value)) {
+                errors.push("an uppercase letter");
+            }
+            if (!/[a-z]/.test(value)) {
+                errors.push("a lowercase letter");
+            }
+            if (!/\d/.test(value)) {
+                errors.push("a number");
+            }
+            if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+                errors.push("a special character");
+            }
+
+            // If any condition is missing, show error
+            if (errors.length > 0) {
+                $.validator.messages.validatePassword = `The password must contain at least ${errors.join(", ")}.`;
+                return false;
+            }
+            return true;
+        }, "");
     });
 
     const validateForm = (value, key) => {

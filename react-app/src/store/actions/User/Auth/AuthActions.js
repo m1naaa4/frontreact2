@@ -14,16 +14,17 @@ export const signUpAction = (credentials, props) =>
         SignUpService(credentials).then((res)=>{
             if(res.hasOwnProperty('success') && res.success===true &&  res.hasOwnProperty('token')){
 
-                localStorage.setItem('user-token','Bearer '+res.token);
+                // localStorage.setItem('user-token','Bearer '+res.token);
 
-                axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
+                // axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
 
-                dispatch({type:'LOGIN_SUCCESS', res});
-                dispatch({type:'LOAD_USER_SUCCESS',res});
-                setTimeout(() => {
-                    props.history.push("/profile/"+res.user.profile_id);
-                    dispatch({type:'RESTART_AUTH_RESPONSE'});
-                }, 10);
+                // dispatch({type:'LOGIN_SUCCESS', res});
+                // dispatch({type:'LOAD_USER_SUCCESS',res});
+                // setTimeout(() => {
+                    props.history.push("/login");
+                    // props.history.push("/profile/"+res.user.profile_id);
+                //     dispatch({type:'RESTART_AUTH_RESPONSE'});
+                // }, 10);
 
             }else if(res.hasOwnProperty('success') && res.success===false) {
                 dispatch({type:'SIGNUP_ERROR',res})
