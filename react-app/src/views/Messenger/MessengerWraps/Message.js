@@ -1,6 +1,6 @@
 import React, { useState }  from 'react'
 import {useSelector} from "react-redux";
-import Moment from 'react-moment';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 
@@ -46,10 +46,7 @@ export default function Message({message}) {
             }
             {
               <div className="messages-date"><label className="messages-date-label">
-                <Moment calendar={calendarStrings}>
-                {message.created_at}
-                </Moment>
-                {/* <Moment start fromNowDuring='1'>{message.created_at}</Moment>   */}
+                {moment(message.created_at).calendar(null, calendarStrings)}
                 </label></div>
             }
                 

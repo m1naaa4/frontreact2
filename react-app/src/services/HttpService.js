@@ -1,4 +1,5 @@
 import axios from './interceptors.js';
+import { svcUrl } from './svcUrl';
 class HttpService {
 
     postData = async (item, added_url, tokenId = "", logged = true) =>
@@ -10,7 +11,7 @@ class HttpService {
         }
         return await axios({
             method: 'POST',
-            url: process.env.REACT_APP_API_URL + "/" + added_url,
+            url: svcUrl('', process.env.REACT_APP_API_URL, '/' + added_url),
             data: item
         }).then(response => response.data)
     }
@@ -31,7 +32,7 @@ class HttpService {
     getData = async (added_url) =>
     {
         axios.defaults.withCredentials = false;
-        return await axios(process.env.REACT_APP_API_URL + "/" + added_url).then( response => response.data);
+        return await axios(svcUrl('', process.env.REACT_APP_API_URL, '/' + added_url)).then( response => response.data);
     }
 
     postLogout = async (added_url) =>
@@ -39,7 +40,7 @@ class HttpService {
         axios.defaults.withCredentials = false;
         return await axios({
             method: 'POST',
-            url: process.env.REACT_APP_API_URL + "/" + added_url,
+            url: svcUrl('', process.env.REACT_APP_API_URL, '/' + added_url),
         }).then(response => response.data)
     }
 

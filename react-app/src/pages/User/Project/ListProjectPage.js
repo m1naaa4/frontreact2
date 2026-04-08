@@ -9,7 +9,7 @@ export default function ListProject(props ) {
         sector_id: '',
         funding_search: '',
         project_status: '',
-        action: 'getallProjects',
+        action: 'get',
     };
     const [filterInput, setFilterInput] = useForm(defaultData);
 

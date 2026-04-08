@@ -32,7 +32,7 @@ function LanguageSelectorView() {
 
         <select
             onChange={handleLanguageChange}
-            value={languageStoredInLocalStorage}
+            value={languageStoredInLocalStorage || ''}
         >
             {languageOptions.map(item => (
                 <option  key={item.id} value={item.id}>{t(item.text)}</option>

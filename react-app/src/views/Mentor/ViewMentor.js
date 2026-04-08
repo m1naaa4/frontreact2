@@ -159,11 +159,6 @@ export default function ViewMentor(props) {
             // top: '-7px',
             // paddingBottom: '25px',
         }),
-        valueContainer: (base, state) => ({
-            ...base,
-            height: '30px',
-            // marginBottom: '20px',
-        }),
         singleValue: (base, state) => ({
             ...base,
             marginTop: '7px',

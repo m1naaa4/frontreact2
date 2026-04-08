@@ -142,7 +142,15 @@ export default function ShowComment({ post }) {
                                             >
                                                 <DialogContent>
                                                 <DialogContentText id="alert-dialog-description">
-                                                           <textarea type="text" name="body" className="WritePost-TextArea js-elasticArea" id="textareaComment" placeholder="Edit Comment" onChange={(e)=> setUpdateText(e.target.value)} style={{width:"300px",borderRadius:"40px",border:"none",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}>{comment.body}</textarea>
+                                                            <textarea
+                                                                type="text"
+                                                                name="body"
+                                                                className="WritePost-TextArea js-elasticArea"
+                                                                id="textareaComment"
+                                                                placeholder="Edit Comment"
+                                                                onChange={(e)=> setUpdateText(e.target.value)}
+                                                                style={{width:"300px",borderRadius:"40px",padding:"15px",backgroundColor:"#F8FBFC",border:"3px solid #00CC66",fontFamily:"Montserrat sans-serif",fontSize:"15px"}}
+                                                            >{comment.body}</textarea>
                                                 </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>

@@ -160,10 +160,11 @@ export default function ShowProjectView(props) {
                 boxShadow: "none",
             },
         }),
-        valueContainer:(base) => ({
-        ...base,
-        height: '30px',
-        padding: '2px 15px',
+        valueContainer: (base) => ({
+            ...base,
+            height: '30px',
+            padding: '2px 15px',
+            // marginBottom: '20px',
         }),
         IndicatorsContainer: (base, state) => ({
             ...base,
@@ -182,11 +183,6 @@ export default function ShowProjectView(props) {
             // position: 'relative',
             // top: '-7px',
             // paddingBottom: '25px',
-        }),
-        valueContainer: (base, state) => ({
-            ...base,
-            height: '30px',
-            // marginBottom: '20px',
         }),
         singleValue: (base, state) => ({
             ...base,

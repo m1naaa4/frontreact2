@@ -176,7 +176,7 @@ const ProjectGridView = ({ project }) => {
                                 </div>
                             }
                             else{
-                                return <img onError={handleImageError} style={{width:'350px', height: '234px'}} src="image.gif" alt="Project"/>
+                                return <img onError={handleImageError} style={{width:'350px', height: '234px'}} src="/image.gif" alt="Project"/>
                             }
                         }
                     }

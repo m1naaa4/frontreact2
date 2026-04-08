@@ -108,39 +108,6 @@ function Zonedropfilter ({formData}) {
           height: '50px',
           padding: '2px 15px',
         }),
-      
-
-      menuList: (provided, state) => ({
-      ...provided,
-      // border: '1px solid green',
-      borderRadius: "32px",
-      padding: '0',
-      "&::-webkit-scrollbar": {
-        width: "5px",
-        
-      },
-      "&::-webkit-scrollbar-track": {
-        background: "#f1f1f1",
-        borderRadius: "10px",
-      },
-      "&::-webkit-scrollbar-thumb": {
-        borderRadius: "10px",
-        background: "#888",
-      },
-      "&::-webkit-scrollbar-thumb:hover": {
-        background: "#555"
-      }
-      }),
-      control: (base, state) => ({
-        ...base,
-        boxShadow: state.isFocused ? "0px 1px 15px -3px #00b60 ":"0px 0px 20px 0px #e7e7e7",
-        borderRadius: '30px',
-        border: '1px solid #e7e7e7',
-        height: '50px',
-        "&:hover":{
-          boxShadow: "none",
-        },
-      }),
   }
 
   return (

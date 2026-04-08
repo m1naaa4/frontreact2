@@ -15,13 +15,8 @@ import Spinner from 'react-bootstrap/Spinner'
 
 export default function LoginView(props) {
 
-    const [place, sePlace] = useState();
-    const [t] = useTranslation();
+    const [t, i18n] = useTranslation();
     const [is_loading, setIsLoading] = useState(false);
-
-    if (localStorage.getItem('user-token')) {
-        props.props.history.push('/project/lists');
-    }
     const [fields, handleFieldChange] = useFormFields({
         email: "",
         password: ""
@@ -37,10 +32,11 @@ export default function LoginView(props) {
     const authResponse = useSelector(state => state.userAuth.authResponse);
 
     useEffect(() => {
-            dispatch(clearUserAuthState())
-            sePlace(t('welcomeDescription'))
-        },
-    [])
+        dispatch(clearUserAuthState());
+        if (localStorage.getItem('user-token')) {
+            props.props.history.replace('/project/lists');
+        }
+    }, [dispatch, props.props.history]);
 
     const handleLogin = (e) => {
         if($("#form-login").valid()){
