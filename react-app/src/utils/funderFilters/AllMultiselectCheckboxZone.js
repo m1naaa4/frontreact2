@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import ReactMultiSelectCheckboxes from "../../components/ReactMultiSelectCheckboxes";
 
 
 const AllMultiSelectCheckboxZone = ({datas, setSelectedcountry}) => {
