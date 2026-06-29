@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import HeaderProfile from "../layout/Header/HeaderProfile";
+import SidebarNav from "../layout/Sidebar/SidebarNav";
 import ArticlesList from '../pages/Admin/articles/ArticlesList';
 import ArticleDetails from '../pages/Admin/articles/ArticleDetails';
 import ArticleAuthor from '../pages/Admin/articles/ArticleAuthor';
@@ -17,8 +18,9 @@ export default function ArticlePrivateRoutes(props) {
 
     return (
         <div>
+            <SidebarNav />
             <HeaderProfile props={props} />
-            <div className="Dadupa-Page">
+            <div className="Dadupa-Page Sidebar-Page">
                 <Switch>
                     <Route exact path={`${props.match.path}/`} component={ArticlesList} />
                     <Route exact path={props.match.path} render={props => (

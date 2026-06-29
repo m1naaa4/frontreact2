@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from '../layout/Header/HeaderProfile';
+import SidebarNav from '../layout/Sidebar/SidebarNav';
 import NotFound from '../pages/404';
 import FriendPage from '../pages/Profile/FriendPage';
+import DashboardPage from '../pages/Profile/DashboardPage';
 import OffrePage from '../pages/Profile/OffrePage';
 import ProfilePage from '../pages/Profile/ProfilePage';
 import MainCvthequeView from '../views/Profile/Cvtheque/MainCvthequeView';
@@ -24,8 +26,9 @@ export default function ProfilePrivateRoutes(props) {
     },[id]);
     return (
         <div>
+            <SidebarNav />
             <HeaderProfile props={props}/>
-            <div className="Dadupa-Page">
+            <div className="Dadupa-Page Sidebar-Page">
                 <div className="Page-Wrapper Profile">
                     <ProfileHeaderForm {...props}/>
                     <div className="Profile-Wrapper">
@@ -36,6 +39,11 @@ export default function ProfilePrivateRoutes(props) {
                                         <Route exact path={`${props.match.path}`}  component = {ProfilePage} />
                                         <Route exact path={props.match.path} render = { props => (
                                             <Redirect to={{pathname: `${props.match.path}` }} />
+                                        )} />
+
+                                        <Route exact path={`${props.match.path}/dashboard`} component={DashboardPage} />
+                                        <Route exact path={props.match.path} render={props => (
+                                            <Redirect to={{ pathname: `${props.match.path}/dashboard` }} />
                                         )} />
 
                                         

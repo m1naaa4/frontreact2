@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+﻿import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import AddComment from '../Comment/AddComment';
 import { Link, useHistory, useParams, NavLink } from 'react-router-dom';
@@ -25,9 +25,11 @@ import { LikeAction } from '../../store/actions/Like/LikeAction';
 import ProjectSkeletonGridOne from '../../skeleton/ProjectSkeletonOne';
 import ProjectSkeletonGrid from '../../skeleton/ProjectSkeletonGrid';
 import AvatarTooltip from '../../utils/AvatarTooltip';
+import "./ShowProjectViewMedia.css";
 
 export default function ShowProjectView(props) {
     const [type, setType] = useState('');
+    const [activeVideo, setActiveVideo] = useState(null);
 
     const [shareUrl, setShareUrl] = useState(false);
     const project = useSelector(state => state.getproject.getproject);
@@ -393,6 +395,29 @@ export default function ShowProjectView(props) {
         }
     }
 
+    const getMediaType = (file) => {
+        if (/^(https?:\/\/)?((www\.)?youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]{11}/.test(file)) {
+            return 'youtube';
+        }
+        if (/^(https?:\/\/)?(www\.)?vimeo\.com\/\d+/.test(file)) {
+            return 'vimeo';
+        }
+        if (/\.(mp4|ogg|webm|x-msvideo|quicktime|x-mpeg2)$/i.test(file)) {
+            return 'video';
+        }
+        if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(file)) {
+            return 'document';
+        }
+        return 'image';
+    };
+
+    const projectVideos = project?.project?.media_link
+        ? project.project.media_link.filter((item) => {
+            const type = getMediaType(item);
+            return type === 'video' || type === 'youtube' || type === 'vimeo';
+        })
+        : [];
+
     return (
         <>
             {/* <!-- SINGLE -->*/}
@@ -443,7 +468,7 @@ export default function ShowProjectView(props) {
                                     <div className="Company-Right">
                                     {project.project.media_link.length > 1 && 
                                         <div className='more-images-tab'>
-                                            <NavLink to={`/project/show/${params.id}/images`}><i class="uil uil-images"></i> 6 Images</NavLink>
+                                            <NavLink to={`/project/show/${params.id}/images`}><i className="uil uil-images"></i> 6 Images</NavLink>
                                         </div>
                                     }
 
@@ -481,36 +506,80 @@ export default function ShowProjectView(props) {
                             <div className="Content-Wrap">
                                 <div className="Signle-Offer-Media">
                                 {
-                                    project.project.media_link && project.project.media_link.map((item, index )=> (
-                                                    <div className="media-wrap" key={project.project.id}>
-                                                    {(function() {
-                                                        if(getExtension(item) == 'youtube'){
-                                                            return <ReactPlayer width="100%" url={item} controls={true} />
-                                                        }else{
-                                                            if(getExtension(item) == 'vimeo'){
-                                                                return <ReactPlayer url={item} controls={true} />
-                                                            }else if (/\.(doc|docx|xls|xlsx|ppt|pptx|csv|pdf)$/i.test(item)){
-                                                                return <div className="Doc-Wrap">
-                                                                    <a href="#!">
-                                                                        <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> {t(`documents`)} </div>
-                                                                    </a>
-                                                                </div>
-                                                            }   
-                                                            else{
-                                                                if(getExtension(item) == 'mp4' || getExtension(item) == ('x-mpeg2') ||
-                                                                getExtension(item) == ('x-msvideo') || getExtension(item) == ('quicktime')){
-                                                                   return <ReactPlayer width='100%' height='300' controls={true}  url={item}/>
-                                                                }else{
-                                                                    if(index == 0){
-                                                                        return <img width="100%" height="300" src={item} alt="Project"/>
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    })()}
+                                    project.project.media_link && project.project.media_link.map((item, index )=> {
+                                        const mediaType = getMediaType(item);
+
+                                        if (mediaType === 'document') {
+                                            return (
+                                                <div className="media-wrap" key={index}>
+                                                    <div className="Doc-Wrap">
+                                                        <a href="#!">
+                                                            <div className="Doc-Name" onClick={goToDocuments}><i className="uil uil-paperclip"></i> {t(`documents`)} </div>
+                                                        </a>
                                                     </div>
-                                                ))}
+                                                </div>
+                                            );
+                                        }
+
+                                        if (mediaType === 'image') {
+                                            return (
+                                                <div className="media-wrap" key={index}>
+                                                    {index === 0 && <img width="100%" height="300" src={item} alt="Project"/>}
+                                                </div>
+                                            );
+                                        }
+
+                                        return null;
+                                    })}
                                 </div>
+
+                                {projectVideos.length > 0 && (
+                                    <div className="project-media-videos">
+                                        {projectVideos.map((videoUrl, index) => (
+                                            <button
+                                                key={index}
+                                                type="button"
+                                                onClick={() => setActiveVideo(videoUrl)}
+                                                className="project-media-video-card"
+                                            >
+                                                <div className="project-media-video-frame">
+                                                    <div className="project-media-video-play"><span /></div>
+                                                    <ReactPlayer
+                                                        width="100%"
+                                                        height="100%"
+                                                        url={videoUrl}
+                                                        light
+                                                        playing={false}
+                                                        controls={false}
+                                                        muted
+                                                    />
+                                                </div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {activeVideo && (
+                                    <div onClick={() => setActiveVideo(null)} className="project-media-overlay">
+                                        <div onClick={(e) => e.stopPropagation()} className="project-media-player">
+                                            <button
+                                                type="button"
+                                                onClick={() => setActiveVideo(null)}
+                                                aria-label="Fermer la vidéo"
+                                                className="project-media-close"
+                                            >
+                                                x
+                                            </button>
+                                            <ReactPlayer
+                                                url={activeVideo}
+                                                playing
+                                                controls
+                                                width="100%"
+                                                height="100%"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div className="Signle-Offer-Content">
                                     <div className="reactions-wrap">
@@ -648,3 +717,4 @@ export default function ShowProjectView(props) {
         </>
     )
 }
+

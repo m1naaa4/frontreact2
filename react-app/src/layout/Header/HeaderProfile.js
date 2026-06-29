@@ -24,6 +24,8 @@ function HeaderProfile() {
     const [showMessages, setShowMessages] = useState(false);
     const [display, setDisplay] = useState(false);
     const [avatar, setAvatar] = useState(false);
+    const [notifFilter, setNotifFilter] = useState('all');
+
     const ref = useRef();
 
     const { t } = useTranslation();
@@ -98,7 +100,7 @@ function HeaderProfile() {
     }
 
     const openNotifications = () => {
-        $('.Dadupa-Notifs-Box').toggleClass('Notifs-Box-Active');
+        setShowNotifications(prev => !prev);
 
         // setShowNotifications(!showNotifications )
 
@@ -127,6 +129,10 @@ function HeaderProfile() {
     useEffect(() => {
         setAvatar(newavatar.avatar.avatar_link);
     }, [newavatar])
+    const filteredNotifications =
+  notifFilter === 'all'
+    ? (usernotifications.notifications || [])
+    : (usernotifications.notifications || []).filter(notification => notification.seen === false);
 
     return (
         <div>
@@ -139,7 +145,7 @@ function HeaderProfile() {
             <header className="Dadupa-Header">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-2 col-md-2">
+                        <div className="col-2 col-md-3">
                             <div className="left-nav">
                                 <a href={`${process.env.REACT_APP_FRONT_URL}`}>
                                     <img src="/assets/images/dadupa-brand-text.svg" alt="Dadupa Connect" className="Logo-Desktop" />
@@ -147,7 +153,7 @@ function HeaderProfile() {
                                 </a>
                             </div>
                         </div>
-                        <div className="dadupa-navigation col-md-5 d-lg-block">
+                        <div className="dadupa-navigation col-md-6 d-lg-block">
                             <div className="center-nav">
                                 <ul className="Dadupa-Nav">
                                 <li className="Nav-Item"><NavLink activeClassName="Active-Nav" to={`/project`} className="Nav-Link"><i className="uil uil-lightbulb-alt"></i><span>{t('projectHolder')}</span></NavLink></li>
@@ -157,7 +163,7 @@ function HeaderProfile() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-10 col-md-5 col-lg-5">
+                        <div className="col-10 col-md-3 col-lg-3">
                             <div className="right-nav">
                                 <div className="New-Post" onClick={addMenu}>
                                     <button className="Add-New" data-toggle="tooltip" data-placement="bottom" title="Add new"><i className="uil uil-plus"></i></button>
@@ -183,19 +189,45 @@ function HeaderProfile() {
                                                 {usernotifications.notifications && usernotifications.notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
                                             </button>
                                             {/* {showNotifications &&  */}
-                                                <div className="Dadupa-Notifs-Box Dadupa-Msgs-Box Msgs-Box-Active" ref={ref}>
-                                                    <div className='Dadupa-Notifs-Box-Header'>
-                                                    <h3>{t('notifications')}</h3>
-                                                    </div>
-                                                    <div className={' Msgs-List'} >
-                                                        { usernotifications.notifications.map((notification, index) =>
-                                                            <NotificationMenu notification={notification} key={index} />
-                                                        )}
-                                                        <div className="All-Messages-Row">
-                                                            <Link to={`/notifications`} className="all-messages-button"> {t('seeAll')} {t('notifications')} </Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div className={`Dadupa-Notifs-Box ${showNotifications ? 'Notifs-Box-Active' : ''}`} ref={ref}>
+  <div className="Dadupa-Notifs-Box-Header">
+    <h3>{t('notifications')}</h3>
+
+    <div className="Notification-Filters">
+      <button
+        type="button"
+        className={notifFilter === 'all' ? 'active' : ''}
+        onClick={() => setNotifFilter('all')}
+      >
+        Toutes
+      </button>
+
+      <button
+        type="button"
+        className={notifFilter === 'unread' ? 'active' : ''}
+        onClick={() => setNotifFilter('unread')}
+      >
+        Non lues
+      </button>
+    </div>
+  </div>
+
+  <div className="Msgs-List">
+    {filteredNotifications.length ? (
+      filteredNotifications.map((notification, index) => (
+        <NotificationMenu notification={notification} key={index} />
+      ))
+    ) : (
+      <div className="p-3">Aucune notification</div>
+    )}
+
+    <div className="All-Messages-Row">
+      <Link to={`/notifications`} className="all-messages-button">
+        {t('seeAll')} {t('notifications')}
+      </Link>
+    </div>
+  </div>
+</div>
                                                 
                                             {/* } */}
                                         </div>
@@ -237,13 +269,11 @@ function HeaderProfile() {
                                         </div>
                                         <ul className='Mini-Profile-Items'>
                                             <li className='Mini-Profile-Item'><Link to={`/profile/`+userProfile.profile_id}><i className="uil uil-user"></i> {t('see_profile')}</Link></li>
-                                            <li className="Mini-Profile-Item"><Link to={`/user/`+userProfile.profile_id+`/settings`}><i className="uil uil-setting"></i>{t('setting')}</Link></li>
+                                            
                                         </ul>
                                         {/* <Link to={`/profile/`+userProfile.profile_id} className="Mini-Profile-Link profil-link">{t('see_profile')}</Link> */}
-                                        <ul className="Mini-Profile-Items">
-                                            <li className="Mini-Profile-Item"><Link to={`/profile/`+userProfile.profile_id+`/meoffre`}><i className="uil uil-layer-group"></i>{t('my_offre')} </Link></li>
-                                            <li className="Mini-Profile-Item"><Link to={`/favorite`}><i className="uil uil-favorite"></i> {t('my_favorite')}  </Link></li>
-                                        </ul>
+                                      
+                                    
                                         <ul className='Mini-Profile-Items'>
                                             <li className="Mini-Profile-Item"><a href="#" className="logoout-link" onClick={handlelogOut}><i className="uil uil-exit"></i>{t('logout')}</a></li>
                                         </ul>

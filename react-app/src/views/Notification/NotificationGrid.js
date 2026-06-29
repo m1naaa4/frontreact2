@@ -6,7 +6,7 @@ import useOutsideClick from '../../helpers/useOutsideClick';
 import $ from 'jquery'
 import { useTranslation } from 'react-i18next';
 
-function NotificationGrid({notification}) {
+function NotificationGrid({notification, key}) {
     
     const [seen, setSeen] = useState(false);
     const [stylo, setStylo] = useState();
@@ -32,6 +32,9 @@ function NotificationGrid({notification}) {
         setProfileId(notified_from.profile_id);
         setIdFrom(notified_from.id);
     }, [notification]);
+    useEffect (()=>{
+        console.log(key);
+    })
 
 
 
@@ -77,7 +80,10 @@ function NotificationGrid({notification}) {
         }
         dispatch( DeleteNotificationAction(data, '/delete')); 
     };
-
+ 
+    const safeLink = notification?.link?.startsWith('/')
+  ? notification.link
+  : `/${notification.link}`;
     
     return (
         
@@ -87,7 +93,7 @@ function NotificationGrid({notification}) {
                         <div className="d-flex w-100 justify-content-between">
                             {notification && <div className="Notifs-List" >
                                 <div className="Notif-Item">
-                                    <Link to={notification.link} className="Notif-Image"  >
+                                    <Link to={safeLink} className="Notif-Image">
                                         <div className='Notif-Item-Inner'>
                                             <div className='Notif-Thumb'>
                                             {avatar ?
@@ -99,35 +105,18 @@ function NotificationGrid({notification}) {
                                                 <div className="Notif-Time">{notification.created_at.for_humans} </div>
                                             </div>
                                         </div>
-                                        
-                                        <div className="Notif-Options show">
-                                            <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i className="uil uil-ellipsis-h"></i>
-                                            </button>
-                                            {notification_id ===  notification.id && display && 
-                                                <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                                    <div className="dropdown-item" onClick={ e => markAsRead(idFrom, notification.id)} ><i className="uis uis-check"></i>{t('mark-as-read')}</div>
-                                                    <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
-                                                </div> 
-                                            }   
-                                        </div>
-
-                                        {/* <Link to={notification.link} className="Notif-Image"  >
-                                       {avatar ?
-                                            <img src={avatar} alt="avatar" style={{width:'50px', height:'50px'}}/>
-                                            : <img src="/assets/images/avatar.png" alt="avatar" style={{width:'50px', height:'50px'}}/>}
-                                       </Link>
-                                        <div className="Notif-Text">{notification.description} </div>
-                                    
-                                        <div className="Notif-Options show">
-                                            <small>
-                                                <Link to={notification.link} className="Notif-Content">
-                                                    <div className="Notif-Time">{notification.created_at.for_humans} </div>
-                                                </Link>
-                                            </small>
-                                                
-                                        </div>   */}
                                     </Link>  
+                                    <div className="Notif-Options show">
+                                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); show(notification.id); }} className="btn btn-secondary btn-sm dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="true">
+                                            <i className="uil uil-ellipsis-h"></i>
+                                        </button>
+                                        {notification_id ===  notification.id && display && 
+                                            <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
+                                                <div className="dropdown-item" onClick={ e => { e.stopPropagation(); markAsRead(idFrom, notification.id); }} ><i className="uis uis-check"></i>{t('mark-as-read')}</div>
+                                                <div className="dropdown-item" onClick={ e => { e.stopPropagation(); DeleteNotif(idFrom, notification.id); }} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
+                                            </div> 
+                                        }   
+                                    </div>
                                 </div>
                             </div>}
                         </div>

@@ -59,12 +59,15 @@ export default function NotificationMenu({notification}) {
     useOutsideClick(ref, () => {
         setDisplay(false)
     });
+    const safeLink = notification?.link?.startsWith('/')
+  ? notification.link
+  : `/${notification.link}`;
 
     return (
           
                 <div className="Notifs-List notification-list-menu" style={stylo} >
                     <div className="Notif-Item">
-                        <Link to={notification.link} className="Notif-Image">
+                        <Link to={safeLink} className="Notif-Image">
                             <div className='Notif-Item-Inner'>
                                 <div className='Notif-Thumb'>
                                     <img src={avatar ? avatar : '/assets/images/avatar.png'} alt="avatar" />
@@ -74,19 +77,18 @@ export default function NotificationMenu({notification}) {
                                     <div className="Notif-Time">{notification.created_at.for_humans} </div>
                                 </div> 
                             </div>
-                            
-                            <div className="Notif-Options show">
-                                <button onClick={e => show(notification.id)} className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i className="uil uil-ellipsis-h"></i>
-                                </button>
-                                {notification_id ===  notification.id && display && 
-                                    <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
-                                        <div className="dropdown-item" onClick={ e => markAsRead(idFrom, notification.id)} ><i className="uis uis-check"></i> {t('mark-as-read')}</div>
-                                        <div className="dropdown-item" onClick={ e => DeleteNotif(idFrom, notification.id)} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
-                                    </div> 
-                                }   
-                            </div>   
                         </Link>  
+                        <div className="Notif-Options show">
+                            <button onClick={e => { e.preventDefault(); e.stopPropagation(); show(notification.id); }} className="btn btn-secondary btn-sm dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="true">
+                                <i className="uil uil-ellipsis-h"></i>
+                            </button>
+                            {notification_id ===  notification.id && display && 
+                                <div className="dropdown-menu dropdown-menu-right show" ref={ref} x-placement="bottom-end" style={{position: "absolute"}}>
+                                    <div className="dropdown-item" onClick={ e => { e.stopPropagation(); markAsRead(idFrom, notification.id); }} ><i className="uis uis-check"></i> {t('mark-as-read')}</div>
+                                    <div className="dropdown-item" onClick={ e => { e.stopPropagation(); DeleteNotif(idFrom, notification.id); }} ><i className="uil uil-trash-alt"></i> {t('delete')}</div>
+                                </div> 
+                            }   
+                        </div>   
                     </div>
                 </div>
         

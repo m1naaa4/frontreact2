@@ -1,6 +1,7 @@
 import React from 'react'
 import {Switch,Route,Redirect} from 'react-router-dom'
 import HeaderProfile from "../layout/Header/HeaderProfile";
+import SidebarNav from "../layout/Sidebar/SidebarNav";
 import ListingFunders from '../views/Funder/ListingFunders'
 import Footer from "../layout/footer/footer";
 import NotFound from '../pages/404';
@@ -11,8 +12,9 @@ import FunderShowPrivateRoutes from './FunderShowPrivateRoutes';
 export default function FundersRoutes(props) {
     return (
         <>
+            <SidebarNav />
             <HeaderProfile props={props}/>
-            <div className="Dadupa-Page">
+            <div className="Dadupa-Page Sidebar-Page">
                 <Switch>
                     <Route exact path={`${props.match.path}/lists`}  component = {ListingFunders} />
                     <Route exact path={props.match.path} render = { props => (

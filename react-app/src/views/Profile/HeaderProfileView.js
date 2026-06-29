@@ -80,6 +80,8 @@ export default function HeaderProfileView({ formData, setForm, props }) {
             setCurrentPage('bio');
         } else if (currentLocation === 'meoffre') {
             setCurrentPage('offres');
+        } else if (currentLocation === 'dashboard') {
+            setCurrentPage('dashboard');
         } else if (currentLocation === 'friends') {
             setCurrentPage('friends');
         } else {
@@ -198,6 +200,7 @@ export default function HeaderProfileView({ formData, setForm, props }) {
                                     </Dialog>
                                     <li><NavLink className={currentPage === 'bio' ? 'active-profile-link': ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i>{t('bio')}</NavLink></li>
                                     <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i>{t('offerings')}</NavLink></li>
+                                    <li><NavLink className={currentPage === 'dashboard' ? 'active-profile-link' : ''} to={`/profile/${params.id}/dashboard`}><i className="uil uil-chart"></i>{t('dashboard') || 'Dashboard'}</NavLink></li>
                                     <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> {t('history')}</NavLink></li>
                                     <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" />{t('réseaux')} </NavLink></li>
                                     {/*<li><Link to={`/messages/${params.id}`}><i className="uil uil-comment-alt-lines" /> Discuter</Link></li> */}

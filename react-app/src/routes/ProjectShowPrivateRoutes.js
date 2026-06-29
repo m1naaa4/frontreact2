@@ -32,7 +32,7 @@ export default function ProjectShowPrivateRoutes(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProjectAction(params.id, '/get'));
-    }, [dispatch]);
+    }, [dispatch, params.id]);
 
     return (
         <div className="Single-Wrapper">
