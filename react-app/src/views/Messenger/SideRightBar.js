@@ -1,68 +1,50 @@
-import React  from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
+export default function SideRightBar() {
+  const activeUser = useSelector(state => state.messages.user)
 
-
-export default function SideRightBar({messages}) {
-
-  return (
-    <>
-      {messages  &&
-  (
-    <div className="Messenger-user-profile">
-      <div className="Messenger-profile-header">
-        <div className="Messenger-Profile-Infos">
-          <span className="Profile-Icon"><i className="uil uil-lightbulb-alt"></i></span>
-          <div className="Profile-Picture" id="imageProfile" style={{backgroundImage: `url(${messages.avatar})`}} ></div>
-          <div className="Profile-Name">{messages.name}</div>
+  if (!activeUser) {
+    return (
+      <div className="Messenger-RightPanel-Inner">
+        <div className="Messenger-EmptySide">
+          <div className="Messenger-EmptySide-Icon">💬</div>
+          <h4>Conversation</h4>
+          <p>Les détails du contact s'afficheront ici.</p>
         </div>
       </div>
-      <div className="Messenger-Profile-Widgets">
-      <div className="Messenger-Profile-Widget">
-        <h3 className="Messenger-Widget-Title">Lieu de résidence</h3>
-        <p>{messages.address}</p>
-      </div>
-      <div className="Messenger-Profile-Widget">
-        <h3 className="Messenger-Widget-Title">{messages.bio}</h3>
-        <p>{messages.job}</p>
-      </div>
-      <div className="Messenger-Profile-Widget">
-        <h3 className="Messenger-Widget-Title">Offres</h3>
-        <div className="Messenger-Offers">
-          <div className="Messenger-Offer">
-            <div className="Messenger-Offer-Media">
-            </div>
-            <div className="Messenger-Offer-Content">
-              <div className="offer-title">
-                <div className="offer-logo">
-                  <img src="assets/images/majorel.png" title="Nom du projet" alt=""/>
-                </div>
-                <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
-                <span>Secteur d’activité</span>
-              </div>
-            </div>
-          </div>
-          <div className="Messenger-Offer">
-            <div className="Messenger-Offer-Media">
-            </div>
-            <div className="Messenger-Offer-Content">
-              <div className="offer-title">
-                <div className="offer-logo">
-                  <img src="assets/images/majorel.png" title="Nom du projet" alt=""/>
-                </div>
-                <h3><a href="#!" data-toggle="modal" data-target="#performancesModalCenter">Nom du projet</a></h3>
-                <span>Secteur d’activité</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </div>
     )
   }
 
-  </>
+  const initials = activeUser?.name
+    ? activeUser.name.split(' ').map(part => part[0]).join('').slice(0, 2).toUpperCase()
+    : 'RA'
 
-    )
+  return (
+    <div className="Messenger-RightPanel-Inner">
+      <div className="Messenger-Profile-Panel">
+        <div className="Messenger-Profile-Avatar">
+          <div className="Messenger-Profile-Avatar-Large">
+            {activeUser.avatar ? (
+              <img src={activeUser.avatar} alt={activeUser.name} />
+            ) : (
+              <span>{initials}</span>
+            )}
+          </div>
+        </div>
+        
+        <div className="Messenger-Profile-Name">
+          <h3>{activeUser.name || 'Utilisateur'}</h3>
+          <span className="Messenger-Profile-Status">En ligne</span>
+        </div>
+
+        <div className="Messenger-Profile-Info">
+          <div className="Messenger-Profile-Info-Item">
+            <i className="uil uil-user"></i>
+            <span>Membre depuis {activeUser.created_at ? new Date(activeUser.created_at).toLocaleDateString('fr-FR') : '...'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }

@@ -1,103 +1,105 @@
-import React, { useCallback, useEffect, useRef, useState }  from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { GetConversationAction } from '../../../store/actions/Messenger/MessageAction';
+import { GetConversationAction, MarkSeenAction } from '../../../store/actions/Messenger/MessageAction';
 import BoxMessage from './BoxMessage';
 import Message from './Message';
 
-
-export default function Body({messages, props}) {
-
-  const [msgs, setMsgs] = useState();
-  const [loadMore, setLoadMore] = useState(true);
-  const [state, setState] = useState([]);
-  const observer = useRef()
+export default function Body() {
+  const [msgs, setMsgs] = useState([]);
+  const [loadingOlder, setLoadingOlder] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
-  // console.log('OLD_SEND_MESSAGE_SUCCESSconversatiousern', conversation.user)
-
   const messagesEndRef = useRef(null);
+  const scrollRef = useRef(null);
+  const stickToBottomRef = useRef(true);
+  const conversation = useSelector(state => state.messages);
+
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
-    getData(loadMore);
-    setLoadMore(false);
-  }, [loadMore]);
+    if (params.id) {
+      dispatch(GetConversationAction({ receiver_id: params.id }, 'messages/show', 1));
+      dispatch(MarkSeenAction({ receiver_id: params.id }));
+    }
+  }, [dispatch, params.id]);
 
   useEffect(() => {
-    const list = document.getElementsByClassName('messagerie__body');
-    if(props?.scrollable) {   
-      // list has fixed height
-      list.addEventListener('scroll', (e) => {
-        const el = e.target;
-        if(el.scrollTop + el.clientHeight === el.scrollHeight) {
-          setLoadMore(true);
-        }
-      });  
-    } else {  
-      // list has auto height  
-      window.addEventListener('scroll', () => {
-        if (window.scrollY + window.innerHeight === list.clientHeight + list.offsetTop) {
-          setLoadMore(true);
-        }
-      });
-    }
-  });
+    setMsgs(conversation?.messages || []);
+    stickToBottomRef.current = true;
+  }, [conversation]);
 
   useEffect(() => {
-    const list = document.getElementsByClassName('messagerie__body');
-
-    if(list.clientHeight <= window.innerHeight && list.clientHeight) {
-      setLoadMore(true);
+    if (stickToBottomRef.current && !loadingOlder) {
+      scrollToBottom();
     }
-  }, [state]);
+  }, [msgs, loadingOlder]);
 
-  useEffect(() => {          
-    setMsgs(messages?.messages);
-  })
-  let data = {
-    receiver_id : params.id
-  }
-
-  const getData = (load) => {
-    if (load) {
-      dispatch(GetConversationAction(data, 'messages/show', 'before'));
+  const loadOlderMessages = async () => {
+    if (!params.id || loadingOlder) {
+      return;
     }
+
+    const container = scrollRef.current;
+    const before = msgs[0]?.created_at;
+
+    if (!before) {
+      return;
+    }
+
+    setLoadingOlder(true);
+    stickToBottomRef.current = false;
+    const previousHeight = container?.scrollHeight || 0;
+    await dispatch(GetConversationAction({ receiver_id: params.id, before }, 'messages/show', 1));
+    requestAnimationFrame(() => {
+      if (container) {
+        container.scrollTop = container.scrollHeight - previousHeight;
+      }
+      stickToBottomRef.current = false;
+      setLoadingOlder(false);
+    });
   };
 
-  // const lastProjectElementRef = useCallback( node =>{
-  //   // if (messages.loading) return
-   
-  //   if (observer.current) observer.current.disconnect()
-  //   observer.current = new IntersectionObserver( msgs => {
-  //     console.log(messages?.messages.length, messages.count)
-  //       if (messages?.messages.length < messages.count  ){  
-  //           // dispatch(GetConversationAction(data, 'messages/show', 'before'));
-  //           // setIsLoading(true)
-  //       }
-  //   })
-  //   if (node) observer.current.observe(node)
-  // }, [msgs])
-
-  useEffect(scrollToBottom, [msgs]);
-
-
-return (        
+  return (
     <div className="Messenger-body msg_wrap">
-        <div className="Messenger-messages '+ userID+'">
-          {msgs &&
-            msgs.map((message, index) => (
-              <div key={index}  className='messagerie__body'>
-                <Message message={message}/>
-              </div>
-            ))
+      <div
+        className="Messenger-messages"
+        ref={scrollRef}
+        onScroll={(e) => {
+          if (e.currentTarget.scrollTop === 0) {
+            loadOlderMessages();
           }
-          <div ref={messagesEndRef} />
-        </div>
-        <BoxMessage/>
+        }}
+      >
+        {loadingOlder && (
+          <div className="Messenger-LoadingIndicator">
+            <div className="Messenger-LoadingSpinner"></div>
+            <span>Chargement des anciens messages...</span>
+          </div>
+        )}
+        {conversation?.loading && msgs.length === 0 && (
+          <div className="Messenger-LoadingIndicator">
+            <div className="Messenger-LoadingSpinner"></div>
+            <span>Chargement des messages...</span>
+          </div>
+        )}
+        {!conversation?.loading && msgs.length === 0 && (
+          <div className="Messenger-EmptyMessages">
+            <div className="Messenger-EmptyMessages-Icon">💬</div>
+            <p>Aucun message dans cette conversation.</p>
+            <span>Envoyez un message pour commencer.</span>
+          </div>
+        )}
+        {msgs.map((message, index) => (
+          <div key={index} className='messagerie__body'>
+            <Message message={message} />
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+      <BoxMessage />
     </div>
-      
-    )
+  );
 }

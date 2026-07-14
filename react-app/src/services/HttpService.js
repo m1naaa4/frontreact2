@@ -9,10 +9,12 @@ class HttpService {
             item.profile_id = localStorage.getItem('profile_id');
             item.user_id = localStorage.getItem('user_id');
         }
+        const headers = item instanceof FormData ? { 'Content-Type': 'multipart/form-data' } : {};
         return await axios({
             method: 'POST',
             url: svcUrl('', process.env.REACT_APP_API_URL, '/' + added_url),
-            data: item
+            data: item,
+            headers
         }).then(response => response.data)
     }
 
@@ -102,8 +104,18 @@ class HttpService {
         item.user_id = localStorage.getItem('user_id');
         return await axios({
             method: 'GET',
-            url: "/" + url,
+            url: svcUrl('', process.env.REACT_APP_API_URL, '/' + url),
             params: item
+        }).then(response => response.data)
+    }
+
+    deleteRequest = async (item, url) =>
+    {
+        item.user_id = localStorage.getItem('user_id');
+        return await axios({
+            method: 'DELETE',
+            url: svcUrl('', process.env.REACT_APP_API_URL, '/' + url),
+            data: item
         }).then(response => response.data)
     }
 }

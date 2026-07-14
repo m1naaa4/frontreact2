@@ -5,7 +5,6 @@ import {UserLogOutAction} from "../../store/actions/User/Auth/AuthActions";
 import {  Link, NavLink, useHistory  } from 'react-router-dom';
 import { LoadNotificationAction, MarkSeenAction } from '../../store/actions/Notification/LoadNotificationAction';
 import $ from "jquery";
-// import Messages from './Messages';
 import { ClearProjectsAction } from '../../store/actions/User/Project/ProjectAction';
 import useOutsideClick from '../../helpers/useOutsideClick';
 import NotificationMenu from '../../views/Notification/NotificationMenu';
@@ -231,10 +230,9 @@ function HeaderProfile() {
                                                 
                                             {/* } */}
                                         </div>
-                                        {/* <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
-                                            <button onClick={openMessages} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>
-                                            {showMessages && <Messages/>}
-                                        </div> */}
+                                        <div className="Dadupa-Notifications-Item Dadupa-Message-Popup">
+                                            <button onClick={() => history.push('/messages')} className="Dadupa-Message" data-toggle="tooltip" data-placement="bottom" title="Messages"><span className="new-message"></span><i className="uil uil-envelope"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="Dadupa-User" onClick={userMenu}>
@@ -295,5 +293,4 @@ function HeaderProfile() {
         </div>
     )
 }
-
 export default HeaderProfile;

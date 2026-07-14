@@ -1,186 +1,98 @@
-import React, {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux';
-import SearchBar from './SearchBar';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import SideLeftBar from './SideLeftBar';
 import Body from './MessengerWraps/Body';
 import Header from './MessengerWraps/Header';
 import SideRightBar from './SideRightBar';
-import { useParams } from 'react-router-dom';
+import PusherConsole from '../../services/PusherConsole';
+import { GetMessagesListAction } from '../../store/actions/Messenger/MessageAction';
+import './messenger.css';
 
+export default function MainMessengerView() {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const pusherRef = useRef(null);
+  const channelRef = useRef(null);
 
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id');
 
-
-export default function MainMessengerView() { 
-   
-    const params = useParams();
-    const [messages, setMessages] = useState();
-    const conversation = useSelector(state => state.conversations);
-    const showContent = () =>{
-        //setShow(conversation)
+    if (!userId) {
+      return undefined;
     }
-    const [show, setShow] = useState(conversation);
-    useEffect(() => {
-        setMessages(conversation.conversations?.[params.id]);
-        setShow(conversation);
-    }, [conversation]);
-    //const showContent = () => setShow(true);
 
-    return (
-        <div className="Page-Profile">  
-            <div className="Messenger-Wrapper">
-                <div className="container-fluid">
-                    <div className="row MessengerDesktop">
-                        <div className="col-md-4 col-lg-3">
-                            <div className="row">
-                                <div className="Messenger-List">
-                                    <SearchBar/>
-                                    <div onClick={showContent}>
-                                        <SideLeftBar/>
-                                    </div >
-                                            {/* <SideLeftProfileView />
-                                            <PostView  {...props}/>
-                                            <SideRightProfileView/> */}
-                                </div>
-                            </div>
-                        </div>
-                    <div className="col-md-8 col-lg-9">
-                        <div className="row">
-                            <div className="tab-content Messenger-row" id="v-pills-tabContent">
-                                <div className="tab-pane fade show active" id="v-abdelkarim-ichia" role="tabpanel" aria-labelledby="v-abdelkarim-ichia-tab">                                    
-                                    <div className="Messenger-wrapper">
-                                        {show ? 
-                                            (<div className="Messenger-box" rel="'+ userID+'">
-                                            <Header messages = {messages} />
-                                            <Body messages = {messages} />                       
-                                            </div>): (<div className="Messenger-box" rel="'+ userID+'"></div>)
-                                        }
+    // Initialize Pusher connection
+    pusherRef.current = new PusherConsole();
+    channelRef.current = pusherRef.current.subscribe(`${userId}-messages`);
 
-                                        <SideRightBar messages = {messages} />
-                                        
-                                    </div>
-                                </div>
-                                                    
-                                <div className="tab-pane fade" id="v-youness-elbezzazi" role="tabpanel" aria-labelledby="v-youness-elbezzazi-tab">
-                                    <div className="Messenger-box" rel="'+ userID+'">
-                                    <div className="Messenger-head">
-                                        <div className="Messenger-head-left">
-                                            <div className="Messenger-head-user-thumb"></div>
-                                            <div className="Messenger-head-user-info">
-                                            <label>Youness EL BEZZAZI</label>
-                                            <span>Active 1m ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="Messenger-body msg_wrap">
-                                        <div className="Messenger-messages '+ userID+'">
-                                        <div className="message incoming-message">
-                                            <div className="avatar-wrapper avatar-small"></div>
-                                        <div className="incoming-bubbles">
-                                            <div className="bubble bubble-light" data-toggle="tooltip" data-placement="right" title="Thursday 1:49AM">Hey anhat!</div>
-                                        </div>
-                                        </div>
-                                        <div className="message outcoming-message">
-                                        <div className="outcoming-bubbles">
-                                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:51AM">what is going on?</div>
-                                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:52AM">Hani Mhani ?</div>
-                                        </div>
-                                        <div className="avatar-wrapper avatar-small"></div>
-                                        </div>
-                                        </div>
-                                        <div className="Messenger-footer"><input type="text" placeholder="Type messages here..."  data-emoji-picker="true"/>
-                                        <div className="Messenger-footer-attachments">
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"/><span><i className="uil uil-image"></i></span></div>
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"/><span><i className="uil uil-video"></i></span></div>
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"/><span><i className="uil uil-file-alt"></i></span></div>
-                                        </div>
-                                        <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className="tab-pane fade" id="v-othmane-marhar" role="tabpanel" aria-labelledby="v-othmane-marhar-tab">
-                                    <div className="Messenger-box" rel="'+ userID+'">
-                                    <div className="Messenger-head">
-                                        <div className="Messenger-head-left">
-                                            <div className="Messenger-head-user-thumb"></div>
-                                            <div className="Messenger-head-user-info">
-                                            <label>Othmane Amrhar</label>
-                                            <span>Active 1m ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="Messenger-body msg_wrap">
-                                        <div className="Messenger-messages '+ userID+'">
-                                        <div className="message incoming-message">
-                                            <div className="avatar-wrapper avatar-small"></div>
-                                        <div className="incoming-bubbles">
-                                            <div className="bubble bubble-light" data-toggle="tooltip" data-placement="right" title="Thursday 1:49AM">Hey anhat!</div>
-                                        </div>
-                                        </div>
-                                        <div className="message outcoming-message">
-                                        <div className="outcoming-bubbles">
-                                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:51AM">what is going on?</div>
-                                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:52AM">Hani Mhani ?</div>
-                                        </div>
-                                        <div className="avatar-wrapper avatar-small"></div>
-                                        </div>
-                                        </div>
-                                        <div className="Messenger-footer"><input type="text" placeholder="Type messages here..." data-emoji-picker="true"/>
-                                        <div className="Messenger-footer-attachments">
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"/><span><i className="uil uil-image"></i></span></div>
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"/><span><i className="uil uil-video"></i></span></div>
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"/><span><i className="uil uil-file-alt"></i></span></div>
-                                        </div>
-                                        <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className="tab-pane fade" id="v-mounir-yamoul" role="tabpanel" aria-labelledby="v-mounir-yamoul-tab">
-                                    <div className="Messenger-box" rel="'+ userID+'">
-                                    <div className="Messenger-head">
-                                        <div className="Messenger-head-left">
-                                            <div className="Messenger-head-user-thumb"></div>
-                                            <div className="Messenger-head-user-info">
-                                            <label>Mounir Yamoul</label>
-                                            <span>Active 1m ago</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="Messenger-body msg_wrap">
-                                        <div className="Messenger-messages '+ userID+'">
-                                        <div className="message incoming-message">
-                                            <div className="avatar-wrapper avatar-small"></div>
-                                        <div className="incoming-bubbles">
-                                            <div className="bubble bubble-light" data-toggle="tooltip" data-placement="right" title="Thursday 1:49AM">Hey anhat!</div>
-                                        </div>
-                                        </div>
-                                        <div className="message outcoming-message">
-                                        <div className="outcoming-bubbles">
-                                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:51AM">what is going on?</div>
-                                            <div className="bubble bubble-dark" data-toggle="tooltip" data-placement="left" title="Thursday 1:52AM">Hani Mhani ?</div>
-                                        </div>
-                                        <div className="avatar-wrapper avatar-small"></div>
-                                        </div>
-                                        </div>
-                                        <div className="Messenger-footer"><input type="text" placeholder="Type messages here..." data-emoji-picker="true"/>
-                                        <div className="Messenger-footer-attachments">
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a photo"><input type="file"/><span><i className="uil uil-image"></i></span></div>
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a video"><input type="file"/><span><i className="uil uil-video"></i></span></div>
-                                        <div className="Messenger-attachment-item" data-toggle="tooltip" data-placement="top" title="Attach a document"><input type="file"/><span><i className="uil uil-file-alt"></i></span></div>
-                                        </div>
-                                        <div className="Messenger-footer-actions"><button className="button-attachments"><i className="uil uil-paperclip"></i></button><button className="button-send" data-toggle="tooltip" data-placement="top" title="Send"><i className="uil uil-message"></i></button></div></div>
-                                    </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-            
-                        
-                    </div>
-                </div>
+    if (!channelRef.current) {
+      console.warn('Could not subscribe to WebSocket channel');
+      return undefined;
+    }
+
+    // Handle incoming messages
+    channelRef.current.bind('message.created', function (data) {
+      console.log('New message received via WebSocket:', data);
+      dispatch({ type: 'SEND_MESSAGE_SUCCESS_PUSHER', res: data });
+      dispatch(GetMessagesListAction('messages/getConversations', '', 1));
+    });
+
+    // Handle deleted messages
+    channelRef.current.bind('message.deleted', function (data) {
+      console.log('Message deleted via WebSocket:', data);
+      dispatch({ type: 'DELETE_MESSAGE_SUCCESS_PUSHER', res: data });
+      dispatch(GetMessagesListAction('messages/getConversations', '', 1));
+    });
+
+    // Handle seen messages
+    channelRef.current.bind('message.seen', function (data) {
+      console.log('Messages marked as seen via WebSocket:', data);
+      dispatch(GetMessagesListAction('messages/getConversations', '', 1));
+    });
+
+    // Cleanup on unmount
+    return () => {
+      if (channelRef.current) {
+        channelRef.current.unbind('message.created');
+        channelRef.current.unbind('message.deleted');
+        channelRef.current.unbind('message.seen');
+        pusherRef.current?.unsubscribe(`${userId}-messages`);
+      }
+    };
+  }, [dispatch]);
+
+  return (
+    <div className="Messenger-Wrapper">
+      <div className="Messenger-LeftPanel">
+        <div className="Messenger-LeftPanel-Header">
+          <h2>Messages</h2>
+        </div>
+        <div className="Messenger-LeftPanel-List">
+          <SideLeftBar />
+        </div>
+      </div>
+
+      <div className="Messenger-MainPanel">
+        {params.id ? (
+          <div className="Messenger-Conversation">
+            <Header />
+            <Body />
+          </div>
+        ) : (
+          <div className="Messenger-EmptyState">
+            <div className="Messenger-EmptyState-Illustration">
+              <div className="Messenger-EmptyState-Bubble">💬</div>
             </div>
-        </div>          
-        
-    )
+            <h3>Sélectionnez une conversation</h3>
+            <p>Choisissez un message dans la liste pour lire la conversation.</p>
+          </div>
+        )}
+      </div>
+
+      <div className="Messenger-RightPanel">
+        <SideRightBar />
+      </div>
+    </div>
+  );
 }
