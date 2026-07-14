@@ -1,0 +1,655 @@
+.Messenger-Wrapper {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr) 320px;
+  min-height: calc(100vh - 90px);
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+}
+
+.Messenger-LeftPanel,
+.Messenger-RightPanel {
+  background: #fff;
+}
+
+.Messenger-LeftPanel {
+  border-right: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.Messenger-LeftPanel-Header {
+  padding: 28px 24px 18px;
+}
+
+.Messenger-LeftPanel-Header h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 700;
+  color: #111827;
+}
+
+.Messenger-LeftPanel-List {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.Messenger-MainPanel {
+  min-width: 0;
+  background: #fff;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.Messenger-Conversation {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Messenger-EmptyState {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: #4b5563;
+  min-height: calc(100vh - 90px);
+}
+
+.Messenger-EmptyState-Illustration {
+  margin-bottom: 22px;
+}
+
+.Messenger-EmptyState-Bubble {
+  width: 180px;
+  height: 180px;
+  border-radius: 36px;
+  background: #e8f7ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 76px;
+  box-shadow: 0 10px 30px rgba(22, 163, 74, 0.08);
+}
+
+.Messenger-EmptyState h3 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  color: #111827;
+}
+
+.Messenger-EmptyState p {
+  margin: 0;
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.Messenger-RightPanel {
+  border-left: 1px solid #edf2f7;
+  display: flex;
+}
+
+.Messenger-RightPanel-Inner,
+.Messenger-EmptySide {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.Messenger-EmptySide {
+  flex-direction: column;
+  text-align: center;
+  color: #64748b;
+  min-height: calc(100vh - 90px);
+}
+
+.Messenger-EmptySide-Icon {
+  width: 160px;
+  height: 160px;
+  border-radius: 36px;
+  background: #f4fdf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  margin-bottom: 22px;
+  box-shadow: 0 10px 30px rgba(22, 163, 74, 0.08);
+}
+
+.Messenger-EmptySide h4 {
+  margin: 0 0 8px;
+  color: #111827;
+  font-size: 22px;
+}
+
+.Messenger-EmptySide p {
+  margin: 0;
+  font-size: 15px;
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+.Messenger-Header {
+  height: 88px;
+  border-bottom: 1px solid #edf2f7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: #fff;
+}
+
+.Messenger-Header-Left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.Messenger-BackButton,
+.Messenger-MenuButton {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 12px;
+  background: #f8fafc;
+  cursor: pointer;
+  color: #111827;
+  font-size: 18px;
+}
+
+.Messenger-Avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e7f8ee;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.Messenger-Header-Infos h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+
+.Messenger-Header-Infos span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.Messenger-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.Messenger-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: #fff;
+}
+
+.Messenger-footer {
+  position: relative;
+  border-top: 1px solid #edf2f7;
+  padding: 18px 24px;
+  background: #fff;
+}
+
+.Messenger-footer input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px 56px 16px 16px;
+  outline: none;
+}
+
+.Messenger-footer-actions {
+  position: absolute;
+  right: 36px;
+  bottom: 28px;
+  display: flex;
+  gap: 10px;
+}
+
+.button-send,
+.button-attachments {
+  border: 0;
+  background: #10b981;
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.button-attachments {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.Messenger-footer-attachments {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.Messenger-attachment-item input {
+  display: none;
+}
+
+.Messenger-attachment-item {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  color: #374151;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.Messenger-AttachmentPreview {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 13px;
+}
+
+.Messenger-AttachmentPreview button,
+.Messenger-DeleteMessage {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.Messenger-ImagePreview {
+  display: block;
+  max-width: 260px;
+  max-height: 260px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-top: 8px;
+}
+
+.Messenger-FileDownload {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: inherit;
+  text-decoration: underline;
+}
+
+.Messenger-DeleteMessage {
+  display: block;
+  color: #dc2626;
+  font-size: 12px;
+  padding: 6px 0 0;
+  margin-left: auto;
+}
+
+@media (max-width: 1200px) {
+  .Messenger-Wrapper {
+    grid-template-columns: 320px minmax(0, 1fr);
+  }
+
+  .Messenger-RightPanel {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .Messenger-Wrapper {
+    grid-template-columns: 1fr;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .Messenger-LeftPanel {
+    display: none;
+  }
+
+  .Messenger-RightPanel {
+    display: none;
+  }
+}
+
+.Messenger-ListActions {
+  display: flex;
+  gap: 10px;
+  padding: 0 24px 18px;
+  align-items: center;
+}
+
+.Messenger-Search {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  background: #f9fafb;
+}
+
+.Messenger-NewChat {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 14px;
+  background: #10b981;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.Messenger-FilterUnread {
+  height: 42px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #f9fafb;
+  color: #374151;
+  cursor: pointer;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.Messenger-FilterUnread.is-active {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #047857;
+}
+
+.Messenger-ComposerHint,
+.Messenger-EmptySearch {
+  margin: 0 24px 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.Messenger-SearchResults {
+  margin: 0 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Messenger-SearchResult {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fff;
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.Messenger-SearchResult img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Messenger-SearchResult span {
+  color: #111827;
+  font-weight: 600;
+}
+
+.Msgs-List {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.Msgs-Item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #edf2f7;
+  text-decoration: none;
+}
+
+.Msgs-Image img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Msgs-Content {
+  flex: 1;
+  min-width: 0;
+}
+
+.Msgs-User {
+  font-weight: 700;
+  color: #111827;
+}
+
+.Msgs-Text {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Msgs-Meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.Msgs-Date {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.Msgs-N {
+  min-width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #16a34a;
+  color: #fff;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+}
+
+/* SideRightBar Profile Panel */
+.Messenger-Profile-Panel {
+  width: 100%;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.Messenger-Profile-Avatar {
+  margin-bottom: 20px;
+}
+
+.Messenger-Profile-Avatar-Large {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #e7f8ee;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 36px;
+  overflow: hidden;
+}
+
+.Messenger-Profile-Avatar-Large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Messenger-Profile-Name h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.Messenger-Profile-Status {
+  font-size: 13px;
+  color: #16a34a;
+}
+
+.Messenger-Profile-Info {
+  margin-top: 24px;
+  width: 100%;
+}
+
+.Messenger-Profile-Info-Item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.Messenger-Profile-Info-Item i {
+  font-size: 16px;
+  color: #16a34a;
+}
+
+/* Loading Indicators */
+.Messenger-LoadingIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: #6b7280;
+  font-size: 14px;
+  gap: 12px;
+}
+
+.Messenger-LoadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #16a34a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty Messages State */
+.Messenger-EmptyMessages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.Messenger-EmptyMessages-Icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.Messenger-EmptyMessages p {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.Messenger-EmptyMessages span {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* Error Messages */
+.Messenger-ErrorMessage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 24px 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.Messenger-ErrorMessage i:first-child {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.Messenger-ErrorMessage span {
+  flex: 1;
+  color: #dc2626;
+}
+
+.Messenger-ErrorMessage button {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.Messenger-ErrorMessage button:hover {
+  background-color: #fee2e2;
+}
