@@ -37,20 +37,30 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
       return () => clearTimeout(timeoutId);
     } 
 
-    const acceptFriend = (id) =>{
-      let data ={
-          'request_id' : id,
-          'url' : 'friend/friendAccept',
+    const acceptFriend = async (invitation) => {
+      const requestId = invitation.request_id || invitation.id;
+      const friendId = invitation.user_id || null;
+      const res = await dispatch(AcceptFriendAction({
+          request_id: requestId,
+          friend_id: friendId,
+          url: 'friend/friendAccept',
+      }));
+      if (res?.success !== false) {
+        show(requestId);
       }
-      dispatch(AcceptFriendAction(data));
-    }
-    const rejectFriend = (id) =>{
-        let data ={
-            'request_id' : id,
-            'url' : 'friend/friendReject',
+    };
+    const rejectFriend = async (invitation) => {
+        const requestId = invitation.request_id || invitation.id;
+        const friendId = invitation.user_id || null;
+        const res = await dispatch(RejectFriendAction({
+            request_id: requestId,
+            friend_id: friendId,
+            url: 'friend/friendReject',
+        }));
+        if (res?.success !== false) {
+          show(requestId);
         }
-        dispatch(RejectFriendAction(data));
-    }
+    };
 
     return (
         <>
@@ -75,15 +85,17 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
             </div>
             <div className="Networks">
             { invitations &&
-                invitations?.map((invitation, index) => (
-                <>
-                {gridId !== invitation.id &&
-                <div className="FriendBox-Item" key={index}>
+                invitations?.map((invitation, index) => {
+                const invitationKey = invitation.request_id || invitation.id;
+                return (
+                <React.Fragment key={invitationKey || index}>
+                {gridId !== invitationKey &&
+                <div className="FriendBox-Item">
                     <div className="FriendBox">
 
                         <div className="Add-Contact Invitation-Options">
-                          <button type="button" onClick={() => {acceptFriend(invitation.id); show(invitation.id)}} className="FriendBox-Accept"><i className="uil uil-check"></i></button> 
-                          <button type="button" onClick={() => {rejectFriend(invitation.id); show(invitation.id)}} className="FriendBox-Delete"><i className="uil uil-times"></i></button> 
+                          <button type="button" onClick={() => acceptFriend(invitation)} className="FriendBox-Accept"><i className="uil uil-check"></i></button> 
+                          <button type="button" onClick={() => rejectFriend(invitation)} className="FriendBox-Delete"><i className="uil uil-times"></i></button> 
                         </div>
                       <Link to={`/profile/${invitation.profile.id}`}>
                         <div className="FriendThumb"><img src={invitation.profile.avatar_link} alt="avatar"/></div>
@@ -110,9 +122,8 @@ export default function InvitationGrid({invitations, filterInput, setFilterInput
                     </div>
                 </div>
                 }
-                </>
-              
-              ))
+                </React.Fragment>
+              )})
             }
             </div>        
         </>

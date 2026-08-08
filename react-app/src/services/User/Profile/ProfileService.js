@@ -9,6 +9,33 @@ export const LoadUser = (url, history) =>{
         localStorage.setItem('user_id', data.user.id);
         localStorage.setItem('profile_id', data.user.profile_id);
         localStorage.setItem('notification', data.user.new_notification ? data.user.new_notification : 0);
+
+        const displayName = data.user.name
+            || [data.user.firstname, data.user.lastname].filter(Boolean).join(' ')
+            || data.user.username
+            || data.user.email
+            || '';
+        if (displayName) {
+            localStorage.setItem('user_name', displayName);
+        }
+
+        // Sync identity into local messenger/friends backend (non-blocking).
+        http.postData({
+            user_id: data.user.id,
+            profile_id: data.user.profile_id,
+            name: displayName,
+            username: data.user.username || displayName,
+            email: data.user.email,
+            avatar: data.user.avatar || data.user.avatar_link,
+            firstname: data.user.firstname,
+            lastname: data.user.lastname,
+            type: data.user.type,
+            _force_name: true,
+            url: 'friend/syncUser',
+        }, 'friend/syncUser').catch((error) => {
+            console.warn('Local user sync failed:', error?.response?.data || error);
+        });
+
         return data;
     }).catch((error)=> {
         if(error.hasOwnProperty('success') === false){
@@ -24,7 +51,15 @@ export const generalePost = (data) =>{
     return  http.postData(data, data.url).then( data => {
         return data;
     }).catch((error)=> {
-        return error;
+        const apiMessage = error?.response?.data?.message
+            || error?.message
+            || 'La requête a échoué.';
+        console.error('generalePost failed:', data?.url, error?.response?.data || error);
+        return {
+            success: false,
+            message: apiMessage,
+            error,
+        };
     });
 }
 

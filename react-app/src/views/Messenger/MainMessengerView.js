@@ -82,7 +82,7 @@ export default function MainMessengerView() {
         ) : (
           <div className="Messenger-EmptyState">
             <div className="Messenger-EmptyState-Illustration">
-              <div className="Messenger-EmptyState-Bubble">💬</div>
+              <div className="Messenger-EmptyState-Bubble"><i className="uil uil-comment-alt-message"></i></div>
             </div>
             <h3>Sélectionnez une conversation</h3>
             <p>Choisissez un message dans la liste pour lire la conversation.</p>
@@ -90,9 +90,11 @@ export default function MainMessengerView() {
         )}
       </div>
 
-      <div className="Messenger-RightPanel">
-        <SideRightBar />
-      </div>
+      {params.id && (
+        <div className="Messenger-RightPanel">
+          <SideRightBar />
+        </div>
+      )}
     </div>
   );
 }

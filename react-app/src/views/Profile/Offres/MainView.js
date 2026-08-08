@@ -31,7 +31,15 @@ export default function MainView(props) {
         <div className="col-md-9">
             <div className="Center-Side">
                 <div className="container">
-                    <div className="offers-list">
+                    <div className="Profile-Section">
+                        <div className="Profile-Section-Header">
+                            <div>
+                                <h3>{t('offerings') || 'Offers'}</h3>
+                                <p>{offres?.length || 0} contenu(s) associé(s) à ce profil.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="offers-list Profile-Offers-Grid">
                         <div className="row">
                             {offres &&
                                 offres.map((offre, index) => (
@@ -54,7 +62,7 @@ export default function MainView(props) {
                             }
                             {!offres?.length === 0 &&
                                 <div className="col-md-12">
-                                    <div className="offer-box">
+                                    <div className="offer-box Profile-Empty-State">
                                         <div className="offer-box">
                                             {t('noresultfound')}
                                         </div>

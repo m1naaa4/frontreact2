@@ -25,6 +25,7 @@ export default function SidebarNav() {
   const email = userProfile?.email || '';
   const role = userProfile?.type || 'Admin';
   const profileId = userProfile?.profile_id || '';
+  const dashboardPath = profileId ? `/profile/${profileId}/dashboard` : '/profile';
 
   useEffect(() => {
     const updateSidebarMode = () => {
@@ -45,6 +46,12 @@ export default function SidebarNav() {
     return () => window.removeEventListener('resize', updateSidebarMode);
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle('Sidebar-Is-Compact', isCompact);
+
+    return () => document.body.classList.remove('Sidebar-Is-Compact');
+  }, [isCompact]);
+
   const toggleSidebar = () => {
     setIsCompact(previousValue => {
       const nextValue = !previousValue;
@@ -54,11 +61,13 @@ export default function SidebarNav() {
   };
 
   return (
-    <aside className={`Sidebar-Nav ${isCompact ? 'Sidebar-Nav-Compact' : ''}`}>
+    <aside className={`Sidebar-Nav ${isCompact ? 'Sidebar-Nav-Compact' : ''}`} data-compact={isCompact ? 'true' : 'false'}>
       <div className="Sidebar-Nav-Inner">
-        <div className="Sidebar-Brand">
-          <img src="/assets/images/dadupa-brand-text.svg" alt="Dadupa" className="Sidebar-Logo" />
-        </div>
+        {!isCompact && (
+          <div className="Sidebar-Brand">
+            <img src="/assets/images/dadupa-brand-text.svg" alt="Dadupa" className="Sidebar-Logo" />
+          </div>
+        )}
 
         <div className="User-Profile">
           <div className="User-Image">
@@ -92,8 +101,8 @@ export default function SidebarNav() {
               </NavLink>
             </li>
             <li className="Nav-Item">
-              <NavLink exact to="/admin" className="Nav-Link" activeClassName="Active-Nav">
-                <i className="uil uil-chart"></i>
+              <NavLink exact to={dashboardPath} className="Nav-Link" activeClassName="Active-Nav">
+                <i className="uil uil-chart-pie"></i>
                 <span>{t('dashboard') || 'Tableau de bord'}</span>
               </NavLink>
             </li>

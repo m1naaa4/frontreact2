@@ -73,21 +73,9 @@ export default function Body() {
           }
         }}
       >
-        {loadingOlder && (
-          <div className="Messenger-LoadingIndicator">
-            <div className="Messenger-LoadingSpinner"></div>
-            <span>Chargement des anciens messages...</span>
-          </div>
-        )}
-        {conversation?.loading && msgs.length === 0 && (
-          <div className="Messenger-LoadingIndicator">
-            <div className="Messenger-LoadingSpinner"></div>
-            <span>Chargement des messages...</span>
-          </div>
-        )}
-        {!conversation?.loading && msgs.length === 0 && (
+        {msgs.length === 0 && (
           <div className="Messenger-EmptyMessages">
-            <div className="Messenger-EmptyMessages-Icon">💬</div>
+            <div className="Messenger-EmptyMessages-Icon"><i className="uil uil-comment-alt-message"></i></div>
             <p>Aucun message dans cette conversation.</p>
             <span>Envoyez un message pour commencer.</span>
           </div>
