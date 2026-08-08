@@ -8,7 +8,7 @@ export default function SideRightBar() {
     return (
       <div className="Messenger-RightPanel-Inner">
         <div className="Messenger-EmptySide">
-          <div className="Messenger-EmptySide-Icon">💬</div>
+          <div className="Messenger-EmptySide-Icon"><i className="uil uil-comment-alt-message"></i></div>
           <h4>Conversation</h4>
           <p>Les détails du contact s'afficheront ici.</p>
         </div>

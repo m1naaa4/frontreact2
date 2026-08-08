@@ -10,9 +10,7 @@ export default function BoxMessage() {
   const params = useParams();
   const ref = useRef();
   const refmessage = useRef(null);
-  const hiddenImageInput = useRef(null);
-  const hiddenVideoInput = useRef(null);
-  const hiddenFileInput = useRef(null);
+  const hiddenAttachmentInput = useRef(null);
   const [text, setText] = useState('');
   const [attachment, setAttachment] = useState(null);
   const [emojiPickerState, SetEmojiPicker] = useState(false);
@@ -42,11 +40,9 @@ export default function BoxMessage() {
       });
       setText('');
       setAttachment(null);
-      if (hiddenImageInput.current) hiddenImageInput.current.value = '';
-      if (hiddenVideoInput.current) hiddenVideoInput.current.value = '';
-      if (hiddenFileInput.current) hiddenFileInput.current.value = '';
-      if (refmessage.current) refmessage.current.value = '';
-    }
+        if (hiddenAttachmentInput.current) hiddenAttachmentInput.current.value = '';
+        if (refmessage.current) refmessage.current.value = '';
+      }
   };
 
   const handleSubmitValue = async (value, key) => {
@@ -109,17 +105,14 @@ export default function BoxMessage() {
         </div>
 
         <div className="Messenger-footer-attachments">
-          <div className="Messenger-attachment-item" onClick={() => hiddenImageInput.current.click()}>
-            <input ref={hiddenImageInput} type="file" accept="image/jpeg, image/png, image/gif, image/webp" onChange={selectAttachment} />
+          <div className="Messenger-attachment-item" onClick={() => hiddenAttachmentInput.current.click()}>
+            <input
+              ref={hiddenAttachmentInput}
+              type="file"
+              accept="image/jpeg, image/png, image/gif, image/webp, video/mp4, video/x-msvideo, video/quicktime, video/mpeg, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/plain"
+              onChange={selectAttachment}
+            />
             <span><i className="uil uil-image"></i></span>
-          </div>
-          <div className="Messenger-attachment-item" onClick={() => hiddenVideoInput.current.click()}>
-            <input ref={hiddenVideoInput} type="file" accept="video/x-mpeg2, video/x-msvideo, video/quicktime, video/mp4" onChange={selectAttachment} />
-            <span><i className="uil uil-video"></i></span>
-          </div>
-          <div className="Messenger-attachment-item" onClick={() => hiddenFileInput.current.click()}>
-            <input ref={hiddenFileInput} type="file" onChange={selectAttachment} />
-            <span><i className="uil uil-file-alt"></i></span>
           </div>
         </div>
 
@@ -131,7 +124,6 @@ export default function BoxMessage() {
         )}
 
         <div className="Messenger-footer-actions">
-          <button className="button-attachments"><i className="uil uil-paperclip"></i></button>
           <button className="button-send" type="button" onClick={sendMessage}>
             <i className="uil uil-message"></i>
           </button>

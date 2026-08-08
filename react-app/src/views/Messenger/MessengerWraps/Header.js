@@ -23,8 +23,9 @@ export default function Header() {
               history.push('/messages');
             }
           }}
+          title="Retour"
         >
-          ←
+          <i className="uil uil-angle-left-b"></i>
         </button>
         <div className="Messenger-Avatar">
           <span>{initials}</span>
@@ -36,7 +37,9 @@ export default function Header() {
       </div>
 
       <div className="Messenger-Header-Actions">
-        <button type="button" className="Messenger-MenuButton">⋮</button>
+        <button type="button" className="Messenger-MenuButton" title="Options">
+          <i className="uil uil-ellipsis-v"></i>
+        </button>
       </div>
     </div>
   );

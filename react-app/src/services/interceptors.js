@@ -41,16 +41,22 @@ axios.interceptors.response.use(
       if (error.response === undefined) {
         return Promise.reject(error);
       }
-      if(error.response.status === 403)
-      {
+
+      const requestUrl = String(error.config?.url || '');
+      const isMessengerOrFriend = /\/messages\/|\/messenger\/|\/friend\/|searchUsers|getusers/i.test(requestUrl);
+
+      // Messenger/friend APIs return 403 for business rules (e.g. not friends).
+      // Do not hard-redirect the whole app for those cases.
+      if (error.response.status === 403 && !isMessengerOrFriend) {
         window.location = '/noauthorization/:id';
       }
-      if(error.response.status === 401)
-      {
-        axios.post('/logout');
-        // history.push('/project/lists')
+      if (error.response.status === 401) {
+        // Do not force-logout on messenger/friend local API errors.
+        if (!isMessengerOrFriend) {
+          axios.post('/logout');
+        }
       }
-  
+
       return Promise.reject(error);
     }
 );

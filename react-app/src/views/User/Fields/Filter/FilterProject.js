@@ -127,12 +127,19 @@ function FilterProject({ filterInput }) {
                     <div className="col-sm-1 col-md-12 col-lg-1">
                         
                     </div>
-                    <Collapse in={open} className="mt-10">
+                            <Collapse in={open} className="mt-10">
                         <div className="col-sm-11 col-md-12 col-lg-12">
                             <div className="display-flex">
                                 <div className="input-row w300">
-                                    <input type="text" data-testid="filter-input-search"
-                                        onChange={(e) => setSearch(e.target.value)} placeholder={t('filter.search')} />
+                                    <div className="Filter-Search-Shell">
+                                        <i className="uil uil-search"></i>
+                                        <input
+                                            type="text"
+                                            data-testid="filter-input-search"
+                                            onChange={(e) => setSearch(e.target.value)}
+                                            placeholder={t('filter.search') || 'Rechercher un projet'}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="input-row input-tags">
                                     <InputTags onChange={selectedTags} selectedTags={selectedTags} tagss={tags} />

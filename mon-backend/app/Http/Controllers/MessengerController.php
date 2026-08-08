@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class MessengerController extends Controller
 {
+    use EnsuresUsersExist;
+
     private const PAGE_SIZE = 20;
     private const MAX_ATTACHMENT_SIZE = 10485760; // 10MB
     private const ALLOWED_IMAGE_MIMES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
@@ -23,35 +26,54 @@ class MessengerController extends Controller
             return $this->validationError('user_id is required');
         }
 
+        $this->ensureUser($userId, $this->userAttributesFromRequest($request));
+
         if (strlen($name) < 2) {
             return response()->json(['success' => true, 'users' => []]);
         }
 
-        // Check if friends table exists
-        $hasFriendsTable = Schema::hasTable('friends');
-        
-        if (!$hasFriendsTable) {
-            // If no friends table, search all users except current user
-            $query = DB::table('users')
-                ->where('users.id', '!=', $userId)
-                ->where('users.name', 'like', '%' . $name . '%')
-                ->select('users.id', 'users.name', 'users.avatar');
-        } else {
-            // Search only among friends
-            $query = DB::table('users')
-                ->join('friends', function ($join) use ($userId) {
-                    $join->on('friends.friend_id', '=', 'users.id')
-                        ->where('friends.user_id', '=', $userId);
-                })
-                ->where('users.id', '!=', $userId)
-                ->select('users.id', 'users.name', 'users.avatar');
-
-            $query->where('users.name', 'like', '%' . $name . '%');
+        if (!Schema::hasTable('users')) {
+            return response()->json(['success' => true, 'users' => []]);
         }
+
+        $query = DB::table('users')
+            ->where('users.id', '!=', $userId)
+            ->where(function ($where) use ($name) {
+                $where->where('users.name', 'like', '%' . $name . '%');
+
+                foreach (['email', 'username', 'firstname', 'lastname'] as $column) {
+                    if (Schema::hasColumn('users', $column)) {
+                        $where->orWhere('users.' . $column, 'like', '%' . $name . '%');
+                    }
+                }
+
+                if (Schema::hasColumn('users', 'firstname') && Schema::hasColumn('users', 'lastname')) {
+                    $where->orWhereRaw("CONCAT(COALESCE(users.firstname,''),' ',COALESCE(users.lastname,'')) like ?", ['%' . $name . '%']);
+                }
+            })
+            ->select($this->userSearchColumns());
+
+        $users = $query->orderBy('users.name')
+            ->limit(20)
+            ->get()
+            ->map(function ($user) use ($userId) {
+                $relationship = $this->relationshipInfo($userId, (int) $user->id);
+                $user->relationship_status = $relationship['status'];
+                $user->request_id = $relationship['request_id'];
+                $user->can_message = $user->relationship_status === 'friends';
+                $user->avatar = $user->avatar ?? '/assets/images/avatar.png';
+
+                if (empty($user->name)) {
+                    $fullName = trim(($user->firstname ?? '') . ' ' . ($user->lastname ?? ''));
+                    $user->name = $fullName !== '' ? $fullName : ($user->username ?? $user->email ?? ('User #' . $user->id));
+                }
+
+                return $user;
+            });
 
         return response()->json([
             'success' => true,
-            'users' => $query->orderBy('users.name')->limit(20)->get()
+            'users' => $users
         ]);
     }
 
@@ -62,6 +84,8 @@ class MessengerController extends Controller
         if (!$userId) {
             return $this->validationError('user_id is required');
         }
+
+        $this->ensureUser($userId, $this->userAttributesFromRequest($request));
 
         $conversationIds = DB::table('conversation_user')
             ->where('user_id', $userId)
@@ -103,8 +127,13 @@ class MessengerController extends Controller
                 $conversation->messages = $lastMessage ? [$lastMessage] : [];
                 $conversation->last_message = $this->messagePreview($lastMessage);
                 $conversation->content = $conversation->last_message;
-                $conversation->created_at = $lastMessage ? $lastMessage->created_at : null;
+                $createdAt = $lastMessage ? $lastMessage->created_at : null;
+                $conversation->created_at = [
+                    'date' => $createdAt,
+                    'for_humans' => $createdAt ? (string) $createdAt : '',
+                ];
                 $conversation->unread = (int) ($unreads[$conversation->id] ?? 0);
+                $conversation->avatar = $conversation->avatar ?? '/assets/images/avatar.png';
 
                 return $conversation;
             })
@@ -152,7 +181,10 @@ class MessengerController extends Controller
         $messages = $messagesQuery
             ->limit(self::PAGE_SIZE)
             ->get()
-            ->sortBy('created_at')
+            ->sortBy([
+                ['created_at', 'asc'],
+                ['id', 'asc'],
+            ])
             ->values()
             ->map(fn ($message) => $this->withAttachmentUrl($message));
 
@@ -175,6 +207,9 @@ class MessengerController extends Controller
             return $this->validationError('user_id and receiver_id are required');
         }
 
+        $this->ensureUser($senderId, $this->userAttributesFromRequest($request));
+        $this->ensureUser($receiverId);
+
         if ($content === '' && !$file) {
             return $this->validationError('content or attachment is required');
         }
@@ -194,8 +229,8 @@ class MessengerController extends Controller
                 }
 
                 $conversationId = DB::table('conversations')->insertGetId([
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
 
                 DB::table('conversation_user')->insert([
@@ -215,11 +250,11 @@ class MessengerController extends Controller
                 'attachment_mime' => $attachment['mime'] ?? null,
                 'attachment_size' => $attachment['size'] ?? null,
                 'read_at' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
 
-            DB::table('conversations')->where('id', $conversationId)->update(['updated_at' => now()]);
+            DB::table('conversations')->where('id', $conversationId)->update(['updated_at' => Carbon::now()]);
             DB::commit();
         } catch (\Throwable $exception) {
             DB::rollBack();
@@ -236,13 +271,16 @@ class MessengerController extends Controller
 
     public function createConversation(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|integer',
-            'receiver_id' => 'required|integer',
-        ]);
+        $userId = (int) $request->input('user_id');
+        $receiverId = (int) $request->input('receiver_id');
 
-        $userId = (int) $request->user_id;
-        $receiverId = (int) $request->receiver_id;
+        if (!$userId || !$receiverId) {
+            return $this->validationError('user_id and receiver_id are required');
+        }
+
+        $this->ensureUser($userId, $this->userAttributesFromRequest($request));
+        $this->ensureUser($receiverId);
+
         $existingConversation = $this->findConversationId($userId, $receiverId);
 
         if ($existingConversation) {
@@ -259,8 +297,8 @@ class MessengerController extends Controller
 
         $conversationId = DB::transaction(function () use ($userId, $receiverId) {
             $conversationId = DB::table('conversations')->insertGetId([
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
 
             DB::table('conversation_user')->insert([
@@ -295,7 +333,7 @@ class MessengerController extends Controller
                 ->where('receiver_id', $userId)
                 ->whereNull('read_at')
                 ->whereNull('deleted_at')
-                ->update(['read_at' => now(), 'updated_at' => now()]);
+                ->update(['read_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
 
             $this->broadcastToUser($receiverId, 'message.seen', [
                 'conversation_id' => $conversationId,
@@ -320,8 +358,8 @@ class MessengerController extends Controller
         }
 
         DB::table('messages')->where('id', $messageId)->update([
-            'deleted_at' => now(),
-            'updated_at' => now(),
+            'deleted_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         $payload = [
@@ -378,7 +416,7 @@ class MessengerController extends Controller
     private function canStartConversation(int $userId, int $receiverId): bool
     {
         if (!Schema::hasTable('friends')) {
-            return true;
+            return false;
         }
 
         return DB::table('friends')
@@ -389,6 +427,66 @@ class MessengerController extends Controller
                 $query->where('user_id', $receiverId)->where('friend_id', $userId);
             })
             ->exists();
+    }
+
+    private function relationshipStatus(int $userId, int $otherUserId): string
+    {
+        return $this->relationshipInfo($userId, $otherUserId)['status'];
+    }
+
+    private function relationshipInfo(int $userId, int $otherUserId): array
+    {
+        if (Schema::hasTable('friends')) {
+            $areFriends = DB::table('friends')
+                ->where(function ($query) use ($userId, $otherUserId) {
+                    $query->where('user_id', $userId)->where('friend_id', $otherUserId);
+                })
+                ->orWhere(function ($query) use ($userId, $otherUserId) {
+                    $query->where('user_id', $otherUserId)->where('friend_id', $userId);
+                })
+                ->exists();
+
+            if ($areFriends) {
+                return ['status' => 'friends', 'request_id' => null];
+            }
+        }
+
+        if (Schema::hasTable('friend_requests')) {
+            $sent = DB::table('friend_requests')
+                ->where('requester_id', $userId)
+                ->where('receiver_id', $otherUserId)
+                ->where('status', 'pending')
+                ->first();
+
+            if ($sent) {
+                return ['status' => 'pending_sent', 'request_id' => (int) $sent->id];
+            }
+
+            $received = DB::table('friend_requests')
+                ->where('requester_id', $otherUserId)
+                ->where('receiver_id', $userId)
+                ->where('status', 'pending')
+                ->first();
+
+            if ($received) {
+                return ['status' => 'pending_received', 'request_id' => (int) $received->id];
+            }
+        }
+
+        return ['status' => 'none', 'request_id' => null];
+    }
+
+    private function userSearchColumns(): array
+    {
+        $columns = ['users.id'];
+
+        foreach (['name', 'email', 'username', 'firstname', 'lastname', 'avatar', 'profile_id'] as $column) {
+            if (Schema::hasColumn('users', $column)) {
+                $columns[] = 'users.' . $column;
+            }
+        }
+
+        return $columns;
     }
 
     private function storeAttachment($file): array

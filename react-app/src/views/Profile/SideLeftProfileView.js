@@ -116,8 +116,8 @@ export default function SideLeftProfileView() {
                 <h3>{t('bio')}</h3>
                 {infoprofile.infoprofile.about &&
                   <ReadMoreReact text={infoprofile.infoprofile.about}
-                    ideal={280}
-                    max={280} />
+                    ideal={180}
+                    max={180} />
                 }
               </div>
 

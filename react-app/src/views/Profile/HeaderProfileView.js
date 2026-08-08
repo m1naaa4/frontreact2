@@ -108,14 +108,32 @@ export default function HeaderProfileView({ formData, setForm, props }) {
         setFileCover(newavatar.avatar.cover_link);
     }, [newavatar]);
 
-    const SendRequest = ()=>{
+    const SendRequest = async ()=>{
         setOpen(true);
-        let data ={
-            'friend_id' : infoprofile?.infoprofile.user_id,
-            'url' : 'friend/sendRequest',
+        const profile = infoprofile?.infoprofile || {};
+        const friendName = (profile.firstname && profile.lastname)
+            ? `${profile.firstname} ${profile.lastname}`
+            : (profile.username || profile.name || '');
+        try {
+            const res = await dispatch(SendRequestFriendAction({
+                friend_id: profile.user_id,
+                friend_name: friendName,
+                friend_username: profile.username || friendName,
+                friend_avatar: profile.avatar || profile.avatar_link,
+                friend_profile_id: profile.id || profile.profile_id,
+                friend_firstname: profile.firstname,
+                friend_lastname: profile.lastname,
+                name: localStorage.getItem('user_name') || undefined,
+                url: 'friend/sendRequest',
+            }));
+            if (res?.success === false) {
+                console.error('Friend request failed:', res?.message || res);
+                return;
+            }
+            setShow(false);
+        } catch (error) {
+            console.error('Friend request failed:', error);
         }
-        dispatch(SendRequestFriendAction(data));
-        setShow(false); 
     }
 
     useEffect(()=>{

@@ -51,6 +51,8 @@ function buildProxy(env) {
     rewrite: (p) => base2 + p,
   });
 
+  const messengerTarget = env.REACT_APP_MESSENGER_URL || 'http://127.0.0.1:8000';
+
   return {
     // ── Microservices ──────────────────────────────────────────────────────
     // Each entry strips its own path prefix before forwarding so the backend
@@ -76,6 +78,23 @@ function buildProxy(env) {
     '/admin':        mainApi(apiOrigin, apiBase),
     '/getusers':     mainApi(apiOrigin, apiBase),
     '/broadcasting': mainApi(apiOrigin, apiBase),
+
+    // Local messenger/friends backend (mon-backend on :8000) for Vite dev.
+    '/api/messages': {
+      ...base,
+      target: messengerTarget,
+      rewrite: (p) => p.replace(/^\/api/, ''),
+    },
+    '/api/searchUsers': {
+      ...base,
+      target: messengerTarget,
+      rewrite: (p) => p.replace(/^\/api/, ''),
+    },
+    '/api/friend': {
+      ...base,
+      target: messengerTarget,
+      rewrite: (p) => p.replace(/^\/api/, ''),
+    },
 
     // ── Legacy /api prefix (kept for any direct axios calls using that prefix)
     '/api': {

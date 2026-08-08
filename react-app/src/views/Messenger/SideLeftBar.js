@@ -7,6 +7,7 @@ import {
   GetConversationAction,
   SearchUsersAction,
 } from '../../store/actions/Messenger/MessageAction';
+import { AcceptFriendAction, SendRequestFriendAction } from '../../store/actions/Friend/FriendsAction';
 import _map from 'lodash/map';
 
 export default function SideLeftBar() {
@@ -19,6 +20,8 @@ export default function SideLeftBar() {
   const [showComposer, setShowComposer] = useState(false);
   const [unreadOnly, setUnreadOnly] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState('');
+  const [pendingUsers, setPendingUsers] = useState({});
   const params = useParams();
 
   // Clear error when component mounts
@@ -53,23 +56,42 @@ export default function SideLeftBar() {
     if (term.length < 2) {
       setSearchResults([]);
       setIsSearching(false);
+      setSearchError('');
       return;
     }
 
+    let cancelled = false;
     setIsSearching(true);
+    setSearchError('');
     const timeout = setTimeout(() => {
       dispatch(SearchUsersAction({ name: term }))
         .then((res) => {
-          setSearchResults(res?.users || []);
+          if (cancelled) {
+            return;
+          }
+          if (res?.success === false) {
+            setSearchError(res?.message || 'Impossible de rechercher les utilisateurs.');
+            setSearchResults([]);
+          } else {
+            setSearchResults(res?.users || []);
+          }
           setIsSearching(false);
         })
-        .catch(() => {
+        .catch((error) => {
+          if (cancelled) {
+            return;
+          }
+          console.error('Messenger search failed:', error);
           setSearchResults([]);
+          setSearchError('Impossible de rechercher les utilisateurs.');
           setIsSearching(false);
         });
     }, 300);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
   }, [dispatch, searchTerm, showComposer]);
 
   const showConversation = (id) => {
@@ -77,12 +99,99 @@ export default function SideLeftBar() {
   };
 
   const openUserConversation = async (user) => {
-    await dispatch(CreateConversationAction({ receiver_id: user.id }, 'messages/create', 1));
-    dispatch(GetConversationAction({ receiver_id: user.id }, 'messages/show', 1));
+    const receiverId = user.id || user.user_id;
+    if (!receiverId) {
+      setSearchError('Utilisateur invalide.');
+      return;
+    }
+
+    try {
+      await dispatch(CreateConversationAction({ receiver_id: receiverId }, 'messages/create', 1));
+    } catch (error) {
+      // Non-blocking: first message will create the conversation when create is unavailable.
+      console.warn('Create conversation failed, opening thread anyway:', error?.response?.data || error);
+    }
+
+    dispatch(GetConversationAction({ receiver_id: receiverId }, 'messages/show', 1));
     setShowComposer(false);
     setSearchTerm('');
     setSearchResults([]);
-    history.push(`/messages/${user.id}`);
+    setSearchError('');
+    history.push(`/messages/${receiverId}`);
+  };
+
+  const sendFriendRequest = async (user) => {
+    setPendingUsers(previous => ({ ...previous, [user.id]: true }));
+    setSearchError('');
+
+    try {
+      const res = await dispatch(SendRequestFriendAction({ friend_id: user.id, url: 'friend/sendRequest' }));
+
+      if (res?.success === false) {
+        setSearchError(res?.message || 'Demande impossible pour cet utilisateur.');
+        return;
+      }
+
+      setSearchResults(previous => previous.map(item => (
+        Number(item.id) === Number(user.id)
+          ? { ...item, relationship_status: res?.status || 'pending_sent', can_message: res?.status === 'friends' }
+          : item
+      )));
+    } catch (error) {
+      setSearchError('Demande impossible pour cet utilisateur.');
+    } finally {
+      setPendingUsers(previous => ({ ...previous, [user.id]: false }));
+    }
+  };
+
+  const acceptFriendRequest = async (user) => {
+    setPendingUsers(previous => ({ ...previous, [user.id]: true }));
+    setSearchError('');
+
+    try {
+      const res = await dispatch(AcceptFriendAction({
+        request_id: user.request_id || user.id,
+        friend_id: user.user_id || user.id,
+        url: 'friend/friendAccept'
+      }));
+
+      if (res?.success === false) {
+        setSearchError(res?.message || 'Impossible d\'accepter cette demande.');
+        return;
+      }
+
+      setSearchResults(previous => previous.map(item => (
+        Number(item.id) === Number(user.id)
+          ? { ...item, relationship_status: 'friends', can_message: true }
+          : item
+      )));
+      await openUserConversation({ ...user, relationship_status: 'friends', can_message: true });
+    } catch (error) {
+      setSearchError('Impossible d\'accepter cette demande.');
+    } finally {
+      setPendingUsers(previous => ({ ...previous, [user.id]: false }));
+    }
+  };
+
+  const handleSearchResultClick = (user) => {
+    if (user.can_message || user.relationship_status === 'friends') {
+      openUserConversation(user);
+      return;
+    }
+
+    if (user.relationship_status === 'pending_received') {
+      acceptFriendRequest(user);
+      return;
+    }
+
+    sendFriendRequest(user);
+  };
+
+  const relationshipLabel = (user) => {
+    if (user.can_message || user.relationship_status === 'friends') return 'Message';
+    if (user.relationship_status === 'pending_sent') return 'Demande envoyée';
+    if (user.relationship_status === 'pending_received') return 'À accepter';
+    return 'Ajouter';
   };
 
   const filteredUsers = listusers.filter((user) => {
@@ -96,10 +205,13 @@ export default function SideLeftBar() {
         <input
           type="search"
           className="Messenger-Search"
-          placeholder={showComposer ? 'Rechercher un ami par nom...' : 'Cliquez sur + pour chercher un ami'}
+          placeholder={showComposer ? 'Rechercher un ami par nom...' : 'Cliquez ou tapez pour chercher un ami'}
           value={searchTerm}
-          disabled={!showComposer}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onFocus={() => setShowComposer(true)}
+          onChange={(e) => {
+            setShowComposer(true);
+            setSearchTerm(e.target.value);
+          }}
         />
         <button
           type="button"
@@ -129,24 +241,35 @@ export default function SideLeftBar() {
         <div className="Messenger-EmptySearch">Recherche en cours...</div>
       )}
 
+      {showComposer && searchError && (
+        <div className="Messenger-ErrorMessage">
+          <i className="uil uil-exclamation-circle"></i>
+          <span>{searchError}</span>
+        </div>
+      )}
+
       {showComposer && searchResults.length > 0 && (
         <div className="Messenger-SearchResults">
           {_map(searchResults, (user) => (
             <button
               type="button"
               key={user.id}
-              className="Messenger-SearchResult"
-              onClick={() => openUserConversation(user)}
+              className={`Messenger-SearchResult Messenger-SearchResult-${user.relationship_status}`}
+              onClick={() => handleSearchResultClick(user)}
+              disabled={user.relationship_status === 'pending_sent' || pendingUsers[user.id]}
             >
               <img src={user.avatar || '/assets/images/avatar.png'} alt="avatar" />
-              <span>{user.name}</span>
+              <span className="Messenger-SearchResultName">{user.name}</span>
+              <span className="Messenger-SearchResultStatus">
+                {pendingUsers[user.id] ? 'Envoi...' : relationshipLabel(user)}
+              </span>
             </button>
           ))}
         </div>
       )}
 
-      {!showComposer && users?.loading && listusers.length === 0 && (
-        <div className="Messenger-EmptySearch">Chargement...</div>
+      {showComposer && !isSearching && searchTerm.trim().length >= 2 && !searchError && searchResults.length === 0 && (
+        <div className="Messenger-EmptySearch">Aucun utilisateur trouvé.</div>
       )}
 
       {users?.error && (
@@ -187,7 +310,7 @@ export default function SideLeftBar() {
         ))
       }
 
-      {!showComposer && !users?.loading && typeof users?.conversations !== 'string' && filteredUsers.length === 0 && (
+      {!showComposer && typeof users?.conversations !== 'string' && filteredUsers.length === 0 && (
         <div className="Messenger-EmptySearch">Aucune conversation.</div>
       )}
     </div>
