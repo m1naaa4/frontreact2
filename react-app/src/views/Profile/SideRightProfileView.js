@@ -31,7 +31,7 @@ export default function SideRightProfileView() {
 
 
   return (
-    <div className="col-md-4 col-lg-3 ordder-first">
+    <div className="col-12">
       {
 
         <div className="Right-Side">

@@ -14,170 +14,118 @@ import RealizationGrid from '../Realization/RealizationGrid';
 import { ClearProjectsAction, getMyOffresAction } from '../../../store/actions/User/Project/ProjectAction';
 import { Link, useParams } from 'react-router-dom';
 import BioSkeleton from '../../../skeleton/profile/BioSkeleton';
+import { useTranslation } from 'react-i18next';
 
-
-
-export default function CvView(props) {
+export default function CvView() {
   const [show, setShow] = useState(false);
   const [showstudies, setShowstudies] = useState(false);
   const [showexperience, setShowexperience] = useState(false);
   const [action, setAction] = useState(false);
+  const { t } = useTranslation();
+  const params = useParams();
+
+  const settings = { dots: false, infinite: true, speed: 500, slidesToShow: 2, slidesToScroll: 1 };
+  const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
+  const loading1 = useSelector(state => state.offres.loading);
+  const loading2 = useSelector(state => state.infoProfile?.loading);
+  const realizations = useSelector(state => state.offres.offres);
+  const user = useSelector(state => state.userProfile.userProfile);
+  const profile = useSelector(state => state.infoProfile?.infoprofile);
+  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const handleCloseStudies = () => setShowstudies(false);
   const handleShowStudies = () => setShowstudies(true);
-
-
   const handleCloseExperience = () => setShowexperience(false);
   const handleShowExperience = () => setShowexperience(true);
 
-  const realizations = useSelector(state => state.offres.offres);
-
-  const params = useParams();
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1
-  };
-
-  const cvtheque = useSelector(state => state.infoProfile?.cvtheque);
-
-  const loading1 = useSelector(state => state.offres.loading);
-  const loading2 = useSelector(state => state.infoProfile?.loading);
-
-
-  const user = useSelector(state => state.userProfile.userProfile);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCvthequeAction({ user_profile_id: params.id }, '', ''));
+    dispatch(getMyOffresAction({ action: 'getmyprojectlist', user_profile_id: params.id }, '', ''));
+  }, [dispatch, params.id]);
 
   useEffect(() => {
-    let data = {
-      action: 'getmyprojectlist',
-      user_profile_id: params.id
-    }
-    let dataa = {
-      user_profile_id: params.id
-    }
-    dispatch(getCvthequeAction(dataa, '', ''));
-    dispatch(getMyOffresAction(data, '', ''));
-  }, [dispatch])
+    if (user?.profile_id) setAction(user.profile_id === params.id);
+  }, [user?.profile_id, params.id]);
 
-  useEffect(() => {
-    if (user?.profile_id) {
-      user?.profile_id === params.id ? setAction(true) : setAction(false);
-    }
-  })
+  const deleteSkill = (id) => dispatch(CvdeleteAction({ skills: { index: id } }, '', ''));
+  const clearProject = () => dispatch(ClearProjectsAction());
 
+  if (loading1 || loading2) return <BioSkeleton />;
 
-
-  const deleteSkill = (id) => {
-    let data = {
-      skills: { index: id }
-    }
-    dispatch(CvdeleteAction(data, '', ''));
-  }
-
-  const clearProject = () => {
-    dispatch(ClearProjectsAction());
-  }
-
-  if (loading1 || loading2) {
-    return <BioSkeleton/>
-  } else {
-    return (
-      <div className="col-md-6">
-        <div className="Center-Side">
-          <div className="Profile-Sections">
-            <div className="Profile-Section">
-              {
-                action &&
-                <button type="button" className="UpdateInfos-BTN" onClick={handleShow} data-toggle="modal" data-target="#SkillsModal"><i className="uil uil-pen"></i></button>
-              }
-
-              <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <SkillsModal show={show} handleClose={handleClose} centred />
-              </Modal>
-
-              <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Skills</h3>
-              <div className="Profile-Skills">
-                <ul>
-                  {cvtheque?.skills &&
-                    cvtheque.skills.map((skill, index) => (
-                      <li key={index}><span>{skill.name} </span>
-                        {action && <button className="delete-skill" onClick={e => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button>}
-                      </li>
-                    ))
-                  }
-                </ul>
+  return (
+    <div className="col-12">
+      <div className="Center-Side">
+        <div className="Profile-Bio-Split">
+          <div className="Profile-Bio-Main">
+            <div className="Profile-Sections">
+              <div className="Profile-Section">
+                {action && <button type="button" className="UpdateInfos-BTN" onClick={handleShow}><i className="uil uil-pen"></i></button>}
+                <Modal show={show} onHide={handleClose} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <SkillsModal show={show} handleClose={handleClose} centred />
+                </Modal>
+                <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Skills</h3>
+                <div className="Profile-Skills">
+                  <ul>{cvtheque?.skills?.map((skill, index) => (
+                    <li key={index}><span>{skill.name}</span>{action && <button className="delete-skill" onClick={() => deleteSkill(skill.index)}><i className="uil uil-trash"></i></button>}</li>
+                  ))}</ul>
+                </div>
+              </div>
+              <div className="Profile-Section">
+                {action && <button type="button" className="UpdateInfos-BTN" onClick={handleShowStudies}><i className="uil uil-plus"></i></button>}
+                <Modal show={showstudies} onHide={handleCloseStudies} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" centred aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <StudieModal showstudies={showstudies} handleCloseStudies={handleCloseStudies} centred />
+                </Modal>
+                <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i> Etudes</h3>
+                <ul className="Section-Items">{cvtheque?.etudes?.map((study, index) => <StudieGrid study={study} key={index} />)}</ul>
+              </div>
+              <div className="Profile-Section">
+                {action && <button type="button" className="UpdateInfos-BTN" onClick={handleShowExperience}><i className="uil uil-plus"></i></button>}
+                <Modal show={showexperience} onHide={handleCloseExperience} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <ExperienceModal showexperience={showexperience} handleCloseExperience={handleCloseExperience} centred />
+                </Modal>
+                <h3 className="Profile-Section-Title"><i className="uil uil-briefcase"></i> Experiences</h3>
+                <ul className="Section-Items">{cvtheque?.experiences?.map((experience, index) => <ExperienceGrid key={index} experience={experience} />)}</ul>
+              </div>
+              <div className="Profile-Section">
+                {action && <Link className="UpdateInfos-BTN" to={`/project/create`} onClick={clearProject}><i className="uil uil-plus"></i></Link>}
+                <h3 className="Profile-Section-Title"><i className="uil uil-presentation"></i> Réalisations</h3>
+                <Slider {...settings}>
+                  {realizations?.projects?.map((realization, index) => (
+                    <div className="Portfolio-Item" key={index}><RealizationGrid realization={realization} /></div>
+                  ))}
+                </Slider>
               </div>
             </div>
-            <div className="Profile-Section">
-              {
-                action &&
-                <button type="button" className="UpdateInfos-BTN" onClick={handleShowStudies} data-toggle="modal" data-target="#EtudeModal"><i className="uil uil-plus"></i></button>
-              }
-
-              <Modal show={showstudies} onHide={handleCloseStudies} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" centred aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <StudieModal showstudies={showstudies} handleCloseStudies={handleCloseStudies} centred/>
-              </Modal>
-
-              <h3 className="Profile-Section-Title"><i className="uil uil-graduation-cap"></i> Etudes</h3>
-              <ul className="Section-Items">
-                {cvtheque?.etudes &&
-                  cvtheque?.etudes.map((study, index) => (
-                    // <div key={index}>
-                      <StudieGrid study={study} key={index} />
-                    // </div>
-                  ))
-                }
-
-              </ul>
-            </div>
-            <div className="Profile-Section">
-              {
-                action &&
-                <button type="button" className="UpdateInfos-BTN" onClick={handleShowExperience} data-toggle="modal" data-target="#ExperienceModal"><i className="uil uil-plus"></i></button>
-              }
-
-              <Modal show={showexperience} onHide={handleCloseExperience} className="DadupaModal modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <ExperienceModal showexperience={showexperience} handleCloseExperience={handleCloseExperience} centred />
-              </Modal>
-
-              <h3 className="Profile-Section-Title"><i className="uil uil-bag"></i> Experiences</h3>
-              <ul className="Section-Items">
-                {cvtheque?.experiences &&
-                  cvtheque.experiences.map((experience, index) => (
-                    // <div >
-                      <ExperienceGrid key={index} experience={experience} />
-                    // </div>
-                  ))
-                }
-              </ul>
-            </div>
-            <div className="Profile-Section">
-              {
-                action &&
-                <Link className="UpdateInfos-BTN" to={`/project/create`} onClick={clearProject}><i className="uil uil-plus"></i>
-                </Link>
-              }
-              <h3 className="Profile-Section-Title"><i className="uil uil-presentation"></i> réalisations</h3>
-              <Slider {...settings}>
-                {realizations?.projects &&
-                  realizations?.projects.map((realization, index) => (
-                    <div className="Portfolio-Item" key={index}>
-                      <RealizationGrid realization={realization} />
-                    </div>
-                  ))
-                }
-              </Slider>
-            </div>
           </div>
+
+          <aside className="Profile-Bio-Side">
+            <div className="Widget-BOX Profile-Info">
+              <h3 className="Widget-Title">{t('profile') || 'Profil'}</h3>
+              <div className="Profile-Side-Card">
+                <div className="Profile-Side-Name">{profile?.firstname ? `${profile.firstname} ${profile.lastname}` : profile?.username}</div>
+                <div className="Profile-Side-Line">{profile?.job}</div>
+                <div className="Profile-Side-Line">{profile?.country || profile?.address}</div>
+              </div>
+            </div>
+
+            <div className="Widget-BOX Profile-Info">
+              <h3 className="Widget-Title">{t('bio')}</h3>
+              <p className="Profile-Side-Text">{profile?.about || t('noresultfound')}</p>
+            </div>
+
+            <div className="Widget-BOX Profile-Info">
+              <h3 className="Widget-Title">{t('contact') || 'Contact'}</h3>
+              <ul className="Profile-Side-List">
+                <li>{profile?.phone}</li>
+                <li>{profile?.email}</li>
+                <li>{profile?.sector}</li>
+              </ul>
+            </div>
+          </aside>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

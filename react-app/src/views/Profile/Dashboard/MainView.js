@@ -67,8 +67,8 @@ export default function MainView() {
         <div className="Dashboard-Hero Dashboard-Hero-Simple">
           <div>
             <p className="Dashboard-Kicker">{t('dashboard') || 'Dashboard'}</p>
-            <h2 className="Dashboard-Title">Bonjour {userProfile?.name || 'Utilisateur'}</h2>
-            <p className="Dashboard-Subtitle">Suivi personnel des vues, favoris, notifications et activité récente.</p>
+            <h2 className="Dashboard-Title">Vue d’ensemble</h2>
+            <p className="Dashboard-Subtitle">Analyse rapide des performances sans infos personnelles superflues.</p>
           </div>
           <NavLink to={userProfile?.profile_id ? `/profile/${userProfile.profile_id}` : '/profile'} className="Dashboard-Back-Link">
             <i className="uil uil-user"></i>
@@ -76,16 +76,16 @@ export default function MainView() {
           </NavLink>
         </div>
 
-        <div className="Dashboard-Stats-Grid">
+        <div className="Dashboard-Stats-Grid Dashboard-Stats-Grid-Compact">
           <div className="Dashboard-Stat-Card"><div className="Dashboard-Stat-Icon"><i className="uil uil-eye"></i></div><div><div className="Dashboard-Stat-Value">{stats.totalViews}</div><div className="Dashboard-Stat-Label">Vues totales</div></div></div>
           <div className="Dashboard-Stat-Card"><div className="Dashboard-Stat-Icon"><i className="uil uil-heart"></i></div><div><div className="Dashboard-Stat-Value">{stats.favoriteCount}</div><div className="Dashboard-Stat-Label">Favoris</div></div></div>
           <div className="Dashboard-Stat-Card"><div className="Dashboard-Stat-Icon"><i className="uil uil-bell"></i></div><div><div className="Dashboard-Stat-Value">{stats.notificationCount}</div><div className="Dashboard-Stat-Label">Notifications</div></div></div>
           <div className="Dashboard-Stat-Card"><div className="Dashboard-Stat-Icon"><i className="uil uil-chart-line"></i></div><div><div className="Dashboard-Stat-Value">{comparisonFallback}</div><div className="Dashboard-Stat-Label">Vs mois précédent</div></div></div>
         </div>
 
-        <div className="Dashboard-Content-Grid">
+        <div className="Dashboard-Content-Grid Dashboard-Content-Grid-Compact">
           <div className="Dashboard-Panel">
-            <div className="Dashboard-Panel-Header"><h3>Statistiques personnelles</h3><span>{stats.activityCount} projets</span></div>
+            <div className="Dashboard-Panel-Header"><h3>Statistiques</h3><span>{stats.activityCount} projets</span></div>
             <div className="Dashboard-Metric"><div className="Dashboard-Metric-Label">Vues ce mois</div><div className="Dashboard-Metric-Value">{stats.currentMonthViews}</div></div>
             <div className="Dashboard-Metric"><div className="Dashboard-Metric-Label">Vues mois précédent</div><div className="Dashboard-Metric-Value">{stats.previousMonthViews}</div></div>
             <div className="Dashboard-Metric"><div className="Dashboard-Metric-Label">Comparaison</div><div className="Dashboard-Metric-Value">{comparisonFallback}</div></div>
@@ -111,36 +111,55 @@ export default function MainView() {
           </div>
         </div>
 
-        <div className="Dashboard-Panel Dashboard-Activity-Panel">
-          <div className="Dashboard-Panel-Header"><h3>Activités récentes</h3><span>Derniers ajouts</span></div>
-          <div className="Dashboard-Activity-List">
-            {stats.recentProjects.slice(0, 3).map(project => (
-              <div className="Dashboard-Activity-Item" key={`activity-${project?.id || project?.name}`}>
-                <i className="uil uil-file-alt"></i>
-                <div>
-                  <div className="Dashboard-Activity-Title">{project?.name || project?.title || 'Projet'} publié</div>
-                  <div className="Dashboard-Activity-Subtitle">{Number(project?.visit || project?.views || 0)} vues totales</div>
+        <div className="Dashboard-Content-Grid Dashboard-Content-Grid-Compact Dashboard-Content-Grid-Second">
+          <div className="Dashboard-Panel Dashboard-Activity-Panel">
+            <div className="Dashboard-Panel-Header"><h3>Activités récentes</h3><span>Derniers ajouts</span></div>
+            <div className="Dashboard-Activity-List">
+              {stats.recentProjects.slice(0, 3).map(project => (
+                <div className="Dashboard-Activity-Item" key={`activity-${project?.id || project?.name}`}>
+                  <i className="uil uil-file-alt"></i>
+                  <div>
+                    <div className="Dashboard-Activity-Title">{project?.name || project?.title || 'Projet'} publié</div>
+                    <div className="Dashboard-Activity-Subtitle">{Number(project?.visit || project?.views || 0)} vues totales</div>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {favorites.slice(0, 2).map(favorite => (
-              <div className="Dashboard-Activity-Item" key={`favorite-${favorite?.id}`}>
-                <i className="uil uil-heart"></i>
-                <div>
-                  <div className="Dashboard-Activity-Title">{favorite?.name || favorite?.title || 'Favori ajouté'}</div>
-                  <div className="Dashboard-Activity-Subtitle">Ajouté à vos favoris</div>
+              ))}
+              {favorites.slice(0, 2).map(favorite => (
+                <div className="Dashboard-Activity-Item" key={`favorite-${favorite?.id}`}>
+                  <i className="uil uil-heart"></i>
+                  <div>
+                    <div className="Dashboard-Activity-Title">{favorite?.name || favorite?.title || 'Favori ajouté'}</div>
+                    <div className="Dashboard-Activity-Subtitle">Ajouté à vos favoris</div>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {notifications.slice(0, 2).map(notification => (
-              <div className="Dashboard-Activity-Item" key={`notification-${notification?.id}`}>
-                <i className="uil uil-bell"></i>
-                <div>
-                  <div className="Dashboard-Activity-Title">{notification?.description || 'Notification'}</div>
-                  <div className="Dashboard-Activity-Subtitle">{notification?.created_at?.for_humans || 'Récente'}</div>
+              ))}
+              {notifications.slice(0, 2).map(notification => (
+                <div className="Dashboard-Activity-Item" key={`notification-${notification?.id}`}>
+                  <i className="uil uil-bell"></i>
+                  <div>
+                    <div className="Dashboard-Activity-Title">{notification?.description || 'Notification'}</div>
+                    <div className="Dashboard-Activity-Subtitle">{notification?.created_at?.for_humans || 'Récente'}</div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+          <div className="Dashboard-Panel">
+            <div className="Dashboard-Panel-Header"><h3>Résumé</h3><span>Lecture rapide</span></div>
+            <div className="Dashboard-Summary-Stack">
+              <div className="Dashboard-Summary-Item">
+                <span>Total vues</span>
+                <strong>{stats.totalViews}</strong>
               </div>
-            ))}
+              <div className="Dashboard-Summary-Item">
+                <span>Favoris</span>
+                <strong>{stats.favoriteCount}</strong>
+              </div>
+              <div className="Dashboard-Summary-Item">
+                <span>Notifications</span>
+                <strong>{stats.notificationCount}</strong>
+              </div>
+            </div>
           </div>
         </div>
       </div>

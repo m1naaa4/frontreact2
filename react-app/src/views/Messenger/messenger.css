@@ -204,10 +204,113 @@
   background: #fff;
 }
 
+.messagerie__body {
+  margin-bottom: 18px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.incoming-message {
+  justify-content: flex-start;
+}
+
+.outcoming-message {
+  justify-content: flex-end;
+}
+
+.message-avatar {
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.message-avatar img {
+  display: block;
+}
+
+.incoming-bubbles,
+.outcoming-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: min(68%, 460px);
+}
+
+.outcoming-bubbles {
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.message.incoming-message {
+  margin-right: auto;
+}
+
+.message.outcoming-message {
+  margin-left: auto;
+  width: auto;
+  flex-direction: row-reverse;
+}
+
+.bubble {
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 10px;
+  padding: 5px 8px;
+}
+
+.bubble-light {
+  background: #eef6ff;
+  border: 0;
+}
+
+.bubble-dark {
+  background: #e8f7ef;
+  color: #111827;
+  border: 0;
+  box-shadow: none;
+}
+
+.message-text {
+  line-height: 1.35;
+  word-break: break-word;
+  font-size: 14px;
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.message-meta-outgoing {
+  justify-content: flex-end;
+  padding-right: 2px;
+}
+
+.bubble .message-meta {
+  margin-top: 2px;
+}
+
+.bubble .message-text:only-child {
+  margin-bottom: 0;
+}
+
+.message-time {
+  white-space: nowrap;
+  line-height: 1;
+}
+
 .Messenger-footer {
   position: relative;
   border-top: 1px solid #edf2f7;
-  padding: 18px 24px;
+  padding: 14px 18px 16px;
   background: #fff;
 }
 
@@ -215,15 +318,42 @@
   width: 100%;
   border: 1px solid #e5e7eb;
   border-radius: 16px;
-  padding: 16px 56px 16px 16px;
+  padding: 14px 54px 14px 44px;
   outline: none;
+  height: 52px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.Messenger-footer input::placeholder {
+  color: #94a3b8;
+}
+
+.Messenger-EmojiButton {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  border: 0;
+  background: transparent;
+  color: #111827;
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Messenger-footer-actions {
   position: absolute;
-  right: 36px;
-  bottom: 28px;
+  right: 16px;
+  bottom: 10px;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 10px;
 }
 
@@ -232,10 +362,14 @@
   border: 0;
   background: #10b981;
   color: #fff;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
 }
 
 .button-attachments {
@@ -243,10 +377,16 @@
   color: #374151;
 }
 
+.button-send i {
+  transform: translateX(1px);
+}
+
 .Messenger-footer-attachments {
   display: flex;
-  gap: 8px;
-  margin-top: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 38px;
 }
 
 .Messenger-attachment-item input {
@@ -254,15 +394,17 @@
 }
 
 .Messenger-attachment-item {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: #f3f4f6;
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  background: #f8fafc;
   color: #374151;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 1px solid #e5e7eb;
+  margin-right: 2px;
 }
 
 .Messenger-AttachmentPreview {
@@ -275,6 +417,18 @@
   background: #ecfdf5;
   color: #047857;
   font-size: 13px;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Messenger-AttachmentThumb {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .Messenger-AttachmentPreview button,
@@ -308,6 +462,19 @@
   font-size: 12px;
   padding: 6px 0 0;
   margin-left: auto;
+}
+
+.Messenger-EmojiPickerWrap {
+  position: absolute;
+  left: 16px;
+  bottom: 66px;
+  z-index: 1000;
+}
+
+.Messenger-EmojiPickerWrap .emoji-mart {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
 }
 
 @media (max-width: 1200px) {
