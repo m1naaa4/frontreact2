@@ -5587,20 +5587,97 @@ label.error {
 }
 
 .Profile-Wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  height: 250px;
-  padding-bottom: 0;
+  padding: 32px 0 20px;
   position: relative;
   z-index: 9;
-  background-color: #F2F4F5;
-
-  /* height: 192px; */
+  background:
+    linear-gradient(180deg, rgba(242, 244, 245, 0.12) 0%, rgba(242, 244, 245, 0.84) 100%),
+    linear-gradient(135deg, rgba(0, 182, 1, 0.12), rgba(255, 255, 255, 0.02));
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.Profile-Hero {
+  padding: 18px 0 6px;
+}
+
+.Profile-Hero-Bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  min-height: 120px;
+}
+
+.Profile-Hero-Left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.Profile-Hero-Right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.Profile-Hero-AvatarBlock {
   position: relative;
+}
+
+.Profile-Hero-Identity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.Profile-Hero-Details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.Profile-Socials {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.Profile-Socials a,
+.Profile-Action-Button {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #2D363A;
+}
+
+.Profile-Action-Button {
+  width: auto;
+  padding: 0 16px;
+  gap: 8px;
+  font-weight: 600;
+  color: #00b601;
+}
+
+.Profile-Picture-Large {
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
+  border-width: 3px;
 }
 
 .Profile-Infos {
@@ -5691,11 +5768,10 @@ label.error {
 .Profile-Name {
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: #4c4c4c;
-  /* text-shadow: 0 0 10px rgba(0, 0, 0, .2); */
-  margin-top: 8px;
+  margin-top: 0;
 }
 
 .Profile-Icon {
@@ -5746,14 +5822,10 @@ label.error {
   font-weight: 600;
 }
 .Profile-Navigation {
-  flex: 0 0 100%;
-  max-width: 100%;
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 8px;
-  top: 10px;
+  justify-content: center;
+  margin: 18px 0 8px;
   position: relative;
-  padding-top: 18px;
 }
 
 .Profie-Menu {
@@ -5767,11 +5839,11 @@ label.error {
 }
 
 .Profie-Menu li a {
-  padding: 6px 15px 6px;
-  background-color: #fff;
+  padding: 10px 16px;
+  background-color: rgba(255, 255, 255, 0.92);
   font-size: 13px;
   color: #2D363A;
-  border-radius: 15px;
+  border-radius: 999px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -11389,9 +11461,279 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   text-align: center;
 }
 
+.Profile .Profile-Flow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Profile .Profile-Flow-Extras {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.Profile .Profile-Info-Panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.Profile-Bio-Split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.9fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.Profile-Bio-Side {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 24px;
+}
+
+.Profile-Bio-Side .Widget-BOX {
+  padding: 18px;
+}
+
+.Profile-Side-Card {
+  display: grid;
+  gap: 6px;
+}
+
+.Profile-Side-Name {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.Profile-Side-Line,
+.Profile-Side-Text,
+.Profile-Side-List li {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.Profile-Side-List {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.Profile-History-Layout {
+  display: grid;
+  gap: 18px;
+}
+
+.Profile-History-Hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 18px 22px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(15,23,42,.06);
+  box-shadow: 0 12px 28px rgba(15,23,42,.05);
+}
+
+.Profile-History-Kicker {
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 11px;
+  color: #00b601;
+  margin-bottom: 6px;
+}
+
+.Profile-History-Title {
+  margin: 0;
+  font-size: 28px;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.Profile-History-Subtitle {
+  margin: 8px 0 0;
+  color: #64748b;
+}
+
+.Profile-History-Grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, .8fr);
+  gap: 18px;
+}
+
+.Profile-History-Main,
+.Profile-History-Sidebar {
+  min-width: 0;
+}
+
+.Profile-History-Sidebar {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.Profile-History-Card {
+  padding: 18px;
+}
+
+.Profile-History-SideText {
+  margin: 0;
+}
+
+.Profile-History-Feed .PostWrap {
+  border-radius: 22px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(15,23,42,.06);
+  box-shadow: 0 16px 36px rgba(15,23,42,.05);
+  margin-bottom: 18px;
+}
+
+.Profile-History-Feed .PostWrap .PostHeader,
+.Profile-History-Feed .PostWrap .PostBody,
+.Profile-History-Feed .PostWrap .PostFooter {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.Profile-History-Feed .PostWrap .PostHeader {
+  padding-top: 18px;
+}
+
+.Profile-History-Feed .PostWrap .PostFooter {
+  padding-bottom: 18px;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card {
+  height: 100%;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card > * {
+  height: 100%;
+}
+
+.Profile-Section-Header-Soft {
+  align-items: center;
+}
+
+.Profile-Section-Header-Badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  position: relative;
+  top: -4px;
+}
+
+.Profile-Offers-Sentinel {
+  height: 1px;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+  height: 100%;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-header,
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-meta,
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-reactions {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-header {
+  padding-top: 14px;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-logo {
+  padding: 14px 14px 0;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-media {
+  margin: 0 14px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-media img,
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-media iframe {
+  border-radius: 16px;
+}
+
+.Profile-Offers-Grid-Modern .Profile-Offer-Card .offer-reactions {
+  padding-bottom: 14px;
+}
+
+.Profile .Profile-Info-Panel .Widget-BOX {
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+}
+
+.Profile .Profile-Info-Summary .Stats-Value,
+.Profile .Profile-Info-Summary .Stats-Text {
+  text-align: left;
+}
+
+.Profile .Profile-Info-Summary ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+.Profile .Profile-Info-Summary li {
+  padding: 8px 0;
+}
+
+.Profile .Profile-Picture-Large {
+  width: 128px;
+  height: 128px;
+  border-radius: 24px;
+  border-width: 4px;
+}
+
 .Profile .Profile-Wrap .container {
   padding-left: 24px;
   padding-right: 24px;
+}
+
+.Profile .Dashboard-Stats-Grid-Compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.Profile .Dashboard-Content-Grid-Compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.Profile .Dashboard-Content-Grid-Second {
+  margin-top: 18px;
+}
+
+.Profile .Dashboard-Summary-Stack {
+  display: grid;
+  gap: 12px;
+}
+
+.Profile .Dashboard-Summary-Item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.Profile .Dashboard-Summary-Item span {
+  color: #64748b;
 }
 
 .Dashboard-Page .Dashboard-Hero,
@@ -11417,6 +11759,53 @@ button.btn-custom-order.btn.btn-secondary.btn-sm.dropdown-toggle {
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 20px;
   box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+}
+
+@media (max-width: 768px) {
+  .Profile-Hero-Bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .Profile-Hero-Left {
+    align-items: flex-start;
+  }
+
+  .Profile-Hero-Right {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .Profile .Profile-Info-Panel {
+    grid-template-columns: 1fr;
+  }
+
+  .Profile-Bio-Split,
+  .Profile-History-Grid {
+    grid-template-columns: 1fr;
+  }
+
+  .Profile-Bio-Side {
+    position: static;
+  }
+
+  .Profile-History-Hero {
+    align-items: start;
+  }
+
+  .Profile .Profile-Info-Summary ul {
+    grid-template-columns: 1fr;
+  }
+
+  .Profile-Navigation {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .Profile .Dashboard-Stats-Grid-Compact,
+  .Profile .Dashboard-Content-Grid-Compact {
+    grid-template-columns: 1fr;
+  }
 }
 
 body.Sidebar-Is-Compact .Dadupa-Header .Logo-Desktop,
@@ -11456,6 +11845,26 @@ body:has(.Sidebar-Nav[data-compact="true"]) .Dadupa-Header .Logo-Desktop,
 
 .Page-Wrapper:not(.Profile) > .container {
   max-width: 1240px;
+}
+
+.Dadupa-Header .dadupa-navigation {
+  display: flex;
+  justify-content: center;
+}
+
+.Dadupa-Header .center-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Dadupa-Header .Dadupa-Nav {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.Dadupa-Header .Dadupa-Nav .Nav-Item {
+  flex: 0 0 auto;
 }
 
 .Filter-Row {

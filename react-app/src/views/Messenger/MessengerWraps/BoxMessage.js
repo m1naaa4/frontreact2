@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from "react-redux";
-import { SendMessageAction, GetMessagesListAction } from '../../../store/actions/Messenger/MessageAction';
+import { SendMessageAction, GetConversationAction } from '../../../store/actions/Messenger/MessageAction';
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 import useOutsideClick from '../../../helpers/useOutsideClick';
@@ -30,19 +30,23 @@ export default function BoxMessage() {
     formData.append('content', text);
     formData.append('receiver_id', params.id);
     formData.append('attachment', attachment);
+    formData.append('attachments[]', attachment);
+    formData.append('attachment_type', attachment.type || 'image');
     return formData;
   };
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if ((text.trim() !== '' || attachment) && params.id) {
-      dispatch(SendMessageAction(buildPayload(), 'messages/store', '')).then(() => {
-        dispatch(GetMessagesListAction('messages/getConversations', '', 1));
-      });
-      setText('');
-      setAttachment(null);
+      try {
+        await dispatch(SendMessageAction(buildPayload(), 'messages/store', ''));
+        await dispatch(GetConversationAction({ receiver_id: params.id }, 'messages/show', 1));
+      } finally {
+        setText('');
+        setAttachment(null);
         if (hiddenAttachmentInput.current) hiddenAttachmentInput.current.value = '';
         if (refmessage.current) refmessage.current.value = '';
       }
+    }
   };
 
   const handleSubmitValue = async (value, key) => {
@@ -70,6 +74,9 @@ export default function BoxMessage() {
     setAttachment(event.target.files?.[0] || null);
   };
 
+  const attachmentPreviewUrl = attachment ? URL.createObjectURL(attachment) : null;
+  const isImageAttachment = attachment?.type?.startsWith('image/');
+
   useOutsideClick(ref, () => {
     SetEmojiPicker(false);
     refmessage.current.focus();
@@ -78,6 +85,9 @@ export default function BoxMessage() {
   return (
     <div>
       <div id="EmojiPicker" className="Messenger-footer">
+        <button type="button" className="Messenger-EmojiButton" onClick={triggerPicker} aria-label="Emoji">
+          <i className="uil uil-smile"></i>
+        </button>
         <input
           autoFocus
           type="text"
@@ -89,45 +99,40 @@ export default function BoxMessage() {
           placeholder="Type messages here..."
           data-emoji-picker="true"
         />
-
-        <div style={{ position: 'absolute', bottom: '10px', zIndex: 1000, left: '10px', textDecoration: 'none' }}>
-          <i onClick={triggerPicker} className="uil uil-smile"></i>
-          {emojiPickerState &&
-            <div ref={ref}>
-              <Picker
-                enableFrequentEmojiSort={true}
-                emoji=''
-                style={{ position: 'absolute', bottom: '40px', left: '20px' }}
-                onSelect={addEmoji}
-              />
-            </div>
-          }
-        </div>
-
-        <div className="Messenger-footer-attachments">
-          <div className="Messenger-attachment-item" onClick={() => hiddenAttachmentInput.current.click()}>
-            <input
-              ref={hiddenAttachmentInput}
-              type="file"
-              accept="image/jpeg, image/png, image/gif, image/webp, video/mp4, video/x-msvideo, video/quicktime, video/mpeg, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/plain"
-              onChange={selectAttachment}
-            />
-            <span><i className="uil uil-image"></i></span>
-          </div>
-        </div>
-
-        {attachment && (
-          <div className="Messenger-AttachmentPreview">
-            <span>{attachment.name}</span>
-            <button type="button" onClick={() => setAttachment(null)}>x</button>
-          </div>
-        )}
-
         <div className="Messenger-footer-actions">
+          <div className="Messenger-footer-attachments">
+            <div className="Messenger-attachment-item" onClick={() => hiddenAttachmentInput.current.click()}>
+              <input
+                ref={hiddenAttachmentInput}
+                type="file"
+                accept="image/jpeg, image/png, image/gif, image/webp"
+                onChange={selectAttachment}
+              />
+              <span><i className="uil uil-image"></i></span>
+            </div>
+            {attachment && (
+              <div className="Messenger-AttachmentPreview">
+                {isImageAttachment && attachmentPreviewUrl && (
+                  <img src={attachmentPreviewUrl} alt={attachment.name} className="Messenger-AttachmentThumb" />
+                )}
+                <span>{attachment.name}</span>
+                <button type="button" onClick={() => setAttachment(null)}>x</button>
+              </div>
+            )}
+          </div>
           <button className="button-send" type="button" onClick={sendMessage}>
             <i className="uil uil-message"></i>
           </button>
         </div>
+        {emojiPickerState &&
+          <div ref={ref} className="Messenger-EmojiPickerWrap">
+            <Picker
+              enableFrequentEmojiSort={true}
+              emoji=''
+              onSelect={addEmoji}
+            />
+          </div>
+        }
       </div>
     </div>
   );

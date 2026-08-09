@@ -12,16 +12,11 @@ export default function Message({message}) {
   let eye = message.read_at ? 'uil uil-eye' : 'uil uil-eye-slash';
   let classe = message.read_at ? 'message-seen' : '';
 
-  const calendarStrings = {
-    lastDay : '[Yesterday at] LT',
-    sameDay : 'LT',
-    lastWeek : '[last] dddd [at] LT',
-    sameElse : 'L'
-  };
-
   const downloadUrl = message.attachment_url
     ? `${message.attachment_url}${message.attachment_url.includes('?') ? '&' : '?'}user_id=${currentUserId}`
     : '';
+
+  const timeLabel = message.created_at ? moment(message.created_at).format('HH:mm') : '';
 
   const renderMessageContent = () => (
     <>
@@ -54,15 +49,15 @@ export default function Message({message}) {
             {!isMine ?
               (
                 <div className="message incoming-message">
-                  <Link className="avatar-wrapper avatar-small" to={"/profile/"+ (message.sender?.profile_id || '')} >
-                    <img  src={message.sender?.profile?.avatar_link || '/assets/images/avatar.png'} alt="avatar"/>
+                  <Link className="avatar-wrapper avatar-small message-avatar" to={"/profile/"+ (message.sender?.profile_id || '')} >
+                    <img src={message.sender?.profile?.avatar_link || '/assets/images/avatar.png'} alt="avatar"/>
                   </Link>
                   <div className="incoming-bubbles">
                     <div className='message-seen bubble bubble-light'>
                       {renderMessageContent()}
-                      <span className="message-status">
-                        <i className='uil uil-eye'></i> {message.created_at}
-                      </span>
+                    </div>
+                    <div className="message-meta message-meta-incoming">
+                      <span className="message-time"><i className='uil uil-eye'></i> {timeLabel}</span>
                     </div>
                   </div>
                 </div>
@@ -71,9 +66,10 @@ export default function Message({message}) {
                 <div className="message outcoming-message">
                   <div className="outcoming-bubbles">
                     <div className={`${classe} bubble bubble-dark`}>
-                      <span className="message-status">
-                        {message.created_at} <i className={eye}></i>
-                      </span>
+                      <div className="message-meta message-meta-outgoing">
+                        <span className="message-time">{timeLabel}</span>
+                        <i className={eye}></i>
+                      </div>
                       {renderMessageContent()}
                       <button className="Messenger-DeleteMessage" type="button" onClick={deleteMessage}>
                         Supprimer
@@ -82,13 +78,6 @@ export default function Message({message}) {
                   </div>
                 </div>
               )
-            }
-            {
-              <div className="messages-date">
-                <label className="messages-date-label">
-                  {moment(message.created_at).calendar(null, calendarStrings)}
-                </label>
-              </div>
             }
             </>
           )

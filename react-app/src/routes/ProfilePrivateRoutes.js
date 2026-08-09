@@ -33,43 +33,41 @@ export default function ProfilePrivateRoutes(props) {
                     <ProfileHeaderForm {...props}/>
                     <div className="Profile-Wrapper">
                         <div className="container">
-                            <div className="row">
-                                <SideLeftProfileView />
-                                    <Switch>
-                                        <Route exact path={`${props.match.path}`}  component = {ProfilePage} />
-                                        <Route exact path={props.match.path} render = { props => (
-                                            <Redirect to={{pathname: `${props.match.path}` }} />
-                                        )} />
+                            <div className="Profile-Flow">
+                                <Switch>
+                                    <Route exact path={`${props.match.path}`} component={ProfilePage} />
+                                    <Route exact path={props.match.path} render={props => (
+                                        <Redirect to={{ pathname: `${props.match.path}` }} />
+                                    )} />
+                                    <Route exact path={`${props.match.path}/dashboard`} component={DashboardPage} />
+                                    <Route exact path={props.match.path} render={props => (
+                                        <Redirect to={{ pathname: `${props.match.path}/dashboard` }} />
+                                    )} />
+                                    <Route exact path={`${props.match.path}/cvtheque`} component={MainCvthequeView} />
+                                    <Route exact path={props.match.path} render={props => (
+                                        <Redirect to={{ pathname: `${props.match.path}/cvtheque` }} />
+                                    )} />
+                                    <Route exact path={`${props.match.path}/meoffre`} component={OffrePage} />
+                                    <Route exact path={props.match.path} render={props => (
+                                        <Redirect to={{ pathname: `${props.match.path}/meoffre` }} />
+                                    )} />
+                                    <Route exact path={`${props.match.path}/friends/:page`} component={FriendPage} />
+                                    <Route exact path={props.match.path} render={props => (
+                                        <Redirect to={{ pathname: `${props.match.path}/friends/:page` }} />
+                                    )} />
+                                    <Route exact path={`${props.match.path}/friends`} component={FriendPage} />
+                                    <Route exact path={props.match.path} render={props => (
+                                        <Redirect to={{ pathname: `${props.match.path}/friends` }} />
+                                    )} />
+                                    <Route component={NotFound} header="false" />
+                                </Switch>
 
-                                        <Route exact path={`${props.match.path}/dashboard`} component={DashboardPage} />
-                                        <Route exact path={props.match.path} render={props => (
-                                            <Redirect to={{ pathname: `${props.match.path}/dashboard` }} />
-                                        )} />
-
-                                        
-                                        <Route exact path={`${props.match.path}/cvtheque`}  component = {MainCvthequeView} />
-                                        <Route exact path={props.match.path} render = { props => (
-                                            <Redirect to={{pathname: `${props.match.path}/cvtheque` }} />
-                                        )} />
-                                        
-                                        <Route exact path={`${props.match.path}/meoffre`}  component = {OffrePage} />
-                                        <Route exact path={props.match.path} render = { props => (
-                                            <Redirect to={{pathname: `${props.match.path}/meoffre` }} />
-                                        )} />
-
-                                        <Route exact path={`${props.match.path}/friends/:page`}  component = {FriendPage} />
-                                        <Route exact path={props.match.path} render = { props => (
-                                            <Redirect to={{pathname: `${props.match.path}/friends/:page` }} />
-                                        )} />
-
-                                        <Route exact path={`${props.match.path}/friends`}  component = {FriendPage} />
-                                        <Route exact path={props.match.path} render = { props => (
-                                            <Redirect to={{pathname: `${props.match.path}/friends` }} />
-                                        )} />
-                                        <Route component={NotFound} header="false" />
-                                    </Switch>
-                                {(props.location.pathname.indexOf('/friends') < 0 && props.location.pathname.indexOf('/meoffre') < 0)  && <SideRightProfileView/>}
-                                
+                                {props.location.pathname.indexOf('/cvtheque') >= 0 && (
+                                    <div className="Profile-Flow-Extras">
+                                        <SideLeftProfileView />
+                                        <SideRightProfileView />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

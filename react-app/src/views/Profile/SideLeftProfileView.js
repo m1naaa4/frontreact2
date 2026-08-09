@@ -31,7 +31,7 @@ export default function SideLeftProfileView() {
 
 
   return (
-    <div className="col-md-4 col-lg-3 dadupa-order-last">
+    <div className="col-12">
       {
         infoprofile.infoprofile !== "" && infoprofile.infoprofile !== 'loading' ?
           <div className="Left-Side">
