@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import HeaderProfileSkeleton from '../../skeleton/profile/HeaderProfileSkeleton';
-import { InvitationsAction, MyFriendsAction, SendRequestFriendAction, SuggestionsAction } from '../../store/actions/Friend/FriendsAction';
+import { AcceptFriendAction, InvitationsAction, MyFriendsAction, RejectFriendAction, SendRequestFriendAction, SuggestionsAction } from '../../store/actions/Friend/FriendsAction';
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import { DialogContentText } from '@material-ui/core';
 import Button from '@mui/material/Button';
@@ -19,16 +19,18 @@ export default function HeaderProfileView() {
     const suggestions = useSelector(state => state.userProfile.suggestions);
     const invitations = useSelector(state => state.userProfile.invitations);
     const newavatar = useSelector(state => state.updateavatar);
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [open, setOpen] = useState(false);
     const [type, setType] = useState('');
     const [fileAvatar, setFileAvatar] = useState();
     const [fileCover, setFileCover] = useState();
     const [user_id, setUserId] = useState();
     const [currentPage, setCurrentPage] = useState('historique');
+    const [friendState, setFriendState] = useState('none');
     const hiddenFileInput = useRef(null);
     const hiddenCoverInput = useRef(null);
     const dispatch = useDispatch();
+    const history = useHistory();
     const params = useParams();
     const location = useLocation();
     const { t } = useTranslation();
@@ -62,15 +64,24 @@ export default function HeaderProfileView() {
 
     useEffect(() => {
         if (infouser.userProfile && infouser.userProfile !== 'loading') setUserId(infouser.userProfile.profile_id);
-        if (myfriends) {
-            const find = myfriends.some((data) => data.profile_id === infoprofile.infoprofile.id);
-            setShow(!find);
+        if (myfriends && Array.isArray(myfriends)) {
+            const viewedUserId = Number(infoprofile?.infoprofile?.user_id);
+            const viewedProfileId = Number(infoprofile?.infoprofile?.id || infoprofile?.infoprofile?.profile_id);
+            const isFriend = myfriends.some((friend) =>
+                Number(friend.user_id || friend.id) === viewedUserId
+                || Number(friend.profile_id || friend.profile?.id) === viewedProfileId
+            );
+            const incoming = Array.isArray(invitations) && invitations.some((invitation) =>
+                Number(invitation.user_id || invitation.profile?.user_id) === viewedUserId
+            );
+            setShow(!isFriend && !incoming);
+            setFriendState(isFriend ? 'friends' : (incoming ? 'pending_received' : 'none'));
         }
-    }, [infoprofile.infoprofile]);
+    }, [infoprofile.infoprofile, myfriends, invitations]);
 
     useEffect(() => {
-        setFileAvatar(newavatar.avatar.avatar_link);
-        setFileCover(newavatar.avatar.cover_link);
+        setFileAvatar(newavatar?.avatar?.avatar_link);
+        setFileCover(newavatar?.avatar?.cover_link);
     }, [newavatar]);
 
     const SendRequest = async () => {
@@ -94,9 +105,35 @@ export default function HeaderProfileView() {
             }));
             if (res?.success !== false) {
                 setShow(false);
+                setFriendState(res?.status || 'pending_sent');
             }
         } catch (error) {
             console.error('Friend request failed:', error);
+        }
+    };
+
+    const openMessenger = () => {
+        const recipientId = Number(infoprofile?.infoprofile?.user_id);
+        if (recipientId) {
+            history.push(`/messages/${recipientId}`);
+        }
+    };
+
+    const respondToInvitation = async (accept) => {
+        const invitation = Array.isArray(invitations)
+            ? invitations.find((item) => Number(item.user_id || item.profile?.user_id) === viewedUserId)
+            : null;
+        if (!invitation) return;
+
+        const action = accept ? AcceptFriendAction : RejectFriendAction;
+        const res = await dispatch(action({
+            request_id: invitation.request_id || invitation.id,
+            friend_id: invitation.user_id,
+            url: accept ? 'friend/friendAccept' : 'friend/friendReject',
+        }));
+        if (res?.success) {
+            setFriendState(accept ? 'friends' : 'none');
+            setShow(!accept);
         }
     };
 
@@ -108,6 +145,13 @@ export default function HeaderProfileView() {
     const displayName = (infoprofile.infoprofile.firstname && infoprofile.infoprofile.lastname)
         ? `${infoprofile.infoprofile.firstname} ${infoprofile.infoprofile.lastname}`
         : infoprofile.infoprofile.username;
+    const viewedUserId = Number(infoprofile?.infoprofile?.user_id);
+    const currentUserId = Number(localStorage.getItem('user_id'));
+    const isKnownOtherProfile = Boolean(viewedUserId && currentUserId && viewedUserId !== currentUserId);
+    // Profile ids are what the profile routes use.  Do not rely only on the
+    // asynchronously loaded user id, otherwise the DADUPERS tab disappears
+    // for the current profile during loading (or with older API responses).
+    const isOwnProfile = String(localStorage.getItem('profile_id')) === String(params.id);
 
     return (
         <>
@@ -149,7 +193,22 @@ export default function HeaderProfileView() {
                                                 <input type="file" id="coverUpload" accept=".png, .jpg, .jpeg" ref={hiddenCoverInput} onChange={selectFileCover} />
                                                 <label htmlFor="coverUpload" className="coverUpload"><i className="uil uil-camera" /> <span>{t('coverEdit')}</span></label>
                                             </>}
-                                            {(infoprofile?.infoprofile.user_id !== userProfile.id && show) && (
+                                            {isKnownOtherProfile && (
+                                                <button type="button" onClick={openMessenger} className="Profile-Action-Button">
+                                                    <i className="uil uil-message"></i>
+                                                    <span>Envoyer un message</span>
+                                                </button>
+                                            )}
+                                            {isKnownOtherProfile && friendState === 'friends' && (
+                                                <button type="button" className="Profile-Action-Button" disabled><i className="uil uil-check"></i><span>Amis</span></button>
+                                            )}
+                                            {isKnownOtherProfile && friendState === 'pending_sent' && (
+                                                <button type="button" className="Profile-Action-Button" disabled><i className="uil uil-clock"></i><span>Invitation envoyée</span></button>
+                                            )}
+                                            {isKnownOtherProfile && friendState === 'pending_received' && (
+                                                <><button type="button" onClick={() => respondToInvitation(true)} className="Profile-Action-Button">Accepter</button><button type="button" onClick={() => respondToInvitation(false)} className="Profile-Action-Button">Refuser</button></>
+                                            )}
+                                            {isKnownOtherProfile && friendState === 'none' && show && (
                                                 <button onClick={SendRequest} className="Profile-Action-Button">
                                                     <i className="uil uil-user-plus"></i>
                                                     <span>{t('request') || 'Demander'}</span>
@@ -174,7 +233,7 @@ export default function HeaderProfileView() {
                                         <li><NavLink className={currentPage === 'historique' ? 'active-profile-link' : ''} to={`/profile/${params.id}`}><i className="uil uil-apps"></i> {t('history')}</NavLink></li>
                                         <li><NavLink className={currentPage === 'bio' ? 'active-profile-link' : ''} to={`/profile/${params.id}/cvtheque`}><i className="uil uil-user-square"></i>{t('bio')}</NavLink></li>
                                         <li><NavLink className={currentPage === 'offres' ? 'active-profile-link' : ''} to={`/profile/${params.id}/meoffre`}><i className="uil uil-layer-group"></i>{t('offerings')}</NavLink></li>
-                                        <li><NavLink className={currentPage === 'dashboard' ? 'active-profile-link' : ''} to={`/profile/${params.id}/dashboard`}><i className="uil uil-chart"></i>{t('dashboard') || 'Dashboard'}</NavLink></li>
+                                        {isOwnProfile && <li><NavLink className={currentPage === 'dashboard' ? 'active-profile-link' : ''} to={`/profile/${params.id}/dashboard`}><i className="uil uil-chart"></i>{t('dashboard') || 'Dashboard'}</NavLink></li>}
                                         <li><NavLink className={currentPage === 'friends' ? 'active-profile-link' : ''} to={`/profile/${params.id}/friends/friends`}><i className="uil uil-share-alt" />{t('réseaux')}</NavLink></li>
                                     </ul>
                                 </div>

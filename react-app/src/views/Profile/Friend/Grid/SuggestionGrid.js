@@ -16,12 +16,17 @@ export default function SuggestionGrid({suggestions}) {
       setGridId(e);
     };
 
-    const addFriend = (id) =>{
-      let data ={
-          'friend_id' : id,
+    const addFriend = async (suggestion) =>{
+      const data ={
+          'friend_id' : suggestion.user_id || suggestion.id,
+          'friend_name': suggestion.name || suggestion.profile?.username,
+          'friend_username': suggestion.profile?.username,
+          'friend_avatar': suggestion.profile?.avatar_link,
+          'friend_profile_id': suggestion.profile?.id,
           'url' : 'friend/sendRequest',
       }
-      dispatch(SendRequestFriendAction(data));
+      const result = await dispatch(SendRequestFriendAction(data));
+      if (result?.success) show(suggestion.id);
     }
     return (
         <>
@@ -30,7 +35,7 @@ export default function SuggestionGrid({suggestions}) {
                 suggestions?.map((suggestion, index) => (
                 gridId !== suggestion.id && <div className="FriendBox-Item" key={index}>
                     <div className="FriendBox">
-                        <button type="button" onClick={() => {addFriend(suggestion.id); show(suggestion.id)}} className="FriendBox-Accept"><i className="uil uil-user-plus"></i></button>
+                        <button type="button" onClick={() => addFriend(suggestion)} className="FriendBox-Accept"><i className="uil uil-user-plus"></i></button>
                         
                       <Link to={`/profile/${suggestion.profile.id}`}>
                         <div className="FriendThumb"><img src={suggestion.profile.avatar_link} alt="avatar"/></div>

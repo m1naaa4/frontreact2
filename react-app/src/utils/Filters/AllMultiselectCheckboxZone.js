@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactMultiSelectCheckboxes from "../../components/ReactMultiSelectCheckboxes";
 import customStyles from "../styleMultiselect";
@@ -13,16 +13,10 @@ const AllMultiSelectCheckboxZone = ({datas, setSelectedcountry}) => {
     {value : name.value, label: t(name.label)}
   ))
 
-  useEffect(() => {
-    setSelectedOptions([{ label: "", value: "" }]);
-  }, []);
-
   function getDropdownButtonLabel({ placeholderButtonLabel, value }) {
     if (value && value.some((o) => o.value === "*")) {
       return `${placeholderButtonLabel}: ${t('all')}`;
-    } else if(value.some((o) => o.value === '')) {
-      return `${placeholderButtonLabel}: ${value.length-1} ${t('selected')}`;
-    }else{
+    } else {
       return `${placeholderButtonLabel}: ${value.length} ${t('selected')}`;
     }
   }

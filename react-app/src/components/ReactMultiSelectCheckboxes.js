@@ -54,7 +54,9 @@ const defaultSelectStyles = {
     boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
     backgroundColor: '#fff',
     borderRadius: 4,
+    zIndex: 9999,
   }),
+  menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
   menuList: (provided) => ({
     ...provided,
     padding: 0,
@@ -131,6 +133,9 @@ const ReactMultiSelectCheckboxes = ({
             hideSelectedOptions={false}
             isSearchable={!hideSearch}
             menuIsOpen
+            menuPlacement="auto"
+            menuPosition="fixed"
+            menuPortalTarget={document.body}
             onChange={handleChange}
             options={options}
             placeholder="Search..."

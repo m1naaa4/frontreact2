@@ -13,12 +13,17 @@ const  SuggestionList = ({suggestion}) => {
     const [type, setType] = useState();
     const dispatch = useDispatch();
   
-    const addFriend = (id) =>{
-        let data ={
-            'friend_id' : id,
+    const addFriend = async () =>{
+        const data ={
+            'friend_id' : suggestion.user_id || suggestion.id,
+            'friend_name': suggestion.name || suggestion.profile?.username,
+            'friend_username': suggestion.profile?.username,
+            'friend_avatar': suggestion.profile?.avatar_link,
+            'friend_profile_id': suggestion.profile?.id,
             'url' : 'friend/sendRequest',
         }
-        dispatch(SendRequestFriendAction(data)); 
+        const result = await dispatch(SendRequestFriendAction(data));
+        if (result?.success) setShow(false);
     }
 
     useEffect(() => {
@@ -44,7 +49,7 @@ const  SuggestionList = ({suggestion}) => {
                         <p><i className={`${type}`}></i> {suggestion.type}</p>
                     </div>
                     <div className="Add-Contact">
-                        <button type="button" name="button" onClick={() => {addFriend(suggestion.id); setShow(false)}}><i className="uil uil-user-plus"></i></button>
+                        <button type="button" name="button" onClick={addFriend}><i className="uil uil-user-plus"></i></button>
                     </div>
                 </div>
                 

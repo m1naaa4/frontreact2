@@ -7,7 +7,6 @@ import {
   GetConversationAction,
   SearchUsersAction,
 } from '../../store/actions/Messenger/MessageAction';
-import { AcceptFriendAction, SendRequestFriendAction } from '../../store/actions/Friend/FriendsAction';
 import _map from 'lodash/map';
 
 export default function SideLeftBar() {
@@ -21,7 +20,6 @@ export default function SideLeftBar() {
   const [unreadOnly, setUnreadOnly] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState('');
-  const [pendingUsers, setPendingUsers] = useState({});
   const params = useParams();
 
   // Clear error when component mounts
@@ -120,78 +118,12 @@ export default function SideLeftBar() {
     history.push(`/messages/${receiverId}`);
   };
 
-  const sendFriendRequest = async (user) => {
-    setPendingUsers(previous => ({ ...previous, [user.id]: true }));
-    setSearchError('');
-
-    try {
-      const res = await dispatch(SendRequestFriendAction({ friend_id: user.id, url: 'friend/sendRequest' }));
-
-      if (res?.success === false) {
-        setSearchError(res?.message || 'Demande impossible pour cet utilisateur.');
-        return;
-      }
-
-      setSearchResults(previous => previous.map(item => (
-        Number(item.id) === Number(user.id)
-          ? { ...item, relationship_status: res?.status || 'pending_sent', can_message: res?.status === 'friends' }
-          : item
-      )));
-    } catch (error) {
-      setSearchError('Demande impossible pour cet utilisateur.');
-    } finally {
-      setPendingUsers(previous => ({ ...previous, [user.id]: false }));
-    }
-  };
-
-  const acceptFriendRequest = async (user) => {
-    setPendingUsers(previous => ({ ...previous, [user.id]: true }));
-    setSearchError('');
-
-    try {
-      const res = await dispatch(AcceptFriendAction({
-        request_id: user.request_id || user.id,
-        friend_id: user.user_id || user.id,
-        url: 'friend/friendAccept'
-      }));
-
-      if (res?.success === false) {
-        setSearchError(res?.message || 'Impossible d\'accepter cette demande.');
-        return;
-      }
-
-      setSearchResults(previous => previous.map(item => (
-        Number(item.id) === Number(user.id)
-          ? { ...item, relationship_status: 'friends', can_message: true }
-          : item
-      )));
-      await openUserConversation({ ...user, relationship_status: 'friends', can_message: true });
-    } catch (error) {
-      setSearchError('Impossible d\'accepter cette demande.');
-    } finally {
-      setPendingUsers(previous => ({ ...previous, [user.id]: false }));
-    }
-  };
-
   const handleSearchResultClick = (user) => {
-    if (user.can_message || user.relationship_status === 'friends') {
-      openUserConversation(user);
-      return;
-    }
-
-    if (user.relationship_status === 'pending_received') {
-      acceptFriendRequest(user);
-      return;
-    }
-
-    sendFriendRequest(user);
+    openUserConversation(user);
   };
 
   const relationshipLabel = (user) => {
-    if (user.can_message || user.relationship_status === 'friends') return 'Message';
-    if (user.relationship_status === 'pending_sent') return 'Demande envoyée';
-    if (user.relationship_status === 'pending_received') return 'À accepter';
-    return 'Ajouter';
+    return 'Message';
   };
 
   const filteredUsers = listusers.filter((user) => {
@@ -205,7 +137,7 @@ export default function SideLeftBar() {
         <input
           type="search"
           className="Messenger-Search"
-          placeholder={showComposer ? 'Rechercher un ami par nom...' : 'Cliquez ou tapez pour chercher un ami'}
+          placeholder={showComposer ? 'Rechercher un utilisateur...' : 'Cliquez ou tapez pour chercher un utilisateur'}
           value={searchTerm}
           onFocus={() => setShowComposer(true)}
           onChange={(e) => {
@@ -233,7 +165,7 @@ export default function SideLeftBar() {
 
       {showComposer && (
         <div className="Messenger-ComposerHint">
-          Tape au moins 2 lettres pour chercher un ami.
+          Tape au moins 2 lettres pour chercher un utilisateur.
         </div>
       )}
 
@@ -256,12 +188,11 @@ export default function SideLeftBar() {
               key={user.id}
               className={`Messenger-SearchResult Messenger-SearchResult-${user.relationship_status}`}
               onClick={() => handleSearchResultClick(user)}
-              disabled={user.relationship_status === 'pending_sent' || pendingUsers[user.id]}
             >
               <img src={user.avatar || '/assets/images/avatar.png'} alt="avatar" />
               <span className="Messenger-SearchResultName">{user.name}</span>
               <span className="Messenger-SearchResultStatus">
-                {pendingUsers[user.id] ? 'Envoi...' : relationshipLabel(user)}
+                {relationshipLabel(user)}
               </span>
             </button>
           ))}
@@ -282,11 +213,15 @@ export default function SideLeftBar() {
         </div>
       )}
 
-      {!showComposer && typeof users?.conversations === 'string' && (
+      {typeof users?.conversations === 'string' && (
         <div className="Messenger-EmptySearch text-danger">{users.conversations}</div>
       )}
 
-      {!showComposer && Array.isArray(listusers) && typeof users?.conversations !== 'string' &&
+      {showComposer && filteredUsers.length > 0 && (
+        <div className="Messenger-ConversationsLabel">Conversations</div>
+      )}
+
+      {Array.isArray(listusers) && typeof users?.conversations !== 'string' &&
         _map(filteredUsers, (user) => (
           <Link
             to={`/messages/${user.user_id}`}

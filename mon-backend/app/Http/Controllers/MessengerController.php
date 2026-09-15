@@ -22,11 +22,12 @@ class MessengerController extends Controller
         $userId = (int) $request->input('user_id');
         $name = trim((string) $request->input('name', ''));
 
-        if (!$userId) {
-            return $this->validationError('user_id is required');
+        // Searching the directory must remain available while a local
+        // messenger session is being initialised. The relationship metadata is
+        // simply omitted until we know the current user id.
+        if ($userId) {
+            $this->ensureUser($userId, $this->userAttributesFromRequest($request));
         }
-
-        $this->ensureUser($userId, $this->userAttributesFromRequest($request));
 
         if (strlen($name) < 2) {
             return response()->json(['success' => true, 'users' => []]);
@@ -37,7 +38,7 @@ class MessengerController extends Controller
         }
 
         $query = DB::table('users')
-            ->where('users.id', '!=', $userId)
+            ->when($userId > 0, fn ($builder) => $builder->where('users.id', '!=', $userId))
             ->where(function ($where) use ($name) {
                 $where->where('users.name', 'like', '%' . $name . '%');
 
@@ -57,10 +58,14 @@ class MessengerController extends Controller
             ->limit(20)
             ->get()
             ->map(function ($user) use ($userId) {
-                $relationship = $this->relationshipInfo($userId, (int) $user->id);
+                $relationship = $userId > 0
+                    ? $this->relationshipInfo($userId, (int) $user->id)
+                    : ['status' => 'none', 'request_id' => null];
                 $user->relationship_status = $relationship['status'];
                 $user->request_id = $relationship['request_id'];
-                $user->can_message = $user->relationship_status === 'friends';
+                // Messaging is deliberately independent from friendship.  The
+                // relationship is returned for the profile UI only.
+                $user->can_message = true;
                 $user->avatar = $user->avatar ?? '/assets/images/avatar.png';
 
                 if (empty($user->name)) {
@@ -119,6 +124,9 @@ class MessengerController extends Controller
         $conversations = DB::table('conversation_user as cu')
             ->join('users as u', 'u.id', '=', 'cu.user_id')
             ->whereIn('cu.conversation_id', $conversationIds)
+            // A newly opened thread should not clutter the sidebar. It becomes
+            // visible only once its first message has been sent.
+            ->whereIn('cu.conversation_id', $lastMessageIds)
             ->where('cu.user_id', '!=', $userId)
             ->select('cu.conversation_id as id', 'u.id as user_id', 'u.name', 'u.avatar')
             ->get()
@@ -207,6 +215,10 @@ class MessengerController extends Controller
             return $this->validationError('user_id and receiver_id are required');
         }
 
+        if ($senderId === $receiverId) {
+            return $this->validationError('You cannot send a message to yourself');
+        }
+
         $this->ensureUser($senderId, $this->userAttributesFromRequest($request));
         $this->ensureUser($receiverId);
 
@@ -223,11 +235,6 @@ class MessengerController extends Controller
         DB::beginTransaction();
         try {
             if (!$conversationId) {
-                if (!$this->canStartConversation($senderId, $receiverId)) {
-                    DB::rollBack();
-                    return response()->json(['success' => false, 'message' => 'Users are not friends'], 403);
-                }
-
                 $conversationId = DB::table('conversations')->insertGetId([
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
@@ -278,6 +285,10 @@ class MessengerController extends Controller
             return $this->validationError('user_id and receiver_id are required');
         }
 
+        if ($userId === $receiverId) {
+            return $this->validationError('You cannot create a conversation with yourself');
+        }
+
         $this->ensureUser($userId, $this->userAttributesFromRequest($request));
         $this->ensureUser($receiverId);
 
@@ -289,10 +300,6 @@ class MessengerController extends Controller
                 'conversation_id' => $existingConversation,
                 'exists' => true
             ]);
-        }
-
-        if (!$this->canStartConversation($userId, $receiverId)) {
-            return response()->json(['success' => false, 'message' => 'Users are not friends'], 403);
         }
 
         $conversationId = DB::transaction(function () use ($userId, $receiverId) {
@@ -372,6 +379,39 @@ class MessengerController extends Controller
         return response()->json(['success' => true] + $payload);
     }
 
+    /**
+     * Hide every message in one direct conversation for its two participants.
+     * The conversation row is kept so a new message can reopen the thread.
+     */
+    public function deleteConversation(Request $request, $receiverId)
+    {
+        $userId = (int) $request->input('user_id');
+        $receiverId = (int) $receiverId;
+
+        if (!$userId || !$receiverId) {
+            return $this->validationError('user_id and receiver_id are required');
+        }
+
+        $conversationId = $this->findConversationId($userId, $receiverId);
+        if (!$conversationId || !$this->belongsToConversation($conversationId, $userId)) {
+            return response()->json(['success' => false, 'message' => 'Conversation not found'], 404);
+        }
+
+        DB::table('messages')
+            ->where('conversation_id', $conversationId)
+            ->whereNull('deleted_at')
+            ->update([
+                'deleted_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+        $payload = ['conversation_id' => (int) $conversationId];
+        $this->broadcastToUser($userId, 'conversation.deleted', $payload);
+        $this->broadcastToUser($receiverId, 'conversation.deleted', $payload);
+
+        return response()->json(['success' => true] + $payload);
+    }
+
     public function downloadAttachment(Request $request, $messageId)
     {
         $userId = (int) $request->input('user_id');
@@ -410,22 +450,6 @@ class MessengerController extends Controller
         return DB::table('conversation_user')
             ->where('conversation_id', $conversationId)
             ->where('user_id', $userId)
-            ->exists();
-    }
-
-    private function canStartConversation(int $userId, int $receiverId): bool
-    {
-        if (!Schema::hasTable('friends')) {
-            return false;
-        }
-
-        return DB::table('friends')
-            ->where(function ($query) use ($userId, $receiverId) {
-                $query->where('user_id', $userId)->where('friend_id', $receiverId);
-            })
-            ->orWhere(function ($query) use ($userId, $receiverId) {
-                $query->where('user_id', $receiverId)->where('friend_id', $userId);
-            })
             ->exists();
     }
 

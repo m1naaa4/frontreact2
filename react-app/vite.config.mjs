@@ -80,21 +80,19 @@ function buildProxy(env) {
     '/broadcasting': mainApi(apiOrigin, apiBase),
 
     // Local messenger/friends backend (mon-backend on :8000) for Vite dev.
-    '/api/messages': {
-      ...base,
-      target: messengerTarget,
-      rewrite: (p) => p.replace(/^\/api/, ''),
-    },
-    '/api/searchUsers': {
-      ...base,
-      target: messengerTarget,
-      rewrite: (p) => p.replace(/^\/api/, ''),
-    },
-    '/api/friend': {
-      ...base,
-      target: messengerTarget,
-      rewrite: (p) => p.replace(/^\/api/, ''),
-    },
+    // HttpService deliberately uses relative URLs in development, e.g.
+    // POST /messages/searchUsers.  These keys must therefore have no /api
+    // prefix; otherwise Vite serves the SPA instead of calling Lumen.
+    '/messages': { ...base, target: messengerTarget },
+    '/searchUsers': { ...base, target: messengerTarget },
+    '/friend': { ...base, target: messengerTarget },
+    // Axios can retain its global `/api` base URL in an already loaded
+    // session. Support those equivalent paths too, so messenger calls always
+    // reach Lumen rather than the main Dadupa API.
+    '/api/messages': { ...base, target: messengerTarget, rewrite: (p) => p.replace(/^\/api/, '') },
+    '/api/messenger': { ...base, target: messengerTarget, rewrite: (p) => p.replace(/^\/api/, '') },
+    '/api/searchUsers': { ...base, target: messengerTarget, rewrite: (p) => p.replace(/^\/api/, '') },
+    '/api/friend': { ...base, target: messengerTarget, rewrite: (p) => p.replace(/^\/api/, '') },
 
     // ── Legacy /api prefix (kept for any direct axios calls using that prefix)
     '/api': {

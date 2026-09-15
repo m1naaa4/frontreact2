@@ -81,6 +81,11 @@ const ConversationReducer = (state = initState, action) => {
                 error: null
             };
 
+        case 'DELETE_CONVERSATION_SUCCESS':
+            return {
+                ...initState
+            };
+
         case 'GET_CONVERSATION_ERROR':
         case 'LOAD_MESSEGES_ERROR':
             return {

@@ -14,6 +14,7 @@ export default function Body() {
   const scrollRef = useRef(null);
   const stickToBottomRef = useRef(true);
   const conversation = useSelector(state => state.messages);
+  const conversationError = conversation?.error;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -27,7 +28,12 @@ export default function Body() {
   }, [dispatch, params.id]);
 
   useEffect(() => {
-    setMsgs(conversation?.messages || []);
+    // A malformed/empty record returned by the API must never make the whole
+    // messenger crash (which previously resulted in a blank page).
+    const nextMessages = Array.isArray(conversation?.messages)
+      ? conversation.messages.filter((message) => message && typeof message === 'object')
+      : [];
+    setMsgs(nextMessages);
     stickToBottomRef.current = true;
   }, [conversation]);
 
@@ -73,6 +79,12 @@ export default function Body() {
           }
         }}
       >
+        {conversationError && (
+          <div className="Messenger-ErrorMessage" role="alert">
+            <i className="uil uil-exclamation-circle"></i>
+            <span>{conversationError}</span>
+          </div>
+        )}
         {msgs.length === 0 && (
           <div className="Messenger-EmptyMessages">
             <div className="Messenger-EmptyMessages-Icon"><i className="uil uil-comment-alt-message"></i></div>
@@ -81,7 +93,7 @@ export default function Body() {
           </div>
         )}
         {msgs.map((message, index) => (
-          <div key={index} className='messagerie__body'>
+          <div key={message.id || index} className='messagerie__body'>
             <Message message={message} />
           </div>
         ))}

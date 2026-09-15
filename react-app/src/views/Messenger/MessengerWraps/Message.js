@@ -6,9 +6,19 @@ import { DeleteMessageAction } from '../../../store/actions/Messenger/MessageAct
 
 export default function Message({message}) {
   const dispatch = useDispatch();
-  const me = useSelector(state => state.userProfile.userProfile?.id);
-  const currentUserId = Number(me || localStorage.getItem('user_id'));
-  const isMine = Number(message.sender_id) === currentUserId;
+  const currentUser = useSelector(state => state.userProfile?.userProfile);
+  // Do not let an incomplete legacy message record break the entire
+  // conversation. The caller also filters these records, this is a final
+  // defensive guard for direct use of this component.
+  if (!message || typeof message !== 'object') {
+    return null;
+  }
+  // The local storage value is the id sent to the messenger API. Prefer it
+  // over profile ids (which can be UUIDs) when deciding which side owns a
+  // message.
+  const currentUserId = Number(localStorage.getItem('user_id') || currentUser?.id || currentUser?.user_id);
+  const isMine = Number(message.sender_id) === currentUserId
+    || String(message.sender_id) === String(currentUser?.id || currentUser?.user_id || '');
   let eye = message.read_at ? 'uil uil-eye' : 'uil uil-eye-slash';
   let classe = message.read_at ? 'message-seen' : '';
 
@@ -71,8 +81,9 @@ export default function Message({message}) {
                         <i className={eye}></i>
                       </div>
                       {renderMessageContent()}
-                      <button className="Messenger-DeleteMessage" type="button" onClick={deleteMessage}>
-                        Supprimer
+                      <button className="Messenger-DeleteMessage" type="button" onClick={deleteMessage} aria-label="Supprimer ce message" title="Supprimer ce message">
+                        <i className="uil uil-trash-alt"></i>
+                        <span>Supprimer</span>
                       </button>
                     </div>
                   </div>
