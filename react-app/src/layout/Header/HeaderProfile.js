@@ -126,12 +126,20 @@ function HeaderProfile() {
     };
 
     useEffect(() => {
-        setAvatar(newavatar.avatar.avatar_link);
+        // The avatar reducer starts with an empty value.  HeaderProfile is
+        // mounted on Messenger too, so dereferencing it here used to crash the
+        // complete /messages route before MainMessengerView could render.
+        setAvatar(newavatar?.avatar?.avatar_link || false);
     }, [newavatar])
-    const filteredNotifications =
-  notifFilter === 'all'
-    ? (usernotifications.notifications || [])
-    : (usernotifications.notifications || []).filter(notification => notification.seen === false);
+    // The notifications endpoint can temporarily return an error object or a
+    // string. Always render from an array so opening a conversation cannot
+    // crash the complete page in the header notification badge.
+    const notifications = Array.isArray(usernotifications?.notifications)
+        ? usernotifications.notifications
+        : [];
+    const filteredNotifications = notifFilter === 'all'
+        ? notifications
+        : notifications.filter(notification => notification.seen === false);
 
     return (
         <div>
@@ -185,7 +193,7 @@ function HeaderProfile() {
                                         <div className=" Dadupa-Notifications-Item Dadupa-Alert-Popup">
                                             <button onClick={openNotifications} className="Dadupa-Alert" data-toggle="tooltip" data-placement="bottom" title="Notifications">
                                                 <span className={classe}></span><i className="uil uil-bell"></i>
-                                                {usernotifications.notifications && usernotifications.notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
+                                                {notifications.some(e => e.seen === false) && <span className="notifications-badge"></span>}
                                             </button>
                                             {/* {showNotifications &&  */}
                                                 <div className={`Dadupa-Notifs-Box ${showNotifications ? 'Notifs-Box-Active' : ''}`} ref={ref}>

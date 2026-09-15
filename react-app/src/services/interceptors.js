@@ -15,6 +15,12 @@ const microservicePrefixes = [
     '/video',
 ];
 
+// These routes are served by the local Lumen messenger through Vite's own
+// proxy entries. They must not inherit the global `/api` base URL, otherwise
+// a request such as `/messages/searchUsers` becomes
+// `/api/messages/searchUsers` and is incorrectly sent to the Dadupa API.
+const localMessengerPrefixes = ['/messages', '/messenger', '/friend', '/searchUsers'];
+
 axios.defaults.baseURL = apiBase || '';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('user-token');
 axios.defaults.withCredentials = true;
@@ -26,7 +32,10 @@ axios.interceptors.request.use((config) => {
 
     // Service-specific routes must hit their own Vite proxy entries instead of
     // being prefixed with the global /api base URL for the main auth API.
-    if (microservicePrefixes.some((prefix) => config.url.startsWith(prefix))) {
+    if (
+      microservicePrefixes.some((prefix) => config.url.startsWith(prefix))
+      || localMessengerPrefixes.some((prefix) => config.url.startsWith(prefix))
+    ) {
         config.baseURL = '';
     }
 

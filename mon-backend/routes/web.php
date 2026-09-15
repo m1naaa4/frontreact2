@@ -18,6 +18,7 @@ $router->group(['prefix' => 'messages'], function () use ($router) {
     $router->post('create', 'MessengerController@createConversation');
     $router->post('markSeen', 'MessengerController@markSeen');
     $router->delete('delete/{messageId}', 'MessengerController@deleteMessage');
+    $router->delete('deleteConversation/{receiverId}', 'MessengerController@deleteConversation');
     $router->get('download/{messageId}', 'MessengerController@downloadAttachment');
 });
 

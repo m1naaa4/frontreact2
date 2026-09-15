@@ -35,6 +35,8 @@
 .Messenger-LeftPanel-List {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
 }
 
 .Messenger-MainPanel {
@@ -200,18 +202,19 @@
 .Messenger-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 24px;
-  background: #fff;
+  padding: 28px clamp(18px, 4vw, 46px);
+  background: linear-gradient(180deg, #fbfefd 0%, #ffffff 38%);
 }
 
 .messagerie__body {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .message {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
 }
 
 .incoming-message {
@@ -235,8 +238,49 @@
 .outcoming-bubbles {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  max-width: min(68%, 460px);
+  gap: 5px;
+  max-width: min(72%, 520px);
+}
+
+.Messenger-Header-Actions {
+  position: relative;
+}
+
+.Messenger-ConversationMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  min-width: 215px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+}
+
+.Messenger-ConversationMenu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #dc2626;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.Messenger-ConversationMenu button:hover:not(:disabled) {
+  background: #fef2f2;
+}
+
+.Messenger-ConversationMenu button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .outcoming-bubbles {
@@ -249,9 +293,10 @@
 }
 
 .message.outcoming-message {
-  margin-left: auto;
-  width: auto;
-  flex-direction: row-reverse;
+  margin-left: 0;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .bubble {
@@ -259,26 +304,31 @@
   flex-direction: column;
   width: fit-content;
   max-width: 100%;
-  border-radius: 10px;
-  padding: 5px 8px;
+  border-radius: 18px;
+  padding: 11px 14px;
 }
 
 .bubble-light {
-  background: #eef6ff;
-  border: 0;
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-bottom-left-radius: 5px;
+  box-shadow: none;
 }
 
 .bubble-dark {
-  background: #e8f7ef;
-  color: #111827;
+  background: #16a34a;
+  color: #fff;
   border: 0;
+  border-bottom-right-radius: 5px;
   box-shadow: none;
 }
 
 .message-text {
-  line-height: 1.35;
+  line-height: 1.5;
   word-break: break-word;
   font-size: 14px;
+  letter-spacing: 0.005em;
 }
 
 .message-meta {
@@ -287,6 +337,10 @@
   gap: 6px;
   font-size: 10px;
   color: #94a3b8;
+}
+
+.bubble-dark .message-meta {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .message-meta-outgoing {
@@ -457,11 +511,19 @@
 }
 
 .Messenger-DeleteMessage {
-  display: block;
-  color: #dc2626;
-  font-size: 12px;
-  padding: 6px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
+  padding: 7px 2px 0;
   margin-left: auto;
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.Messenger-DeleteMessage:hover {
+  color: #fff;
 }
 
 .Messenger-EmojiPickerWrap {
@@ -558,6 +620,15 @@
   line-height: 1.4;
 }
 
+.Messenger-ConversationsLabel {
+  margin: 18px 24px 6px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .Messenger-SearchResults {
   margin: 0 24px 12px;
   display: flex;
@@ -593,6 +664,8 @@
 .Msgs-List {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .Msgs-Item {
@@ -602,6 +675,11 @@
   padding: 16px 24px;
   border-bottom: 1px solid #edf2f7;
   text-decoration: none;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .Msgs-Image img {
@@ -609,6 +687,10 @@
   height: 52px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.Msgs-Image {
+  flex: 0 0 52px;
 }
 
 .Msgs-Content {
@@ -619,6 +701,9 @@
 .Msgs-User {
   font-weight: 700;
   color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Msgs-Text {
@@ -635,11 +720,15 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
+  min-width: 0;
 }
 
 .Msgs-Date {
   color: #9ca3af;
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Msgs-N {
@@ -653,6 +742,53 @@
   align-items: center;
   justify-content: center;
   padding: 0 6px;
+}
+
+/* Override the old global chat theme loaded by style.css. Each message uses
+   exactly one flat colour and never creates a second inner coloured bubble. */
+.Messenger-Wrapper .message.outcoming-message {
+  width: 100%;
+  margin: 0 0 14px;
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.Messenger-Wrapper .message.incoming-message {
+  width: 100%;
+  margin: 0 0 14px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.Messenger-Wrapper .bubble.bubble-dark,
+.Messenger-Wrapper .bubble.bubble-light {
+  display: flex;
+  align-items: initial;
+  justify-content: initial;
+  margin: 0;
+}
+
+.Messenger-Wrapper .bubble.bubble-dark {
+  background: #16a34a;
+  color: #fff;
+}
+
+.Messenger-Wrapper .bubble.bubble-light {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.Messenger-Wrapper .bubble.bubble-dark .message-text,
+.Messenger-Wrapper .bubble.bubble-light .message-text {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* SideRightBar Profile Panel */

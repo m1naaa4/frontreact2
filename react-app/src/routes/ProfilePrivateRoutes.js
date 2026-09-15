@@ -12,7 +12,7 @@ import ProfileHeaderForm from '../views/Profile/ProfileFormData';
 import SideLeftProfileView from '../views/Profile/SideLeftProfileView';
 import SideRightProfileView from '../views/Profile/SideRightProfileView';
 import { ProfileAction } from '../store/actions/Profile/UserActions';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 
@@ -20,6 +20,11 @@ export default function ProfilePrivateRoutes(props) {
     const params = useParams();
     const id = params.id;
     const dispatch = useDispatch();
+    // Profile ids are UUIDs in the main API, so numeric comparison always
+    // fails and used to redirect the owner away from their Dashboard.
+    const currentProfileId = localStorage.getItem('profile_id');
+    const isOwnProfile = Boolean(currentProfileId) && String(currentProfileId) === String(id);
+    const restrictedProfilePath = `/profile/${id}`;
     
     useEffect(() => {
         dispatch( ProfileAction(params.id));
@@ -39,9 +44,8 @@ export default function ProfilePrivateRoutes(props) {
                                     <Route exact path={props.match.path} render={props => (
                                         <Redirect to={{ pathname: `${props.match.path}` }} />
                                     )} />
-                                    <Route exact path={`${props.match.path}/dashboard`} component={DashboardPage} />
-                                    <Route exact path={props.match.path} render={props => (
-                                        <Redirect to={{ pathname: `${props.match.path}/dashboard` }} />
+                                    <Route exact path={`${props.match.path}/dashboard`} render={routeProps => (
+                                        isOwnProfile ? <DashboardPage {...routeProps} /> : <Redirect to={restrictedProfilePath} />
                                     )} />
                                     <Route exact path={`${props.match.path}/cvtheque`} component={MainCvthequeView} />
                                     <Route exact path={props.match.path} render={props => (
@@ -51,13 +55,11 @@ export default function ProfilePrivateRoutes(props) {
                                     <Route exact path={props.match.path} render={props => (
                                         <Redirect to={{ pathname: `${props.match.path}/meoffre` }} />
                                     )} />
-                                    <Route exact path={`${props.match.path}/friends/:page`} component={FriendPage} />
-                                    <Route exact path={props.match.path} render={props => (
-                                        <Redirect to={{ pathname: `${props.match.path}/friends/:page` }} />
+                                    <Route exact path={`${props.match.path}/friends/:page`} render={routeProps => (
+                                        <FriendPage {...routeProps} />
                                     )} />
-                                    <Route exact path={`${props.match.path}/friends`} component={FriendPage} />
-                                    <Route exact path={props.match.path} render={props => (
-                                        <Redirect to={{ pathname: `${props.match.path}/friends` }} />
+                                    <Route exact path={`${props.match.path}/friends`} render={routeProps => (
+                                        <FriendPage {...routeProps} />
                                     )} />
                                     <Route component={NotFound} header="false" />
                                 </Switch>

@@ -135,7 +135,7 @@ export default function Messages() {
             </div>
             </div>
             <div className="All-Messages-Row">
-                <Link to={`/messages/${userProfile.id}`} className="all-messages-button">{t('seeallmsgs')} </Link>
+                <Link to="/messages" className="all-messages-button">{t('seeallmsgs')} </Link>
             </div>
         </div>
                                             

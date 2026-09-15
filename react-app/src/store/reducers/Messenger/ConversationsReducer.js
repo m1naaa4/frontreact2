@@ -119,9 +119,25 @@ const ConversationsReducer = (state = initState, action) => {
                 error: null
             };
 
+        case 'DELETE_CONVERSATION_SUCCESS':
+            const deletedConversationId = String(action?.res?.receiver_id);
+            const remainingConversations = { ...state.conversations };
+            delete remainingConversations[deletedConversationId];
+            return {
+                ...state,
+                conversations: remainingConversations,
+                activeConversationId: String(state.activeConversationId) === deletedConversationId
+                    ? null
+                    : state.activeConversationId,
+                loading: false,
+                loadingMessages: false,
+                error: null
+            };
+
         case 'LOAD_CONVERSATIONS_ERROR':
         case 'LOAD_MESSEGES_ERROR':
         case 'SEND_MESSAGE_ERROR':
+        case 'DELETE_CONVERSATION_ERROR':
         case 'GET_MESSEGES_ERROR':
             return {
                 ...state,

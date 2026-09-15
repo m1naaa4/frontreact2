@@ -60,7 +60,7 @@ export const SendRequestFriendAction = (data) =>{
                     dispatch(InvitationsAction({'url': 'friend/getInvitations'}));
                     dispatch({type:'LOADING_SEND_SUGGESTION_SUCCESS', res});
                 } else if(res.hasOwnProperty('success') && res.success === false) {
-                    dispatch({type:'LOADING_SUGGESTIONS_ERROR',res})
+                    dispatch({type:'LOADING_SEND_SUGGESTION_ERROR',res})
                 }
                 return res;
             },

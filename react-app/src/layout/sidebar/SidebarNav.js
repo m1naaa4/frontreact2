@@ -89,15 +89,9 @@ export default function SidebarNav() {
               </NavLink>
             </li>
             <li className="Nav-Item">
-              <NavLink exact to={profileId ? `/profile/${profileId}/meoffre` : '/profile'} className="Nav-Link" activeClassName="Active-Nav">
-                <i className="uil uil-layer-group"></i>
-                <span>{t('my_offre') || 'Mes offres'}</span>
-              </NavLink>
-            </li>
-            <li className="Nav-Item">
-              <NavLink exact to="/favorite" className="Nav-Link" activeClassName="Active-Nav">
-                <i className="uil uil-star"></i>
-                <span>{t('favorite') || 'Favoris'}</span>
+              <NavLink exact to={profileId ? `/profile/${profileId}` : '/profile'} className="Nav-Link" activeClassName="Active-Nav">
+                <i className="uil uil-user"></i>
+                <span>{t('see_profile') || 'Profil'}</span>
               </NavLink>
             </li>
             <li className="Nav-Item">
@@ -107,9 +101,21 @@ export default function SidebarNav() {
               </NavLink>
             </li>
             <li className="Nav-Item">
-              <NavLink exact to={profileId ? `/profile/${profileId}` : '/profile'} className="Nav-Link" activeClassName="Active-Nav">
-                <i className="uil uil-user"></i>
-                <span>{t('see_profile') || 'Profil'}</span>
+              <NavLink exact to="/messages" className="Nav-Link" activeClassName="Active-Nav">
+                <i className="uil uil-envelope"></i>
+                <span>{t('messages') || 'Messages'}</span>
+              </NavLink>
+            </li>
+            <li className="Nav-Item">
+              <NavLink exact to={profileId ? `/profile/${profileId}/meoffre` : '/profile'} className="Nav-Link" activeClassName="Active-Nav">
+                <i className="uil uil-layer-group"></i>
+                <span>{t('my_offre') || 'Mes offres'}</span>
+              </NavLink>
+            </li>
+            <li className="Nav-Item">
+              <NavLink exact to="/favorite" className="Nav-Link" activeClassName="Active-Nav">
+                <i className="uil uil-star"></i>
+                <span>{t('favorite') || 'Favoris'}</span>
               </NavLink>
             </li>
             <li className="Nav-Item">
